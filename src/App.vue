@@ -1,10 +1,10 @@
 <template>
-    <div id="app">
-        <router-view class="view"></router-view>
-        <!--<keep-alive>
+    <div id="app" class="scroll">
+        <!--<router-view class="view"></router-view>-->
+        <keep-alive >
             <router-view v-if="$route.meta.keepAlive"></router-view>
         </keep-alive>
-        <router-view v-if="!$route.meta.keepAlive"></router-view>-->
+        <router-view v-if="!$route.meta.keepAlive"></router-view>
         <div class="clearB"></div>
     </div>
 </template>
@@ -35,8 +35,6 @@
 <style lang="less">
     @import url('assets/css/base.less');
     @import url('assets/css/icon/iconfont.css');
-    @import "./assets/css/theme.less";
-    @import './assets/css/common/swiper.min.css';
     html, body {
         margin: 0 auto;
         width: 100%;
