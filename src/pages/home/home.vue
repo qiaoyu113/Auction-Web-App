@@ -7,39 +7,47 @@
         
         <div class="header">传家</div>
         <div class="content">
-            <div id='' class="special">
-                <h1>CHUANJIA SPECIAL</h1>
-                <div>传家标题</div>
-                <div class="time">2017.10.15 17:00</div>
-                <i><a :href='url'>MORE</a></i>
-            </div>
-            <div id='special' class="special">
-                <!-- <my-title></my-title> -->
+            <div v-for="list in homelist" :key="list.url">
+                <home-item :str="list"></home-item>
             </div>
         </div>
-        
-        <div class="footer">
+        <z-footer ></z-footer>
+        <!-- <div class="footer">
             <ul class="clearfix">
                 <li class="fl"><i class="iconfont icon-shouyetianchong  check"></i></li>
                 <li class="fl"><i class="iconfont icon-xiaochuizi"></i></li>
                 <li class="fl"><i class="iconfont icon-shoucang1"></i></li>
                 <li class="fl"><i class="iconfont icon-wodetianchong"></i></li>
             </ul>
-        </div>
+        </div> -->
         <!-- <z-banner :listImg="list">sss</z-banner> -->
     </div>
 </template>
 
 <script >
     import {appService} from '../../service/appService'
-    // import {  } from "../../component/";
+    import itemc from "../../component/home/item.vue";
     export default {
         data () {
             return {
                 title: '茶叶拍卖',
-                list:[]
+                homelist:[
+                    {
+                        title:"CHUANJIA SPECIAL",
+                        subtitle:"传家标题1",
+                        url:"http://www.baidu.com",
+                        time:"2017.10.15 17:00",
+                    },{
+                        title:"CHUANJIA SPECIAL",
+                        subtitle:"传家标题2",
+                        url:"http://www.baidu.com",
+                        time:"2017.10.15 16:00",
+                    }
+                ],
+                
             }
         },
+        components:{'home-item':itemc},
         syncData({store}) {
             /*基本规则
             * 所有不需要token的请求都放在这里
@@ -77,22 +85,11 @@
             * 这里的数据可以放在data中
             * */
 
-
         },
         methods: {
         }
     }
 
-    // Vue.component('my-title',{
-    //     template:'<h1>CHUANJIA SPECIAL</h1>'+
-    //             '<div>传家标题</div>'+
-    //             '<div class="time">2017.10.15 17:00</div>'+
-    //             '<i><a href="/src/pages/home/home.vue">MORE</a></i>'
-
-    // })
-    // new Vue({
-    //     el:'#special'
-    // })
 </script>
 
 <style lang="less">
@@ -103,6 +100,7 @@
     .header{
         position: fixed;
         top: 0;
+        z-index: 100;
         width: @size375;
         height: @size45;
         background:rgba(2, 10, 2, 1);
@@ -115,38 +113,7 @@
         margin-top: @size45;
         margin-bottom: 1.2rem;
     }
-    .special{
-        width: @size375;
-        height: @size200;
-        background: gray;
-        margin-bottom: @size5;
-        text-align: center;
-        position: relative;
-        i{
-            position: absolute;
-            top: 0;
-            right: 0;
-            padding-right: 3px;
-            padding-left:3px;    
-            background: rgb(51,51,51);
-            a{
-                color: white;
-                font-size:@size10;
-            }
-        }
-        h1{
-            padding-top: 60px;
-            font-size: @size20  ;
-        }
-        .t-title{
-            padding: 10px;
-        }
-        .time{
-            padding: 10px;
-            font-size: @size10;
-            color: white;
-        }
-    }
+    
     .footer{
         position:fixed;
         bottom:0;
