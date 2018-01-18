@@ -114,28 +114,6 @@
         margin-bottom: 1.2rem;
     }
     
-    .footer{
-        position:fixed;
-        bottom:0;
-        width: @size375;
-        height: 1.2rem;
-        background: rgb(249,248,243);
-        ul{
-            li{
-                width: 25%;
-                height: 1.2rem;
-                text-align: center;
-                line-height: 1.2rem;
-                i{
-                    font-size: @size25;
-                    color:rgb(217, 217, 217);
-                    border: none;
-                }
-            }
-            .check{
-                color: black;
-            }
-        }
-    }
+    
 </style>
 
