@@ -1,0 +1,288 @@
+<template>
+    <div id="home" v-set-title="title">
+        <div class="header">
+            <div class="headerLeft">
+                <div class="headerEn">{{header.name}}</div>
+                <div class="headerCh">{{header.name2}}</div>
+            </div>
+            <div class="headerRight">
+                <img src="../../../src/assets/image/mycenter/right.png"/>
+            </div>
+        </div>
+        <!--设置昵称-->
+        <div class="box2">
+            <!--新手机号码-->
+            <div class="info">
+                <div class="infoList">原手机号码<div class="phone">{{phone}}</div></div>
+            </div>
+            <!--短信验证码-->
+            <div class="info">
+                <div class="infoList">短信验证码<input class="codeInp" type="number" placeholder="请输入" v-model="inputNum"/><div class="code" @click="getcode">获取验证码<span v-if="codeShow" style="margin:0;">({{timeOver}})</span></div></div>
+            </div>
+            <!--保存-->
+            <div class="save" @click="save">下一步</div>
+        </div>
+    </div>
+</template>
+
+<script>
+    import {appService} from '../../service/appService'
+    export default {
+        data () {
+            return {
+                title: '个人中心',
+                header:{
+                    name:'CELL PHONE NUMBER',
+                    name2:'新手机号'
+                },
+                timeOver:60,//短信验证码倒计时
+                inputPhone:'',//手机号
+                inputNum:'',//验证码
+                codeShow:false,
+                phone:'13546000000'
+            }
+        },
+        computed: {
+            //将存在store中的数据取出
+            listImg() {
+                return this.$store.state.homeStore.listImg || []
+            },
+            noticelist() {
+                return this.$store.state.homeStore.noticelist || []
+            },
+        },
+        mounted: function() {
+            /*
+             * 所有需要token的请求都放在这里
+             * 可以使用DOM元素
+             * 这里的数据可以放在data中
+             * */
+
+
+        },
+        methods: {
+            deleteName:function(){
+                let that = this;
+                that.inputPhone = '';
+            },
+            //换手机号
+            save:function(){
+                let that = this;
+                that.$router.push({name:'savePhone'})
+            },
+            //获取验证码
+            getcode:function(){
+                let that = this;
+                if(that.codeShow){
+
+                }else{
+                    that.codeShow = true;
+                    let time = setInterval(function(){
+                        console.log(that.timeOver);
+                        if(that.timeOver === 0){
+                            clearInterval(time)
+                            that.codeShow = false;
+                            that.timeOver = 60;
+                        }else{
+                            that.timeOver = that.timeOver -= 1
+                        }
+                    },1000)
+                }
+            }
+        }
+    }
+</script>
+<style lang="less">
+    /*rem等基本设置都放在base中，不写多个*/
+    @import url('../../assets/css/base.less');
+    .header{
+        width:100%;
+        height:3.7rem;
+        border-bottom:1px solid #2B343D;
+        padding:1.07rem 0.53rem;
+        box-sizing: border-box;
+        .headerLeft{
+            width:80%;
+            float:left;
+            .headerEn{
+                height:0.75rem;
+                font-weight: bold;
+                font-size:20px;
+            }
+        }
+        .headerRight{
+            float: right;
+            margin-top:0.3rem;
+        }
+    }
+    .box{
+        width:100%;
+        padding:0.27rem;
+        box-sizing: border-box;
+        .boxHeader{
+            width:100%;
+            height:2.4rem;
+            border-bottom:1px solid #7E8689;
+            position: relative;
+            .boxHeaderLeft{
+                width:2.2rem;
+                height:2.2rem;
+                float:left;
+                border-radius: 100%;
+                overflow: hidden;
+                img{
+                    width:100%;
+                    height:100%;
+                }
+            }
+            .boxHeaderRight{
+                width:1rem;
+                height:0.6rem;
+                float:right;
+                position:absolute;
+                top:0;
+                bottom:0;
+                right:0;
+                margin:auto;
+            }
+        }
+        .info{
+            width:100%;
+            padding-left:0.2rem;
+            box-sizing: border-box;
+            border-bottom:1px solid #7E8689;
+            .infoList{
+                width:100%;
+                height:1rem;
+                line-height:1rem;
+                border-bottom:1px solid #C9D0D8;
+                font-size:13px;
+                color:#333;
+                span{
+                    color:#B1B1B1;
+                    font-size:13px;
+                    margin-left:0.8rem;
+                }
+                .more{
+                    width: 1rem;
+                    float:right;
+                    margin-top:0.24rem;
+                }
+                .icon-weixin1{
+                    margin-right:0.2rem;
+                }
+                .goBind{
+                    float:right;
+                    color:#6F6F6F;
+                    font-size:13px;
+                    padding-right:0.2rem;
+                }
+            }
+            .infoList:last-child{
+                border-bottom: none;
+            }
+        }
+        .back{
+            width:100%;
+            height:1.2rem;
+            line-height:1.2rem;
+            border:1px solid #28313A;
+            text-align: center;
+            box-sizing: border-box;
+            margin-top:0.8rem;
+            font-size:14px;
+        }
+    }
+    .box2{
+        width:100%;
+        padding:0.27rem;
+        box-sizing: border-box;
+        .info{
+            width:100%;
+            padding-left:0.2rem;
+            box-sizing: border-box;
+            border-bottom:1px solid #7E8689;
+            .infoList{
+                width:100%;
+                height:1rem;
+                line-height:1rem;
+                border-bottom:1px solid #C9D0D8;
+                font-size:13px;
+                color:#333;
+                overflow: hidden;
+                span{
+                    color:#B1B1B1;
+                    font-size:13px;
+                    margin-left:0.8rem;
+                }
+                .more{
+                    width: 1rem;
+                    float:right;
+                    margin-top:0.24rem;
+                }
+                .icon-weixin1{
+                    margin-right:0.2rem;
+                }
+                .goBind{
+                    float:right;
+                    color:#6F6F6F;
+                    font-size:13px;
+                    padding-right:0.2rem;
+                }
+                .phone{
+                    float:right;
+                    margin-right:0.1rem;
+                    color:#333;
+                    font-size:13px;
+                }
+                .code{
+                    float:right;
+                    margin-right:0.1rem;
+                    color:#B1B1B1;
+                    font-size:12px;
+                }
+                input{
+                    margin-left:0.2rem;
+                    border:none;
+                    outline: none;
+                    font-size:13px;
+                    color:#333;
+                }
+                input::-webkit-input-placeholder {
+                    color:#C1C1C1;
+                    font-size:13px;
+                }
+                input:-moz-placeholder {
+                    color:#C1C1C1;
+                    font-size:13px;
+                }
+                input::-moz-placeholder {
+                    color:#C1C1C1;
+                    font-size:13px;
+                }
+                input:-ms-input-placeholder {
+                    color:#C1C1C1;
+                    font-size:13px;
+                }
+                .codeInp{
+                    width:3rem;
+                }
+            }
+            .infoList:last-child{
+                border-bottom: none;
+            }
+        }
+        .save{
+            width:100%;
+            height:1.4rem;
+            line-height:1.4rem;
+            text-align: center;
+            position: fixed;
+            left:0;
+            right:0;
+            bottom:0;
+            border-top:1px solid #1A242E;
+        }
+    }
+</style>
+

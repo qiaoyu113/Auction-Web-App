@@ -29,6 +29,14 @@ const home = (resolve) => {require(['./pages/home/home.vue'],resolve)}
 // 直播
 const live = (resolve) => {require(['./pages/live/index.vue'],resolve)}
 const liveDetails = (resolve) => {require(['./pages/live/details.vue'],resolve)}
+//个人中心
+const mycenter = (resolve) => {require(['./pages/mycenter/mycenter.vue'],resolve)}
+const saveName = (resolve) => {require(['./pages/mycenter/saveName.vue'],resolve)}
+const savePhone = (resolve) => {require(['./pages/mycenter/savePhone.vue'],resolve)}
+const password = (resolve) => {require(['./pages/mycenter/password.vue'],resolve)}
+const newPhone = (resolve) => {require(['./pages/mycenter/newPhone.vue'],resolve)}
+//登陆页
+const login = (resolve) => {require(['./pages/login/login.vue'],resolve)}
 // 404错误页面
 const error = (resolve) => {require(['./pages/error.vue'],resolve)}
 
@@ -39,7 +47,15 @@ const routers = [
     {name: 'err',path:'/s/404',component: error}, //错误跳到404页面
     // 直播
     {name: 'live',path:'/lives',component: live},
-    {name: 'liveDetails',path:'/lives/details/:liveDetailId',component: liveDetails}
+    {name: 'liveDetails',path:'/lives/details/:liveDetailId',component: liveDetails},
+    //登陆
+    {name: 'login',path:'/login',component: login},
+    //个人中心
+    {name: 'mycenter',path:'/mycenter',component: mycenter},
+    {name: 'saveName',path:'/saveName',component: saveName},
+    {name: 'savePhone',path:'/savePhone',component: savePhone},
+    {name: 'password',path:'/password',component: password},
+    {name: 'newPhone',path:'/newPhone',component: newPhone},
 ]
 
 const router = new VueRouter({
