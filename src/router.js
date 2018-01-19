@@ -26,8 +26,11 @@ Vue.component('z-home', backhome)
 // 定义组件
 const short = (resolve) => {require(['./pages/short.vue'],resolve)}
 const home = (resolve) => {require(['./pages/home/home.vue'],resolve)}
-const specialRunning = (resolve) => {require(['./pages/home/specialRunning.vue'],resolve)}
-const specialHistory = (resolve) => {require(['./pages/home/specialHistory.vue'],resolve)}
+const specialRunning = (resolve) => {require(['./pages/special/specialRunning.vue'],resolve)}
+const specialHistory = (resolve) => {require(['./pages/special/specialHistory.vue'],resolve)}
+const specialWilling = (resolve) => {require(['./pages/special/specialWilling.vue'],resolve)}
+const specialDetailswill = (resolve) => {require(['./pages/special/specialDetailswill.vue'],resolve)}
+const personalCenter = (resolve) => {require(['./pages/personal/personalCenter.vue'],resolve)}
 // 直播
 const live = (resolve) => {require(['./pages/live/index.vue'],resolve)}
 const liveDetails = (resolve) => {require(['./pages/live/details.vue'],resolve)}
@@ -38,8 +41,11 @@ const error = (resolve) => {require(['./pages/error.vue'],resolve)}
 const routers = [
     {path: '/d/:shortId', component: short},
     {name: 'home',path:'/',component: home, meta: {keepAlive: true}},
-    {name: 'specialRunning',path:'/home/specialRunning',component:specialRunning},
-    {name: 'specialHistory',path:'/home/specialHistory/',component:specialHistory},
+    {name: 'specialRunning',path:'/special/specialRunning',component:specialRunning},
+    {name: 'specialHistory',path:'/special/specialHistory/',component:specialHistory},
+    {name: 'specialWilling',path:'/special/specialWilling/',component:specialWilling},
+    {name: 'specialDetailswill',path:'/special/specialDetailswill/',component:specialDetailswill},
+    {name: 'personalCenter',path:'/personal/personalCenter/',component:personalCenter},
     {name: 'err',path:'/s/404',component: error}, //错误跳到404页面
     // 直播
     {name: 'live',path:'/lives',component: live},
