@@ -50,6 +50,7 @@ const routers = [
     {name: 'liveDetails',path:'/lives/details/:liveDetailId',component: liveDetails},
     //登陆
     {name: 'login',path:'/login',component: login},
+    {name: 'signup',path:'/signup',component: login},
     //个人中心
     {name: 'mycenter',path:'/mycenter',component: mycenter},
     {name: 'saveName',path:'/saveName',component: saveName},

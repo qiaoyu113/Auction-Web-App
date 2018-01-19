@@ -10,8 +10,8 @@
             </div>
             <!--按钮-->
             <div class="menu">
-                <div :class="checked ? 'check' : 'login'" @click="getMenu(1)">登陆</div>
-                <div :class="!checked ? 'check2' : 'register'" @click="getMenu(2)">注册</div>
+                <div :class="login ? 'check' : 'login'" @click="getMenu(1)">登陆</div>
+                <div :class="!login ? 'check2' : 'register'" @click="getMenu(2)">注册</div>
             </div>
         </div>
         <!--登陆中心-->
@@ -23,24 +23,57 @@
             </div>
             <!--登陆账号-->
             <div class="info">
-                <input type="number" placeholder="输入手机号"/>
-                <div class="infoRight"><i class="iconfont icon-closeicon"></i></div>
+                <input type="number" placeholder="输入手机号" v-model="phoneUser"/>
+                <div class="infoRight" @click="deletePhone"><i class="iconfont icon-closeicon"></i></div>
             </div>
             <div class="info">
-                <input type="password" placeholder="输入密码"/>
-                <div class="infoRight"><i class="iconfont icon-closeicon"></i></div>
+                <input type="password" placeholder="输入密码" v-model="passwordUser"/>
+                <div class="infoRight" @click="deletePassword"><i class="iconfont icon-closeicon"></i></div>
             </div>
             <!--联系客服-->
-            <div class="talk"><span>登陆遇到问题，联系客服</span></div>
+            <div class="talk"><a href="tel:+10086"><span>登陆遇到问题，联系客服</span></a></div>
             <!--登陆和提示-->
             <div class="bottom">
-                <div class="hint" v-if="hint">密码错误</div>
-                <div class="ok">登 陆</div>
+                <div class="hint" v-if="hint">{{hintText}}</div>
+                <div class="ok" @click="loginBtn">登 陆</div>
             </div>
         </div>
         <!--注册中心-->
-        <div class="box sign" v-if="!login">
+        <div class="box sign" v-if="!login && !wxShow">
             <!--注册账号-->
+            <div class="info">
+                <input type="number" placeholder="输入手机号" v-model="phone"/>
+                <div class="infoRight" @click="removePhone"><i class="iconfont icon-closeicon"></i></div>
+            </div>
+            <div class="info">
+                <input style="width:6rem;" type="number" placeholder="输入验证码" v-model="code"/>
+                <div class="code" @click="getcode">获取验证码<span v-if="codeShow" style="margin:0;">({{timeOver}})</span></div>
+            </div>
+            <div class="info">
+                <input type="password" placeholder="输入密码" v-model="password"/>
+                <div class="infoRight" @click="removePassword"><i class="iconfont icon-closeicon"></i></div>
+            </div>
+            <div class="info">
+                <input type="password" placeholder="确认密码" v-model="password2"/>
+                <div class="infoRight" @click="removePassword2"><i class="iconfont icon-closeicon"></i></div>
+            </div>
+            <!--微信登陆-->
+            <div class="wxLogin" v-if="wxLogin" @click="wxlogin">
+                <i class="iconfont icon-icon_weixin"></i>微信
+            </div>
+            <!--登陆和提示-->
+            <div class="bottom">
+                <div class="hint" v-if="hint2">{{hint2Text}}</div>
+                <div class="ok" @click="sign">注 册</div>
+            </div>
+        </div>
+        <!--微信登陆-->
+        <div class="box" v-if="wxShow">
+            <div class="boxHeader">
+                <div class="boxImg">
+                    <img src="http://img0.imgtn.bdimg.com/it/u=3206453844,923580852&fm=27&gp=0.jpg"/>
+                </div>
+            </div>
             <div class="info">
                 <input type="number" placeholder="输入手机号" v-model="phone"/>
                 <div class="infoRight" @click="removePhone"><i class="iconfont icon-closeicon"></i></div>
@@ -59,15 +92,15 @@
             </div>
             <!--登陆和提示-->
             <div class="bottom">
-                <div class="hint" v-if="hint2">两次密码冲突</div>
-                <div class="ok">注 册</div>
+                <div class="hint" v-if="hint2">{{hint2Text}}</div>
+                <div class="ok" @click="sign">注 册</div>
             </div>
         </div>
     </div>
 </template>
 
 <script>
-    import {myService} from '../../service/mycenterService'
+    import {commonService} from '../../service/mycenterService'
     export default {
         data () {
             return {
@@ -76,9 +109,13 @@
                     name:'LOG IN',
                     name2:'用户登录'
                 },
+                wxShow:false,
                 checked:true,
                 hint:false,
                 hint2:false,
+                hint2Text:'',
+                hintText:'',
+                phoneOk:false,//判断手机号是否正确
                 login:true,//1.true登陆页面  2.false注册页面
                 timeOver:60,//短信验证码倒计时
                 inputPhone:'',//手机号
@@ -87,7 +124,12 @@
                 phone:'',
                 code:'',
                 password:'',
-                password2:''
+                password2:'',
+                checkPassword:false,
+                platform:'WAP_H5',//判断平台,
+                passwordUser:'',//登陆账户
+                phoneUser:'',//登陆密码
+                wxLogin:false,//微信登陆
             }
         },
         computed: {
@@ -101,13 +143,92 @@
         },
         mounted: function() {
             this.onMove()
+            if(this.login){
+                let phoneNum = window.localStorage.getItem('phone');
+                this.phoneUser = phoneNum
+            }
+//            首次加载判断在什么浏览器下打开
+            let ua = navigator.userAgent.toLowerCase();
+            if(ua.match(/MicroMessenger/i)=="micromessenger") {
+//                    这里是微信浏览器
+                this.wxLogin = true;
+            } else {
+//                    这里不是微信浏览器
+                this.wxLogin = true;
+            }
         },
         methods: {
+            //点击注册
+            sign:function(){
+                let that = this;
+                if(that.phoneOk){
+                    if(that.checkPassword){
+                        if(that.password == that.password2){
+                            if(that.code != ''){
+                                commonService.goSignup({phone:that.phone,password:that.password,smsCode:that.code,type:1,platform:that.platform}).then(function(res){
+                                    console.log(res.data)
+                                    if(res.data.code === 200){
+                                        that.phoneUser = that.phone;
+                                        window.localStorage.setItem('phone',that.phone)
+                                        that.login = true;
+                                        that.wxShow = false;
+                                    }else if(res.data.code === 512104){
+                                        that.hint2 = true;
+                                        that.hint2Text = '短信验证码已过期';
+                                    }
+                                })
+                            }else{
+                                that.hint2 = true;
+                                that.hint2Text = '请输入验证码';
+                            }
+                        }else{
+                            that.hint2 = true;
+                            that.hint2Text = '两次密码输入不一致';
+                        }
+                    }else{
+                        that.hint2 = true;
+                        that.hint2Text = '密码为字母、数字、下划线组合且长度为6-16的字符';
+                    }
+                }else{
+                    that.hint2 = true;
+                    that.hint2Text = '手机号格式错误';
+                }
+            },
+            //点击登陆
+            loginBtn:function(){
+                let that = this;
+                commonService.goLogin({phone:that.phoneUser,password:that.passwordUser,platform:that.platform}).then(function(res){
+                    console.log(res)
+                    if(res.data.code === 200){
+                        console.log('登陆成功')
+                        let token = res.data.datas;
+                        window.localStorage.setItem('token',token)
+                        that.$router.replace({name:'home'})
+                    }else if(res.data.code === 513110){
+                        that.hint = true;
+                        that.hintText = '用户不存在,请注册';
+                    }else if(res.data.code === 513114){
+                        that.hint = true;
+                        that.hintText = '账号密码错误,请重新输入';
+                    }
+                })
+            },
+            //删除登陆手机号
+            deletePhone:function(){
+                let that = this;
+                that.phoneUser = '';
+            },
+            //删除密码
+            deletePassword:function(){
+                let that = this;
+                that.passwordUser = '';
+            },
             getMenu:function(index){
                 let that = this;
                 if(index === 1){
                     that.checked = true;
                     that.login = true;
+                    that.wxShow = false;
                 }else{
                     that.checked = false;
                     that.login = false;
@@ -116,20 +237,35 @@
             //获取验证码
             getcode:function(){
                 let that = this;
-                if(that.codeShow){
+                if(that.phoneOk){
+                    if(that.codeShow){
 
+                    }else{
+                        that.codeShow = true;
+                        commonService.getQR({phone:that.phone,type:1}).then(function(res){
+                            console.log(res.data)
+                            if(res.data.code === 200){
+                                console.log('短信发送成功')
+                                let time = setInterval(function(){
+                                    if(that.timeOver === 0){
+                                        clearInterval(time)
+                                        that.codeShow = false;
+                                        that.timeOver = 60;
+                                    }else{
+                                        that.timeOver = that.timeOver -= 1
+                                    }
+                                },1000)
+                            }
+                            if(res.data.code === 513109){
+                                that.codeShow = false;
+                                that.hint2 = true;
+                                that.hint2Text = '用户已存在，请直接登陆';
+                            }
+                        });
+                    }
                 }else{
-                    that.codeShow = true;
-                    let time = setInterval(function(){
-                        console.log(that.timeOver);
-                        if(that.timeOver === 0){
-                            clearInterval(time)
-                            that.codeShow = false;
-                            that.timeOver = 60;
-                        }else{
-                            that.timeOver = that.timeOver -= 1
-                        }
-                    },1000)
+                    that.hint2 = true;
+                    that.hint2Text = '手机号格式错误';
                 }
             },
             //删除手机号
@@ -175,6 +311,50 @@
                     }
                 })
             },
+            //绑定微信登陆
+            wxlogin:function(){
+                let that = this;
+                that.wxShow = true;
+//                commonService.getWxpay({loginType:'WEIXIN',platform:'WXH5',jumpRouter:'wxbaselogin',wxscope:'snsapi_base'}).then(function(res){
+//                    let code = res.data.code;
+//                    if(code === 200){
+//                        //获取静默授权地址成功
+//                        window.location.href = res.data.datas;
+//                    }
+//                })
+            }
+        },
+        beforeRouteEnter(to, from, next){
+            next(vm => {
+                vm.url = to.path;
+                if(vm.url == '/login'){
+                    vm.login = true;
+                }
+                if(vm.url == '/signup'){
+                    vm.login = false;
+                }
+            })
+        },
+        watch:{
+            phone(curVal,oldVal){
+                let that = this;
+                let reg = /^1[3|4|5|7|8][0-9]{9}$/;
+                let flag = reg.test(curVal)
+                if(flag){
+                    that.phoneOk = true;
+                    that.hint2 = false;
+                }else{
+                    that.phoneOk = false;
+                }
+            },
+            password(curVal){
+                let that = this;
+                let re = /^([\d]|[\w]){6,16}$/;
+                that.checkPassword = re.test(curVal);
+                if(that.checkPassword){
+                    that.hint2 = false;
+                }
+            }
         }
     }
 </script>
@@ -255,6 +435,16 @@
         width:100%;
         padding:0.2rem;
         box-sizing: border-box;
+        .wxLogin{
+            width: 2rem;
+            text-align: center;
+            margin:0.5rem auto;
+            i{
+                font-size:28px;
+                float:left;
+                line-height: 0.6rem;
+            }
+        }
         .boxHeader{
             width:100%;
             padding:1.6rem 0 1.4rem 0;
@@ -320,16 +510,16 @@
     }
     .sign{
         padding-top:2.4rem;
-        .code{
-            height: 1.06rem;
-            line-height: 1.06rem;
-            float:right;
-            margin-right:0.1rem;
-            color:#B1B1B1;
-            font-size:12px;
-            span{
-                font-size: 12px;
-            }
+    }
+    .code{
+        height: 1.06rem;
+        line-height: 1.06rem;
+        float:right;
+        margin-right:0.1rem;
+        color:#B1B1B1;
+        font-size:12px;
+        span{
+            font-size: 12px;
         }
     }
     .bottom{
