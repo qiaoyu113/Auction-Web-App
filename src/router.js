@@ -26,6 +26,10 @@ Vue.component('z-home', backhome)
 // 定义组件
 const short = (resolve) => {require(['./pages/short.vue'],resolve)}
 const home = (resolve) => {require(['./pages/home/home.vue'],resolve)}
+const login = (resolve) => {require(['./pages/login/login.vue'],resolve)}
+const registerweixin = (resolve) => {require(['./pages/login/registerweixin.vue'],resolve)}
+const registerphone = (resolve) => {require(['./pages/login/registerphone.vue'],resolve)}
+const service = (resolve) => {require(['./pages/service/service.vue'],resolve)}
 const specialRunning = (resolve) => {require(['./pages/special/specialRunning.vue'],resolve)}
 const specialHistory = (resolve) => {require(['./pages/special/specialHistory.vue'],resolve)}
 const specialWilling = (resolve) => {require(['./pages/special/specialWilling.vue'],resolve)}
@@ -41,6 +45,10 @@ const error = (resolve) => {require(['./pages/error.vue'],resolve)}
 const routers = [
     {path: '/d/:shortId', component: short},
     {name: 'home',path:'/',component: home, meta: {keepAlive: true}},
+    {name: 'login',path:'/login',component:login},
+    {name: 'registerweixin',path:'/register',component:registerweixin},
+    {name: 'registerphone',path:'/register1',component:registerphone},
+    {name: 'service',path:'/service',component:service},
     {name: 'specialRunning',path:'/special/specialRunning',component:specialRunning},
     {name: 'specialHistory',path:'/special/specialHistory/',component:specialHistory},
     {name: 'specialWilling',path:'/special/specialWilling/',component:specialWilling},
