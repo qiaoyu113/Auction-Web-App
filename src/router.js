@@ -30,10 +30,9 @@ const login = (resolve) => {require(['./pages/login/login.vue'],resolve)}
 const registerweixin = (resolve) => {require(['./pages/login/registerweixin.vue'],resolve)}
 const registerphone = (resolve) => {require(['./pages/login/registerphone.vue'],resolve)}
 const service = (resolve) => {require(['./pages/service/service.vue'],resolve)}
-const specialRunning = (resolve) => {require(['./pages/special/specialRunning.vue'],resolve)}
-const specialHistory = (resolve) => {require(['./pages/special/specialHistory.vue'],resolve)}
-const specialWilling = (resolve) => {require(['./pages/special/specialWilling.vue'],resolve)}
-const specialDetailswill = (resolve) => {require(['./pages/special/specialDetailswill.vue'],resolve)}
+const special = (resolve) => {require(['./pages/special/special.vue'],resolve)}
+const specialinfo = (resolve) => {require(['./pages/special/specialinfo.vue'],resolve)}
+const specialDetails = (resolve) => {require(['./pages/special/specialDetails.vue'],resolve)}
 const personalCenter = (resolve) => {require(['./pages/personal/personalCenter.vue'],resolve)}
 // 直播
 const live = (resolve) => {require(['./pages/live/index.vue'],resolve)}
@@ -49,10 +48,9 @@ const routers = [
     {name: 'registerweixin',path:'/register',component:registerweixin},
     {name: 'registerphone',path:'/register1',component:registerphone},
     {name: 'service',path:'/service',component:service},
-    {name: 'specialRunning',path:'/special/specialRunning',component:specialRunning},
-    {name: 'specialHistory',path:'/special/specialHistory/',component:specialHistory},
-    {name: 'specialWilling',path:'/special/specialWilling/',component:specialWilling},
-    {name: 'specialDetailswill',path:'/special/specialDetailswill/',component:specialDetailswill},
+    {name: 'special',path:'/special',component:special},
+    {name: 'specialinfo',path:'/specialinfo',component:specialinfo},
+    {name: 'specialDetails',path:'/specialDetails/',component:specialDetails},
     {name: 'personalCenter',path:'/personal/personalCenter/',component:personalCenter},
     {name: 'err',path:'/s/404',component: error}, //错误跳到404页面
     // 直播
