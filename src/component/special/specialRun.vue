@@ -15,11 +15,7 @@
         <div class="sell-picture">
                     <div class="sell-bpic">
                         <img :src="str.img[0]" alt="" srcset="">
-                        <div class="s-run" >
-                            <span  class="span1" :class="getBgcolor(str.index)"><i class="">||</i></span>
-                            <!-- 是否被收藏 -->
-                            <span class="span2" v-if="str.collected"><i class="iconfont icon-xing"></i></span>
-                        </div>
+                        <z-icon  v-for="list in str" :key="list.url" :arr="str"></z-icon>
                     </div>
                     <div class="sell-spic">
                         <ul  v-for="index in str.img.length">
@@ -48,14 +44,9 @@ export default {
   components: {},
   mounted() {},
   methods: {
-      getBgcolor:function(index) {
-          if(index==1){
-              return 'bgcolor1';
-          }else if(index==2){
-              return 'bgcolor2';
-          }else if(index==3){
-              return 'bgcolor3';
-          }
+      getData:function() {
+          let that = this;
+          
       },
       getIndex:function() {
 //           [1,2,3].forEach(function(item){
@@ -140,59 +131,7 @@ export default {
         width: @size375;
         height: @size150;
       }
-      .s-run {
-        width: @size30;
-        height: @size15;
-        position: absolute;
-        top: 0;
-        right: 0;
-        .span1 {
-          width: @size15;
-          height: @size15;
-          float: right;
-          font-size: @size10;
-          box-sizing: border-box;
-          i {
-            width: @size15;
-            height: @size15;
-            color: white;
-            font-size: @size10;
-            font-weight: bold;
-            text-align: center;
-            padding: 1px;
-            line-height: @size15;
-          }
-        }
-        .span2 {
-          width: @size15;
-          height: @size15;
-          // display: inline-block;
-          float: right;
-          background: black;
-          font-size: @size10;
-          box-sizing: border-box;
-          i {
-            width: @size15;
-            height: @size15;
-            color: white;
-            font-size: @size10;
-            font-weight: bold;
-            text-align: center;
-            padding: 1px;
-            line-height: @size15;
-            color: rgb(233, 199, 115);
-          }
-        }
-      }
-    }
-    .bgcolor1{
-        background: rgb(0, 188, 181);
-    }
-    .bgcolor2{
-        background: rgb(233, 199, 115);
-    }
-    .bgcolor3{
-        background: rgb(235, 97, 0);
+      
     }
     .sell-spic {
       width: @size375; 

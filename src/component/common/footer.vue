@@ -1,27 +1,35 @@
 <template>
-	<div class="index-bottom" id="index-bottom">
+	<!-- <div class="index-bottom" id="index-bottom">
 		<router-link v-for="(item, index) in listFoot" :key="item.type" 
-        :to="{ name :item.imgType == '1'? 'home' 
+        	:to="{ name :item.imgType == '1'? 'home' 
                     :item.imgType == '5'? 'activity'
                     :item.imgType == '4'? 'knowledge'
                     :item.imgType == '2'? 'mycenter': 'article' }" 
-        class="single-bottom index-page" ref="myBoxa" replace>
+        	class="single-bottom index-page" ref="myBoxa" replace>
 
 			<i v-if="item.imgType == footName" class="iconfont changecolor footer-btn" 
-            v-bind:class="{'icon-shouyetianchong': item.imgType == '1',
+            	v-bind:class="{'icon-shouyetianchong': item.imgType == '1',
                             'icon-huodongtianchong': item.imgType == '5',
                             'icon-zhishitianchong': item.imgType == '4',
                             'icon-wodetianchong': item.imgType == '2',
                             'icon-wenzhangtianchong': item.imgType == '3'}"></i>
 			<i v-else class="iconfont" 
-            v-bind:class="{'icon-shouye1': item.imgType == '1',
+            	v-bind:class="{'icon-shouye1': item.imgType == '1',
                             'icon-huodong4': item.imgType == '5',
                             'icon-zhishi3': item.imgType == '4',
                             'icon-wode1': item.imgType == '2',
                             'icon-wenzhang1': item.imgType == '3'}"></i>
 			<p>{{item.name}}</p>
 		</router-link>
-	</div>
+	</div> -->
+	<div class="footer">
+            <ul class="clearfix">
+                <li class="fl"><i class="iconfont icon-shouyetianchong  check"></i></li>
+                <li class="fl"><i class="iconfont icon-zhishitianchong"></i></li>
+                <li class="fl"><i class="iconfont icon-wenzhangtianchong"></i></li>
+                <li class="fl"><i class="iconfont icon-wodetianchong"></i></li>
+            </ul>
+    </div>
 </template>
 
 <script>
@@ -29,8 +37,8 @@
 		data() {
 			return {
 				listFoot: [
-                    {type:"",
-                     imgType:'',
+                    {type:"1",
+                     imgType:'1',
                      name:''
                     }
                      
@@ -52,6 +60,37 @@
 </script>
 
 <style lang="less">
+/*rem等基本设置都放在base中，不写多个*/
+    @import url('../../assets/css/base.less');
+    @import url('../../assets/css/icon/iconfont.css');
+//自己做的
+	.footer{
+        position:fixed;
+        bottom:0;
+        width: @size375;
+        height: 1.2rem;
+		background: rgb(249,248,243);
+		box-sizing: border-box;
+		border-top:1px solid rgb(53, 60, 70); 
+        ul{
+            li{
+                width: 25%;
+                height: 1.2rem;
+                text-align: center;
+                line-height: 1.2rem;
+                i{
+                    font-size: @size20;
+                    color:rgb(168, 174, 180);
+                    border: none;
+                }
+            }
+            .check{
+                color: black;
+            }
+        }
+    }
+
+	//原先组件本身的
 	.index-bottom {
 		max-width: 450px;
 		width: 100%;

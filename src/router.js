@@ -15,12 +15,16 @@ import zbanner from './component/common/banner.vue'
 import zfooter from './component/common/footer.vue'
 import zhistory from './component/common/goback.vue'
 import backhome from './component/common/back-home.vue'
+import nav from './component/common/nav.vue'
+import iconstate from './component/common/iconState.vue'
 
 Vue.component('z-modal', zmodal)
 Vue.component('z-banner', zbanner)
 Vue.component('z-footer', zfooter)
 Vue.component('z-history', zhistory)
 Vue.component('z-home', backhome)
+Vue.component('z-nav',nav)
+Vue.component('z-icon',iconstate)
 
 
 // 定义组件
@@ -28,12 +32,12 @@ const short = (resolve) => {require(['./pages/short.vue'],resolve)}
 const home = (resolve) => {require(['./pages/home/home.vue'],resolve)}
 const login = (resolve) => {require(['./pages/login/login.vue'],resolve)}
 const registerweixin = (resolve) => {require(['./pages/login/registerweixin.vue'],resolve)}
-const registerphone = (resolve) => {require(['./pages/login/registerphone.vue'],resolve)}
 const service = (resolve) => {require(['./pages/service/service.vue'],resolve)}
 const special = (resolve) => {require(['./pages/special/special.vue'],resolve)}
 const specialinfo = (resolve) => {require(['./pages/special/specialinfo.vue'],resolve)}
 const specialDetails = (resolve) => {require(['./pages/special/specialDetails.vue'],resolve)}
 const personalCenter = (resolve) => {require(['./pages/personal/personalCenter.vue'],resolve)}
+const auction = (resolve) => {require(['./pages/auction/auction.vue'],resolve)}
 // 直播
 const live = (resolve) => {require(['./pages/live/index.vue'],resolve)}
 const liveDetails = (resolve) => {require(['./pages/live/details.vue'],resolve)}
@@ -46,11 +50,11 @@ const routers = [
     {name: 'home',path:'/',component: home, meta: {keepAlive: true}},
     {name: 'login',path:'/login',component:login},
     {name: 'registerweixin',path:'/register',component:registerweixin},
-    {name: 'registerphone',path:'/register1',component:registerphone},
     {name: 'service',path:'/service',component:service},
     {name: 'special',path:'/special',component:special},
     {name: 'specialinfo',path:'/specialinfo',component:specialinfo},
     {name: 'specialDetails',path:'/specialDetails/',component:specialDetails},
+    {name: 'auction',path:'/auction',component:auction},
     {name: 'personalCenter',path:'/personal/personalCenter/',component:personalCenter},
     {name: 'err',path:'/s/404',component: error}, //错误跳到404页面
     // 直播

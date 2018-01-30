@@ -6,11 +6,7 @@
     <div class="" id="" v-set-title="title">
         
         <div class="header">传家</div>
-        <div class="nav">
-            <span class="">&lt;</span> 
-            <span class="span1">c</span>
-            <span class="span2">d</span>
-        </div>
+        <z-nav></z-nav>
         
         <div class="container">
             <div class="titleEn">CHUANJIA SPECIAL</div>
@@ -55,6 +51,7 @@
                 title: '专题详情',
                 specialist:[
                     {
+                        index:1,
                         collected:false,
                         img:'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1516784700115&di=f6b8e9cf4f25f3c564b1baed63ffa6f6&imgtype=0&src=http%3A%2F%2Fimg387.ph.126.net%2FjLY_ZSMwX5h9geAwDcehWA%3D%3D%2F2427158724177097031.jpg',
                         money:'200,000CNY',
@@ -62,6 +59,7 @@
                         number:"NX00012"
                     },
                     {
+                        index:1,
                         collected:true,
                         img:'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1516784700115&di=f6b8e9cf4f25f3c564b1baed63ffa6f6&imgtype=0&src=http%3A%2F%2Fimg387.ph.126.net%2FjLY_ZSMwX5h9geAwDcehWA%3D%3D%2F2427158724177097031.jpg',
                         money:'200,000CNY',
@@ -69,6 +67,7 @@
                         number:"NX00012"
                     },
                     {
+                        index:1,
                         collected:true,
                         img:'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1516784700115&di=f6b8e9cf4f25f3c564b1baed63ffa6f6&imgtype=0&src=http%3A%2F%2Fimg387.ph.126.net%2FjLY_ZSMwX5h9geAwDcehWA%3D%3D%2F2427158724177097031.jpg',
                         money:'200,000CNY',
@@ -138,34 +137,6 @@
         color: white;
         text-align: center;
         line-height: @size45;
-    }
-    .nav{
-        width: @size375;
-        height: @size35;
-        border-bottom: 1px solid rgb(53, 60, 70);
-        background: rgb(255, 255, 255);
-        position: fixed;
-        top: @size45;
-        z-index: 100;
-        span{
-            display: inline-block;
-            line-height: @size30;
-            text-align: center;
-            font-size: @size30;
-            font-weight: lighter;
-            color: rgb(157, 169, 177);
-            margin-left: 20px;
-            
-            
-        }
-        .span1{
-            float: right;
-            padding-right: 20px;
-        }
-        .span2{
-            float: right;
-            padding-right: 20px;
-        }
     }
      .container{
         margin-top: @size75;
