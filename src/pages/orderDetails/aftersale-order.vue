@@ -1,0 +1,456 @@
+<template>
+    <!--title为当前页标题
+        组件要小，如遇list，只将item做成组件，其他的都写在页面中
+    -->
+    <!-- 订单详情-订单售后 -->
+    <!-- index四种状态
+    0，退货失败
+    1，退货中
+    2，审核中
+    3，退款成功 -->
+    <div class="" id="" v-set-title="title">
+        <div class="header">传家</div>
+        <div class="nav">
+            <span class="">&lt;</span> 
+            <span class="span1" :class="index>2||index==0 ? 'display':'' ">c</span>
+        </div>
+        <div class="content">
+            <div class="state">
+                <div class="linecolor redline" v-if='index>0'>
+                    <div class="circle pos1" :class="index>0 ? 'bgcolor':'' "></div>
+                    <div class="circle pos2" :class="index>1 ? 'bgcolor':'' "></div>
+                    <div class="circle pos3" :class="index>2 ? 'bgcolor':'' "></div>
+                    <div class="label">
+                        <span class="label1" :class="index>0 ? 'fontcolor':'' ">提交审核</span>
+                        <span class="label2" :class="index>1 ? 'fontcolor':'' ">审核中</span>
+                        <span class="label3" :class="index>2 ? 'fontcolor':'' ">已解决</span>
+                    </div>
+                </div>
+                <div class=" linecolor1 redline" v-if='index==0'>
+                    <div class="circle pos1 grayBg"></div>
+                    <div class="circle pos2 grayBg"></div>
+                    <div class="circle pos3 grayBg"></div>
+                    <div class="label">
+                        <span class="label1">提交审核</span>
+                        <span class="label2">审核中</span>
+                        <span class="label3">已解决</span>
+                    </div>
+                </div>
+            </div>
+            <div class="payment">
+                <div class="witpay" v-if='index==0'>退货失败</div>
+                <div class="witpay" v-if='index==1'>退货中</div>
+                <div class="witpay" v-if='index==2'>审核中</div>
+                <div class="witpay" v-if='index==3'>已退款</div>
+                <div class="money" v-if='index>0'>50,000 CNY</div>
+            </div>
+            <div class="orderinfo">
+                <div class="price clearfix" v-if='index>0'><div class="fl">退回路径</div><div class="fr">支付宝</div></div>
+                <div class="price clearfix" v-if='index>0'><div class="fl">差额原因</div><div class="fr">其他</div></div>
+                <div class="price clearfix" v-if='index==0'>货品属性特殊，无法进行退货。审核失败，客服驳回售后申请。如有问题，请联系售后</div>
+            </div>
+            <div class="helpCenter">
+                <span class="fl">到账周期说明</span>
+                <div class="fr icon">i</div>
+                <a class="fr" @click="open()">查看说明</a>
+            </div>
+            <div class="itemInfo clearfix">
+                <div class="pic fl"><img src="../../assets/image/myimage/eg.gif" alt=""></div>
+                <div class="box fl">
+                    <div class="money">300,00CNY</div>
+                    <div class="title">器物器物器物</div>
+                    <div class="number">20180709-2</div>
+                </div>
+            </div>
+            <div class="totalMoney clearfix">
+                <div class="fl">问题描述</div>
+            </div>
+            <div class="moneys">
+                <div class="price clearfix"><div class="fl">收到物品有破损，货物外包装不完整</div></div>
+                <div class="price clearfix"><div class="fl">货品投递有问题，无法正常签收</div><div class="fr">2018.06.06 00：00</div></div>
+            </div>
+            <div class="orderinfo">
+                <div class="price clearfix"><div class="fl">订单编号:</div><div class="fr">308796987864</div></div>
+                <div class="price clearfix"><div class="fl">申请时间:</div><div class="fr">2018.06.31 12：12：12</div></div>
+                <div class="price clearfix"><div class="fl">联系人:</div><div class="fr">李先生</div></div>
+                <div class="price clearfix"><div class="fl">手机号码:</div><div class="fr">138 3666 6666</div></div>
+            </div>  
+        </div>
+        <div class="footer">联系售后</div>
+        <!-- 到账周期说明弹窗 -->
+        <div :class="dis">
+            <div class="transparent"></div>
+            <div class="popWin" >
+                <div class="close" @click="close()"><i class="iconfont icon-closeicon"></i></div>
+                <div class="titleEn">RULES</div>
+                <div class="titleCh">到账周期说明</div>
+                <div class="explain1">
+                    <p class="title">到账周期说明</p>
+                    <p>为了维护拍卖交易秩序，保障平台用户的合法权益，以下规则请大家务必遵守：</p>
+                </div>
+                <div class="explain1">
+                    <p class="title">到账周期说明</p>
+                    <p>为了维护拍卖交易秩序，保障平台用户的合法权益，以下规则请大家务必遵守：
+                    为了维护拍卖交易秩序，保障平台用户的合法权益，以下规则请大家务必遵守：
+                    </p>
+                </div>
+                <div class="explain1">
+                    <p class="title">到账周期说明</p>
+                    <p>为了维护拍卖交易秩序，保障平台用户的合法权益，以下规则请大家务必遵守：
+                    为了维护拍卖交易秩序，保障平台用户的合法权益，以下规则请大家务必遵守：
+                    </p>
+                </div>
+                <div class="explain1">
+                    <p class="title">到账周期说明</p>
+                    <p>为了维护拍卖交易秩序，保障平台用户的合法权益，以下规则请大家务必遵守：
+                    为了维护拍卖交易秩序，保障平台用户的合法权益，以下规则请大家务必遵守：
+                    </p>
+                </div>
+                
+                
+            </div>
+        </div>
+    </div>
+</template>
+
+<script >
+import {appService} from '../../service/appService'
+  export default {
+    props: ['str'],
+    data () {
+      return {
+          title:'售后服务',
+          arrays: [],
+        index:1,
+        dis:'dis'
+          
+      }
+    },
+    components: {},
+    mounted () {
+    },
+    methods: {
+        open:function(){
+            this.dis='';
+        },
+        close:function() {
+            this.dis='dis';
+        }
+    }
+  }
+</script>
+
+<style lang="less">
+    /*rem等基本设置都放在base中，不写多个*/
+    @import url('../../assets/css/base.less');
+    @import url('../../assets/css/icon/iconfont.css');
+    .header{
+        position: fixed;
+        top: 0;
+        z-index: 100;
+        width: @size375;
+        height: @size45;
+        background:rgba(2, 10, 2, 1);
+        font-size: @size20;
+        color: white;
+        text-align: center;
+        line-height: @size45;
+    }
+    .nav{
+        width: @size375;
+        height: @size35;
+        border-bottom: 0.5px solid rgb(53, 60, 70);
+        background: rgb(255, 255, 255);
+        position: fixed;
+        top: @size45;
+        z-index: 100;
+        span{
+            display: inline-block;
+            line-height: @size30;
+            text-align: center;
+            font-size: @size30;
+            font-weight: lighter;
+            color: rgb(157, 169, 177);
+            margin-left: 20px;
+        }
+        .span1{
+            float: right;
+            padding-right: 20px;
+            display: none;
+        }
+        .display{
+            display: block;
+        }
+    }
+    .content{
+        margin-top: @size80;
+        margin-bottom: 1.2rem;
+        box-sizing: border-box;
+        padding: 0 @size10;
+        .state{
+            height: @size80;
+            width: 100%;
+            border-bottom: 1px solid rgb(129, 135, 140);
+            box-sizing: border-box;
+            padding: 0 @size45;
+            .linecolor{
+                border-top: 0.08rem solid rgb(21, 179, 187);
+            }
+            .linecolor1{
+                border-top: 0.08rem solid gray;
+            }
+            .redline{
+                box-sizing: border-box;
+                
+                padding: @size30;
+                padding-top: @size15;
+                position: relative;
+                top: @size25;
+                .circle{
+                    width: @size9;
+                    height: @size9;
+                    border-radius: 50%;
+                    border: 3px solid rgb(21, 179, 187);
+                    display: inline-block;
+                    position: absolute;
+                    background: white;
+                }
+                .grayBg{
+                    background: gray;
+                    border-color:gray; 
+                }
+                .pos1{
+                    top: -@size8;
+                    left: -1px;
+                }
+                .pos2{
+                    top: -@size8;
+                    left: 3.3rem;
+                }
+                .pos3{
+                    top: -@size8;
+                    right: -1px;
+                }
+                .bgcolor{
+                    background: rgb(21, 179, 187);
+                }
+                .label {
+                    margin-left: -1.5rem;
+                    margin-right: -1.5rem; 
+                    text-align: center;   
+                    
+                    .label1{
+                        float: left;
+                        font-size: @size16;
+                        color: gray;
+                    }
+                    .label2{
+                        text-align: center;
+                        font-size: @size16;
+                        color: gray;
+                    }
+                    .label3{
+                        float: right;
+                        font-size: @size16;
+                        color: gray;
+                    }
+                    .fontcolor{
+                        color: rgb(21, 179, 187);
+                    }
+                }
+            }
+            
+        }
+        .payment{
+            height: @size40;
+            box-sizing: border-box;
+            border-bottom: 1px solid rgb(129, 135, 140);
+            .witpay{
+                padding-left: @size10;
+                line-height: @size40;
+                font-size: @size14;
+                float: left;
+            }
+            .money{
+                margin-top: @size6;
+                line-height: @size30;
+                font-size: @size15;
+                color: rgb(21, 179, 187);
+                float: right;
+                padding: 0 @size10;
+                
+            }
+        }
+        .helpCenter{
+                height: @size40;
+                width: 100%;
+                border-top: 1px solid rgb(130, 135, 140);
+                border-bottom: 1px solid rgb(130, 135, 140);
+                text-align: center;
+                line-height: @size40;
+                span{
+                    padding-left:@size10;
+                    font-size: 12px;
+                    font-weight: bold; 
+                }
+                a{
+                    font-size: @size10;
+                    text-decoration: underline;
+                    color: rgb(130, 135, 140);
+                    margin-right: @size5;
+                }
+                .icon{
+                    width: @size12;
+                    height: @size12;
+                    border: 1px solid rgb(130, 135, 140);
+                    border-radius:50%; 
+                    display: inline-block;
+                    font-size: @size1;
+                    line-height: @size12;
+                    margin-top: @size14;
+                    margin-right: @size10;
+                }
+        }
+        .itemInfo{
+            height: @size98;
+            border-bottom: 1px solid rgb(129, 135, 140);
+            box-sizing: border-box;
+            .pic{
+                width: @size80;
+                height: @size80;
+                padding-top:@size9;
+                margin-left: @size10; 
+                display: inline-block;
+                img{
+                    width: 100%;
+                    height: 100%;
+                }
+            }
+            .box{
+                display: inline-block;
+                margin-left: @size15;
+                padding-top: @size10;
+                .money {
+                    font-size: 15px;
+                    font-weight: bold;
+                }
+                .title {
+                    font-size: 14px;
+                    color: rgb(133, 133, 133);
+                    padding-top: @size1;
+                }
+                .number {
+                    font-size: 12px;
+                    color: rgb(133, 133, 133);
+                    padding: 0 0 @size25 0;
+                    line-height: @size10;
+                }
+            }
+            
+        }
+        .totalMoney{
+            height: @size40;
+            width: 8.933rem;
+            border-bottom: 1px solid rgb(129, 135, 140);
+            margin-left: @size10;
+            line-height: @size40;
+            .fl{
+                font-size: @size14;
+            }
+            .fr{
+                font-size: @size14;
+                font-weight: bold;
+                color: red;
+            }
+        }
+        .moneys{
+            box-sizing: border-box;
+            padding: @size5 @size10;
+            border-bottom: 1px solid rgb(129, 135, 140);
+            height: @size50;
+            div{
+                font-size: @size12;
+                line-height: @size20;
+            }
+        }
+        .orderinfo{
+            padding: @size5 @size10;
+            div{
+                font-size: @size12;
+                line-height: @size20;
+            }
+        }
+    }
+    .footer{
+        position:fixed;
+        bottom:0;
+        width: @size375;
+        height: 1.2rem;
+		box-sizing: border-box;
+        border-top:1px solid rgb(53, 60, 70); 
+        text-align: center;
+        line-height: 1.2rem;
+        font-size: 15px;
+    }
+    //到账周期说明弹窗
+.dis{
+    display: none;
+}
+.transparent{
+    position: fixed;
+    bottom: 0;
+    z-index: 100;
+    width: 100%;
+    height: 100%;
+    background:#000;  
+    opacity:0.6;
+}
+.popWin{
+    height: 14.72rem;
+    width: 8.67rem;
+    background: white;
+    position: fixed;
+    bottom:@size25;
+    left: @size25;
+    z-index: 1000;
+    text-align: center;
+    box-sizing: border-box;
+    padding: 0 @size20;
+    overflow: scroll;
+    .close{
+            position: absolute;
+            right: 0;top: 0;
+            width: @size30;
+            height: @size30;
+            background: #eb6100;
+            i{
+                font-size: @size30;
+                color: white;
+            }
+    }
+    .titleEn{
+        padding-top: @size50;
+        letter-spacing: 2px;
+        font-size: @size14;
+        font-weight: bold;
+    }
+    .titleCh{
+        font-size: @size11;
+        padding-bottom: @size25;
+    }
+    .explain1{
+        padding: 0 @size10 @size25 @size10;
+        text-align: left;
+        .title{
+            font-size: @size10;
+            color: black;
+            padding-bottom: @size4;
+        }
+        p{
+            font-size: @size10;
+            color: gray;
+        }
+    }
+}    
+</style>
+

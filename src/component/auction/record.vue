@@ -72,7 +72,7 @@ import priceRecord from'../../component/auction/priceRecord'
       return {
           arrays: [],
           dis:'',
-          index:3,
+          index:1,
           pricerecord:[
               {money:'200,000CNY',
               name:'某某某',

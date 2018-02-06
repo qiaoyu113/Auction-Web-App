@@ -1,5 +1,4 @@
 <template>
-<!-- 两个模板有星星无星星 -->
 <div class="sell">
         <!-- 内容部分 -->
         <div class="sell-content">
@@ -18,12 +17,9 @@
                         <z-icon  v-for="list in str" :key="list.url" :arr="str"></z-icon>
                     </div>
                     <div class="sell-spic">
-                        <ul  v-for="index in str.img.length">
-                            <li ><img :src="str.img[index]" alt="" srcset=""></li>
-                            <li style="left:95px"><img :src="str.img[2]" alt="" srcset=""></li>
-                            <li style="left:190px"><img :src="str.img[3]" alt="" srcset=""></li> 
-                            <li style="left:285px"><img :src="str.img[4]" alt="" srcset=""></li>
-                            <li style="left:380px"><img :src="str.img[5]" alt="" srcset=""></li>
+                        <ul >
+                            
+                            <li  v-for="(falg,index) in str.img" :style= "getPos(index)" ><img :src="falg" alt="" srcset=""></li>
                             
                         </ul>
                     </div>
@@ -38,23 +34,27 @@ export default {
   data() {
     return {
       arrays: [],
-      flag: true
+      flag: true,
     };
   },
   components: {},
-  mounted() {},
+  mounted() {
+    // this.getPos()
+  },
   methods: {
       getData:function() {
           let that = this;
           
       },
-      getIndex:function() {
-//           [1,2,3].forEach(function(item){
-// console.log(item);
-// });
-        return str.img.length;
+       getPos:function(index) {
+        var str = 95*(index)+'px';
+        str='left:'+str;
+        return str;
       }
       
+  },
+  computed:{
+   
   }
 };
 </script>
@@ -140,7 +140,6 @@ export default {
         overflow-x: auto;
       // height: @size98;
       ul {
-        //这里宽度出问题
         width: @size375;
        position: relative;
         li {position: absolute;

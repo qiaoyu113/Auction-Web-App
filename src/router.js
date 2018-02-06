@@ -31,13 +31,26 @@ Vue.component('z-icon',iconstate)
 const short = (resolve) => {require(['./pages/short.vue'],resolve)}
 const home = (resolve) => {require(['./pages/home/home.vue'],resolve)}
 const login = (resolve) => {require(['./pages/login/login.vue'],resolve)}
+const mine = (resolve) => {require(['./pages/mine/mine.vue'],resolve)}
+//订单详情
+const normalorder = (resolve) => {require(['./pages/orderDetails/normal-order.vue'],resolve)}
+const closeorder = (resolve) => {require(['./pages/orderDetails/close-order.vue'],resolve)}
+const afterorder = (resolve) => {require(['./pages/orderDetails/aftersale-order.vue'],resolve)}
+const shipping = (resolve) => {require(['./pages/orderDetails/shipping.vue'],resolve)}
+const rules = (resolve) => {require(['./pages/orderDetails/rules.vue'],resolve)}
+//拍品详情
+const auction = (resolve) => {require(['./pages/auction/auction.vue'],resolve)}
+//地址
+const address = (resolve) => {require(['./pages/address/new-address.vue'],resolve)}
+const addresslist = (resolve) => {require(['./pages/address/addresslist.vue'],resolve)}
+
 const registerweixin = (resolve) => {require(['./pages/login/registerweixin.vue'],resolve)}
 const service = (resolve) => {require(['./pages/service/service.vue'],resolve)}
 const special = (resolve) => {require(['./pages/special/special.vue'],resolve)}
 const specialinfo = (resolve) => {require(['./pages/special/specialinfo.vue'],resolve)}
 const specialDetails = (resolve) => {require(['./pages/special/specialDetails.vue'],resolve)}
 const personalCenter = (resolve) => {require(['./pages/personal/personalCenter.vue'],resolve)}
-const auction = (resolve) => {require(['./pages/auction/auction.vue'],resolve)}
+
 // 直播
 const live = (resolve) => {require(['./pages/live/index.vue'],resolve)}
 const liveDetails = (resolve) => {require(['./pages/live/details.vue'],resolve)}
@@ -48,13 +61,29 @@ const error = (resolve) => {require(['./pages/error.vue'],resolve)}
 const routers = [
     {path: '/d/:shortId', component: short},
     {name: 'home',path:'/',component: home, meta: {keepAlive: true}},
+    
+    {name: 'mine',path:'/mine',component:mine},
+//订单详情
+    {name: 'normalorder',path:'/normalorder',component:normalorder},//订单正常
+    {name: 'closeorder',path:'/closeorder',component:closeorder},//订单关闭
+    {name: 'afterorder',path:'/afterorder',component:afterorder},//订单售后
+    {name: 'shipping',path:'/shipping',component:shipping},//物流信息
+    {name: 'rules',path:'/rules',component:rules},//到账周期说明
+//拍品详情
+    {name: 'auction',path:'/auction',component:auction},
+//地址
+    {name: 'address',path:'/address',component:address},
+    {name: 'addresslist',path:'/addresslist',component:addresslist},
+//登录注册
     {name: 'login',path:'/login',component:login},
     {name: 'registerweixin',path:'/register',component:registerweixin},
-    {name: 'service',path:'/service',component:service},
-    {name: 'special',path:'/special',component:special},
-    {name: 'specialinfo',path:'/specialinfo',component:specialinfo},
-    {name: 'specialDetails',path:'/specialDetails/',component:specialDetails},
-    {name: 'auction',path:'/auction',component:auction},
+    {name: 'service',path:'/service',component:service},//客服
+
+    {name: 'special',path:'/special',component:special},//专题
+    {name: 'specialinfo',path:'/specialinfo',component:specialinfo},//专题详情
+    {name: 'specialDetails',path:'/specialDetails/',component:specialDetails},//排场详情-拍品列表
+
+   
     {name: 'personalCenter',path:'/personal/personalCenter/',component:personalCenter},
     {name: 'err',path:'/s/404',component: error}, //错误跳到404页面
     // 直播

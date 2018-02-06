@@ -4,10 +4,8 @@
     -->
     <!-- 拍品详情 -->
     <div class="" id="" v-set-title="title">
-        
         <div class="header">传家</div>
         <z-nav></z-nav>
-        
         <div class="container">
             <div class="sell-list">
                 <div class="sell-pic">
@@ -53,21 +51,25 @@
                           <a class="fr">查看如何参加拍卖</a>
                     </div>
                 </div>
-                  
             </div>
             <div class="others">
                 <div class="othersEn">OTHERS</div>
                 <div class="othersCh">本场其他</div>
             </div>
+            <!-- 本场其他 -->
             <div class="sell-more clearfix">
                 <div v-for="list in specialist" :key="list.url">
                     <special-more :str="list"></special-more>
                 </div>
             </div>
         </div>
+        <!-- 出价记录 -->
         <z-record></z-record>
+        <!-- 彩色信息条 -->
         <z-info></z-info>
+        <!-- 底部竞拍栏 -->
         <z-foot></z-foot>
+        <!-- 保证金充值弹窗 -->
         <z-payment></z-payment>
     </div>
 </template>
@@ -234,8 +236,6 @@
                     text-align: left;
                     padding: @size10;
                 }
-                
-                
             }
             .sell-inf{
                 margin-top: @size20;
