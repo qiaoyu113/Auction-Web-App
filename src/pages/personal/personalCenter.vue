@@ -2,19 +2,20 @@
     <!--title为当前页标题
         组件要小，如遇list，只将item做成组件，其他的都写在页面中
     -->
-    <!-- 茶叶拍卖前台 -->
+    <!-- 个人中心 -->
     <div class="" id="" v-set-title="title">
         
         <div class="header">传家</div>
-        <div class="content">
-            <div v-for="list in homelist" :key="list.url">
-                <home-item :str="list"></home-item>
-            </div>
-        </div>
-        <z-footer >
-            
-        </z-footer>
         
+        <z-footer ></z-footer>
+        <!-- <div class="footer">
+            <ul class="clearfix">
+                <li class="fl"><i class="iconfont icon-shouyetianchong  check"></i></li>
+                <li class="fl"><i class="iconfont icon-xiaochuizi"></i></li>
+                <li class="fl"><i class="iconfont icon-shoucang1"></i></li>
+                <li class="fl"><i class="iconfont icon-wodetianchong"></i></li>
+            </ul>
+        </div> -->
         <!-- <z-banner :listImg="list">sss</z-banner> -->
     </div>
 </template>
@@ -33,12 +34,6 @@
                         url:"http://www.baidu.com",
                         time:"2017.10.15 17:00",
                     },{
-                        title:"CHUANJIA SPECIAL",
-                        subtitle:"传家标题2",
-                        url:"http://www.baidu.com",
-                        time:"2017.10.15 16:00",
-                    },
-                    {
                         title:"CHUANJIA SPECIAL",
                         subtitle:"传家标题2",
                         url:"http://www.baidu.com",
@@ -115,6 +110,28 @@
         margin-bottom: 1.2rem;
     }
     
-    
+    .footer{
+        position:fixed;
+        bottom:0;
+        width: @size375;
+        height: 1.2rem;
+        background: rgb(249,248,243);
+        ul{
+            li{
+                width: 25%;
+                height: 1.2rem;
+                text-align: center;
+                line-height: 1.2rem;
+                i{
+                    font-size: @size25;
+                    color:rgb(217, 217, 217);
+                    border: none;
+                }
+            }
+            .check{
+                color: black;
+            }
+        }
+    }
 </style>
 

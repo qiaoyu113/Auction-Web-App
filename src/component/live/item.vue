@@ -1,23 +1,16 @@
 <template>
     <div>
-        <div class="item" v-for="item in arrays">
-            <div class="left">
-                <img class="cover" :src="item.cover">
-                <span class="mark grey" v-if="item.state=='已结束'"><span class="txtScale">{{ item.state }}</span></span>
-                <span class="mark yellow" v-else><span class="txtScale">{{ item.state }}</span></span>
-            </div>
-            <div class="right">
-                <p class="p1">{{ item.title }}</p>
-                <p class="p2">{{ item.time }}</p>
-                <p class="p3">{{ item.peoNum }}</p>
-                <p class="p4">{{ item.price }}</p>
-            </div>
+        <div id='' class="special">
+            <h1>{{str.title}}</h1>
+            <div>{{str.subtitle}}</div>
+            <div class="time">{{str.time}}</div>
+            <i><a :href="str.url">MORE</a></i>
         </div>
     </div>
 </template>
 <script type="text/ecmascript-6">
   export default {
-    props: ['collection'],
+    props: ['str'],
     data () {
       return {
           arrays: []
@@ -25,7 +18,6 @@
     },
     components: {},
     mounted () {
-        this.arrays = this.collection;
     },
     methods: {}
   }

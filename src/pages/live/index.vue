@@ -3,6 +3,7 @@
       组件要小，如遇list，只将item做成组件，其他的都写在页面中 id="home" v-set-title="title"
   -->
   <div>
+    ccccc
   </div>
 </template>
 
