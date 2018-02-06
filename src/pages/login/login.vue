@@ -197,6 +197,7 @@
             //点击登陆
             loginBtn:function(){
                 let that = this;
+                console.log(that.phoneUser);
                 commonService.goLogin({phone:that.phoneUser,password:that.passwordUser,platform:that.platform}).then(function(res){
                     console.log(res)
                     if(res.data.code === 200){

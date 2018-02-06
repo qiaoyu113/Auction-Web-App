@@ -30,8 +30,7 @@ Vue.component('z-icon',iconstate)
 // 定义组件
 const short = (resolve) => {require(['./pages/short.vue'],resolve)}
 const home = (resolve) => {require(['./pages/home/home.vue'],resolve)}
-const login = (resolve) => {require(['./pages/login/login.vue'],resolve)}
-const registerweixin = (resolve) => {require(['./pages/login/registerweixin.vue'],resolve)}
+const registerweixin = (resolve) => {require(['./component/login/registerweixin.vue'],resolve)}
 const service = (resolve) => {require(['./pages/service/service.vue'],resolve)}
 const special = (resolve) => {require(['./pages/special/special.vue'],resolve)}
 const specialinfo = (resolve) => {require(['./pages/special/specialinfo.vue'],resolve)}
@@ -59,10 +58,10 @@ const routers = [
     {name: 'login',path:'/login',component:login},
     {name: 'registerweixin',path:'/register',component:registerweixin},
     {name: 'service',path:'/service',component:service},
-    {name: 'special',path:'/special',component:special},
-    {name: 'specialinfo',path:'/specialinfo',component:specialinfo},
+    {name: 'special',path:'/special',component:special},//专场列表
+    {name: 'specialinfo',path:'/specialinfo',component:specialinfo},//专题详情
     {name: 'specialDetails',path:'/specialDetails/',component:specialDetails},
-    {name: 'auction',path:'/auction',component:auction},
+    {name: 'auction',path:'/auction',component:auction},//拍品详情
     {name: 'personalCenter',path:'/personal/personalCenter/',component:personalCenter},
     {name: 'err',path:'/s/404',component: error}, //错误跳到404页面
     // 直播
