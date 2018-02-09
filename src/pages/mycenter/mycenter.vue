@@ -23,8 +23,8 @@
             <div class="info">
                 <div class="infoList">昵称  <span>{{user.name}}</span><div class="more" @click="changeName"><img src="../../../src/assets/image/mycenter/more.png"/></div></div>
                 <div class="infoList">性别  <span>{{user.sex}}</span><div class="more"><img src="../../../src/assets/image/mycenter/more.png"/></div></div>
-                <div class="infoList">生日  <span>{{user.birthday}}</span><div class="more"><img src="../../../src/assets/image/mycenter/more.png"/></div></div>
-                <div class="infoList">手机  <span v-if="hasPhone">{{user.phone}}</span><span v-if="!hasPhone">暂无绑定手机号</span><div class="more" @click="changePhone"><img src="../../../src/assets/image/mycenter/more.png"/></div></div>
+                <div class="infoList">生日  <span>{{user.age}}</span><div class="more"><img src="../../../src/assets/image/mycenter/more.png"/></div></div>
+                <div class="infoList">手机  <span v-if="user.phone!=''">{{user.phone}}</span><span v-if="user.phone==''">暂无绑定手机号</span><div class="more" @click="changePhone"><img src="../../../src/assets/image/mycenter/more.png"/></div></div>
             </div>
             <!--修改密码-->
             <div class="info">
@@ -43,16 +43,13 @@
 
 <script>
     import {appService} from '../../service/appService'
+    import {commonService} from '../../service/commonService.js'
     export default {
         data () {
             return {
                 title: '个人中心',
-                user:{
-                    name:'吴彦祖',
-                    sex:'男',
-                    birthday:'1989-01-01',
-                    phone:'13038008888'
-                },
+               
+                user:'',
                 header:{
                     name:'PERSONAL SETTING',
                     name2:'个人设置'
@@ -62,17 +59,7 @@
             }
         },
         syncData({store}) {
-            /*基本规则
-             * 所有不需要token的请求都放在这里
-             * 这里不出现window，document等DOM元素
-             * 这里获得的数据都要存储在store中
-             * 写法如下
-             * */
             const that = this;
-            /*
-             * 将所有的请求处理以数组放在promise中
-             * that.data().data调用数据
-             * */
             return Promise.all([
                 appervice.getParam().then(res=>{
 //                    store.state.homeStore.listImg = res.data;
@@ -92,25 +79,19 @@
             },
         },
         mounted: function() {
-            /*
-             * 所有需要token的请求都放在这里
-             * 可以使用DOM元素
-             * 这里的数据可以放在data中
-             * */
-
-
+            this.getUsers()
         },
         methods: {
             //改变名字
             changeName:function(){
                 let that = this;
-                that.$router.push({name:'saveName'})
+                that.$router.push({name:'saveName',query:{id:that.user.id}})
             },
             //改电话号
             changePhone:function(){
                 let that = this;
                 if(that.hasPhone){
-                    that.$router.push({name:'newPhone'})
+                    that.$router.push({name:'newPhone',query:{phone:that.user.phone}})
                 }else{
                     that.$router.push({name:'savePhone'})
                 }
@@ -119,7 +100,15 @@
             changePass:function(){
                 let that = this;
                 that.$router.push({name:'password'})
-            }
+            },
+            getUsers:function(){
+                let that=this
+                 commonService.getUsers().then(function(res){
+                    that.user=res.data.datas.user
+                    console.log(that.user)
+              })
+
+             },
         }
     }
 </script>

@@ -27,6 +27,7 @@
 
 <script>
     import {appService} from '../../service/appService'
+    import {commonService} from '../../service/commonService.js'
     export default {
         data () {
             return {
@@ -46,8 +47,8 @@
             listImg() {
                 return this.$store.state.homeStore.listImg || []
             },
-            noticelist() {
-                return this.$store.state.homeStore.noticelist || []
+            phone() {
+                return this.$route.query.phone 
             },
         },
         mounted: function() {

@@ -20,16 +20,18 @@
             </div>
             <!--新密码-->
             <div class="info">
-                <div class="infoList">确认新密码<input type="password" placeholder="请输入" v-model="newPassword2"/><div class="del" @click="deleteName3"><i class="iconfont icon-closeicon"></i></div></div>
+                <div class="infoList">确认新密码<input type="password" placeholder="请输入" v-model="newPassword2" /><div class="del" @click="deleteName3"><i class="iconfont icon-closeicon"></i></div></div>
             </div>
+            <div class="v_prompt" ref="v_prompt">{{prompt}}</div>
             <!--保存-->
-            <div class="save" @click="saveName">保存</div>
+            <div class="save" @click="putPasswords()">保存</div>
         </div>
     </div>
 </template>
 
 <script>
     import {appService} from '../../service/appService'
+    import {commonService} from '../../service/commonService.js'
     export default {
         data () {
             return {
@@ -38,6 +40,7 @@
                     name:'PASSWORD',
                     name2:'密码设置'
                 },
+                prompt:'两次',
                 oldPassword:'',//旧密码
                 newPassword:'',//新密码
                 newPassword2:''//确认新密码
@@ -48,9 +51,7 @@
             listImg() {
                 return this.$store.state.homeStore.listImg || []
             },
-            noticelist() {
-                return this.$store.state.homeStore.noticelist || []
-            },
+          
         },
         mounted: function() {
             /*
@@ -74,11 +75,34 @@
                 let that = this;
                 that.newPassword2 = '';
             },
+      
             //保存名字
             saveName:function(){
                 let that = this;
                 that.$router.go(-1);
-            }
+            },
+             putPasswords:function(){
+                 let that=this
+                  if(that.newPassword!=that.newPassword2){
+                    that.prompt="两次密码不一致";
+                     that.$refs.v_prompt.style.display = 'block';  
+                setTimeout(() => {  
+                       that.$refs.v_prompt.style.display = 'none';  
+                   },2000)  
+                     return false
+                  }
+    commonService.putPasswords({oldPassword:that.oldPassword,newPassword:that.newPassword}).then(function(res){
+                    if(res.data.code == 200){
+                     that.$router.go(-1);
+                    }else{
+                        that.prompt=res.data.message;
+                     that.$refs.v_prompt.style.display = 'block';  
+                setTimeout(() => {  
+                       that.$refs.v_prompt.style.display = 'none';  
+                   },2000) 
+                    }
+              })
+            },
         }
     }
 </script>
@@ -235,6 +259,19 @@
             .infoList:last-child{
                 border-bottom: none;
             }
+        }
+        .v_prompt{
+            display: none;
+            width: 100%;
+            position: fixed;
+            left: 0;
+            bottom: 1.4rem;
+          
+                font-size: 14px;
+                line-height: 20px;
+                color: red;
+                text-align: center;
+            
         }
         .save{
             width:100%;

@@ -6,17 +6,90 @@
     <div class="" id="" v-set-title="title">
         
         <div class="header">传家</div>
-        
+        <div class="content" v-if="logined">
+            <div class="box clearfix ">
+                <div class="boxImg fl">
+                    <img src="http://img0.imgtn.bdimg.com/it/u=3206453844,923580852&fm=27&gp=0.jpg"/>
+                    <div class="member"><i class="iconfont icon-duigoudunpai"></i></div>
+                </div>
+                <div class="info fl">
+                    <div class="hel">HELLO!</div>
+                    <div class="name">冰箱胖</div>
+                    <div class="prove">
+                        <i class="iconfont icon-duigoudunpai"></i>&nbsp;实名认证
+                    </div>
+                </div>
+                <div class="fr">...</div>
+            </div>
+            <div class="option clearfix">
+                <div class="litbox fl">
+                    <div class="pic"><i class="iconfont icon-tupian"></i></div>
+                    <div class="font">全部订单</div>
+                </div>
+                <div class="litbox fl">
+                    <div class="pic"><i class="iconfont icon-tupian"></i></div>
+                    <div class="font">待付款</div>
+                </div>
+                <div class="litbox fl">
+                    <div class="pic"><i class="iconfont icon-tupian"></i></div>
+                    <div class="font">待收货</div>
+                </div>
+                <div class="litbox fl">
+                    <div class="pic"><i class="iconfont icon-tupian"></i></div>
+                    <div class="font">退款/售后</div>
+                </div>
+            </div>
+            <div class="account">
+                <div class="acc  clearfix">
+                    <div class="fl">保证金账户</div>
+                    <div class="fr">...</div>
+                </div>
+                <div class="remain clearfix">
+                    <div class="mon fl">
+                        <span >余额</span><br> 
+                        <span class="span1">500,000CNY</span> 
+                    </div>
+                    <button class="fr">提现</button>
+                    <button class="fr">充值</button>
+                </div>
+            </div>
+            <div class="center">
+                <div class="address  clearfix">
+                    <div class="fl">地址管理</div>
+                    <div class="fr">...</div>
+                </div>
+                <div class="address  clearfix">
+                    <div class="fl">会员中心</div>
+                    <div class="fr">...</div>
+                </div>
+                <div class="address  clearfix">
+                    <div class="fl">帮助中心</div>
+                    <div class="fr">...</div>
+                </div>
+            </div>
+            
+        </div>
+        <div class="content" v-if='!logined'>
+            <div class="unlogin">
+                <div class="pic"><span class="iconfont icon-tupian"></span></div>
+                <div class="hel">HELLO!</div>
+                <div class="log">请登录</div>
+                <div class="link"><a href="www.baidu.com">快来登录，和我们一起没羞没臊的捡漏吧！</a></div>
+            </div>
+            <div class="center">
+                <div class="address  clearfix">
+                    <div class="fl">帮助中心</div>
+                    <div class="fr">...</div>
+                </div>
+            </div>
+        </div>
+        <div class="sell-spic">
+                <ul >
+                    <li  v-for="(falg,index) in img" :style= "getPos(index)" ><img :src="falg" alt="" srcset=""></li>
+                </ul>
+        </div>
+        <div class="give">我要送拍</div>
         <z-footer ></z-footer>
-        <!-- <div class="footer">
-            <ul class="clearfix">
-                <li class="fl"><i class="iconfont icon-shouyetianchong  check"></i></li>
-                <li class="fl"><i class="iconfont icon-xiaochuizi"></i></li>
-                <li class="fl"><i class="iconfont icon-shoucang1"></i></li>
-                <li class="fl"><i class="iconfont icon-wodetianchong"></i></li>
-            </ul>
-        </div> -->
-        <!-- <z-banner :listImg="list">sss</z-banner> -->
     </div>
 </template>
 
@@ -26,19 +99,15 @@
     export default {
         data () {
             return {
-                title: '茶叶拍卖',
-                homelist:[
-                    {
-                        title:"CHUANJIA SPECIAL",
-                        subtitle:"传家标题1",
-                        url:"http://www.baidu.com",
-                        time:"2017.10.15 17:00",
-                    },{
-                        title:"CHUANJIA SPECIAL",
-                        subtitle:"传家标题2",
-                        url:"http://www.baidu.com",
-                        time:"2017.10.15 16:00",
-                    }
+                title: '个人中心',
+                logined:false,
+                img:[
+                    'http://img0.imgtn.bdimg.com/it/u=3206453844,923580852&fm=27&gp=0.jpg',
+                    'http://img0.imgtn.bdimg.com/it/u=3206453844,923580852&fm=27&gp=0.jpg',
+                    'http://img0.imgtn.bdimg.com/it/u=3206453844,923580852&fm=27&gp=0.jpg',
+                    'http://img0.imgtn.bdimg.com/it/u=3206453844,923580852&fm=27&gp=0.jpg',
+                    'http://img0.imgtn.bdimg.com/it/u=3206453844,923580852&fm=27&gp=0.jpg',
+                    'http://img0.imgtn.bdimg.com/it/u=3206453844,923580852&fm=27&gp=0.jpg'
                 ],
                 
             }
@@ -83,6 +152,11 @@
 
         },
         methods: {
+            getPos:function(index) {
+                var str = 95*(index)+'px';
+                str='left:'+str;
+                return str;
+            }
         }
     }
 
@@ -107,31 +181,208 @@
     }
     .content{
         margin-top: @size45;
-        margin-bottom: 1.2rem;
-    }
-    
-    .footer{
-        position:fixed;
-        bottom:0;
-        width: @size375;
-        height: 1.2rem;
-        background: rgb(249,248,243);
-        ul{
-            li{
-                width: 25%;
-                height: 1.2rem;
-                text-align: center;
-                line-height: 1.2rem;
-                i{
-                    font-size: @size25;
-                    color:rgb(217, 217, 217);
-                    border: none;
+        padding:0 @size10;
+        .box{
+            height: 3.4rem;
+            width: 100%;
+            border-bottom: 1px solid rgb(51, 51, 51);
+            .boxImg{
+                width: 1.73rem;
+                height: 1.73rem;
+                padding: 0.866rem 0 0 @size20;
+                img{
+                    width: 100%;
+                    height: 100%;
+                    border-radius: 50%;
+                }
+                .member{
+                    width: 0.4533rem;
+                    height: 0.4533rem;
+                    position: relative;
+                    margin-top: -1.7rem;
+                    margin-left: 1.4rem;
                 }
             }
-            .check{
-                color: black;
+             .info{
+                margin-top: @size35;
+                padding-left: @size20;
+                .hel{
+                    font-weight: bold;
+                    letter-spacing: 1px;
+                }
+                .name{
+                    font-size: @size14;
+                    line-height: @size14;
+                }
+                .prove{
+                        font-size: 8px;
+                        color:rgb(133, 133, 133);
+                        padding-top:@size3 ;
+                        i{
+                            color: rgb(0, 184, 176)
+                        }
+                }
+            }
+            .fr{
+                letter-spacing: @size3;
+                font-weight: bold;
+                margin-top: 1.8rem;
             }
         }
+        .option{
+            height: @size98;
+            border-bottom: 1px solid rgb(51, 51, 51);
+            .litbox{
+                width: 25%;
+                height: 100%;
+                .pic{
+                    width: @size22;
+                    height: @size18;
+                    display: inline-block;
+                    margin-top: @size30;
+                    margin-left: @size35;
+                    i{
+                        width: 100%;
+                        height: 100%;
+                        font-size: @size20;
+                    }
+                }
+                .font{
+                    font-size: @size15;
+                    text-align: center;
+                    padding-top: @size10;
+                    font-size: @size10;
+                }
+            }
+            
+            
+            
+        }
+        .account{
+            box-sizing: border-box;
+            .acc{
+                height: @size35;
+                border-bottom: 1px solid rgb(202, 209, 217);
+                margin-left: @size10;
+                .fl{
+                    font-size: @size12;
+                    line-height: @size35;
+                }
+                .fr{
+                    letter-spacing: @size3;
+                    font-weight: bold;  
+                    padding-right: @size10;
+                }
+            }
+            .remain{
+                height: @size55;
+                border-bottom: 1px solid rgb(51, 51, 51);
+                padding-right: @size10;
+                .mon{
+                    padding-left: @size10;
+                    padding-top: @size10;
+                    span{
+                        font-size: @size10;
+                    }
+                    .span1{
+                        font-size: @size14;
+                        font-weight: bold;
+                    }
+                }
+                .fr{
+                    margin-top: @size15;
+                    border: 1px solid rgb(202, 209, 217);
+                    margin-left: @size10;
+                    background: white;
+                    outline: none;
+                    height: @size25;
+                    width: 1.8rem;
+                    font-size: @size10;
+                }
+            }
+        }
+        .center{
+            border-bottom: 1px solid black;
+            box-sizing: border-box;
+            .address{
+                // box-sizing: border-box;
+                height: @size35;
+                border-bottom: 1px solid rgb(202, 209, 217);
+                margin-left: @size10;
+                .fl{
+                    font-size: @size12;
+                    line-height: @size35;
+                }
+                .fr{
+                    letter-spacing: @size3;
+                    font-weight: bold;  
+                    padding-right: @size10;
+                }
+            }
+        }
+        .unlogin{
+            height: 10.3333rem;
+            border-bottom: 1px solid black;
+            box-sizing: border-box;
+            text-align: center;
+            .pic{
+                padding-top: 3rem;
+                span{
+                    font-size: @size80;
+                }
+            }
+            .hel{
+                font-weight: bold;
+                padding-top: @size20;
+            }
+            .log{
+                font-size:@size12;
+            }
+            .link{
+                padding-top: @size25;
+                text-decoration: underline;
+                color: red;
+                a{
+                    font-size: @size10;
+                    color: red;
+                }
+            }
+        }
+    }
+    .sell-spic {
+            width: 9.4666rem; 
+            height: @size80;
+            overflow: hidden;
+            overflow-x: auto;
+            margin-top: @size10;
+            margin-left: @size10;
+            ul {
+                width: @size375;
+                position: relative;
+                li {
+                    position: absolute;
+                    width: @size80;
+                    height: @size80;
+                    margin-left: @size5;
+                    background: gray;
+                    img {
+                        width: @size80;
+                        height: @size80;
+                    }
+                }
+            }
+    }
+    .give{
+        height: @size35;
+        width: 100%;
+        background: gray;
+        color: white;
+        position: fixed;
+        left: 0;
+        bottom: @size45;
+        font-size: @size10;
+        line-height: @size35;
+        padding-left: @size20;
     }
 </style>
 

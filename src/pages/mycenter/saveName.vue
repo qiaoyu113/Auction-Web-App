@@ -16,13 +16,14 @@
                 <div class="infoList">请输入昵称<input type="text" placeholder="请输入" v-model="inputName"/><div class="del" @click="deleteName"><i class="iconfont icon-closeicon"></i></div></div>
             </div>
             <!--保存-->
-            <div class="save" @click="saveName">保存</div>
+            <div class="save" @click="postUsersinfo()">保存</div>
         </div>
     </div>
 </template>
 
 <script>
     import {appService} from '../../service/appService'
+    import {commonService} from '../../service/commonService.js'
     export default {
         data () {
             return {
@@ -45,9 +46,7 @@
             listImg() {
                 return this.$store.state.homeStore.listImg || []
             },
-            noticelist() {
-                return this.$store.state.homeStore.noticelist || []
-            },
+    
         },
         mounted: function() {
             /*
@@ -55,7 +54,7 @@
              * 可以使用DOM元素
              * 这里的数据可以放在data中
              * */
-
+             console.log(this.id)
 
         },
         methods: {
@@ -70,7 +69,16 @@
                 that.user.name = that.inputName
                 that.inputName = '';
                 that.$router.go(-1);
-            }
+            },
+            postUsersinfo:function(){
+                 let that=this
+                 commonService.postUsersinfo({name:that.inputName}).then(function(res){
+                    
+                    if(res.data.code == 200){
+                     that.$router.go(-1);
+                    }
+              })
+            },
         }
     }
 </script>

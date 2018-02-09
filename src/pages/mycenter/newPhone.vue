@@ -27,6 +27,7 @@
 
 <script>
     import {appService} from '../../service/appService'
+    import {commonService} from '../../service/commonService.js'
     export default {
         data () {
             return {
@@ -39,7 +40,7 @@
                 inputPhone:'',//手机号
                 inputNum:'',//验证码
                 codeShow:false,
-                phone:'13546000000'
+               
             }
         },
         computed: {
@@ -47,8 +48,8 @@
             listImg() {
                 return this.$store.state.homeStore.listImg || []
             },
-            noticelist() {
-                return this.$store.state.homeStore.noticelist || []
+             phone() {
+                return this.$route.query.phone 
             },
         },
         mounted: function() {
@@ -57,7 +58,7 @@
              * 可以使用DOM元素
              * 这里的数据可以放在data中
              * */
-
+             this.getGaptchas()
 
         },
         methods: {
@@ -78,9 +79,9 @@
                 }else{
                     that.codeShow = true;
                     let time = setInterval(function(){
-                        console.log(that.timeOver);
+                        // console.log(that.timeOver);
                         if(that.timeOver === 0){
-                            clearInterval(time)
+                            // clearInterval(time)
                             that.codeShow = false;
                             that.timeOver = 60;
                         }else{
@@ -88,6 +89,19 @@
                         }
                     },1000)
                 }
+                // 获取短信验码
+                 commonService.getSms({phone:that.phone,type:5}).then(function(res){
+                    console.log(res)
+                    if(res.data.code == 200){
+                     that.$router.go(-1);
+                    }
+              })
+            },
+            getGaptchas:function(){
+                 commonService.getGaptchas().then(function(res){
+                    console.log(res)
+                   
+              })
             }
         }
     }
