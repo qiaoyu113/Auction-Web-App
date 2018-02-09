@@ -377,173 +377,173 @@
         right:0;
         bottom:0;
         margin:auto;
-    }
-    .header{
-        width:100%;
-        height:3.7rem;
-        border-bottom:1px solid #2B343D;
-        padding:1.07rem 0.53rem;
-        box-sizing: border-box;
-        position: relative;
-        .headerLeft{
-            width:80%;
-            float:left;
-            .headerEn{
-                height:0.75rem;
-                font-weight: bold;
-                font-size:20px;
-            }
-        }
-        .headerRight{
-            float: right;
-            margin-top:0.3rem;
-        }
-        .menu{
-            height:0.8rem;
-            line-height:0.8rem;
-            position: absolute;
-            bottom:1px;
-            box-sizing: border-box;
-            .login{
-                float:left;
-                color:#A8A8A8;
-                padding:0 0.14rem;
-            }
-            .register{
-                float:left;
-                color:#A8A8A8;
-                margin-left:0.2rem;
-                padding:0 0.14rem;
-            }
-            .check2{
-                float:left;
-                color:#353535;
-                margin-left:0.2rem;
-                padding:0 0.14rem;
-                box-sizing: border-box;
-                border-bottom:1px solid #353535;
-            }
-            .check{
-                color:#353535;
-                float:left;
-                padding:0 0.14rem;
-                box-sizing: border-box;
-                border-bottom:1px solid #353535;
-            }
-        }
-    }
-    .box{
-        width:100%;
-        padding:0.2rem;
-        box-sizing: border-box;
-        .wxLogin{
-            width: 2rem;
-            text-align: center;
-            margin:0.5rem auto;
-            i{
-                font-size:28px;
-                float:left;
-                line-height: 0.6rem;
-            }
-        }
-        .boxHeader{
+        .header{
             width:100%;
-            padding:1.6rem 0 1.4rem 0;
-            text-align: center;
-            .boxImg{
-                width:1.86rem;
-                height:1.86rem;
-                border-radius: 100%;
-                overflow: hidden;
-                margin:auto;
-                img{
-                    width:100%;
-                    height:100%;
+            height:3.7rem;
+            border-bottom:1px solid #2B343D;
+            padding:1.07rem 0.53rem;
+            box-sizing: border-box;
+            position: relative;
+            .headerLeft{
+                width:80%;
+                float:left;
+                .headerEn{
+                    height:0.75rem;
+                    font-weight: bold;
+                    font-size:20px;
+                }
+            }
+            .headerRight{
+                float: right;
+                margin-top:0.3rem;
+            }
+            .menu{
+                height:0.8rem;
+                line-height:0.8rem;
+                position: absolute;
+                bottom:1px;
+                box-sizing: border-box;
+                .login{
+                    float:left;
+                    color:#A8A8A8;
+                    padding:0 0.14rem;
+                }
+                .register{
+                    float:left;
+                    color:#A8A8A8;
+                    margin-left:0.2rem;
+                    padding:0 0.14rem;
+                }
+                .check2{
+                    float:left;
+                    color:#353535;
+                    margin-left:0.2rem;
+                    padding:0 0.14rem;
+                    box-sizing: border-box;
+                    border-bottom:1px solid #353535;
+                }
+                .check{
+                    color:#353535;
+                    float:left;
+                    padding:0 0.14rem;
+                    box-sizing: border-box;
+                    border-bottom:1px solid #353535;
                 }
             }
         }
-        .info{
+        .box{
             width:100%;
-            height:1.06rem;
-            padding-left:0.2rem;
+            padding:0.2rem;
             box-sizing: border-box;
-            border-bottom:1px solid #7E8689;
-            overflow: hidden;
-            input{
-                width:8rem;
-                height:99%;
-                float:left;
-                border:none;
-                outline: none;
+            .wxLogin{
+                width: 2rem;
+                text-align: center;
+                margin:0.5rem auto;
+                i{
+                    font-size:28px;
+                    float:left;
+                    line-height: 0.6rem;
+                }
+            }
+            .boxHeader{
+                width:100%;
+                padding:1.6rem 0 1.4rem 0;
+                text-align: center;
+                .boxImg{
+                    width:1.86rem;
+                    height:1.86rem;
+                    border-radius: 100%;
+                    overflow: hidden;
+                    margin:auto;
+                    img{
+                        width:100%;
+                        height:100%;
+                    }
+                }
+            }
+            .info{
+                width:100%;
+                height:1.06rem;
+                padding-left:0.2rem;
+                box-sizing: border-box;
+                border-bottom:1px solid #7E8689;
+                overflow: hidden;
+                input{
+                    width:8rem;
+                    height:99%;
+                    float:left;
+                    border:none;
+                    outline: none;
+                    font-size:14px;
+                }
+                input::-webkit-input-placeholder {
+                    color:#C1C1C1;
+                }
+                input:-moz-placeholder {
+                    color:#C1C1C1;
+                }
+                input::-moz-placeholder {
+                    color:#C1C1C1;
+                }
+                input:-ms-input-placeholder {
+                    color:#C1C1C1;
+                }
+                .infoRight{
+                    float:right;
+                    margin-right:0.2rem;
+                    margin-top:0.3rem;
+                    color:#C1C1C1;
+                }
+            }
+            .talk{
+                width:100%;
+                text-align: center;
+                height:0.8rem;
+                line-height:1rem;
+                font-size:12px;
+                color:#333;
+                span{
+                    border-bottom:1px solid #333;
+                    font-size: 11px;
+                }
+            }
+        }
+        .sign{
+            padding-top:2.4rem;
+        }
+        .code{
+            height: 1.06rem;
+            line-height: 1.06rem;
+            float:right;
+            margin-right:0.1rem;
+            color:#B1B1B1;
+            font-size:12px;
+            span{
+                font-size: 12px;
+            }
+        }
+        .bottom{
+            left:0;
+            right:0;
+            position: fixed;
+            bottom:0;
+            .hint{
+                width:100%;
+                height:0.67rem;
+                line-height:0.67rem;
+                color:#fff;
+                background:linear-gradient(70deg, #DC704A, #F44EA0);
+                text-align: center;
+                font-size:12px;
+            }
+            .ok{
+                width:100%;
+                height:1.2rem;
+                line-height:1.2rem;
+                border-top:1px solid #333;
+                text-align: center;
                 font-size:14px;
             }
-            input::-webkit-input-placeholder {
-                color:#C1C1C1;
-            }
-            input:-moz-placeholder {
-                color:#C1C1C1;
-            }
-            input::-moz-placeholder {
-                color:#C1C1C1;
-            }
-            input:-ms-input-placeholder {
-                color:#C1C1C1;
-            }
-            .infoRight{
-                float:right;
-                margin-right:0.2rem;
-                margin-top:0.3rem;
-                color:#C1C1C1;
-            }
-        }
-        .talk{
-            width:100%;
-            text-align: center;
-            height:0.8rem;
-            line-height:1rem;
-            font-size:12px;
-            color:#333;
-            span{
-                border-bottom:1px solid #333;
-                font-size: 11px;
-            }
-        }
-    }
-    .sign{
-        padding-top:2.4rem;
-    }
-    .code{
-        height: 1.06rem;
-        line-height: 1.06rem;
-        float:right;
-        margin-right:0.1rem;
-        color:#B1B1B1;
-        font-size:12px;
-        span{
-            font-size: 12px;
-        }
-    }
-    .bottom{
-        left:0;
-        right:0;
-        position: fixed;
-        bottom:0;
-        .hint{
-            width:100%;
-            height:0.67rem;
-            line-height:0.67rem;
-            color:#fff;
-            background:linear-gradient(70deg, #DC704A, #F44EA0);
-            text-align: center;
-            font-size:12px;
-        }
-        .ok{
-            width:100%;
-            height:1.2rem;
-            line-height:1.2rem;
-            border-top:1px solid #333;
-            text-align: center;
-            font-size:14px;
         }
     }
 </style>

@@ -107,7 +107,6 @@ import priceRecord from'../../component/auction/priceRecord'
     height: 17rem;
     background:#000;  
     opacity:0.6;
-    // display: none;
 }
 .record{
     width: @size375;
@@ -119,6 +118,7 @@ import priceRecord from'../../component/auction/priceRecord'
     box-sizing: border-box;
     padding:0 @size20;
     text-align: center;
+    display: none;
     .down{
         height: @size30;
         width: 100%;

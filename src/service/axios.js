@@ -19,7 +19,6 @@ if(win && win != 'undefined'){
 axios.interceptors.request.use(function (config) {
     // 在发送请求之前加toke
     let xtoken = isClient ? localStorage.token : null;
-    console.log(xtoken)
     if(xtoken != null){
         config.headers['Authorization'] = 'bearer ' +  xtoken
     }

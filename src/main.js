@@ -38,9 +38,7 @@ import zmodal from './component/common/modal.vue'
 import zbanner from './component/common/banner.vue'
 import zfooter from './component/common/footer.vue'
 import zhistory from './component/common/goback.vue'
-import pheader from './component/personal/header.vue'
 import backhome from './component/common/back-home.vue'
-import poption from './component/personal/option.vue'
 
 Vue.component('z-modal', zmodal)
 Vue.component('z-banner', zbanner)

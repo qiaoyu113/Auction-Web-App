@@ -11,12 +11,14 @@
         <div class="container">
             <div class="sell-list">
                 <div class="sell-pic">
-                    <img src="../../assets/image/myimage/pic.png" alt="" srcset="">
+                    <img :src="img">
                 </div>
                 <div class="sell-information">
-                    <span class="iconfont icon-shangcheng pos1"> 50</span>
-                    <span class="iconfont icon-qunzu pos2"> 200000</span>
-                </div> 
+                    <div class="font">{{details.readNum}}</div>
+                    <div class="sellicon2"><div class="icon"></div></div>
+                    <div class="font">{{details.title}}</div>
+                    <div class="sellicon1"></div>
+                </div>
                 <div class='sell-content'>
                     <div class="sell-int">
                         <div class="time">{{timemoney}}</div>
@@ -44,14 +46,18 @@
 
 <script >
     import {appService} from '../../service/appService'
+    import {commonService} from '../../service/commonService'
     import specialmore from "../../component/special/specialmore.vue";
     export default {
         data () {
             return {
+                details:'',
+                img:'',
                 title: '专场详情-拍场详情',
                 index:2,
+                id:'',
                 timemoney:"00:57:00:00",
-                title:"器物拍卖专场",
+//                title:"器物拍卖专场",
                 time:"2017.10.15 23:00",
                 startTime:'2017.12.17 17：00',
                 endTime:'2017.12.18 18：00',
@@ -76,27 +82,6 @@
             }
         },
         components:{'special-more':specialmore},
-        syncData({store}) {
-            /*基本规则
-            * 所有不需要token的请求都放在这里
-            * 这里不出现window，document等DOM元素
-            * 这里获得的数据都要存储在store中
-            * 写法如下
-            * */
-            const that = this;
-            /*
-            * 将所有的请求处理以数组放在promise中
-            * that.data().data调用数据
-            * */
-            return Promise.all([
-                appervice.getParam().then(res=>{
-//                    store.state.homeStore.listImg = res.data;
-                }),
-                service.getParam().then(res=>{
-//                    store.state.homeStore.noticelist = res.data.datas;
-                }),
-            ])
-        },
         computed: {
             //将存在store中的数据取出
             listImg() {
@@ -107,13 +92,24 @@
             },
         },
         mounted: function() {
-            /*
-            * 所有需要token的请求都放在这里
-            * 可以使用DOM元素
-            * 这里的数据可以放在data中
-            * */
+            let that = this;
+            that.id = that.$route.query.id;
+            that.onload()
         },
         methods: {
+            //初始化数据
+            onload(){
+                let that = this;
+                commonService.getAuction({id:that.id},that.id).then(function(res){
+                    console.log(res)
+                    if(res.data.code === 200){
+                        that.details = res.data.datas;
+                        that.img = that.$store.state.picHead + res.data.datas.picItems[0];
+//                        console.log(that.details)
+                    }
+                })
+            },
+            //背景色
             getBgcolor:function(index) {
                 if(index==1){
                     return 'bgcolor1';
@@ -149,16 +145,54 @@
     }
     .sell-list{
         .sell-pic{
+            width:100%;
             height: @size162;
-            background: gray;
+            overflow: hidden;
             img{
                 width: 100%;
-                height: 100%;
+                height: 5.6267rem;
+                margin-top:-0.7rem;
             }
         }
         .sell-information {
-            padding-top: 10px;
+            padding: 10px;
+            box-sizing: border-box;
             position: relative;
+            overflow: hidden;
+            .sellicon1{
+                width:0.16rem;
+                height:0.16rem;
+                float:right;
+                border: 0.06rem solid #A6A9AF;
+                margin-right:10px;
+                margin-top:0.06rem;
+            }
+            .font{
+                font-size:10px;
+                float:right;
+                margin-right:10px;
+            }
+            .sellicon2{
+                width: 0;
+                height: 0;
+                border-left: 0.2rem solid transparent;
+                border-right: 0.2rem solid transparent;
+                border-bottom: 0.3rem solid #A6A9AF;
+                float:right;
+                position: relative;
+                margin-right:10px;
+                margin-top:0.04rem;
+                .icon{
+                    width: 0;
+                    height: 0;
+                    border-left: 0.1rem solid transparent;
+                    border-right: 0.1rem solid transparent;
+                    border-bottom: 0.15rem solid #fff;
+                    position: absolute;
+                    left: -0.1rem;
+                    top: 0.1rem;
+                }
+            }
             a {
             font-size: @size6;
             text-decoration: underline;

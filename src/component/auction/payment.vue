@@ -83,7 +83,7 @@ import priceRecord from'../../component/auction/priceRecord'
     height: 100%;
     background:#000;  
     opacity:0.6;
-    // display: none;
+    display: none;
 }
 .popWin{
     height: 14.72rem;
@@ -96,6 +96,7 @@ import priceRecord from'../../component/auction/priceRecord'
     text-align: center;
     box-sizing: border-box;
     padding: 0 @size20;
+    display: none;
     .close{
             position: absolute;
             right: 0;top: 0;

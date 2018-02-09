@@ -58,17 +58,20 @@ const routers = [
     {name: 'login',path:'/login',component:login},
     {name: 'registerweixin',path:'/register',component:registerweixin},
     {name: 'service',path:'/service',component:service},
-    {name: 'special',path:'/special',component:special},//专场列表
-    {name: 'specialinfo',path:'/specialinfo',component:specialinfo},//专题详情
+    {name: 'special',path:'/special',component:special},
+    {name: 'specialinfo',path:'/specialinfo',component:specialinfo},
     {name: 'specialDetails',path:'/specialDetails/',component:specialDetails},
-    {name: 'auction',path:'/auction',component:auction},//拍品详情
+    {name: 'auction',path:'/auction',component:auction,
+        children:[
+            {name:'auctionMore',path:'more/:id',component:auction},
+        ]
+    },
     {name: 'personalCenter',path:'/personal/personalCenter/',component:personalCenter},
     {name: 'err',path:'/s/404',component: error}, //错误跳到404页面
     // 直播
     {name: 'live',path:'/lives',component: live},
     {name: 'liveDetails',path:'/lives/details/:liveDetailId',component: liveDetails},
     //登陆
-    {name: 'login',path:'/login',component: login},
     {name: 'signup',path:'/signup',component: login},
     //个人中心
     {name: 'mycenter',path:'/mycenter',component: mycenter},

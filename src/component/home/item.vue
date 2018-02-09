@@ -1,14 +1,18 @@
 <template>
     <div>
-        <div id='' class="special">
-            <h1>{{str.title}}</h1>
-            <div class="t-title">{{str.subtitle}}</div>
-            <div class="time">{{str.time}}</div>
-            <i><a :href="str.url">. . .</a></i>
+        <div id='special' class="special" @click="goDetails(str.id)">
+            <img :src="$store.state.picHead + str.cover"/>
+            <div class="text">
+                <h1>{{str.title}}</h1>
+                <div class="t-title">{{str.subTitle}}</div>
+                <div class="time">{{str.createTime}}</div>
+                <i><a :href="str.url">. . .</a></i>
+            </div>
         </div>
     </div>
 </template>
-<script type="text/ecmascript-6">
+
+<script>
   export default {
     props: ['str'],
     data () {
@@ -19,21 +23,41 @@
     },
     components: {},
     mounted () {
+
     },
-    methods: {}
+    methods: {
+        goDetails(id){
+            console.log(id)
+            let that = this;
+            that.$router.push({name:'specialinfo',query:{id:id}})
+        }
+    }
   }
 </script>
+
 <style lang="less">
 @import url('../../assets/css/base.less');
-.special{
-        width: @size375;
-        height: @size211;
-        background: url(../../assets/image/myimage/timg.jpg);
-        background-repeat:no-repeat; 
-        background-size:100% 100%;
-        margin-bottom: @size5;
-        text-align: center;
-        position: relative;
+#special{
+    width: @size375;
+    height: @size211;
+    background-repeat:no-repeat;
+    background-size:100% 100%;
+    margin-bottom: @size5;
+    text-align: center;
+    position: relative;
+    img{
+        width:100%;
+        height:100%;
+    }
+    .text{
+        width:100%;
+        height:100%;
+        position: absolute;
+        left:0;
+        right:0;
+        top:0;
+        bottom:0;
+        margin:auto;
         i{
             position: absolute;
             top: 0;
@@ -52,20 +76,33 @@
             }
         }
         h1{
-            padding-top: 2.24rem;
-            font-size: @size15;
+            width:80%;
+            margin:auto;
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow:ellipsis;
+            padding-top: 1.65rem;
+            font-size: 24px;
+            font-weight: 400;
             color: rgb(255, 255, 255);
         }
         .t-title{
+            width:70%;
+            margin:auto;
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow:ellipsis;
             color: rgb(255, 255, 255);
-            font-size: @size11;
+            font-size: 14px;
+            font-weight: 400;
+            margin-top:@size2;
         }
         .time{
-            padding-top: @size25;
-            font-size: @size6;
-            // color: black;
+            padding-top: @size14;
+            font-size: 14px;
             color: rgb(255, 255, 255);
         }
     }
+}
     
 </style>
