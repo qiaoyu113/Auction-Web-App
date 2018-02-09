@@ -50,6 +50,8 @@ const myaccount = (resolve) => {require(['./pages/personal/myAccount.vue'],resol
 const helpcenter = (resolve) => {require(['./pages/personal/helpcenter.vue'],resolve)}
 const membercenter = (resolve) => {require(['./pages/personal/membercenter.vue'],resolve)}
 const realname = (resolve) => {require(['./pages/personal/realname.vue'],resolve)}
+const cash = (resolve) => {require(['./pages/personal/cash.vue'],resolve)}
+const cashstep = (resolve) => {require(['./pages/personal/cashstep.vue'],resolve)}
 
 const registerweixin = (resolve) => {require(['./pages/login/registerweixin.vue'],resolve)}
 const service = (resolve) => {require(['./pages/service/service.vue'],resolve)}
@@ -91,6 +93,9 @@ const routers = [
     {name: 'helpcenter',path:'/helpcenter',component:helpcenter},
     {name: 'membercenter',path:'/membercenter',component:membercenter},
     {name: 'realname',path:'/realname',component:realname},
+    {name: 'cash',path:'/cash',component:cash},
+    {name: 'cashstep',path:'/cashstep',component:cashstep},
+    
 
     {name: 'service',path:'/service',component:service},//客服
 
