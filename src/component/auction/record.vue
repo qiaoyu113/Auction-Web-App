@@ -98,122 +98,123 @@ import priceRecord from'../../component/auction/priceRecord'
 @import url('../../assets/css/base.less');
 .dis{
     display: none;
-}
-.transparent{
-    position: fixed;
-    bottom: @size45;
-    z-index: 100;
-    width: 100%;
-    height: 17rem;
-    background:#000;  
-    opacity:0.6;
-}
-.record{
-    width: @size375;
-    height: 12rem;
-    position: fixed;
-    z-index: 100;
-    bottom: @size45;
-    background: white;
-    box-sizing: border-box;
-    padding:0 @size20;
-    text-align: center;
-    display: none;
-    .down{
-        height: @size30;
+    .transparent{
+        position: fixed;
+        bottom: @size45;
+        z-index: 100;
         width: 100%;
-        border-bottom: 1px solid rgb(202, 209, 217);
-        font-size: 25px;
-        color: rgb(202, 209, 217);
+        height: 17rem;
+        background:#000;
+        opacity:0.6;
     }
-    .content{
-        height: 2.99rem;
-        border-bottom: 1px solid rgb(202, 209, 217);
-        .pic{
-            width: @size80;
-            height: @size80;
-            padding-top: @size15;
-            display: inline-block;
-            img{
-                width: 100%;
-                height: 100%;
-            }
+    .record{
+        width: @size375;
+        height: 12rem;
+        position: fixed;
+        z-index: 100;
+        bottom: @size45;
+        background: white;
+        box-sizing: border-box;
+        padding:0 @size20;
+        text-align: center;
+        display: none;
+        .down{
+            height: @size30;
+            width: 100%;
+            border-bottom: 1px solid rgb(202, 209, 217);
+            font-size: 25px;
+            color: rgb(202, 209, 217);
         }
-        .info{
-            padding-left: @size15;
-            text-align: left;
-            line-height: @size15;
-            .tit{
-                margin-top: @size40;
-                font-size: 10px;
-                color: rgb(122, 122, 122);
-            }
-            .price{
-                font-size: 10px;
-                font-weight: bold;
-            }
-            .title{
-                font-size: 10px;
-                color: rgb(122, 122, 122);
-            }
-            .time{
-                font-size: 10px;
-                color: rgb(122, 122, 122);
-            }
-        }
-        .moneytime{
-            text-align: right;
-            padding-top: @size13;
-            .nowTit{
-                font-size: 10px;
-                line-height: 15px;
-            }
-            .nowPrice{
-                font-size: 14px;
-                color: red;
-                font-weight: bold;  
-            }
-            .over{
-                padding-top: @size10;
-                font-size: 10px;
-                line-height: 15px;
-            }
-            .time{
+        .content{
+            height: 2.99rem;
+            border-bottom: 1px solid rgb(202, 209, 217);
+            .pic{
+                width: @size80;
+                height: @size80;
+                padding-top: @size15;
                 display: inline-block;
-                color: white;
-                margin-left: @size15;
-                .num{
-                    height: @size20;
-                    background: black;
-                    border-radius:3px;
-                    padding: 2px; 
-                    line-height: @size22;
-                    font-size: @size12;
-                    font-weight: bold;
-                }
-                .colon{
-                    text-align: center;
-                    line-height: @size22;
-                    width: @size10;
-                    color: #000;
-                    font-weight: bold;
+                img{
+                    width: 100%;
+                    height: 100%;
                 }
             }
-            .time1{
-                color: #000;
-                font-size: 10px;
+            .info{
+                padding-left: @size15;
+                text-align: left;
                 line-height: @size15;
-                font-weight: bold;
+                .tit{
+                    margin-top: @size40;
+                    font-size: 10px;
+                    color: rgb(122, 122, 122);
+                }
+                .price{
+                    font-size: 10px;
+                    font-weight: bold;
+                }
+                .title{
+                    font-size: 10px;
+                    color: rgb(122, 122, 122);
+                }
+                .time{
+                    font-size: 10px;
+                    color: rgb(122, 122, 122);
+                }
+            }
+            .moneytime{
+                text-align: right;
+                padding-top: @size13;
+                .nowTit{
+                    font-size: 10px;
+                    line-height: 15px;
+                }
+                .nowPrice{
+                    font-size: 14px;
+                    color: red;
+                    font-weight: bold;
+                }
+                .over{
+                    padding-top: @size10;
+                    font-size: 10px;
+                    line-height: 15px;
+                }
+                .time{
+                    display: inline-block;
+                    color: white;
+                    margin-left: @size15;
+                    .num{
+                        height: @size20;
+                        background: black;
+                        border-radius:3px;
+                        padding: 2px;
+                        line-height: @size22;
+                        font-size: @size12;
+                        font-weight: bold;
+                    }
+                    .colon{
+                        text-align: center;
+                        line-height: @size22;
+                        width: @size10;
+                        color: #000;
+                        font-weight: bold;
+                    }
+                }
+                .time1{
+                    color: #000;
+                    font-size: 10px;
+                    line-height: @size15;
+                    font-weight: bold;
+                }
             }
         }
+    }
+    .bidRecord{
+        padding:  0.1rem 0;
+        width: 100%;
+        height:  7.99rem;
+        // overflow: hidden;
+        overflow: scroll;
+
     }
 }
- .bidRecord{
-    padding:  0.1rem 0;
-    width: 100%;
-    height:  7.99rem;
-    // overflow: hidden;
-    overflow: scroll;
-    
- }   
+
 </style>
