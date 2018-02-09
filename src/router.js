@@ -35,7 +35,7 @@ const service = (resolve) => {require(['./pages/service/service.vue'],resolve)}
 const special = (resolve) => {require(['./pages/special/special.vue'],resolve)}
 const specialinfo = (resolve) => {require(['./pages/special/specialinfo.vue'],resolve)}
 const specialDetails = (resolve) => {require(['./pages/special/specialDetails.vue'],resolve)}
-const personalCenter = (resolve) => {require(['./pages/personal/personalCenter.vue'],resolve)}
+
 const auction = (resolve) => {require(['./pages/auction/auction.vue'],resolve)}
 // 直播
 const live = (resolve) => {require(['./pages/live/index.vue'],resolve)}
@@ -46,6 +46,14 @@ const saveName = (resolve) => {require(['./pages/mycenter/saveName.vue'],resolve
 const savePhone = (resolve) => {require(['./pages/mycenter/savePhone.vue'],resolve)}
 const password = (resolve) => {require(['./pages/mycenter/password.vue'],resolve)}
 const newPhone = (resolve) => {require(['./pages/mycenter/newPhone.vue'],resolve)}
+// 个人中心chenhaojn
+const personalCenter = (resolve) => {require(['./pages/personal/personalCenter.vue'],resolve)}
+const myorder = (resolve) => {require(['./pages/personal/myorder-center.vue'],resolve)}
+const myaccount = (resolve) => {require(['./pages/personal/myAccount.vue'],resolve)}
+const helpcenter = (resolve) => {require(['./pages/personal/helpcenter.vue'],resolve)}
+const membercenter = (resolve) => {require(['./pages/personal/membercenter.vue'],resolve)}
+const realname = (resolve) => {require(['./pages/personal/realname.vue'],resolve)}
+
 //登陆页
 const login = (resolve) => {require(['./pages/login/login.vue'],resolve)}
 // 404错误页面
@@ -66,7 +74,7 @@ const routers = [
             {name:'auctionMore',path:'more/:id',component:auction},
         ]
     },
-    {name: 'personalCenter',path:'/personal/personalCenter/',component:personalCenter},
+   
     {name: 'err',path:'/s/404',component: error}, //错误跳到404页面
     // 直播
     {name: 'live',path:'/lives',component: live},
@@ -79,6 +87,14 @@ const routers = [
     {name: 'savePhone',path:'/savePhone',component: savePhone},
     {name: 'password',path:'/password',component: password},
     {name: 'newPhone',path:'/newPhone',component: newPhone},
+    // 个人中心chenhaojn
+    {name: 'personalCenter',path:'/personal/personalCenter/',component:personalCenter},
+    {name: 'myorder',path:'/myorder',component:myorder},
+    {name: 'myaccount',path:'/myaccount',component:myaccount},
+    {name: 'helpcenter',path:'/helpcenter',component:helpcenter},
+    {name: 'membercenter',path:'/membercenter',component:membercenter},
+    {name: 'realname',path:'/realname',component:realname},
+
 ]
 
 const router = new VueRouter({

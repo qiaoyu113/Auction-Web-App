@@ -35,6 +35,30 @@ export const commonService = {
     deleteAuctions(params,id){
         return axios.delete('/admin/auctions/'+ id ,qs.stringify(params))
     },
+    /* 获取用户信息 */
+    getUsers: function () {
+        return axios.get('/users')
+    },
+    /* 设置用户信息 */
+    postUsersinfo: function (params) {
+        return axios.post('/users/info' + this.getParam(params))
+    },
+    /* 修改密码 */
+    putPasswords: function (params) {
+        return axios.put('/passwords/password',qs.stringify(params))
+    },
+    /* 获取用户信息 */
+    getSms: function (params) {
+        return axios.get('/sms' + this.getParam(params))
+    },
+    /* 初始化 */
+    getGaptchas: function () {
+        return axios.get('/gaptchas')
+    },
+     /* 保证金 */
+    getBails: function () {
+        return axios.get('/bails')
+    },
 
 
 

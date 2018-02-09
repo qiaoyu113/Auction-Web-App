@@ -32,7 +32,7 @@
                 </div>
             </div>
             <div class="center">
-                <div class="address  clearfix">
+                <div class="address  clearfix" style="border-bottom: 1px solid rgb(202, 209, 217);">
                     <div class="fl">保证金充值</div>
                     <div class="fr">...</div>
                 </div>
@@ -73,6 +73,7 @@
 <script >
     import {appService} from '../../service/appService'
     import itemc from "../../component/home/item.vue";
+    import {commonService} from '../../service/commonService.js'
     export default {
         data () {
             return {
@@ -129,7 +130,8 @@
             * 所有需要token的请求都放在这里
             * 可以使用DOM元素
             * 这里的数据可以放在data中
-            * */
+            * */ 
+            this.getBails()
 
         },
         methods: {
@@ -137,6 +139,12 @@
                 var str = 95*(index)+'px';
                 str='left:'+str;
                 return str;
+            },
+            getBails:function(){
+               commonService.getBails().then(function(res){
+                    // that.user=res.data.datas.user
+                    console.log(res)
+              })
             },
             
         }
@@ -250,7 +258,7 @@
                 .address{
                     // box-sizing: border-box;
                     height: @size35;
-                    border-bottom: 1px solid rgb(202, 209, 217);
+                    // border-bottom: 1px solid rgb(202, 209, 217);
                     margin-left: @size10;
                     .fl{
                         font-size: @size12;

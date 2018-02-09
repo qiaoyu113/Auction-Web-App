@@ -3,7 +3,7 @@
         组件要小，如遇list，只将item做成组件，其他的都写在页面中
     -->
     <!-- 实名认证 -->
-    <div :class="shadow" id="" v-set-title="title">
+    <div :class="shadow" class="realname" id="" v-set-title="title">
         
         <div class="header">传家</div>
         <div class="content">
@@ -48,7 +48,8 @@
             </div>
         </div>
         <!-- 弹窗 -->
-        <div class="popWin" :class="dis">
+        <div class="shadow" :class="dis">
+        <div class="popWin">
                 <div class="close" @click="close"><i class="iconfont icon-closeicon"></i></div>
                 <div class="remove">
                     <p class="removeEn">ID PHOTOS</p>
@@ -63,6 +64,7 @@
                     <span>1.证件正面照</span>
                     <span>2.证件背面照</span>
                 </div>
+        </div>
         </div>
     </div>
 </template>
@@ -106,7 +108,7 @@
         methods: {
             close:function() {
                 this.dis='dis';
-                this.shadow='';
+               
             },
             removeName:function(){
                 let that = this;
@@ -125,7 +127,7 @@
     /*rem等基本设置都放在base中，不写多个*/
     @import url('../../assets/css/base.less');
     @import url('../../assets/css/icon/iconfont.css');
-    
+    .realname{
     .header{
         position: fixed;
         top: 0;
@@ -181,7 +183,8 @@
             input{
                 // padding-left:2rem; 
                 width: 4rem;
-                height: 100%;
+                margin-top: 2px;
+                line-height: 1rem;
                 float: left;
                 border: none;
                 outline: none;
@@ -238,7 +241,7 @@
             }
         }
         .hit{
-            margin-top:2.05rem; 
+            margin:2.05rem 0; 
             p{
                 font-size: @size10;
                 padding-left: @size10;
@@ -282,7 +285,11 @@
     .shadow{
         width: 100%;
         height: 100%;
-        background: rgba(2, 10, 2, 0.5)
+        background: rgba(2, 10, 2, 0.5);
+        position: fixed;
+        left: 0;
+        top: 0;
+        z-index: 99999;
     }
     .dis{
         display: none;
@@ -350,5 +357,6 @@
             }
         }
     }
+}
 </style>
 
