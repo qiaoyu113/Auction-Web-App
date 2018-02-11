@@ -74,6 +74,7 @@
                 auctionDetail:[],
                 page:{num:1,size:10},
                 recoCh:false,
+                isShowNoMore:false,
             }
         },
         components:{'special-more':specialmore},
@@ -96,13 +97,34 @@
         methods: {
             meScroll: function (){
                 let that = this;
+                let scrollUp = document.getElementsByClassName('mescroll-upwarp');
+                let scrollDown = document.getElementsByClassName('mescroll-downwarp-reset');
+                for(let i = 0;i<scrollUp.length;i++){
+                    scrollUp[i].parentNode.removeChild(scrollUp[i]);
+                }
+                for(let i = 0;i<scrollDown.length;i++){
+                    scrollDown[i].parentNode.removeChild(scrollDown[i]);
+                }
+                let scrollWarp = document.getElementsByClassName('mescroll-downwarp');
+                for(let i = 0;i<scrollWarp.length;i++){
+                    scrollWarp[i].parentNode.removeChild(scrollWarp[i]);
+                }
                 that.mescroll = new MeScroll("mescroll", {
                     up: {
                         callback: that.upCallback,
                         page:{size:that.page.size},
                         isBounce: false, //此处禁止ios回弹,解析(务必认真阅读,特别是最后一点): http://www.mescroll.com/qa.html#q10
                     },
+                    down: {
+                        callback: that.downCallback //下拉刷新的回调,别写成downCallback(),多了括号就自动执行方法了
+                    }
                 });
+            },
+            downCallback(){
+                let that = this;
+                that.page.num = 1;
+                that.auctionDetail = [];
+                that.upCallback()
             },
             upCallback: function () {
                 const that = this;
@@ -111,17 +133,17 @@
                     that.auctionDetail = that.auctionDetail.concat(curPageData); //更新列表数据
                     // 加载完成后busy为false，如果最后一页则lastpage为true
                     //          加载完成后给页数+1
-                    console.log(that.auctionDetail)
+                    if(that.page.num >= that.totalPage) {
+                        that.isShowNoMore = true;
+                    }else{
+                        that.isShowNoMore = false;
+                    }
+                    that.page.num = that.page.num+1;
                     that.mescroll.endSuccess(curPageData.length,that.totalPage);
+                    that.mescroll.endUpScroll(that.isShowNoMore)
                 }, function() {
                     that.mescroll.endErr(); //联网失败的回调,隐藏下拉刷新和上拉加载的状态;
                 });
-            },
-            downCallback(){
-                let that = this;
-                that.page.num = 1;
-                that.auctionDetail = [];
-                that.upCallback()
             },
             getListData:function(pageNum,pageSize,successCallback,errorCallback) {
                 //延时一秒,模拟联网
@@ -133,15 +155,20 @@
                 }).then(function(res){
                     if(res.data.code === 200){
                         let act = res.data.datas.pager.datas;
-                        let collects = res.data.datas.collects
+                        let collects = res.data.datas.collects;
                         that.totalPage = res.data.datas.pager.totalPage;
-                        let dataArr = ''
+                        let dataArr = '';
                         for (let i = 0;i<act.length;i++){
+                            let price = act[i].basePrice/100;
+                            if(price%1 === 0){
+                                act[i].basePrice = price.toString() + '.00'
+                            }else{
+                                act[i].basePrice = price.toFixed(2);
+                            }
                             let collect = collects.indexOf(act[i].id)
                             if(collect === -1){
                                 act[i]['collect'] = false
                                 dataArr = act;
-
                             }else{
                                 act[i]['collect'] = true;
                                 dataArr = act;

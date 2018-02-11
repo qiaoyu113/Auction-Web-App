@@ -7,7 +7,7 @@
     4拍品被流拍
     5拍品被自己拍中 -->
     <div class="infomation bground1 clearfix" v-if="index==1">
-        
+
         <div class="time1 fr">
                <div class="fr num">01</div>
                <div class="fr colon">:</div>
@@ -82,12 +82,12 @@
         bottom: @size45;
         width: 100%;
         height: @size35;
-        
+
         text-align: center;
         font-size: 13px;
         line-height: @size25;
         .learnMore{
-            
+
             width: 1.6rem;
             height: @size15;
             border: 1px solid white;
@@ -95,18 +95,18 @@
             font-size:  9px;
             color: white;
             line-height: @size15;
-            margin:@size10 @size10 @size10 @size10; 
+            margin:@size10 @size10 @size10 @size10;
         }
         .value{
             font-size:  9px;
             color: white;
-            margin-top:@size6; 
+            margin-top:@size6;
         }
         .value1{
             color: black;
             font-size:  9px;
             margin-top:@size6;
-            margin-right: @size10; 
+            margin-right: @size10;
         }
         .success{
             font-size: @size5;
@@ -127,15 +127,15 @@
                 height: @size20;
                 background: black;
                 border-radius:3px;
-                padding: 2px; 
-                margin-top:@size6; 
+                padding: 2px;
+                margin-top:@size6;
                 line-height: @size22;
                 font-size: @size12;
                 font-weight: bold;
             }
             .colon{
                 text-align: center;
-                margin-top:@size6; 
+                margin-top:@size6;
                 line-height: @size22;
                 width: @size10;
             }
@@ -151,8 +151,8 @@
                 height: @size20;
                 background: white;
                 border-radius:3px;
-                padding: 2px; 
-                margin-top:@size6; 
+                padding: 2px;
+                margin-top:@size6;
                 line-height: @size21;
                 font-size: @size12;
                 font-weight: bold;
@@ -160,7 +160,7 @@
             .colon{
                 font-weight: bold;
                 text-align: center;
-                margin-top:@size6; 
+                margin-top:@size6;
                 line-height: @size22;
                 width: @size10;
             }
@@ -169,7 +169,7 @@
     //即将开始
     .bground1{
         background: white;
-        border-top:1px solid rgb(201, 209, 218) 
+        border-top:1px solid rgb(201, 209, 218)
     }
     //进行中
     .bground2{

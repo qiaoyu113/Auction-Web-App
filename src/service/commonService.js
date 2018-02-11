@@ -19,9 +19,25 @@ export const commonService = {
     getAuctionList: function (params) {
         return axios.get('/auctions' + this.getParam(params))
     },
+    /*获取专场详情*/
+    getAuctionMarkets:function(params){
+        return axios.get('/auctionMarkets' + this.getParam(params))
+    },
+    /*获取专场下拍品列表*/
+    getAuctionMarketsList:function(params,id){
+        return axios.get('/auctionMarkets/'+ id + this.getParam(params))
+    },
     /* 获取拍品详情 */
     getAuction: function (params,id) {
         return axios.get('/auctions/'+ id + this.getParam(params))
+    },
+    /* 获取拍品价格记录 */
+    getAuctionPrice: function (params) {
+        return axios.get('/auctions/offer' + this.getParam(params))
+    },
+    /*用户出价*/
+    postMyPrice: function (params) {
+        return axios.post('/auctions/offer',qs.stringify(params))
     },
 
     postGaptchas: function (params) {
@@ -35,6 +51,7 @@ export const commonService = {
     deleteAuctions(params,id){
         return axios.delete('/admin/auctions/'+ id ,qs.stringify(params))
     },
+
 
 
 

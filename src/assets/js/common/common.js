@@ -40,9 +40,9 @@ export const common = {
         var date = {
             "M+": that.getMonth() + 1,
             "d+": that.getDate(),
-            "h+": that.getHours(),
-            "m+": that.getMinutes(),
-            "s+": that.getSeconds(),
+            "h+": that.getHours() < 10 ? '0' + that.getHours() : that.getHours(),
+            "m+": that.getMinutes() <10 ? '0' + that.getMinutes() : that.getMinutes(),
+            "s+": that.getSeconds() <10 ? '0' + that.getSeconds() : that.getSeconds() ,
             "q+": Math.floor((that.getMonth() + 3) / 3),
             "S+": that.getMilliseconds()
         };
