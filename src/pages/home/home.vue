@@ -191,27 +191,27 @@
         left:0;
         right:0;
         margin:auto;
-    }
-    .header{
-        position: fixed;
-        top: 0;
-        z-index: 100;
-        width: @size375;
-        height: @size45;
-        background:rgba(2, 10, 2, 1);
-        font-size: @size20;
-        color: white;
-        text-align: center;
-        line-height: @size45;
-    }
-    #mescroll{
-        position: fixed;
-        top:1.2rem;
-        bottom: 1.2rem;
-        left:0;
-        right:0;
-        margin:auto;
-        height:auto;
+        .header{
+            position: fixed;
+            top: 0;
+            z-index: 100;
+            width: @size375;
+            height: @size45;
+            background:rgba(2, 10, 2, 1);
+            font-size: @size20;
+            color: white;
+            text-align: center;
+            line-height: @size45;
+        }
+        #mescroll{
+            position: fixed;
+            top:1.2rem;
+            bottom: 1.2rem;
+            left:0;
+            right:0;
+            margin:auto;
+            height:auto;
+        }
     }
 </style>
 

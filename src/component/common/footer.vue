@@ -66,17 +66,17 @@
 //                console.log(that.$route.name);
                 that.index = index;
                 if(index === 0){
-                    that.$router.replace({name:'home'})
                     that.index = 0;
+                    that.$router.replace({name:'home'})
                 }else if(index === 1){
-                    that.$router.replace({name:'special'})
                     that.index = 1;
+                    that.$router.replace({name:'special'})
                 }else if(index === 2){
-                    that.$router.replace({name:'home'})
                     that.index = 2;
-                }else if(index === 3){
                     that.$router.replace({name:'home'})
+                }else if(index === 3){
                     that.index = 3;
+                    that.$router.replace({name:'personalCenter'})
                 }
             }
         }

@@ -3,7 +3,7 @@
         组件要小，如遇list，只将item做成组件，其他的都写在页面中
     -->
     <!-- 个人中心 -->
-    <div class="" id="" v-set-title="title">
+    <div class="" id="personal" v-set-title="title">
         
         <div class="header">传家</div>
         <div class="content" v-if="logined">
@@ -74,7 +74,7 @@
                 <div class="pic"><span class="iconfont icon-tupian"></span></div>
                 <div class="hel">HELLO!</div>
                 <div class="log">请登录</div>
-                <div class="link"><a href="www.baidu.com">快来登录，和我们一起没羞没臊的捡漏吧！</a></div>
+                <div class="link"><a @click="goLogin()">快来登录，和我们一起没羞没臊的捡漏吧！</a></div>
             </div>
             <div class="center">
                 <div class="address  clearfix">
@@ -156,6 +156,10 @@
                 var str = 95*(index)+'px';
                 str='left:'+str;
                 return str;
+            },
+            goLogin:function(){
+                let that = this;
+                that.$router.push({name:'login'})
             }
         }
     }
@@ -166,191 +170,191 @@
     /*rem等基本设置都放在base中，不写多个*/
     @import url('../../assets/css/base.less');
     @import url('../../assets/css/icon/iconfont.css');
-    
-    .header{
-        position: fixed;
-        top: 0;
-        z-index: 100;
-        width: @size375;
-        height: @size45;
-        background:rgba(2, 10, 2, 1);
-        font-size: @size20;
-        color: white;
-        text-align: center;
-        line-height: @size45;
-    }
-    .content{
-        margin-top: @size45;
-        padding:0 @size10;
-        .box{
-            height: 3.4rem;
-            width: 100%;
-            border-bottom: 1px solid rgb(51, 51, 51);
-            .boxImg{
-                width: 1.73rem;
-                height: 1.73rem;
-                padding: 0.866rem 0 0 @size20;
-                img{
-                    width: 100%;
-                    height: 100%;
-                    border-radius: 50%;
+    #personal{
+        .header{
+            position: fixed;
+            top: 0;
+            z-index: 100;
+            width: @size375;
+            height: @size45;
+            background:rgba(2, 10, 2, 1);
+            font-size: @size20;
+            color: white;
+            text-align: center;
+            line-height: @size45;
+        }
+        .content{
+            margin-top: @size45;
+            padding:0 @size10;
+            .box{
+                height: 3.4rem;
+                width: 100%;
+                border-bottom: 1px solid rgb(51, 51, 51);
+                .boxImg{
+                    width: 1.73rem;
+                    height: 1.73rem;
+                    padding: 0.866rem 0 0 @size20;
+                    img{
+                        width: 100%;
+                        height: 100%;
+                        border-radius: 50%;
+                    }
+                    .member{
+                        width: 0.4533rem;
+                        height: 0.4533rem;
+                        position: relative;
+                        margin-top: -1.7rem;
+                        margin-left: 1.4rem;
+                    }
                 }
-                .member{
-                    width: 0.4533rem;
-                    height: 0.4533rem;
-                    position: relative;
-                    margin-top: -1.7rem;
-                    margin-left: 1.4rem;
-                }
-            }
-             .info{
-                margin-top: @size35;
-                padding-left: @size20;
-                .hel{
-                    font-weight: bold;
-                    letter-spacing: 1px;
-                }
-                .name{
-                    font-size: @size14;
-                    line-height: @size14;
-                }
-                .prove{
+                .info{
+                    margin-top: @size35;
+                    padding-left: @size20;
+                    .hel{
+                        font-weight: bold;
+                        letter-spacing: 1px;
+                    }
+                    .name{
+                        font-size: @size14;
+                        line-height: @size14;
+                    }
+                    .prove{
                         font-size: 8px;
                         color:rgb(133, 133, 133);
                         padding-top:@size3 ;
                         i{
                             color: rgb(0, 184, 176)
                         }
-                }
-            }
-            .fr{
-                letter-spacing: @size3;
-                font-weight: bold;
-                margin-top: 1.8rem;
-            }
-        }
-        .option{
-            height: @size98;
-            border-bottom: 1px solid rgb(51, 51, 51);
-            .litbox{
-                width: 25%;
-                height: 100%;
-                .pic{
-                    width: @size22;
-                    height: @size18;
-                    display: inline-block;
-                    margin-top: @size30;
-                    margin-left: @size35;
-                    i{
-                        width: 100%;
-                        height: 100%;
-                        font-size: @size20;
                     }
-                }
-                .font{
-                    font-size: @size15;
-                    text-align: center;
-                    padding-top: @size10;
-                    font-size: @size10;
-                }
-            }
-            
-            
-            
-        }
-        .account{
-            box-sizing: border-box;
-            .acc{
-                height: @size35;
-                border-bottom: 1px solid rgb(202, 209, 217);
-                margin-left: @size10;
-                .fl{
-                    font-size: @size12;
-                    line-height: @size35;
                 }
                 .fr{
                     letter-spacing: @size3;
-                    font-weight: bold;  
-                    padding-right: @size10;
+                    font-weight: bold;
+                    margin-top: 1.8rem;
                 }
             }
-            .remain{
-                height: @size55;
+            .option{
+                height: @size98;
                 border-bottom: 1px solid rgb(51, 51, 51);
-                padding-right: @size10;
-                .mon{
-                    padding-left: @size10;
-                    padding-top: @size10;
-                    span{
+                .litbox{
+                    width: 25%;
+                    height: 100%;
+                    .pic{
+                        width: @size22;
+                        height: @size18;
+                        display: inline-block;
+                        margin-top: @size30;
+                        margin-left: @size35;
+                        i{
+                            width: 100%;
+                            height: 100%;
+                            font-size: @size20;
+                        }
+                    }
+                    .font{
+                        font-size: @size15;
+                        text-align: center;
+                        padding-top: @size10;
                         font-size: @size10;
                     }
-                    .span1{
-                        font-size: @size14;
+                }
+
+
+
+            }
+            .account{
+                box-sizing: border-box;
+                .acc{
+                    height: @size35;
+                    border-bottom: 1px solid rgb(202, 209, 217);
+                    margin-left: @size10;
+                    .fl{
+                        font-size: @size12;
+                        line-height: @size35;
+                    }
+                    .fr{
+                        letter-spacing: @size3;
                         font-weight: bold;
+                        padding-right: @size10;
                     }
                 }
-                .fr{
-                    margin-top: @size15;
-                    border: 1px solid rgb(202, 209, 217);
-                    margin-left: @size10;
-                    background: white;
-                    outline: none;
-                    height: @size25;
-                    width: 1.8rem;
-                    font-size: @size10;
-                }
-            }
-        }
-        .center{
-            border-bottom: 1px solid black;
-            box-sizing: border-box;
-            .address{
-                // box-sizing: border-box;
-                height: @size35;
-                border-bottom: 1px solid rgb(202, 209, 217);
-                margin-left: @size10;
-                .fl{
-                    font-size: @size12;
-                    line-height: @size35;
-                }
-                .fr{
-                    letter-spacing: @size3;
-                    font-weight: bold;  
+                .remain{
+                    height: @size55;
+                    border-bottom: 1px solid rgb(51, 51, 51);
                     padding-right: @size10;
+                    .mon{
+                        padding-left: @size10;
+                        padding-top: @size10;
+                        span{
+                            font-size: @size10;
+                        }
+                        .span1{
+                            font-size: @size14;
+                            font-weight: bold;
+                        }
+                    }
+                    .fr{
+                        margin-top: @size15;
+                        border: 1px solid rgb(202, 209, 217);
+                        margin-left: @size10;
+                        background: white;
+                        outline: none;
+                        height: @size25;
+                        width: 1.8rem;
+                        font-size: @size10;
+                    }
                 }
             }
-        }
-        .unlogin{
-            height: 10.3333rem;
-            border-bottom: 1px solid black;
-            box-sizing: border-box;
-            text-align: center;
-            .pic{
-                padding-top: 3rem;
-                span{
-                    font-size: @size80;
+            .center{
+                border-bottom: 1px solid black;
+                box-sizing: border-box;
+                .address{
+                    // box-sizing: border-box;
+                    height: @size35;
+                    border-bottom: 1px solid rgb(202, 209, 217);
+                    margin-left: @size10;
+                    .fl{
+                        font-size: @size12;
+                        line-height: @size35;
+                    }
+                    .fr{
+                        letter-spacing: @size3;
+                        font-weight: bold;
+                        padding-right: @size10;
+                    }
                 }
             }
-            .hel{
-                font-weight: bold;
-                padding-top: @size20;
-            }
-            .log{
-                font-size:@size12;
-            }
-            .link{
-                padding-top: @size25;
-                text-decoration: underline;
-                color: red;
-                a{
-                    font-size: @size10;
+            .unlogin{
+                height: 10.3333rem;
+                border-bottom: 1px solid black;
+                box-sizing: border-box;
+                text-align: center;
+                .pic{
+                    padding-top: 3rem;
+                    span{
+                        font-size: @size80;
+                    }
+                }
+                .hel{
+                    font-weight: bold;
+                    padding-top: @size20;
+                }
+                .log{
+                    font-size:@size12;
+                }
+                .link{
+                    padding-top: @size25;
+                    text-decoration: underline;
                     color: red;
+                    a{
+                        font-size: @size10;
+                        color: red;
+                    }
                 }
             }
         }
-    }
-    .sell-spic {
-            width: 9.4666rem; 
+        .sell-spic {
+            width: 9.4666rem;
             height: @size80;
             overflow: hidden;
             overflow-x: auto;
@@ -371,18 +375,19 @@
                     }
                 }
             }
-    }
-    .give{
-        height: @size35;
-        width: 100%;
-        background: gray;
-        color: white;
-        position: fixed;
-        left: 0;
-        bottom: @size45;
-        font-size: @size10;
-        line-height: @size35;
-        padding-left: @size20;
+        }
+        .give{
+            height: @size35;
+            width: 100%;
+            background: gray;
+            color: white;
+            position: fixed;
+            left: 0;
+            bottom: @size45;
+            font-size: @size10;
+            line-height: @size35;
+            padding-left: @size20;
+        }
     }
 </style>
 
