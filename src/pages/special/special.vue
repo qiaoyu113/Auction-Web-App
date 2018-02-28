@@ -9,7 +9,7 @@
             </div>
             <div id="mescroll" class="mescroll">
                 <div class="mescroll-bounce">
-                    <div v-for="(list,index) in specialRun">
+                    <div v-for="(list,index) in specialRun" @click="goSellMore(list.id)">
                         <div class="sell">
                             <!-- 内容部分 -->
                             <div class="sell-content" v-if="checked != 3">
@@ -20,7 +20,7 @@
                                     <a v-if="EndText === 1">拍场已结束，快去看看成交结果</a>
                                     <a class="over" v-if="EndText === 3">即将开始</a>
                                     <a class="over" v-if="EndText === 4">正在进行</a>
-                                    <span class="pos2"><div class="sellicon2"><div class="icon"></div></div> {{list.doneUserNum}}</span>
+                                    <span class="pos2"><div class="sellicon2"><div class="icon"></div></div>{{list.doneUserNum}}</span>
                                     <span class="pos1"><div class="box"></div> {{list.auctionNum}}</span>
                                 </div>
                             </div>
@@ -204,7 +204,7 @@
                                         specialist[i].EndTime = common.getFormatOfDate(time,'dd:h:m:s')
                                         if(time <= 0){
                                             if(that.checked === 2){
-                                                that.EndText = 1
+                                                that.EndText = 1;
                                                 clearInterval(timeRun)
                                             }else if(that.checked === 1){
                                                 that.EndText = 2
@@ -253,15 +253,21 @@
             //数据请求判断
             getContent: function() {
                 let that = this;
-                if(that.checked==2){
+                if(that.checked == 2){
                     return that.specialRun;
-                }else if(that.checked==1){
+                }else if(that.checked == 1){
                     return that.specialWill;
                 }
-                else if(that.checked==3){
+                else if(that.checked == 3){
                     return that.specialHis;
                 }
             },
+            //跳转详情页
+            goSellMore(id){
+                let that = this;
+                console.log(id);
+                that.$router.push({name:'specialMore',params:{id:id}})
+            }
         }
     }
 
@@ -310,8 +316,6 @@
             z-index: 100;
             div{
                 display: inline-block;
-
-
                 float: left;
                 color: rgb(153, 153, 162);
                 width: 33.3%;
@@ -325,7 +329,7 @@
                 }
                 .check{
                     box-sizing: border-box;
-                    padding-bottom: 8px;
+                    padding-bottom: 0.17rem;
                     border-bottom: 2px solid black;
                     color: rgb(51, 51, 51)
                 }
@@ -336,9 +340,10 @@
             overflow: hidden;
             .sell-time {
                 font-size:18px;
-                margin-top: 33px;
+                margin-top: 0.74rem;
                 padding-left: 20px;
                 font-weight: bold;
+                text-align: left;
                 width: 100%;
                 height: 0.65rem;
                 box-sizing: border-box;
@@ -346,12 +351,14 @@
             .sell-title {
                 width:100%;
                 font-size: 12px;
+                text-align: left;
                 padding-left: 20px;
                 box-sizing: border-box;
             }
             .sell-information {
                 width:100%;
                 padding-top: 10px;
+                text-align: left;
                 box-sizing: border-box;
                 overflow: hidden;
                 .over{
@@ -380,7 +387,7 @@
                         border-bottom: 0.3rem solid  #A9AEB6;
                         float:left;
                         position: relative;
-                        margin-right:0.03rem;
+                        margin-right:10px;
                         margin-top:0.04rem;
                         .icon{
                             width: 0;
@@ -406,7 +413,7 @@
                         border: 2px solid #A9AEB6;
                         float: left;
                         margin-top: 0.01rem;
-                        margin-right: 0.08rem;
+                        margin-right: 10px;
                     }
                 }
             }

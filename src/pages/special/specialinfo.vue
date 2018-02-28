@@ -51,6 +51,11 @@
                                 <div class="icon"></div>
                                 <div class="icon2"></div>
                             </div>
+                            <!--流拍-->
+                            <div class="collect5"  v-if="list.auctionStatus === 4">
+                                <div class="icon"></div>
+                                <div class="icon2"></div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -165,7 +170,7 @@
                             }else{
                                 act[i].basePrice = price.toFixed(2);
                             }
-                            let collect = collects.indexOf(act[i].id)
+                            let collect = collects.indexOf(act[i].id);
                             if(collect === -1){
                                 act[i]['collect'] = false
                                 dataArr = act;
@@ -477,6 +482,31 @@
                             height:0.35rem;
                             float:right;
                             background:#EB6100;
+                            padding: 0.09rem 0.09rem;
+                            box-sizing: border-box;
+                            position: relative;
+                            .icon{
+                                width: 0;
+                                height: 0;
+                                position: absolute;
+                                left: 0.08rem;
+                                border-top: 0.1rem solid transparent;
+                                border-left: 0.16rem solid #fff;
+                                border-bottom: 0.1rem solid transparent;
+                            }
+                            .icon2{
+                                width: 0.03rem;
+                                height: 0.2rem;
+                                background: #fff;
+                                position: absolute;
+                                right: 0.1rem;
+                            }
+                        }
+                        .collect5{
+                            width:0.35rem;
+                            height:0.35rem;
+                            float:right;
+                            background:#808080;
                             padding: 0.09rem 0.09rem;
                             box-sizing: border-box;
                             position: relative;

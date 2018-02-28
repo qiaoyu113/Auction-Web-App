@@ -7,6 +7,10 @@ import qs from 'qs'
 
 export const commonService = {
     api: {},
+    /* 个人中心 */
+    getUser:function(params){
+      return axios.get('/users' + this.getParam(params))
+    },
     /* 获取专题列表 */
     getauctionPack: function (params) {
         return axios.get('/auctionPackages' + this.getParam(params))
@@ -39,7 +43,10 @@ export const commonService = {
     postMyPrice: function (params) {
         return axios.post('/auctions/offer',qs.stringify(params))
     },
-
+    /*保证金相关操作*/
+    postMyBail:function(){
+        return axios.post('/bails/frozen',qs.stringify(params))
+    },
     postGaptchas: function (params) {
         return axios.post('/gaptchas',qs.stringify(params))
     },
@@ -50,6 +57,22 @@ export const commonService = {
     /*删除拍品*/
     deleteAuctions(params,id){
         return axios.delete('/admin/auctions/'+ id ,qs.stringify(params))
+    },
+    /* 余额冻结 */
+    setbails:function(params){
+        return axios.post('/bails/frozen',qs.stringify(params))
+    },
+    /* 订单支付 */
+    putOrders:function(params){
+        return axios.put('/orders',qs.stringify(params))
+    },
+    /*  获取微信授权地址  */
+    getWxpay:function(params,loginType,platform,jumpRouter,wxscope){
+        return axios.get('/tokens/oauth' + this.getParam(params,loginType,platform,jumpRouter,wxscope))
+    },
+    /* 获取code */
+    getWXbaseCode: function(params) {
+        return axios.get('/tokens/wxbaseinfo' + this.getParam(params));
     },
 
 

@@ -1,33 +1,33 @@
 <template>
-	<!-- <div class="index-bottom" id="index-bottom">
-		<router-link v-for="(item, index) in listFoot" :key="item.type" 
-        	:to="{ name :item.imgType == '1'? 'home' 
-                    :item.imgType == '5'? 'activity'
-                    :item.imgType == '4'? 'knowledge'
-                    :item.imgType == '2'? 'mycenter': 'article' }" 
-        	class="single-bottom index-page" ref="myBoxa" replace>
+	<!--<div class="index-bottom" id="index-bottom">-->
+		<!--<router-link v-for="(item, index) in listFoot" :key="item.type"-->
+        	<!--:to="{ name :item.imgType == '1'? 'home'-->
+                    <!--:item.imgType == '2'? 'special'-->
+                    <!--:item.imgType == '3'? 'knowledge'-->
+                    <!--:item.imgType == '4'? 'mycenter': 'article' }"-->
+        	<!--class="single-bottom index-page" ref="myBoxa" replace>-->
 
-			<i v-if="item.imgType == footName" class="iconfont changecolor footer-btn" 
-            	v-bind:class="{'icon-shouyetianchong': item.imgType == '1',
-                            'icon-huodongtianchong': item.imgType == '5',
-                            'icon-zhishitianchong': item.imgType == '4',
-                            'icon-wodetianchong': item.imgType == '2',
-                            'icon-wenzhangtianchong': item.imgType == '3'}"></i>
-			<i v-else class="iconfont" 
-            	v-bind:class="{'icon-shouye1': item.imgType == '1',
-                            'icon-huodong4': item.imgType == '5',
-                            'icon-zhishi3': item.imgType == '4',
-                            'icon-wode1': item.imgType == '2',
-                            'icon-wenzhang1': item.imgType == '3'}"></i>
-			<p>{{item.name}}</p>
-		</router-link>
-	</div> -->
+			<!--<i v-if="item.imgType == footName" class="iconfont changecolor footer-btn"-->
+            	<!--v-bind:class="{'icon-shouyetianchong': item.imgType == '1',-->
+                            <!--'icon-huodongtianchong': item.imgType == '5',-->
+                            <!--'icon-zhishitianchong': item.imgType == '4',-->
+                            <!--'icon-wodetianchong': item.imgType == '2',-->
+                            <!--'icon-wenzhangtianchong': item.imgType == '3'}"></i>-->
+			<!--<i v-else class="iconfont"-->
+            	<!--v-bind:class="{'icon-shouye1': item.imgType == '1',-->
+                            <!--'icon-huodong4': item.imgType == '5',-->
+                            <!--'icon-zhishi3': item.imgType == '4',-->
+                            <!--'icon-wode1': item.imgType == '2',-->
+                            <!--'icon-wenzhang1': item.imgType == '3'}"></i>-->
+			<!--<p>{{item.name}}</p>-->
+		<!--</router-link>-->
+	<!--</div>-->
 	<div class="footer">
             <ul class="clearfix">
-                <li class="fl"><i class="iconfont icon-shouyetianchong  check"></i></li>
-                <li class="fl"><i class="iconfont icon-zhishitianchong"></i></li>
-                <li class="fl"><i class="iconfont icon-wenzhangtianchong"></i></li>
-                <li class="fl"><i class="iconfont icon-wodetianchong"></i></li>
+                <li class="fl" @click="checked(0)"><i :class="index == 0 ? 'iconfont icon-shouyetianchong check' : 'iconfont icon-shouyetianchong'"></i></li>
+                <li class="fl" @click="checked(1)"><i :class="index == 1 ? 'iconfont icon-zhishitianchong check' : 'iconfont icon-zhishitianchong'"></i></li>
+                <li class="fl" @click="checked(2)"><i :class="index == 2 ? 'iconfont icon-wenzhangtianchong check' : 'iconfont icon-wenzhangtianchong'"></i></li>
+                <li class="fl" @click="checked(3)"><i :class="index == 3 ? 'iconfont icon-wodetianchong check' : 'iconfont icon-wodetianchong'"></i></li>
             </ul>
     </div>
 </template>
@@ -43,6 +43,7 @@
                     }
                      
                 ],
+                index:0,
 				footName: '',
 				routePath: '',
 				routeName: ''
@@ -51,10 +52,34 @@
 		mounted() {
 			const that = this;
 			// 请求底部数据
-
+//            console.log(that.$route.name);
+            if(that.$route.name == 'home'){
+                that.index = 0
+            }else if(that.$route.name == 'special'){
+                that.index = 1
+            }
 		},
-		updated: function() {},
-		method: {}
+        methods: {
+            checked(index){
+                let that = this;
+                console.log(index)
+//                console.log(that.$route.name);
+                that.index = index;
+                if(index === 0){
+                    that.$router.replace({name:'home'})
+                    that.index = 0;
+                }else if(index === 1){
+                    that.$router.replace({name:'special'})
+                    that.index = 1;
+                }else if(index === 2){
+                    that.$router.replace({name:'home'})
+                    that.index = 2;
+                }else if(index === 3){
+                    that.$router.replace({name:'home'})
+                    that.index = 3;
+                }
+            }
+        }
 
 	}
 </script>
