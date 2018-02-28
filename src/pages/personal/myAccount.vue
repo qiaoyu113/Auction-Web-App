@@ -13,19 +13,19 @@
             <div class="account">
                 <div class="item">
                     <div class="boxx">
-                        <div class="money">50,000CNY</div>
+                        <div class="money">{{wallet!=null?wallet.totalMoney:0}}CNY</div>
                         <div class="text">保证金总额</div>
                     </div>
                 </div>
                 <div class="box clearfix ">
                     <div class="fl">
-                        <div class="sum bgcol">40,000 CNY</div>
+                        <div class="sum bgcol">{{wallet!=null?wallet.availableMoney:0}} CNY</div>
                         <div class="exp">可用金额</div>
                         <div class="warn">可用金额才可体现和出价</div>
                     </div>
                     <div class="bor fl"></div>
                     <div class="fl">
-                        <div class="sum">10,000 CNY</div>
+                        <div class="sum">{{wallet!=null?wallet.frozenMoney:0}} CNY</div>
                         <div class="exp">冻结金额</div>
                         <div class="warn">保证金体现未至账户时即被冻结</div>
                     </div>
@@ -59,10 +59,24 @@
                     <div class="bor"></div>
                 </div>
                 <div class="listcontent clearfix"  v-for="arr1 in arr"  :key="arr1.url">
-                    <div class="fl">{{arr1.money}}</div>
-                    <div class="f2">{{arr1.reason}}</div>
-                    <div class="f3">{{arr1.time}}</div>
-                    <div class="f4 line">{{arr1.state}}</div>
+                    <div class="fl">{{arr1.flowAmount}}</div>
+                    <div class="f2">{{arr1.title}}</div>
+                    <div class="f3">{{arr1.createTime | stampFormate2}}</div>
+                    <div class="f4 line" v-if="arr1.flowStatus==10">线上充值成功</div>
+                    <div class="f4 line" v-if="arr1.flowStatus==11">线上充值成功并进入拍卖前冻结</div>
+                    <div class="f4 line" v-if="arr1.flowStatus==20">线下充值申请</div>
+                    <div class="f4 line" v-if="arr1.flowStatus==21">线下充值成功</div>
+                    <div class="f4 line" v-if="arr1.flowStatus==22">线下充值拒绝</div>
+                    <div class="f4 line" v-if="arr1.flowStatus==23">线下充值关闭</div>
+                    <div class="f4 line" v-if="arr1.flowStatus==30">出价冻结</div>
+                    <div class="f4 line" v-if="arr1.flowStatus==31">拍卖结束解冻</div>
+                    <div class="f4 line" v-if="arr1.flowStatus==40">线上提现处理中</div>
+                    <div class="f4 line" v-if="arr1.flowStatus==41">线上提现处理成功</div>
+                    <div class="f4 line" v-if="arr1.flowStatus==42">线上提现处理失败</div>
+                    <div class="f4 line" v-if="arr1.flowStatus==50">线下提现申请中</div>
+                    <div class="f4 line" v-if="arr1.flowStatus==51">线下提现成功</div>
+                    <div class="f4 line" v-if="arr1.flowStatus==52">线下提现申请拒绝</div>
+                    <div class="f4 line" v-if="arr1.flowStatus==53">线下提现申请关闭</div>
                     <div class="bor"></div>
                 </div>
             </div>
@@ -78,19 +92,20 @@
         data () {
             return {
                 title: '个人中心',
+                wallet:'',
                 arr:[
-                    {money:'500,000CNY',
-                    reason:'提现解冻',
-                    time:'2018.04.01 22:11:11',
-                    state:'冻解成功>'},
-                     {money:'600,000CNY',
-                    reason:'提现',
-                    time:'2018.04.01 22:11:11',
-                    state:'提现成功>'},
-                    {money:'600,000CNY',
-                    reason:'线下充值',
-                    time:'2018.04.01 22:11:11',
-                    state:'充值成功>'},
+                    // {money:'500,000CNY',
+                    // reason:'提现解冻',
+                    // time:'2018.04.01 22:11:11',
+                    // state:'冻解成功>'},
+                    //  {money:'600,000CNY',
+                    // reason:'提现',
+                    // time:'2018.04.01 22:11:11',
+                    // state:'提现成功>'},
+                    // {money:'600,000CNY',
+                    // reason:'线下充值',
+                    // time:'2018.04.01 22:11:11',
+                    // state:'充值成功>'},
                 ]
             }
         },
@@ -132,6 +147,7 @@
             * 这里的数据可以放在data中
             * */ 
             this.getBails()
+            this.getUsers()
 
         },
         methods: {
@@ -141,9 +157,16 @@
                 return str;
             },
             getBails:function(){
-               commonService.getBails().then(function(res){
-                    // that.user=res.data.datas.user
+                let that = this;
+               commonService.getBails({pageNo:1,pageSize:30}).then(function(res){
+                    that.arr=res.data.datas.datas
                     console.log(res)
+              })
+            },
+             getUsers:function(){
+                let that = this;
+               commonService.getUsers().then(function(res){
+                    that.wallet=res.data.datas.user.wallet
               })
             },
             
@@ -286,7 +309,7 @@
                 height: @size30;
                 text-align: center;
                 .fl{
-                    width: 25%;
+                    width: 20%;
                     text-align: center;
                     font-size: @size10;
                     line-height: @size30;
@@ -305,7 +328,7 @@
                 }
                 .f4{
                     float: left;
-                    width: 20%;
+                    width: 25%;
                     font-size: @size10;
                     line-height: @size30;
                 }

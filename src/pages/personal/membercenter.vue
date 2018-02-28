@@ -26,8 +26,8 @@
                     <div class="point">4,000分<br><span>会员积分</span></div>
                     <div class="number">NO:000 000 000</div>
                     <div class="star">
-                        <i class="iconfont icon-xianxingxing"></i>
-                        <!-- <i class="iconfont icon-xianxingxing"></i> -->
+                        <div><i class="iconfont icon-xianxingxing"></i></div>
+                        <div><i class="iconfont icon-xianxingxing"></i></div>
                     </div>
                 </div>
             </div>
@@ -64,6 +64,7 @@
 
 <script >
     import {appService} from '../../service/appService'
+    import {commonService} from '../../service/commonService.js'
     export default {
         data () {
             return {
@@ -113,7 +114,7 @@
             * 可以使用DOM元素
             * 这里的数据可以放在data中
             * */
-
+            this.getUsers()
         },
         methods: {
             getIndex:function(index){
@@ -124,6 +125,14 @@
                     that.index = 2;
                 }
             },
+             getUsers:function(){
+                let that=this
+                 commonService.getUsers().then(function(res){
+                    that.user=res.data.datas.user
+                    console.log(res)
+              })
+
+             },
         }
     }
 

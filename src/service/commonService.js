@@ -56,10 +56,32 @@ export const commonService = {
         return axios.get('/gaptchas')
     },
      /* 保证金 */
-    getBails: function () {
-        return axios.get('/bails')
+    getBails: function (params) {
+        return axios.get('/bails' + this.getParam(params))
     },
-
+    putOrders: function (params) {
+        return axios.put('/orders',this.getParam(params))
+    },
+     /* 获取订单号  */
+    postBails: function (params) {
+        return axios.post('/bails' + this.getParam(params))
+    },
+     /* 获取手机验证码 */
+    getFormssms: function (params) {
+        return axios.get('/forms/sms' + this.getParam(params))
+    },
+    /* 申请单提交  */
+    postForms: function (params) {
+        return axios.post('/forms' + this.getParam(params))
+    },
+    /* 申请单提交  */
+    getForms: function (params) {
+        return axios.get('/forms/' + params)
+    },
+     /* 获取银行卡列表  */
+    getBankCards: function () {
+        return axios.get('/bankCards')
+    },
 
 
     getParam: function(param){

@@ -33,6 +33,7 @@ Vue.use(Vuex)
 Vue.use(VueRouter)
 Vue.use(VueCropper)
 
+
 // 定义全局组件
 import zmodal from './component/common/modal.vue'
 import zbanner from './component/common/banner.vue'

@@ -53,6 +53,16 @@ const myaccount = (resolve) => {require(['./pages/personal/myAccount.vue'],resol
 const helpcenter = (resolve) => {require(['./pages/personal/helpcenter.vue'],resolve)}
 const membercenter = (resolve) => {require(['./pages/personal/membercenter.vue'],resolve)}
 const realname = (resolve) => {require(['./pages/personal/realname.vue'],resolve)}
+const cash = (resolve) => {require(['./pages/personal/cash.vue'],resolve)}
+const cashstep = (resolve) => {require(['./pages/personal/cashstep.vue'],resolve)}
+const recharge = (resolve) => {require(['./pages/personal/recharge.vue'],resolve)}
+const rechargeList = (resolve) => {require(['./pages/personal/rechargeList.vue'],resolve)}
+//订单详情
+const normalorder = (resolve) => {require(['./pages/orderDetails/normal-order.vue'],resolve)}
+const closeorder = (resolve) => {require(['./pages/orderDetails/close-order.vue'],resolve)}
+const afterorder = (resolve) => {require(['./pages/orderDetails/aftersale-order.vue'],resolve)}
+const shipping = (resolve) => {require(['./pages/orderDetails/shipping.vue'],resolve)}
+const rules = (resolve) => {require(['./pages/orderDetails/rules.vue'],resolve)}
 
 //登陆页
 const login = (resolve) => {require(['./pages/login/login.vue'],resolve)}
@@ -68,7 +78,7 @@ const routers = [
     {name: 'service',path:'/service',component:service},
     {name: 'special',path:'/special',component:special},
     {name: 'specialinfo',path:'/specialinfo',component:specialinfo},
-    {name: 'specialDetails',path:'/specialDetails/',component:specialDetails},
+    {name: 'specialDetails',path:'/specialDetails',component:specialDetails},
     {name: 'auction',path:'/auction',component:auction,
         children:[
             {name:'auctionMore',path:'more/:id',component:auction},
@@ -94,6 +104,16 @@ const routers = [
     {name: 'helpcenter',path:'/helpcenter',component:helpcenter},
     {name: 'membercenter',path:'/membercenter',component:membercenter},
     {name: 'realname',path:'/realname',component:realname},
+     {name: 'cash',path:'/cash',component:cash},
+    {name: 'cashstep',path:'/cashstep',component:cashstep},
+    {name: 'recharge',path:'/recharge',component:recharge},
+    {name: 'rechargeList',path:'/rechargeList',component:rechargeList},
+    //订单详情
+    {name: 'normalorder',path:'/normalorder',component:normalorder},//订单正常
+    {name: 'closeorder',path:'/closeorder',component:closeorder},//订单关闭
+    {name: 'afterorder',path:'/afterorder',component:afterorder},//订单售后
+    {name: 'shipping',path:'/shipping',component:shipping},//物流信息
+    {name: 'rules',path:'/rules',component:rules},//到账周期说明
 
 ]
 

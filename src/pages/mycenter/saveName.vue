@@ -46,7 +46,9 @@
             listImg() {
                 return this.$store.state.homeStore.listImg || []
             },
-    
+            id() {
+                return this.$route.query.id 
+            },
         },
         mounted: function() {
             /*
@@ -72,7 +74,7 @@
             },
             postUsersinfo:function(){
                  let that=this
-                 commonService.postUsersinfo({name:that.inputName}).then(function(res){
+                 commonService.postUsersinfo({id:that.id,name:that.inputName}).then(function(res){
                     
                     if(res.data.code == 200){
                      that.$router.go(-1);
