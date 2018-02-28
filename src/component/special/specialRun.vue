@@ -2,60 +2,59 @@
 <!-- 两个模板有星星无星星 -->
 <div class="sell">
         <!-- 内容部分 -->
-        <div class="sell-content">
-            <div class="sell-time">{{str.timeOrMoney}}</div>
-            <div class="sell-title">{{str.title}}</div>
-            <div class="sell-information">
-                <a :href="str.url">{{str.warn}}</a>
-                <span class="iconfont icon-shangcheng pos1"> {{str.collect}}</span>
-                <span class="iconfont icon-qunzu pos2"> {{str.people}}</span>
-            </div>              
-        </div>
+    <span>{{str}}</span>
+        <!--<div class="sell-content">-->
+            <!--<div class="sell-time">{{str.timeOrMoney}}</div>-->
+            <!--<div class="sell-title">{{str.name}}</div>-->
+            <!--<div class="sell-information">-->
+                <!--<a :href="str.url">{{str.warn}}</a>-->
+                <!--<span class="iconfont icon-shangcheng pos1"> {{str.collect}}</span>-->
+                <!--<span class="iconfont icon-qunzu pos2"> {{str.people}}</span>-->
+            <!--</div>-->
+        <!--</div>-->
         <!-- 图片部分，未实现完全 -->
-        <div class="sell-picture">
-                    <div class="sell-bpic">
-                        <img :src="str.img[0]" alt="" srcset="">
-                        <z-icon  v-for="list in str" :key="list.url" :arr="str"></z-icon>
-                    </div>
-                    <div class="sell-spic">
-                        <ul  v-for="index in str.img.length">
-                            <li ><img :src="str.img[index]" alt="" srcset=""></li>
-                            <li style="left:95px"><img :src="str.img[2]" alt="" srcset=""></li>
-                            <li style="left:190px"><img :src="str.img[3]" alt="" srcset=""></li> 
-                            <li style="left:285px"><img :src="str.img[4]" alt="" srcset=""></li>
-                            <li style="left:380px"><img :src="str.img[5]" alt="" srcset=""></li>
-                            
-                        </ul>
-                    </div>
-                </div>
-</div>
+        <!--<div class="sell-picture">-->
+            <!--<div class="sell-bpic">-->
+                <!--<img :src="str.img[0]" alt="" srcset="">-->
+                <!--<z-icon  v-for="list in str" :key="list.url" :arr="str"></z-icon>-->
+            <!--</div>-->
+            <!--<div class="sell-spic">-->
+                <!--<ul  v-for="index in str.img.length">-->
+                    <!--<li ><img :src="str.img[index]" alt="" srcset=""></li>-->
+                    <!--<li style="left:95px"><img :src="str.img[2]" alt="" srcset=""></li>-->
+                    <!--<li style="left:190px"><img :src="str.img[3]" alt="" srcset=""></li>-->
+                    <!--<li style="left:285px"><img :src="str.img[4]" alt="" srcset=""></li>-->
+                    <!--<li style="left:380px"><img :src="str.img[5]" alt="" srcset=""></li>-->
 
-    
+                <!--</ul>-->
+            <!--</div>-->
+        <!--</div>-->
+    </div>
 </template>
-<script type="text/ecmascript-6">
+<script>
+import {common} from '../../assets/js/common/common'
 export default {
-  props: ["str"],
-  data() {
-    return {
-      arrays: [],
-      flag: true
-    };
-  },
-  components: {},
-  mounted() {},
-  methods: {
-      getData:function() {
-          let that = this;
-          
-      },
-      getIndex:function() {
-//           [1,2,3].forEach(function(item){
-// console.log(item);
-// });
-        return str.img.length;
-      }
-      
-  }
+    props: ["str"],
+    data() {
+        return {
+            time:'',
+            str:''
+        };
+    },
+    computed:{
+        'time': function(){
+            return this.str;
+        }
+    },
+    methods: {
+        setTime(){
+            let that = this;
+            setInterval(function(){
+                let time = that.time - new Date();
+                that.str = common.getFormatOfDate(time,'dd:h:m:s')
+            },1000);
+        }
+    }
 };
 </script>
 <style lang="less">

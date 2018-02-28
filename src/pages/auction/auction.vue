@@ -28,7 +28,7 @@
                             </div>
                         </div>
                         <div class="sell-information">
-                            <div class="font">{{details.realNum}}人</div>
+                            <div class="font">{{details.readNum}}人</div>
                             <div class="sellicon2"><div class="icon"></div></div>
                         </div>
                         <div class='sell-content'>
@@ -57,8 +57,9 @@
                             <div class="sell-inf" v-html="content"></div>
                             <div class="helpCenter">
                                 <span class="fl">帮助中心</span>
-                                  <div class="fr2 iconfont icon-daiquanquandetanhao"></div>
-                                  <a class="fr">查看如何参加拍卖</a>
+                                <div class="fr2 iconfont icon-daiquanquandetanhao"></div>
+                                <a class="fr">查看如何参加拍卖</a>
+                                <!--<a class="fr" v-if="details.auctionStatus === 2">查看如何参加拍卖</a>-->
                             </div>
                         </div>
                     </div>
@@ -67,50 +68,77 @@
                         <div class="othersCh">本场其他</div>
                     </div>
                     <div class="sell-more clearfix">
-                        <div class="sellList" @click="sellListGo(list.id)" v-for="list in specialist">
+                        <div class="sellList" v-if="specialist.length != 0" @click="sellListGo(list.id)" v-for="list in specialist">
                             <div class="pic">
                                 <img :src="$store.state.picHead + list.picItems[0]"/>
-                                <div class="money">￥{{list.basePrice}}</div>
+                                <div class="money">￥{{list.currentPrice}}</div>
                                 <div class="title">{{list.title}}</div>
                                 <div class="number">{{list.completeNo}}</div>
                             </div>
+                            <div class="date">
+                                <!--收藏图标-->
+                                <div class="collect" v-if="list.collect">
+                                    <div class="collectIcon">
+                                        <div class="bottom"></div>
+                                    </div>
+                                </div>
+                                <!--进行中-->
+                                <div class="collect2" v-if="list.auctionStatus === 2">
+                                    <div class="icon"></div>
+                                    <div class="icon"></div>
+                                </div>
+                                <!--预展中-->
+                                <div class="collect3"  v-if="list.auctionStatus === 1">
+                                    <div class="icon"></div>
+                                </div>
+                                <!--已结束-->
+                                <div class="collect4"  v-if="list.auctionStatus === 3">
+                                    <div class="icon"></div>
+                                    <div class="icon2"></div>
+                                </div>
+                                <!--流拍-->
+                                <div class="collect5"  v-if="list.auctionStatus === 4">
+                                    <div class="icon"></div>
+                                    <div class="icon2"></div>
+                                </div>
+                            </div>
                         </div>
+                        <div class="sellListNo" v-if="specialist.length === 0">— 暂无更多 —</div>
                     </div>
                 </div>
             </div>
         </div>
         <!--阴影-->
-        <div :class="dis">
-            <div class="transparent"></div>
-            <div class="record">
-                <div class="down" @click="getNone()">^</div>
-                <div class="content">
-                    <div class="pic fl"><img src="../../assets/image/myimage/timg.jpg" alt=""></div>
+        <div class="dis">
+            <div class="transparent" v-if="dis"></div>
+            <div :class="dis ? 'record recordShow' : 'record'"  v-if="dis">
+                <div class="down" @click="getNone()"><i class="iconfont icon-xialajiantou" style="color:#A9AEB6;font-size:32px;"></i></div>
+                <div class="disShow">
+                    <div class="pic fl"><img :src="$store.state.picHead + details.picItems[0]" alt=""></div>
                     <div class="info fl">
                         <div class="tit">起拍价格</div>
-                        <div class="price">50,000 CNY</div>
-                        <div class="title">茶壶茶壶</div>
-                        <div class="time">201708-076</div>
+                        <div class="price">{{details.basePrice}} CNY</div>
+                        <div class="title">{{details.title}}</div>
+                        <div class="time">{{details.auctionStartTime}}</div>
                     </div>
                     <!-- 三种状态 index
-                    1.竞拍中
-                    2.被别人拍中
-                    3被自己拍中 -->
-                    <div class="moneytime fr" v-if="index==1">
+                     1.未开始 2.进行中 3.已结束 4.流拍 5.撤拍 竞拍开始后专场不可删除下架  -->
+                    <div class="moneytime fr" v-if="details.auctionStatus === 2">
                         <div class="nowTit">当前价格</div>
-                        <div class="nowPrice">200,000 CNY</div>
+                        <div class="nowPrice" v-if="!offerNumDate">{{details.currentPrice}} CNY</div>
+                        <div class="nowPrice" v-if="offerNumDate">{{details.basePrice}} CNY</div>
                         <div class="over">离结束还有</div>
                         <div class="time fr">
-                            <div class="fr num">01</div>
+                            <div class="fr num">{{s}}</div>
                             <div class="fr colon">:</div>
-                            <div class="fr num">02</div>
+                            <div class="fr num">{{m}}</div>
                             <div class="fr colon">:</div>
-                            <div class="fr num">03</div>
+                            <div class="fr num">{{h}}</div>
                             <div class="fr colon"> :</div>
-                            <div class="fr num">04</div>
+                            <div class="fr num">{{day}}</div>
                         </div>
                     </div>
-                    <div class="moneytime fr" v-if="index==2">
+                    <div class="moneytime fr" v-if="details.auctionStatus === 1">
                         <div class="nowTit">成交价格</div>
                         <div class="nowPrice">200,000 CNY</div>
                         <div class="over">成交时间</div>
@@ -124,83 +152,209 @@
                         <div class="nowPrice">200,000 CNY</div>
                         <div class="over">付款期限</div>
                         <div class="time fr">
-                            <div class="fr num">01</div>
+                            <div class="fr num">{{s}}</div>
                             <div class="fr colon">:</div>
-                            <div class="fr num">02</div>
+                            <div class="fr num">{{m}}</div>
                             <div class="fr colon">:</div>
-                            <div class="fr num">03</div>
+                            <div class="fr num">{{h}}</div>
                             <div class="fr colon"> :</div>
-                            <div class="fr num">04</div>
+                            <div class="fr num">{{day}}</div>
                         </div>
                     </div>
                 </div>
-                <div class="bidRecord">
-                    <div  v-for="list in pricerecord" :key="list.url">
-                        <z-price :str="list"></z-price>
+                <div class="bidRecord content">
+                    <div  v-for="(list,index) in pricerecord">
+                        <div :class="list.userId == useId ? 'reco mycolor': 'reco'">
+                            <div :class="index == 0 ? 'price fl':'price fl line'">{{list.offerAmount}}</div>
+                            <div class="fr">
+                                <div v-if="list.userId != useId" class="who">{{list.userName}}</div>
+                                <div v-if="list.userId == useId" class="who">我的出价</div>
+                                <div class="time">{{list.offerTime}}</div>
+                            </div>
+                        </div>
                     </div>
-
-
                 </div>
             </div>
         </div>
         <!--倒计时-->
-        <div class="timeEnd">
-            <div class="infomation bground1 clearfix" v-if="index==1">
-
-                <div class="time1 fr">
-                    <div class="fr num">01</div>
-                    <div class="fr colon">:</div>
-                    <div class="fr num">02</div>
-                    <div class="fr colon">:</div>
-                    <div class="fr num">03</div>
-                    <div class="fr colon"> :</div>
-                    <div class="fr num">04</div>
-                </div>
-                <div class="value1 fr">即将开始</div>
+        <!--1.未开始 2.进行中 3.已结束 4.流拍 5.撤拍 竞拍开始后专场不可删除下架
+        1代表即将开始
+        2进行中
+        3拍品别人拍中
+        4拍品被流拍
+        5拍品被自己拍中-->
+        <div class="infomation bground1 clearfix" v-if="details.auctionStatus === 1">
+            <div class="time1 fr">
+                <div class="fr num">{{s}}</div>
+                <div class="fr colon">:</div>
+                <div class="fr num">{{m}}</div>
+                <div class="fr colon">:</div>
+                <div class="fr num">{{h}}</div>
+                <div class="fr colon"> :</div>
+                <div class="fr num">{{day}}</div>
             </div>
-            <div class="infomation bground2 clearfix" v-else-if="index==2">
-                <div class="learnMore fl">查看更多</div>
-                <div class="value fl">当前价格 200,000CNY</div>
-                <div class="time fr">
-                    <div class="fr num">01</div>
-                    <div class="fr colon">:</div>
-                    <div class="fr num">02</div>
-                    <div class="fr colon">:</div>
-                    <div class="fr num">03</div>
-                    <div class="fr colon"> :</div>
-                    <div class="fr num">04</div>
-                </div>
-            </div>
-            <div class="infomation bground3 clearfix" v-else-if="index==3">
-                <div class="learnMore fl">查看更多</div>
-                <div class="value fl">当前价格 200,000CNY</div>
-                <div class="success fr">
-                    拍品成交
-                </div>
-            </div>
-            <div class="infomation bground4 clearfix" v-else-if="index==4">
-                <div class="success fr">
-                    拍品流拍
-                </div>
-            </div>
-            <div class="infomation bground3 clearfix" v-else-if="index==5">
-                <div class="learnMore fl">查看更多</div>
-                <div class="value fl">当前价格 200,000CNY</div>
-                <span class="warn">支付</span>
-                <div class="time fr">
-                    <div class="fr num">01</div>
-                    <div class="fr colon">:</div>
-                    <div class="fr num">02</div>
-                    <div class="fr colon">:</div>
-                    <div class="fr num">03</div>
-                    <div class="fr colon"> :</div>
-                    <div class="fr num">04</div>
-                </div>
+            <div class="value1 fr">即将开始</div>
+        </div>
+        <!--2进行中-->
+        <div class="infomation bground2 clearfix" v-else-if="details.auctionStatus === 2">
+            <div class="learnMore fl" @click="lookMore()">查看更多</div>
+            <div class="value fl" v-if="!offerNumDate">当前价格 {{details.currentPrice}}CNY</div>
+            <div class="value fl" v-if="offerNumDate">当前价格 {{details.basePrice}}CNY</div>
+            <div class="time fr">
+                <div class="fr num">{{s}}</div>
+                <div class="fr colon">:</div>
+                <div class="fr num">{{m}}</div>
+                <div class="fr colon">:</div>
+                <div class="fr num">{{h}}</div>
+                <div class="fr colon"> :</div>
+                <div class="fr num">{{day}}</div>
             </div>
         </div>
+        <div class="infomation bground3 clearfix" v-else-if="details.auctionStatus === 3">
+            <div class="learnMore fl">查看更多</div>
+            <div class="value fl">当前价格 200,000CNY</div>
+            <div class="success fr">
+                拍品成交
+            </div>
+        </div>
+        <div class="infomation bground4 clearfix" v-else-if="details.auctionStatus === 4">
+            <div class="success fr">
+                拍品流拍
+            </div>
+        </div>
+        <div class="infomation bground3 clearfix" v-else-if="details.auctionStatus === 3">
+            <div class="learnMore fl">查看更多</div>
+            <div class="value fl">当前价格 200,000CNY</div>
+            <span class="warn">支付</span>
+            <div class="time fr">
+                <div class="fr num">01</div>
+                <div class="fr colon">:</div>
+                <div class="fr num">02</div>
+                <div class="fr colon">:</div>
+                <div class="fr num">03</div>
+                <div class="fr colon"> :</div>
+                <div class="fr num">04</div>
+            </div>
+        </div>
+        <!--<z-info></z-info>-->
         <!--底部-->
-        <z-foot></z-foot>
+        <!--起拍价格-->
+        <div class="footer" v-if="details.auctionStatus === 1">
+            <div class="value">
+                <span class='label'>起拍价格</span>
+                <span class="price">{{bidPrice}}CNY</span>
+            </div>
+            <div class="r-icon" @click="collectBtn()">
+                <i class="iconfont icon-duigoudunpai"></i>
+            </div>
+        </div>
+        <!--当前价格-->
+        <div class="footer" v-else-if="details.auctionStatus === 2">
+            <div class="value">
+                <span class="btn1" @click="subtraction()">-</span>
+                <span class="price">{{bidPrice}}CNY</span>
+                <span class="btn2" @click="addPrice()">+</span>
+            </div>
+            <!--收藏状态-->
+            <div class="r-icon" @click="collectBtn()"><img src="../../assets/image/mycenter/collect.png"/></div>
+            <!--<div class="r-icon"><img src="../../assets/image/mycenter/collectNo.png"/></div>-->
+            <div class="offer" @click="offerPrice()">出&nbsp;&nbsp;价</div>
+        </div>
+        <!--交易结束的价格-->
+        <div class="footer" v-else-if="details.auctionStatus === 3">
+            <div class="value">
+                <span class='label'>成交价格</span>
+                <span class="price">203,000 CNY</span>
+            </div>
+            <div class="r-icon"><i class="iconfont icon-duigoudunpai"></i></div>
+        </div>
+        <div class="footer" v-else-if="details.auctionStatus === 4">
+            <div class="value">
+                <span class='label'>成交价格</span>
+                <span class="price">203,000 CNY</span>
+            </div>
+            <div class="r-icon" @click="getList()"><i class="iconfont icon-duigoudunpai"></i></div>
+            <div class="offer">去支付</div>
+        </div>
+        <!--<z-foot></z-foot>-->
         <!--<z-payment></z-payment>-->
+
+        <!--缴纳保证金-->
+        <div class="dis2" v-if="dis2Show">
+            <div class="transparent"></div>
+            <div class="popWin" >
+                <div class="close" @click="closePay()"><i class="iconfont icon-closeicon"></i></div>
+                <div class="payEn">PAYMENT</div>
+                <div class="payCh">保证金缴纳</div>
+                <div class="remind">
+                    <p class="p1">{{deposit}}CNY</p>
+                    <p class="p2">当前需缴纳保证金金额</p>
+                </div>
+                <div class="pay" v-if="!walletDate">
+                    <div class="check2"><i class="iconfont icon-closeicon"></i></div>
+                    <img src="../../assets/image/mycenter/mypriceno.png"/>
+                    <div class="infoWexin">
+                        <div class="span1">保证金可用金额支付</div>
+                        <div class="span2">保证金可用金额：{{userWallet}} CNY <span style="font-size:11px;color:#E95500;">余额不足</span></div>
+                    </div>
+                </div>
+                <div class="pay" @click="getIndex(0)" v-if="walletDate">
+                    <div :class="index==0 ? 'check' : 'check1'"><i class="iconfont icon-duihao"></i></div>
+                    <img v-if="index==0" src="../../assets/image/mycenter/myprice.png"/>
+                    <img v-if="index!=0" src="../../assets/image/mycenter/mypriceno.png"/>
+                    <div class="infoWexin">
+                        <div :class="index==0 ? 'span3' : 'span1'">保证金可用金额支付</div>
+                        <div class="span2">保证金可用金额：{{userWallet}} CNY</div>
+                    </div>
+                </div>
+                <div class="pay" @click="getIndex(1)" v-if="wxShow">
+                    <div :class="index==1 ? 'check' : 'check1'"><i class="iconfont icon-duihao"></i></div>
+                    <i :class="index==1 ? 'background1' : ''" class="iconfont icon-icon_weixinzhifu"></i>
+                    <div class="infoWexin">
+                        <div :class="index==1 ? 'span3' : 'span1'">微信支付</div>
+                        <div class="span2">单笔最高5,000-50,000 CNY</div>
+                    </div>
+                </div>
+                <div class="pay" @click="getIndex(2)" v-if="!wxShow">
+                    <div :class="index==2 ? 'check' : 'check1'"><i class="iconfont icon-duihao"></i></div>
+                    <i :class="index==2 ? 'background2' : ''" class="iconfont icon-icon_zhifubao"></i>
+                    <div  :class="index==2 ? 'infoAlipay2' : 'infoAlipay'">支付宝支付</div>
+                </div>
+                <div class="footer" @click="payYes()">确认支付</div>
+            </div>
+        </div>
+
+        <!--成功提示弹窗-->
+        <div class="dis3" v-if="dis3Show">
+            <div class="transparent"></div>
+            <div class="popWin">
+                <div class="close" @click="closePay()"><i class="iconfont icon-closeicon"></i></div>
+                <div class="payEn">SUCCESS</div>
+                <div class="payCh">成功</div>
+                <div class="remind">
+                    <img src="../../assets/image/mycenter/yesHint.png"/>
+                    <p class="p2">{{hintText}}</p>
+                </div>
+                <div class="footer" @click="closePay()">确定</div>
+            </div>
+        </div>
+
+        <!--失败提示弹窗-->
+        <div class="dis3" v-if="dis4Show">
+            <div class="transparent"></div>
+            <div class="popWin">
+                <div class="close" @click="closePay()"><i class="iconfont icon-closeicon"></i></div>
+                <div class="payEn">WARN</div>
+                <div class="payCh">警告</div>
+                <div class="remind">
+                    <i class="iconfont icon-tanhao"></i>
+                    <p class="p2">{{hintText}}</p>
+                </div>
+                <div class="footer" @click="closePay()">确定</div>
+            </div>
+        </div>
+
+        <div class="payOK"></div>
     </div>
 </template>
 
@@ -217,26 +371,41 @@
             return {
                 title: '专场详情-拍场详情',
                 id:'',
+                useId:'',
                 img:'',
                 details:'',
                 content:'',
                 bugShow:true,
                 page:{num:1,size:10},
+                page2:{num:1,size:10},
                 specialist:[],
                 marketNo:'',
                 totalPage:'',
+                day:'',
+                h:'',
+                m:'',
+                s:'',
+                offerNumDate:false,//是否有人拍中状态
+                bidPrice:'',//出价
+                isShowNoMore:false,
+                baseDetail:'',
                 arrays: [],
-                dis:'',
-                index:3,
+                dis:false,
+                index:1,
+                dis2Show:false,
+                dis3Show:false,
+                dis4Show:false,
+                deposit:'',
+                userWallet:'',
+                walletDate:false,
+                wxShow:false,//判断是否是微信打开
+                checked:false,//调用支付
+                hintText:'',//提示字体
                 pricerecord:[
                     {money:'200,000CNY',
                         name:'某某某',
                         time:'2017.10.25 23:12:34'},
-                    {money:'300,000CNY',
-                        name:'某某某',
-                        time:'2017.10.25 23:12:34'},
                 ],
-
             }
         },
         components:{'z-foot':item,'z-info':info,'z-record':record,'z-payment':payment},
@@ -244,7 +413,12 @@
             let that = this;
             that.onMove();
             that.id = that.$route.params.id;
-            that.onload()
+            that.meScroll()
+            that.WebSocketTest()
+            that.checked = window.localStorage.getItem('checked');
+            if(that.checked){
+                that.wxpay()
+            }
         },
         beforeUpdate(){
             let that = this;
@@ -252,15 +426,60 @@
             that.bugShow = false;
         },
         methods: {
+            //socket连接
+            WebSocketTest(){
+                let that = this;
+                let stompClient = null;
+//                let socket = new SockJS('http://shik.s1.natapp.cc/auction');
+                let socket = new SockJS('http://api.sundayauction.cn/auction');
+                stompClient = Stomp.over(socket);
+                stompClient.connect({}, function(frame) {
+                    // 2.有人出价后后台会回调这里
+                    stompClient.subscribe('/auction/offerHis/'+ that.id, function(r) {
+                        console.log(eval('(' + r.body + ')'));
+                        let body = eval('(' + r.body + ')');
+                        let Price = body.offerAmount/100;
+                        that.details.currentPrice = Price.toString() + '.00';
+                        if(that.bidPrice <= that.details.currentPrice){
+                            that.bidPrice = Price.toString() + '.00'
+                        }
+                        if(that.dis){
+                            that.lookMore()
+                        }
+                    });
+                });
+            },
+            //下拉刷新、加载
             meScroll: function (){
                 let that = this;
+                let scrollUp = document.getElementsByClassName('mescroll-upwarp');
+                let scrollDown = document.getElementsByClassName('mescroll-downwarp-reset');
+                for(let i = 0;i<scrollUp.length;i++){
+                    scrollUp[i].parentNode.removeChild(scrollUp[i]);
+                }
+                for(let i = 0;i<scrollDown.length;i++){
+                    scrollDown[i].parentNode.removeChild(scrollDown[i]);
+                }
+                let scrollWarp = document.getElementsByClassName('mescroll-downwarp');
+                for(let i = 0;i<scrollWarp.length;i++){
+                    scrollWarp[i].parentNode.removeChild(scrollWarp[i]);
+                }
                 that.mescroll = new MeScroll("mescroll", {
                     up: {
                         callback: that.upCallback,
                         page:{size:that.page.size},
                         isBounce: false, //此处禁止ios回弹,解析(务必认真阅读,特别是最后一点): http://www.mescroll.com/qa.html#q10
                     },
+                    down: {
+                        callback: that.downCallback //下拉刷新的回调,别写成downCallback(),多了括号就自动执行方法了
+                    }
                 });
+            },
+            downCallback(){
+                let that = this;
+                that.page.num = 1;
+                that.specialist = [];
+                that.upCallback()
             },
             upCallback: function () {
                 const that = this;
@@ -269,7 +488,14 @@
                     that.specialist = that.specialist.concat(curPageData); //更新列表数据
                     // 加载完成后busy为false，如果最后一页则lastpage为true
                     //          加载完成后给页数+1
+                    if(that.page.num >= that.totalPage) {
+                        that.isShowNoMore = true;
+                    }else{
+                        that.isShowNoMore = false;
+                    }
+                    that.page.num = that.page.num+1;
                     that.mescroll.endSuccess(curPageData.length,that.totalPage);
+                    that.mescroll.endUpScroll(that.isShowNoMore)
                 }, function() {
                     that.mescroll.endErr(); //联网失败的回调,隐藏下拉刷新和上拉加载的状态;
                 });
@@ -277,25 +503,96 @@
             getListData:function(pageNum,pageSize,successCallback,errorCallback) {
                 //延时一秒,模拟联网
                 const that = this;
-                commonService.getAuctionList({
-                    pageNo:that.page.num,
-                    pageSize:that.page.size,
-                    marketNo:that.marketNo}).then(function(res){
+                commonService.getAuction({id:that.id},that.id).then(function(res){
                     if(res.data.code === 200){
-                        let auctionList = res.data.datas.pager.datas;
-                        let ids = [];
-                        for(let i = 0;i<auctionList.length;i++){
-                            if(auctionList[i].id === that.id){
-                            }else{
-                                ids.push(auctionList[i].id);
-                            }
+                        that.details = res.data.datas;
+                        that.details.auctionStartTime  = common.getFormatOfDate(that.details.auctionStartTime,'yyyy-MM-dd')
+                        if(that.details.offerNum != 0){
+                            that.offerNumDate = false;
+                        }else{
+                            that.offerNumDate = true;
                         }
-                        commonService.getAuctionList({pageNo:1,pageSize:10,auctionIds:ids}).then(function(res) {
-                            console.log(res)
+                        let price = res.data.datas.basePrice/100;
+                        let price2 = res.data.datas.currentPrice/100;
+                        if(price%1 === 0){
+                            that.details.basePrice = price.toString() + '.00'
+                        }else{
+                            that.details.basePrice = price.toFixed(2);
+                        }
+                        if(price2%1 === 0){
+                            that.details.currentPrice = price2.toString() + '.00'
+                        }else{
+                            that.details.currentPrice = price2.toFixed(2);
+                        }
+                        if(that.offerNumDate){
+                            that.bidPrice = that.details.basePrice
+                        }else{
+                            that.bidPrice = that.details.currentPrice
+                        }
+                        setInterval(function(){
+                            let time = that.details.mqEndTime - new Date();
+                            that.day = common.getFormatOfDate(time,'dd')
+                            that.h = common.getFormatOfDate(time,'h')
+                            that.m = common.getFormatOfDate(time,'m')
+                            that.s = common.getFormatOfDate(time,'s')
+                        },1000);
+                        that.img = res.data.datas.picItems;
+                        that.$nextTick(function () {
+                            that.onswiper();
+                        });
+                        that.marketNo = res.data.datas.marketNo;
+                        commonService.getAuctionList({
+                            pageNo:that.page.num,
+                            pageSize:that.page.size,
+                            marketNo:that.marketNo}).then(function(res){
                             if(res.data.code === 200){
-                                let specialist = res.data.datas.pager.datas
-                                that.totalPage = res.data.datas.pager.totalPage;
-                                successCallback&&successCallback(specialist);//成功回调
+                                if(res.data.datas.pager.datas != null){
+                                    let auctionList = res.data.datas.pager.datas;
+                                    let ids = [];
+                                    for(let i = 0;i<auctionList.length;i++){
+                                        if(auctionList[i].id === that.id){
+                                        }else{
+                                            ids.push(auctionList[i].id);
+                                        }
+                                    }
+                                    commonService.getAuctionList({pageNo:1,pageSize:10,auctionIds:ids}).then(function(res) {
+                                        console.log(res)
+                                        if(res.data.code === 200){
+                                            if(res.data.datas.pager != null){
+                                                let specialist = res.data.datas.pager.datas;
+                                                let collects = res.data.datas.collects;
+                                                let dataArr = '';
+                                                that.totalPage = res.data.datas.pager.totalPage;
+                                                for (let i = 0;i<specialist.length;i++){
+                                                    if(specialist[i].currentPrice === 0){
+                                                        specialist[i].currentPrice = specialist[i].basePrice
+                                                    }
+                                                    let price = specialist[i].currentPrice/100;
+                                                    if(price%1 === 0){
+                                                        specialist[i].currentPrice = price.toString() + '.00'
+                                                    }else{
+                                                        specialist[i].currentPrice = price.toFixed(2);
+                                                    }
+                                                    let collect = collects.indexOf(specialist[i].id)
+                                                    if(collect === -1){
+                                                        specialist[i]['collect'] = false;
+                                                        dataArr = specialist;
+                                                    }else{
+                                                        specialist[i]['collect'] = true;
+                                                        dataArr = specialist;
+                                                    }
+                                                }
+                                                successCallback&&successCallback(dataArr);//成功回调
+                                            }else{
+                                                let specialist = [];
+                                                that.totalPage = '1';
+                                                successCallback&&successCallback(specialist);//成功回调
+                                            }
+                                        }
+                                    })
+                                }else{
+
+                                }
                             }
                         })
                     }
@@ -309,22 +606,6 @@
                     speed: 400,
                     autoplay: 1000,
                 });
-            },
-            //初始化数据
-            onload(){
-                let that = this;
-                commonService.getAuction({id:that.id},that.id).then(function(res){
-                    console.log(res)
-                    if(res.data.code === 200){
-                        that.details = res.data.datas;
-                        that.img = res.data.datas.picItems;
-                        that.$nextTick(function () {
-                            that.onswiper();
-                        });
-                        that.marketNo = res.data.datas.marketNo
-                        that.meScroll()
-                    }
-                })
             },
             //返回上一层
             back(){
@@ -361,10 +642,345 @@
                 let that = this;
                 that.$router.push({name:'auctionMore',params:{id:id}})
             },
+            //关闭拍品记录
+            getNone:function() {
+                let that = this;
+                that.dis = false;
+            },
+            //查看拍品记录
+            lookMore(){
+                let that = this;
+                that.dis = true;
+                that.$nextTick(function () {
+                    let overscroll = function(el) {
+                        el.addEventListener('touchstart', function() {
+                            let top = el.scrollTop
+                                , totalScroll = el.scrollHeight
+                                , currentScroll = top + el.offsetHeight;
+                            if(top === 0) {
+                                el.scrollTop = 1
+                            } else if(currentScroll === totalScroll) {
+                                el.scrollTop = top - 1
+                            }
+                        });
+                        el.addEventListener('touchmove', function(evt) {
+                            if(el.offsetHeight < el.scrollHeight)
+                                evt._isScroller = true
+                        })
+                    };
+                    overscroll(document.querySelector('.bidRecord'));
+//                    let cc = document.querySelector('.bidRecord');
+//                    cc.addEventListener('touchmove', function(evt) {
+//                        console.log(evt)
+//                        if(cc.offsetHeight < cc.scrollHeight){
+//                            evt._isScroller = true
+//                        }else{
+//                            alert('到底')
+//                        }
+//
+//                    })
+                    document.body.addEventListener('touchmove', function(evt) {
+                        if(!evt._isScroller) {
+                            evt.preventDefault()
+                        }
+                    })
+                });
+                commonService.getUser().then(function(res){
+                    if(res.data.code === 200){
+                        that.useId = res.data.datas.user.id;
+                    }
+                })
+                commonService.getAuctionPrice({pageNo:that.page2.num,pageSize:50,auctionId:that.id}).then(function(res){
+                    if(res.data.code === 200){
+                        that.pricerecord = res.data.datas.datas;
+                        console.log(that.pricerecord.length)
+                        for(let i = 0;i <= that.pricerecord.length;i++){
+                            let price = that.pricerecord[i].offerAmount/100;
+                            that.pricerecord[i].offerAmount = price.toString()+ '.00';
+                            that.pricerecord[i].offerTime = common.getFormatOfDate(that.pricerecord[i].offerTime,'yyyy-MM-dd h:m:s')
+                        }
+                    }
+                })
+            },
+            //减少出价
+            subtraction(){
+                let that = this;
+                if(that.bidPrice <= 1000){
+                    if(that.bidPrice <= Number(that.details.basePrice) + 100){
+                        if(that.offerNumDate){
+                            that.bidPrice = that.details.basePrice;
+                        }else{
+                            that.bidPrice = that.details.currentPrice
+                        }
+                    }else{
+                        if(that.bidPrice <= Number(that.details.currentPrice) + 100){
+                            that.bidPrice = that.details.currentPrice;
+                        }else{
+                            that.bidPrice = parseInt(that.bidPrice)
+                            let bidPrice = that.bidPrice - 100;
+                            that.bidPrice = bidPrice.toString() + '.00';
+                        }
+                    }
+                }else if(1000 < that.bidPrice && that.bidPrice <= 10000){
+                    if(that.bidPrice <= Number(that.details.basePrice) + 1000){
+                        if(that.offerNumDate){
+                            that.bidPrice = that.details.basePrice;
+                        }else{
+                            that.bidPrice = that.details.currentPrice
+                        }
+                    }else{
+                        if(that.bidPrice <= Number(that.details.currentPrice) + 1000){
+                            that.bidPrice = that.details.currentPrice;
+                        }else{
+                            that.bidPrice = parseInt(that.bidPrice)
+                            let bidPrice = that.bidPrice - 1000;
+                            that.bidPrice = bidPrice.toString() + '.00';
+                        }
+                    }
+                }else if(that.bidPrice > 10000){
+                    if(that.bidPrice <= Number(that.details.basePrice) + 10000){
+                        if(that.offerNumDate){
+                            that.bidPrice = that.details.basePrice;
+                        }else{
+                            that.bidPrice = that.details.currentPrice
+                        }
+                    }else{
+                        if(that.bidPrice <= Number(that.details.currentPrice) + 10000){
+                            that.bidPrice = that.details.currentPrice;
+                        }else{
+                            that.bidPrice = parseInt(that.bidPrice)
+                            let bidPrice = that.bidPrice - 10000;
+                            that.bidPrice = bidPrice.toString() + '.00';
+                        }
+                    }
+                }
+            },
+            //加价出价
+            addPrice(){
+                let that = this;
+                that.bidPrice = parseInt(that.bidPrice);
+                if(that.bidPrice < 1000){
+                    let bidPrice = that.bidPrice + 100;
+                    that.bidPrice = bidPrice.toString() + '.00';
+                }else if(1000 <= that.bidPrice && that.bidPrice < 10000){
+                    let bidPrice = that.bidPrice + 1000;
+                    that.bidPrice = bidPrice.toString() + '.00';
+                }else if(that.bidPrice >= 10000) {
+                    let bidPrice = that.bidPrice + 10000;
+                    that.bidPrice = bidPrice.toString() + '.00';
+                }
+            },
+            //确认出价
+            offerPrice(){
+                let that = this;
+                let bidPrice = that.bidPrice * 100;
+                that.monitor();
+                //冻结保证金
+                commonService.postMyPrice({offerAmount:bidPrice,auctionId:that.id}).then(function(res){
+                    if(res.data.code === 537126){
+                        //查看用户余额是否够冻结
+                        commonService.getUser().then(function(res){
+                            if(res.data.datas.user.wallet == null){
+                                that.userWallet = '0.00';
+                            }else{
+                                let userWallet = res.data.datas.user.wallet.availableMoney/100;
+                                that.userWallet = userWallet.toString() + '.00';
+                            }
+                            that.dis2Show = true;
+                            if(bidPrice === 0){
+                                that.deposit = '300.00'
+                            }else{
+                                let deposit = that.bidPrice * 0.1;
+                                that.deposit = deposit.toString() + '.00'
+                            }
+                            if(that.deposit*1 < that.userWallet*1){
+                                that.walletDate = true;
+                                that.getIndex(0)
+                            }else{
+                                that.walletDate = false;
+                                that.getIndex(1)
+                                if(that.wxShow){
+                                    that.getIndex(1)
+                                }else{
+                                    that.getIndex(2)
+                                }
+                            }
+                        })
+                    }else if(res.data.code === 200){
+                        that.dis3Show = true;
+                        that.hintText = '出价成功';
+                    }else{
+                        that.dis4Show = true;
+                        that.hintText = res.data.message;
+                    }
+                })
+            },
+            //保证金支付
+            getIndex: function(index) {
+                let that = this;
+                if(index==1){
+                    that.index=1
+                }else if(index==2){
+                    that.index=2
+                }else{
+                    that.index=0
+                }
+            },
+            //关闭提示窗
+            closePay:function() {
+                let that = this;
+                that.dis2Show = false;
+                that.dis3Show = false;
+                that.dis4Show = false;
+            },
+            //判断浏览器
+            monitor(){
+                let that = this
+                function isWeiXin() {
+                    var ua = window.navigator.userAgent.toLowerCase();
+//                console.log(ua);//mozilla/5.0 (iphone; cpu iphone os 9_1 like mac os x) applewebkit/601.1.46 (khtml, like gecko)version/9.0 mobile/13b143 safari/601.1
+                    if (ua.match(/MicroMessenger/i) == 'micromessenger') {
+                        return true;
+                    } else {
+                        return false;
+                    }
+                }
+                if(isWeiXin()){
+//                    console.log(" 是来自微信内置浏览器")
+                    that.wxShow = true;
+                }else{
+//                    console.log("不是来自微信内置浏览器")
+                    that.wxShow = false;
+                }
+            },
+            //生成订单并选择支付方式
+            payYes(){
+                let that = this;
+                let channelIds = '';
+                if(that.index === 1){//微信
+                    channelIds = 'WX_JSAPI'
+                }else if(that.index === 0){//余额
+                    channelIds = 'NATIVE'
+                }else{//支付宝
+                    channelIds = 'ALIPAY_WAP'
+                }
+                commonService.setbails({auctionId:that.id,channelId:channelIds}).then(function(res){
+                    console.log(res)
+                    if(res.data.code === 200){
+                        if(that.index === 1){//微信支付
+                            let orderNo = res.data.datas;
+                            window.localStorage.setItem('orderNo',orderNo);
+                            commonService.putOrders({orderNo:orderNo,channelId:channelIds}).then(function(res){
+                                console.log(res)
+                                if(res.data.success){
+                                    commonService.getWxpay({loginType:'WEIXIN',platform:'WXH5',jumpRouter:'wxbaselogin',wxscope:'snsapi_base'}).then(function(res){
+                                        let code = res.data.code;
+                                        if(code === 200){
+                                            //获取静默授权地址成功
+                                            window.localStorage.setItem('id',that.id);
+                                            window.location.href = res.data.datas;
+                                        }
+                                    })
+                                }
+                            })
+                        }else if(that.index === 0){//账户余额
+                            that.dis2Show = false;
+                            that.dis3Show = true;
+                            that.hintText = '保证金支付成功';
+                        }else{//支付宝
+                            let orderNo = res.data.datas;
+                            window.localStorage.setItem('orderNo',orderNo);
+                            commonService.putOrders({orderNo:orderNo,channelId:channelIds}).then(function(res){
+                                console.log(res)
+                                if(res.data.success){
+                                    let payOK = document.getElementsByClassName("payOK");
+                                    payOK[0].innerHTML = res.data.datas.payUrl;
+                                    document.punchout_form.submit()
+                                }
+                            })
+                        }
+                    }
+                })
+            },
+            //自动唤醒微信支付
+            wxpay:function(){
+                let that = this;
+                let extra = window.localStorage.getItem('extra');
+                let orderNo = window.localStorage.getItem('orderNo');
+                commonService.putOrders({orderNo:orderNo,channelId:'WX_JSAPI',extra:extra,}).then(function (res) {
+                    if(res.data.success){
+                        let temp=res.data.datas.payParam;
+                        console.log(temp)
+                        wx.config({
+                            debug: false, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
+                            appId: temp.appId, // 必填，公众号的唯一标识
+                            timestamp: temp.timeStamp+'', // 必填，生成签名的时间戳
+                            nonceStr: temp.nonceStr, // 必填，生成签名的随机串
+                            signature: temp.paySign, // 必填，签名，见附录1
+                            jsApiList: [
+                                'chooseWXPay'
+                            ] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
+                        })
+
+                        wx.ready(function(){
+                            // config信息验证后会执行ready方法，所有接口调用都必须在config接口获得结果之后，config是一个客户端的异步操作，所以如果需要在页面加载时就调用相关接口，则须把相关接口放在ready函数中调用来确保正确执行。对于用户触发时才调用的接口，则可以直接调用，不需要放在ready函数中。
+                            wx.chooseWXPay({
+                                timestamp: temp.timeStamp+'', // 支付签名时间戳，注意微信jssdk中的所有使用timestamp字段均为小写。但最新版的支付后台生成签名使用的timeStamp字段名需大写其中的S字符
+                                nonceStr: temp.nonceStr, // 支付签名随机串，不长于 32 位
+                                package: temp.wxPackage, // 统一支付接口返回的prepay_id参数值，提交格式如：prepay_id=***）
+                                signType:"MD5", // 签名方式，默认为'SHA1'，使用新版支付需传入'MD5'
+                                paySign:temp.paySign, // 支付签名
+                                success: function (res) {
+                                    // 支付成功后的回调函数
+                                    //分别跳转的路径
+                                    //1.知识。2.活动。3.会员。4.商品。5.直播
+                                    alert('支付成功');
+                                    window.localStorage.removeItem('checked')
+                                    that.checked = false
+                                },
+                                cancel:function(){
+                                    window.localStorage.removeItem('checked');
+                                    alert('支付失败');
+                                    that.checked = false
+                                }
+                            });
+                        });
+
+                        wx.error(function(res){
+//                            alert('订单错误')
+                            window.localStorage.removeItem('checked')
+                            alert('支付失败');
+                            that.checked = false
+                            // config信息验证失败会执行error函数，如签名过期导致验证失败，具体错误信息可以打开config的debug模式查看，也可以在返回的res参数中查看，对于SPA可以在这里更新签名。
+                        });
+                    }else{
+//                        alert('订单错误');
+                        window.localStorage.removeItem('checked')
+                        alert('支付失败');
+                        that.checked = false
+                    }
+                })
+            },
+            //收藏
+            collectBtn:function(){
+                let that = this;
+                commonService.postCollect({id:that.id,collect:true},that.id).then(function(res){
+                    console.log(res)
+                    if(res.data.code === 537134){
+                        that.dis4Show = true;
+                        that.hintText = res.data.message;
+                    }else if(res.data.code === 537135){
+                        that.dis4Show = true;
+                        that.hintText = "拍品已出价,不可取消收藏";
+                    }else if(res.data.code === 200){//收藏成功
+
+                    }
+                })
+            }
         },
         watch: {
             '$route' (to, from) {
-                console.log(to.path)
+//                console.log(to.path)
                 let that = this;
                 that.$router.go(0)
             }
@@ -656,7 +1272,7 @@
             text-align: center;
             margin: @size5;
             .sellList {
-                width: 4.55rem;
+                width: 4.49rem;
                 float: left;
                 margin: 0.2rem 0.15rem;
                 position: relative;
@@ -688,42 +1304,42 @@
                         text-overflow: ellipsis;
                     }
                 }
-                .date {
-                    width: 0.7rem;
+                .date{
+                    width:0.7rem;
                     position: absolute;
-                    right: 0;
-                    top: 0;
-                    .collect {
-                        width: 0.35rem;
-                        height: 0.35rem;
-                        float: left;
-                        background: #333333;
-                        padding: 0.08rem 0.1rem;
+                    right:0;
+                    top:0;
+                    .collect{
+                        width:0.35rem;
+                        height:0.35rem;
+                        float:left;
+                        background:#333333;
+                        padding:0.08rem 0.1rem;
                         box-sizing: border-box;
-                        .collectIcon {
-                            width: 100%;
-                            height: 100%;
-                            background: #F2CE76;
+                        .collectIcon{
+                            width:100%;
+                            height:100%;
+                            background:#F2CE76;
                             position: relative;
-                            .bottom {
+                            .bottom{
                                 width: 0;
                                 height: 0;
                                 position: absolute;
-                                bottom: 0;
+                                bottom:0;
                                 border-right: 0.075rem solid transparent;
                                 border-bottom: 0.075rem solid #333333;
                                 border-left: 0.075rem solid transparent;
                             }
                         }
                     }
-                    .collect2 {
-                        width: 0.35rem;
-                        height: 0.35rem;
-                        float: right;
-                        background: #5EBAA9;
+                    .collect2{
+                        width:0.35rem;
+                        height:0.35rem;
+                        float:right;
+                        background:#5EBAA9;
                         padding: 0.09rem 0.03rem;
                         box-sizing: border-box;
-                        .icon {
+                        .icon{
                             width: 0.06rem;
                             height: 100%;
                             float: left;
@@ -731,29 +1347,29 @@
                             margin: 0 0.04rem;
                         }
                     }
-                    .collect3 {
-                        width: 0.35rem;
-                        height: 0.35rem;
-                        float: right;
-                        background: #F2CE76;
+                    .collect3{
+                        width:0.35rem;
+                        height:0.35rem;
+                        float:right;
+                        background:#F2CE76;
                         padding: 0.09rem 0.09rem;
                         box-sizing: border-box;
-                        .icon {
-                            width: 100%;
-                            height: 100%;
+                        .icon{
+                            width:100%;
+                            height:100%;
                             border-radius: 100%;
-                            background: #fff;
+                            background:#fff;
                         }
                     }
-                    .collect4 {
-                        width: 0.35rem;
-                        height: 0.35rem;
-                        float: right;
-                        background: #EB6100;
+                    .collect4{
+                        width:0.35rem;
+                        height:0.35rem;
+                        float:right;
+                        background:#EB6100;
                         padding: 0.09rem 0.09rem;
                         box-sizing: border-box;
                         position: relative;
-                        .icon {
+                        .icon{
                             width: 0;
                             height: 0;
                             position: absolute;
@@ -762,7 +1378,32 @@
                             border-left: 0.16rem solid #fff;
                             border-bottom: 0.1rem solid transparent;
                         }
-                        .icon2 {
+                        .icon2{
+                            width: 0.03rem;
+                            height: 0.2rem;
+                            background: #fff;
+                            position: absolute;
+                            right: 0.1rem;
+                        }
+                    }
+                    .collect5{
+                        width:0.35rem;
+                        height:0.35rem;
+                        float:right;
+                        background:#808080;
+                        padding: 0.09rem 0.09rem;
+                        box-sizing: border-box;
+                        position: relative;
+                        .icon{
+                            width: 0;
+                            height: 0;
+                            position: absolute;
+                            left: 0.08rem;
+                            border-top: 0.1rem solid transparent;
+                            border-left: 0.16rem solid #fff;
+                            border-bottom: 0.1rem solid transparent;
+                        }
+                        .icon2{
                             width: 0.03rem;
                             height: 0.2rem;
                             background: #fff;
@@ -772,9 +1413,17 @@
                     }
                 }
             }
+            .sellListNo{
+                width:100%;
+                height:2rem;
+                line-height:1rem;
+                text-align: center;
+                font-size:12px;
+                color:#858585;
+            }
         }
         .dis{
-            display: none;
+            /*display: none;*/
             .transparent{
                 position: fixed;
                 bottom: @size45;
@@ -784,35 +1433,46 @@
                 background:#000;
                 opacity:0.6;
             }
+            @keyframes show{
+                0%  {bottom:-10rem;}
+                100%{bottom:1.2rem;}
+            }
+            .recordShow{
+                -webkit-animation:show 0.2s linear 1;
+                -webkit-animation-fill-mode:both;
+            }
             .record{
                 width: @size375;
-                height: 12rem;
                 position: fixed;
                 z-index: 100;
                 bottom: @size45;
-                background: white;
+                background: #fff;
+                padding: 0 0.5333rem 0.4rem;
                 box-sizing: border-box;
-                padding:0 @size20;
                 text-align: center;
-                display: none;
                 .down{
                     height: @size30;
+                    line-height: @size30;
                     width: 100%;
                     border-bottom: 1px solid rgb(202, 209, 217);
                     font-size: 25px;
                     color: rgb(202, 209, 217);
                 }
-                .content{
-                    height: 2.99rem;
-                    border-bottom: 1px solid rgb(202, 209, 217);
+                .disShow{
+                    /*height: 2.99rem;*/
+                    /*border-bottom: 1px solid rgb(202, 209, 217);*/
+                    overflow: hidden;
+                    padding-bottom:0.1rem;
                     .pic{
                         width: @size80;
                         height: @size80;
                         padding-top: @size15;
                         display: inline-block;
+                        overflow: hidden;
                         img{
-                            width: 100%;
+                            width: 130%;
                             height: 100%;
+                            margin-left:-15%;
                         }
                     }
                     .info{
@@ -845,12 +1505,13 @@
                             line-height: 15px;
                         }
                         .nowPrice{
-                            font-size: 14px;
-                            color: red;
+                            font-size: 16px;
+                            color: #ED6506;
                             font-weight: bold;
                         }
                         .over{
                             padding-top: @size10;
+                            padding-bottom: 0.1rem;
                             font-size: 10px;
                             line-height: 15px;
                         }
@@ -887,119 +1548,750 @@
             .bidRecord{
                 padding:  0.1rem 0;
                 width: 100%;
-                height:  7.99rem;
-                // overflow: hidden;
+                max-height:  7.99rem;
                 overflow: scroll;
-
+                height: auto;
+                .mycolor{
+                    color:#ED6506;
+                }
+                .reco{
+                    width: 100%;
+                    height: 1.14rem;
+                    .price{
+                        text-align: left;
+                        line-height: 1.14rem;
+                        font-size: @size14;
+                        font-weight: bold;
+                    }
+                    .line{
+                        text-decoration: line-through;
+                    }
+                    .fr{
+                        text-align: right;
+                        .who{
+                            font-size: @size10;
+                            /*color: rgb(122, 122, 122);*/
+                        }
+                        .time{
+                            font-size: @size10;
+                            /*color: rgb(122, 122, 122);*/
+                        }
+                    }
+                }
             }
         }
-        .timeEnd{
-            .infomation{
-                box-sizing: border-box;
+        .dis2{
+            z-index:102;
+            .transparent{
                 position: fixed;
-                bottom: @size45;
+                bottom: 0;
+                z-index: 102;
                 width: 100%;
-                height: @size35;
-
+                height: 100%;
+                background:#000;
+                opacity:0.6;
+                display: block;
+            }
+            .popWin{
+                height: 11rem;
+                width: 8.67rem;
+                background: white;
+                position: fixed;
+                top:0;
+                bottom:0;
+                left: 0;
+                right:0;
+                margin:auto;
+                z-index: 1000;
                 text-align: center;
-                font-size: 13px;
-                line-height: @size25;
-                .learnMore{
-
-                    width: 1.6rem;
-                    height: @size15;
-                    border: 1px solid white;
-                    border-radius:3px;
-                    font-size:  9px;
-                    color: white;
-                    line-height: @size15;
-                    margin:@size10 @size10 @size10 @size10;
+                box-sizing: border-box;
+                padding: 0 @size20;
+                display: block;
+                .close{
+                    position: absolute;
+                    right: 0;top: 0;
+                    width: @size30;
+                    height: @size30;
+                    background: #eb6100;
+                    i{
+                        font-size: 0.7rem;
+                        color: white;
+                    }
                 }
-                .value{
-                    font-size:  9px;
-                    color: white;
-                    margin-top:@size6;
+                .payEn{
+                    padding-top: @size50;
+                    font-size:@size14;
+                    font-weight: bold;
                 }
-                .value1{
-                    color: black;
-                    font-size:  9px;
-                    margin-top:@size6;
-                    margin-right: @size10;
+                .payCh{
+                    font-size: 11px;
+                    color: rgb(51, 51, 51);
+                    line-height: @size11;
                 }
-                .success{
-                    font-size: @size5;
-                    color: white;
-                    line-height: @size35;
-                    padding-right: @size20;
+                .remind{
+                    padding: @size25 0;
+                    font-size: 12px;
+                    img{
+                        width:1rem;
+                        margin-bottom:0.3rem;
+                    }
+                    .p1{
+                        color: #E95500;
+                        font-size: 15px;
+                        font-weight: bold;
+                    }
+                    .p2{
+                        font-size: 11px;
+                        color:#373737;
+                    }
                 }
                 .warn{
-                    font-size: @size10;
-                    color: white;
-                    line-height: @size35;
+                    border-top: 1px solid rgb(129, 135, 140);
+                    text-align: left;
+                    height: @size40;
+                    font-size: 10px;
+                    line-height: @size40;
                 }
-                .time{
-                    display: inline-block;
-                    color: white;
-                    margin-right: @size15;
-                    .num{
-                        height: @size20;
-                        background: black;
-                        border-radius:3px;
-                        padding: 2px;
-                        margin-top:@size6;
-                        line-height: @size22;
-                        font-size: @size12;
+                .value{
+                    width: 100%;
+                    height: @size40;
+                    line-height: @size40;
+                    position: relative;
+                    text-align: center;
+                    border: 1px solid rgb(129, 135, 140);
+                    .btn1{
+                        width: 1.46rem;
+                        position: absolute;
+                        left: 0;
+                        top: -3px;
+                        font-size: 50px;
+                        line-height: 40px;
+                        color: red;
+                    }
+                    .btn2{
+
+                        width: 1.46rem;
+                        position: absolute;
+                        right: 0;
+                        top: -3px;
+                        font-size: 35px;
+                        line-height: 40px;
+                        color: red;
+                    }
+                    .label{
+                        font-size: 10px;
+                    }
+                    .price{
+                        font-size: 11px;
+                        width: 2.68rem;
                         font-weight: bold;
                     }
-                    .colon{
-                        text-align: center;
-                        margin-top:@size6;
-                        line-height: @size22;
-                        width: @size10;
-                    }
                 }
-                .time1{
-                    display: inline-block;
-                    color: black;
-                    margin-right: @size15;
+                .worthy{
                     box-sizing: border-box;
-                    .num{
-                        // box-sizing: border-box;
-                        border: 0.5px solid rgb(129, 135, 140);
-                        height: @size20;
-                        background: white;
-                        border-radius:3px;
-                        padding: 2px;
-                        margin-top:@size6;
-                        line-height: @size21;
-                        font-size: @size12;
-                        font-weight: bold;
+                    height: 1.52rem;
+                    border-bottom: 1px solid rgb(129, 135, 140);
+                    padding-top: 10px;
+                    .tit{
+                        font-size: 10px;
+                        color: rgb(129, 135, 140);
                     }
-                    .colon{
+                    .money{
+                        font-size: 11px;
                         font-weight: bold;
-                        text-align: center;
-                        margin-top:@size6;
-                        line-height: @size22;
-                        width: @size10;
                     }
                 }
+                .explain{
+                    font-size: 10px;
+                    color: rgb(129, 135, 140);
+                    text-align: left;
+                    box-sizing: border-box;
+                    padding-top: @size10;
+                    span{
+                        font-weight: bold;
+                        font-size: 10px;
+                        color: #000;
+
+                    }
+                }
+                .payway{
+                    font-size: 14px;
+                    padding-top: @size25;
+                    text-align: left;
+                }
+                .pay{
+                    height: @size50;
+                    border-top: 1px solid rgb(129, 135, 140);
+                    .check{
+                        float: left;
+                        margin-top: 18px;
+                        box-sizing: border-box;
+                        border: 3px solid rgb(0, 185, 181);
+                        width: @size14;
+                        height: @size14;
+                        position: relative;
+                        i{
+                            font-size: @size10;
+                            line-height: @size10;
+                            position: absolute;
+                            top: -1px;
+                            left: -11px;
+                            color: rgb(0, 185, 181);
+                        }
+                    }
+                    .check1{
+                        float: left;
+                        margin-top: 18px;
+                        box-sizing: border-box;
+                        border: 3px solid rgb(168, 174, 180);
+                        width: @size14;
+                        height: @size14;
+                        position: relative;
+                        text-align: center;
+                        i{
+                            font-size: @size10;
+                            line-height: @size10;
+                            position: absolute;
+                            top: -1px;
+                            left: -12px;
+                            display: none
+                        }
+                    }
+                    .check2{
+                        float: left;
+                        margin-top: 18px;
+                        box-sizing: border-box;
+                        border: 3px solid rgb(168, 174, 180);
+                        width: @size14;
+                        height: @size14;
+                        position: relative;
+                        text-align: center;
+                        i{
+                            font-size: @size10;
+                            font-weight: bold;
+                            position: absolute;
+                            top: -0.54rem;
+                            left: -0.3rem;
+                        }
+                    }
+                    i{
+                        font-size: 25px;
+                        color: rgb(168, 174, 180);
+                        float: left;
+                        margin-left: @size10;
+                        line-height:  @size50;
+
+                    }
+                    img{
+                        width: 0.67rem;
+                        height: 0.67rem;
+                        margin-top: 13px;
+                        float: left;
+                        margin-left: 0.23rem;
+                    }
+                    .background1{
+                        color: rgb(107, 184, 105)
+                    }
+                    .background2{
+                        color: rgb(0, 157, 235)
+                    }
+                    .infoWexin{
+                        text-align: left;
+                        float: left;
+                        margin-left: @size10;
+                        margin-top: @size16;
+                        color: rgb(129, 135, 140);
+                        .span1{
+                            font-size: 13px;
+                            line-height: @size13;
+                            color: rgb(129, 135, 140);
+                        }
+                        .span2{
+                            font-size: 10px;
+                            line-height: @size10;
+                            color: rgb(129, 135, 140);
+                        }
+                        .span3{
+                            font-size: 13px;
+                            line-height: @size13;
+                            color: #000;
+                        }
+                    }
+                    .infoAlipay{
+                        text-align: left;
+                        float: left;
+                        margin-left: @size10;
+                        margin-top: 17px;
+                        color: rgb(129, 135, 140);
+                        font-size: 15px;
+                    }
+                    .infoAlipay2{
+                        text-align: left;
+                        float: left;
+                        margin-left: @size10;
+                        margin-top: 17px;
+                        color: #000000;
+                        font-size: 15px;
+                    }
+                }
+
+                .footer{
+                    height: @size45;
+                    box-sizing: border-box;
+                    border-top: 1px solid rgb(53, 60, 70);
+                    position: absolute;
+                    bottom: 0;
+                    left: 0;
+                    line-height: @size45;
+                    font-size: 14px;
+                }
             }
-            //即将开始
-            .bground1{
+        }
+        .dis3{
+            z-index:102;
+            .transparent{
+                position: fixed;
+                bottom: 0;
+                z-index: 102;
+                width: 100%;
+                height: 100%;
+                background:#000;
+                opacity:0.6;
+                display: block;
+            }
+            .popWin{
+                height: 7rem;
+                width: 6.67rem;
                 background: white;
-                border-top:1px solid rgb(201, 209, 218)
+                position: fixed;
+                top:0;
+                bottom:0;
+                left: 0;
+                right:0;
+                margin:auto;
+                z-index: 1000;
+                text-align: center;
+                box-sizing: border-box;
+                padding: 0 @size20;
+                display: block;
+                .close{
+                    position: absolute;
+                    right: 0;top: 0;
+                    width: @size30;
+                    height: @size30;
+                    background: #eb6100;
+                    i{
+                        font-size: 0.7rem;
+                        color: white;
+                    }
+                }
+                .payEn{
+                    padding-top: @size50;
+                    font-size:@size14;
+                    font-weight: bold;
+                }
+                .payCh{
+                    font-size: 11px;
+                    color: rgb(51, 51, 51);
+                    line-height: @size11;
+                }
+                .remind{
+                    padding: @size25 0;
+                    font-size: 12px;
+                    i{
+                        font-size:1rem;
+                        color:#ECC261;
+                    }
+                    img{
+                        width:1rem;
+                        margin-bottom:0.3rem;
+                    }
+                    .p1{
+                        color: #E95500;
+                        font-size: 15px;
+                        font-weight: bold;
+                    }
+                    .p2{
+                        font-size: 11px;
+                        color:#373737;
+                    }
+                }
+                .warn{
+                    border-top: 1px solid rgb(129, 135, 140);
+                    text-align: left;
+                    height: @size40;
+                    font-size: 10px;
+                    line-height: @size40;
+                }
+                .value{
+                    width: 100%;
+                    height: @size40;
+                    line-height: @size40;
+                    position: relative;
+                    text-align: center;
+                    border: 1px solid rgb(129, 135, 140);
+                    .btn1{
+                        width: 1.46rem;
+                        position: absolute;
+                        left: 0;
+                        top: -3px;
+                        font-size: 50px;
+                        line-height: 40px;
+                        color: red;
+                    }
+                    .btn2{
+
+                        width: 1.46rem;
+                        position: absolute;
+                        right: 0;
+                        top: -3px;
+                        font-size: 35px;
+                        line-height: 40px;
+                        color: red;
+                    }
+                    .label{
+                        font-size: 10px;
+                    }
+                    .price{
+                        font-size: 11px;
+                        width: 2.68rem;
+                        font-weight: bold;
+                    }
+                }
+                .worthy{
+                    box-sizing: border-box;
+                    height: 1.52rem;
+                    border-bottom: 1px solid rgb(129, 135, 140);
+                    padding-top: 10px;
+                    .tit{
+                        font-size: 10px;
+                        color: rgb(129, 135, 140);
+                    }
+                    .money{
+                        font-size: 11px;
+                        font-weight: bold;
+                    }
+                }
+                .explain{
+                    font-size: 10px;
+                    color: rgb(129, 135, 140);
+                    text-align: left;
+                    box-sizing: border-box;
+                    padding-top: @size10;
+                    span{
+                        font-weight: bold;
+                        font-size: 10px;
+                        color: #000;
+
+                    }
+                }
+                .payway{
+                    font-size: 14px;
+                    padding-top: @size25;
+                    text-align: left;
+                }
+                .pay{
+                    height: @size50;
+                    border-top: 1px solid rgb(129, 135, 140);
+                    .check{
+                        float: left;
+                        margin-top: 18px;
+                        box-sizing: border-box;
+                        border: 3px solid rgb(0, 185, 181);
+                        width: @size14;
+                        height: @size14;
+                        position: relative;
+                        i{
+                            font-size: @size10;
+                            line-height: @size10;
+                            position: absolute;
+                            top: -1px;
+                            left: -11px;
+                            color: rgb(0, 185, 181);
+                        }
+                    }
+                    .check1{
+                        float: left;
+                        margin-top: 18px;
+                        box-sizing: border-box;
+                        border: 3px solid rgb(168, 174, 180);
+                        width: @size14;
+                        height: @size14;
+                        position: relative;
+                        text-align: center;
+                        i{
+                            font-size: @size10;
+                            line-height: @size10;
+                            position: absolute;
+                            top: -1px;
+                            left: -12px;
+                            display: none
+                        }
+                    }
+                    .check2{
+                        float: left;
+                        margin-top: 18px;
+                        box-sizing: border-box;
+                        border: 3px solid rgb(168, 174, 180);
+                        width: @size14;
+                        height: @size14;
+                        position: relative;
+                        text-align: center;
+                        i{
+                            font-size: @size10;
+                            font-weight: bold;
+                            position: absolute;
+                            top: -0.54rem;
+                            left: -0.3rem;
+                        }
+                    }
+                    i{
+                        font-size: 25px;
+                        color: rgb(168, 174, 180);
+                        float: left;
+                        margin-left: @size10;
+                        line-height:  @size50;
+
+                    }
+                    img{
+                        width: 0.67rem;
+                        height: 0.67rem;
+                        margin-top: 13px;
+                        float: left;
+                        margin-left: 0.23rem;
+                    }
+                    .background1{
+                        color: rgb(107, 184, 105)
+                    }
+                    .background2{
+                        color: rgb(0, 157, 235)
+                    }
+                    .infoWexin{
+                        text-align: left;
+                        float: left;
+                        margin-left: @size10;
+                        margin-top: @size16;
+                        color: rgb(129, 135, 140);
+                        .span1{
+                            font-size: 13px;
+                            line-height: @size13;
+                            color: rgb(129, 135, 140);
+                        }
+                        .span2{
+                            font-size: 10px;
+                            line-height: @size10;
+                            color: rgb(129, 135, 140);
+                        }
+                        .span3{
+                            font-size: 13px;
+                            line-height: @size13;
+                            color: #000;
+                        }
+                    }
+                    .infoAlipay{
+                        text-align: left;
+                        float: left;
+                        margin-left: @size10;
+                        margin-top: 17px;
+                        color: rgb(129, 135, 140);
+                        font-size: 15px;
+                    }
+                    .infoAlipay2{
+                        text-align: left;
+                        float: left;
+                        margin-left: @size10;
+                        margin-top: 17px;
+                        color: #000000;
+                        font-size: 15px;
+                    }
+                }
+
+                .footer{
+                    height: @size45;
+                    box-sizing: border-box;
+                    border-top: 1px solid rgb(53, 60, 70);
+                    position: absolute;
+                    bottom: 0;
+                    left: 0;
+                    line-height: @size45;
+                    font-size: 14px;
+                }
             }
-            //进行中
-            .bground2{
-                background:linear-gradient(30deg,rgb(0, 224, 222) 0%,rgb(104, 105, 237) 100%);
+        }
+        .infomation{
+            box-sizing: border-box;
+            position: fixed;
+            bottom: @size45;
+            width: 100%;
+            height: @size35;
+
+            text-align: center;
+            font-size: 13px;
+            line-height: @size25;
+            .learnMore{
+
+                width: 1.6rem;
+                height: @size15;
+                border: 1px solid white;
+                border-radius:3px;
+                font-size:  9px;
+                color: white;
+                line-height: @size15;
+                margin:@size10 @size10 @size10 @size10;
             }
-            //已经拍中
-            .bground3{
-                background:linear-gradient(30deg,#f54ea2 0%,#dd704c 100%);
+            .value{
+                font-size:  9px;
+                color: white;
+                margin-top:@size6;
             }
-            //流拍
-            .bground4{
-                background:gray;
+            .value1{
+                color: black;
+                font-size:  9px;
+                margin-top:@size6;
+                margin-right: @size10;
+            }
+            .success{
+                font-size: 12px;
+                color: white;
+                line-height: @size35;
+                padding-right: @size20;
+            }
+            .warn{
+                font-size: @size10;
+                color: white;
+                line-height: @size35;
+            }
+            .time{
+                display: inline-block;
+                color: white;
+                margin-right: @size15;
+                .num{
+                    height: @size20;
+                    background: black;
+                    border-radius:3px;
+                    padding: 2px;
+                    margin-top:@size6;
+                    line-height: @size22;
+                    font-size: @size12;
+                    font-weight: bold;
+                }
+                .colon{
+                    text-align: center;
+                    margin-top:@size6;
+                    line-height: @size22;
+                    width: @size10;
+                }
+            }
+            .time1{
+                display: inline-block;
+                color: black;
+                margin-right: @size15;
+                box-sizing: border-box;
+                .num{
+                    // box-sizing: border-box;
+                    border: 0.5px solid rgb(129, 135, 140);
+                    height: @size20;
+                    background: white;
+                    border-radius:3px;
+                    padding: 2px;
+                    margin-top:@size6;
+                    line-height: @size21;
+                    font-size: @size12;
+                    font-weight: bold;
+                }
+                .colon{
+                    font-weight: bold;
+                    text-align: center;
+                    margin-top:@size6;
+                    line-height: @size22;
+                    width: @size10;
+                }
+            }
+        }
+        //即将开始
+        .bground1{
+            background: white;
+            border-top:1px solid rgb(201, 209, 218)
+        }
+        //进行中
+        .bground2{
+            background:linear-gradient(30deg,rgb(0, 224, 222) 0%,rgb(104, 105, 237) 100%);
+        }
+        //已经拍中
+        .bground3{
+            background:linear-gradient(30deg,#f54ea2 0%,#dd704c 100%);
+        }
+        //流拍
+        .bground4{
+            background:gray;
+        }
+        //底部
+        .footer{
+            width: 100%;
+            height: @size45;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            z-index: 101;
+            background: rgb(250, 251, 252);
+            box-sizing: border-box;
+            border-top: 1px solid rgb(53, 60, 70);
+            .value{
+                float: left;
+                width: 5.6rem;
+                height: 100%;
+                line-height: @size45;
+                position: relative;
+                text-align: center;
+                .btn1{
+                    width: 1.46rem;
+                    line-height:@size40;
+                    font-size: 35px;
+                    color: red;
+                    float: left;
+                }
+                .btn2{
+                    width: 1.46rem;
+                    line-height:@size40;
+                    font-size: 35px;
+                    color: red;
+                    float: right;
+                }
+                .label{
+                    font-size: 8px;
+                }
+                .price{
+                    font-size: 11px;
+                    width: 2.68rem;
+                    font-weight: bold;
+                }
+            }
+            .r-icon{
+                float: right;
+                height: 100%;
+                width: @size45;
+                box-sizing: border-box;
+                border-left:1px solid rgb(205, 212, 220);
+                text-align: center;
+                i{
+                    line-height: @size45;
+                    font-size: @size30;
+                }
+                img{
+                    width: 70%;
+                    height: 67%;
+                    margin: 0.2rem auto;
+                }
+            }
+            .offer{
+                float: right;
+                width: 3.2rem;
+                height: 100%;
+                box-sizing: border-box;
+                border-left:1px solid rgb(205, 212, 220);
+                text-align: center;
+                line-height: @size45;
+                font-size: 16px;
             }
         }
     }

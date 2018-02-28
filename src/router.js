@@ -37,6 +37,7 @@ const specialinfo = (resolve) => {require(['./pages/special/specialinfo.vue'],re
 const specialDetails = (resolve) => {require(['./pages/special/specialDetails.vue'],resolve)}
 
 const auction = (resolve) => {require(['./pages/auction/auction.vue'],resolve)}
+const wxbaselogin = (resolve) => {require(['./pages/auction/wxbaselogin.vue'],resolve)}
 // 直播
 const live = (resolve) => {require(['./pages/live/index.vue'],resolve)}
 const liveDetails = (resolve) => {require(['./pages/live/details.vue'],resolve)}
@@ -78,13 +79,17 @@ const routers = [
     {name: 'service',path:'/service',component:service},
     {name: 'special',path:'/special',component:special},
     {name: 'specialinfo',path:'/specialinfo',component:specialinfo},
-    {name: 'specialDetails',path:'/specialDetails',component:specialDetails},
+    {name: 'specialDetails',path:'/specialDetails',component:specialDetails,
+        children:[
+            {name:'specialMore',path:'more/:id',component:auction},
+        ]
+    },
     {name: 'auction',path:'/auction',component:auction,
         children:[
             {name:'auctionMore',path:'more/:id',component:auction},
         ]
     },
-   
+
     {name: 'err',path:'/s/404',component: error}, //错误跳到404页面
     // 直播
     {name: 'live',path:'/lives',component: live},
@@ -115,6 +120,7 @@ const routers = [
     {name: 'shipping',path:'/shipping',component:shipping},//物流信息
     {name: 'rules',path:'/rules',component:rules},//到账周期说明
 
+    {name:'wxbaselogin',path:'/wxbaselogin',component: wxbaselogin}, // 微信跳转页
 ]
 
 const router = new VueRouter({

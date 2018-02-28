@@ -26,6 +26,7 @@
                 page:{num:1,size:4},
                 homelist:[],
                 totalPage:'1',
+                isShowNoMore:false,
             }
         },
         components:{'home-item':itemc},
@@ -37,6 +38,18 @@
         methods: {
             meScroll: function (){
                 let that = this;
+                let scrollUp = document.getElementsByClassName('mescroll-upwarp');
+                let scrollDown = document.getElementsByClassName('mescroll-downwarp-reset');
+                for(let i = 0;i<scrollUp.length;i++){
+                    scrollUp[i].parentNode.removeChild(scrollUp[i]);
+                }
+                for(let i = 0;i<scrollDown.length;i++){
+                    scrollDown[i].parentNode.removeChild(scrollDown[i]);
+                }
+                let scrollWarp = document.getElementsByClassName('mescroll-downwarp');
+                for(let i = 0;i<scrollWarp.length;i++){
+                    scrollWarp[i].parentNode.removeChild(scrollWarp[i]);
+                }
                 that.mescroll = new MeScroll("mescroll", {
                     up: {
                         callback: that.upCallback,
@@ -44,7 +57,7 @@
                         isBounce: false, //此处禁止ios回弹,解析(务必认真阅读,特别是最后一点): http://www.mescroll.com/qa.html#q10
                     },
                     down: {
-                        callback: that.downCallback //下拉刷新的回调,别写成downCallback(),多了括号就自动执行方法了
+                        callback: that.downCallback, //下拉刷新的回调,别写成downCallback(),多了括号就自动执行方法了
                     }
                 });
             },
@@ -56,8 +69,15 @@
                     console.log(that.homelist)
                     // 加载完成后busy为false，如果最后一页则lastpage为true
                     //          加载完成后给页数+1
-                    that.page.num = that.page.num+1
+                    console.log(that.page.num )
+                    if(that.page.num >= that.totalPage) {
+                        that.isShowNoMore = true;
+                    }else{
+                        that.isShowNoMore = false;
+                    }
+                    that.page.num = that.page.num+1;
                     that.mescroll.endSuccess(curPageData.length,that.totalPage);
+                    that.mescroll.endUpScroll(that.isShowNoMore)
                 }, function() {
                     that.mescroll.endErr(); //联网失败的回调,隐藏下拉刷新和上拉加载的状态;
                 });

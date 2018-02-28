@@ -1,8 +1,8 @@
 <template>
     
-    <div :class="dis">
-        <div class="transparent"></div>
-        <div class="record">
+    <div class="dis">
+        <div class="transparent" v-if="dis"></div>
+        <div class="record"  v-if="dis">
             <div class="down" @click="getNone()">^</div>
             <div class="content">
                 <div class="pic fl"><img src="../../assets/image/myimage/timg.jpg" alt=""></div>
@@ -55,11 +55,15 @@
                 </div>
             </div>
             <div class="bidRecord">
-                <div  v-for="list in pricerecord" :key="list.url">
-                    <z-price :str="list"></z-price>
+                <div  v-for="list in pricerecord">
+                    <div class="reco">
+                        <div class="price fl">{{list.money}}</div>
+                        <div class="fr">
+                            <div class="who ">{{list.name}}</div>
+                            <div class="time">{{list.time}}</div>
+                        </div>
+                    </div>
                 </div>
-                
-                
             </div>
         </div>
     </div>
@@ -71,7 +75,7 @@ import priceRecord from'../../component/auction/priceRecord'
     data () {
       return {
           arrays: [],
-          dis:'',
+          dis:true,
           index:3,
           pricerecord:[
               {money:'200,000CNY',
@@ -80,7 +84,7 @@ import priceRecord from'../../component/auction/priceRecord'
               {money:'300,000CNY',
               name:'某某某',
               time:'2017.10.25 23:12:34'},
-          ]
+          ],
       }
     },
     components: {'z-price':priceRecord},
@@ -89,7 +93,7 @@ import priceRecord from'../../component/auction/priceRecord'
     methods: {
         getNone:function() {
             let that = this;
-            that.dis='dis';
+            that.dis = false;
         }
     }
   }
@@ -97,7 +101,7 @@ import priceRecord from'../../component/auction/priceRecord'
 <style lang="less">
 @import url('../../assets/css/base.less');
 .dis{
-    display: none;
+    /*display: none;*/
     .transparent{
         position: fixed;
         bottom: @size45;
@@ -117,7 +121,7 @@ import priceRecord from'../../component/auction/priceRecord'
         box-sizing: border-box;
         padding:0 @size20;
         text-align: center;
-        display: none;
+        /*display: none;*/
         .down{
             height: @size30;
             width: 100%;
@@ -213,7 +217,28 @@ import priceRecord from'../../component/auction/priceRecord'
         height:  7.99rem;
         // overflow: hidden;
         overflow: scroll;
-
+        .reco{
+            width: 100%;
+            height: 1.14rem;
+            .price{
+                text-align: left;
+                line-height: 1.14rem;
+                font-size: @size14;
+                font-weight: bold;
+                text-decoration: line-through;
+            }
+            .fr{
+                text-align: right;
+                .who{
+                    font-size: @size10;
+                    color: rgb(122, 122, 122);
+                }
+                .time{
+                    font-size: @size10;
+                    color: rgb(122, 122, 122);
+                }
+            }
+        }
     }
 }
 

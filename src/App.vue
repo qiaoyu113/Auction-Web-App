@@ -42,7 +42,10 @@
         overflow: scroll;
         height: 100%;
         max-width: 450px;
-        position:relative;
+        -webkit-tap-highlight-color: transparent;
+        -webkit-touch-callout: none;
+        -webkit-user-select: none;
+        user-select:none;
     }
     body {
         font-family: PingFang SC,Hiragino Sans GB,Microsoft YaHei,WenQuanYi Micro Hei,Helvetica Neue,Arial,sans-serif;
