@@ -57,8 +57,9 @@
                             <div class="sell-inf" v-html="content"></div>
                             <div class="helpCenter">
                                 <span class="fl">帮助中心</span>
-                                  <div class="fr2 iconfont icon-daiquanquandetanhao"></div>
-                                  <a class="fr">查看如何参加拍卖</a>
+                                <div class="fr2 iconfont icon-daiquanquandetanhao"></div>
+                                <a class="fr">查看如何参加拍卖</a>
+                                <!--<a class="fr" v-if="details.auctionStatus === 2">查看如何参加拍卖</a>-->
                             </div>
                         </div>
                     </div>
@@ -243,7 +244,9 @@
                 <span class='label'>起拍价格</span>
                 <span class="price">{{bidPrice}}CNY</span>
             </div>
-            <div class="r-icon" ><i class="iconfont icon-duigoudunpai"></i></div>
+            <div class="r-icon" @click="collectBtn()">
+                <i class="iconfont icon-duigoudunpai"></i>
+            </div>
         </div>
         <!--当前价格-->
         <div class="footer" v-else-if="details.auctionStatus === 2">
@@ -253,7 +256,7 @@
                 <span class="btn2" @click="addPrice()">+</span>
             </div>
             <!--收藏状态-->
-            <div class="r-icon"><img src="../../assets/image/mycenter/collect.png"/></div>
+            <div class="r-icon" @click="collectBtn()"><img src="../../assets/image/mycenter/collect.png"/></div>
             <!--<div class="r-icon"><img src="../../assets/image/mycenter/collectNo.png"/></div>-->
             <div class="offer" @click="offerPrice()">出&nbsp;&nbsp;价</div>
         </div>
@@ -958,6 +961,22 @@
                     }
                 })
             },
+            //收藏
+            collectBtn:function(){
+                let that = this;
+                commonService.postCollect({id:that.id,collect:true},that.id).then(function(res){
+                    console.log(res)
+                    if(res.data.code === 537134){
+                        that.dis4Show = true;
+                        that.hintText = res.data.message;
+                    }else if(res.data.code === 537135){
+                        that.dis4Show = true;
+                        that.hintText = "拍品已出价,不可取消收藏";
+                    }else if(res.data.code === 200){//收藏成功
+
+                    }
+                })
+            }
         },
         watch: {
             '$route' (to, from) {

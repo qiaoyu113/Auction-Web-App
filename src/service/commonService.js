@@ -74,6 +74,10 @@ export const commonService = {
     getWXbaseCode: function(params) {
         return axios.get('/tokens/wxbaseinfo' + this.getParam(params));
     },
+    /* 收藏拍品的接口 */
+    postCollect:function(params,id){
+        return axios.post('/auctions/'+ id,qs.stringify(params))
+    },
 
 
 
