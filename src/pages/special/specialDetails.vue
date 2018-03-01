@@ -117,7 +117,7 @@
             return {
                 details:'',
                 img:'',
-                title: '专场详情-拍场详情',
+                title: '详情',
                 index:2,
                 id:'',
                 page:{num:1,size:5},
