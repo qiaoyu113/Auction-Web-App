@@ -197,20 +197,20 @@
             <div class="value1 fr">即将开始</div>
         </div>
         <!--2进行中-->
-        <div class="infomation bground2 clearfix" v-else-if="details.auctionStatus === 2">
-            <div class="learnMore fl" @click="lookMore()">查看更多</div>
-            <div class="value fl" v-if="!offerNumDate">当前价格 {{details.currentPrice}}CNY</div>
-            <div class="value fl" v-if="offerNumDate">当前价格 {{details.basePrice}}CNY</div>
-            <div class="time fr">
-                <div class="fr num">{{s}}</div>
-                <div class="fr colon">:</div>
-                <div class="fr num">{{m}}</div>
-                <div class="fr colon">:</div>
-                <div class="fr num">{{h}}</div>
-                <div class="fr colon"> :</div>
-                <div class="fr num">{{day}}</div>
-            </div>
-        </div>
+        <!--<div class="infomation bground2 clearfix" v-else-if="details.auctionStatus === 2">-->
+            <!--<div class="learnMore fl" @click="lookMore()">查看更多</div>-->
+            <!--<div class="value fl" v-if="!offerNumDate">当前价格 {{details.currentPrice}}CNY</div>-->
+            <!--<div class="value fl" v-if="offerNumDate">当前价格 {{details.basePrice}}CNY</div>-->
+            <!--<div class="time fr">-->
+                <!--<div class="fr num">{{s}}</div>-->
+                <!--<div class="fr colon">:</div>-->
+                <!--<div class="fr num">{{m}}</div>-->
+                <!--<div class="fr colon">:</div>-->
+                <!--<div class="fr num">{{h}}</div>-->
+                <!--<div class="fr colon"> :</div>-->
+                <!--<div class="fr num">{{day}}</div>-->
+            <!--</div>-->
+        <!--</div>-->
         <div class="infomation bground3 clearfix" v-else-if="details.auctionStatus === 3">
             <div class="learnMore fl">查看更多</div>
             <div class="value fl">当前价格 200,000CNY</div>
