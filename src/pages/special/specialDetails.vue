@@ -117,7 +117,7 @@
             return {
                 details:'',
                 img:'',
-                title: '详情',
+                title: '商品详情',
                 index:2,
                 id:'',
                 page:{num:1,size:5},
