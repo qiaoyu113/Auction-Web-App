@@ -324,14 +324,14 @@
                     text-align: center;
                     font-size: @size14;
                     line-height: @size35;
-                    margin-left: @size35;
+                    //margin-left: @size35;
                     // padding-left: @size55;
                 }
                 .check{
                     box-sizing: border-box;
                     padding-bottom: 0.17rem;
                     border-bottom: 2px solid black;
-                    color: rgb(51, 51, 51)
+                    color: rgb(51, 51, 51);
                 }
             }
         }

@@ -58,7 +58,8 @@
                             <div class="helpCenter">
                                 <span class="fl">帮助中心</span>
                                 <div class="fr2 iconfont icon-daiquanquandetanhao"></div>
-                                <a class="fr">查看如何参加拍卖</a>
+                                <a class="fr">查看如何购买</a>
+                                <!--<a class="fr">查看如何参加拍卖</a>-->
                                 <!--<a class="fr" v-if="details.auctionStatus === 2">查看如何参加拍卖</a>-->
                             </div>
                         </div>
@@ -258,7 +259,8 @@
             <!--收藏状态-->
             <div class="r-icon" @click="collectBtn()"><img src="../../assets/image/mycenter/collect.png"/></div>
             <!--<div class="r-icon"><img src="../../assets/image/mycenter/collectNo.png"/></div>-->
-            <div class="offer" @click="offerPrice()">出&nbsp;&nbsp;价</div>
+            <!--<div class="offer" @click="offerPrice()">出&nbsp;&nbsp;价</div>-->
+            <div class="offer" @click="offerPrice()">购&nbsp;&nbsp;买</div>
         </div>
         <!--交易结束的价格-->
         <div class="footer" v-else-if="details.auctionStatus === 3">
@@ -369,7 +371,7 @@
     export default {
         data () {
             return {
-                title: '专场详情-拍场详情',
+                title: '专场详情',
                 id:'',
                 useId:'',
                 img:'',
@@ -531,6 +533,7 @@
                         }
                         setInterval(function(){
                             let time = that.details.mqEndTime - new Date();
+                            let aa = common.getFormatOfDate(time,'dd:h:m:s')
                             that.day = common.getFormatOfDate(time,'dd')
                             that.h = common.getFormatOfDate(time,'h')
                             that.m = common.getFormatOfDate(time,'m')

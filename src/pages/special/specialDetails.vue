@@ -40,7 +40,8 @@
                                         <div class="xian"></div>
                                         <div class="xian"></div>
                                     </div>
-                                    <span>拍卖中</span>
+                                    <!--<span>拍卖中</span>-->
+                                    <span>售卖中</span>
                                 </div>
                                 <div class="state" v-if="details.auctionStatus === 1">
                                     <div  class="span1" :class="getBgcolor(details.auctionStatus)">

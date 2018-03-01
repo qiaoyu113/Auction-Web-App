@@ -20,7 +20,8 @@
                 <div class="speTime">{{details.createTime}}</div>
                 <div class="speCont" v-html="details.content"></div>
                 <div class="recommend" v-if="recoCh">RECOMMEND</div>
-                <div class="recoCh" v-if="recoCh">拍品推荐</div>
+                <!--<div class="recoCh" v-if="recoCh">拍品推荐</div>-->
+                <div class="recoCh" v-if="recoCh">推荐</div>
                 <div class="sell-more clearfix" v-if="recoCh">
                     <!--推荐拍品列表-->
                     <div class="sellList" @click="sellListGo(list.id)" v-for="list in auctionDetail">
