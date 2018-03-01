@@ -2246,6 +2246,7 @@
                 line-height: @size45;
                 position: relative;
                 text-align: center;
+                display: none;
                 .btn1{
                     width: 1.46rem;
                     line-height:@size40;
