@@ -319,6 +319,7 @@
                 float: left;
                 color: rgb(153, 153, 162);
                 width: 33.3%;
+                text-align: center;
                 span{
                     // display: inline-block;
                     text-align: center;
