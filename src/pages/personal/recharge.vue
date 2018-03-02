@@ -209,7 +209,7 @@
             text-align: left;
             span{
                 width: 2rem;
-                line-height: 1.02rem;
+                line-height: 1rem;
                 float: left;
                 font-size: @size12;
                 padding-top: @size1;

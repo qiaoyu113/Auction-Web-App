@@ -9,6 +9,8 @@ import store from '../vuex/'
 // axios.defaults.baseURL = 'http://shik.s1.natapp.cc';
 axios.defaults.baseURL = 'http://api.sundayauction.cn';
 // axios.defaults.baseURL = 'http://x5dsaj.natappfree.cc';
+axios.defaults.baseURL = 'http://wiqqen.natappfree.cc';
+// axios.defaults.baseURL = 'http://nja35c.natappfree.cc';
 // axios.defaults.baseURL = 'http://u4hphg.natappfree.cc';
 //  axios.defaults.baseURL = 'http://ht7f2f.natappfree.cc';
 

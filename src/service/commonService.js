@@ -125,6 +125,47 @@ export const commonService = {
 
 
 
+     /* 获取地址列表  */
+    getAddress: function (params) {
+        return axios.get('/users/address' + this.getParam(params))
+    },
+     /* 获取详情地址  */
+    getAddressid: function (id) {
+        return axios.get('/users/address/' + id)
+    },
+    /* 获取省  */
+    getCitys: function (params) {
+        return axios.get('/citys')
+    },
+     /* 获取市  */
+    getCitysId: function (params) {
+        return axios.get('/citys/'+ params)
+    },
+     /* 新增地址  */
+    postAddress: function (params) {
+        return axios.post('/users/address' + this.getParam(params))
+    },
+    /* 删除地址  */
+    deleteAddress: function (params) {
+        return axios.delete('/users/address/' + params)
+    },
+     /* 设置默认地址  */
+    postAddressid: function (id,params) {
+        return axios.post('/users/address/' + id + this.getParam(params) )
+    },
+    /* 获取会员等级积分  */
+    getVip: function (params) {
+        return axios.get('/users/vip/' + params)
+    },
+     /* 获取会员等级积分  */
+    getPoint: function (params) {
+        return axios.get('/users/point' + this.getParam(params))
+    },
+    /* 获取会员规则  */
+    getDoctype: function (params) {
+        return axios.get('/doc/type' + this.getParam(params))
+    },
+
 
     getParam: function(param){
         let url = '';

@@ -76,23 +76,23 @@
                     <input type="" placeholder="请输入金额" disabled="disabled" v-model="money"/>
                 </div>
                 <div class="info"><span>姓名</span>
-                    <input type="" placeholder="请输入收款方姓名" v-model="name"/>
+                    <input type="" placeholder="请输入收款方姓名" v-model="userBankName"/>
                     <div class="infoClose" @click='removeName'><i class="iconfont icon-closeicon"></i></div>
                 </div>
                 <div class="info"><span>银行</span>
-                    <input type="" placeholder="请选择银行" v-model="account"/>
+                    <input type="" placeholder="请选择银行" v-model="userBank"/>
                     <div class="infomore" @click='removeAccount'><i class="more">...</i></div>
                 </div>
                 <div class="info"><span>银行卡号</span>
-                    <input type="" placeholder="请输入银行卡号" v-model="account"/>
+                    <input type="" placeholder="请输入银行卡号" v-model="userBankCardNo"/>
                     <div class="infoClose" @click='removeAccount'><i class="iconfont icon-closeicon"></i></div>
                 </div>
                 <div class="info"><span>开户省市</span>
-                    <input type="" placeholder="请选择开户省市" v-model="account"/>
+                    <input type="" placeholder="请选择开户省市" v-model="userBankProvince"/>
                     <div class="infomore" @click='removeAccount'><i class="more">...</i></div>
                 </div>
                 <div class="info"><span>开户银行</span>
-                    <input type="" placeholder="请输入开户银行" v-model="account"/>
+                    <input type="" placeholder="请输入开户银行" v-model="userBankDetail"/>
                     <div class="infoClose" @click='removeAccount'><i class="iconfont icon-closeicon"></i></div>
                 </div>
             </div>
@@ -129,9 +129,12 @@
                 </div>
                 <div class="info"><span>交易种类</span>
                     <div class="infoClose" v-if="list.channelId=='ALIPAY_MOBILE'">支付宝提现</div>
+                     <div class="infoClose" v-if="list.channelId=='UNIONPAY'">线下提现</div>
                 </div>
                 <div class="info"><span>提现方式</span>
-                    <div class="infoClose"><span class="span2">{{list.channelId=="ALIPAY_MOBILE"?"支付宝":"银行卡"}}<br>{{list.channelUser}}</span>
+                    <div class="infoClose">
+                    <span class="span2" v-if="list.channelId=='ALIPAY_MOBILE'">支付宝<br>{{list.channelUser}}</span>
+                    <span class="span2" v-if="list.channelId=='UNIONPAY'">{{list.userBank}}<br>{{list.userBankCardNo}}</span>
                     </div>
                 </div>
                 <div class="info"><span>提现金额</span>
@@ -171,6 +174,11 @@ import {commonService} from '../../service/commonService.js'
           timer: null,
           oddNumbers:'',//单号
           list:'',
+          userBankName:'',//收款姓名
+          userBank:'',//银行名称
+          userBankCardNo:'',//银行卡号
+          userBankProvince:'',//开户行省份
+          userBankDetail:'',//开户银行
 
       }
     },
@@ -245,7 +253,14 @@ import {commonService} from '../../service/commonService.js'
             },
             postForms:function(){
                 let that = this
-                 commonService.postForms({channelId:'ALIPAY_MOBILE',channelUser:that.account,phone:that.phone,type:2,idCard:that.namecard,userName:that.userName,smsCode:that.verification,smsType:7,amount:that.money,realName:that.name}).then(function(res){
+                let type=''
+                if(that.flag==1){
+                   type=2
+                }else if(that.flag==2){
+                   type=3
+                }
+                 commonService.postForms({channelId:'UNIONPAY',channelUser:that.account,phone:that.phone,type:type,idCard:that.namecard,userName:that.userName,smsCode:that.verification,smsType:7,amount:that.money,realName:that.name,userBankName:that.userBankName,userBank:that.userBank,userBankCardNo:that.userBankCardNo,userBankProvince:that.userBankProvince,userBankDetail:that.userBankDetail}).then(function(res){
+                    console.log(res)
                     if(res.data.message=='success'){
                        that.oddNumbers=res.data.datas 
                  // setInterval(() => {

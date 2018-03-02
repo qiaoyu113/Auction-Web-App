@@ -22,42 +22,58 @@
         <div class="membox" v-if='index==1'>
             <div class="card">
                 <div class="box">
-                    <div class="level">VIP<br><span>会员等级</span></div>
-                    <div class="point">4,000分<br><span>会员积分</span></div>
+                    <div class="level" v-if="user.vipLevel==1">VIP<br><span>会员等级</span></div>
+                    <div class="level" v-if="user.vipLevel==2">SVIP<br><span>会员等级</span></div>
+                    <div class="level" v-if="user.vipLevel==3">SSVIP<br><span>会员等级</span></div>
+                    <div class="level" v-if="user.vipLevel==4">SSSVIP<br><span>会员等级</span></div>
+                    <div class="point">{{pointNum}}分<br><span>会员积分</span></div>
                     <div class="number">NO:000 000 000</div>
                     <div class="star">
-                        <div><i class="iconfont icon-xianxingxing"></i></div>
-                        <div><i class="iconfont icon-xianxingxing"></i></div>
+                        <div><i class="iconfont icon-xianxingxing" v-if="user.vipLevel==1"></i></div>
+                        <div><i class="iconfont icon-xianxingxing" v-if="user.vipLevel==2"></i></div>
+                        <div><i class="iconfont icon-xianxingxing" v-if="user.vipLevel==3"></i></div>
+                        <div><i class="iconfont icon-xianxingxing" v-if="user.vipLevel==4"></i></div>
                     </div>
                 </div>
             </div>
-            <div class="bar">
+            <div class="bar" v-if="integral!=''">
                 <div class="clearfix" >
-                    <div class="box fl"></div>
-                    <div class="fr">VIP</div>
+                    <div class="box fl">
+                        <div class="progress" :style="'width:'+ width + ';' + 'background: linear-gradient(to right,'+colorValue1+','+ colorValue2 +');'"></div>
+                    </div>
+                    <div class="fr" v-if="user.vipLevel==1">SVIP</div>
+                    <div class="fr" v-if="user.vipLevel==2">SSVIP</div>
+                    <div class="fr" v-if="user.vipLevel==3">SSSVIP</div>
                 </div>            
-                <p class="warn">在累计6,000分即可升级</p>
+                <p class="warn">在累计{{integral}}分即可升级</p>
             </div>
+            <div class="bar" v-if="integral==''">
+                <p class="warn">恭喜您！您已是顶级会员了哟～～～</p>      
+                <p class="warn">更多会员权益敬请期待！</p>
+            </div>
+
             <div class="pointDetail">
                 <div class="tit">积分明细</div>
-                <div class="record" v-for="list in record"  :key="list.url"  ><div class="fl">{{list.name}}</div>{{list.number}}<div class="fr">{{list.time}}</div></div>
+                <div class="record" v-for="list in records"    >
+                  <div class="fl">{{list.name}}</div>{{list.num}}<div class="fr" v-if="list.getTime!=null">{{list.getTime | stampFormate2 }}</div></div>
                 <!-- <div class="record"><div class="fl">拍卖成交</div> +5 <div class="fr">2018.4.44 20:11:50</div></div> --> 
             </div>
         </div>
         <!-- 会员规则 -->
         <div class="text" v-if='index==2'>
-            <div class="time">更新时间：2017.11.24</div>
-            <div class="box">
-                <div class="tit">保证金说明</div>
-                <p class="txt">为了维护拍卖交易秩序，保障平台用户的合法权益，以下规则请大家务必遵守</p>
+            <div class="time">更新时间：{{rule.createTime}}</div>
+            <div v-html='rule.content'>
+        <!--         <div class="tit">保证金说明</div>
+                <p class="txt">为了维护拍卖交易秩序，保障平台用户的合法权益，以下规则请大家务必遵守</p> -->
             </div>
-            <div class="box">
+        <!--     <div class="box">
                 <div class="tit">1.保证金金额</div>
-                <p class="txt">为了维护拍卖交易秩序，保障平台用户的合法权益，以下规则请大家务必遵守为了维护拍卖交易秩序，保障平台用户的合法权益，以下规则请大家务必遵守
+                <div class="txt" v-html='rule'>
+                为了维护拍卖交易秩序，保障平台用户的合法权益，以下规则请大家务必遵守为了维护拍卖交易秩序，保障平台用户的合法权益，以下规则请大家务必遵守
                     为了维护拍卖交易秩序，保障平台用户的合法权益，以下规则请大家务必遵守为了维护拍卖交易秩序，保障平台用户的合法权益，以下规则请大家务必遵守
                     为了维护拍卖交易秩序，保障平台用户的合法权益，以下规则请大家务必遵守为了维护拍卖交易秩序，保障平台用户的合法权益，以下规则请大家务必遵守
-                </p>
-            </div>
+                </div>
+            </div> -->
         </div>
     </div>
 </template>
@@ -70,51 +86,21 @@
             return {
                 title: '会员中心',
                 index:1,
-                record:[{name:'拍卖成交',number:'+5',time:'2018.04.24 20:11:50'},
-                        {name:'商场消费',number:'+5',time:'2018.04.04 20:11:50'},
-                        {name:'违约',number:'-10',time:'2018.04.18 20:11:50'},
-                        {name:'保证金充值',number:'-10',time:'2018.12.12 20:11:50'},]
+                user:'',
+                records:'',
+                pointNum:'',//会员积分
+                integral:'',//再次升级所需的积分
+                width:'',
+                colorValue1:'',
+                colorValue2:'',
+                rule:'',//规则
             }
         },
         components:{},
-        
-        syncData({store}) {
-            /*基本规则
-            * 所有不需要token的请求都放在这里
-            * 这里不出现window，document等DOM元素
-            * 这里获得的数据都要存储在store中
-            * 写法如下
-            * */
-            const that = this;
-            /*
-            * 将所有的请求处理以数组放在promise中
-            * that.data().data调用数据
-            * */
-            return Promise.all([
-                appervice.getParam().then(res=>{
-//                    store.state.homeStore.listImg = res.data;
-                }),
-                service.getParam().then(res=>{
-//                    store.state.homeStore.noticelist = res.data.datas;
-                }),
-            ])
-        },
-        computed: {
-            //将存在store中的数据取出
-            listImg() {
-                return this.$store.state.homeStore.listImg || []
-            },
-            noticelist() {
-                return this.$store.state.homeStore.noticelist || []
-            },
-        },
         mounted: function() {
-            /*
-            * 所有需要token的请求都放在这里
-            * 可以使用DOM元素
-            * 这里的数据可以放在data中
-            * */
             this.getUsers()
+            this.getPoint()
+            this.getDoctype()
         },
         methods: {
             getIndex:function(index){
@@ -125,14 +111,57 @@
                     that.index = 2;
                 }
             },
+            // 获取会员信息
              getUsers:function(){
                 let that=this
                  commonService.getUsers().then(function(res){
                     that.user=res.data.datas.user
-                    console.log(res)
+                    that.pointNum=res.data.datas.user.numItem.pointNum
+                    
+                    if(that.user.vipLevel == 1){
+                       that.colorValue1='#e3864f'
+                       that.colorValue2='#df575d'
+                    }else  if(that.user.vipLevel == 2){
+                       that.colorValue1='#4ac7af'
+                       that.colorValue2='#3c8eda'
+                    }else  if(that.user.vipLevel == 3){
+                       that.colorValue1='#a43f69'
+                       that.colorValue2='#4b0b44'
+                    }
+                    if(res.data.code==200){
+                        that.getVip(that.user.vipLevel)
+                    }
               })
-
              },
+             // 获取积分等级
+             getVip:function(level){
+                let that=this
+                 commonService.getVip(level+1).then(function(res){
+                    if(res.data.datas!=null){
+                      that.integral=res.data.datas.pointNum - that.pointNum
+                    that.width=that.pointNum / res.data.datas.pointNum * 100+ '%'
+                    console.log(that.width)
+                   
+                    }
+              })
+             },
+             // 获取积分明细
+             getPoint:function(){
+                let that=this
+                 commonService.getPoint({pageNo:1,pageSize:30}).then(function(res){
+                 that.records=res.data.datas.datas
+              })
+             },
+             // 获取会员规则
+              getDoctype:function(){
+                let that=this
+                 commonService.getDoctype({type:2}).then(function(res){
+                  console.log(res)
+                  that.rule=res.data.datas
+
+              })
+             },
+
         }
     }
 
@@ -287,8 +316,14 @@
                 float: left;
                 width: @size300;
                 height: @size10;
-                background: gray;
+                background: #d9d9d9;
                 border-radius: @size10;
+                .progress{
+                   
+                   height: @size10;
+                   border-radius: @size10 0 0 @size10;
+                    
+                }
             }
             .fr{
                 height: @size10;
