@@ -128,11 +128,13 @@
                     <div class="infoClose" v-if="list.applyTime!=null">{{list.applyTime | stampFormate2}}</div>
                 </div>
                 <div class="info"><span>交易种类</span>
-                    <div class="infoClose" v-if="list.status==2">支付宝提现</div>
-                    <div class="infoClose" v-if="list.status==1">线下提现</div>
+                    <div class="infoClose" v-if="list.channelId=='ALIPAY_MOBILE'">支付宝提现</div>
+                     <div class="infoClose" v-if="list.channelId=='UNIONPAY'">线下提现</div>
                 </div>
                 <div class="info"><span>提现方式</span>
-                    <div class="infoClose"><span class="span2">{{list.channelId=="ALIPAY_MOBILE"?"支付宝":"银行卡"}}<br>{{list.channelUser}}</span>
+                    <div class="infoClose">
+                    <span class="span2" v-if="list.channelId=='ALIPAY_MOBILE'">支付宝<br>{{list.channelUser}}</span>
+                    <span class="span2" v-if="list.channelId=='UNIONPAY'">{{list.userBank}}<br>{{list.userBankCardNo}}</span>
                     </div>
                 </div>
                 <div class="info"><span>提现金额</span>

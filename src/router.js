@@ -40,6 +40,9 @@ const auction = (resolve) => {require(['./pages/auction/auction.vue'],resolve)}
 // 直播
 const live = (resolve) => {require(['./pages/live/index.vue'],resolve)}
 const liveDetails = (resolve) => {require(['./pages/live/details.vue'],resolve)}
+//地址
+const address = (resolve) => {require(['./pages/address/new-address.vue'],resolve)}
+const addresslist = (resolve) => {require(['./pages/address/addresslist.vue'],resolve)}
 //个人中心
 const mycenter = (resolve) => {require(['./pages/mycenter/mycenter.vue'],resolve)}
 const saveName = (resolve) => {require(['./pages/mycenter/saveName.vue'],resolve)}
@@ -91,6 +94,9 @@ const routers = [
     {name: 'liveDetails',path:'/lives/details/:liveDetailId',component: liveDetails},
     //登陆
     {name: 'signup',path:'/signup',component: login},
+    //地址
+    {name: 'address',path:'/address',component:address},
+    {name: 'addresslist',path:'/addresslist',component:addresslist},
     //个人中心
     {name: 'mycenter',path:'/mycenter',component: mycenter},
     {name: 'saveName',path:'/saveName',component: saveName},
@@ -98,7 +104,7 @@ const routers = [
     {name: 'password',path:'/password',component: password},
     {name: 'newPhone',path:'/newPhone',component: newPhone},
     // 个人中心chenhaojn
-    {name: 'personalCenter',path:'/personal/personalCenter/',component:personalCenter},
+    {name: 'personalCenter',path:'/personalCenter',component:personalCenter},
     {name: 'myorder',path:'/myorder',component:myorder},
     {name: 'myaccount',path:'/myaccount',component:myaccount},
     {name: 'helpcenter',path:'/helpcenter',component:helpcenter},

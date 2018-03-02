@@ -11,6 +11,7 @@ import './mixin/directive';
 import './mixin/filter';
 import VueCropper from 'vue-cropper';
 import wx from 'weixin-js-sdk'
+
 // import './assets/js/common/infinite'
 // import infiniteScroll from 'vue-infinite-scroll';
 
@@ -40,7 +41,9 @@ import zbanner from './component/common/banner.vue'
 import zfooter from './component/common/footer.vue'
 import zhistory from './component/common/goback.vue'
 import backhome from './component/common/back-home.vue'
+import VDistpicker from 'v-distpicker'
 
+Vue.component('v-distpicker', VDistpicker)
 Vue.component('z-modal', zmodal)
 Vue.component('z-banner', zbanner)
 Vue.component('z-footer', zfooter)
@@ -48,6 +51,7 @@ Vue.component('z-history', zhistory)
 Vue.component('pheader', pheader)
 Vue.component('z-home', backhome)
 Vue.component('poption', poption)
+
 
 
 const router = new VueRouter({

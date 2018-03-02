@@ -3,19 +3,19 @@
         组件要小，如遇list，只将item做成组件，其他的都写在页面中
     -->
     <!-- 个人中心 -->
-    <div class="" id="" v-set-title="title">
+    <div class="personalCenter" id="" v-set-title="title">
         
         <div class="header">传家</div>
         <div class="content" v-if="logined">
             <div class="box clearfix ">
                 <div class="boxImg fl">
                     <img src="http://img0.imgtn.bdimg.com/it/u=3206453844,923580852&fm=27&gp=0.jpg"/>
-                    <div class="member"><i class="iconfont icon-duigoudunpai"></i></div>
+                    <div class="member">v{{list.vipLevel}}</div>
                 </div>
                 <div class="info fl">
                     <div class="hel">HELLO!</div>
-                    <div class="name">冰箱胖</div>
-                    <div class="prove">
+                    <div class="name">{{list.name}}</div>
+                    <div class="prove" v-if="list.realNameStatus==2">
                         <i class="iconfont icon-duigoudunpai"></i>&nbsp;实名认证
                     </div>
                 </div>
@@ -27,30 +27,31 @@
                     <div class="font">全部订单</div>
                 </div>
                 <div class="litbox fl">
-                    <div class="pic"><i class="iconfont icon-tupian"></i></div>
+                    <div class="pic"><i class="iconfont icon-tupian"></i><div class="number" v-if="numItem.noPayNum!=0">{{numItem.noPayNum}}</div></div>
                     <div class="font">待付款</div>
                 </div>
                 <div class="litbox fl">
-                    <div class="pic"><i class="iconfont icon-tupian"></i></div>
+                    <div class="pic"><i class="iconfont icon-tupian"></i><div class="number" v-if="numItem.noGetNum!=0">{{numItem.noGetNum}}</div></div>
                     <div class="font">待收货</div>
                 </div>
                 <div class="litbox fl">
-                    <div class="pic"><i class="iconfont icon-tupian"></i></div>
+                    <div class="pic"><i class="iconfont icon-tupian"></i><div class="number" v-if="numItem.saleNum!=0">{{numItem.saleNum}}</div></div>
                     <div class="font">退款/售后</div>
                 </div>
             </div>
             <div class="account">
                 <div class="acc  clearfix">
-                    <div class="fl">保证金账户</div>
+                    <div class="fl">保证金管理</div>
                     <div class="fr">...</div>
                 </div>
                 <div class="remain clearfix">
                     <div class="mon fl">
-                        <span >余额</span><br> 
-                        <span class="span1">500,000CNY</span> 
+                        <span >保证金总额</span><br> 
+                        <!-- <span class="span1">{{list.wallet.totalMoney}}CNY</span>  -->
+                        <span class="span1">{{totalMoney}}CNY</span>
                     </div>
-                    <button class="fr">提现</button>
-                    <button class="fr">充值</button>
+                    <button class="fr" @click="cash">提现</button>
+                    <button class="fr" @click="recharge">充值</button>
                 </div>
             </div>
             <div class="center">
@@ -96,11 +97,12 @@
 <script >
     import {appService} from '../../service/appService'
     import itemc from "../../component/home/item.vue";
+    import {commonService} from '../../service/commonService.js'
     export default {
         data () {
             return {
                 title: '个人中心',
-                logined:false,
+                logined:true,
                 img:[
                     'http://img0.imgtn.bdimg.com/it/u=3206453844,923580852&fm=27&gp=0.jpg',
                     'http://img0.imgtn.bdimg.com/it/u=3206453844,923580852&fm=27&gp=0.jpg',
@@ -109,7 +111,12 @@
                     'http://img0.imgtn.bdimg.com/it/u=3206453844,923580852&fm=27&gp=0.jpg',
                     'http://img0.imgtn.bdimg.com/it/u=3206453844,923580852&fm=27&gp=0.jpg'
                 ],
-                
+                list:'',
+                numItem:'',//数字
+                totalMoney:'',//保证金总额
+                noPayNum:'',//待支付数量
+                noGetNum:'',//待收货数量
+                saleNum:'',//售后数量
             }
         },
         components:{'home-item':itemc},
@@ -149,6 +156,7 @@
             * 可以使用DOM元素
             * 这里的数据可以放在data中
             * */
+            this.getUsers()
 
         },
         methods: {
@@ -156,7 +164,24 @@
                 var str = 95*(index)+'px';
                 str='left:'+str;
                 return str;
-            }
+            },
+            cash:function(){
+                this.$router.push({path:"/cash"})
+            },
+            recharge:function(){
+                this.$router.push({path:"/recharge"})
+            },
+            getUsers:function(){
+                let that = this;
+                 commonService.getUsers().then(function(res){
+                
+                    that.list=res.data.datas.user
+                    that.totalMoney=that.list.wallet.totalMoney
+                    that.numItem=that.list.numItem
+                    console.log(that.totalMoney)
+                 })
+            },
+
         }
     }
 
@@ -166,7 +191,7 @@
     /*rem等基本设置都放在base中，不写多个*/
     @import url('../../assets/css/base.less');
     @import url('../../assets/css/icon/iconfont.css');
-    
+    .personalCenter{
     .header{
         position: fixed;
         top: 0;
@@ -199,8 +224,15 @@
                     width: 0.4533rem;
                     height: 0.4533rem;
                     position: relative;
+                    border:1px solid red;
+                    border-radius: 50%;
+                    background: #fff;
                     margin-top: -1.7rem;
-                    margin-left: 1.4rem;
+                    margin-left: 1.2rem;
+                    text-align: center;
+                    line-height: 0.4533rem;
+                    color: red;
+                    font-size: 8px;
                 }
             }
              .info{
@@ -241,10 +273,25 @@
                     display: inline-block;
                     margin-top: @size30;
                     margin-left: @size35;
+                    position: relative;
                     i{
                         width: 100%;
                         height: 100%;
                         font-size: @size20;
+                    }
+                    .number{
+                      position: absolute;
+                      right: -@size6;
+                      top: -@size6;
+                      width: @size14;
+                      height: @size14;
+                      background: red;
+                      border:1px solid red;
+                      border-radius: 50%;
+                      font-size: 8px;
+                      color: #fff;
+                      text-align: center;
+                      line-height: @size14;
                     }
                 }
                 .font{
@@ -384,5 +431,7 @@
         line-height: @size35;
         padding-left: @size20;
     }
+}
+
 </style>
 
