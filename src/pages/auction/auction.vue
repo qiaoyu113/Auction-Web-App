@@ -529,12 +529,16 @@
                         }else{
                             that.bidPrice = that.details.currentPrice
                         }
-                        setInterval(function(){
-                            let time = that.details.mqEndTime - new Date();
-                            that.day = common.getFormatOfDate(time,'dd')
-                            that.h = common.getFormatOfDate(time,'h')
-                            that.m = common.getFormatOfDate(time,'m')
-                            that.s = common.getFormatOfDate(time,'s')
+                        let timeRun = setInterval(function(){
+                            let timestamp = new Date();
+                            let time = that.details.mqEndTime - timestamp;
+                            that.day = parseInt(time / 1000 / 60 / 60 / 24 , 10) < 10 ? '0' + parseInt(time / 1000 / 60 / 60 / 24 , 10) : parseInt(time / 1000 / 60 / 60 / 24 , 10);
+                            that.h =  parseInt(time / 1000 / 60 / 60 % 24 , 10) < 10 ? '0' +  parseInt(time / 1000 / 60 / 60 % 24 , 10) :  parseInt(time / 1000 / 60 / 60 % 24 , 10);
+                            that.m = parseInt(time / 1000 / 60 % 60, 10) < 10 ? '0' +  parseInt(time / 1000 / 60 % 60 , 10) :  parseInt(time / 1000 / 60 % 60 , 10);
+                            that.s = parseInt(time / 1000 % 60, 10) < 10 ? '0' + parseInt(time / 1000 % 60, 10) : parseInt(time / 1000 % 60, 10);
+                            if(time < 0){
+                                clearInterval(timeRun)
+                            }
                         },1000);
                         that.img = res.data.datas.picItems;
                         that.$nextTick(function () {

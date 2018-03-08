@@ -58,7 +58,7 @@
                                 <div class="sta-over">开始：{{startTime}}</div>
                                 <div class="sta-over">结束：{{overTime}}</div>
                             </div>
-                            <div class="sell-inf" v-html="details.content"></div>
+                            <div class="sell-html" v-html="details.content"></div>
                         </div>
                     </div>
                     <div class="sell-more clearfix" v-if="recoCh">
@@ -209,7 +209,11 @@
                         that.img = that.$store.state.picHead + res.data.datas.coverUrl;
                         let timeRun = setInterval(function(){
                             let time = that.details.auctionEndTime - new Date();
-                            that.EndTime = common.getFormatOfDate(time,'dd:h:m:s')
+                            let day = parseInt(time / 1000 / 60 / 60 / 24 , 10) < 10 ? '0' + parseInt(time / 1000 / 60 / 60 / 24 , 10) : parseInt(time / 1000 / 60 / 60 / 24 , 10);
+                            let h =  parseInt(time / 1000 / 60 / 60 % 24 , 10) < 10 ? '0' +  parseInt(time / 1000 / 60 / 60 % 24 , 10) :  parseInt(time / 1000 / 60 / 60 % 24 , 10);
+                            let m = parseInt(time / 1000 / 60 % 60, 10) < 10 ? '0' +  parseInt(time / 1000 / 60 % 60 , 10) :  parseInt(time / 1000 / 60 % 60 , 10);
+                            let s = parseInt(time / 1000 % 60, 10) < 10 ? '0' + parseInt(time / 1000 % 60, 10) : parseInt(time / 1000 % 60, 10);
+                            that.EndTime = day + ':' + h + ':' + m + ':' + s;
                             if(time < 0){
                                 clearInterval(timeRun)
                             }
@@ -625,6 +629,13 @@
         .sell-content{
             box-sizing: border-box;
             padding: @size20;
+            .sell-html{
+                margin-top:0.2rem;
+                img{
+                    width:100% !important;
+                    height: auto !important;
+                }
+            }
             .sell-int{
                 div{
                     text-align: center;

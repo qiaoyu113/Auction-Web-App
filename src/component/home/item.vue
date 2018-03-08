@@ -38,8 +38,8 @@
 <style lang="less">
 @import url('../../assets/css/base.less');
 #special{
-    width: @size375;
-    height: @size211;
+    width: 100%;
+    height: 4.5rem;
     background-repeat:no-repeat;
     background-size:100% 100%;
     margin-bottom: @size5;
@@ -81,7 +81,7 @@
             overflow: hidden;
             white-space: nowrap;
             text-overflow:ellipsis;
-            padding-top: 1.65rem;
+            padding-top: 1.2rem;
             font-size: 24px;
             font-weight: 400;
             color: rgb(255, 255, 255);

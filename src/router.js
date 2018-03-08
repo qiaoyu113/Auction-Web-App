@@ -63,7 +63,7 @@ const routers = [
     {name: 'specialinfo',path:'/specialinfo',component:specialinfo},
     {name: 'specialDetails',path:'/specialDetails',component:specialDetails,
         children:[
-            {name:'specialMore',path:'more/:id',component:auction},
+            {name:'specialMore',path:'more/:id',component:specialDetails},
         ]
     },
     {name: 'auction',path:'/auction',component:auction,

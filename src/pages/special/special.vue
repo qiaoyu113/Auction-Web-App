@@ -201,7 +201,12 @@
                                     specialist[i].ImgList = speciaImgList;
                                     let timeRun = setInterval(function(){
                                         let time = specialist[i].auctionEndTime - new Date();
-                                        specialist[i].EndTime = common.getFormatOfDate(time,'dd:h:m:s')
+                                        let day = parseInt(time / 1000 / 60 / 60 / 24 , 10) < 10 ? '0' + parseInt(time / 1000 / 60 / 60 / 24 , 10) : parseInt(time / 1000 / 60 / 60 / 24 , 10);
+                                        let h =  parseInt(time / 1000 / 60 / 60 % 24 , 10) < 10 ? '0' +  parseInt(time / 1000 / 60 / 60 % 24 , 10) :  parseInt(time / 1000 / 60 / 60 % 24 , 10);
+                                        let m = parseInt(time / 1000 / 60 % 60, 10) < 10 ? '0' +  parseInt(time / 1000 / 60 % 60 , 10) :  parseInt(time / 1000 / 60 % 60 , 10);
+                                        let s = parseInt(time / 1000 % 60, 10) < 10 ? '0' + parseInt(time / 1000 % 60, 10) : parseInt(time / 1000 % 60, 10);
+                                        specialist[i].EndTime = day + ':' + h + ':' + m + ':' + s;
+//                                        specialist[i].EndTime = common.getFormatOfDate(time,'dd:h:m:s')
                                         if(time <= 0){
                                             if(that.checked === 2){
                                                 that.EndText = 1;
