@@ -3,8 +3,7 @@
         组件要小，如遇list，只将item做成组件，其他的都写在页面中
     -->
     <!-- 订单详情-订单正常-订单完成 -->
-    <div class="" id="" v-set-title="title">
-        
+    <div class="logistics">
         <div class="header">传家</div>
         <div :class="dis">
             <div class="transparent"></div>
@@ -92,7 +91,7 @@ import {appService} from '../../service/appService'
     /*rem等基本设置都放在base中，不写多个*/
     @import url('../../assets/css/base.less');
     @import url('../../assets/css/icon/iconfont.css');
-    
+    .logistics{
     .header{
         position: fixed;
         top: 0;
@@ -205,6 +204,7 @@ import {appService} from '../../service/appService'
             }
         }
     }
+}
 }
 </style>
 

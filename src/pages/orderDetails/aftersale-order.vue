@@ -121,13 +121,16 @@ import {appService} from '../../service/appService'
       return {
           title:'售后服务',
           arrays: [],
-        index:1,
-        dis:'dis'
+          index:1,
+          dis:'dis',
+          orderNo:'',
+        
           
       }
     },
     components: {},
     mounted () {
+        this.huoqu()
     },
     methods: {
         open:function(){
@@ -135,7 +138,8 @@ import {appService} from '../../service/appService'
         },
         close:function() {
             this.dis='dis';
-        }
+        },
+       
     }
   }
 </script>

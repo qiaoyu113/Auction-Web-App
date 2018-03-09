@@ -16,11 +16,17 @@
         </div>
         <div class="content">
             <!-- 待付款 -->
-            <div class="account" v-if="index==1||index==0">
+            <div class="account" v-for="(list,index) in datalist">
                 <div class="item">
-                    <span>订单号:87540097</span>
-                    <span class="fr bgcolor">待付款</span>
-                    <div class="time fr">
+                    <span>订单号:{{list.orderNo}}</span>
+                    <span class="fr bgcolor" v-if="list.status==1">待付款</span>
+                    <span class="fr bgcolor" v-if="list.status==2">处理中</span>
+                    <span class="fr" v-if="list.status==3">待发货</span>
+                    <span class="fr" v-if="list.status==4">已发货</span>
+                    <span class="fr iconfont icon-tupian" v-if="list.status==6">已关闭</span>
+                    <span class="fr iconfont icon-tupian" v-if="list.status==5">已完成</span>
+
+                    <div class="time fr" v-if="list.status==1">
                         <div class="fr num">01</div>
                         <div class="fr colon">:</div>
                         <div class="fr num">02</div>
@@ -31,35 +37,19 @@
                         <img src="http://img0.imgtn.bdimg.com/it/u=3206453844,923580852&fm=27&gp=0.jpg"/>
                     </div>
                     <div class="info fl">
-                        <div class="hel">500,000 CNY</div>
-                        <div class="name">茶壶茶壶</div>
-                        <div class="prove">20180606-100</div>
-                        <button class="fr">查看订单</button>
-                        <button class="fr">立即付款</button>
+                        <div class="hel">{{list.amount}} CNY</div>
+                        <div class="name">{{list.orderTitle}}</div>
+                        <div class="prove">{{list.createTime}}-{{list.orderDetail.auctionNo}}</div>
+                        <button class="fr" @click="details(list.status,list.orderNo)">查看订单</button>
+                        <button class="fr" v-if="list.status==1">立即付款</button>
+                        <button class="fr" v-if="list.status==2 || list.status==3">分享</button>
                     </div>
                 </div>
             </div>
-            <!-- 待付款-处理中 -->
-            <div class="account" v-if="index==1||index==0">
-                <div class="item">
-                    <span>订单号:87540097</span>
-                    <span class="fr bgcolor">处理中</span>
-                </div>
-                <div class="box clearfix ">
-                    <div class="boxImg fl">
-                        <img src="http://img0.imgtn.bdimg.com/it/u=3206453844,923580852&fm=27&gp=0.jpg"/>
-                    </div>
-                    <div class="info fl">
-                        <div class="hel">500,000 CNY</div>
-                        <div class="name">茶壶茶壶</div>
-                        <div class="prove">20180606-100</div>
-                        <button class="fr">查看订单</button>
-                        <button class="fr">分享</button>
-                    </div>
-                </div>
-            </div>
+          
+
             <!-- 待发货 -->
-            <div class="account" v-if="index==2||index==0">
+      <!--       <div class="account" v-if="index==2||index==0">
                 <div class="item">
                     <span>订单号:87540097</span>
                     <span class="fr">待发货</span>
@@ -75,9 +65,9 @@
                         <button class="fr">查看订单</button>
                     </div>
                 </div>
-            </div>
+            </div> -->
             <!-- 售后 -->
-            <div class="account" v-if="index==3||index==0">
+     <!--        <div class="account" v-if="index==3||index==0">
                 <div class="item">
                     <span>订单号:87540097</span>
                     <span class="fr iconfont icon-tupian"></span>
@@ -95,35 +85,29 @@
                         <button class="fr">查看订单</button>
                     </div>
                 </div>
-            </div>
+            </div> -->
         </div>
     </div>
 </template>
 
 <script >
     import {appService} from '../../service/appService'
-    import itemc from "../../component/home/item.vue";
+    import itemc from "../../component/home/item.vue"
+    import {commonService} from '../../service/commonService.js'
     export default {
         data () {
             return {
                 title: '个人中心',
                 index:0,
+                datalist:'',
+                branch:[],
+                hour:[],
                 
             }
         },
         components:{'home-item':itemc},
         syncData({store}) {
-            /*基本规则
-            * 所有不需要token的请求都放在这里
-            * 这里不出现window，document等DOM元素
-            * 这里获得的数据都要存储在store中
-            * 写法如下
-            * */
             const that = this;
-            /*
-            * 将所有的请求处理以数组放在promise中
-            * that.data().data调用数据
-            * */
             return Promise.all([
                 appervice.getParam().then(res=>{
 //                    store.state.homeStore.listImg = res.data;
@@ -143,12 +127,7 @@
             },
         },
         mounted: function() {
-            /*
-            * 所有需要token的请求都放在这里
-            * 可以使用DOM元素
-            * 这里的数据可以放在data中
-            * */
-
+            this.getOrder()
         },
         methods: {
             getPos:function(index) {
@@ -160,14 +139,61 @@
                 let that = this;
                 if(index === 1){
                     that.index = 1;
+                    that.getOrder();
                 }else if(index==2){
                     that.index = 2;
+                    that.getOrder();
                 }else if(index==3){
                     that.index = 3;
+                    that.getOrder()
                 }else if(index==0){
                     that.index = 0;
+                    that.getOrder();
                 }
             },
+            details:function(type,id){
+                // if(type==5){
+                //    this.$router.push({path:"/afterorder",query:{id:id}})  
+                // }else 
+                 this.$router.push({path:"/normalorder",query:{id:id}})  
+                // if(type==6){
+                //     this.$router.push({path:"/closeorder",query:{id:id}})  
+                // }else{
+                   
+                // }
+
+            },
+             // 获取我的订单
+            getOrder:function(){
+                let that=this;
+                let status='1,2,3,4,5,6'
+                if(that.index === 1){
+                    status = '1,2,3';
+                }else if(that.index==2){
+                    status = '4';
+                }else if(that.index==0){
+                    status = '1,2,3,4,5,6';
+                }
+               commonService.getOrder({pageNo:1,pageSize:10,status:status}).then(function(res){
+                      that.datalist=res.data.datas.datas
+
+                      // console.log(that.datalist)
+                      console.log(res)
+                      // for(let i=0;i<that.datalist.length;i++){
+                      //   // if()
+                      //   if(that.datalist[i].expireTime!=null){
+                      //       let expireTime=that.datalist[i].expireTime
+                      //    console.log(new Date(1519984388189))
+
+                      //   that.branch[i]=new Date(expireTime).getHours()
+                      //   // console.log(that.datalist[i].expireTime)
+                        
+                      //   that.hour[i]=new Date(expireTime).getMinutes()
+                      //   }
+                      // }
+                    })
+            },
+
         }
     }
 

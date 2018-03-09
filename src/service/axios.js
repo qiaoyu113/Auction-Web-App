@@ -5,7 +5,9 @@ import axios from 'axios';
 import store from '../vuex/'
 
 // axios.defaults.baseURL = 'http://api.saas.vjuzhen.com';
-axios.defaults.baseURL = 'http://wiqqen.natappfree.cc';
+// axios.defaults.baseURL = 'http://api.sundayauction.cn';
+axios.defaults.baseURL =  'http://8v3q7g.natappfree.cc';
+
 // axios.defaults.baseURL = 'http://nja35c.natappfree.cc';
 // axios.defaults.baseURL = 'http://u4hphg.natappfree.cc';
 //  axios.defaults.baseURL = 'http://ht7f2f.natappfree.cc';
