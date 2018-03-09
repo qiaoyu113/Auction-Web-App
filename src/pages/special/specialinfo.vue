@@ -3,14 +3,11 @@
         <div class="header">传家</div>
         <div class="nav">
             <span class="back" @click="back()"><i class="iconfont icon-fanhui"></i></span>
-            <span class="span1"><i class="iconfont icon-bianji2"></i></span>
+            <span class="span1">
+                <img src="../../assets/image/mycenter/icon2.png"/>
+            </span>
             <span class="span2">
-                <div class="fang">
-                    <div class="yuan"></div>
-                    <div class="san">
-                        <div class="san2"></div>
-                    </div>
-                </div>
+                <img src="../../assets/image/mycenter/icon1.png"/>
             </span>
         </div>
         <div id="mescroll" class="mescroll container">
@@ -266,7 +263,7 @@
             height: @size35;
             line-height: @size35;
             border-bottom: 1px solid rgb(53, 60, 70);
-            background: rgb(255, 255, 255);
+            background:  rgb(255, 255, 255);
             position: fixed;
             top: @size45;
             z-index: 100;
@@ -282,48 +279,19 @@
                 float: right;
                 padding-right: 20px;
                 color:#A9AEB6;
+                font-size:20px;
+                img{
+                    width: 0.6rem;
+                    margin-top: 0.15rem;
+                }
             }
             .span2{
                 float: right;
                 padding-right: 20px;
                 color:#A9AEB6;
-                .fang{
-                    width:0.3rem;
-                    height:0.35rem;
-                    margin-top:0.2rem;
-                    border:0.05rem solid #A9AEB6;
-                    position: relative;
-                    border-radius: 1px;
-                    .yuan{
-                        width:0.1rem;
-                        height:0.1rem;
-                        background:#A9AEB6;
-                        position: absolute;
-                        top:0.05rem;
-                        left:0;
-                        right:0;
-                        margin:auto;
-                        border-radius: 100%;
-                    }
-                    .san{
-                        width: 0;
-                        height: 0;
-                        border-right: 0.15rem solid transparent;
-                        border-bottom: 0.15rem solid #A9AEB6;
-                        border-left: 0.15rem solid transparent;
-                        position: absolute;
-                        bottom:0;
-                        .san2{
-                            width: 0;
-                            height: 0;
-                            border-right: 0.15rem solid transparent;
-                            border-bottom: 0.15rem solid #fff;
-                            border-left: 0.15rem solid transparent;
-                            position: absolute;
-                            bottom: -0.2rem;
-                            left: -0.14rem;
-                        }
-                    }
+                img{
+                    width: 0.6rem;
+                    margin-top: 0.15rem;
                 }
             }
         }
@@ -357,6 +325,10 @@
             .speCont{
                 padding: @size20 @size20 @size15 @size20;
                 text-align: left;
+                img{
+                    width:100% !important;
+                    height: auto !important;
+                }
             }
             .spePic{
                 width: 9.47rem;

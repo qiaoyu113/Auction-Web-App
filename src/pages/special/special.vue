@@ -16,11 +16,11 @@
                                 <div class="sell-time">{{list.EndTime}}</div>
                                 <div class="sell-title">{{list.name}}</div>
                                 <div class="sell-information">
-                                    <a v-if="EndText === 2">拍场已开始，快去捡漏吧</a>
-                                    <a v-if="EndText === 1">拍场已结束，快去看看成交结果</a>
-                                    <a class="over" v-if="EndText === 3">即将开始</a>
-                                    <a class="over" v-if="EndText === 4">正在进行</a>
-                                    <span class="pos2"><div class="sellicon2"><div class="icon"></div></div>{{list.doneUserNum}}</span>
+                                    <a v-if="list.EndText === 2">拍场已开始，快去捡漏吧</a>
+                                    <a v-if="list.EndText === 1">拍场已结束，快去看看成交结果</a>
+                                    <a class="over" v-if="list.EndText === 3">即将开始</a>
+                                    <a class="over" v-if="list.EndText === 4">正在进行</a>
+                                    <span class="pos2"><img class="pos2img" src="../../assets/image/mycenter/icon3.png"/>{{list.doneUserNum}}</span>
                                     <span class="pos1"><div class="box"></div> {{list.auctionNum}}</span>
                                 </div>
                             </div>
@@ -29,7 +29,7 @@
                                 <div class="sell-title">{{list.name}}</div>
                                 <div class="sell-information">
                                     <a class="over">成交件数：{{list.doneNum}}</a>
-                                    <span class="pos2"><div class="sellicon2"><div class="icon"></div></div> {{list.doneUserNum}}</span>
+                                    <span class="pos2"><img class="pos2img" src="../../assets/image/mycenter/icon3.png"/> {{list.doneUserNum}}</span>
                                     <span class="pos1"><div class="box"></div> {{list.auctionNum}}</span>
                                 </div>
                             </div>
@@ -200,26 +200,34 @@
                                     specialist[i].EndTime = '';
                                     specialist[i].ImgList = speciaImgList;
                                     let timeRun = setInterval(function(){
-                                        let time = specialist[i].auctionEndTime - new Date();
+                                        let now = new Date().getTime()
+                                        let time = '';
+                                        if(that.checked == '2'){
+                                            time = specialist[i].auctionEndTime - now;
+                                        }else{
+                                            time = specialist[i].auctionStartTime - now;
+                                        }
+
                                         let day = parseInt(time / 1000 / 60 / 60 / 24 , 10) < 10 ? '0' + parseInt(time / 1000 / 60 / 60 / 24 , 10) : parseInt(time / 1000 / 60 / 60 / 24 , 10);
                                         let h =  parseInt(time / 1000 / 60 / 60 % 24 , 10) < 10 ? '0' +  parseInt(time / 1000 / 60 / 60 % 24 , 10) :  parseInt(time / 1000 / 60 / 60 % 24 , 10);
                                         let m = parseInt(time / 1000 / 60 % 60, 10) < 10 ? '0' +  parseInt(time / 1000 / 60 % 60 , 10) :  parseInt(time / 1000 / 60 % 60 , 10);
                                         let s = parseInt(time / 1000 % 60, 10) < 10 ? '0' + parseInt(time / 1000 % 60, 10) : parseInt(time / 1000 % 60, 10);
                                         specialist[i].EndTime = day + ':' + h + ':' + m + ':' + s;
-//                                        specialist[i].EndTime = common.getFormatOfDate(time,'dd:h:m:s')
                                         if(time <= 0){
                                             if(that.checked === 2){
-                                                that.EndText = 1;
+                                                specialist[i].EndText = 1;
+                                                specialist[i].EndTime = '00:00:00:00'
                                                 clearInterval(timeRun)
                                             }else if(that.checked === 1){
-                                                that.EndText = 2
+                                                specialist[i].EndText = 2
+                                                specialist[i].EndTime = '00:00:00:00'
                                                 clearInterval(timeRun)
                                             }
                                         }else{
                                             if(that.checked === 2){
-                                                that.EndText = 4
+                                                specialist[i].EndText = 4
                                             }else if(that.checked === 1){
-                                                that.EndText = 3
+                                                specialist[i].EndText = 3
                                             }
                                         }
                                     },1000);
@@ -324,12 +332,13 @@
                 float: left;
                 color: rgb(153, 153, 162);
                 width: 33.3%;
+                text-align: center;
                 span{
                     // display: inline-block;
                     text-align: center;
                     font-size: @size14;
                     line-height: @size35;
-                    margin-left: @size35;
+                    //margin-left: @size35;
                     // padding-left: @size55;
                 }
                 .check{
@@ -384,6 +393,12 @@
                     color: #A9AEB6;
                     margin-right:0.2rem;
                     line-height: 0.4rem;
+                    .pos2img{
+                        width:0.45rem;
+                        float:left;
+                        margin-right: 0.1rem;
+                        margin-top: -0.01rem;
+                    }
                     .sellicon2{
                         width: 0;
                         height: 0;

@@ -54,8 +54,7 @@ const error = (resolve) => {require(['./pages/error.vue'],resolve)}
 
 // 创建路由器实例，配置路由规则
 const routers = [
-    {path: '/d/:shortId', component: short},
-    {name: 'home',path:'/',component: home, meta: {keepAlive: true}},
+    {name: 'home',path:'/',component: home, meta: {keepAlive: false}},
     {name: 'login',path:'/login',component:login},
     {name: 'registerweixin',path:'/register',component:registerweixin},
     {name: 'service',path:'/service',component:service},

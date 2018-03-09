@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div id='special' class="special" @click="goDetails(str.id)">
+        <div id='specials' class="specials" @click="goDetails(str.id)">
             <img :src="$store.state.picHead + str.cover"/>
             <div class="text">
                 <h1>{{str.title}}</h1>
@@ -37,7 +37,7 @@
 
 <style lang="less">
 @import url('../../assets/css/base.less');
-#special{
+#specials{
     width: 100%;
     height: 4.5rem;
     background-repeat:no-repeat;
