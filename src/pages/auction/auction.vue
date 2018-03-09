@@ -3,14 +3,11 @@
         <div class="header">传家</div>
         <div class="nav">
             <span class="back" @click="back()"><i class="iconfont icon-fanhui"></i></span>
-            <span class="span1"><i class="iconfont icon-bianji2"></i></span>
+            <span class="span1">
+                <img src="../../assets/image/mycenter/icon2.png"/>
+            </span>
             <span class="span2">
-                <div class="fang">
-                    <div class="yuan"></div>
-                    <div class="san">
-                        <div class="san2"></div>
-                    </div>
-                </div>
+                <img src="../../assets/image/mycenter/icon1.png"/>
             </span>
         </div>
         <div id="mescroll" class="mescroll content">
@@ -29,7 +26,9 @@
                         </div>
                         <div class="sell-information">
                             <div class="font">{{details.readNum}}人</div>
-                            <div class="sellicon2"><div class="icon"></div></div>
+                            <div class="sellicon2">
+                                <img src="../../assets/image/mycenter/icon3.png"/>
+                            </div>
                         </div>
                         <div class='sell-content'>
                             <div class="sell-int">
@@ -37,11 +36,9 @@
                                 <div class="intrCh">{{details.title}}</div>
                                 <div class="prove">
                                     <span v-for="list in details.identifications">
-                                        <span class="list" v-if="list === 1"><i class="iconfont icon-duigoudunpai"></i>认证1</span>
-                                        <span class="list" v-if="list === 2"><i class="iconfont icon-duigoudunpai"></i>认证2</span>
-                                        <span class="list" v-if="list === 3"><i class="iconfont icon-duigoudunpai"></i>认证3</span>
-                                        <span class="list" v-if="list === 4"><i class="iconfont icon-duigoudunpai"></i>认证4</span>
-                                        <span class="list" v-if="list === 5"><i class="iconfont icon-duigoudunpai"></i>认证5</span>
+                                        <span class="list" v-if="list === 1"><i class="iconfont icon-duigoudunpai"></i>质量认证</span>
+                                        <span class="list" v-if="list === 2"><i class="iconfont icon-duigoudunpai"></i>作者认证</span>
+                                        <span class="list" v-if="list === 3"><i class="iconfont icon-duigoudunpai"></i>专家认证</span>
                                     </span>
                                 </div>
                                 <div class="info">
@@ -58,8 +55,7 @@
                             <div class="helpCenter">
                                 <span class="fl">帮助中心</span>
                                 <div class="fr2 iconfont icon-daiquanquandetanhao"></div>
-                                <a class="fr">查看如何购买</a>
-                                <!--<a class="fr">查看如何参加拍卖</a>-->
+                                <a class="fr">查看如何参加拍卖</a>
                                 <!--<a class="fr" v-if="details.auctionStatus === 2">查看如何参加拍卖</a>-->
                             </div>
                         </div>
@@ -109,6 +105,7 @@
                 </div>
             </div>
         </div>
+
         <!--阴影-->
         <div class="dis">
             <div class="transparent" v-if="dis"></div>
@@ -197,23 +194,23 @@
             <div class="value1 fr">即将开始</div>
         </div>
         <!--2进行中-->
-        <!--<div class="infomation bground2 clearfix" v-else-if="details.auctionStatus === 2">-->
-            <!--<div class="learnMore fl" @click="lookMore()">查看更多</div>-->
-            <!--<div class="value fl" v-if="!offerNumDate">当前价格 {{details.currentPrice}}CNY</div>-->
-            <!--<div class="value fl" v-if="offerNumDate">当前价格 {{details.basePrice}}CNY</div>-->
-            <!--<div class="time fr">-->
-                <!--<div class="fr num">{{s}}</div>-->
-                <!--<div class="fr colon">:</div>-->
-                <!--<div class="fr num">{{m}}</div>-->
-                <!--<div class="fr colon">:</div>-->
-                <!--<div class="fr num">{{h}}</div>-->
-                <!--<div class="fr colon"> :</div>-->
-                <!--<div class="fr num">{{day}}</div>-->
-            <!--</div>-->
-        <!--</div>-->
+        <div class="infomation bground2 clearfix" v-else-if="details.auctionStatus === 2">
+            <div class="learnMore fl" @click="lookMore()">出价记录</div>
+            <div class="value fl" v-if="!offerNumDate">当前价格 {{details.currentPrice}}CNY</div>
+            <div class="value fl" v-if="offerNumDate">当前价格 {{details.basePrice}}CNY</div>
+            <div class="time fr">
+                <div class="fr num">{{s}}</div>
+                <div class="fr colon">:</div>
+                <div class="fr num">{{m}}</div>
+                <div class="fr colon">:</div>
+                <div class="fr num">{{h}}</div>
+                <div class="fr colon"> :</div>
+                <div class="fr num">{{day}}</div>
+            </div>
+        </div>
         <div class="infomation bground3 clearfix" v-else-if="details.auctionStatus === 3">
-            <div class="learnMore fl">查看更多</div>
-            <div class="value fl">当前价格 200,000CNY</div>
+            <div class="learnMore fl" @click="lookMore()">出价记录</div>
+            <div class="value fl">当前价格 {{details.currentPrice}}CNY</div>
             <div class="success fr">
                 拍品成交
             </div>
@@ -224,8 +221,8 @@
             </div>
         </div>
         <div class="infomation bground3 clearfix" v-else-if="details.auctionStatus === 3">
-            <div class="learnMore fl">查看更多</div>
-            <div class="value fl">当前价格 200,000CNY</div>
+            <div class="learnMore fl" @click="lookMore()">出价记录</div>
+            <div class="value fl">当前价格 {{details.currentPrice}}CNY</div>
             <span class="warn">支付</span>
             <div class="time fr">
                 <div class="fr num">01</div>
@@ -246,7 +243,8 @@
                 <span class="price">{{bidPrice}}CNY</span>
             </div>
             <div class="r-icon" @click="collectBtn()">
-                <i class="iconfont icon-duigoudunpai"></i>
+                <img v-if="hasCollect" src="../../assets/image/mycenter/collect.png"/>
+                <img v-if="!hasCollect" src="../../assets/image/mycenter/collectNo.png"/>
             </div>
         </div>
         <!--当前价格-->
@@ -257,26 +255,30 @@
                 <span class="btn2" @click="addPrice()">+</span>
             </div>
             <!--收藏状态-->
-            <div class="r-icon" @click="collectBtn()"><img src="../../assets/image/mycenter/collect.png"/></div>
-            <!--<div class="r-icon"><img src="../../assets/image/mycenter/collectNo.png"/></div>-->
-            <!--<div class="offer" @click="offerPrice()">出&nbsp;&nbsp;价</div>-->
-            <div class="offer" @click="offerPrice()">购&nbsp;&nbsp;买</div>
+            <div class="r-icon" @click="collectBtn()">
+                <img v-if="hasCollect" src="../../assets/image/mycenter/collect.png"/>
+                <img v-if="!hasCollect" src="../../assets/image/mycenter/collectNo.png"/>
+            </div>
+            <div class="offer" @click="offerPrice()">参与竞拍</div>
         </div>
         <!--交易结束的价格-->
         <div class="footer" v-else-if="details.auctionStatus === 3">
             <div class="value">
                 <span class='label'>成交价格</span>
-                <span class="price">203,000 CNY</span>
+                <span class="price">{{details.currentPrice}}CNY</span>
             </div>
             <div class="r-icon"><i class="iconfont icon-duigoudunpai"></i></div>
         </div>
+        <!--流拍-->
         <div class="footer" v-else-if="details.auctionStatus === 4">
             <div class="value">
-                <span class='label'>成交价格</span>
-                <span class="price">203,000 CNY</span>
+                <span class='label'>起拍价格</span>
+                <span class="price">{{details.currentPrice}}CNY</span>
             </div>
-            <div class="r-icon" @click="getList()"><i class="iconfont icon-duigoudunpai"></i></div>
-            <div class="offer">去支付</div>
+            <div class="r-icon" @click="collectBtn()">
+                <img v-if="hasCollect" src="../../assets/image/mycenter/collect.png"/>
+                <img v-if="!hasCollect" src="../../assets/image/mycenter/collectNo.png"/>
+            </div>
         </div>
         <!--<z-foot></z-foot>-->
         <!--<z-payment></z-payment>-->
@@ -371,7 +373,7 @@
     export default {
         data () {
             return {
-                title: '专场详情',
+                title: '专场详情-拍场详情',
                 id:'',
                 useId:'',
                 img:'',
@@ -408,6 +410,7 @@
                         name:'某某某',
                         time:'2017.10.25 23:12:34'},
                 ],
+                hasCollect:false,
             }
         },
         components:{'z-foot':item,'z-info':info,'z-record':record,'z-payment':payment},
@@ -420,6 +423,12 @@
             that.checked = window.localStorage.getItem('checked');
             if(that.checked){
                 that.wxpay()
+            }
+            let token = window.localStorage.getItem('token');
+            if(token != null){
+                that.isCollect();
+            }else{
+
             }
         },
         beforeUpdate(){
@@ -531,13 +540,16 @@
                         }else{
                             that.bidPrice = that.details.currentPrice
                         }
-                        setInterval(function(){
-                            let time = that.details.mqEndTime - new Date();
-                            let aa = common.getFormatOfDate(time,'dd:h:m:s')
-                            that.day = common.getFormatOfDate(time,'dd')
-                            that.h = common.getFormatOfDate(time,'h')
-                            that.m = common.getFormatOfDate(time,'m')
-                            that.s = common.getFormatOfDate(time,'s')
+                        let timeRun = setInterval(function(){
+                            let timestamp = new Date();
+                            let time = that.details.mqEndTime - timestamp;
+                            that.day = parseInt(time / 1000 / 60 / 60 / 24 , 10) < 10 ? '0' + parseInt(time / 1000 / 60 / 60 / 24 , 10) : parseInt(time / 1000 / 60 / 60 / 24 , 10);
+                            that.h =  parseInt(time / 1000 / 60 / 60 % 24 , 10) < 10 ? '0' +  parseInt(time / 1000 / 60 / 60 % 24 , 10) :  parseInt(time / 1000 / 60 / 60 % 24 , 10);
+                            that.m = parseInt(time / 1000 / 60 % 60, 10) < 10 ? '0' +  parseInt(time / 1000 / 60 % 60 , 10) :  parseInt(time / 1000 / 60 % 60 , 10);
+                            that.s = parseInt(time / 1000 % 60, 10) < 10 ? '0' + parseInt(time / 1000 % 60, 10) : parseInt(time / 1000 % 60, 10);
+                            if(time < 0){
+                                clearInterval(timeRun)
+                            }
                         },1000);
                         that.img = res.data.datas.picItems;
                         that.$nextTick(function () {
@@ -600,6 +612,15 @@
                         })
                     }
                 })
+            },
+            //是否收藏接口
+            isCollect(){
+              let that = this;
+              commonService.getCollect({id:that.id},that.id).then(function(res){
+                  if(res.data.code === 200){
+                      that.hasCollect = res.data.datas;
+                  }
+              })
             },
             //swiper初始化
             onswiper(){
@@ -696,8 +717,7 @@
                 commonService.getAuctionPrice({pageNo:that.page2.num,pageSize:50,auctionId:that.id}).then(function(res){
                     if(res.data.code === 200){
                         that.pricerecord = res.data.datas.datas;
-                        console.log(that.pricerecord.length)
-                        for(let i = 0;i <= that.pricerecord.length;i++){
+                        for(let i = 0;i < that.pricerecord.length;i++){
                             let price = that.pricerecord[i].offerAmount/100;
                             that.pricerecord[i].offerAmount = price.toString()+ '.00';
                             that.pricerecord[i].offerTime = common.getFormatOfDate(that.pricerecord[i].offerTime,'yyyy-MM-dd h:m:s')
@@ -967,7 +987,13 @@
             //收藏
             collectBtn:function(){
                 let that = this;
-                commonService.postCollect({id:that.id,collect:true},that.id).then(function(res){
+                let collectDate = ''
+                if(that.hasCollect){
+                    collectDate = false
+                }else{
+                    collectDate = true
+                }
+                commonService.postCollect({id:that.id,collect:collectDate},that.id).then(function(res){
                     console.log(res)
                     if(res.data.code === 537134){
                         that.dis4Show = true;
@@ -976,7 +1002,7 @@
                         that.dis4Show = true;
                         that.hintText = "拍品已出价,不可取消收藏";
                     }else if(res.data.code === 200){//收藏成功
-
+                        that.hasCollect = !that.hasCollect;
                     }
                 })
             }
@@ -1031,48 +1057,18 @@
                 float: right;
                 padding-right: 20px;
                 color:#A9AEB6;
+                img{
+                    width: 0.6rem;
+                    margin-top: 0.15rem;
+                }
             }
             .span2{
                 float: right;
                 padding-right: 20px;
                 color:#A9AEB6;
-                .fang{
-                    width:0.3rem;
-                    height:0.35rem;
-                    margin-top:0.2rem;
-                    border:0.05rem solid #A9AEB6;
-                    position: relative;
-                    border-radius: 1px;
-                    .yuan{
-                        width:0.1rem;
-                        height:0.1rem;
-                        background:#A9AEB6;
-                        position: absolute;
-                        top:0.05rem;
-                        left:0;
-                        right:0;
-                        margin:auto;
-                        border-radius: 100%;
-                    }
-                    .san{
-                        width: 0;
-                        height: 0;
-                        border-right: 0.15rem solid transparent;
-                        border-bottom: 0.15rem solid #A9AEB6;
-                        border-left: 0.15rem solid transparent;
-                        position: absolute;
-                        bottom:0;
-                        .san2{
-                            width: 0;
-                            height: 0;
-                            border-right: 0.15rem solid transparent;
-                            border-bottom: 0.15rem solid #fff;
-                            border-left: 0.15rem solid transparent;
-                            position: absolute;
-                            bottom: -0.2rem;
-                            left: -0.14rem;
-                        }
-                    }
+                img{
+                    width: 0.6rem;
+                    margin-top: 0.15rem;
                 }
             }
         }
@@ -1089,12 +1085,13 @@
         }
         .sell-list{
             .sell-pic{
-                height:4.5rem;
+                height:7.5rem;
                 overflow: hidden;
                 img{
                     width: 100%;
-                    height: 7rem;
-                    margin-top:-1rem;
+                    height: 100%;
+                    /*height: 8rem;*/
+                    /*margin-top:-1rem;*/
                 }
                 .dian{
                     width:0.4rem;
@@ -1125,15 +1122,19 @@
                     color: #A6A9AF;
                 }
                 .sellicon2{
-                    width: 0;
-                    height: 0;
-                    border-left: 0.2rem solid transparent;
-                    border-right: 0.2rem solid transparent;
-                    border-bottom: 0.3rem solid  #A9AEB6;
+                    /*width: 0;*/
+                    /*height: 0;*/
+                    /*border-left: 0.2rem solid transparent;*/
+                    /*border-right: 0.2rem solid transparent;*/
+                    /*border-bottom: 0.3rem solid  #A9AEB6;*/
                     float:right;
-                    position: relative;
-                    margin-right:6px;
-                    margin-top:0.04rem;
+                    /*position: relative;*/
+                    /*margin-right:6px;*/
+                    /*margin-top:0.04rem;*/
+                    img{
+                        width: 0.4rem;
+                        margin-right: 0.1rem;
+                    }
                     .icon{
                         width: 0;
                         height: 0;
@@ -1161,7 +1162,7 @@
                         font-weight: bold;
                     }
                     .intrCh{
-                        font-size: 12px;
+                        font-size: 14px;
                         color:rgb(133, 133, 133);
                     }
                     .prove{
@@ -1182,11 +1183,11 @@
                     .info{
                         padding: @size10;
                         p{
-                            font-size: 10px;
+                            font-size: 12px;
                             text-align: left;
                             color:rgb(133, 133, 133);
                             span{
-                                font-size: 10px;
+                                font-size: 12px;
                             }
                         }
                         div{
@@ -1206,6 +1207,10 @@
                     font-size: 11px;
                     color: rgb(133, 133, 133);
                     padding: @size10;
+                    img{
+                        width:100% !important;
+                        height: auto !important;
+                    }
                 }
                 .pic-list{
                     // width: @size375;
@@ -1463,9 +1468,9 @@
                 }
                 .disShow{
                     /*height: 2.99rem;*/
-                    /*border-bottom: 1px solid rgb(202, 209, 217);*/
+                    border-bottom: 1px solid rgb(202, 209, 217);
                     overflow: hidden;
-                    padding-bottom:0.1rem;
+                    padding-bottom:0.4rem;
                     .pic{
                         width: @size80;
                         height: @size80;
@@ -1494,6 +1499,10 @@
                         .title{
                             font-size: 10px;
                             color: rgb(122, 122, 122);
+                            width:3rem;
+                            overflow: hidden;
+                            text-overflow:ellipsis;
+                            white-space: nowrap;
                         }
                         .time{
                             font-size: 10px;
@@ -2143,13 +2152,13 @@
                 margin:@size10 @size10 @size10 @size10;
             }
             .value{
-                font-size:  9px;
+                font-size:  12px;
                 color: white;
                 margin-top:@size6;
             }
             .value1{
                 color: black;
-                font-size:  9px;
+                font-size:  12px;
                 margin-top:@size6;
                 margin-right: @size10;
             }
@@ -2246,7 +2255,6 @@
                 line-height: @size45;
                 position: relative;
                 text-align: center;
-                display: none;
                 .btn1{
                     width: 1.46rem;
                     line-height:@size40;
@@ -2295,7 +2303,7 @@
                 border-left:1px solid rgb(205, 212, 220);
                 text-align: center;
                 line-height: @size45;
-                font-size: 16px;
+                font-size: 14px;
             }
         }
     }

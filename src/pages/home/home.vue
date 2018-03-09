@@ -1,7 +1,7 @@
 <template>
     <div id="home" class="home" v-set-title="title">
         <div class="header">传家</div>
-        <div id="mescroll" class="mescroll">
+        <div id="mescroll" class="mescroll homeMescroll">
             <div class="mescroll-bounce">
                 <div class="wrapper">
                     <div class="content" v-for="list in homelist">
@@ -11,6 +11,7 @@
             </div>
         </div>
         <z-footer ></z-footer>
+        <!--<div style="width:100%;height:2rem;background:red;position:fixed;bottom:0;" @click="checked(1)"></div>-->
     </div>
 </template>
 
@@ -32,10 +33,30 @@
         components:{'home-item':itemc},
         mounted: function() {
             let that = this;
-            that.onMove();
+//            that.onMove();
             that.meScroll();
         },
         methods: {
+            checked(index){
+                let that = this;
+                console.log(index)
+//                console.log(that.$route.name);
+                that.index = index;
+                if(index === 0){
+                    that.$router.replace({name:'home'})
+                    that.index = 0;
+                }else if(index === 1){
+                    that.$router.replace({name:'special'})
+//                    that.$router.push({name:'specialMore',params:{id:'5aa1f83badc051793d0f3bd5'}})
+                    that.index = 1;
+                }else if(index === 2){
+                    that.$router.replace({name:'home'})
+                    that.index = 2;
+                }else if(index === 3){
+                    that.$router.replace({name:'home'})
+                    that.index = 3;
+                }
+            },
             meScroll: function (){
                 let that = this;
                 let scrollUp = document.getElementsByClassName('mescroll-upwarp');
@@ -156,7 +177,7 @@
                             evt._isScroller = true
                     })
                 }
-                overscroll(document.querySelector('.mescroll'));
+                overscroll(document.querySelector('.homeMescroll'));
                 document.body.addEventListener('touchmove', function(evt) {
                     //In this case, the default behavior is scrolling the body, which
                     //would result in an overflow.  Since we don't want that, we preventDefault.

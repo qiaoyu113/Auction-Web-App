@@ -3,18 +3,15 @@
         组件要小，如遇list，只将item做成组件，其他的都写在页面中
     -->
     <!-- 专场列表-排场详情 -->
-    <div class="" id="" v-set-title="title">
+    <div class="" id="specialDetails" v-set-title="title">
         <div class="header">传家</div>
         <div class="nav">
             <span class="back" @click="back()"><i class="iconfont icon-fanhui"></i></span>
-            <span class="span1"><i class="iconfont icon-bianji2"></i></span>
+            <span class="span1">
+                <img src="../../assets/image/mycenter/icon2.png"/>
+            </span>
             <span class="span2">
-                <div class="fang">
-                    <div class="yuan"></div>
-                    <div class="san">
-                        <div class="san2"></div>
-                    </div>
-                </div>
+                <img src="../../assets/image/mycenter/icon1.png"/>
             </span>
         </div>
         <div id="mescroll" class="mescroll">
@@ -26,7 +23,9 @@
                         </div>
                         <div class="sell-information">
                             <div class="font">{{details.auctionNum}}</div>
-                            <div class="sellicon2"><div class="icon"></div></div>
+                            <div class="sellicon2">
+                                <img src="../../assets/image/mycenter/icon3.png"/>
+                            </div>
                             <div class="font">{{details.doneUserNum}}</div>
                             <div class="sellicon1"></div>
                         </div>
@@ -59,7 +58,7 @@
                                 <div class="sta-over">开始：{{startTime}}</div>
                                 <div class="sta-over">结束：{{overTime}}</div>
                             </div>
-                            <div class="sell-inf" v-html="details.content"></div>
+                            <div class="sell-html" v-html="details.content"></div>
                         </div>
                     </div>
                     <div class="sell-more clearfix" v-if="recoCh">
@@ -209,11 +208,31 @@
                         that.details = res.data.datas;
                         that.img = that.$store.state.picHead + res.data.datas.coverUrl;
                         let timeRun = setInterval(function(){
-                            let time = that.details.auctionEndTime - new Date();
-                            that.EndTime = common.getFormatOfDate(time,'dd:h:m:s')
-                            if(time < 0){
-                                clearInterval(timeRun)
+                            let now = new Date().getTime()
+                            let time = '';
+                            if(that.details.auctionStatus == '1'){
+                                time = that.details.auctionStartTime - now;
+                            }else{
+                                time = that.details.auctionEndTime - now;
                             }
+
+                            let day = '';
+                            let h =  '';
+                            let m =  '';
+                            let s =  '';
+                            if(time < 0){
+                                day = '00';
+                                h =  '00';
+                                m =  '00';
+                                s =  '00';
+                                clearInterval(timeRun)
+                            }else{
+                                day = parseInt(time / 1000 / 60 / 60 / 24 , 10) < 10 ? '0' + parseInt(time / 1000 / 60 / 60 / 24 , 10) : parseInt(time / 1000 / 60 / 60 / 24 , 10);
+                                h =  parseInt(time / 1000 / 60 / 60 % 24 , 10) < 10 ? '0' +  parseInt(time / 1000 / 60 / 60 % 24 , 10) :  parseInt(time / 1000 / 60 / 60 % 24 , 10);
+                                m = parseInt(time / 1000 / 60 % 60, 10) < 10 ? '0' +  parseInt(time / 1000 / 60 % 60 , 10) :  parseInt(time / 1000 / 60 % 60 , 10);
+                                s = parseInt(time / 1000 % 60, 10) < 10 ? '0' + parseInt(time / 1000 % 60, 10) : parseInt(time / 1000 % 60, 10);
+                            }
+                            that.EndTime = day + ':' + h + ':' + m + ':' + s;
                         },1000);
                         that.overTime = common.getFormatOfDate(that.details.auctionEndTime,'yyyy.MM.dd h:m')
                         that.startTime = common.getFormatOfDate(that.details.auctionStartTime,'yyyy.MM.dd h:m')
@@ -312,419 +331,401 @@
     @import url('../../assets/css/base.less');
     @import url('../../assets/css/icon/iconfont.css');
     @import url("../../assets/css/common/mescroll.min.css");
-    .header{
-        position: fixed;
-        z-index: 100;
-        top: 0;
-        width: @size375;
-        height: @size45;
-        background:rgba(2, 10, 2, 1);
-        font-size: @size20;
-        color: white;
-        text-align: center;
-        line-height: @size45;
-    }
-    .nav{
-        width: @size375;
-        height: @size35;
-        line-height: @size35;
-        border-bottom: 1px solid rgb(53, 60, 70);
-        background: rgb(255, 255, 255);
-        position: fixed;
-        top: @size45;
-        z-index: 100;
-        .back{
+    #specialDetails{
+        .header{
+            position: fixed;
+            z-index: 100;
+            top: 0;
+            width: @size375;
+            height: @size45;
+            background:rgba(2, 10, 2, 1);
+            font-size: @size20;
+            color: white;
+            text-align: center;
+            line-height: @size45;
+        }
+        .nav{
+            width: @size375;
+            height: @size35;
             line-height: @size35;
-            i{
-                font-size:28px;
-                margin-left: 0.3rem;
+            border-bottom: 1px solid rgb(53, 60, 70);
+            background: rgb(255, 255, 255);
+            position: fixed;
+            top: @size45;
+            z-index: 100;
+            .back{
+                line-height: @size35;
+                i{
+                    font-size:28px;
+                    margin-left: 0.3rem;
+                    color:#A9AEB6;
+                }
+            }
+            .span1{
+                float: right;
+                padding-right: 20px;
                 color:#A9AEB6;
-            }
-        }
-        .span1{
-            float: right;
-            padding-right: 20px;
-            color:#A9AEB6;
-        }
-        .span2{
-            float: right;
-            padding-right: 20px;
-            color:#A9AEB6;
-            .fang{
-                width:0.3rem;
-                height:0.35rem;
-                margin-top:0.22rem;
-                border:0.05rem solid #A9AEB6;
-                position: relative;
-                border-radius: 1px;
-                .yuan{
-                    width:0.1rem;
-                    height:0.1rem;
-                    background:#A9AEB6;
-                    position: absolute;
-                    top:0.05rem;
-                    left:0;
-                    right:0;
-                    margin:auto;
-                    border-radius: 100%;
+                img{
+                    width: 0.6rem;
+                    margin-top: 0.15rem;
                 }
-                .san{
-                    width: 0;
-                    height: 0;
-                    border-right: 0.15rem solid transparent;
-                    border-bottom: 0.15rem solid #A9AEB6;
-                    border-left: 0.15rem solid transparent;
-                    position: absolute;
-                    bottom:0;
-                    .san2{
-                        width: 0;
-                        height: 0;
-                        border-right: 0.15rem solid transparent;
-                        border-bottom: 0.15rem solid #fff;
-                        border-left: 0.15rem solid transparent;
-                        position: absolute;
-                        bottom: -0.2rem;
-                        left: -0.14rem;
-                    }
+            }
+            .span2{
+                float: right;
+                padding-right: 20px;
+                color:#A9AEB6;
+                img{
+                    width: 0.6rem;
+                    margin-top: 0.15rem;
                 }
             }
         }
-    }
-    #mescroll{
-        width:100%;
-        position: fixed;
-        top:2.14rem;
-        bottom:0;
-        left:0;
-        right:0;
-        margin:auto;
-        height:auto;
-        .mescroll-bounce{
+        #mescroll{
             width:100%;
+            position: fixed;
+            top:2.14rem;
+            bottom:0;
+            left:0;
+            right:0;
+            margin:auto;
+            height:auto;
+            .mescroll-bounce{
+                width:100%;
+            }
         }
-    }
-    .container{
-        width:100%;
-        .sell-more{
-            padding: 0.093rem;
-            box-sizing: border-box;
-            .sellList{
-                width: 4.57rem;
-                float:left;
-                margin:0.2rem 0.1rem;
-                position: relative;
-                .pic {
-                    width:100%;
+        .container{
+            width:100%;
+            .sell-more{
+                padding: 0.093rem;
+                box-sizing: border-box;
+                .sellList{
+                    width: 4.57rem;
+                    float:left;
+                    margin:0.2rem 0.1rem;
                     position: relative;
-                    img {
-                        width: 100%;
-                        height: 3.47rem;
+                    .pic {
+                        width:100%;
+                        position: relative;
+                        img {
+                            width: 100%;
+                            height: 3.47rem;
+                        }
+                        .money {
+                            font-size: 15px;
+                            padding-top: @size15;
+                        }
+                        .title {
+                            font-size: 14px;
+                            color: rgb(133, 133, 133);
+                            padding-top: @size1;
+                            overflow: hidden;
+                            white-space: nowrap;
+                            text-overflow:ellipsis;
+                        }
+                        .number {
+                            font-size: 12px;
+                            color: rgb(133, 133, 133);
+                            padding: 0 0 @size25 0;
+                            overflow: hidden;
+                            white-space: nowrap;
+                            text-overflow:ellipsis;
+                        }
                     }
-                    .money {
-                        font-size: 15px;
-                        padding-top: @size15;
-                    }
-                    .title {
-                        font-size: 14px;
-                        color: rgb(133, 133, 133);
-                        padding-top: @size1;
-                        overflow: hidden;
-                        white-space: nowrap;
-                        text-overflow:ellipsis;
-                    }
-                    .number {
-                        font-size: 12px;
-                        color: rgb(133, 133, 133);
-                        padding: 0 0 @size25 0;
-                        overflow: hidden;
-                        white-space: nowrap;
-                        text-overflow:ellipsis;
-                    }
-                }
-                .date{
-                    width:0.7rem;
-                    position: absolute;
-                    right:0;
-                    top:0;
-                    .collect{
-                        width:0.35rem;
-                        height:0.35rem;
-                        float:left;
-                        background:#333333;
-                        padding:0.08rem 0.1rem;
-                        box-sizing: border-box;
-                        .collectIcon{
-                            width:100%;
-                            height:100%;
+                    .date{
+                        width:0.7rem;
+                        position: absolute;
+                        right:0;
+                        top:0;
+                        .collect{
+                            width:0.35rem;
+                            height:0.35rem;
+                            float:left;
+                            background:#333333;
+                            padding:0.08rem 0.1rem;
+                            box-sizing: border-box;
+                            .collectIcon{
+                                width:100%;
+                                height:100%;
+                                background:#F2CE76;
+                                position: relative;
+                                .bottom{
+                                    width: 0;
+                                    height: 0;
+                                    position: absolute;
+                                    bottom:0;
+                                    border-right: 0.075rem solid transparent;
+                                    border-bottom: 0.075rem solid #333333;
+                                    border-left: 0.075rem solid transparent;
+                                }
+                            }
+                        }
+                        .collect2{
+                            width:0.35rem;
+                            height:0.35rem;
+                            float:right;
+                            background:#5EBAA9;
+                            padding: 0.09rem 0.03rem;
+                            box-sizing: border-box;
+                            .icon{
+                                width: 0.06rem;
+                                height: 100%;
+                                float: left;
+                                background: #fff;
+                                margin: 0 0.04rem;
+                            }
+                        }
+                        .collect3{
+                            width:0.35rem;
+                            height:0.35rem;
+                            float:right;
                             background:#F2CE76;
+                            padding: 0.09rem 0.09rem;
+                            box-sizing: border-box;
+                            .icon{
+                                width:100%;
+                                height:100%;
+                                border-radius: 100%;
+                                background:#fff;
+                            }
+                        }
+                        .collect4{
+                            width:0.35rem;
+                            height:0.35rem;
+                            float:right;
+                            background:#EB6100;
+                            padding: 0.09rem 0.09rem;
+                            box-sizing: border-box;
                             position: relative;
-                            .bottom{
+                            .icon{
                                 width: 0;
                                 height: 0;
                                 position: absolute;
-                                bottom:0;
-                                border-right: 0.075rem solid transparent;
-                                border-bottom: 0.075rem solid #333333;
-                                border-left: 0.075rem solid transparent;
+                                left: 0.08rem;
+                                border-top: 0.1rem solid transparent;
+                                border-left: 0.16rem solid #fff;
+                                border-bottom: 0.1rem solid transparent;
+                            }
+                            .icon2{
+                                width: 0.03rem;
+                                height: 0.2rem;
+                                background: #fff;
+                                position: absolute;
+                                right: 0.1rem;
+                            }
+                        }
+                        .collect5{
+                            width:0.35rem;
+                            height:0.35rem;
+                            float:right;
+                            background:#808080;
+                            padding: 0.09rem 0.09rem;
+                            box-sizing: border-box;
+                            position: relative;
+                            .icon{
+                                width: 0;
+                                height: 0;
+                                position: absolute;
+                                left: 0.08rem;
+                                border-top: 0.1rem solid transparent;
+                                border-left: 0.16rem solid #fff;
+                                border-bottom: 0.1rem solid transparent;
+                            }
+                            .icon2{
+                                width: 0.03rem;
+                                height: 0.2rem;
+                                background: #fff;
+                                position: absolute;
+                                right: 0.1rem;
                             }
                         }
                     }
-                    .collect2{
-                        width:0.35rem;
-                        height:0.35rem;
-                        float:right;
-                        background:#5EBAA9;
-                        padding: 0.09rem 0.03rem;
-                        box-sizing: border-box;
-                        .icon{
-                            width: 0.06rem;
-                            height: 100%;
-                            float: left;
-                            background: #fff;
-                            margin: 0 0.04rem;
-                        }
-                    }
-                    .collect3{
-                        width:0.35rem;
-                        height:0.35rem;
-                        float:right;
-                        background:#F2CE76;
-                        padding: 0.09rem 0.09rem;
-                        box-sizing: border-box;
-                        .icon{
-                            width:100%;
-                            height:100%;
-                            border-radius: 100%;
-                            background:#fff;
-                        }
-                    }
-                    .collect4{
-                        width:0.35rem;
-                        height:0.35rem;
-                        float:right;
-                        background:#EB6100;
-                        padding: 0.09rem 0.09rem;
-                        box-sizing: border-box;
-                        position: relative;
-                        .icon{
-                            width: 0;
-                            height: 0;
-                            position: absolute;
-                            left: 0.08rem;
-                            border-top: 0.1rem solid transparent;
-                            border-left: 0.16rem solid #fff;
-                            border-bottom: 0.1rem solid transparent;
-                        }
-                        .icon2{
-                            width: 0.03rem;
-                            height: 0.2rem;
-                            background: #fff;
-                            position: absolute;
-                            right: 0.1rem;
-                        }
-                    }
-                    .collect5{
-                        width:0.35rem;
-                        height:0.35rem;
-                        float:right;
-                        background:#808080;
-                        padding: 0.09rem 0.09rem;
-                        box-sizing: border-box;
-                        position: relative;
-                        .icon{
-                            width: 0;
-                            height: 0;
-                            position: absolute;
-                            left: 0.08rem;
-                            border-top: 0.1rem solid transparent;
-                            border-left: 0.16rem solid #fff;
-                            border-bottom: 0.1rem solid transparent;
-                        }
-                        .icon2{
-                            width: 0.03rem;
-                            height: 0.2rem;
-                            background: #fff;
-                            position: absolute;
-                            right: 0.1rem;
-                        }
-                    }
                 }
             }
         }
-    }
-    .sell-list{
-        .sell-pic{
-            width:100%;
-            height: @size162;
-            overflow: hidden;
-            img{
-                width: 100%;
-                height: 100%;
+        .sell-list{
+            .sell-pic{
+                width:100%;
+                height: @size162;
+                overflow: hidden;
+                img{
+                    width: 100%;
+                    height: 100%;
+                }
             }
-        }
-        .sell-information {
-            padding: 10px;
-            box-sizing: border-box;
-            position: relative;
-            overflow: hidden;
-            .sellicon1{
-                width:0.16rem;
-                height:0.16rem;
-                float:right;
-                border: 0.06rem solid #A6A9AF;
-                margin-right:10px;
-                margin-top:0.06rem;
-            }
-            .font{
-                font-size:10px;
-                float:right;
-                margin-right:10px;
-                color:#A6A9AF;
-            }
-            .sellicon2{
-                width: 0;
-                height: 0;
-                border-left: 0.2rem solid transparent;
-                border-right: 0.2rem solid transparent;
-                border-bottom: 0.3rem solid #A6A9AF;
-                float:right;
+            .sell-information {
+                padding: 10px;
+                box-sizing: border-box;
                 position: relative;
-                margin-right:10px;
-                margin-top:0.04rem;
-                .icon{
-                    width: 0;
-                    height: 0;
-                    border-left: 0.1rem solid transparent;
-                    border-right: 0.1rem solid transparent;
-                    border-bottom: 0.15rem solid #fff;
+                overflow: hidden;
+                .sellicon1{
+                    width:0.16rem;
+                    height:0.16rem;
+                    float:right;
+                    border: 0.06rem solid #A6A9AF;
+                    margin-right:10px;
+                    margin-top:0.06rem;
+                }
+                .font{
+                    font-size:10px;
+                    float:right;
+                    margin-right:10px;
+                    color:#A6A9AF;
+                }
+                .sellicon2{
+                    /*width: 0;*/
+                    /*height: 0;*/
+                    /*border-left: 0.2rem solid transparent;*/
+                    /*border-right: 0.2rem solid transparent;*/
+                    /*border-bottom: 0.3rem solid #A6A9AF;*/
+                    float:right;
+                    /*position: relative;*/
+                    /*margin-right:10px;*/
+                    /*margin-top:0.04rem;*/
+                    img{
+                        width: 0.4rem;
+                        margin-right: 0.1rem;
+                    }
+                    .icon{
+                        width: 0;
+                        height: 0;
+                        border-left: 0.1rem solid transparent;
+                        border-right: 0.1rem solid transparent;
+                        border-bottom: 0.15rem solid #fff;
+                        position: absolute;
+                        left: -0.1rem;
+                        top: 0.1rem;
+                    }
+                }
+                a {
+                    font-size: @size6;
+                    text-decoration: underline;
+                    color: red;
+                    padding-left: 20px;
+                }
+                .pos2 {
                     position: absolute;
-                    left: -0.1rem;
-                    top: 0.1rem;
+                    top: 15px;
+                    right: 10px;
+                    font-size: @size6;
+                    color: rgb(65, 62, 62);
+                }
+                .pos1 {
+                    position: absolute;
+                    top: 15px;
+                    right: 70px;
+                    font-size: @size6;
+                    color: rgb(51, 51, 51);
                 }
             }
-            a {
-            font-size: @size6;
-            text-decoration: underline;
-            color: red;
-            padding-left: 20px;
-            }
-            .pos2 {
-            position: absolute;
-            top: 15px;
-            right: 10px;
-            font-size: @size6;
-            color: rgb(65, 62, 62);
-            }
-            .pos1 {
-            position: absolute;
-            top: 15px;
-            right: 70px;
-            font-size: @size6;
-            color: rgb(51, 51, 51);
-            }
-        }
-        .sell-content{
-            box-sizing: border-box;
-            padding: @size20;
-            .sell-int{
-                div{
-                    text-align: center;
-                }
-                .time{
-                    font-size: 18px;
-                    font-weight: bold;
-                }
-                .title{
-                    font-size: 12px;
-                    padding-top: @size5;
-                    color:rgb(133, 133, 133);
-                }
-                .info{
-                    font-size: 9px;
-                    padding-top: @size25;
-                    padding-bottom: @size25;
-                    color:rgb(133, 133, 133);
-                }
-                .state{
-                    font-size: @size10;
-                    text-align: left;
-                    color:rgb(133, 133, 133);
-                    overflow: hidden;
-                    margin-bottom:0.1rem;
-                    span{
-                        font-size: @size10;
+            .sell-content{
+                box-sizing: border-box;
+                padding: @size20;
+                .sell-html{
+                    margin-top:0.2rem;
+                    img{
+                        width:100% !important;
+                        height: auto !important;
                     }
-                    .span1 {
-                        width: @size15;
-                        height: @size15;
-                        display: inline-block;
-                        float: left;
-                        background: rgb(0, 188, 181);
-                        box-sizing: border-box;
+                }
+                .sell-int{
+                    div{
                         text-align: center;
-                        padding: 0.1rem 0.05rem;
-                        margin-right:0.1rem;
-                        position: relative;
-                        .xian{
-                            width:0.1rem;
-                            height:0.2rem;
-                            background:#fff;
-                            float:left;
-                            margin:0 0.02rem;
+                    }
+                    .time{
+                        font-size: 18px;
+                        font-weight: bold;
+                    }
+                    .title{
+                        font-size: 12px;
+                        padding-top: @size5;
+                        color:rgb(133, 133, 133);
+                    }
+                    .info{
+                        font-size: 9px;
+                        padding-top: @size25;
+                        padding-bottom: @size25;
+                        color:rgb(133, 133, 133);
+                    }
+                    .state{
+                        font-size: @size10;
+                        text-align: left;
+                        color:rgb(133, 133, 133);
+                        overflow: hidden;
+                        margin-bottom:0.1rem;
+                        span{
+                            font-size: @size10;
                         }
-                        .icon1{
-                            width: 70%;
-                            height: 100%;
-                            border-radius: 100%;
-                            background: #fff;
-                            margin: auto;
+                        .span1 {
+                            width: @size15;
+                            height: @size15;
+                            display: inline-block;
+                            float: left;
+                            background: rgb(0, 188, 181);
+                            box-sizing: border-box;
+                            text-align: center;
+                            padding: 0.1rem 0.05rem;
+                            margin-right:0.1rem;
+                            position: relative;
+                            .xian{
+                                width:0.1rem;
+                                height:0.2rem;
+                                background:#fff;
+                                float:left;
+                                margin:0 0.02rem;
+                            }
+                            .icon1{
+                                width: 70%;
+                                height: 100%;
+                                border-radius: 100%;
+                                background: #fff;
+                                margin: auto;
+                            }
+                            .icon4{
+                                width: 0;
+                                height: 0;
+                                position: absolute;
+                                left: 0.08rem;
+                                border-top: 0.1rem solid transparent;
+                                border-left: 0.16rem solid #fff;
+                                border-bottom: 0.1rem solid transparent;
+                            }
+                            .icon5{
+                                width: 0.03rem;
+                                height: 0.2rem;
+                                background: #fff;
+                                position: absolute;
+                                right: 0.1rem;
+                            }
                         }
-                        .icon4{
-                            width: 0;
-                            height: 0;
-                            position: absolute;
-                            left: 0.08rem;
-                            border-top: 0.1rem solid transparent;
-                            border-left: 0.16rem solid #fff;
-                            border-bottom: 0.1rem solid transparent;
+                        .bgcolor1{
+                            background: rgb(0, 188, 181);
                         }
-                        .icon5{
-                            width: 0.03rem;
-                            height: 0.2rem;
-                            background: #fff;
-                            position: absolute;
-                            right: 0.1rem;
+                        .bgcolor2{
+                            background: rgb(233, 199, 115);
+                        }
+                        .bgcolor3{
+                            background: rgb(235, 97, 0);
                         }
                     }
-                    .bgcolor1{
-                        background: rgb(0, 188, 181);
-                    }
-                    .bgcolor2{
-                        background: rgb(233, 199, 115);
-                    }
-                    .bgcolor3{
-                        background: rgb(235, 97, 0);
+                    .sta-over{
+                        font-size: 9px;
+                        text-align: left;
+                        color: rgb(133, 133, 133);
                     }
                 }
-                .sta-over{
-                    font-size: 9px;
-                    text-align: left;
+                .sell-inf{
+                    margin-top: @size20;
+                    font-size: 11px;
+                    line-height: @size24;
                     color: rgb(133, 133, 133);
                 }
             }
-            .sell-inf{
-                margin-top: @size20;
-                font-size: 11px;
-                line-height: @size24;
-                color: rgb(133, 133, 133);
-            }
+        }
+        .sell-more{
+            box-sizing: border-box;
+            text-align: center;
+            margin: @size5;
         }
     }
-    .sell-more{
-        box-sizing: border-box;
-        text-align: center;
-        margin: @size5;
-    }
-    
 </style>
 
