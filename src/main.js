@@ -3,8 +3,8 @@ import App from './App.vue'
 import Vuex from 'vuex'
 import VueRouter from 'vue-router'
 import routers from './router'
-// import ElementUI from 'element-ui'
-// import 'element-ui/lib/theme-default/index.css'
+import ElementUI from 'element-ui'
+import 'element-ui/lib/theme-chalk/index.css'
 // import VueLazyload from 'vue-lazyload'
 import store from './vuex';
 import './mixin/directive';
@@ -33,6 +33,7 @@ Vue.config.debug = true
 Vue.use(Vuex)
 Vue.use(VueRouter)
 Vue.use(VueCropper)
+Vue.use(ElementUI)
 
 
 // 定义全局组件
@@ -41,9 +42,9 @@ import zbanner from './component/common/banner.vue'
 import zfooter from './component/common/footer.vue'
 import zhistory from './component/common/goback.vue'
 import backhome from './component/common/back-home.vue'
-import VDistpicker from 'v-distpicker'
 
-Vue.component('v-distpicker', VDistpicker)
+
+
 Vue.component('z-modal', zmodal)
 Vue.component('z-banner', zbanner)
 Vue.component('z-footer', zfooter)

@@ -8,7 +8,7 @@
     2.配送中
     3.交易完成
     0.线下处理 -->
-    <div class="" id="" v-set-title="title">
+    <div class="orderDetails" id="" v-set-title="title">
         <div class="header">传家</div>
         <!-- 返回键,当订单完成时有删除icon -->
         <div class="nav">
@@ -73,55 +73,97 @@
                 <div class="witpay">待支付</div>
                 <div class="btn">更改支付方式</div>
             </div>
-            <div  v-if='index==2||index==3'>
-               <div class="logistic">
+            <div v-if="datas.status==4">
+               <div class="logistic" @click="show">
                     物流信息<span class="fr">...</span>
                 </div>
                 <div class="logdetail">
-                    <div>顺风速运</div>
-                    <div>暂无物流信息</div>
-                    <div>2018.04.11 09:06:33</div>
+                    <div>{{logistics.location}}</div>
+                    <div>{{logistics.context}}</div>
+                    <div>{{logistics.time}}</div>
                 </div> 
             </div>
             <div class="address">
-                <div class="peo"><span>李先生</span>  134 9766 9923</div>
-                <div>北京市 北京市 东城区</div>
-                <div>XX街道建外soho 12-2202</div>
+                <div class="peo"><span>{{adress.name}}</span>  {{adress.phone}}</div>
+                <div>{{adress.provinceName}} {{adress.cityName}} {{adress.districtName}}</div>
+                <div>{{adress.detailAdress}}</div>
             </div>
             <div class="itemInfo clearfix">
                 <div class="pic fl"><img src="../../assets/image/myimage/eg.gif" alt=""></div>
                 <div class="box fl">
-                    <div class="money">300,00CNY</div>
-                    <div class="title">器物器物器物</div>
-                    <div class="number">20180709-2</div>
+                    <div class="money">{{orderDetail.finalPrice}}CNY</div>
+                    <div class="title">{{orderDetail.auctionName}}</div>
+                    <div class="number">{{datas.createTime}}-{{orderDetail.auctionNo}}</div>
                 </div>
             </div>
             <div class="totalMoney clearfix">
                 <div class="fl">订单总额</div>
-                <div class="fr">50,500 CNY</div>
+                <div class="fr">{{datas.amount}} CNY</div>
             </div>
             <div class="moneys">
-                <div class="price clearfix"><div class="fl">拍品价格:</div><div class="fr">50,000 CNY</div></div>
-                <div class="price clearfix"><div class="fl">保险+运费:</div><div class="fr">500 CNY</div></div>
+                <div class="price clearfix"><div class="fl">拍品价格:</div><div class="fr">{{orderDetail.finalPrice}} CNY</div></div>
+                <div class="price clearfix"><div class="fl">保险+运费:</div><div class="fr">{{orderDetail.finalPrice / 100}} CNY</div></div>
             </div>
             <div class="orderinfo">
-                <div class="price clearfix"><div class="fl">订单编号:</div><div class="fr">308796987864</div></div>
-                <div class="price clearfix"><div class="fl">支付方式:</div><div class="fr"  v-if='index>0&&index<4'>微信</div><div class="fr"  v-if='index==0'>线下转账</div></div>
+                <div class="price clearfix"><div class="fl">订单编号:</div><div class="fr">{{orderDetail.adminId}}</div></div>
+                 <div class="price clearfix" v-if="createTime!=''"><div class="fl">支付时间:</div><div class="fr">{{createTime}}</div></div>
+                <div class="price clearfix"><div class="fl">支付方式:</div>
+                      <div class="fr"  v-if="datas.channelId=='ALIPAY_WAP'">支付宝</div>
+                      <div class="fr"  v-if="datas.channelId=='WX_NATIVE'">微信</div>
+                      <div class="fr"  v-if="datas.channelId=='UNIONPAY'">线下转账</div>
+                      <div class="fr"  v-if='index==0'>线下转账</div>
+               </div>
+
             </div>
         </div>
-        <div class="footer1" v-if='index==1'>支&nbsp;&nbsp;&nbsp;付</div>
+        <div class="footer1" v-if='index==1' @click="rechargeList">支&nbsp;&nbsp;&nbsp;付</div>
         <div class="footer" v-if='index==3'>
             <div class="value">
                 分&nbsp;&nbsp;&nbsp;享
             </div>
             <div class="r-icon" ><i class="iconfont icon-duigoudunpai"></i></div>
         </div>
+
+            <div class="logistics">
+        <div class="header">传家</div>
+        <div :class="dis">
+            <div class="transparent"></div>
+            <div class="popWin" >
+                <div class="close" @click="close()"><i class="iconfont icon-closeicon"></i></div>
+                <div class="titleEn">SHIPPING</div>
+                <div class="titleCh">物流信息</div>
+                <div class="num">运单号<span class="fr">{{logistic.nu}}</span></div>
+                <div class="num num1">快递公司<span class="fr">{{logistic.com}}</span></div>
+                <!-- <div class="num num1">预计送达<span class="fr">2018.05.11</span></div> -->
+                <div class="box">
+                    
+                    <div class="contents" v-for="lists in logisticss">
+                    <div class="line"> </div>
+                        <div class="contents_box">
+                        <!-- <div class="circle"></div> -->
+                        <p>{{lists.context}}</p>
+                        <!-- <p>{{lists.location}}</p> -->
+                        <!-- <p>期待与你下一次合作</p> -->
+                        <p>{{lists.time}}</p>
+                        </div>
+                    </div>
+           <!--          <div class="content">
+                        <div class="circle"></div>
+                        <p>[朝阳区]您的订单正在派送。感谢您的等待！</p>
+                        <p>配送员：李松松，电话：138 1234 8888</p>
+                        <p>2018.06.11 15:08:55</p>
+                    </div> -->
+                </div>
+            </div>
+        </div>
+    </div>
         
     </div>
 </template>
 
 <script >
 import {appService} from '../../service/appService'
+import {commonService} from '../../service/commonService.js'
   export default {
     props: ['str'],
     data () {
@@ -129,13 +171,86 @@ import {appService} from '../../service/appService'
           title:'订单详情-订单正常',
           arrays: [],
           index:0,
+          orderNo:'',//详情id
+          datas:'',//详情
+          orderDetail:'',
+          adress:'',//地址
+          logistics:'',//物流
+          logisticss:'',//物流列表
+          logistic:'',
+          arrays: [],
+          dis:'dis',
+          createTime:'',//支付时间
           
       }
     },
     components: {},
     mounted () {
+        this.huoqu()
+        this.getOrderid()
     },
-    methods: {}
+    methods: {
+         huoqu:function(){
+            this.orderNo=this.$route.query.id
+            // console.log(this.orderNo)
+        },
+        close:function() {
+            this.dis='dis';
+        },
+        show:function(){
+            this.dis=''
+        },
+        rechargeList:function(){      
+              let that=this;
+              let index=''
+              if(that.datas.channelId=='UNIONPAY'){
+                     index=3
+            that.$router.push({path:"/rechargeList",query:{money:that.datas.amount,index:index,orderNo:that.datas.adminId}})
+                }            
+        },
+         getOrderid:function(){
+            let that=this;
+            commonService.getOrderid(that.orderNo).then(function(res){
+                console.log(res.data.datas)
+                that.datas=res.data.datas
+                that.orderDetail=that.datas.orderDetail
+                that.adress=that.orderDetail.adress
+
+                 let orderLogs = res.data.datas.orderLogs
+                 for(let i=0;i<orderLogs.length;i++){
+                      console.log(11)
+                      if(orderLogs[i].status==3){
+                            that.createTime=orderLogs[i].createTime
+                      }
+
+                 }
+
+                if(that.datas.status==4){
+                   that.index=2
+                commonService.getKaidi({nu:that.orderDetail.nu,com:that.orderDetail.com}).then(function(res){
+                    // console.log(res)
+                    that.logistics=res.data.datas.data[0]
+                    // console.log(that.logistics)
+                    that.logisticss=res.data.datas.data
+                    that.logistic=res.data.datas
+                    console.log(res.data.datas)
+                    
+                })
+                }
+                if(that.datas.status==1){
+                   that.index=1
+                }
+                if(that.datas.status==2 || that.datas.status==3){
+                    that.index=0
+                }
+                if(that.datas.status==5){
+                    that.index=3
+                }
+                // console.log(that.orderDetail)
+            })
+          },
+
+    }
   }
 </script>
 
@@ -143,7 +258,7 @@ import {appService} from '../../service/appService'
     /*rem等基本设置都放在base中，不写多个*/
     @import url('../../assets/css/base.less');
     @import url('../../assets/css/icon/iconfont.css');
-    
+.orderDetails{
     .header{
         position: fixed;
         top: 0;
@@ -591,6 +706,130 @@ import {appService} from '../../service/appService'
             }
         } 
     }
+    .logistics{
+    .header{
+        position: fixed;
+        top: 0;
+        z-index: 100;
+        width: @size375;
+        height: @size45;
+        background:rgba(2, 10, 2, 1);
+        font-size: @size20;
+        color: white;
+        text-align: center;
+        line-height: @size45;
+    }
     
+    
+.dis{
+    display: none;
+}
+.transparent{
+    position: fixed;
+    bottom: 0;
+    z-index: 100;
+    width: 100%;
+    height: 100%;
+    background:#000;  
+    opacity:0.6;
+}
+.popWin{
+    height: 14.72rem;
+    width: 8.67rem;
+    background: white;
+    position: fixed;
+    bottom:@size25;
+    left: @size25;
+    z-index: 1000;
+    text-align: center;
+    box-sizing: border-box;
+    padding: 0 @size20;
+    overflow: scroll;
+    .close{
+            position: absolute;
+            right: 0;top: 0;
+            width: @size30;
+            height: @size30;
+            background: #eb6100;
+            i{
+                font-size: @size30;
+                color: white;
+            }
+    }
+    .titleEn{
+        padding-top: @size50;
+        letter-spacing: 2px;
+        font-size: @size14;
+        font-weight: bold;
+    }
+    .titleCh{
+        font-size: @size11;
+        padding-bottom: @size25;
+    }
+    .num{
+        width: 7.6rem;
+        height: @size40;
+        border-top: 1px solid gray;
+        font-size: @size14;
+        line-height: @size40;
+        text-align: left;
+        .fr{
+            font-size: @size14;
+            color: gray;
+        }
+    }
+    .num1{
+        border-bottom: 1px solid gray;
+    }
+    .box{
+        // height: 8.4rem;
+        // overflow:hidden;
+        // overflow-y: scroll;
+        .contents{
+            padding: @size26 0 0 0.44rem;
+            position: relative;
+            // padding-left: 0.44rem;
+            border-left: 2px solid gray;
+            .line{
+                position: absolute;
+                left: -@size5;
+                top: @size26;
+                width: @size10;
+                height: @size10;
+                border-radius: 50%;
+                background: gray;
+                z-index: 3000;
+                  }
+        .contents_box{
+            border-bottom: 1px solid gray;
+            text-align: left;
+            // float: left;
+            width:  7rem;
+            // height: 2.4rem;
+            box-sizing: border-box;
+            padding-bottom: @size13;
+            p{
+                font-size: @size10;
+            }
+        }
+        }
+   .contents:first-child{
+         padding-top: 0;
+         margin-top: @size26;
+         .line{
+            position: absolute;
+            left: -@size5;
+            top: 0;
+
+         }
+
+    }
+    }
+
+
+}
+}
+
+    }
 </style>
 

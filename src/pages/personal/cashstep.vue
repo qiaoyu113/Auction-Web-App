@@ -134,7 +134,7 @@
                 <div class="info"><span>提现方式</span>
                     <div class="infoClose">
                     <span class="span2" v-if="list.channelId=='ALIPAY_MOBILE'">支付宝<br>{{list.channelUser}}</span>
-                    <span class="span2" v-if="list.channelId=='UNIONPAY'">{{list.userBank}}<br>{{list.userBankCardNo}}</span>
+                    <span class="span2" v-if="list.channelId=='UNIONPAY'">{{list.userBank}}<br>{{list.userBankCardNo.substr(list.userBankCardNo.length-4)}}</span>
                     </div>
                 </div>
                 <div class="info"><span>提现金额</span>

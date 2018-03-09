@@ -44,6 +44,15 @@ const liveDetails = (resolve) => {require(['./pages/live/details.vue'],resolve)}
 //地址
 const address = (resolve) => {require(['./pages/address/new-address.vue'],resolve)}
 const addresslist = (resolve) => {require(['./pages/address/addresslist.vue'],resolve)}
+// 我的
+const my = (resolve) => {require(['./pages/my/my.vue'],resolve)}
+const lot = (resolve) => {require(['./pages/my/lot.vue'],resolve)}
+const not = (resolve) => {require(['./pages/my/not.vue'],resolve)}
+const already = (resolve) => {require(['./pages/my/already.vue'],resolve)}
+const notstart = (resolve) => {require(['./pages/my/notstart.vue'],resolve)}
+// 确认订单
+const order = (resolve) => {require(['./pages/my/order.vue'],resolve)}
+const selection = (resolve) => {require(['./pages/my/selection.vue'],resolve)}
 //个人中心
 const mycenter = (resolve) => {require(['./pages/mycenter/mycenter.vue'],resolve)}
 const saveName = (resolve) => {require(['./pages/mycenter/saveName.vue'],resolve)}
@@ -101,6 +110,18 @@ const routers = [
     //地址
     {name: 'address',path:'/address',component:address},
     {name: 'addresslist',path:'/addresslist',component:addresslist},
+    // 我的
+    {name: 'my',path:'/my',component: my,redirect:'/my/notstart',
+            children:[
+               {name: 'notstart',path:'/my/notstart',component: notstart},
+               {name: 'lot',path:'/my/lot',component: lot},
+               {name: 'not',path:'/my/not',component: not},
+               {name: 'already',path:'/my/already',component: already},
+               ]
+       },
+    // 确认订单
+    {name: 'order',path:'/my/order',component: order},
+    {name: 'selection',path:'/my/selection',component: selection},
     //个人中心
     {name: 'mycenter',path:'/mycenter',component: mycenter},
     {name: 'saveName',path:'/saveName',component: saveName},

@@ -47,6 +47,11 @@ export const commonService = {
     postMyBail:function(){
         return axios.post('/bails/frozen',qs.stringify(params))
     },
+    /* 获取拍品详情 */
+    getAuctions: function (id) {
+        return axios.get('/auctions/'+ id)
+    },
+
     postGaptchas: function (params) {
         return axios.post('/gaptchas',qs.stringify(params))
     },
@@ -133,6 +138,10 @@ export const commonService = {
     getAddress: function (params) {
         return axios.get('/users/address' + this.getParam(params))
     },
+     /* 获取我的默认地址  */
+    getDefault: function () {
+        return axios.get('/users/address/default')
+    },
      /* 获取详情地址  */
     getAddressid: function (id) {
         return axios.get('/users/address/' + id)
@@ -155,7 +164,7 @@ export const commonService = {
     },
      /* 设置默认地址  */
     postAddressid: function (id,params) {
-        return axios.post('/users/address/' + id + this.getParam(params) )
+        return axios.post('/users/address/' + id + this.getParam(params))
     },
     /* 获取会员等级积分  */
     getVip: function (params) {
@@ -168,6 +177,38 @@ export const commonService = {
     /* 获取会员规则  */
     getDoctype: function (params) {
         return axios.get('/doc/type' + this.getParam(params))
+    },
+    /* 图片  */
+    postBase: function (params) {
+        return axios.post('/files/base64' + this.getParam(params))
+    },
+    /* 获取实名认证信息  */
+    getAuths: function () {
+        return axios.get('/users/auths')
+    },
+    /* 提交实名认证信息  */
+    putAuths: function (params) {
+        return axios.put('/users/auths' + this.getParam(params))
+    },
+    /* 获取我的订单  */
+    getOrder: function (params) {
+        return axios.get('/users/order' + this.getParam(params))
+    },
+    /* 获取我的订单详情  */
+    getOrderid: function (params) {
+        return axios.get('/orders/' + params)
+    },
+     /* 获取我的订单详情快递  */
+    getKaidi: function (params) {
+        return axios.get('/kuaidi' + this.getParam(params))
+    },
+     /* 获取我的收藏  */
+    getCollect: function (params) {
+        return axios.get('/auctions/collects' + this.getParam(params))
+    },
+    /* 获取是否提交订单  */
+    getCheckOrder: function (params) {
+        return axios.get('/auctions/checkOrder' + this.getParam(params))
     },
 
 
