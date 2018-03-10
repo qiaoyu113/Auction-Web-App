@@ -38,6 +38,33 @@
                                 <div class="sell-bpic">
                                     <img :src="$store.state.picHead + list.coverUrl">
                                 </div>
+                                <div class="date">
+                                    <!--收藏图标-->
+                                    <div class="collect" v-if="list.collect">
+                                        <div class="collectIcon">
+                                            <div class="bottom"></div>
+                                        </div>
+                                    </div>
+                                    <!--进行中-->
+                                    <div class="collect2" v-if="list.auctionStatus === 2">
+                                        <div class="icon"></div>
+                                        <div class="icon"></div>
+                                    </div>
+                                    <!--预展中-->
+                                    <div class="collect3"  v-if="list.auctionStatus === 1">
+                                        <div class="icon"></div>
+                                    </div>
+                                    <!--已结束-->
+                                    <div class="collect4"  v-if="list.auctionStatus === 3">
+                                        <div class="icon"></div>
+                                        <div class="icon2"></div>
+                                    </div>
+                                    <!--流拍-->
+                                    <div class="collect5"  v-if="list.auctionStatus === 4">
+                                        <div class="icon"></div>
+                                        <div class="icon2"></div>
+                                    </div>
+                                </div>
                                 <div class="sell-hint" v-for="(img,key,index) in list.ImgList" v-if="list.id == key">
                                     <div class="sell-box">
                                         <div class="sell-spic">
@@ -90,6 +117,17 @@
 //        components:{'spe-run':specialRun},
         mounted: function() {
             let that = this;
+            let type = that.$route.query.type;
+            console.log(type)
+            if(type != 'undefined'){
+                if(type == '1'){
+                    that.checked = 2;
+                }else if(type == '2'){
+                    that.checked = 1;
+                }else if(type == '3'){
+                    that.checked = 3;
+                }
+            }
             that.onMove()
             that.meScroll();
         },
@@ -100,16 +138,19 @@
                 if(index === 1){
                     that.checked = 2;
                     that.page.num = 1;
+                    that.$router.replace({name:'special',query:{type:'1'}})
                     that.specialRun = [];
                     that.downCallback()
                 }else if(index===2){
                     that.checked = 1;
                     that.page.num = 1;
+                    that.$router.replace({name:'special',query:{type:'2'}})
                     that.specialRun = [];
                     that.downCallback()
                 }else{
                     that.checked = 3;
                     that.page.num = 1;
+                    that.$router.replace({name:'special',query:{type:'3'}})
                     that.specialRun = [];
                     that.downCallback()
                 }
@@ -181,7 +222,6 @@
                                 let specialist = res.data.datas.pager.datas;
                                 let speciaImgList = res.data.datas.auctionMarketPic
                                 that.totalPage = res.data.datas.pager.totalPage
-                                console.log(specialist)
                                 for(let i = 0;i<specialist.length;i++){
                                     specialist[i].ImgList = speciaImgList;
                                     let price = specialist[i].doneAmount/100;
@@ -189,6 +229,11 @@
                                         specialist[i].doneAmount = price.toString() + '.00'
                                     }else{
                                         specialist[i].doneAmount = price.toFixed(2);
+                                    }
+                                    for(let t = 0;t < res.data.datas.collects.length;t++){
+                                        if(specialist[i].id == res.data.datas.collects[t]){
+                                            specialist[i].collect = true;
+                                        }
                                     }
                                 }
                                 successCallback&&successCallback(specialist);//成功回调
@@ -199,6 +244,43 @@
                                 for(let i = 0;i<specialist.length;i++){
                                     specialist[i].EndTime = '';
                                     specialist[i].ImgList = speciaImgList;
+                                    for(let t = 0;t < res.data.datas.collects.length;t++){
+                                        if(specialist[i].id == res.data.datas.collects[t]){
+                                            specialist[i].collect = true;
+                                        }
+                                    }
+
+                                    let now = new Date().getTime()
+                                    let time = '';
+                                    if(that.checked == '2'){
+                                        time = specialist[i].auctionEndTime - now;
+                                    }else{
+                                        time = specialist[i].auctionStartTime - now;
+                                    }
+                                    //初始化时间
+                                    let day = parseInt(time / 1000 / 60 / 60 / 24 , 10) < 10 ? '0' + parseInt(time / 1000 / 60 / 60 / 24 , 10) : parseInt(time / 1000 / 60 / 60 / 24 , 10);
+                                    let h =  parseInt(time / 1000 / 60 / 60 % 24 , 10) < 10 ? '0' +  parseInt(time / 1000 / 60 / 60 % 24 , 10) :  parseInt(time / 1000 / 60 / 60 % 24 , 10);
+                                    let m = parseInt(time / 1000 / 60 % 60, 10) < 10 ? '0' +  parseInt(time / 1000 / 60 % 60 , 10) :  parseInt(time / 1000 / 60 % 60 , 10);
+                                    let s = parseInt(time / 1000 % 60, 10) < 10 ? '0' + parseInt(time / 1000 % 60, 10) : parseInt(time / 1000 % 60, 10);
+                                    specialist[i].EndTime = day + ':' + h + ':' + m + ':' + s;
+                                    if(time <= 0){
+                                        if(that.checked === 2){
+                                            specialist[i].EndText = 1;
+                                            specialist[i].EndTime = '00:00:00:00'
+                                            clearInterval(timeRun)
+                                        }else if(that.checked === 1){
+                                            specialist[i].EndText = 2
+                                            specialist[i].EndTime = '00:00:00:00'
+                                            clearInterval(timeRun)
+                                        }
+                                    }else{
+                                        if(that.checked === 2){
+                                            specialist[i].EndText = 4
+                                        }else if(that.checked === 1){
+                                            specialist[i].EndText = 3
+                                        }
+                                    }
+                                    //倒计时时间
                                     let timeRun = setInterval(function(){
                                         let now = new Date().getTime()
                                         let time = '';
@@ -463,6 +545,7 @@
 
             .sell-picture {
                 width: 100%;
+                position: relative;
                 .sell-bpic {
                     width: 100%;
                     margin-bottom: @size5;
@@ -530,6 +613,114 @@
                                     font-size:12px;
                                 }
                             }
+                        }
+                    }
+                }
+                .date{
+                    width:0.7rem;
+                    position: absolute;
+                    right:0;
+                    top:0;
+                    .collect{
+                        width:0.35rem;
+                        height:0.35rem;
+                        float:left;
+                        background:#333333;
+                        padding:0.08rem 0.1rem;
+                        box-sizing: border-box;
+                        .collectIcon{
+                            width:100%;
+                            height:100%;
+                            background:#F2CE76;
+                            position: relative;
+                            .bottom{
+                                width: 0;
+                                height: 0;
+                                position: absolute;
+                                bottom:0;
+                                border-right: 0.075rem solid transparent;
+                                border-bottom: 0.075rem solid #333333;
+                                border-left: 0.075rem solid transparent;
+                            }
+                        }
+                    }
+                    .collect2{
+                        width:0.35rem;
+                        height:0.35rem;
+                        float:right;
+                        background:#5EBAA9;
+                        padding: 0.09rem 0.03rem;
+                        box-sizing: border-box;
+                        .icon{
+                            width: 0.06rem;
+                            height: 100%;
+                            float: left;
+                            background: #fff;
+                            margin: 0 0.04rem;
+                        }
+                    }
+                    .collect3{
+                        width:0.35rem;
+                        height:0.35rem;
+                        float:right;
+                        background:#F2CE76;
+                        padding: 0.09rem 0.09rem;
+                        box-sizing: border-box;
+                        .icon{
+                            width:100%;
+                            height:100%;
+                            border-radius: 100%;
+                            background:#fff;
+                        }
+                    }
+                    .collect4{
+                        width:0.35rem;
+                        height:0.35rem;
+                        float:right;
+                        background:#EB6100;
+                        padding: 0.09rem 0.09rem;
+                        box-sizing: border-box;
+                        position: relative;
+                        .icon{
+                            width: 0;
+                            height: 0;
+                            position: absolute;
+                            left: 0.08rem;
+                            border-top: 0.1rem solid transparent;
+                            border-left: 0.16rem solid #fff;
+                            border-bottom: 0.1rem solid transparent;
+                        }
+                        .icon2{
+                            width: 0.03rem;
+                            height: 0.2rem;
+                            background: #fff;
+                            position: absolute;
+                            right: 0.1rem;
+                        }
+                    }
+                    .collect5{
+                        width:0.35rem;
+                        height:0.35rem;
+                        float:right;
+                        background:#808080;
+                        padding: 0.09rem 0.09rem;
+                        box-sizing: border-box;
+                        position: relative;
+                        .icon{
+                            width: 0;
+                            height: 0;
+                            position: absolute;
+                            left: 0.08rem;
+                            border-top: 0.1rem solid transparent;
+                            border-left: 0.16rem solid #fff;
+                            border-bottom: 0.1rem solid transparent;
+                        }
+                        .icon2{
+                            width: 0.03rem;
+                            height: 0.2rem;
+                            background: #fff;
+                            position: absolute;
+                            right: 0.1rem;
                         }
                     }
                 }

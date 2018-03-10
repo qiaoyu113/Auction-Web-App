@@ -11,7 +11,8 @@
                 <img src="../../assets/image/mycenter/icon2.png"/>
             </span>
             <span class="span2">
-                <img src="../../assets/image/mycenter/icon1.png"/>
+                <img v-if="!collect" src="../../assets/image/mycenter/icon1.png"/>
+                <img v-if="collect" src="../../assets/image/mycenter/icon4.png"/>
             </span>
         </div>
         <div id="mescroll" class="mescroll">
@@ -128,6 +129,7 @@
                 collects:'',//拍品列表数据
                 auctionDetail:[],
                 isShowNoMore:false,
+                collect:false
             }
         },
         components:{'special-more':specialmore},
@@ -237,7 +239,6 @@
                         that.startTime = common.getFormatOfDate(that.details.auctionStartTime,'yyyy.MM.dd h:m')
                         that.completeNo = that.details.completeNo;
                         commonService.getAuctionList({pageNo:pageNum,pageSize:pageSize,marketNo:that.completeNo}).then(function(res){
-                            console.log(res)
                             if(res.data.code === 200){
                                 that.collects = res.data.datas.pager.datas
                                 if(that.collects.length === 0){
@@ -250,6 +251,9 @@
                                     let collects = res.data.datas.collects;
                                     that.totalPage = res.data.datas.pager.totalPage
                                     let dataArr = '';
+                                    if(collects.length != 0){
+                                        that.collect = true;
+                                    }
                                     for (let i = 0;i<specialist.length;i++){
                                         if(specialist[i].currentPrice === 0){
                                             specialist[i].currentPrice = specialist[i].basePrice
@@ -314,7 +318,8 @@
             //返回按钮
             back(){
               let that = this;
-              that.$router.replace({name:'special'});
+//              that.$router.replace({name:'special'});
+              that.$router.back(-1);
             },
             //前往拍品详情
             sellListGo(id){

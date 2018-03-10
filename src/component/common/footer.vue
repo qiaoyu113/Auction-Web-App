@@ -79,14 +79,14 @@
                     that.$router.replace({name:'home'})
                     that.index = 0;
                 }else if(index === 1){
-                    that.$router.push({name:'special'})
+                    that.$router.replace({name:'special'})
 //                    that.$router.push({name:'specialMore',params:{id:'5aa1f83badc051793d0f3bd5'}})
                     that.index = 1;
                 }else if(index === 2){
-                    that.$router.replace({name:'home'})
+                    that.$router.push({name:'my'})
                     that.index = 2;
                 }else if(index === 3){
-                    that.$router.replace({name:'home'})
+                    that.$router.replace({name:'personalCenter'})
                     that.index = 3;
                 }
             }

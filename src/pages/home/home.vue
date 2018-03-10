@@ -1,7 +1,7 @@
 <template>
     <div id="home" class="home" v-set-title="title">
         <div class="header">传家</div>
-        <div id="mescroll" class="mescroll homeMescroll">
+        <div id="mescroll" class="mescroll">
             <div class="mescroll-bounce">
                 <div class="wrapper">
                     <div class="content" v-for="list in homelist">
@@ -33,7 +33,7 @@
         components:{'home-item':itemc},
         mounted: function() {
             let that = this;
-//            that.onMove();
+            that.onMove();
             that.meScroll();
         },
         methods: {
@@ -177,7 +177,7 @@
                             evt._isScroller = true
                     })
                 }
-                overscroll(document.querySelector('.homeMescroll'));
+                overscroll(document.querySelector('.mescroll'));
                 document.body.addEventListener('touchmove', function(evt) {
                     //In this case, the default behavior is scrolling the body, which
                     //would result in an overflow.  Since we don't want that, we preventDefault.
