@@ -205,7 +205,7 @@
         position: relative;
     }
     #home{
-        width:100%;
+        max-width:10rem;
         position: absolute;
         top:0;
         bottom:0;
@@ -228,6 +228,7 @@
     #mescroll{
         position: fixed;
         top:1.2rem;
+        max-width:10rem;
         bottom: 1.2rem;
         left:0;
         right:0;

@@ -1157,6 +1157,7 @@
         }
         #mescroll{
             width:100%;
+            max-width:10rem;
             position: fixed;
             top:2.15rem;
             bottom:0;
@@ -2322,30 +2323,37 @@
         .bground1{
             background: white;
             border-top:1px solid rgb(201, 209, 218)
+            max-width: 10rem;
         }
         //进行中
         .bground2{
             background:linear-gradient(30deg,rgb(0, 224, 222) 0%,rgb(104, 105, 237) 100%);
+            max-width: 10rem;
         }
         //已经拍中
         .bground3{
             background:linear-gradient(30deg,#f54ea2 0%,#dd704c 100%);
+            max-width: 10rem;
         }
         //流拍
         .bground4{
             background:gray;
+            max-width: 10rem;
         }
         //底部
         .footer{
             width: 100%;
-            height: @size45;
+            max-width: 10rem;
+            height: 1.2rem;
             position: fixed;
             bottom: 0;
             left: 0;
+            right: 0;
+            margin: auto;
             z-index: 101;
-            background: rgb(250, 251, 252);
+            background: #fafbfc;
             box-sizing: border-box;
-            border-top: 1px solid rgb(53, 60, 70);
+            border-top: 1px solid #353c46;
             .value{
                 float: left;
                 width: 5.6rem;

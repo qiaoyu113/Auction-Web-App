@@ -319,6 +319,7 @@
         }
         #mescroll{
             position: fixed;
+            max-width:10rem;
             top:2.16rem;
             bottom:0;
             left:0;

@@ -376,6 +376,7 @@
     #special{
         #mescroll{
             width:100%;
+            max-width:10rem;
             position: fixed;
             top:2.14rem;
             bottom: 1.2rem;
