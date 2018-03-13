@@ -483,7 +483,7 @@
                 stompClient.connect({}, function(frame) {
                     // 2.有人出价后后台会回调这里
                     stompClient.subscribe('/auction/offerHis/'+ that.id, function(r) {
-                        console.log(eval('(' + r.body + ')'));
+//                        console.log(eval('(' + r.body + ')'));
                         let body = eval('(' + r.body + ')');
                         let Price = body.offerAmount/100;
                         that.details.currentPrice = Price.toString() + '.00';
@@ -607,7 +607,6 @@
                                         }
                                     }
                                     commonService.getAuctionList({pageNo:1,pageSize:10,auctionIds:ids}).then(function(res) {
-                                        console.log(res)
                                         if(res.data.code === 200){
                                             if(res.data.datas.pager != null){
                                                 let specialist = res.data.datas.pager.datas;
@@ -781,7 +780,9 @@
             //减少出价
             subtraction(){
                 let that = this;
-                if(that.bidPrice <= 1000){
+                if(that.bidPrice <= 10000){
+                    console.log(that.bidPrice)
+                    console.log(Number(that.details.currentPrice) + 100)
                     if(that.bidPrice <= Number(that.details.basePrice) + 100){
                         if(that.offerNumDate){
                             that.bidPrice = that.details.basePrice;
@@ -792,14 +793,15 @@
                     }else{
                         if(that.bidPrice <= Number(that.details.currentPrice) + 100){
                             that.bidPrice = that.details.currentPrice;
+                            that.noPriceBtn = true;
                         }else{
                             that.bidPrice = parseInt(that.bidPrice)
                             let bidPrice = that.bidPrice - 100;
                             that.bidPrice = bidPrice.toString() + '.00';
+                            that.noPriceBtn = false;
                         }
-                        that.noPriceBtn = false;
                     }
-                }else if(1000 < that.bidPrice && that.bidPrice <= 10000){
+                }else if(10000 < that.bidPrice && that.bidPrice <= 100000){
                     if(that.bidPrice <= Number(that.details.basePrice) + 1000){
                         if(that.offerNumDate){
                             that.bidPrice = that.details.basePrice;
@@ -810,14 +812,15 @@
                     }else{
                         if(that.bidPrice <= Number(that.details.currentPrice) + 1000){
                             that.bidPrice = that.details.currentPrice;
+                            that.noPriceBtn = true;
                         }else{
                             that.bidPrice = parseInt(that.bidPrice)
                             let bidPrice = that.bidPrice - 1000;
                             that.bidPrice = bidPrice.toString() + '.00';
+                            that.noPriceBtn = false;
                         }
-                        that.noPriceBtn = false;
                     }
-                }else if(that.bidPrice > 10000){
+                }else if(that.bidPrice > 100000){
                     if(that.bidPrice <= Number(that.details.basePrice) + 10000){
                         if(that.offerNumDate){
                             that.bidPrice = that.details.basePrice;
@@ -828,12 +831,13 @@
                     }else{
                         if(that.bidPrice <= Number(that.details.currentPrice) + 10000){
                             that.bidPrice = that.details.currentPrice;
+                            that.noPriceBtn = true;
                         }else{
                             that.bidPrice = parseInt(that.bidPrice)
                             let bidPrice = that.bidPrice - 10000;
                             that.bidPrice = bidPrice.toString() + '.00';
+                            that.noPriceBtn = false;
                         }
-                        that.noPriceBtn = false;
                     }
                 }
             },
@@ -842,13 +846,13 @@
                 let that = this;
                 that.noPriceBtn = false;
                 that.bidPrice = parseInt(that.bidPrice);
-                if(that.bidPrice < 1000){
+                if(that.bidPrice < 10000){
                     let bidPrice = that.bidPrice + 100;
                     that.bidPrice = bidPrice.toString() + '.00';
-                }else if(1000 <= that.bidPrice && that.bidPrice < 10000){
+                }else if(10000 <= that.bidPrice && that.bidPrice < 100000){
                     let bidPrice = that.bidPrice + 1000;
                     that.bidPrice = bidPrice.toString() + '.00';
-                }else if(that.bidPrice >= 10000) {
+                }else if(that.bidPrice >= 100000) {
                     let bidPrice = that.bidPrice + 10000;
                     that.bidPrice = bidPrice.toString() + '.00';
                 }
@@ -947,20 +951,18 @@
                 }else{//支付宝
                     channelIds = 'ALIPAY_WAP'
                 }
+                window.localStorage.setItem('id',that.id);
+                window.localStorage.setItem('route','auction');
                 commonService.setbails({auctionId:that.id,channelId:channelIds}).then(function(res){
-                    console.log(res)
                     if(res.data.code === 200){
                         if(that.index === 1){//微信支付
                             let orderNo = res.data.datas;
                             window.localStorage.setItem('orderNo',orderNo);
                             commonService.putOrders({orderNo:orderNo,channelId:channelIds}).then(function(res){
-                                console.log(res)
                                 if(res.data.success){
                                     commonService.getWxpay({loginType:'WEIXIN',platform:'WXH5',jumpRouter:'wxbaselogin',wxscope:'snsapi_base'}).then(function(res){
-                                        let code = res.data.code;
-                                        if(code === 200){
+                                        if(res.data.code === 200){
                                             //获取静默授权地址成功
-                                            window.localStorage.setItem('id',that.id);
                                             window.location.href = res.data.datas;
                                         }
                                     })
@@ -974,7 +976,6 @@
                             let orderNo = res.data.datas;
                             window.localStorage.setItem('orderNo',orderNo);
                             commonService.putOrders({orderNo:orderNo,channelId:channelIds}).then(function(res){
-                                console.log(res)
                                 if(res.data.success){
                                     let payOK = document.getElementsByClassName("payOK");
                                     payOK[0].innerHTML = res.data.datas.payUrl;
@@ -993,7 +994,6 @@
                 commonService.putOrders({orderNo:orderNo,channelId:'WX_JSAPI',extra:extra,}).then(function (res) {
                     if(res.data.success){
                         let temp=res.data.datas.payParam;
-                        console.log(temp)
                         wx.config({
                             debug: false, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
                             appId: temp.appId, // 必填，公众号的唯一标识
@@ -1054,7 +1054,6 @@
                     collectDate = true
                 }
                 commonService.postCollect({id:that.id,collect:collectDate},that.id).then(function(res){
-                    console.log(res)
                     if(res.data.code === 537134){
                         that.dis4Show = true;
                         that.hintText = res.data.message;
@@ -1085,7 +1084,6 @@
             },
             bidPrice(value){
                 let that = this;
-                console.log(value)
                 if(that.offerNumDate){
                     if(value == that.details.basePrice){
                         that.noPriceBtn = true;
@@ -2322,7 +2320,7 @@
         //即将开始
         .bground1{
             background: white;
-            border-top:1px solid rgb(201, 209, 218)
+            border-top:1px solid rgb(201, 209, 218);
             max-width: 10rem;
         }
         //进行中

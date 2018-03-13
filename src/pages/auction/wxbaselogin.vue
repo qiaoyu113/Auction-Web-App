@@ -92,10 +92,12 @@
                             let id = window.localStorage.getItem('id');
                             window.localStorage.setItem('checked',true);
                             if (/(iPhone|iPad|iPod|iOS)/i.test(navigator.userAgent)) {
-                                window.location.href = '/auction/more/'+ id;
+//                                window.location.href = '/auction/more/'+ id;
+                                window.location.href = '/wxpay/';
                             } else if (/(Android)/i.test(navigator.userAgent)) {
                                 //alert(navigator.userAgent);
-                                window.location.href = '/auction/more/'+ id;
+//                                window.location.href = '/auction/more/'+ id;
+                                window.location.href = '/wxpay/';
                             }
                         }
                     })
