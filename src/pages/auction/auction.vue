@@ -7,7 +7,8 @@
                 <img src="../../assets/image/mycenter/icon2.png"/>
             </span>
             <span class="span2">
-                <img src="../../assets/image/mycenter/icon1.png"/>
+                <img v-if="!hasCollect" src="../../assets/image/mycenter/icon1.png"/>
+                <img v-if="hasCollect" src="../../assets/image/mycenter/icon4.png"/>
             </span>
         </div>
         <div id="mescroll" class="mescroll content">
@@ -21,7 +22,7 @@
                                 </div>
                             </div>
                             <div class="dian">
-                                <div class="dianList" v-for="(item,index) in img"></div>
+                                <div :class="dianIndex == index ? 'dianNow' : 'dianList'" v-for="(item,index) in img"></div>
                             </div>
                         </div>
                         <div class="sell-information">
@@ -105,6 +106,38 @@
                 </div>
             </div>
         </div>
+
+        <!--联系客服-->
+        <div class="talk" @click="openService()">
+            <img src="../../assets/image/mycenter/icon5.png"/>
+        </div>
+
+        <!--客户服务-->
+        <div class="serviceBox" v-if="ServiceBox">
+            <div class="serviceClose" @click="closeService()">×</div>
+            <div class="serviceTop">
+                <h2>ASSISTANCE</h2>
+                <p>客户服务</p>
+            </div>
+            <div class="serviceList">
+                <img src="../../assets/image/mycenter/t1.png"/>
+                <p>电话委托</p>
+            </div>
+            <div class="serviceList">
+                <img src="../../assets/image/mycenter/t2.png"/>
+                <p>客服服务</p>
+            </div>
+            <div class="serviceList">
+                <img src="../../assets/image/mycenter/t3.png"/>
+                <p>私恰</p>
+            </div>
+            <div class="serviceWX">
+                <img src="../../assets/image/mycenter/wx.png"/>
+                <p>联系微信客服</p>
+                <p class="p">长按识别二维码</p>
+            </div>
+        </div>
+        <div class="serviceBk" v-if="ServiceBox"></div>
 
         <!--阴影-->
         <div class="dis">
@@ -250,7 +283,7 @@
         <!--当前价格-->
         <div class="footer" v-else-if="details.auctionStatus === 2">
             <div class="value">
-                <span class="btn1" @click="subtraction()">-</span>
+                <span :class="noPriceBtn ? 'btn1 nobtn1' : 'btn1'" @click="subtraction()">-</span>
                 <span class="price">{{bidPrice}}CNY</span>
                 <span class="btn2" @click="addPrice()">+</span>
             </div>
@@ -411,6 +444,9 @@
                         time:'2017.10.25 23:12:34'},
                 ],
                 hasCollect:false,
+                noPriceBtn:true,//不能减价
+                ServiceBox:false,
+                dianIndex:''
             }
         },
         components:{'z-foot':item,'z-info':info,'z-record':record,'z-payment':payment},
@@ -447,7 +483,7 @@
                 stompClient.connect({}, function(frame) {
                     // 2.有人出价后后台会回调这里
                     stompClient.subscribe('/auction/offerHis/'+ that.id, function(r) {
-                        console.log(eval('(' + r.body + ')'));
+//                        console.log(eval('(' + r.body + ')'));
                         let body = eval('(' + r.body + ')');
                         let Price = body.offerAmount/100;
                         that.details.currentPrice = Price.toString() + '.00';
@@ -571,7 +607,6 @@
                                         }
                                     }
                                     commonService.getAuctionList({pageNo:1,pageSize:10,auctionIds:ids}).then(function(res) {
-                                        console.log(res)
                                         if(res.data.code === 200){
                                             if(res.data.datas.pager != null){
                                                 let specialist = res.data.datas.pager.datas;
@@ -628,7 +663,24 @@
                 let swiper = new Swiper('.swiper-container', {
                     loop: true,
                     speed: 400,
-                    autoplay: 1000,
+                    autoplay: true,
+                    on: {
+                        slideChangeTransitionEnd: function(){
+                            if(that.dianIndex != that.img.length - 1){
+                                if(this.activeIndex == '0'){
+                                    that.dianIndex = that.img.length - 1
+                                }else {
+                                    that.dianIndex = this.activeIndex - 1
+                                }
+                            }else{
+                                if(this.activeIndex > that.img.length){
+                                    that.dianIndex = '0'
+                                }else{
+                                    that.dianIndex = this.activeIndex - 1
+                                }
+                            }
+                        },
+                    },
                 });
             },
             //返回上一层
@@ -728,52 +780,63 @@
             //减少出价
             subtraction(){
                 let that = this;
-                if(that.bidPrice <= 1000){
+                if(that.bidPrice <= 10000){
+                    console.log(that.bidPrice)
+                    console.log(Number(that.details.currentPrice) + 100)
                     if(that.bidPrice <= Number(that.details.basePrice) + 100){
                         if(that.offerNumDate){
                             that.bidPrice = that.details.basePrice;
                         }else{
                             that.bidPrice = that.details.currentPrice
                         }
+                        that.noPriceBtn = true;
                     }else{
                         if(that.bidPrice <= Number(that.details.currentPrice) + 100){
                             that.bidPrice = that.details.currentPrice;
+                            that.noPriceBtn = true;
                         }else{
                             that.bidPrice = parseInt(that.bidPrice)
                             let bidPrice = that.bidPrice - 100;
                             that.bidPrice = bidPrice.toString() + '.00';
+                            that.noPriceBtn = false;
                         }
                     }
-                }else if(1000 < that.bidPrice && that.bidPrice <= 10000){
+                }else if(10000 < that.bidPrice && that.bidPrice <= 100000){
                     if(that.bidPrice <= Number(that.details.basePrice) + 1000){
                         if(that.offerNumDate){
                             that.bidPrice = that.details.basePrice;
                         }else{
                             that.bidPrice = that.details.currentPrice
                         }
+                        that.noPriceBtn = true;
                     }else{
                         if(that.bidPrice <= Number(that.details.currentPrice) + 1000){
                             that.bidPrice = that.details.currentPrice;
+                            that.noPriceBtn = true;
                         }else{
                             that.bidPrice = parseInt(that.bidPrice)
                             let bidPrice = that.bidPrice - 1000;
                             that.bidPrice = bidPrice.toString() + '.00';
+                            that.noPriceBtn = false;
                         }
                     }
-                }else if(that.bidPrice > 10000){
+                }else if(that.bidPrice > 100000){
                     if(that.bidPrice <= Number(that.details.basePrice) + 10000){
                         if(that.offerNumDate){
                             that.bidPrice = that.details.basePrice;
                         }else{
                             that.bidPrice = that.details.currentPrice
                         }
+                        that.noPriceBtn = true;
                     }else{
                         if(that.bidPrice <= Number(that.details.currentPrice) + 10000){
                             that.bidPrice = that.details.currentPrice;
+                            that.noPriceBtn = true;
                         }else{
                             that.bidPrice = parseInt(that.bidPrice)
                             let bidPrice = that.bidPrice - 10000;
                             that.bidPrice = bidPrice.toString() + '.00';
+                            that.noPriceBtn = false;
                         }
                     }
                 }
@@ -781,14 +844,15 @@
             //加价出价
             addPrice(){
                 let that = this;
+                that.noPriceBtn = false;
                 that.bidPrice = parseInt(that.bidPrice);
-                if(that.bidPrice < 1000){
+                if(that.bidPrice < 10000){
                     let bidPrice = that.bidPrice + 100;
                     that.bidPrice = bidPrice.toString() + '.00';
-                }else if(1000 <= that.bidPrice && that.bidPrice < 10000){
+                }else if(10000 <= that.bidPrice && that.bidPrice < 100000){
                     let bidPrice = that.bidPrice + 1000;
                     that.bidPrice = bidPrice.toString() + '.00';
-                }else if(that.bidPrice >= 10000) {
+                }else if(that.bidPrice >= 100000) {
                     let bidPrice = that.bidPrice + 10000;
                     that.bidPrice = bidPrice.toString() + '.00';
                 }
@@ -887,20 +951,18 @@
                 }else{//支付宝
                     channelIds = 'ALIPAY_WAP'
                 }
+                window.localStorage.setItem('id',that.id);
+                window.localStorage.setItem('route','auction');
                 commonService.setbails({auctionId:that.id,channelId:channelIds}).then(function(res){
-                    console.log(res)
                     if(res.data.code === 200){
                         if(that.index === 1){//微信支付
                             let orderNo = res.data.datas;
                             window.localStorage.setItem('orderNo',orderNo);
                             commonService.putOrders({orderNo:orderNo,channelId:channelIds}).then(function(res){
-                                console.log(res)
                                 if(res.data.success){
                                     commonService.getWxpay({loginType:'WEIXIN',platform:'WXH5',jumpRouter:'wxbaselogin',wxscope:'snsapi_base'}).then(function(res){
-                                        let code = res.data.code;
-                                        if(code === 200){
+                                        if(res.data.code === 200){
                                             //获取静默授权地址成功
-                                            window.localStorage.setItem('id',that.id);
                                             window.location.href = res.data.datas;
                                         }
                                     })
@@ -914,7 +976,6 @@
                             let orderNo = res.data.datas;
                             window.localStorage.setItem('orderNo',orderNo);
                             commonService.putOrders({orderNo:orderNo,channelId:channelIds}).then(function(res){
-                                console.log(res)
                                 if(res.data.success){
                                     let payOK = document.getElementsByClassName("payOK");
                                     payOK[0].innerHTML = res.data.datas.payUrl;
@@ -933,7 +994,6 @@
                 commonService.putOrders({orderNo:orderNo,channelId:'WX_JSAPI',extra:extra,}).then(function (res) {
                     if(res.data.success){
                         let temp=res.data.datas.payParam;
-                        console.log(temp)
                         wx.config({
                             debug: false, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
                             appId: temp.appId, // 必填，公众号的唯一标识
@@ -994,7 +1054,6 @@
                     collectDate = true
                 }
                 commonService.postCollect({id:that.id,collect:collectDate},that.id).then(function(res){
-                    console.log(res)
                     if(res.data.code === 537134){
                         that.dis4Show = true;
                         that.hintText = res.data.message;
@@ -1005,6 +1064,16 @@
                         that.hasCollect = !that.hasCollect;
                     }
                 })
+            },
+            //打开客服
+            openService(){
+                let that = this;
+                that.ServiceBox = true;
+            },
+            //关闭客服
+            closeService(){
+                let that = this;
+                that.ServiceBox = false;
             }
         },
         watch: {
@@ -1012,6 +1081,18 @@
 //                console.log(to.path)
                 let that = this;
                 that.$router.go(0)
+            },
+            bidPrice(value){
+                let that = this;
+                if(that.offerNumDate){
+                    if(value == that.details.basePrice){
+                        that.noPriceBtn = true;
+                    }
+                }else{
+                    if(value == that.details.currentPrice){
+                        that.noPriceBtn = true;
+                    }
+                }
             }
         }
     }
@@ -1074,6 +1155,7 @@
         }
         #mescroll{
             width:100%;
+            max-width:10rem;
             position: fixed;
             top:2.15rem;
             bottom:0;
@@ -1105,6 +1187,15 @@
                         width: 0.15rem;
                         height: 0.15rem;
                         background: #fff;
+                        z-index: 100;
+                        position: relative;
+                        border-radius: 100%;
+                        margin: 0.15rem 0;
+                    }
+                    .dianNow{
+                        width: 0.15rem;
+                        height: 0.15rem;
+                        background: #EB6100;
                         z-index: 100;
                         position: relative;
                         border-radius: 100%;
@@ -1671,6 +1762,9 @@
                     position: relative;
                     text-align: center;
                     border: 1px solid rgb(129, 135, 140);
+                    .nobtn1{
+                        color:#3C434D !important;
+                    }
                     .btn1{
                         width: 1.46rem;
                         position: absolute;
@@ -1942,6 +2036,9 @@
                     position: relative;
                     text-align: center;
                     border: 1px solid rgb(129, 135, 140);
+                    .nobtn1{
+                        color:#3C434D !important;
+                    }
                     .btn1{
                         width: 1.46rem;
                         position: absolute;
@@ -2223,31 +2320,38 @@
         //即将开始
         .bground1{
             background: white;
-            border-top:1px solid rgb(201, 209, 218)
+            border-top:1px solid rgb(201, 209, 218);
+            max-width: 10rem;
         }
         //进行中
         .bground2{
             background:linear-gradient(30deg,rgb(0, 224, 222) 0%,rgb(104, 105, 237) 100%);
+            max-width: 10rem;
         }
         //已经拍中
         .bground3{
             background:linear-gradient(30deg,#f54ea2 0%,#dd704c 100%);
+            max-width: 10rem;
         }
         //流拍
         .bground4{
             background:gray;
+            max-width: 10rem;
         }
         //底部
         .footer{
             width: 100%;
-            height: @size45;
+            max-width: 10rem;
+            height: 1.2rem;
             position: fixed;
             bottom: 0;
             left: 0;
+            right: 0;
+            margin: auto;
             z-index: 101;
-            background: rgb(250, 251, 252);
+            background: #fafbfc;
             box-sizing: border-box;
-            border-top: 1px solid rgb(53, 60, 70);
+            border-top: 1px solid #353c46;
             .value{
                 float: left;
                 width: 5.6rem;
@@ -2255,6 +2359,9 @@
                 line-height: @size45;
                 position: relative;
                 text-align: center;
+                .nobtn1{
+                    color:#3C434D !important;
+                }
                 .btn1{
                     width: 1.46rem;
                     line-height:@size40;
@@ -2304,6 +2411,111 @@
                 text-align: center;
                 line-height: @size45;
                 font-size: 14px;
+            }
+        }
+        .talk{
+            width: 1rem;
+            height: 0.9rem;
+            background: #fff;
+            position: fixed;
+            right: 0;
+            top: 5.5rem;
+            bottom: 0;
+            margin: auto;
+            border: 2px solid #000;
+            border-right: none;
+            border-bottom-left-radius: 6px;
+            border-top-left-radius:6px;
+            padding:0.2rem;
+            box-sizing:border-box;
+            img{
+                width:0.56rem;
+                height:0.5rem;
+            }
+        }
+        .serviceBk{
+            width:100%;
+            height:100%;
+            position: fixed;
+            top:0;
+            bottom:0;
+            left:0;
+            right:0;
+            margin:auto;
+            background:#000000;
+            opacity: 0.65;
+            z-index:200;
+
+        }
+        .serviceBox{
+            width:7rem;
+            height:9.2rem;
+            position: absolute;
+            left:0;
+            right:0;
+            top:0;
+            bottom:0;
+            margin:auto;
+            background:#fff;
+            padding:0.5rem;
+            z-index:201;
+            .serviceClose{
+                position: absolute;
+                right:0;
+                top:0;
+                width:0.8rem;
+                height:0.8rem;
+                background:#EB6100;
+                color:#fff;
+                text-align: center;
+                line-height:0.7rem;
+                font-size: 0.9rem;
+            }
+            .serviceTop{
+                text-align: center;
+                margin-top:0.5rem;
+                margin-bottom:0.4rem;
+                h2{
+                    font-size:18px;
+                }
+                p{
+                    font-size:12px;
+                    margin-top:0.2rem;
+                }
+            }
+            .serviceList{
+                overflow: hidden;
+                font-size: 12px;
+                padding:0.3rem 0 0.3rem 2.3rem;
+                border-top:1px solid #B5B8BA;
+                img{
+                    float:left;
+                    width:0.5rem;
+                }
+                p{
+                    width:2rem;
+                    text-align: center;
+                    float:left;
+                    font-size:12px;
+                }
+            }
+            .serviceWX{
+                overflow: hidden;
+                font-size: 12px;
+                border-top:1px solid #B5B8BA;
+                text-align: center;
+                img{
+                    width:2rem;
+                    height:2rem;
+                    margin: 0.4rem auto;
+                }
+                p{
+                    font-size:12px;
+                }
+                .p{
+                    font-size:9px;
+                    color:#C3C3C3;
+                }
             }
         }
     }

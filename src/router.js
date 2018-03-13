@@ -34,10 +34,14 @@ const registerweixin = (resolve) => {require(['./component/login/registerweixin.
 const service = (resolve) => {require(['./pages/service/service.vue'],resolve)}
 const special = (resolve) => {require(['./pages/special/special.vue'],resolve)}
 const specialinfo = (resolve) => {require(['./pages/special/specialinfo.vue'],resolve)}
+const specialView = (resolve) => {require(['./pages/special/specialView.vue'],resolve)}
 const specialDetails = (resolve) => {require(['./pages/special/specialDetails.vue'],resolve)}
 
 const auction = (resolve) => {require(['./pages/auction/auction.vue'],resolve)}
+const auctionView = (resolve) => {require(['./pages/auction/auctionView.vue'],resolve)}
 const wxbaselogin = (resolve) => {require(['./pages/auction/wxbaselogin.vue'],resolve)}
+const wxPay = (resolve) => {require(['./pages/wxPay/wxPay.vue'],resolve)}
+const aliPay = (resolve) => {require(['./pages/wxPay/aliPay.vue'],resolve)}
 // 直播
 const live = (resolve) => {require(['./pages/live/index.vue'],resolve)}
 const liveDetails = (resolve) => {require(['./pages/live/details.vue'],resolve)}
@@ -90,6 +94,7 @@ const routers = [
     {name: 'service',path:'/service',component:service},
     {name: 'special',path:'/special',component:special},
     {name: 'specialinfo',path:'/specialinfo',component:specialinfo},
+    {name: 'specialView',path:'/specialView',component:specialView},
     {name: 'specialDetails',path:'/specialDetails',component:specialDetails,
         children:[
             {name:'specialMore',path:'more/:id',component:specialDetails},
@@ -100,6 +105,12 @@ const routers = [
             {name:'auctionMore',path:'more/:id',component:auction},
         ]
     },
+    {name: 'auctionView',path:'/auctionView',component:auctionView,
+        children:[
+            {name:'auctionView',path:'acMore/:id',component:auctionView},
+        ]
+    },
+    {name: 'personalCenter',path:'/personal/personalCenter/',component:personalCenter},
 
     {name: 'err',path:'/s/404',component: error}, //错误跳到404页面
     // 直播
@@ -147,6 +158,8 @@ const routers = [
     {name: 'rules',path:'/rules',component:rules},//到账周期说明
 
     {name:'wxbaselogin',path:'/wxbaselogin',component: wxbaselogin}, // 微信跳转页
+    {name:'wxPay',path:'/wxpay/',component: wxPay}, // 微信支付页
+    {name:'aliPay',path:'/payOk',component: aliPay}, // 支付宝支付成功页
 ]
 
 const router = new VueRouter({

@@ -23,7 +23,7 @@
     export default {
         data () {
             return {
-                title: '专题',
+                title: '茶叶拍卖',
                 page:{num:1,size:4},
                 homelist:[],
                 totalPage:'1',

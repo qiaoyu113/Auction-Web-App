@@ -7,7 +7,8 @@
                 <img src="../../assets/image/mycenter/icon2.png"/>
             </span>
             <span class="span2">
-                <img src="../../assets/image/mycenter/icon1.png"/>
+                <img v-if="!collect" src="../../assets/image/mycenter/icon1.png"/>
+                <img v-if="collect" src="../../assets/image/mycenter/icon4.png"/>
             </span>
         </div>
         <div id="mescroll" class="mescroll container">
@@ -78,6 +79,7 @@
                 page:{num:1,size:10},
                 recoCh:false,
                 isShowNoMore:false,
+                collect:false,
             }
         },
         components:{'special-more':specialmore},
@@ -95,7 +97,7 @@
             let that = this;
             that.onMove()
             that.id = that.$route.query.id;
-            that.onload()
+            that.meScroll()
         },
         methods: {
             meScroll: function (){
@@ -151,33 +153,53 @@
             getListData:function(pageNum,pageSize,successCallback,errorCallback) {
                 //延时一秒,模拟联网
                 const that = this;
-                commonService.getAuctionList({
-                    pageNo:pageNum,
-                    pageSize:pageSize,
-                    auctionIds:that.details.auctionIds.toString()
-                }).then(function(res){
+                commonService.getauctionPackId({id:that.id},that.id).then(function(res){
+                    console.log(1,res)
                     if(res.data.code === 200){
-                        let act = res.data.datas.pager.datas;
-                        let collects = res.data.datas.collects;
-                        that.totalPage = res.data.datas.pager.totalPage;
+                        that.details = res.data.datas;
+                        that.details.createTime = common.getFormatOfDate(that.details.createTime,'yyyy.MM.dd h:m:s')
+                        console.log(that.details.auctionIds)
                         let dataArr = '';
-                        for (let i = 0;i<act.length;i++){
-                            let price = act[i].basePrice/100;
-                            if(price%1 === 0){
-                                act[i].basePrice = price.toString() + '.00'
-                            }else{
-                                act[i].basePrice = price.toFixed(2);
-                            }
-                            let collect = collects.indexOf(act[i].id);
-                            if(collect === -1){
-                                act[i]['collect'] = false
-                                dataArr = act;
-                            }else{
-                                act[i]['collect'] = true;
-                                dataArr = act;
-                            }
+                        if(that.details.auctionIds != null && that.details.auctionIds.length != 0){
+                            that.recoCh = true;
+                            commonService.getAuctionList({
+                                pageNo:pageNum,
+                                pageSize:pageSize,
+                                auctionIds:that.details.auctionIds.toString()
+                            }).then(function(res){
+                                if(res.data.code === 200){
+                                    let act = res.data.datas.pager.datas;
+                                    let collects = res.data.datas.collects;
+                                    that.totalPage = res.data.datas.pager.totalPage;
+                                    if(collects.length != 0){
+                                        that.collect = true;
+                                    }
+                                    for (let i = 0;i<act.length;i++){
+                                        let price = act[i].basePrice/100;
+                                        if(price%1 === 0){
+                                            act[i].basePrice = price.toString() + '.00'
+                                        }else{
+                                            act[i].basePrice = price.toFixed(2);
+                                        }
+                                        let collect = collects.indexOf(act[i].id);
+                                        if(collect === -1){
+                                            act[i]['collect'] = false
+                                            dataArr = act;
+                                        }else{
+                                            act[i]['collect'] = true;
+                                            dataArr = act;
+                                        }
+                                    }
+                                    successCallback&&successCallback(dataArr);//成功回调
+                                }else{
+                                    that.recoCh = false;
+                                    successCallback&&successCallback(dataArr);//成功回调
+                                }
+                            })
+                        }else{
+                            that.recoCh = false;
+                            successCallback&&successCallback(dataArr);//成功回调
                         }
-                        successCallback&&successCallback(dataArr);//成功回调
                     }
                 })
             },
@@ -298,6 +320,7 @@
         }
         #mescroll{
             position: fixed;
+            max-width:10rem;
             top:2.16rem;
             bottom:0;
             left:0;
