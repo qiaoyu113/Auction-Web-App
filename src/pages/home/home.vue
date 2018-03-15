@@ -1,6 +1,6 @@
 <template>
     <div id="home" class="home" v-set-title="title">
-        <div class="header">传家</div>
+        <!--<div class="header">传家</div>-->
         <div id="mescroll" class="mescroll homeMescroll">
             <div class="mescroll-bounce">
                 <div class="wrapper">
@@ -33,7 +33,7 @@
         components:{'home-item':itemc},
         mounted: function() {
             let that = this;
-//            that.onMove();
+            that.onMove();
             that.meScroll();
         },
         methods: {
@@ -226,7 +226,7 @@
         }
         #mescroll{
             position: fixed;
-            top:1.2rem;
+            top:0;
             bottom: 1.2rem;
             left:0;
             right:0;

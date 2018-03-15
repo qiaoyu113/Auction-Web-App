@@ -72,6 +72,7 @@
          </div> -->
             
         </div>
+        <z-footer ></z-footer>
     </div>
 </template>
 

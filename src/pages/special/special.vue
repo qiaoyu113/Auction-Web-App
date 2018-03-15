@@ -1,6 +1,6 @@
 <template>
     <div id="special" v-set-title="title">
-        <div class="header">传家</div>
+        <!--<div class="header">传家</div>-->
         <div class="container">
             <div class="nav">
                 <div @click="getMenu(1)"><span :class="checked==2 ? 'check' : ''">正在进行</span></div>
@@ -378,7 +378,7 @@
             width:100%;
             max-width:10rem;
             position: fixed;
-            top:2.14rem;
+            top:@size35;
             bottom: 1.2rem;
             left:0;
             right:0;
@@ -403,12 +403,12 @@
         }
         .nav{
             width: @size375;
-            height: @size35;
+            height: 1.07rem;
             box-sizing: border-box;
             border-bottom: 1px solid rgb(53, 60, 70);
             background: rgb(255, 255, 255);
             position: fixed;
-            top: @size45;
+            top: 0;
             z-index: 100;
             div{
                 display: inline-block;
@@ -420,13 +420,13 @@
                     // display: inline-block;
                     text-align: center;
                     font-size: @size14;
-                    line-height: @size35;
+                    line-height: 1.07rem;
                     //margin-left: @size35;
                     // padding-left: @size55;
                 }
                 .check{
                     box-sizing: border-box;
-                    padding-bottom: 0.17rem;
+                    padding-bottom: 0.2rem;
                     border-bottom: 2px solid black;
                     color: rgb(51, 51, 51);
                 }

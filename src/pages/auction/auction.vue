@@ -7,7 +7,7 @@
                 <img src="../../assets/image/mycenter/icon2.png"/>
             </span>
             <span class="span2">
-                <img v-if="!hasCollect" src="../../assets/image/mycenter/icon1.png"/>
+                <img v-if="!hasCollect" src="../../assets/image/mycenter/icon4.png"/>
                 <img v-if="hasCollect" src="../../assets/image/mycenter/icon4.png"/>
             </span>
         </div>
@@ -651,7 +651,7 @@
             //是否收藏接口
             isCollect(){
               let that = this;
-              commonService.getCollect({id:that.id},that.id).then(function(res){
+              commonService.getOrderCollect({id:that.id},that.id).then(function(res){
                   if(res.data.code === 200){
                       that.hasCollect = res.data.datas;
                   }

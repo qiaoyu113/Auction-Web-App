@@ -128,7 +128,7 @@ export const commonService = {
         return axios.post('/auctions/'+ id,qs.stringify(params))
     },
     /* 查看是否收藏 */
-    getCollect:function(params,id){
+    getOrderCollect:function(params,id){
         return axios.get('/auctions/'+ id +'/collect' + this.getParam(params));
     },
 

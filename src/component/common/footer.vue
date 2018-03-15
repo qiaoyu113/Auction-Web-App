@@ -53,7 +53,7 @@
                         name:''
                     }
                 ],
-                index:0,
+                index:'0',
 				footName: '',
 				routePath: '',
 				routeName: ''
@@ -62,29 +62,38 @@
 		mounted() {
 			const that = this;
 			// 请求底部数据
-//            console.log(that.$route.name);
+            console.log(that.$route.name)
             if(that.$route.name == 'home'){
                 that.index = 0
             }else if(that.$route.name == 'special'){
                 that.index = 1
+            }else if(that.$route.name == 'notstart'){
+                that.index = 2
+            }else if(that.$route.name == 'lot'){
+                that.index = 2
+            }else if(that.$route.name == 'already'){
+                that.index = 2
+            }else if(that.$route.name == 'not'){
+                that.index = 2
+            }else if(that.$route.name == 'personalCenter'){
+                that.index = 3
             }
 		},
         methods: {
             checked(index){
                 let that = this;
                 console.log(index)
-//                console.log(that.$route.name);
                 that.index = index;
                 if(index === 0){
                     that.$router.replace({name:'home'})
                     that.index = 0;
                 }else if(index === 1){
                     that.$router.replace({name:'special'})
-//                    that.$router.push({name:'specialMore',params:{id:'5aa1f83badc051793d0f3bd5'}})
                     that.index = 1;
                 }else if(index === 2){
-                    that.$router.push({name:'my'})
+                    that.$router.replace({name:'my'})
                     that.index = 2;
+                    console.log('index',that.index)
                 }else if(index === 3){
                     that.$router.replace({name:'personalCenter'})
                     that.index = 3;

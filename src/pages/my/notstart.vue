@@ -1,5 +1,4 @@
 <template>
-
     <div class="notstart">
         <div class="box">
          <div class="ros clearfix" v-for="list in datas">
@@ -17,6 +16,7 @@
              </div>
          </div>            
         </div>
+        <z-footer ></z-footer>
     </div>
 </template>
 
