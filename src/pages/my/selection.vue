@@ -108,6 +108,7 @@
           	margin-top: @size10;
           	i{
           		font-size: 16px;
+          		
           	}
           }
            }

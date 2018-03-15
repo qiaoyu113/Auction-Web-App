@@ -21,29 +21,34 @@
             </div>
             
             <div class="address">
-                <div class="peo"><span>李先生</span>  134 9766 9923</div>
-                <div>北京市 北京市 东城区</div>
-                <div>XX街道建外soho 12-2202</div>
+                <div class="peo"><span>{{adress.name}}</span>   {{adress.phone}}</div>
+                <div>{{adress.provinceName}} {{adress.cityName}} {{adress.districtName}}</div>
+                <div>{{adress.detailAdress}}</div>
             </div>
             <div class="itemInfo clearfix">
                 <div class="pic fl"><img src="../../assets/image/myimage/eg.gif" alt=""></div>
                 <div class="box fl">
-                    <div class="money">300,00CNY</div>
-                    <div class="title">器物器物器物</div>
-                    <div class="number">20180709-2</div>
+                    <div class="money">{{orderDetail.finalPrice}}CNY</div>
+                    <div class="title">{{orderDetail.auctionName}}</div>
+                    <div class="number">{{datas.createTime}}-{{orderDetail.auctionNo}}</div>
                 </div>
             </div>
             <div class="totalMoney clearfix">
                 <div class="fl">订单总额</div>
-                <div class="fr">50,500 CNY</div>
+                <div class="fr">{{datas.amount}} CNY</div>
             </div>
             <div class="moneys">
-                <div class="price clearfix"><div class="fl">拍品价格:</div><div class="fr">50,000 CNY</div></div>
-                <div class="price clearfix"><div class="fl">保险+运费:</div><div class="fr">500 CNY</div></div>
+                <div class="price clearfix"><div class="fl">拍品价格:</div><div class="fr">{{orderDetail.finalPrice}} CNY</div></div>
+                <div class="price clearfix"><div class="fl">保险+运费:</div><div class="fr">{{orderDetail.finalPrice / 100}} CNY</div></div>
             </div>
             <div class="orderinfo">
-                <div class="price clearfix"><div class="fl">订单编号:</div><div class="fr">308796987864</div></div>
-                <div class="price clearfix"><div class="fl">支付方式:</div><div class="fr">微信</div></div>
+                <div class="price clearfix"><div class="fl">订单编号:</div><div class="fr">{{orderDetail.adminId}}</div></div>
+                <div class="price clearfix" v-if="time.status==2"><div class="fl">支付时间:</div><div class="fr">{{time.creatPayTime}}</div></div>
+                <div class="price clearfix"><div class="fl">支付方式:</div>
+                      <div class="fr"  v-if="datas.channelId=='ALIPAY_WAP'">支付宝</div>
+                      <div class="fr"  v-if="datas.channelId=='WX_NATIVE'">微信</div>
+                      <div class="fr"  v-if="datas.channelId=='UNIONPAY'">线下转账</div>
+                </div>
             </div>
         </div>
         
@@ -52,19 +57,60 @@
 
 <script >
 import {appService} from '../../service/appService'
+import {commonService} from '../../service/commonService.js'
   export default {
     props: ['str'],
     data () {
       return {
           title:'线下转账',
           arrays: [],
+          orderNo: this.$route.query.id,
+          datas:'',
+          orderDetail:'',
+          adress:'',//地址
+          // logistics:'',//物流
+          // logisticss:'',//物流列表
+          logistic:'',
+          arrays: [],
+          dis:'dis',
+          time:''//支付时间
+
           
       }
     },
     components: {},
+    computed: {
+            //将存在store中的数据取出
+            listImg() {
+                return this.$store.state.homeStore.listImg || []
+            },
+            noticelist() {
+                return this.$store.state.homeStore.noticelist || []
+            },
+
+        },
     mounted () {
+        this.getOrderid()
     },
-    methods: {}
+    methods: {
+        // 获取订单
+         getOrderid:function(){
+            let that=this;
+            console.log(that.orderNo)
+            commonService.getOrderid(that.orderNo).then(function(res){
+                console.log(res)
+                if(res.data.code==200){
+                  that.datas=res.data.datas
+                 let payLogs=that.datas.payLogs
+                 that.time=payLogs[payLogs.length-1]
+                that.orderDetail=that.datas.orderDetail
+                that.adress=that.orderDetail.adress  
+                }
+                
+           
+            })
+          },
+    }
   }
 </script>
 

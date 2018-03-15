@@ -76,7 +76,7 @@
               <!-- 支付方式 -->
                 <div class="payment_method">
                     <div class="payment_top">支付方式</div>
-                    <div class="ros clearfix">
+                    <div class="ros clearfix" :class="{'ros_ll':index==1}" @click="selected(1)">
                         <div class="ros_l"><span>✔</span></div>
                         <div class="ros_con"><i class="iconfont icon-icon_weixinzhifu"></i></div>
                         <div class="ros_r">
@@ -84,7 +84,7 @@
                            <p>单笔最高5.000-50.000CNY</p>
                         </div>
                     </div>
-                    <div class="ros clearfix">
+                    <div class="ros clearfix" :class="{'ros_ll':index==2}" @click="selected(2)">
                         <div class="ros_l"><span>✔</span></div>
                         <div class="ros_con"><i class="iconfont icon-icon_zhifubao"></i></div>
                         <div class="ros_r">
@@ -92,7 +92,7 @@
                            
                         </div>
                     </div>
-                    <div class="ros clearfix">
+                    <div class="ros clearfix" :class="{'ros_ll':index==3}" @click="selected(3)">
                         <div class="ros_l"><span>✔</span></div>
                         <div class="ros_con"><i class="iconfont icon-icon_zhifubao"></i></div>
                         <div class="ros_r">
@@ -103,7 +103,7 @@
                 </div>
 
         </div>
-        <div class="botton">
+        <div class="botton" @click="postOrders()">
             <div>提交订单</div>
         </div>
 
@@ -117,6 +117,7 @@
         data () {
             return {
                 title: '订单确认',
+                index:1,
                 address:'',
                 datas:'',
                 picItems:'',
@@ -154,26 +155,50 @@
         },
         methods: {
             jump:function(){
-               this.$router.push({path:"/selection",query:{}})
+               this.$router.push({path:"/my/selection",query:{}})
             },
             //获取默认地址 
             getDefault:function(){
                  let that=this;
                  commonService.getDefault().then(function(res){
                    that.address=res.data.datas
-                   console.log(res)
+                   // console.log(res)
                 })
             },
-            //获取默认地址 
+            selected:function(id){
+                 this.index=id
+            },
+            //获取订单
             getAuctions:function(){
                  let that=this;
                  commonService.getAuctions(that.auctionId).then(function(res){
+                    if(res.data.code==200){
                    that.datas=res.data.datas
+                   // console.log(that.datas)
                    that.picItems=that.datas.picItems[0]
                    // console.log(that.datas)
-
+                    }
                 })
             },
+            // 提交订单
+            postOrders:function(){
+                let that=this;
+                let channelIds=''
+                 if(that.index === 1){//微信
+                    channelIds = 'WX_JSAPI'
+                }else if(that.index === 3){//转账汇款
+                    channelIds = 'UNIONPAY'
+                }else if(that.index === 2){//支付宝
+                    channelIds = 'ALIPAY_WAP'
+                }
+                 commonService.postOrders(that.auctionId,{addressId:that.address.id,channelId:channelIds}).then(function(res){
+                    console.log(res)
+                    if(res.data.code==200){
+                   // that.datas=res.data.datas
+                   // that.picItems=that.datas.picItems[0]
+                    }
+                })
+            }
         }
     }
 </script>
@@ -381,10 +406,10 @@
                         height: @size10;
                         margin-top: @size6;
                         text-align: center;
-                        border:2px solid #15b3b2;
+                        border:2px solid rgb(224,224,224);
                         span{
                             font-size: @size6;
-                            color:#15b3b2;
+                            color:rgb(224,224,224);
                             line-height: @size10;
                            
                         }
@@ -394,7 +419,7 @@
                         margin: 0 @size10;
                         i{
                           font-size: @size26;  
-                          color:#40b73f;
+                          color:rgb(224,224,224);
                         }
                         
                     }
@@ -409,6 +434,21 @@
                         }
                     }
                 }
+               .ros_ll{
+                        .ros_l{
+                        border:2px solid #15b3b2;
+                        span{
+                            font-size: @size6;
+                            color:#15b3b2;
+                            line-height: @size10;
+                           }
+                        }
+                        .ros_con{
+                            i{
+                              color:#4dbc4c;  
+                            }
+                        }
+                    }
             }
        }
        .botton{

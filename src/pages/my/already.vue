@@ -53,7 +53,7 @@
                  <div class="ros_l3">{{list.auctionStartTime}}-{{list.no}}</div>
              </div>
              <div class="ros_r"><img :src="picHead + list.picItems[0]"/></div>
-             <div class="ros_con"  v-if="list.status=1">
+             <div class="ros_con"  v-if="list.status=1"  @click="jump(list.id)">
                  去支付
              </div>
              <div class="ros_con"  v-if="list.status!=1">
@@ -90,7 +90,7 @@
                  <div class="ros_l3">{{list.auctionStartTime}}-{{list.no}}</div>
              </div>
              <div class="ros_r"><img :src="picHead + list.picItems[0]"/></div>
-             <div class="ros_con"  v-if="list.status=1">
+             <div class="ros_con"  v-if="list.status=1" @click="jump(list.id)">
                  去支付
              </div>
              <div class="ros_con"  v-if="list.status!=1">
@@ -127,7 +127,7 @@
                  <div class="ros_l3">{{list.auctionStartTime}}-{{list.no}}</div>
              </div>
              <div class="ros_r"><img :src="picHead + list.picItems[0]"/></div>
-             <div class="ros_con"  v-if="list.status=1">
+             <div class="ros_con"  v-if="list.status=1" @click="jump(list.id)">
                  去支付
              </div>
              <div class="ros_con"  v-if="list.status!=1">
@@ -163,7 +163,7 @@
                  <div class="ros_l3">{{list.auctionStartTime}}-{{list.no}}</div>
              </div>
              <div class="ros_r"><img :src="picHead + list.picItems[0]"/></div>
-             <div class="ros_con"  v-if="list.status=1">
+             <div class="ros_con"  v-if="list.status=1" @click="jump(list.id)">
                  去支付
              </div>
              <div class="ros_con"  v-if="list.status!=1">
@@ -227,22 +227,27 @@
                 let that =this;
         commonService.getCheckOrder({auctionId:id}).then(function(res){
                     // that.datas=res.data.datas.datas
+                    console.log(res)
                     if(res.data.datas==null){
                          that.$router.push({path:"/my/order",query:{auctionId:id}}) 
+                    }else{
+                        let status=res.data.datas.status
+                        if(status!=1){//订单详情页
+                         that.$router.push({path:"/normalorder",query:{id:res.data.datas.orderNo}}) 
+                        }else if(status==6){//关闭
+                         that.$router.push({path:"/closeorder",query:{id:res.data.datas.orderNo}}) 
+                        }
                     }
-                console.log(res)
-                    
                 })
-
-             
             },
-
             // 获取我的收藏
             getCollect:function(){
                 let that=this;
                  commonService.getCollect({pageNo:1,pageSize:30,status:2}).then(function(res){
-                    that.datas=res.data.datas.datas
-                console.log(res)
+                    if(res.data.code==200){
+                        that.datas=res.data.datas.datas
+                    }
+                    console.log(that.datas)
                     var now = new Date();
                     var now1=new Date()
                     var now2=new Date()

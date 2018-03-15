@@ -42,10 +42,10 @@
                 <div class="witpay" v-if='index==1'>退货中</div>
                 <div class="witpay" v-if='index==2'>审核中</div>
                 <div class="witpay" v-if='index==3'>已退款</div>
-                <div class="money" v-if='index>0'>50,000 CNY</div>
+                <div class="money" v-if='index>0'>{{datas.refundAmount}} CNY</div>
             </div>
             <div class="orderinfo">
-                <div class="price clearfix" v-if='index>0'><div class="fl">退回路径</div><div class="fr">支付宝</div></div>
+                <!-- <div class="price clearfix" v-if='index>0'><div class="fl">退回路径</div><div class="fr">支付宝</div></div> -->
                 <div class="price clearfix" v-if='index>0'><div class="fl">差额原因</div><div class="fr">其他</div></div>
                 <div class="price clearfix" v-if='index==0'>货品属性特殊，无法进行退货。审核失败，客服驳回售后申请。如有问题，请联系售后</div>
             </div>
@@ -57,23 +57,25 @@
             <div class="itemInfo clearfix">
                 <div class="pic fl"><img src="../../assets/image/myimage/eg.gif" alt=""></div>
                 <div class="box fl">
-                    <div class="money">300,00CNY</div>
-                    <div class="title">器物器物器物</div>
-                    <div class="number">20180709-2</div>
+                    <div class="money">{{order.finalPrice}}CNY</div>
+                    <div class="title">{{order.auctionName}}</div>
+                    <div class="number">{{lists.createTime}}-{{order.auctionNo}}</div>
                 </div>
             </div>
             <div class="totalMoney clearfix">
                 <div class="fl">问题描述</div>
             </div>
             <div class="moneys">
-                <div class="price clearfix"><div class="fl">收到物品有破损，货物外包装不完整</div></div>
-                <div class="price clearfix"><div class="fl">货品投递有问题，无法正常签收</div><div class="fr">2018.06.06 00：00</div></div>
+                <div class="price clearfix">
+                    <div class="fl">{{datas.amountReason}}</div>
+                    <div class="fr">{{datas.dealTime}}</div>
+                </div>
             </div>
             <div class="orderinfo">
-                <div class="price clearfix"><div class="fl">订单编号:</div><div class="fr">308796987864</div></div>
-                <div class="price clearfix"><div class="fl">申请时间:</div><div class="fr">2018.06.31 12：12：12</div></div>
-                <div class="price clearfix"><div class="fl">联系人:</div><div class="fr">李先生</div></div>
-                <div class="price clearfix"><div class="fl">手机号码:</div><div class="fr">138 3666 6666</div></div>
+                <div class="price clearfix"><div class="fl">订单编号:</div><div class="fr">{{datas.orderNo}}</div></div>
+                <div class="price clearfix"><div class="fl">申请时间:</div><div class="fr">{{datas.dealTime}}</div></div>
+                <div class="price clearfix"><div class="fl">联系人:</div><div class="fr">{{adress.name}}</div></div>
+                <div class="price clearfix"><div class="fl">手机号码:</div><div class="fr">{{adress.name}}</div></div>
             </div>  
         </div>
         <div class="footer">联系售后</div>
@@ -115,6 +117,7 @@
 
 <script >
 import {appService} from '../../service/appService'
+import {commonService} from '../../service/commonService.js'
   export default {
     props: ['str'],
     data () {
@@ -123,14 +126,27 @@ import {appService} from '../../service/appService'
           arrays: [],
           index:1,
           dis:'dis',
-          orderNo:'',
+          orderNo:'',//订单ID
+          datas:'',//售后数据
+          id:this.$route.query.id,
+          order:'',
+          lists:'',
+          adress:'',
+
         
           
       }
     },
     components: {},
+    computed: {
+ 
+    picHead(){
+       return this.$store.state.picHead
+      }
+     },
     mounted () {
-        this.huoqu()
+       
+        this.getOrdercsid()
     },
     methods: {
         open:function(){
@@ -139,6 +155,34 @@ import {appService} from '../../service/appService'
         close:function() {
             this.dis='dis';
         },
+        //获取订单详情
+        getOrderid:function(){
+            let that=this
+            commonService.getOrderid(that.orderNo).then(function(res){
+                if(res.data.code==200){
+                 that.order=res.data.datas.orderDetail
+                 that.lists=res.data.datas
+                 that.adress=that.order.adress
+                }
+                // console.log(res)
+
+                    })
+        },
+          // 获取售后详情
+        getOrdercsid:function(){
+                let that=this;
+
+               commonService.getOrdercsid(that.id).then(function(res){
+                if(res.data.code==200){
+                 that.datas=res.data.datas
+                 that.orderNo=that.datas.orderNo
+                 that.getOrderid()
+                }
+                console.log(res)
+
+                })
+            },
+
        
     }
   }
@@ -371,10 +415,23 @@ import {appService} from '../../service/appService'
             box-sizing: border-box;
             padding: @size5 @size10;
             border-bottom: 1px solid rgb(129, 135, 140);
-            height: @size50;
+            
             div{
                 font-size: @size12;
                 line-height: @size20;
+            }
+            .price{
+                position: relative;
+                min-height: @size25;
+                .fl{
+                    float: left;
+                    width: 5rem;
+                }
+                .fr{
+                   position: absolute;
+                   right: 0;
+                   bottom: 0;
+                }
             }
         }
         .orderinfo{

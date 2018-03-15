@@ -200,8 +200,10 @@
              getCollect:function(){
                 let that=this;
                  commonService.getCollect({pageNo:1,pageSize:30,status:3}).then(function(res){
-                    that.datas=res.data.datas.datas
-                     console.log(res)
+                   if(res.data.code==200){
+                        that.datas=res.data.datas.datas
+                    }
+                    
                     var now = new Date();
                     var now1=new Date()
                     var now2=new Date()

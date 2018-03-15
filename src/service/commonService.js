@@ -27,6 +27,11 @@ export const commonService = {
     getAuctions: function (id) {
         return axios.get('/auctions/'+ id)
     },
+     /* 提交订单 */
+    postOrders: function (id,params) {
+        return axios.post('/auctions/'+ id +'/orders' + this.getParam(params))
+    },
+
 
     postGaptchas: function (params) {
         return axios.post('/gaptchas',qs.stringify(params))
@@ -54,6 +59,10 @@ export const commonService = {
     /* 获取用户信息 */
     getSms: function (params) {
         return axios.get('/sms' + this.getParam(params))
+    },
+    /* 获取浏览记录 */
+    getFootPrint: function (params) {
+        return axios.get('/users/footPrint' + this.getParam(params))
     },
     /* 初始化 */
     getGaptchas: function () {
@@ -149,6 +158,14 @@ export const commonService = {
     /* 获取我的订单详情  */
     getOrderid: function (params) {
         return axios.get('/orders/' + params)
+    },
+      /* 获取售后列表单  */
+    getOrdercs: function (params) {
+        return axios.get('/ordercs' + this.getParam(params))
+    },
+     /* 获取售后详情  */
+    getOrdercsid: function (id) {
+        return axios.get('/ordercs/' + id)
     },
      /* 获取我的订单详情快递  */
     getKaidi: function (params) {

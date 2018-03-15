@@ -22,15 +22,15 @@
                 <div class="fr">...</div>
             </div>
             <div class="option clearfix">
-                <div class="litbox fl">
+                <div class="litbox fl" @click="order(0)">
                     <div class="pic"><i class="iconfont icon-tupian"></i></div>
                     <div class="font">全部订单</div>
                 </div>
-                <div class="litbox fl">
+                <div class="litbox fl" @click="order(1)">
                     <div class="pic"><i class="iconfont icon-tupian"></i><div class="number" v-if="numItem.noPayNum!=0">{{numItem.noPayNum}}</div></div>
                     <div class="font">待付款</div>
                 </div>
-                <div class="litbox fl">
+                <div class="litbox fl" @click="order(2)">
                     <div class="pic"><i class="iconfont icon-tupian"></i><div class="number" v-if="numItem.noGetNum!=0">{{numItem.noGetNum}}</div></div>
                     <div class="font">待收货</div>
                 </div>
@@ -57,15 +57,15 @@
             <div class="center">
                 <div class="address  clearfix">
                     <div class="fl">地址管理</div>
-                    <div class="fr">...</div>
+                    <div class="fr" @click="address()">...</div>
                 </div>
                 <div class="address  clearfix">
                     <div class="fl">会员中心</div>
-                    <div class="fr">...</div>
+                    <div class="fr" @click="member">...</div>
                 </div>
                 <div class="address  clearfix">
                     <div class="fl">帮助中心</div>
-                    <div class="fr">...</div>
+                    <div class="fr" @click="help">...</div>
                 </div>
             </div>
             
@@ -121,17 +121,7 @@
         },
         components:{'home-item':itemc},
         syncData({store}) {
-            /*基本规则
-            * 所有不需要token的请求都放在这里
-            * 这里不出现window，document等DOM元素
-            * 这里获得的数据都要存储在store中
-            * 写法如下
-            * */
             const that = this;
-            /*
-            * 将所有的请求处理以数组放在promise中
-            * that.data().data调用数据
-            * */
             return Promise.all([
                 appervice.getParam().then(res=>{
 //                    store.state.homeStore.listImg = res.data;
@@ -151,12 +141,8 @@
             },
         },
         mounted: function() {
-            /*
-            * 所有需要token的请求都放在这里
-            * 可以使用DOM元素
-            * 这里的数据可以放在data中
-            * */
             this.getUsers()
+            this.getFootPrint()
 
         },
         methods: {
@@ -171,16 +157,52 @@
             recharge:function(){
                 this.$router.push({path:"/recharge"})
             },
+            order:function(index){
+         this.$router.push({path:"/myorder",query:{index:index}})       
+            },
+            address:function(){
+          this.$router.push({path:"/addresslist"}) 
+            },
+            member:function(){
+              this.$router.push({path:"/membercenter"})   
+            },
+            help:function(){
+              this.$router.push({path:"/helpcenter"})  
+            },
+            // 获取个人信息
             getUsers:function(){
                 let that = this;
                  commonService.getUsers().then(function(res){
-                
-                    that.list=res.data.datas.user
+                    // console.log(res)
+                    if(res.data.code==200){
+                      that.list=res.data.datas.user
                     that.totalMoney=that.list.wallet.totalMoney
-                    that.numItem=that.list.numItem
-                    console.log(that.totalMoney)
+                    that.numItem=that.list.numItem  
+                    }
+                    
                  })
             },
+              // 获取浏览记录
+            getFootPrint:function(){
+                let that = this;
+             // function genStatId() {
+             //          var cookieId = getTimestamp();
+             //     cookieId = "zstat" + "-" + cookieId + "-" + Math.round(Math.random() * 3000000000);
+             //         return cookieId;
+             //          }
+                    // console.log(genStatId())
+               // let cookiesId = window.localStorage.getItem("token")
+                  // console.log(cookiesId)
+                 commonService.getFootPrint().then(function(res){
+                    // console.log(res)
+                    if(res.data.code==200){
+                     
+                        
+                    }
+                    
+                 })
+            },
+
 
         }
     }
