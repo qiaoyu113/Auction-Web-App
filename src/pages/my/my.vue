@@ -48,7 +48,6 @@
             },
         },
         mounted: function() {
-            
              if(this.$route.path=="/my/notstart"){
                    this.indexs=0
              }else if(this.$route.path=="/my/lot"){

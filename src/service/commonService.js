@@ -96,6 +96,7 @@ export const commonService = {
     getBails: function (params) {
         return axios.get('/bails' + this.getParam(params))
     },
+    // 提交线上单独
     putOrders: function (params) {
         return axios.put('/orders',this.getParam(params))
     },

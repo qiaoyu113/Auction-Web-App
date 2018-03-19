@@ -122,7 +122,6 @@
                 let that = this;
                commonService.getUsers().then(function(res){
                     that.wallet=res.data.datas.user.wallet
-                    console.log(res)
               })
             },
             // full:function(){
@@ -142,7 +141,8 @@
                     // that.wallet=res.data.datas.user.wallet
                     console.log(res)
                     if(that.index==3){
-                  that.$router.push({path:"/rechargeList",query:{money:that.money,index:that.index,orderNo:res.data.datas}})   	
+                  that.$router.push({path:"/rechargeList",query:{money:that.money,index:that.index,orderNo:res.data.datas}}) 
+
                     }
                    
               })

@@ -241,6 +241,9 @@ import {commonService} from '../../service/commonService.js'
                commonService.postAddress({name:that.name,phone:that.phone,provinceName:that.provinceName,provinceId:that.provinceid,cityName:that.cityName,cityId:that.cityid,districtName:that.countyName,districtId:that.countyid,detailAdress:that.detailAdress}).then(function(res){
                 // that.bankCard=res.data.datas
                   // console.log(res)
+                  if(res.data.code==200){
+                       that.$router.push({path:"/addresslist"})
+                  }
                   
                  })
             },
@@ -250,6 +253,9 @@ import {commonService} from '../../service/commonService.js'
                commonService.postAddressid(that.addressid,{type:1,defaultAdress:that.defaultAdress,available:true,name:that.name,phone:that.phone,provinceName:that.provinceName,provinceId:that.provinceid,cityName:that.cityName,cityId:that.cityid,districtName:that.countyName,districtId:that.countyid,detailAdress:that.detailAdress}).then(function(res){
                 // that.bankCard=res.data.datas
                   // console.log(res)
+                    if(res.data.code==200){
+                       that.$router.push({path:"/addresslist"})
+                  }
                   
                  })
             },

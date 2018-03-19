@@ -5,7 +5,7 @@
    
     <div class="addresslist" id="" v-set-title="title">
         <div class="header">传家</div>
-        <z-nav></z-nav>
+        <div class="returncla"><span @click="Vreturn">&lt;</span></div>
         <div class="content clearfix">
             <div v-for="list in data">
                 <div class="peo clearfix">
@@ -78,7 +78,10 @@ import {commonService} from '../../service/commonService.js'
             },
             edit:function(id){
             this.$router.push({path:"/address",query:{id:id}})
-            }
+            },
+            Vreturn:function(){
+             window.history.go(-1)
+            },
 
             
 
@@ -103,6 +106,25 @@ import {commonService} from '../../service/commonService.js'
         color: white;
         text-align: center;
         line-height: @size45;
+    }
+    .returncla{
+        width: @size375;
+        height: @size35;
+        border-bottom: 1px solid rgb(53, 60, 70);
+        background: rgb(255, 255, 255);
+        position: fixed;
+        top: @size45;
+        z-index: 100;
+        span{
+            display: inline-block;
+            line-height: @size30;
+            text-align: center;
+            font-size: @size30;
+            font-weight: lighter;
+            color: rgb(157, 169, 177);
+            margin-left: 20px;
+        }
+
     }
     .content{
         padding: 0 @size10;
