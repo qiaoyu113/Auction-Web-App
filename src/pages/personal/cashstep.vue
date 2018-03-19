@@ -210,8 +210,6 @@ import {commonService} from '../../service/commonService.js'
                 if(this.$route.query.index==3){
                     this.flag=2
                 }
-                console.log(this.$route.query.index)
-                console.log(this.$route.query.orderNo)
             },
             nextStep:function(){
                 if(this.index==1){
@@ -227,7 +225,6 @@ import {commonService} from '../../service/commonService.js'
              let that = this;
             if(that.count==0){
                  commonService.getFormssms({phone:that.phone,type:2,idCard:that.namecard,userName:that.userNamew}).then(function(res){
-                   console.log(res)
                     if(res.data.message!= 'success'){
                       return false 
                     }else{
@@ -260,7 +257,6 @@ import {commonService} from '../../service/commonService.js'
                    type=3
                 }
                  commonService.postForms({channelId:'UNIONPAY',channelUser:that.account,phone:that.phone,type:type,idCard:that.namecard,userName:that.userName,smsCode:that.verification,smsType:7,amount:that.money,realName:that.name,userBankName:that.userBankName,userBank:that.userBank,userBankCardNo:that.userBankCardNo,userBankProvince:that.userBankProvince,userBankDetail:that.userBankDetail}).then(function(res){
-                    console.log(res)
                     if(res.data.message=='success'){
                        that.oddNumbers=res.data.datas 
                  // setInterval(() => {
@@ -272,7 +268,6 @@ import {commonService} from '../../service/commonService.js'
              getForms:function(){
                 let that = this;
                  commonService.getForms(that.oddNumbers).then(function(res){
-                    console.log(res)
                     that.list=res.data.datas
                     
                  })

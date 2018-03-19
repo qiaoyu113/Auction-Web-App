@@ -38,6 +38,7 @@ const specialView = (resolve) => {require(['./pages/special/specialView.vue'],re
 const specialDetails = (resolve) => {require(['./pages/special/specialDetails.vue'],resolve)}
 
 const auction = (resolve) => {require(['./pages/auction/auction.vue'],resolve)}
+const none = (resolve) => {require(['./pages/auction/none.vue'],resolve)}
 const auctionView = (resolve) => {require(['./pages/auction/auctionView.vue'],resolve)}
 const wxbaselogin = (resolve) => {require(['./pages/auction/wxbaselogin.vue'],resolve)}
 const wxPay = (resolve) => {require(['./pages/wxPay/wxPay.vue'],resolve)}
@@ -95,6 +96,7 @@ const routers = [
     {name: 'special',path:'/special',component:special},
     {name: 'specialinfo',path:'/specialinfo',component:specialinfo},
     {name: 'specialView',path:'/specialView',component:specialView},
+    {name: 'none',path:'/none',component:none},
     {name: 'specialDetails',path:'/specialDetails',component:specialDetails,
         children:[
             {name:'specialMore',path:'more/:id',component:specialDetails},

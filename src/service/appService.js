@@ -141,7 +141,6 @@ export const appService = {
                 // 用户取消分享后执行的回调函数
             },
             trigger: function () {
-                console.log(shareInfo)
                 // 用户取消分享后执行的回调函数
             }
         });
@@ -158,7 +157,6 @@ export const appService = {
                 // 用户取消分享后执行的回调函数
             },
             trigger: function () {
-                console.log(shareInfo)
                 // 用户取消分享后执行的回调函数
             }
         });

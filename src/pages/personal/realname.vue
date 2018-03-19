@@ -164,7 +164,6 @@
             // 获取实名认证信息
             getAuths:function(){
                commonService.getAuths().then(function(res){
-                    console.log(res)  
                     })
             },
             handleAvatarSuccess(res, file) {
@@ -195,7 +194,6 @@
                 that.width=this.width
                 that.height=this.height
     commonService.postBase({base64Img:that.base,width:this.width,height:this.height}).then(function(res){
-                    console.log(res)
                     if(res.data.code==200){
                     that.authFrontPic=res.data.datas
                     }
@@ -241,7 +239,6 @@
     commonService.postBase({base64Img:that.base,width:this.width,height:this.height}).then(function(res){
                     if(res.data.code==200){
                     that.authBackPic=res.data.datas
-                    console.log(that.authBackPic)
                     }
                     // that.url='http://test.resource.vjuzhen.com/'+ res.data.datas
            })
@@ -268,8 +265,7 @@
           submit:function(){
             let that=this;
             commonService.putAuths({authIdCard:that.namecard,authRealName:that.name,authFrontPic:that.authFrontPic,authBackPic:that.authBackPic}).then(function(res){
-                console.log(res)
-                  
+
                     // that.url='http://test.resource.vjuzhen.com/'+ res.data.datas
             })
           },

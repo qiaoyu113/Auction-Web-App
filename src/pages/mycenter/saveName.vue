@@ -56,7 +56,6 @@
              * 可以使用DOM元素
              * 这里的数据可以放在data中
              * */
-             console.log(this.id)
 
         },
         methods: {

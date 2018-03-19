@@ -108,7 +108,6 @@
                 let that=this
                  commonService.getUsers().then(function(res){
                     that.user=res.data.datas.user
-                    console.log(that.user)
               })
 
              },

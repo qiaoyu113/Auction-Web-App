@@ -62,7 +62,6 @@
 		mounted() {
 			const that = this;
 			// 请求底部数据
-            console.log(that.$route.name)
             if(that.$route.name == 'home'){
                 that.index = 0
             }else if(that.$route.name == 'special'){
@@ -82,7 +81,6 @@
         methods: {
             checked(index){
                 let that = this;
-                console.log(index)
                 that.index = index;
                 if(index === 0){
                     that.$router.replace({name:'home'})
@@ -93,7 +91,6 @@
                 }else if(index === 2){
                     that.$router.replace({name:'my'})
                     that.index = 2;
-                    console.log('index',that.index)
                 }else if(index === 3){
                     that.$router.replace({name:'personalCenter'})
                     that.index = 3;

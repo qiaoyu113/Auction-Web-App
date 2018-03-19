@@ -98,7 +98,6 @@ import {commonService} from '../../service/commonService.js'
             let that=this;
             console.log(that.orderNo)
             commonService.getOrderid(that.orderNo).then(function(res){
-                console.log(res)
                 if(res.data.code==200){
                   that.datas=res.data.datas
                  let payLogs=that.datas.payLogs

@@ -179,9 +179,6 @@
                 let that=this;
                commonService.getOrdercs({pageNo:1,pageSize:30}).then(function(res){
                       that.ordercs=res.data.datas.datas
-                    
-                      console.log(res.data.datas.datas)
-
                     })
             },
 

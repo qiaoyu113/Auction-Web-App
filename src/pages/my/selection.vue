@@ -78,14 +78,12 @@
           },
         	obtain:function(){
                   this.$router.push({path:"/my/order",query:{addressId:this.addressId,auctionId:this.auctionId}})    
-    	console.log(id)
         	},
         	// 获取地址
         	getAddress:function(){
                 let that=this;
                  commonService.getAddress({pageNo:1,pageSize:30}).then(function(res){
                    that.address=res.data.datas.datas
-                   console.log(that.address)
                 })
             },
 

@@ -228,7 +228,6 @@
                 let that =this;
         commonService.getCheckOrder({auctionId:id}).then(function(res){
                     // that.datas=res.data.datas.datas
-                    console.log(res)
                     if(res.data.datas==null){
                          that.$router.push({path:"/my/order",query:{auctionId:id}}) 
                     }else{
@@ -248,7 +247,6 @@
                     if(res.data.code==200){
                         that.datas=res.data.datas.datas
                     }
-                    console.log(that.datas)
                     var now = new Date();
                     var now1=new Date()
                     var now2=new Date()

@@ -78,7 +78,6 @@
             save:function(){
                 let that = this;
          commonService.getCheckCode({phone:that.phone,type:5,smsCode:that.inputNum}).then(function(res){
-                    console.log(res)
                     if(res.data.code == 200){
                       that.$router.push({name:'savePhone'})
                     }
@@ -88,7 +87,6 @@
             getKaptchas:function(){
                 let that=this
                  commonService.getKaptchas().then(function(res){
-                    console.log(res)
                     that.img=res.data.datas
               })
             },
@@ -113,7 +111,6 @@
                 }
                 // 获取短信验码
                  commonService.getSendMessage({phone:that.phone,type:5,kaptchaKey:that.img.kaptchaKey,kaptchaValue:that.kaptchaValue}).then(function(res){
-                    console.log(res)
                     if(res.data.code == 200){
                      // that.$router.go(-1);
                     }

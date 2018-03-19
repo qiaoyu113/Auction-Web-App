@@ -645,6 +645,8 @@
                                 }
                             }
                         })
+                    }else{
+                        that.$router.replace({name:'none'})
                     }
                 })
             },
@@ -781,8 +783,6 @@
             subtraction(){
                 let that = this;
                 if(that.bidPrice <= 10000){
-                    console.log(that.bidPrice)
-                    console.log(Number(that.details.currentPrice) + 100)
                     if(that.bidPrice <= Number(that.details.basePrice) + 100){
                         if(that.offerNumDate){
                             that.bidPrice = that.details.basePrice;
@@ -866,7 +866,7 @@
                 commonService.postMyPrice({offerAmount:bidPrice,auctionId:that.id}).then(function(res){
                     if(res.data.code === 537126){
                         //查看用户余额是否够冻结
-                        commonService.getUser().then(function(res){
+                        commonService.getUsers().then(function(res){
                             if(res.data.datas.user.wallet == null){
                                 that.userWallet = '0.00';
                             }else{

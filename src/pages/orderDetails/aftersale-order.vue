@@ -173,13 +173,11 @@ import {commonService} from '../../service/commonService.js'
                 let that=this;
 
                commonService.getOrdercsid(that.id).then(function(res){
-                if(res.data.code==200){
-                 that.datas=res.data.datas
-                 that.orderNo=that.datas.orderNo
-                 that.getOrderid()
-                }
-                console.log(res)
-
+                    if(res.data.code==200){
+                     that.datas=res.data.datas
+                     that.orderNo=that.datas.orderNo
+                     that.getOrderid()
+                    }
                 })
             },
 

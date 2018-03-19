@@ -27,7 +27,6 @@
     },
     methods: {
         goDetails(id){
-            console.log(id)
             let that = this;
             that.$router.push({name:'specialinfo',query:{id:id}})
         }

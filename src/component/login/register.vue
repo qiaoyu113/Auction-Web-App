@@ -99,7 +99,6 @@
                 }else{
                     that.codeShow = true;
                     let time = setInterval(function(){
-                        console.log(that.timeOver);
                         if(that.timeOver === 0){
                             clearInterval(time)
                             that.codeShow = false;

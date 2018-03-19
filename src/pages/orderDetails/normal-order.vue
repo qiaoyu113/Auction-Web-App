@@ -212,14 +212,12 @@ import {commonService} from '../../service/commonService.js'
          getOrderid:function(){
             let that=this;
             commonService.getOrderid(that.orderNo).then(function(res){
-                console.log(res.data.datas)
                 that.datas=res.data.datas
                 that.orderDetail=that.datas.orderDetail
                 that.adress=that.orderDetail.adress
 
                  let orderLogs = res.data.datas.orderLogs
                  for(let i=0;i<orderLogs.length;i++){
-                      console.log(11)
                       if(orderLogs[i].status==3){
                             that.createTime=orderLogs[i].createTime
                       }
@@ -232,8 +230,6 @@ import {commonService} from '../../service/commonService.js'
                     // console.log(that.logistics)
                     that.logisticss=res.data.datas.data
                     that.logistic=res.data.datas
-                    console.log(res.data.datas)
-                    
                 })
                 }
                 if(that.datas.status==1){

@@ -76,7 +76,6 @@
                 let that = this;
                 
              commonService.putPhoneset({phone:that.inputPhone,smsCode:this.inputNum,type:6}).then(function(res){
-                console.log(res)
                     if(res.data.code==200){
                       that.$router.replace({name:'mycenter'});
                     }
@@ -87,7 +86,6 @@
             getKaptchas:function(){
                 let that=this
                  commonService.getKaptchas().then(function(res){
-                    console.log(res)
                     that.img=res.data.datas
               })
             },
@@ -111,7 +109,6 @@
                 }
                 // 获取短信验码
                  commonService.getNewPhone({phone:that.inputPhone,type:6,kaptchaKey:that.img.kaptchaKey,kaptchaValue:that.kaptchaValue}).then(function(res){
-                    console.log(res)
                     if(res.data.code == 200){
                      // that.$router.go(-1);
                     }

@@ -189,7 +189,6 @@
                         if(that.password == that.password2){
                             if(that.code != ''){
                                 commonService.goSignup({phone:that.phone,password:that.password,smsCode:that.code,type:1,platform:that.platform}).then(function(res){
-                                    console.log(res.data)
                                     if(res.data.code === 200){
                                         that.phoneUser = that.phone;
                                         window.localStorage.setItem('phone',that.phone)
@@ -220,11 +219,8 @@
             //点击登陆
             loginBtn:function(){
                 let that = this;
-                console.log(that.phoneUser);
                 commonService.goLogin({phone:that.phoneUser,password:that.passwordUser,platform:that.platform}).then(function(res){
-                    console.log(res)
                     if(res.data.code === 200){
-                        console.log('登陆成功')
                         let token = res.data.datas;
                         window.localStorage.setItem('token',token)
                         that.$router.replace({name:'home'})
@@ -267,9 +263,7 @@
                     }else{
                         that.codeShow = true;
                         commonService.getQR({phone:that.phone,type:1,kaptchaKey:that.img.kaptchaKey,kaptchaValue:that.kaptchaValue}).then(function(res){
-                            console.log(res.data)
                             if(res.data.code === 200){
-                                console.log('短信发送成功')
                                 let time = setInterval(function(){
                                     if(that.timeOver === 0){
                                         clearInterval(time)

@@ -246,7 +246,6 @@ import {commonService} from '../../service/commonService.js'
                             let orderNo = res.data.datas;
                             window.localStorage.setItem('orderNo',orderNo);
                             commonService.putOrders({orderNo:orderNo,channelId:channelIds}).then(function(res){
-                                console.log(res)
                                 if(res.data.success){
                                     let payOK = document.getElementsByClassName("payOK");
                                     payOK[0].innerHTML = res.data.datas.payUrl;

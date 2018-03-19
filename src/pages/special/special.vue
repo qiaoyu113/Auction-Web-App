@@ -21,7 +21,7 @@
                                     <a class="over" v-if="list.EndText === 3">即将开始</a>
                                     <a class="over" v-if="list.EndText === 4">正在进行</a>
                                     <span class="pos2"><img class="pos2img" src="../../assets/image/mycenter/icon3.png"/>{{list.doneUserNum}}</span>
-                                    <span class="pos1"><div class="box"></div> {{list.auctionNum}}</span>
+                                    <span class="pos1"><img class="pos1img" src="../../assets/image/mycenter/zheng.png"/> {{list.auctionNum}}</span>
                                 </div>
                             </div>
                             <div class="sell-content" v-if="checked === 3">
@@ -30,7 +30,7 @@
                                 <div class="sell-information">
                                     <a class="over">成交件数：{{list.doneNum}}</a>
                                     <span class="pos2"><img class="pos2img" src="../../assets/image/mycenter/icon3.png"/> {{list.doneUserNum}}</span>
-                                    <span class="pos1"><div class="box"></div> {{list.auctionNum}}</span>
+                                    <span class="pos1"><img class="pos1img" src="../../assets/image/mycenter/zheng.png"/> {{list.auctionNum}}</span>
                                 </div>
                             </div>
                             <!-- 图片部分，未实现完全 -->
@@ -41,14 +41,16 @@
                                 <div class="date">
                                     <!--收藏图标-->
                                     <div class="collect" v-if="list.collect">
-                                        <div class="collectIcon">
-                                            <div class="bottom"></div>
-                                        </div>
+                                        <!--<div class="collectIcon">-->
+                                            <!--<div class="bottom"></div>-->
+                                        <!--</div>-->
+                                        <img src="../../assets/image/mycenter/collectIcon.png"/>
                                     </div>
                                     <!--进行中-->
                                     <div class="collect2" v-if="list.auctionStatus === 2">
-                                        <div class="icon"></div>
-                                        <div class="icon"></div>
+                                        <!--<div class="icon"></div>-->
+                                        <!--<div class="icon"></div>-->
+                                        <img src="../../assets/image/mycenter/zan.png" />
                                     </div>
                                     <!--预展中-->
                                     <div class="collect3"  v-if="list.auctionStatus === 1">
@@ -56,8 +58,9 @@
                                     </div>
                                     <!--已结束-->
                                     <div class="collect4"  v-if="list.auctionStatus === 3">
-                                        <div class="icon"></div>
-                                        <div class="icon2"></div>
+                                        <!--<div class="icon"></div>-->
+                                        <!--<div class="icon2"></div>-->
+                                        <img src="../../assets/image/mycenter/end.png" />
                                     </div>
                                     <!--流拍-->
                                     <div class="collect5"  v-if="list.auctionStatus === 4">
@@ -118,7 +121,6 @@
         mounted: function() {
             let that = this;
             let type = that.$route.query.type;
-            console.log(type)
             if(type != 'undefined'){
                 if(type == '1'){
                     that.checked = 2;
@@ -360,7 +362,6 @@
             //跳转详情页
             goSellMore(id){
                 let that = this;
-                console.log(id);
                 that.$router.push({name:'specialMore',params:{id:id}})
             }
         }
@@ -433,12 +434,13 @@
             }
         }
         .sell-content {
-            height: @size115;
+            margin-bottom:0.25rem;
             overflow: hidden;
             .sell-time {
-                font-size:18px;
-                margin-top: 0.74rem;
-                padding-left: 20px;
+                font-size:16px;
+                margin-top: 1.06rem;
+                letter-spacing:1px;
+                padding-left: 0.53rem;
                 font-weight: bold;
                 text-align: left;
                 width: 100%;
@@ -472,12 +474,13 @@
                 }
                 .pos2 {
                     float:right;
-                    font-size: 12px;
+                    font-size: 10px;
                     color: #A9AEB6;
                     margin-right:0.2rem;
-                    line-height: 0.4rem;
+                    line-height: 0.38rem;
+                    font-weight: 500;
                     .pos2img{
-                        width:0.45rem;
+                        width:0.36rem;
                         float:left;
                         margin-right: 0.1rem;
                         margin-top: -0.01rem;
@@ -506,10 +509,17 @@
                 }
                 .pos1 {
                     float:right;
-                    font-size: 12px;
+                    font-size: 10px;
                     color: #A9AEB6;
                     margin-right:0.4rem;
-                    line-height: 0.4rem;
+                    line-height: 0.38rem;
+                    font-weight: 500;
+                    .pos1img{
+                        width:0.34rem;
+                        float:left;
+                        margin-right: 0.1rem;
+                        margin-top: -0.01rem;
+                    }
                     .box{
                         width: 0.25rem;
                         height: 0.25rem;
@@ -572,7 +582,6 @@
                             width: max-content;
                             overflow: hidden;
                             overflow-x: auto;
-                            padding-left: @size5;
                             // height: @size98;
                             ul {
                                 //这里宽度出问题
@@ -627,8 +636,10 @@
                         height:0.35rem;
                         float:left;
                         background:#333333;
-                        padding:0.08rem 0.1rem;
                         box-sizing: border-box;
+                        img{
+                            width:100%;
+                        }
                         .collectIcon{
                             width:100%;
                             height:100%;
@@ -650,8 +661,10 @@
                         height:0.35rem;
                         float:right;
                         background:#5EBAA9;
-                        padding: 0.09rem 0.03rem;
                         box-sizing: border-box;
+                        img{
+                            width:100%;
+                        }
                         .icon{
                             width: 0.06rem;
                             height: 100%;
@@ -679,9 +692,12 @@
                         height:0.35rem;
                         float:right;
                         background:#EB6100;
-                        padding: 0.09rem 0.09rem;
+                        /*padding: 0.09rem 0.09rem;*/
                         box-sizing: border-box;
                         position: relative;
+                        img{
+                            width:100%;
+                        }
                         .icon{
                             width: 0;
                             height: 0;

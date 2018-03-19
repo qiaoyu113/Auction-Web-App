@@ -36,24 +36,26 @@
                                 <div class="title">{{details.name}}</div>
                                 <div class="info">{{overTime}} 结束</div>
                                 <div class="state" v-if="details.auctionStatus === 2">
-                                    <div  class="span1" :class="getBgcolor(details.auctionStatus)">
-                                        <div class="xian"></div>
-                                        <div class="xian"></div>
-                                    </div>
-                                    <!--<span>拍卖中</span>-->
-                                    <span>售卖中</span>
+                                    <!--<div  class="span1" :class="getBgcolor(details.auctionStatus)">-->
+                                        <!--<div class="xian"></div>-->
+                                        <!--<div class="xian"></div>-->
+                                    <!--</div>-->
+                                    <img src="../../assets/image/mycenter/zan.png"/>
+                                    <span>拍卖中</span>
                                 </div>
                                 <div class="state" v-if="details.auctionStatus === 1">
                                     <div  class="span1" :class="getBgcolor(details.auctionStatus)">
                                         <div class="icon1"></div>
                                     </div>
+                                    <!--<img src="../../assets/image/mycenter/zan.png"/>-->
                                     <span>预展中</span>
                                 </div>
                                 <div class="state" v-if="details.auctionStatus === 3">
-                                    <div  class="span1" :class="getBgcolor(details.auctionStatus)">
-                                        <div class="icon4"></div>
-                                        <div class="icon5"></div>
-                                    </div>
+                                    <!--<div  class="span1" :class="getBgcolor(details.auctionStatus)">-->
+                                        <!--<div class="icon4"></div>-->
+                                        <!--<div class="icon5"></div>-->
+                                    <!--</div>-->
+                                    <img src="../../assets/image/mycenter/end.png"/>
                                     <span>已结束</span>
                                 </div>
                                 <div class="sta-over">开始：{{startTime}}</div>
@@ -74,14 +76,16 @@
                             <div class="date">
                                 <!--收藏图标-->
                                 <div class="collect" v-if="list.collect">
-                                    <div class="collectIcon">
-                                        <div class="bottom"></div>
-                                    </div>
+                                    <!--<div class="collectIcon">-->
+                                        <!--<div class="bottom"></div>-->
+                                    <!--</div>-->
+                                    <img src="../../assets/image/mycenter/collectIcon.png" />
                                 </div>
                                 <!--进行中-->
                                 <div class="collect2" v-if="list.auctionStatus === 2">
-                                    <div class="icon"></div>
-                                    <div class="icon"></div>
+                                    <!--<div class="icon"></div>-->
+                                    <!--<div class="icon"></div>-->
+                                    <img src="../../assets/image/mycenter/zan.png" />
                                 </div>
                                 <!--预展中-->
                                 <div class="collect3"  v-if="list.auctionStatus === 1">
@@ -89,8 +93,9 @@
                                 </div>
                                 <!--已结束-->
                                 <div class="collect4"  v-if="list.auctionStatus === 3">
-                                    <div class="icon"></div>
-                                    <div class="icon2"></div>
+                                    <!--<div class="icon"></div>-->
+                                    <!--<div class="icon2"></div>-->
+                                    <img src="../../assets/image/mycenter/end.png" />
                                 </div>
                                 <!--流拍-->
                                 <div class="collect5"  v-if="list.auctionStatus === 4">
@@ -205,7 +210,6 @@
                 //延时一秒,模拟联网
                 const that = this;
                 commonService.getAuctionMarketsList({id:that.id},that.id).then(function(res){
-                    console.log(res)
                     if(res.data.code === 200){
                         that.details = res.data.datas;
                         that.img = that.$store.state.picHead + res.data.datas.coverUrl;
@@ -278,6 +282,8 @@
                                 }
                             }
                         })
+                    }else{
+                        that.$router.replace({name:'none'})
                     }
                 })
             },
@@ -447,8 +453,11 @@
                             height:0.35rem;
                             float:left;
                             background:#333333;
-                            padding:0.08rem 0.1rem;
+                            /*padding:0.08rem 0.1rem;*/
                             box-sizing: border-box;
+                            img{
+                                width:100%;
+                            }
                             .collectIcon{
                                 width:100%;
                                 height:100%;
@@ -470,8 +479,11 @@
                             height:0.35rem;
                             float:right;
                             background:#5EBAA9;
-                            padding: 0.09rem 0.03rem;
+                            /*padding: 0.09rem 0.03rem;*/
                             box-sizing: border-box;
+                            img{
+                                width:100%;
+                            }
                             .icon{
                                 width: 0.06rem;
                                 height: 100%;
@@ -499,9 +511,12 @@
                             height:0.35rem;
                             float:right;
                             background:#EB6100;
-                            padding: 0.09rem 0.09rem;
+                            /*padding: 0.09rem 0.09rem;*/
                             box-sizing: border-box;
                             position: relative;
+                            img{
+                                width:100%;
+                            }
                             .icon{
                                 width: 0;
                                 height: 0;
@@ -559,7 +574,7 @@
                 }
             }
             .sell-information {
-                padding: 10px;
+                padding: 0.26rem;
                 box-sizing: border-box;
                 position: relative;
                 overflow: hidden;
@@ -589,6 +604,7 @@
                     /*margin-top:0.04rem;*/
                     img{
                         width: 0.4rem;
+                        height: 0.4rem;
                         margin-right: 0.1rem;
                     }
                     .icon{
@@ -658,6 +674,13 @@
                         color:rgb(133, 133, 133);
                         overflow: hidden;
                         margin-bottom:0.1rem;
+                        img{
+                            width: @size15;
+                            height: @size15;
+                            float:left;
+                            margin-right:0.1rem;
+                            margin-top:0.03rem;
+                        }
                         span{
                             font-size: @size10;
                         }

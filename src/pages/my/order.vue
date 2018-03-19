@@ -168,10 +168,8 @@
             },
             //获取默认地址 
             getDefault:function(){
-                console.log(this.addressId)
                  let that=this;
                  commonService.getDefault().then(function(res){
-                    console.log(res)
                     if(res.data.datas!=null){
                         that.address=res.data.datas
                     }
@@ -215,7 +213,6 @@
                     channelIds = 'ALIPAY_WAP'
                 }
                  commonService.postOrders(that.auctionId,{addressId:that.address.id,channelId:channelIds}).then(function(res){
-                    console.log(res)
                     if(res.data.code==200){
                    // that.datas=res.data.datas
                    // that.picItems=that.datas.picItems[0]

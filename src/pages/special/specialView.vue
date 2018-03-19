@@ -156,7 +156,6 @@
                     if(res.data.code === 200){
                         that.details = res.data.datas;
                         that.details.createTime = common.getFormatOfDate(that.details.createTime,'yyyy.MM.dd h:m:s')
-                        console.log(that.details.auctionIds)
                         let dataArr = '';
                         if(that.details.auctionIds != null && that.details.auctionIds.length != 0){
                             that.recoCh = true;
@@ -208,7 +207,6 @@
                     if(res.data.code === 200){
                         that.details = res.data.datas;
                         that.details.createTime = common.getFormatOfDate(that.details.createTime,'yyyy.MM.dd h:m:s')
-                        console.log(that.details.auctionIds)
                         if(that.details.auctionIds != null){
                             that.recoCh = true;
                             that.meScroll();

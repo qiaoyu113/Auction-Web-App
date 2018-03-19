@@ -104,7 +104,6 @@
                 let that = this;
                commonService.getUsers().then(function(res){
                     that.wallet=res.data.datas.user.wallet
-                    console.log(res)
               })
             },
             full:function(){
