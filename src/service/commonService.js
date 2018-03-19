@@ -15,6 +15,14 @@ export const commonService = {
     getauctionPackId: function (params,id) {
         return axios.get('/auctionPackages/'+ id + this.getParam(params))
     },
+     /* 获取图片验证码 */
+    getKaptchas: function (params) {
+        return axios.get('/kaptchas')
+    },
+    /* 通用：验证验证码的对错 */
+    postValidateImg: function (params) {
+        return axios.post('/kaptchas',qs.stringify(params))
+    },
     /* 获取专题|专场拍品列表 */
     getAuctionList: function (params) {
         return axios.get('/auctions' + this.getParam(params))
@@ -46,7 +54,7 @@ export const commonService = {
     },
     /* 获取用户信息 */
     getUsers: function () {
-        return axios.get('/users')
+        return axios.get('/users/info')
     },
     /* 设置用户信息 */
     postUsersinfo: function (params) {
@@ -56,9 +64,25 @@ export const commonService = {
     putPasswords: function (params) {
         return axios.put('/passwords/password',qs.stringify(params))
     },
-    /* 获取用户信息 */
+    /* 获取短信信息 */
     getSms: function (params) {
         return axios.get('/sms' + this.getParam(params))
+    },
+     /* 获取旧手机短信验证发信息 */
+    getSendMessage: function (params) {
+        return axios.get('/user/oldPhone/sendMessage' + this.getParam(params))
+    },
+    /* 获取新手机短信验证发信息 */
+    getNewPhone: function (params) {
+        return axios.get('/user/newPhone/sendMessage' + this.getParam(params))
+    },
+     /* 获取旧手机短信验证 */
+    getCheckCode: function (params) {
+        return axios.get('/user/oldPhone/checkCode' + this.getParam(params))
+    },
+    /* 更新手机号 */
+    putPhoneset: function (params) {
+        return axios.put('/user/phone/set' + this.getParam(params))
     },
     /* 获取浏览记录 */
     getFootPrint: function (params) {

@@ -33,7 +33,7 @@
             </div>
             <!--实名认证-->
             <div class="info">
-                <div class="infoList">实名认证<div class="goBind">去认证</div></div>
+                <div class="infoList">实名认证<div class="goBind" @click="realname()">去认证</div></div>
             </div>
             <!--退出-->
             <div class="back">退出登陆</div>
@@ -86,6 +86,9 @@
             changeName:function(){
                 let that = this;
                 that.$router.push({name:'saveName',query:{id:that.user.id}})
+            },
+            realname:function(){
+                this.$router.push({name:'realname'})
             },
             //改电话号
             changePhone:function(){

@@ -46,6 +46,10 @@
                 <div class="infoRight" @click="removePhone"><i class="iconfont icon-closeicon"></i></div>
             </div>
             <div class="info">
+                <input style="width:6rem;" type="text" placeholder="输入验证码" v-model="kaptchaValue"/>
+                <div class="code" @click="getKaptchas()"><img :src="img.imageString"/></div>
+            </div>
+            <div class="info">
                 <input style="width:6rem;" type="number" placeholder="输入验证码" v-model="code"/>
                 <div class="code" @click="getcode">获取验证码<span v-if="codeShow" style="margin:0;">({{timeOver}})</span></div>
             </div>
@@ -77,6 +81,10 @@
             <div class="info">
                 <input type="number" placeholder="输入手机号" v-model="phone"/>
                 <div class="infoRight" @click="removePhone"><i class="iconfont icon-closeicon"></i></div>
+            </div>
+            <div class="info">
+                <input style="width:6rem;" type="text" placeholder="输入验证码" v-model="kaptchaValue"/>
+                <div class="code" @click="">图片验证码<span v-if="codeShow" style="margin:0;">({{timeOver}})</span></div>
             </div>
             <div class="info">
                 <input style="width:6rem;" type="number" placeholder="输入验证码" v-model="code"/>
@@ -130,19 +138,27 @@
                 passwordUser:'',//登陆账户
                 phoneUser:'',//登陆密码
                 wxLogin:false,//微信登陆
+                kaptchaValue:'',
+                img:'',
             }
         },
+     // asyncData({store,route}) {
+     //        return Promise.all([
+     //            commonService.getKaptchas().then(res=>{
+     //                store.state.homeStore.list=res;
+     //            }),
+               
+     //        ])
+     //    },
         computed: {
             //将存在store中的数据取出
-            listImg() {
-                return this.$store.state.homeStore.listImg || []
-            },
-            noticelist() {
-                return this.$store.state.homeStore.noticelist || []
-            },
+            // list() {
+            //     return this.$store.state.homeStore.list 
+            // },
         },
         mounted: function() {
             this.onMove()
+            this.getKaptchas()
             if(this.login){
                 let phoneNum = window.localStorage.getItem('phone');
                 this.phoneUser = phoneNum
@@ -158,6 +174,14 @@
             }
         },
         methods: {
+            // 获取图片验证码
+            getKaptchas:function(){
+                let that=this
+                 commonService.getKaptchas().then(function(res){
+                    console.log(res)
+                    that.img=res.data.datas
+              })
+            },
             //点击注册
             sign:function(){
                 let that = this;
@@ -243,7 +267,7 @@
 
                     }else{
                         that.codeShow = true;
-                        commonService.getQR({phone:that.phone,type:1}).then(function(res){
+                        commonService.getQR({phone:that.phone,type:1,kaptchaKey:that.img.kaptchaKey,kaptchaValue:that.kaptchaValue}).then(function(res){
                             console.log(res.data)
                             if(res.data.code === 200){
                                 console.log('短信发送成功')
@@ -493,6 +517,11 @@
                     margin-right:0.2rem;
                     margin-top:0.3rem;
                     color:#C1C1C1;
+                }
+                .code{
+                    img{
+                        height: 1rem;
+                    }
                 }
             }
             .talk{

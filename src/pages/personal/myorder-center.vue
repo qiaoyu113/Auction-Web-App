@@ -40,7 +40,7 @@
                     <div class="info fl">
                         <div class="hel">{{list.amount}} CNY</div>
                         <div class="name">{{list.orderTitle}}</div>
-                        <div class="prove">{{list.createTime}}-{{list.orderDetail.auctionNo}}</div>
+                        <div class="prove">{{list.createTime | stampFormate}}-{{list.orderDetail.auctionNo}}</div>
                         <button class="fr" @click="details(list.status,list.orderNo)">查看订单</button>
                         <button class="fr" v-if="list.status==1">立即付款</button>
                         <button class="fr" v-if="list.status==2 || list.status==3">分享</button>
@@ -63,7 +63,7 @@
                     <div class="info fl">
                         <div class="hel">{{list.amount}} CNY</div>
                         <div class="name">{{list.auctionName}}</div>
-                        <div class="prove">{{list.createTime}}-{{list.auctionNo}}</div>
+                        <div class="prove">{{list.createTime | stampFormate}}-{{list.auctionNo}}</div>
                         <button class="fr" @click="shouhou(list.status,list.id)">查看订单</button>
                        
                     </div>
@@ -88,8 +88,6 @@
                 branch:[],
                 hour:[],
                 ordercs:'',//售后
-
-                
             }
         },
         components:{'home-item':itemc},

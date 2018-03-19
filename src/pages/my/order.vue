@@ -123,6 +123,7 @@
                 picItems:'',
                 payLimitTime:'',//超时
                 auctionId:this.$route.query.auctionId,
+                addressId:this.$route.query.addressId,
             }
         },
         syncData({store}) {
@@ -150,19 +151,41 @@
 
         },
         mounted: function() {
-            this.getDefault()
+            
+            this.addresst()
             this.getAuctions()
         },
         methods: {
+            addresst:function(){
+                if(this.addressId==undefined){
+                   this.getDefault()
+                }else{
+                    this.getAddressid()
+                }
+            },
             jump:function(){
-               this.$router.push({path:"/my/selection",query:{}})
+               this.$router.push({path:"/my/selection",query:{auctionId:this.auctionId}})
             },
             //获取默认地址 
             getDefault:function(){
+                console.log(this.addressId)
                  let that=this;
                  commonService.getDefault().then(function(res){
-                   that.address=res.data.datas
-                   // console.log(res)
+                    console.log(res)
+                    if(res.data.datas!=null){
+                        that.address=res.data.datas
+                    }
+                })
+            },
+            //获取详情地址地址 
+            getAddressid:function(){
+                 let that=this;
+                 commonService.getAddressid(that.addressId).then(function(res){
+                    // console.log(res)
+                    if(res.data.datas!=null){
+                        that.address=res.data.datas
+                    }
+                   // that.address=res.data.datas
                 })
             },
             selected:function(id){

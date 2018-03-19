@@ -232,7 +232,7 @@
                          that.$router.push({path:"/my/order",query:{auctionId:id}}) 
                     }else{
                         let status=res.data.datas.status
-                        if(status!=1){//订单详情页
+                        if(status!=6){//订单详情页
                          that.$router.push({path:"/normalorder",query:{id:res.data.datas.orderNo}}) 
                         }else if(status==6){//关闭
                          that.$router.push({path:"/closeorder",query:{id:res.data.datas.orderNo}}) 

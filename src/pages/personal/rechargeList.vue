@@ -185,25 +185,27 @@ import {commonService} from '../../service/commonService.js'
                let that = this
                commonService.getBankCards().then(function(res){
                 that.bankCard=res.data.datas
-                  console.log(res)
+                  // console.log(res)
                  })
             },
             //提交申请表
             postForms:function(){
                 let that = this
+                                    // orderNo:'974154167146647552'
                commonService.postForms({channelId:'UNIONPAY',userBankDetail:that.userBankDetail,userBankCardNo:that.userBankCardNo,phone:that.phone,type:1,userName:that.name,amount:that.money,bankId:that.bankCardId}).then(function(res){
+                console.log(res)
                     if(res.data.message=='success'){
                        that.oddNumbers=res.data.datas 
                        that.getForms()
                     }
-                    console.log(res)
+                    
                  })
             },
              //获取申请表信息
              getForms:function(){
                 let that = this
                  commonService.getForms(that.oddNumbers).then(function(res){
-                    console.log(res)
+                    // console.log(res)
                     that.list=res.data.datas
                  })
             },
@@ -218,13 +220,13 @@ import {commonService} from '../../service/commonService.js'
                     channelIds = 'ALIPAY_WAP'
                 }
                 commonService.setbails({auctionId:that.id,channelId:channelIds}).then(function(res){
-                    console.log(res)
+                    // console.log(res)
                     if(res.data.code === 200){
                         if(that.index === 1){//微信支付
                             let orderNo = res.data.datas;
                             window.localStorage.setItem('orderNo',orderNo);
                             commonService.putOrders({orderNo:orderNo,channelId:channelIds}).then(function(res){
-                                console.log(res)
+                                // console.log(res)
                                 if(res.data.success){
                                     commonService.getWxpay({loginType:'WEIXIN',platform:'WXH5',jumpRouter:'wxbaselogin',wxscope:'snsapi_base'}).then(function(res){
                                         let code = res.data.code;

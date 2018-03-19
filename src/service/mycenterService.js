@@ -23,6 +23,14 @@ export const commonService = {
     getWxpay:function(params,loginType,platform,jumpRouter,wxscope){
         return axios.get('/tokens/oauth' + this.getParam(params,loginType,platform,jumpRouter,wxscope))
     },
+     /* 获取图片验证码 */
+    getKaptchas: function (params) {
+        return axios.get('/kaptchas')
+    },
+    /* 通用：验证验证码的对错 */
+    postValidateImg: function (params) {
+        return axios.post('/kaptchas',qs.stringify(params))
+    },
     getParam: function(param){
         let url = '';
         for(let key in param){

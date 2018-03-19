@@ -409,6 +409,7 @@ import {commonService} from '../../service/commonService.js'
                         text-align: center;
                         font-size: @size13;
                         color: gray;
+                        margin-left: -@size20;
                     }
                     .label3{
                         float: right;
@@ -470,6 +471,7 @@ import {commonService} from '../../service/commonService.js'
                         text-align: center;
                         font-size: @size14;
                         color: red;
+                        margin-left: -@size20;
                     }
                     .label3{
                         float: right;

@@ -13,19 +13,19 @@
             <div class="account">
                 <div class="item">
                     <div class="boxx">
-                        <div class="money">{{wallet!=null?wallet.totalMoney:0}}CNY</div>
+                        <div class="money">{{wallet!=null?wallet.totalMoney:0 | money}}CNY</div>
                         <div class="text">保证金总额</div>
                     </div>
                 </div>
                 <div class="box clearfix ">
                     <div class="fl">
-                        <div class="sum bgcol">{{wallet!=null?wallet.availableMoney:0}} CNY</div>
+                        <div class="sum bgcol">{{wallet!=null?wallet.availableMoney:0 | money}} CNY</div>
                         <div class="exp">可用金额</div>
                         <div class="warn">可用金额才可体现和出价</div>
                     </div>
                     <div class="bor fl"></div>
                     <div class="fl">
-                        <div class="sum">{{wallet!=null?wallet.frozenMoney:0}} CNY</div>
+                        <div class="sum">{{wallet!=null?wallet.frozenMoney:0 | money}} CNY</div>
                         <div class="exp">冻结金额</div>
                         <div class="warn">保证金体现未至账户时即被冻结</div>
                     </div>
@@ -34,17 +34,17 @@
             <div class="center">
                 <div class="address  clearfix" style="border-bottom: 1px solid rgb(202, 209, 217);">
                     <div class="fl">保证金充值</div>
-                    <div class="fr">...</div>
+                    <div class="fr" @click="recharge()">...</div>
                 </div>
                 <div class="address  clearfix">
                     <div class="fl">保证金提现</div>
-                    <div class="fr">...</div>
+                    <div class="fr" @click="cash()">...</div>
                 </div>
             </div>
             <div class="center">
                 <div class="address  clearfix">
                     <div class="fl">保证金说明</div>
-                    <div class="fr">...</div>
+                    <div class="fr" @click="helpcenter()">...</div>
                 </div>
             </div>
             <div class="cashDetail">
@@ -62,21 +62,21 @@
                     <div class="fl">{{arr1.flowAmount}}</div>
                     <div class="f2">{{arr1.title}}</div>
                     <div class="f3">{{arr1.createTime | stampFormate2}}</div>
-                    <div class="f4 line" v-if="arr1.flowStatus==10">线上充值成功</div>
-                    <div class="f4 line" v-if="arr1.flowStatus==11">线上充值成功并进入拍卖前冻结</div>
-                    <div class="f4 line" v-if="arr1.flowStatus==20">线下充值申请</div>
-                    <div class="f4 line" v-if="arr1.flowStatus==21">线下充值成功</div>
-                    <div class="f4 line" v-if="arr1.flowStatus==22">线下充值拒绝</div>
-                    <div class="f4 line" v-if="arr1.flowStatus==23">线下充值关闭</div>
+                    <div class="f4 line" v-if="arr1.flowStatus==10">充值成功</div>
+                    <div class="f4 line" v-if="arr1.flowStatus==11">拍卖前冻结</div>
+                    <div class="f4 line" v-if="arr1.flowStatus==20">充值申请</div>
+                    <div class="f4 line" v-if="arr1.flowStatus==21">充值成功</div>
+                    <div class="f4 line" v-if="arr1.flowStatus==22">充值拒绝</div>
+                    <div class="f4 line" v-if="arr1.flowStatus==23">充值关闭</div>
                     <div class="f4 line" v-if="arr1.flowStatus==30">出价冻结</div>
                     <div class="f4 line" v-if="arr1.flowStatus==31">拍卖结束解冻</div>
-                    <div class="f4 line" v-if="arr1.flowStatus==40">线上提现处理中</div>
-                    <div class="f4 line" v-if="arr1.flowStatus==41">线上提现处理成功</div>
-                    <div class="f4 line" v-if="arr1.flowStatus==42">线上提现处理失败</div>
-                    <div class="f4 line" v-if="arr1.flowStatus==50">线下提现申请中</div>
-                    <div class="f4 line" v-if="arr1.flowStatus==51">线下提现成功</div>
-                    <div class="f4 line" v-if="arr1.flowStatus==52">线下提现申请拒绝</div>
-                    <div class="f4 line" v-if="arr1.flowStatus==53">线下提现申请关闭</div>
+                    <div class="f4 line" v-if="arr1.flowStatus==40">提现处理中</div>
+                    <div class="f4 line" v-if="arr1.flowStatus==41">提现处理成功</div>
+                    <div class="f4 line" v-if="arr1.flowStatus==42">提现处理失败</div>
+                    <div class="f4 line" v-if="arr1.flowStatus==50">提现申请中</div>
+                    <div class="f4 line" v-if="arr1.flowStatus==51">提现成功</div>
+                    <div class="f4 line" v-if="arr1.flowStatus==52">提现申请拒绝</div>
+                    <div class="f4 line" v-if="arr1.flowStatus==53">提现申请关闭</div>
                     <div class="bor"></div>
                 </div>
             </div>
@@ -151,16 +151,26 @@
 
         },
         methods: {
+            
             getPos:function(index) {
                 var str = 95*(index)+'px';
                 str='left:'+str;
                 return str;
             },
+            recharge:function(){
+                this.$router.push({path:"/recharge"})
+            },
+             cash:function(){
+                this.$router.push({path:"/cash"})
+            },
+            helpcenter:function(){
+                this.$router.push({path:"/helpcenter"})
+            },
             getBails:function(){
                 let that = this;
                commonService.getBails({pageNo:1,pageSize:30}).then(function(res){
                     that.arr=res.data.datas.datas
-                    console.log(res)
+                    
               })
             },
              getUsers:function(){

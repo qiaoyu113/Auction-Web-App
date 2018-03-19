@@ -8,7 +8,7 @@
         <div class="header">传家</div>
         <div class="content" v-if="logined">
             <div class="box clearfix ">
-                <div class="boxImg fl">
+                <div class="boxImg fl" @click="mycenter()">
                     <img src="http://img0.imgtn.bdimg.com/it/u=3206453844,923580852&fm=27&gp=0.jpg"/>
                     <div class="member">v{{list.vipLevel}}</div>
                 </div>
@@ -42,13 +42,13 @@
             <div class="account">
                 <div class="acc  clearfix">
                     <div class="fl">保证金管理</div>
-                    <div class="fr">...</div>
+                    <div class="fr" @click="bond">...</div>
                 </div>
                 <div class="remain clearfix">
                     <div class="mon fl">
                         <span >保证金总额</span><br> 
                         <!-- <span class="span1">{{list.wallet.totalMoney}}CNY</span>  -->
-                        <span class="span1">{{totalMoney}}CNY</span>
+                        <span class="span1">{{totalMoney | money}}CNY</span>
                     </div>
                     <button class="fr" @click="cash">提现</button>
                     <button class="fr" @click="recharge">充值</button>
@@ -150,6 +150,12 @@
                 var str = 95*(index)+'px';
                 str='left:'+str;
                 return str;
+            },
+            bond:function(){
+                 this.$router.push({path:"/myaccount"})
+            },
+            mycenter:function(){
+                this.$router.push({path:"/mycenter"})
             },
             cash:function(){
                 this.$router.push({path:"/cash"})

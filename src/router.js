@@ -104,8 +104,8 @@ const routers = [
     //登陆
     {name: 'signup',path:'/signup',component: login},
     //地址
-    {name: 'address',path:'/address',component:address},
-    {name: 'addresslist',path:'/addresslist',component:addresslist},
+    {name: 'address',path:'/address',component:address},        //新建地址
+    {name: 'addresslist',path:'/addresslist',component:addresslist}, //地址列表
     // 我的
     {name: 'my',path:'/my',component: my,redirect:'/my/notstart',
             children:[
@@ -116,24 +116,24 @@ const routers = [
                ]
        },
     // 确认订单
-    {name: 'order',path:'/my/order',component: order},
-    {name: 'selection',path:'/my/selection',component: selection},
+    {name: 'order',path:'/my/order',component: order},            //确认订单
+    {name: 'selection',path:'/my/selection',component: selection},  //确认订单地址
     //个人中心
-    {name: 'mycenter',path:'/mycenter',component: mycenter},
+    {name: 'mycenter',path:'/mycenter',component: mycenter},    //个人设置
     {name: 'saveName',path:'/saveName',component: saveName},
     {name: 'savePhone',path:'/savePhone',component: savePhone},
     {name: 'password',path:'/password',component: password},
     {name: 'newPhone',path:'/newPhone',component: newPhone},
     // 个人中心chenhaojn
-    {name: 'personalCenter',path:'/personalCenter',component:personalCenter},
-    {name: 'myorder',path:'/myorder',component:myorder},
-    {name: 'myaccount',path:'/myaccount',component:myaccount},
-    {name: 'helpcenter',path:'/helpcenter',component:helpcenter},
-    {name: 'membercenter',path:'/membercenter',component:membercenter},
-    {name: 'realname',path:'/realname',component:realname},
-     {name: 'cash',path:'/cash',component:cash},
+    {name: 'personalCenter',path:'/personalCenter',component:personalCenter},  //个人中心
+    {name: 'myorder',path:'/myorder',component:myorder},            //我的订单
+    {name: 'myaccount',path:'/myaccount',component:myaccount},            //保证金首页
+    {name: 'helpcenter',path:'/helpcenter',component:helpcenter},        //保证金说明
+    {name: 'membercenter',path:'/membercenter',component:membercenter}, //会员
+    {name: 'realname',path:'/realname',component:realname},             //实名认证
+     {name: 'cash',path:'/cash',component:cash},                        //保证金提现
     {name: 'cashstep',path:'/cashstep',component:cashstep},
-    {name: 'recharge',path:'/recharge',component:recharge},
+    {name: 'recharge',path:'/recharge',component:recharge},             //保证金充值
     {name: 'rechargeList',path:'/rechargeList',component:rechargeList},
     //订单详情
     {name: 'normalorder',path:'/normalorder',component:normalorder},//订单正常
