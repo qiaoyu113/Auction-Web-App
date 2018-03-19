@@ -60,7 +60,9 @@
             getCollect:function(){
             	let that=this;
                  commonService.getCollect({pageNo:1,pageSize:30,status:0}).then(function(res){
-                   that.datas=res.data.datas.datas
+                 	if(res.data.code==200){
+                 		that.datas=res.data.datas.datas
+                 	} 
                     
                 })
             }

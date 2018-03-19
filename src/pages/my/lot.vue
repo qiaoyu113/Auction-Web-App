@@ -14,7 +14,7 @@
                  </div>
                  <div class="ros_l2">{{list.auctionCollect.newPrice}} CNY</div>
                  <div class="ros_l3">{{list.auction.title}}</div>
-                 <div class="ros_l3">{{list.auction.auctionStartTime}}-{{list.auction.groupNo}}</div>
+                 <div class="ros_l3">{{list.auction.auctionStartTime}}-{{list.auction.no}}</div>
              </div>
              <!-- <img src="../../assets/image/error/ufo_blue_2x.png"/> -->
              <div class="ros_r"><img :src="picHead + list.auction.picItems[0]"/></div>
@@ -117,8 +117,9 @@
             getCollect:function(){
                 let that=this;
                  commonService.getCollect({pageNo:1,pageSize:30,status:1}).then(function(res){
-                   that.datas=res.data.datas.datas
-                    console.log(that.datas)
+                   if(res.data.code==200){
+                        that.datas=res.data.datas.datas
+                    }
                 })
             }
 

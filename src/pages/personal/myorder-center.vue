@@ -16,7 +16,8 @@
         </div>
         <div class="content">
             <!-- 待付款 -->
-            <div class="account" v-for="(list,index) in datalist">
+            <div v-if="index!=3">
+            <div class="account" v-if="index!=3" v-for="(list,index) in datalist">
                 <div class="item">
                     <span>订单号:{{list.orderNo}}</span>
                     <span class="fr bgcolor" v-if="list.status==1">待付款</span>
@@ -33,8 +34,8 @@
                     </div>
                 </div>
                 <div class="box clearfix ">
-                    <div class="boxImg fl">
-                        <img src="http://img0.imgtn.bdimg.com/it/u=3206453844,923580852&fm=27&gp=0.jpg"/>
+                    <div class="boxImg fl" v-for="(img,index) in list.orderDetail.picItems" v-if="index==0">
+                        <img :src="picHead + img" onerror="this.src='http://img0.imgtn.bdimg.com/it/u=3206453844,923580852&fm=27&gp=0.jpg'"/>
                     </div>
                     <div class="info fl">
                         <div class="hel">{{list.amount}} CNY</div>
@@ -46,46 +47,30 @@
                     </div>
                 </div>
             </div>
-          
-
-            <!-- 待发货 -->
-      <!--       <div class="account" v-if="index==2||index==0">
-                <div class="item">
-                    <span>订单号:87540097</span>
-                    <span class="fr">待发货</span>
-                </div>
-                <div class="box clearfix ">
-                    <div class="boxImg fl">
-                        <img src="http://img0.imgtn.bdimg.com/it/u=3206453844,923580852&fm=27&gp=0.jpg"/>
-                    </div>
-                    <div class="info fl">
-                        <div class="hel">500,000 CNY</div>
-                        <div class="name">茶壶茶壶</div>
-                        <div class="prove">20180606-100</div>
-                        <button class="fr">查看订单</button>
-                    </div>
-                </div>
-            </div> -->
+            </div>
             <!-- 售后 -->
-     <!--        <div class="account" v-if="index==3||index==0">
+            <div v-if="index==3">
+            <div class="account" v-for="(list,index) in ordercs">
                 <div class="item">
-                    <span>订单号:87540097</span>
-                    <span class="fr iconfont icon-tupian"></span>
-                    <span class="fr">已完成</span>
-                    
+                    <span>订单号:{{list.orderNo}}</span>
+                    <span class="fr" v-if="list.status!=4">售后中</span>
+                    <span class="fr" v-if="list.status==4">已完成</span>
                 </div>
                 <div class="box clearfix ">
                     <div class="boxImg fl">
-                        <img src="http://img0.imgtn.bdimg.com/it/u=3206453844,923580852&fm=27&gp=0.jpg"/>
+                        <img :src="picHead + list.picItems[0]" onerror="this.src='http://img0.imgtn.bdimg.com/it/u=3206453844,923580852&fm=27&gp=0.jpg'"/>
                     </div>
                     <div class="info fl">
-                        <div class="hel">500,000 CNY</div>
-                        <div class="name">茶壶茶壶</div>
-                        <div class="prove">20180606-100</div>
-                        <button class="fr">查看订单</button>
+                        <div class="hel">{{list.amount}} CNY</div>
+                        <div class="name">{{list.auctionName}}</div>
+                        <div class="prove">{{list.createTime}}-{{list.auctionNo}}</div>
+                        <button class="fr" @click="shouhou(list.status,list.id)">查看订单</button>
+                       
                     </div>
                 </div>
-            </div> -->
+            </div>
+            </div>
+
         </div>
     </div>
 </template>
@@ -102,6 +87,8 @@
                 datalist:'',
                 branch:[],
                 hour:[],
+                ordercs:'',//售后
+
                 
             }
         },
@@ -125,11 +112,24 @@
             noticelist() {
                 return this.$store.state.homeStore.noticelist || []
             },
+            picHead(){
+                return this.$store.state.picHead
+            }
         },
         mounted: function() {
+            this.routers()
             this.getOrder()
+            this.getOrdercs()
+            
         },
         methods: {
+            routers:function(){
+               
+                 let index= this.$route.query.index
+                if(index!=''){
+                    this.index=index
+                }
+            },
             getPos:function(index) {
                 var str = 95*(index)+'px';
                 str='left:'+str;
@@ -145,25 +145,22 @@
                     that.getOrder();
                 }else if(index==3){
                     that.index = 3;
-                    that.getOrder()
                 }else if(index==0){
                     that.index = 0;
                     that.getOrder();
                 }
             },
             details:function(type,id){
-                // if(type==5){
-                //    this.$router.push({path:"/afterorder",query:{id:id}})  
-                // }else 
-                 this.$router.push({path:"/normalorder",query:{id:id}})  
-                // if(type==6){
-                //     this.$router.push({path:"/closeorder",query:{id:id}})  
-                // }else{
-                   
-                // }
-
+                if(type==6){
+                    this.$router.push({path:"/closeorder",query:{id:id}})  
+                }else{
+                    this.$router.push({path:"/normalorder",query:{id:id}})  
+                }
             },
-             // 获取我的订单
+            shouhou:function(type,id){
+                  this.$router.push({path:"/afterorder",query:{id:id}})    
+            },
+            // 获取我的订单
             getOrder:function(){
                 let that=this;
                 let status='1,2,3,4,5,6'
@@ -176,21 +173,17 @@
                 }
                commonService.getOrder({pageNo:1,pageSize:10,status:status}).then(function(res){
                       that.datalist=res.data.datas.datas
+                      // console.log(res)
+                    })
+            },
+             // 获取售后列表
+            getOrdercs:function(){
+                let that=this;
+               commonService.getOrdercs({pageNo:1,pageSize:30}).then(function(res){
+                      that.ordercs=res.data.datas.datas
+                    
+                      console.log(res.data.datas.datas)
 
-                      // console.log(that.datalist)
-                      console.log(res)
-                      // for(let i=0;i<that.datalist.length;i++){
-                      //   // if()
-                      //   if(that.datalist[i].expireTime!=null){
-                      //       let expireTime=that.datalist[i].expireTime
-                      //    console.log(new Date(1519984388189))
-
-                      //   that.branch[i]=new Date(expireTime).getHours()
-                      //   // console.log(that.datalist[i].expireTime)
-                        
-                      //   that.hour[i]=new Date(expireTime).getMinutes()
-                      //   }
-                      // }
                     })
             },
 

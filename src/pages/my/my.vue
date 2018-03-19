@@ -3,6 +3,7 @@
         组件要小，如遇list，只将item做成组件，其他的都写在页面中
     -->
     <div class="my">
+       <div class="header"><div>传家</div></div>
        <div class="head clearfix">
        <div><router-link to="/my/notstart"><p :class="{'show':indexs==0}" @click="show(0)">未开始</p></router-link></div>
            <div><router-link to="/my/lot"><p :class="{'show':indexs==1}" @click="show(1)">参拍中</p></router-link></div>
@@ -13,6 +14,7 @@
      <div>
          <router-view></router-view>
      </div>
+     <z-footer ></z-footer>
     </div>
 </template>
 
@@ -60,6 +62,21 @@
     /*rem等基本设置都放在base中，不写多个*/
     @import url('../../assets/css/base.less');
     .my{
+        .header{
+           height: @size45; 
+            div{
+        position: fixed;
+        top: 0;
+        z-index: 100;
+        width: @size375;
+        height: @size45;
+        background:rgba(2, 10, 2, 1);
+        font-size: @size20;
+        color: white;
+        text-align: center;
+        line-height: @size45;
+          }
+      }
         .head{
              height: @size40;
              border-bottom: 1px solid rgb(53,60,70);

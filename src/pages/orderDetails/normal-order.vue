@@ -208,6 +208,7 @@ import {commonService} from '../../service/commonService.js'
             that.$router.push({path:"/rechargeList",query:{money:that.datas.amount,index:index,orderNo:that.datas.adminId}})
                 }            
         },
+        // 获取订单
          getOrderid:function(){
             let that=this;
             commonService.getOrderid(that.orderNo).then(function(res){
@@ -222,9 +223,7 @@ import {commonService} from '../../service/commonService.js'
                       if(orderLogs[i].status==3){
                             that.createTime=orderLogs[i].createTime
                       }
-
                  }
-
                 if(that.datas.status==4){
                    that.index=2
                 commonService.getKaidi({nu:that.orderDetail.nu,com:that.orderDetail.com}).then(function(res){
