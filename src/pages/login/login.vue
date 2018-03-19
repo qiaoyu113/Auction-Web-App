@@ -178,7 +178,6 @@
             getKaptchas:function(){
                 let that=this
                  commonService.getKaptchas().then(function(res){
-                    console.log(res)
                     that.img=res.data.datas
               })
             },
