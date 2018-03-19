@@ -30,6 +30,8 @@
                 datas:'',
             }
         },
+
+        
         syncData({store}) {
             const that = this;
             return Promise.all([
