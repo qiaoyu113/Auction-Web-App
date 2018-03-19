@@ -4,7 +4,7 @@
     -->
     <!-- 专场列表-排场详情 -->
     <div class="" id="specialDetails" v-set-title="title">
-        <div class="header">传家</div>
+        <!--<div class="header">传家</div>-->
         <div class="nav">
             <span class="back" @click="back()"><i class="iconfont icon-fanhui"></i></span>
             <span class="span1">
@@ -356,7 +356,7 @@
             border-bottom: 1px solid rgb(53, 60, 70);
             background: rgb(255, 255, 255);
             position: fixed;
-            top: @size45;
+            top: 0;
             z-index: 100;
             .back{
                 line-height: @size35;
@@ -389,7 +389,7 @@
             width:100%;
             max-width:10rem;
             position: fixed;
-            top:2.14rem;
+            top:@size35;
             bottom:0;
             left:0;
             right:0;

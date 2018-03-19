@@ -39,8 +39,6 @@
         methods: {
             checked(index){
                 let that = this;
-                console.log(index)
-//                console.log(that.$route.name);
                 that.index = index;
                 if(index === 0){
                     that.$router.replace({name:'home'})
@@ -87,10 +85,8 @@
                 that.getListData(that.page.num, that.page.size,function(curPageData) {
                     if(that.page.num == 1)  that.homelist = [];//如果是第一页需手动制空列表
                     that.homelist = that.homelist.concat(curPageData); //更新列表数据
-                    console.log(that.homelist)
                     // 加载完成后busy为false，如果最后一页则lastpage为true
                     //          加载完成后给页数+1
-                    console.log(that.page.num )
                     if(that.page.num >= that.totalPage) {
                         that.isShowNoMore = true;
                     }else{
@@ -113,7 +109,6 @@
                 //延时一秒,模拟联网
                 const that = this;
                 commonService.getauctionPack({pageNo:pageNum,pageSize:pageSize}).then(function(res){
-                    console.log(res)
                     if(res.data.code === 200){
                         let act = res.data.datas.datas;
                         that.totalPage = res.data.datas.totalPage;
@@ -140,7 +135,6 @@
             onload(){
                 let that = this;
                 commonService.getuction({pageNo:that.page.num,pageSize:that.page.size}).then(function(res){
-                    console.log(res)
                     if(res.data.code === 200){
                         if(that.page.num === 1){
                             that.homelist = res.data.datas.datas;

@@ -1,6 +1,6 @@
 <template>
     <div id="speciailinfo" v-set-title="title">
-        <div class="header">传家</div>
+        <!--<div class="header">传家</div>-->
         <div class="nav">
             <span class="back" @click="back()"><i class="iconfont icon-fanhui"></i></span>
             <span class="span1">
@@ -154,11 +154,9 @@
                 //延时一秒,模拟联网
                 const that = this;
                 commonService.getauctionPackId({id:that.id},that.id).then(function(res){
-                    console.log(1,res)
                     if(res.data.code === 200){
                         that.details = res.data.datas;
                         that.details.createTime = common.getFormatOfDate(that.details.createTime,'yyyy.MM.dd h:m:s')
-                        console.log(that.details.auctionIds)
                         let dataArr = '';
                         if(that.details.auctionIds != null && that.details.auctionIds.length != 0){
                             that.recoCh = true;
@@ -210,7 +208,6 @@
                     if(res.data.code === 200){
                         that.details = res.data.datas;
                         that.details.createTime = common.getFormatOfDate(that.details.createTime,'yyyy.MM.dd h:m:s')
-                        console.log(that.details.auctionIds)
                         if(that.details.auctionIds != null){
                             that.recoCh = true;
                             that.meScroll();
@@ -288,7 +285,7 @@
             border-bottom: 1px solid rgb(53, 60, 70);
             background:  rgb(255, 255, 255);
             position: fixed;
-            top: @size45;
+            top: 0;
             z-index: 100;
             .back{
                 line-height: @size35;
@@ -321,7 +318,7 @@
         #mescroll{
             position: fixed;
             max-width:10rem;
-            top:2.16rem;
+            top:@size35;
             bottom:0;
             left:0;
             right:0;

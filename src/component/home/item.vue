@@ -5,7 +5,7 @@
             <div class="text">
                 <h1>{{str.title}}</h1>
                 <div class="t-title">{{str.subTitle}}</div>
-                <div class="time">{{str.createTime}}</div>
+                <div class="time">{{str.smTitle}}</div>
                 <i><a :href="str.url">. . .</a></i>
             </div>
         </div>

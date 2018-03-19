@@ -70,7 +70,7 @@ export const commonService = {
     },
     /* 获取用户信息 */
     getUsers: function () {
-        return axios.get('/users')
+        return axios.get('/users/info')
     },
     /* 设置用户信息 */
     postUsersinfo: function (params) {
