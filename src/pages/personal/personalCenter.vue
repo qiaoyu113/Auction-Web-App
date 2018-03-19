@@ -142,7 +142,7 @@
         },
         mounted: function() {
             this.getUsers()
-            this.getFootPrint()
+            // this.getFootPrint()
 
         },
         methods: {
@@ -179,11 +179,13 @@
             getUsers:function(){
                 let that = this;
                  commonService.getUsers().then(function(res){
-                    // console.log(res)
                     if(res.data.code==200){
                       that.list=res.data.datas.user
-                    that.totalMoney=that.list.wallet.totalMoney
+                      if(that.list.wallet!=null){
+                         that.totalMoney=that.list.wallet.totalMoney
+                      }
                     that.numItem=that.list.numItem  
+                    that.getFootPrint()
                     }else{
                         that.logined=false
                     }
@@ -201,14 +203,14 @@
                     // console.log(genStatId())
                // let cookiesId = window.localStorage.getItem("token")
                   // console.log(cookiesId)
-                 commonService.getFootPrint().then(function(res){
-                    // console.log(res)
-                    if(res.data.code==200){
+                 // commonService.getFootPrint().then(function(res){
+                 //    // console.log(res)
+                 //    if(res.data.code==200){
                      
                         
-                    }
+                 //    }
                     
-                 })
+                 // })
             },
 
 

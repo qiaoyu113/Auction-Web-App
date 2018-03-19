@@ -3,7 +3,7 @@
         组件要小，如遇list，只将item做成组件，其他的都写在页面中
     -->
     <!-- 个人中心-我的订单 -->
-    <div class="" id="" v-set-title="title">
+    <div class="myorder" id="" v-set-title="title">
         
         <div class="header">传家</div>
         <div class="nav">
@@ -191,7 +191,7 @@
     /*rem等基本设置都放在base中，不写多个*/
     @import url('../../assets/css/base.less');
     @import url('../../assets/css/icon/iconfont.css');
-    
+    .myorder{
     .header{
         position: fixed;
         top: 0;
@@ -346,5 +346,6 @@
         line-height: @size35;
         padding-left: @size20;
     }
+}
 </style>
 

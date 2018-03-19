@@ -120,6 +120,10 @@ export const commonService = {
     getBails: function (params) {
         return axios.get('/bails' + this.getParam(params))
     },
+    // 提交线上单独
+    // putOrders: function (params) {
+    //     return axios.put('/orders',this.getParam(params))
+    // },
      /* 获取订单号  */
     postBails: function (params) {
         return axios.post('/bails' + this.getParam(params))
@@ -251,6 +255,8 @@ export const commonService = {
     getCheckOrder: function (params) {
         return axios.get('/auctions/checkOrder' + this.getParam(params))
     },
+
+
 
 
     getParam: function(param){

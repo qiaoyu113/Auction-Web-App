@@ -102,7 +102,7 @@
             </div>
         </div>
         <div class="footer1" v-if='index==1||index==2' @click="nextStep">下一步</div>
-        <div class="footer1" v-if='index==3'>完成</div>
+        <div class="footer1" v-if='index==3' @click="returnUpper">完成</div>
         
     </div>
 </template>
@@ -176,6 +176,9 @@ import {commonService} from '../../service/commonService.js'
                 }
 
             },
+            returnUpper:function(){
+                window.history.go(-1)
+            },
             bankId:function(id){
               this.bankCardId=id;
             },
@@ -191,8 +194,10 @@ import {commonService} from '../../service/commonService.js'
             //提交申请表
             postForms:function(){
                 let that = this
+                let money=that.money * 100
+                console.log(money)
                                     // orderNo:'974154167146647552'
-               commonService.postForms({channelId:'UNIONPAY',userBankDetail:that.userBankDetail,userBankCardNo:that.userBankCardNo,phone:that.phone,type:1,userName:that.name,amount:that.money,bankId:that.bankCardId}).then(function(res){
+               commonService.postForms({channelId:'UNIONPAY',userBankDetail:that.userBankDetail,userBankCardNo:that.userBankCardNo,phone:that.phone,type:1,userName:that.name,amount:money,bankId:that.bankCardId}).then(function(res){
                 console.log(res)
                     if(res.data.message=='success'){
                        that.oddNumbers=res.data.datas 
@@ -645,6 +650,7 @@ import {commonService} from '../../service/commonService.js'
         bottom:0;
         width: @size375;
         height: 1.2rem;
+        background: #fff;
 		box-sizing: border-box;
         border-top:1px solid rgb(53, 60, 70); 
         text-align: center;

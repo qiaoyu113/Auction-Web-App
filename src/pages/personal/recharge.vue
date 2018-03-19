@@ -140,7 +140,8 @@
                commonService.postBails({amount:that.money}).then(function(res){
                     // that.wallet=res.data.datas.user.wallet
                     if(that.index==3){
-                  that.$router.push({path:"/rechargeList",query:{money:that.money,index:that.index,orderNo:res.data.datas}})   	
+                  that.$router.push({path:"/rechargeList",query:{money:that.money,index:that.index,orderNo:res.data.datas}}) 
+
                     }
                    
               })

@@ -20,8 +20,8 @@
             <div class="bor"></div>
             <div class="money clearfix">
                 <div class="fl">
-                    <p>保证金提现余额<span>{{wallet!=null?wallet.availableMoney:0}}CNY</span></p>
-                    <p>保证金总额{{wallet!=null?wallet.totalMoney:0}}CNY</p>
+                    <p>保证金提现余额<span>{{wallet!=null?wallet.availableMoney:0 | money}}CNY</span></p>
+                    <p>保证金总额{{wallet!=null?wallet.totalMoney:0 | money}}CNY</p>
                 </div>
                 <div class="fr" @click="full()">全部提现</div>
             </div>
@@ -108,12 +108,12 @@
             },
             full:function(){
             	  let that = this;
-            	  that.money=that.wallet.availableMoney 
+            	  that.money=that.wallet.availableMoney / 100
             },
             cny:function(){
                 let that = this;
-                 if(that.money>that.wallet.availableMoney){
-                     that.money=that.wallet.availableMoney 
+                 if(that.money>that.wallet.availableMoney / 100){
+                     that.money=that.wallet.availableMoney /100
                  }
             },
              // 获取订单号

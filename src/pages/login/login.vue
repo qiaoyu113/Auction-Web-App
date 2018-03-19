@@ -46,7 +46,7 @@
                 <div class="infoRight" @click="removePhone"><i class="iconfont icon-closeicon"></i></div>
             </div>
             <div class="info">
-                <input style="width:6rem;" type="text" placeholder="输入验证码" v-model="kaptchaValue"/>
+                <input style="width:6rem;" type="text" placeholder="输入图片验证码" v-model="kaptchaValue"/>
                 <div class="code" @click="getKaptchas()"><img :src="img.imageString"/></div>
             </div>
             <div class="info">
@@ -83,7 +83,7 @@
                 <div class="infoRight" @click="removePhone"><i class="iconfont icon-closeicon"></i></div>
             </div>
             <div class="info">
-                <input style="width:6rem;" type="text" placeholder="输入验证码" v-model="kaptchaValue"/>
+                <input style="width:6rem;" type="text" placeholder="输入图片验证码" v-model="kaptchaValue"/>
                 <div class="code" @click="">图片验证码<span v-if="codeShow" style="margin:0;">({{timeOver}})</span></div>
             </div>
             <div class="info">
@@ -104,6 +104,27 @@
                 <div class="ok" @click="sign">注 册</div>
             </div>
         </div>
+       
+       <!-- 弹窗 -->
+        <div class="shadow" :class="{'dis':ind==1}">
+        <div class="popWin">
+                <div class="close" @click=""><i class="iconfont icon-closeicon"></i></div>
+                <div class="remove">
+                    <p class="removeEn">ID PHOTOS</p>
+                    <p class="removeCn">照片样例</p>
+                    <p class="removeCon">请保持照片清晰，方便审核</p>
+                </div>
+                <div class="picbox clearfix">
+                    <!-- <div class="pic"><img v-if="imageUrl" :src="imageUrl"></div> -->
+                     <!-- <div class="pic"><img v-if="imageUrl2" :src="imageUrl2"></div> -->
+                </div>
+                <div class="font">
+                    <span>1.证件正面照</span>
+                    <span>2.证件背面照</span>
+                </div>
+        </div>
+        </div>
+
     </div>
 </template>
 
@@ -140,6 +161,7 @@
                 wxLogin:false,//微信登陆
                 kaptchaValue:'',
                 img:'',
+                ind:1,
             }
         },
      // asyncData({store,route}) {
@@ -178,6 +200,7 @@
             getKaptchas:function(){
                 let that=this
                  commonService.getKaptchas().then(function(res){
+
                     that.img=res.data.datas
               })
             },
@@ -189,14 +212,19 @@
                         if(that.password == that.password2){
                             if(that.code != ''){
                                 commonService.goSignup({phone:that.phone,password:that.password,smsCode:that.code,type:1,platform:that.platform}).then(function(res){
+                                    console.log(res.data)
                                     if(res.data.code === 200){
                                         that.phoneUser = that.phone;
                                         window.localStorage.setItem('phone',that.phone)
                                         that.login = true;
                                         that.wxShow = false;
                                     }else if(res.data.code === 512104){
+                                        that.codeShow = false;
                                         that.hint2 = true;
                                         that.hint2Text = '短信验证码已过期';
+                                        that.getKaptchas()
+                                        that.kaptchaValue()
+
                                     }
                                 })
                             }else{
@@ -219,8 +247,11 @@
             //点击登陆
             loginBtn:function(){
                 let that = this;
+                console.log(that.phoneUser);
                 commonService.goLogin({phone:that.phoneUser,password:that.passwordUser,platform:that.platform}).then(function(res){
+                    console.log(res)
                     if(res.data.code === 200){
+                        console.log('登陆成功')
                         let token = res.data.datas;
                         window.localStorage.setItem('token',token)
                         that.$router.replace({name:'home'})
@@ -263,16 +294,23 @@
                     }else{
                         that.codeShow = true;
                         commonService.getQR({phone:that.phone,type:1,kaptchaKey:that.img.kaptchaKey,kaptchaValue:that.kaptchaValue}).then(function(res){
+                            console.log(res.data)
                             if(res.data.code === 200){
+                                // console.log('短信发送成功')
                                 let time = setInterval(function(){
                                     if(that.timeOver === 0){
                                         clearInterval(time)
                                         that.codeShow = false;
-                                        that.timeOver = 60;
+                                        that.timeOver = 90;
                                     }else{
                                         that.timeOver = that.timeOver -= 1
                                     }
                                 },1000)
+                            }
+                            if(res.data.code==511104){
+                                that.codeShow = false;
+                                that.hint2 = true;
+                                that.hint2Text = '验证码不正确,请重新输入';
                             }
                             if(res.data.code === 513109){
                                 that.codeShow = false;
@@ -567,6 +605,86 @@
                 font-size:14px;
             }
         }
+        // 弹窗样式
+    .shadow{
+        width: 100%;
+        height: 100%;
+        background: rgba(2, 10, 2, 0.5);
+        position: fixed;
+        left: 0;
+        top: 0;
+        z-index: 99999;
+    }
+    .dis{
+        display: none;
+    }
+    .popWin{
+        position: absolute;
+        z-index: 10;;
+        bottom:3.7333rem;
+        left: @size30;
+        width:8.4rem;
+        height: 8.9333rem;
+        background: white;
+        box-sizing: border-box;
+        .close{
+            position: absolute;
+            right: 0;top: 0;
+            width: @size30;
+            height: @size30;
+            background: #eb6100;
+            i{
+                font-size: @size30;
+                color: white;
+            }
+        }
+        .remove{
+            padding-top: @size50;
+            margin: auto;
+            
+            text-align: center;
+            .removeEn{
+                font-size: 14px;
+                font-weight: bold;
+            }
+            .removeCn{
+                color: #333333;
+                font-size: @size12;
+            }
+            .removeCon{
+                color: #333333;
+                font-size:@size12;
+                padding: @size15;
+            }
+        }
+        .picbox{
+            margin: @size5;
+            margin-top: @size30;
+            width: 100%;
+            box-sizing: border-box;
+            .pic{
+                box-sizing: border-box;
+                margin-left: @size35;
+                float: left;
+                width: 2.6666rem;
+                height: @size115;
+                background: gray;
+                img{
+                    width: 100%;
+                    height: 100%;
+                }
+            }
+        }
+        .font{
+            padding:@size10 0.6rem;
+            text-align: center;
+            span{
+                float: left;
+                width: 50%;
+                font-size:@size11;
+            }
+        }
+      }
     }
 </style>
 
