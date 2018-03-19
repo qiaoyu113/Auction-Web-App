@@ -75,7 +75,7 @@
                 <div class="pic"><span class="iconfont icon-tupian"></span></div>
                 <div class="hel">HELLO!</div>
                 <div class="log">请登录</div>
-                <div class="link"><a href="www.baidu.com">快来登录，和我们一起没羞没臊的捡漏吧！</a></div>
+                <div class="link"><router-link to="/login">快来登录，和我们一起没羞没臊的捡漏吧！</router-link></div>
             </div>
             <div class="center">
                 <div class="address  clearfix">
@@ -184,6 +184,8 @@
                       that.list=res.data.datas.user
                     that.totalMoney=that.list.wallet.totalMoney
                     that.numItem=that.list.numItem  
+                    }else{
+                        that.logined=false
                     }
                     
                  })
