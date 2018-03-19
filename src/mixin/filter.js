@@ -81,4 +81,8 @@ Vue.filter('stampFormate2',function(id) {
 
     return Y+M+D+h+m+s;
 })
+Vue.filter('money',function(id) {
+    return ((id / 100).toFixed(0) + '').replace(/\d{1,3}(?=(\d{3})+(\.\d*)?$)/g, '$&,');;
+})
+
 

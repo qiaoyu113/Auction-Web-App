@@ -15,10 +15,15 @@
             <div class="info">
                 <div class="infoList">原手机号码<div class="phone">{{phone}}</div></div>
             </div>
+            <!--图片-->
+            <div class="info">
+                <div class="infoList">图片验证 <input class="codeInp" type="text" placeholder="请输入" v-model="kaptchaValue"/><div class="code" @click="getKaptchas()"><img :src="img.imageString"/></div></div>
+            </div>
             <!--短信验证码-->
             <div class="info">
                 <div class="infoList">短信验证码<input class="codeInp" type="number" placeholder="请输入" v-model="inputNum"/><div class="code" @click="getcode">获取验证码<span v-if="codeShow" style="margin:0;">({{timeOver}})</span></div></div>
             </div>
+            <div id="captcha-box"></div>
             <!--保存-->
             <div class="save" @click="save">下一步</div>
         </div>
@@ -40,6 +45,8 @@
                 inputPhone:'',//手机号
                 inputNum:'',//验证码
                 codeShow:false,
+                img:'',
+                kaptchaValue:'',
                
             }
         },
@@ -58,8 +65,9 @@
              * 可以使用DOM元素
              * 这里的数据可以放在data中
              * */
-             this.getGaptchas()
-
+             // this.getGaptchas()
+             // this.mounted()
+             this.getKaptchas()
         },
         methods: {
             deleteName:function(){
@@ -69,10 +77,24 @@
             //换手机号
             save:function(){
                 let that = this;
-                that.$router.push({name:'savePhone'})
+         commonService.getCheckCode({phone:that.phone,type:5,smsCode:that.inputNum}).then(function(res){
+                    console.log(res)
+                    if(res.data.code == 200){
+                      that.$router.push({name:'savePhone'})
+                    }
+              })
             },
+            // 获取图片验证码
+            getKaptchas:function(){
+                let that=this
+                 commonService.getKaptchas().then(function(res){
+                    console.log(res)
+                    that.img=res.data.datas
+              })
+            },
+ 
             //获取验证码
-            getcode:function(){
+          getcode:function(){
                 let that = this;
                 if(that.codeShow){
 
@@ -90,19 +112,14 @@
                     },1000)
                 }
                 // 获取短信验码
-                 commonService.getSms({phone:that.phone,type:5}).then(function(res){
+                 commonService.getSendMessage({phone:that.phone,type:5,kaptchaKey:that.img.kaptchaKey,kaptchaValue:that.kaptchaValue}).then(function(res){
                     console.log(res)
                     if(res.data.code == 200){
-                     that.$router.go(-1);
+                     // that.$router.go(-1);
                     }
               })
             },
-            getGaptchas:function(){
-                 commonService.getGaptchas().then(function(res){
-                    console.log(res)
-                   
-              })
-            }
+
         }
     }
 </script>
@@ -172,6 +189,7 @@
                 border-bottom:1px solid #C9D0D8;
                 font-size:13px;
                 color:#333;
+
                 span{
                     color:#B1B1B1;
                     font-size:13px;
@@ -224,6 +242,9 @@
                 font-size:13px;
                 color:#333;
                 overflow: hidden;
+                img{
+                    height: 1rem;
+                }
                 span{
                     color:#B1B1B1;
                     font-size:13px;
@@ -297,6 +318,14 @@
             bottom:0;
             border-top:1px solid #1A242E;
         }
+         #captcha-box{
+        width:100%;
+        /*background: rgba(0, 0, 0, 0.1);*/
+        border-radius: 5px;
+        color: #454545;
+        margin-bottom:30px;
+        /*overflow: hidden;*/
+    }
     }
 </style>
 

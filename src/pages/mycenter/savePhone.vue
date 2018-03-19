@@ -15,7 +15,11 @@
             <div class="info">
                 <div class="infoList">新手机号码<input type="number" placeholder="请输入" v-model="inputPhone"/><div class="del" @click="deleteName"><i class="iconfont icon-closeicon"></i></div></div>
             </div>
-            <!--短信验证码-->
+            <!--图片-->
+            <div class="info">
+                <div class="infoList">图片验证 <input class="codeInp" type="text" placeholder="请输入" v-model="kaptchaValue"/><div class="code" @click="getKaptchas()"><img :src="img.imageString"/></div></div>
+            </div>
+            <!-- 短信验证 -->
             <div class="info">
                 <div class="infoList">短信验证码<input class="codeInp" type="number" placeholder="请输入" v-model="inputNum"/><div class="code" @click="getcode">获取验证码<span v-if="codeShow" style="margin:0;">({{timeOver}})</span></div></div>
             </div>
@@ -40,6 +44,8 @@
                 inputPhone:'',//手机号
                 inputNum:'',//验证码
                 codeShow:false,
+                kaptchaValue:'',
+                img:'',
             }
         },
         computed: {
@@ -57,7 +63,7 @@
              * 可以使用DOM元素
              * 这里的数据可以放在data中
              * */
-
+             this.getKaptchas()
 
         },
         methods: {
@@ -68,19 +74,34 @@
             //换手机号
             save:function(){
                 let that = this;
-                that.$router.replace({name:'mycenter'});
+                
+             commonService.putPhoneset({phone:that.inputPhone,smsCode:this.inputNum,type:6}).then(function(res){
+                console.log(res)
+                    if(res.data.code==200){
+                      that.$router.replace({name:'mycenter'});
+                    }
+              }) 
+            },
+
+            // 获取图片验证码
+            getKaptchas:function(){
+                let that=this
+                 commonService.getKaptchas().then(function(res){
+                    console.log(res)
+                    that.img=res.data.datas
+              })
             },
             //获取验证码
-            getcode:function(){
+          getcode:function(){
                 let that = this;
                 if(that.codeShow){
 
                 }else{
                     that.codeShow = true;
                     let time = setInterval(function(){
-                        console.log(that.timeOver);
+                        // console.log(that.timeOver);
                         if(that.timeOver === 0){
-                            clearInterval(time)
+                            // clearInterval(time)
                             that.codeShow = false;
                             that.timeOver = 60;
                         }else{
@@ -88,9 +109,14 @@
                         }
                     },1000)
                 }
-               
-
-            }
+                // 获取短信验码
+                 commonService.getNewPhone({phone:that.inputPhone,type:6,kaptchaKey:that.img.kaptchaKey,kaptchaValue:that.kaptchaValue}).then(function(res){
+                    console.log(res)
+                    if(res.data.code == 200){
+                     // that.$router.go(-1);
+                    }
+              })
+            },
         }
     }
 </script>
@@ -241,6 +267,9 @@
                     margin-right:0.1rem;
                     color:#B1B1B1;
                     font-size:12px;
+                    img{
+                        height: 1rem;
+                    }
                 }
                 input{
                     margin-left:0.2rem;

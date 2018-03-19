@@ -5,7 +5,7 @@
             <p class="top_p1">SHIPPING ADDRESS</p>
             <div class="top_div clearfix">
             <p class="top_p2">地址选择</p>
-            <div><i class="iconfont icon-dian1"></i></div>	
+            <div @click="obtain()"><i class="iconfont icon-dian1"></i></div>	
             </div>
             
 
@@ -16,7 +16,7 @@
             <div class="address_l">
                 <p>{{list.name}}</p>
             </div>
-            <div class="address_r" :class="{'address_rcolor':list.defaultAdress==true}" @click="obtain(list._id)">
+            <div class="address_r" :class="{'address_rcolor':list.defaultAdress==true}" @click="addressId(list._id)">
                 <div>✔</div>
             </div>
             <div class="address_con">
@@ -28,7 +28,7 @@
             </div>
         </div>
         <div class="botton">
-            <div>添加新地址 + </div>
+            <div @click="xing()">添加新地址 + </div>
         </div>
     </div>
 </template>
@@ -41,6 +41,8 @@
             return {
                 title: '订单确认',
                 address:'',
+                auctionId:this.$route.query.auctionId,
+                addressId:'',
             }
         },
         syncData({store}) {
@@ -68,8 +70,15 @@
         	this.getAddress()
         },
         methods: {
-        	obtain:function(id){
-        		console.log(id)
+          addressId:function(id){
+                 this.addressId=id
+          },
+          xing:function(){
+            this.$router.push({path:"/address"})
+          },
+        	obtain:function(){
+                  this.$router.push({path:"/my/order",query:{addressId:this.addressId,auctionId:this.auctionId}})    
+    	console.log(id)
         	},
         	// 获取地址
         	getAddress:function(){
