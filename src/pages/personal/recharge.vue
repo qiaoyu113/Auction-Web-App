@@ -5,14 +5,14 @@
     <!-- 保证金提现 -->
     <div class="recharge" id="" v-set-title="title">
         
-        <div class="header">传家</div>
+        <!-- <div class="header">传家</div> -->
         <div class="content">
             <div class="loginBox">
                 <div class='loginEn'>PAYMENT</div>
                 <div class="loginCn" v-if="money==''">充值</div>
                 <div class="loginCn" v-if="money!=''">保证金充值</div>
             </div>
-            <div class="fr">...</div>
+            <div class="fr" @click='Return()'>...</div>
         </div>
         <div class="box">
             <div class="info"><span v-if="money==''">金额</span><span v-if="money!=''">金额</span>
@@ -32,7 +32,7 @@
                 <!-- <div class="fr" @click="full()">全部提现</div> -->
             </div>
             <div class="pay" @click="getIndex(3)">
-                <div :class="index==3 ? 'check' : 'check1'"><i class="iconfont icon-duihao"></i></div>
+                <div :class="show== true ? 'check' : 'check1'" @click="shows()"><i class="iconfont icon-duihao"></i></div>
                 <!-- <i :class="index==3 ? 'background3' : ''" class="iconfont icon-icon_zhifubao"></i> -->
                 <div class="infoAlipay">
                         <div class="span1" style="margin-top:2px;">我同意并理解
@@ -64,7 +64,9 @@
                     </div>
             </div>
         </div>
+        <div class="prompt" v-if="prompt!=''">{{prompt}}</div>
         <div class="footer1" @click="postBails()">立即充值</div>
+        <div class="payOK"></div>
     </div>
 </template>
 
@@ -72,6 +74,7 @@
 
     import {appService} from '../../service/appService'
     import {commonService} from '../../service/commonService.js'
+    import MeScroll from 'mescroll'
     export default {
         data () {
             return {
@@ -79,6 +82,9 @@
                 index:3,
                 money:"",
                 wallet:'',
+                checked:false,
+                show:true,
+                prompt:'',
             }
         },
         components:{},
@@ -104,9 +110,25 @@
             },
         },
         mounted: function() {
+
         	this.getUsers()
+            this.checked = window.localStorage.getItem('checked');
+            if(this.checked){
+                // this.wxpay()
+            }
         },
         methods: {
+            Return:function(){
+                window.history.go(-1)
+            },
+            shows:function(){
+                if(this.show == false){
+                   this.prompt=''
+                   this.show=true
+                }else{
+                     this.show=false
+                }
+            },
              getIndex: function(index) {
                 let that = this;
                 if(index==1){
@@ -137,13 +159,112 @@
              // 获取订单号
             postBails:function(){
                 let that = this;
+                let channelIds = '';
+                 if(that.index === 1){//微信
+                    channelIds = 'WX_JSAPI'
+                }else if(that.index === 2){//支付宝
+                    channelIds = 'ALIPAY_WAP'
+                }
+                if(that.show==false){
+                    that.prompt="请同意协议"
+                    return false
+                }
                commonService.postBails({amount:that.money}).then(function(res){
                     // that.wallet=res.data.datas.user.wallet
+                    if(res.data.code!=200){
+                        that.prompt=res.data.message
+                        return false
+                    }
                     if(that.index==3){
                   that.$router.push({path:"/rechargeList",query:{money:that.money,index:that.index,orderNo:res.data.datas}})   	
                     }
+                    if(that.index == 1){//微信支付
+                            let orderNo = res.data.datas;
+                            window.localStorage.setItem('orderNo',orderNo);
+                            commonService.putOrders({orderNo:orderNo,channelId:channelIds}).then(function(res){
+                                if(res.data.success){
+                                    commonService.getWxpay({loginType:'WEIXIN',platform:'WXH5',jumpRouter:'wxbaselogin',wxscope:'snsapi_base'}).then(function(res){
+                                        if(res.data.code === 200){
+                                            //获取静默授权地址成功 
+                                            window.location.href = res.data.datas;
+                                        }
+                                    })
+                                }
+                            })
+                        }
+                       if(that.index==2) {//支付宝
+                            let orderNo = res.data.datas;
+                            window.localStorage.setItem('orderNo',orderNo);
+                            commonService.putOrders({orderNo:orderNo,channelId:channelIds}).then(function(res){
+                                if(res.data.success){
+                                    console.log(res)
+                                    let payOK = document.getElementsByClassName("payOK");
+                                    payOK[0].innerHTML = res.data.datas.payUrl;
+                                    document.punchout_form.submit()
+                                }
+                            })
+                        }
+
                    
               })
+            },
+               //自动唤醒微信支付
+            wxpay:function(){
+                let that = this;
+                let extra = window.localStorage.getItem('extra');
+                let orderNo = window.localStorage.getItem('orderNo');
+                commonService.putOrders({orderNo:orderNo,channelId:'WX_JSAPI',extra:extra,}).then(function (res) {
+                    if(res.data.success){
+                        let temp=res.data.datas.payParam;
+                        wx.config({
+                            debug: false, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
+                            appId: temp.appId, // 必填，公众号的唯一标识
+                            timestamp: temp.timeStamp+'', // 必填，生成签名的时间戳
+                            nonceStr: temp.nonceStr, // 必填，生成签名的随机串
+                            signature: temp.paySign, // 必填，签名，见附录1
+                            jsApiList: [
+                                'chooseWXPay'
+                            ] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
+                        })
+
+                        wx.ready(function(){
+                            // config信息验证后会执行ready方法，所有接口调用都必须在config接口获得结果之后，config是一个客户端的异步操作，所以如果需要在页面加载时就调用相关接口，则须把相关接口放在ready函数中调用来确保正确执行。对于用户触发时才调用的接口，则可以直接调用，不需要放在ready函数中。
+                            wx.chooseWXPay({
+                                timestamp: temp.timeStamp+'', // 支付签名时间戳，注意微信jssdk中的所有使用timestamp字段均为小写。但最新版的支付后台生成签名使用的timeStamp字段名需大写其中的S字符
+                                nonceStr: temp.nonceStr, // 支付签名随机串，不长于 32 位
+                                package: temp.wxPackage, // 统一支付接口返回的prepay_id参数值，提交格式如：prepay_id=***）
+                                signType:"MD5", // 签名方式，默认为'SHA1'，使用新版支付需传入'MD5'
+                                paySign:temp.paySign, // 支付签名
+                                success: function (res) {
+                                    // 支付成功后的回调函数
+                                    //分别跳转的路径
+                                    //1.知识。2.活动。3.会员。4.商品。5.直播
+                                    alert('支付成功');
+                                    window.localStorage.removeItem('checked')
+                                    that.checked = false
+                                },
+                                cancel:function(){
+                                    window.localStorage.removeItem('checked');
+                                    alert('支付失败');
+                                    that.checked = false
+                                }
+                            });
+                        });
+
+                        wx.error(function(res){
+//                            alert('订单错误')
+                            window.localStorage.removeItem('checked')
+                            alert('支付失败');
+                            that.checked = false
+                            // config信息验证失败会执行error函数，如签名过期导致验证失败，具体错误信息可以打开config的debug模式查看，也可以在返回的res参数中查看，对于SPA可以在这里更新签名。
+                        });
+                    }else{
+//                        alert('订单错误');
+                        window.localStorage.removeItem('checked')
+                        alert('支付失败');
+                        that.checked = false
+                    }
+                })
             },
         }
     }
@@ -383,6 +504,19 @@
                     }
             }
         }
+    }
+    .prompt{
+       position:fixed;
+        bottom:1.2rem;
+        left: 0;
+        width: 100%;
+       height: 0.67rem;
+       line-height: 0.67rem;
+        color: #fff;
+        background: linear-gradient(70deg, #DC704A, #F44EA0);
+        text-align: center;
+         font-size: 12px;
+
     }
     
     .footer1{

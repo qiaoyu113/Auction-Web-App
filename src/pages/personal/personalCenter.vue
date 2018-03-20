@@ -179,7 +179,6 @@
             getUsers:function(){
                 let that = this;
                  commonService.getUsers().then(function(res){
-                    // console.log(res)
                     if(res.data.code==200){
                       that.list=res.data.datas.user
                     that.totalMoney=that.list.wallet.totalMoney

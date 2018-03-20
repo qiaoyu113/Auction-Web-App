@@ -32,7 +32,9 @@
                 let that = this;
                 let extra = window.localStorage.getItem('extra');
                 let orderNo = window.localStorage.getItem('orderNo');
+                console.log(orderNo)
                 commonService.putOrders({orderNo:orderNo,channelId:'WX_JSAPI',extra:extra,}).then(function (res) {
+                    console.log(res)
                     if(res.data.success){
                         let temp=res.data.datas.payParam;
                         wx.config({

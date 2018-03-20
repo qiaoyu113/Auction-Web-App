@@ -10,7 +10,7 @@
     index三种状1.填写信息 2.审核中 3.已完成
     -->
     <div class="cashstep" v-set-title="title">
-        <div class="header">传家</div>
+        <!-- <div class="header">传家</div> -->
         <div class="nav">
             <span class="">&lt;</span> 
         </div>

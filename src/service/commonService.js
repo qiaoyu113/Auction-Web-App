@@ -156,6 +156,14 @@ export const commonService = {
     getWXbaseCode: function(params) {
         return axios.get('/tokens/wxbaseinfo' + this.getParam(params));
     },
+    /* 获取 */
+    getWXinfo: function(params) {
+        return axios.get('/tokens/wxinfo' + this.getParam(params));
+    },
+     /* 提交微信注册信息  */
+    putUserss: function (params) {
+        return axios.put('/users' + this.getParam(params))
+    },
     /* 收藏拍品的接口 */
     postCollect:function(params,id){
         return axios.post('/auctions/'+ id,qs.stringify(params))

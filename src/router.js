@@ -32,15 +32,16 @@ const short = (resolve) => {require(['./pages/short.vue'],resolve)}
 const home = (resolve) => {require(['./pages/home/home.vue'],resolve)}
 const registerweixin = (resolve) => {require(['./component/login/registerweixin.vue'],resolve)}
 const service = (resolve) => {require(['./pages/service/service.vue'],resolve)}
-const special = (resolve) => {require(['./pages/special/special.vue'],resolve)}
+// const special = (resolve) => {require(['./pages/special/special.vue'],resolve)}
 const specialinfo = (resolve) => {require(['./pages/special/specialinfo.vue'],resolve)}
-const specialView = (resolve) => {require(['./pages/special/specialView.vue'],resolve)}
-const specialDetails = (resolve) => {require(['./pages/special/specialDetails.vue'],resolve)}
+// const specialView = (resolve) => {require(['./pages/special/specialView.vue'],resolve)}
+// const specialDetails = (resolve) => {require(['./pages/special/specialDetails.vue'],resolve)}
 
 const auction = (resolve) => {require(['./pages/auction/auction.vue'],resolve)}
 const none = (resolve) => {require(['./pages/auction/none.vue'],resolve)}
 const auctionView = (resolve) => {require(['./pages/auction/auctionView.vue'],resolve)}
 const wxbaselogin = (resolve) => {require(['./pages/auction/wxbaselogin.vue'],resolve)}
+const wxlogin = (resolve) => {require(['./pages/auction/wxlogin.vue'],resolve)}
 const wxPay = (resolve) => {require(['./pages/wxPay/wxPay.vue'],resolve)}
 const aliPay = (resolve) => {require(['./pages/wxPay/aliPay.vue'],resolve)}
 // 直播
@@ -93,15 +94,15 @@ const routers = [
     {name: 'login',path:'/login',component:login},
     {name: 'registerweixin',path:'/register',component:registerweixin},
     {name: 'service',path:'/service',component:service},
-    {name: 'special',path:'/special',component:special},
+    // {name: 'special',path:'/special',component:special},
     {name: 'specialinfo',path:'/specialinfo',component:specialinfo},
-    {name: 'specialView',path:'/specialView',component:specialView},
+    // {name: 'specialView',path:'/specialView',component:specialView},
     {name: 'none',path:'/none',component:none},
-    {name: 'specialDetails',path:'/specialDetails',component:specialDetails,
-        children:[
-            {name:'specialMore',path:'more/:id',component:specialDetails},
-        ]
-    },
+    // {name: 'specialDetails',path:'/specialDetails',component:specialDetails,
+    //     children:[
+    //         {name:'specialMore',path:'more/:id',component:specialDetails},
+    //     ]
+    // },
     {name: 'auction',path:'/auction',component:auction,
         children:[
             {name:'auctionMore',path:'more/:id',component:auction},
@@ -162,6 +163,7 @@ const routers = [
     {name:'wxbaselogin',path:'/wxbaselogin',component: wxbaselogin}, // 微信跳转页
     {name:'wxPay',path:'/wxpay/',component: wxPay}, // 微信支付页
     {name:'aliPay',path:'/payOk',component: aliPay}, // 支付宝支付成功页
+    {name:'wxlogin',path:'/wxlogin',component: wxlogin}, //微信登录跳转
 ]
 
 const router = new VueRouter({
