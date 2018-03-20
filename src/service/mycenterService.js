@@ -27,6 +27,10 @@ export const commonService = {
     getKaptchas: function (params) {
         return axios.get('/kaptchas')
     },
+    /* 提交微信注册信息  */
+    putUserss: function (params) {
+        return axios.put('/users' + this.getParam(params))
+    },
     /* 通用：验证验证码的对错 */
     postValidateImg: function (params) {
         return axios.post('/kaptchas',qs.stringify(params))

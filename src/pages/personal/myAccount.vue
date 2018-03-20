@@ -59,7 +59,7 @@
                     <div class="bor"></div>
                 </div>
                 <div class="listcontent clearfix"  v-for="arr1 in arr"  :key="arr1.url">
-                    <div class="fl">{{arr1.flowAmount}}</div>
+                    <div class="fl">{{arr1.flowAmount | money}}</div>
                     <div class="f2">{{arr1.title}}</div>
                     <div class="f3">{{arr1.createTime | stampFormate2}}</div>
                     <div class="f4 line" v-if="arr1.flowStatus==10">充值成功</div>

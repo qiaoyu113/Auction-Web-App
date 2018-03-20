@@ -6,7 +6,7 @@
                 <div class="headerCh">{{header.name2}}</div>
             </div>
             <div class="headerRight">
-                <img src="../../../src/assets/image/mycenter/right.png"/>
+                <img src="../../assets/image/mycenter/right.png"/>
             </div>
             <!--按钮-->
             <div class="menu">
@@ -31,7 +31,7 @@
                 <div class="infoRight" @click="deletePassword"><i class="iconfont icon-closeicon"></i></div>
             </div>
             <!--联系客服-->
-            <div class="talk"><a href="tel:+10086"><span>登陆遇到问题，联系客服</span></a></div>
+            <div class="talk"><a href="tel:+10086"><span>登录遇到问题，联系客服</span></a></div>
             <!--登陆和提示-->
             <div class="bottom">
                 <div class="hint" v-if="hint">{{hintText}}</div>
@@ -75,7 +75,7 @@
         <div class="box" v-if="wxShow">
             <div class="boxHeader">
                 <div class="boxImg">
-                    <img src="http://img0.imgtn.bdimg.com/it/u=3206453844,923580852&fm=27&gp=0.jpg"/>
+                    <img :src="wximg"/>
                 </div>
             </div>
             <div class="info">
@@ -84,7 +84,7 @@
             </div>
             <div class="info">
                 <input style="width:6rem;" type="text" placeholder="输入图片验证码" v-model="kaptchaValue"/>
-                <div class="code" @click="">图片验证码<span v-if="codeShow" style="margin:0;">({{timeOver}})</span></div>
+                <div class="code" @click="getKaptchas()"><img :src="img.imageString"/></div>
             </div>
             <div class="info">
                 <input style="width:6rem;" type="number" placeholder="输入验证码" v-model="code"/>
@@ -101,30 +101,9 @@
             <!--登陆和提示-->
             <div class="bottom">
                 <div class="hint" v-if="hint2">{{hint2Text}}</div>
-                <div class="ok" @click="sign">注 册</div>
+                <div class="ok" @click="putUsers()">注 册</div>
             </div>
         </div>
-       
-       <!-- 弹窗 -->
-        <div class="shadow" :class="{'dis':ind==1}">
-        <div class="popWin">
-                <div class="close" @click=""><i class="iconfont icon-closeicon"></i></div>
-                <div class="remove">
-                    <p class="removeEn">ID PHOTOS</p>
-                    <p class="removeCn">照片样例</p>
-                    <p class="removeCon">请保持照片清晰，方便审核</p>
-                </div>
-                <div class="picbox clearfix">
-                    <!-- <div class="pic"><img v-if="imageUrl" :src="imageUrl"></div> -->
-                     <!-- <div class="pic"><img v-if="imageUrl2" :src="imageUrl2"></div> -->
-                </div>
-                <div class="font">
-                    <span>1.证件正面照</span>
-                    <span>2.证件背面照</span>
-                </div>
-        </div>
-        </div>
-
     </div>
 </template>
 
@@ -161,7 +140,8 @@
                 wxLogin:false,//微信登陆
                 kaptchaValue:'',
                 img:'',
-                ind:1,
+                wx:this.$route.query.wx,
+                wximg:'',
             }
         },
      // asyncData({store,route}) {
@@ -181,6 +161,8 @@
         mounted: function() {
             this.onMove()
             this.getKaptchas()
+            this.vwx()
+            this.vwximg()
             if(this.login){
                 let phoneNum = window.localStorage.getItem('phone');
                 this.phoneUser = phoneNum
@@ -196,11 +178,21 @@
             }
         },
         methods: {
+            vwximg:function(){
+              this.wximg=window.localStorage.getItem('headImg')
+           
+            },
+            vwx:function(){
+              if(this.wx=='wx'){
+                this.wxShow=true
+                this.checked = false;
+                this.login = false;
+            }
+            },
             // 获取图片验证码
             getKaptchas:function(){
                 let that=this
                  commonService.getKaptchas().then(function(res){
-
                     that.img=res.data.datas
               })
             },
@@ -212,19 +204,14 @@
                         if(that.password == that.password2){
                             if(that.code != ''){
                                 commonService.goSignup({phone:that.phone,password:that.password,smsCode:that.code,type:1,platform:that.platform}).then(function(res){
-                                    console.log(res.data)
                                     if(res.data.code === 200){
                                         that.phoneUser = that.phone;
                                         window.localStorage.setItem('phone',that.phone)
                                         that.login = true;
                                         that.wxShow = false;
                                     }else if(res.data.code === 512104){
-                                        that.codeShow = false;
                                         that.hint2 = true;
                                         that.hint2Text = '短信验证码已过期';
-                                        that.getKaptchas()
-                                        that.kaptchaValue()
-
                                     }
                                 })
                             }else{
@@ -247,11 +234,8 @@
             //点击登陆
             loginBtn:function(){
                 let that = this;
-                console.log(that.phoneUser);
                 commonService.goLogin({phone:that.phoneUser,password:that.passwordUser,platform:that.platform}).then(function(res){
-                    console.log(res)
                     if(res.data.code === 200){
-                        console.log('登陆成功')
                         let token = res.data.datas;
                         window.localStorage.setItem('token',token)
                         that.$router.replace({name:'home'})
@@ -280,9 +264,13 @@
                     that.checked = true;
                     that.login = true;
                     that.wxShow = false;
-                }else{
+                }else if(that.wx!='wx'){
                     that.checked = false;
                     that.login = false;
+                }else if(that.wx=='wx'){
+                    that.checked = false;
+                    that.login = false;
+                    that.wxShow=true
                 }
             },
             //获取验证码
@@ -292,25 +280,23 @@
                     if(that.codeShow){
 
                     }else{
-                        that.codeShow = true;
+                        
+                        if(that.kaptchaValue==''){
+                             that.hint2 = true;
+                             that.hint2Text = '请填写图片验证码';
+                        }
                         commonService.getQR({phone:that.phone,type:1,kaptchaKey:that.img.kaptchaKey,kaptchaValue:that.kaptchaValue}).then(function(res){
-                            console.log(res.data)
                             if(res.data.code === 200){
-                                // console.log('短信发送成功')
+                                that.codeShow = true;
                                 let time = setInterval(function(){
                                     if(that.timeOver === 0){
                                         clearInterval(time)
                                         that.codeShow = false;
-                                        that.timeOver = 90;
+                                        that.timeOver = 60;
                                     }else{
                                         that.timeOver = that.timeOver -= 1
                                     }
                                 },1000)
-                            }
-                            if(res.data.code==511104){
-                                that.codeShow = false;
-                                that.hint2 = true;
-                                that.hint2Text = '验证码不正确,请重新输入';
                             }
                             if(res.data.code === 513109){
                                 that.codeShow = false;
@@ -323,6 +309,45 @@
                     that.hint2 = true;
                     that.hint2Text = '手机号格式错误';
                 }
+            },
+            //微信注册提交
+            putUsers:function(){
+                let that=this;
+                let infoKey= window.localStorage.getItem('redisInfoKey')
+                if(that.phoneOk){
+                    if(that.checkPassword){
+                        if(that.password == that.password2){
+                            if(that.code != ''){
+                                commonService.putUserss({infoKey:infoKey,type:1,smsCode:that.code,phone:that.phone,platfrom:'WXH5',password:that.password}).then(function(res){
+                                    console.log(res)
+                                    if(res.data.code === 512104){
+                                        that.hint2 = true;
+                                        that.hint2Text = '短信验证码已过期';
+                                    }else if(res.data.code === 200){
+                                       that.phoneUser = that.phone;
+                                        window.localStorage.setItem('phone',that.phone)
+                                        that.login = true;
+                                        that.wxShow = false;
+                                    }
+                                })
+                            }else{
+                                that.hint2 = true;
+                                that.hint2Text = '请输入验证码';
+                            }
+                        }else{
+                            that.hint2 = true;
+                            that.hint2Text = '两次密码输入不一致';
+                        }
+                    }else{
+                        that.hint2 = true;
+                        that.hint2Text = '密码为字母、数字、下划线组合且长度为6-16的字符';
+                    }
+                }else{
+                    that.hint2 = true;
+                    that.hint2Text = '手机号格式错误';
+                }
+                 
+
             },
             //删除手机号
             removePhone:function(){
@@ -370,21 +395,28 @@
             //绑定微信登陆
             wxlogin:function(){
                 let that = this;
-                that.wxShow = true;
-//                commonService.getWxpay({loginType:'WEIXIN',platform:'WXH5',jumpRouter:'wxbaselogin',wxscope:'snsapi_base'}).then(function(res){
-//                    let code = res.data.code;
-//                    if(code === 200){
-//                        //获取静默授权地址成功
-//                        window.location.href = res.data.datas;
-//                    }
-//                })
+                // that.wxShow = true;
+               commonService.getWxpay({loginType:'WEIXIN',platform:'WXH5',jumpRouter:'wxlogin',wxscope:'snsapi_userinfo'}).then(function(res){
+                   let code = res.data.code;
+                   if(code === 200){
+                       //获取静默授权地址成功
+                       window.location.href = res.data.datas;
+                   }
+               })
             }
-        },
+          },
+
         beforeRouteEnter(to, from, next){
             next(vm => {
                 vm.url = to.path;
                 if(vm.url == '/login'){
-                    vm.login = true;
+
+                    if(vm.wx!='wx'){
+                      vm.login = true;  
+                    }else if(vm.wx=='wx'){
+                      vm.login = false; 
+                    }
+                    
                 }
                 if(vm.url == '/signup'){
                     vm.login = false;
@@ -603,88 +635,9 @@
                 border-top:1px solid #333;
                 text-align: center;
                 font-size:14px;
+                background: #fff;
             }
         }
-        // 弹窗样式
-    .shadow{
-        width: 100%;
-        height: 100%;
-        background: rgba(2, 10, 2, 0.5);
-        position: fixed;
-        left: 0;
-        top: 0;
-        z-index: 99999;
-    }
-    .dis{
-        display: none;
-    }
-    .popWin{
-        position: absolute;
-        z-index: 10;;
-        bottom:3.7333rem;
-        left: @size30;
-        width:8.4rem;
-        height: 8.9333rem;
-        background: white;
-        box-sizing: border-box;
-        .close{
-            position: absolute;
-            right: 0;top: 0;
-            width: @size30;
-            height: @size30;
-            background: #eb6100;
-            i{
-                font-size: @size30;
-                color: white;
-            }
-        }
-        .remove{
-            padding-top: @size50;
-            margin: auto;
-            
-            text-align: center;
-            .removeEn{
-                font-size: 14px;
-                font-weight: bold;
-            }
-            .removeCn{
-                color: #333333;
-                font-size: @size12;
-            }
-            .removeCon{
-                color: #333333;
-                font-size:@size12;
-                padding: @size15;
-            }
-        }
-        .picbox{
-            margin: @size5;
-            margin-top: @size30;
-            width: 100%;
-            box-sizing: border-box;
-            .pic{
-                box-sizing: border-box;
-                margin-left: @size35;
-                float: left;
-                width: 2.6666rem;
-                height: @size115;
-                background: gray;
-                img{
-                    width: 100%;
-                    height: 100%;
-                }
-            }
-        }
-        .font{
-            padding:@size10 0.6rem;
-            text-align: center;
-            span{
-                float: left;
-                width: 50%;
-                font-size:@size11;
-            }
-        }
-      }
     }
 </style>
 

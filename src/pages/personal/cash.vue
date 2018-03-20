@@ -5,7 +5,7 @@
     <!-- 保证金提现 -->
     <div class="cash" id="" v-set-title="title">
         
-        <div class="header">传家</div>
+        <!-- <div class="header">传家</div> -->
         <div class="content">
             <div class="loginBox">
                 <div class='loginEn'>REFUND</div>
@@ -113,7 +113,7 @@
             cny:function(){
                 let that = this;
                  if(that.money>that.wallet.availableMoney / 100){
-                     that.money=that.wallet.availableMoney /100
+                     that.money=that.wallet.availableMoney / 100
                  }
             },
              // 获取订单号
