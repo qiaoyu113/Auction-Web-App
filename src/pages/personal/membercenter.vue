@@ -11,7 +11,7 @@
                 <div class='loginEn '>MY ACCOUNT</div>
                 <div class="loginCn ">会员中心</div>
             </div>
-            <div class="fr">...</div>
+            <div class="fr" @click="Return()">...</div>
             <!--按钮-->
             <div class="menu">
                 <div class='font' :class="index==1 ?'checked':''" @click="getIndex(1)">会员等级</div>
@@ -84,7 +84,7 @@
     export default {
         data () {
             return {
-                title: '会员中心',
+                title: '传家',
                 index:1,
                 user:'',
                 records:'',
@@ -103,6 +103,9 @@
             this.getDoctype()
         },
         methods: {
+            Return:function(){
+              window.history.go(-1)
+            },
             getIndex:function(index){
                 let that = this;
                 if(index === 1){

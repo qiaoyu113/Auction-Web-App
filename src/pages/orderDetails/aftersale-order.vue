@@ -11,7 +11,7 @@
     <div class="" id="" v-set-title="title">
         <div class="header">传家</div>
         <div class="nav">
-            <span class="">&lt;</span> 
+            <span class="" @click="Return()">&lt;</span> 
             <span class="span1" :class="index>2||index==0 ? 'display':'' ">c</span>
         </div>
         <div class="content">
@@ -149,6 +149,9 @@ import {commonService} from '../../service/commonService.js'
         this.getOrdercsid()
     },
     methods: {
+        Return:function(){
+            window.history.go(-1)
+        },
         open:function(){
             this.dis='';
         },

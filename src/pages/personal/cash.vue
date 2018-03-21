@@ -27,7 +27,7 @@
             </div>
             <div class="info"><span>提现方式</span></div>
             <div class="bor"></div>
-            <div class="pay" @click="getIndex(1)">
+            <div class="pay" @click="getIndex(1)" v-if="wxLogin==true">
                 <div :class="index==1 ? 'check' : 'check1'"><i class="iconfont icon-duihao"></i></div>
                     <i :class="index==1 ? 'background1' : ''" class="iconfont icon-icon_weixinzhifu"></i>
                     <div class="infoWexin">
@@ -35,7 +35,7 @@
                         <div class="span2">单笔最高5,000-50,000 CNY</div>
                     </div>
             </div>
-            <div class="pay" @click="getIndex(2)">
+            <div class="pay" @click="getIndex(2)" v-if="wxLogin==false">
                 <div :class="index==2 ? 'check' : 'check1'"><i class="iconfont icon-duihao"></i></div>
                 <i :class="index==2 ? 'background2' : ''" class="iconfont icon-icon_zhifubao"></i>
                 <div class="infoAlipay">支付宝支付</div>
@@ -57,10 +57,11 @@
     export default {
         data () {
             return {
-                title: '保证金提现',
+                title: '传家',
                 index:3,
                 money:"",
                 wallet:'',
+                wxLogin:true,
             }
         },
         components:{},
@@ -87,8 +88,21 @@
         },
         mounted: function() {
         	this.getUsers()
+               this.wxshow()
+           
         },
         methods: {
+            // 首次加载判断在什么浏览器下打开
+             wxshow:function(){
+                 let ua = navigator.userAgent.toLowerCase();
+            if(ua.match(/MicroMessenger/i)=="micromessenger") {
+//                    这里是微信浏览器
+                this.wxLogin = true;
+            } else {
+//                    这里不是微信浏览器
+                this.wxLogin = false;
+            }
+             },
              getIndex: function(index) {
                 let that = this;
                 if(index==1){
@@ -122,7 +136,18 @@
                // commonService.postBails({amount:that.money}).then(function(res){
                     // that.wallet=res.data.datas.user.wallet
                     // console.log(res.data.datas)
-                    that.$router.push({path:"/cashstep",query:{money:that.money,index:that.index}})
+                    if(that.index!=1){
+                      that.$router.push({path:"/cashstep",query:{money:that.money,index:that.index}})  
+                    }else{
+                        let money=that.money * 100
+                       commonService.postForms({amount:money,type:2,channelId:'WX_JSAPI'}).then(function(res){
+                          console.log(res)
+                              
+
+                       })
+
+                    }
+                    
               // })
             },
         }

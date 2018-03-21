@@ -42,7 +42,7 @@
             </div>
             <div class="info"><span>提现方式</span></div>
             <div class="bor"></div>
-            <div class="pay" @click="getIndex(1)">
+            <div class="pay" @click="getIndex(1)" v-if="wxLogin==true">
                 <div :class="index==1 ? 'check' : 'check1'"><i class="iconfont icon-duihao"></i></div>
                     <i :class="index==1 ? 'background1' : ''" class="iconfont icon-icon_weixinzhifu"></i>
                     <div class="infoWexin">
@@ -50,7 +50,7 @@
                         <div class="span2">单笔最高5,000-50,000 CNY</div>
                     </div>
             </div>
-            <div class="pay" @click="getIndex(2)">
+            <div class="pay" @click="getIndex(2)" v-if="wxLogin==false">
                 <div :class="index==2 ? 'check' : 'check1'"><i class="iconfont icon-duihao"></i></div>
                 <i :class="index==2 ? 'background2' : ''" class="iconfont icon-icon_zhifubao"></i>
                 <div class="infoAlipay">支付宝支付</div>
@@ -78,13 +78,14 @@
     export default {
         data () {
             return {
-                title: '保证金充值',
+                title: '传家',
                 index:3,
                 money:"",
                 wallet:'',
                 checked:false,
                 show:true,
                 prompt:'',
+                wxLogin:true,
             }
         },
         components:{},
@@ -110,7 +111,7 @@
             },
         },
         mounted: function() {
-
+            this.wxshow()
         	this.getUsers()
             this.checked = window.localStorage.getItem('checked');
             if(this.checked){
@@ -118,6 +119,17 @@
             }
         },
         methods: {
+            // 首次加载判断在什么浏览器下打开
+             wxshow:function(){
+                 let ua = navigator.userAgent.toLowerCase();
+            if(ua.match(/MicroMessenger/i)=="micromessenger") {
+//                    这里是微信浏览器
+                this.wxLogin = true;
+            } else {
+//                    这里不是微信浏览器
+                this.wxLogin = false;
+            }
+             },
             Return:function(){
                 window.history.go(-1)
             },

@@ -4,7 +4,7 @@
     -->
    
     <div class="new-address" id="" v-set-title="title">
-        <div class="header">传家</div>
+        <!-- <div class="header">传家</div> -->
         <div class="content">
             <div class="loginBox">
                 <div class='loginEn'>SHIPPING ADDRESS</div>
@@ -13,8 +13,8 @@
             <div>
             	<!-- <v-distpicker></v-distpicker> -->
             </div>
-            <div class="icon">
-                <div ><i class="iconfont icon-tupian"></i></div>
+            <div class="icon" @click="Return()">
+                <div ><img src="../../assets/image/mycenter/right.png"/></div>
             </div>
         </div>
         <div class="box2">
@@ -56,7 +56,7 @@
                 <span>删除地址</span>
             </div>
         </div>
-      
+        <div class="prompt" v-if="prompt!=''">{{prompt}}</div>
         <div class="footer" @click="postAddress()" v-if="addressid==''">保&nbsp;&nbsp;存</div>
         <div class="footer" @click="postAddressid()" v-if="addressid!=''">保&nbsp;&nbsp;存</div>
     </div>
@@ -69,7 +69,7 @@ import {commonService} from '../../service/commonService.js'
     props: ['str'],
     data () {
       return {
-        title:'地址',
+        title:'传家',
         arrays: [],
         index:1,
         name:'',//联系人
@@ -87,6 +87,7 @@ import {commonService} from '../../service/commonService.js'
         countyName:'',
         addressid:'',//地址id
         defaultAdress:'',//是否是默认地址
+        prompt:'',
 
       }
     },
@@ -115,6 +116,9 @@ import {commonService} from '../../service/commonService.js'
     	
     },
     methods: {
+      Return:function(){
+        window.history.go(-1)
+      },
 
     	getAddressid:function(){
             let that = this
@@ -238,18 +242,43 @@ import {commonService} from '../../service/commonService.js'
             // 新增地址
              postAddress:function(){
                let that = this
+               
+                 let reg = /^1[3|4|5|7|8][0-9]{9}$/;
+                 let flag = reg.test(that.phone)
+                 if(!flag){
+                  that.prompt='手机格式不正确'
+                   return false
+                 }
+                 if(that.name=='' || that.phone=='' || that.provinceName=='' || that.cityName=='' || that.detailAdress=='' || that.districtName==''){
+                  that.prompt='请填写完整'
+                  return false
+                 }
                commonService.postAddress({name:that.name,phone:that.phone,provinceName:that.provinceName,provinceId:that.provinceid,cityName:that.cityName,cityId:that.cityid,districtName:that.countyName,districtId:that.countyid,detailAdress:that.detailAdress}).then(function(res){
                 // that.bankCard=res.data.datas
-                  // console.log(res)
+                   if(res.data.code==200){
+                      window.history.go(-1)
+                   }
                   
                  })
             },
             // 修改地址
              postAddressid:function(){
                let that = this
+               let reg = /^1[3|4|5|7|8][0-9]{9}$/;
+                 let flag = reg.test(that.phone)
+                 if(!flag){
+                  that.prompt='手机格式不正确'
+                   return false
+                 }
+                 if(that.name=='' || that.phone=='' || that.provinceName=='' || that.cityName=='' || that.detailAdress=='' || that.districtName==''){
+                  that.prompt='请填写完整'
+                  return false
+                 }
                commonService.postAddressid(that.addressid,{type:1,defaultAdress:that.defaultAdress,available:true,name:that.name,phone:that.phone,provinceName:that.provinceName,provinceId:that.provinceid,cityName:that.cityName,cityId:that.cityid,districtName:that.countyName,districtId:that.countyid,detailAdress:that.detailAdress}).then(function(res){
                 // that.bankCard=res.data.datas
-                  // console.log(res)
+                  if(res.data.code==200){
+                      window.history.go(-1)
+                   }
                   
                  })
             },
@@ -418,6 +447,19 @@ import {commonService} from '../../service/commonService.js'
                 color: red;
             }
         }
+    }
+    .prompt{
+       position:fixed;
+        bottom:1.2rem;
+        left: 0;
+        width: 100%;
+       height: 0.67rem;
+       line-height: 0.67rem;
+        color: #fff;
+        background: linear-gradient(70deg, #DC704A, #F44EA0);
+        text-align: center;
+         font-size: 12px;
+
     }
     .footer{
         position:fixed;

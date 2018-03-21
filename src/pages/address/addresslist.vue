@@ -4,8 +4,11 @@
     -->
    
     <div class="addresslist" id="" v-set-title="title">
-        <div class="header">传家</div>
-        <z-nav></z-nav>
+        <!-- <div class="header">传家</div> -->
+        <!-- <z-nav></z-nav> -->
+        <div class="nav">
+            <span class="">&lt;</span> 
+        </div>
         <div class="content clearfix">
             <div v-for="list in data">
                 <div class="peo clearfix">
@@ -35,7 +38,7 @@ import {commonService} from '../../service/commonService.js'
     props: ['str'],
     data () {
       return {
-          title:'地址列表',
+          title:'传家',
           arrays: [],
           index:1,
           data:'',
@@ -104,9 +107,29 @@ import {commonService} from '../../service/commonService.js'
         text-align: center;
         line-height: @size45;
     }
+    .nav{
+        width: @size375;
+        height: @size35;
+        border-bottom: 0.5px solid rgb(53, 60, 70);
+        background: rgb(255, 255, 255);
+        position: fixed;
+        top: 0;
+        z-index: 100;
+        span{
+            display: inline-block;
+            line-height: @size30;
+            text-align: center;
+            font-size: @size30;
+            font-weight: lighter;
+            color: rgb(157, 169, 177);
+            margin-left: 20px;
+        }
+    }
     .content{
         padding: 0 @size10;
-        margin-top:@size80;
+        margin-top:@size35;
+        padding-bottom: 1.2rem;
+
         .peo{
             padding:@size15 @size10;
             height: @size20;
@@ -181,7 +204,7 @@ import {commonService} from '../../service/commonService.js'
         width: 9.73rem;
         height: 1.2rem;
         box-sizing: border-box;
-        margin: @size5; 
+        margin:@size5; 
         border:1px solid rgb(53, 60, 70); 
         text-align: center;
         line-height: 1.2rem;

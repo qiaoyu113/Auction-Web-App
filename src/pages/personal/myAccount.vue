@@ -7,7 +7,7 @@
         
         <div class="header">传家</div>
         <div class="nav">
-            <span class="return fl">&lt;</span> 
+            <span class="return fl" @click="Return()">&lt;</span> 
         </div>
         <div class="content">
             <div class="account">
@@ -91,7 +91,7 @@
     export default {
         data () {
             return {
-                title: '个人中心',
+                title: '传家',
                 wallet:'',
                 arr:[
                     // {money:'500,000CNY',
@@ -151,7 +151,9 @@
 
         },
         methods: {
-            
+            Return:function(){
+              window.history.go(-1)
+            },
             getPos:function(index) {
                 var str = 95*(index)+'px';
                 str='left:'+str;

@@ -5,7 +5,7 @@
             <p class="top_p1">SHIPPING ADDRESS</p>
             <div class="top_div clearfix">
             <p class="top_p2">地址选择</p>
-            <div @click="obtain()"><i class="iconfont icon-dian1"></i></div>	
+            <div @click="obtain()"><img src="../../assets/image/mycenter/right.png"/></div>	
             </div>
             
 
@@ -39,7 +39,7 @@
     export default {
         data () {
             return {
-                title: '订单确认',
+                title: '传家',
                 address:'',
                 auctionId:this.$route.query.auctionId,
                 addressId:'',
@@ -74,7 +74,7 @@
                  this.addressId=id
           },
           xing:function(){
-            this.$router.push({path:"/address"})
+            this.$router.push({path:"/address",query:{id:''}})
           },
         	obtain:function(){
                   this.$router.push({path:"/my/order",query:{addressId:this.addressId,auctionId:this.auctionId}})    

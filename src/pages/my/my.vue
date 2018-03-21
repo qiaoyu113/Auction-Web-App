@@ -23,7 +23,7 @@
     export default {
         data () {
             return {
-                title: '我的',
+                title: '传家',
                 indexs:0,
             }
         },

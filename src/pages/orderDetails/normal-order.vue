@@ -12,7 +12,7 @@
         <div class="header">传家</div>
         <!-- 返回键,当订单完成时有删除icon -->
         <div class="nav">
-            <span class="">&lt;</span> 
+            <span class="" @click="Return()">&lt;</span> 
             <span class="span1" :class="index==3 ? 'display':'' ">c</span>
         </div>
         <div class="content">
@@ -190,6 +190,9 @@ import {commonService} from '../../service/commonService.js'
         this.getOrderid()
     },
     methods: {
+        Return:function(){
+            window.history.go(-1)
+        },
          huoqu:function(){
             this.orderNo=this.$route.query.id
             // console.log(this.orderNo)

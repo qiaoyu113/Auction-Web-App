@@ -82,7 +82,7 @@
     export default {
         data () {
             return {
-                title: '参拍中',
+                title: '传家',
                 datas:'',
             }
         },
