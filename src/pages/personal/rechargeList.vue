@@ -12,7 +12,7 @@
     <div class="rechargeList" v-set-title="title">
         <!-- <div class="header">传家</div> -->
         <div class="nav">
-            <span class="">&lt;</span> 
+            <span class="" @click="Return()">&lt;</span> 
         </div>
         <div class="content">
             <div class="state">
@@ -114,7 +114,7 @@ import {commonService} from '../../service/commonService.js'
     props: ['str'],
     data () {
       return {
-          title:'支付宝充值单',
+          title:'传家',
           arrays: [],
           index:1,
           active:0,
@@ -141,6 +141,9 @@ import {commonService} from '../../service/commonService.js'
         this.getBankCards()
     },
     methods: {
+            Return:function(){
+                window.history.go(-1)
+            },
             removeName:function(){
                 let that = this;
                 that.name = ''
@@ -288,7 +291,7 @@ import {commonService} from '../../service/commonService.js'
         border-bottom: 0.5px solid rgb(53, 60, 70);
         background: rgb(255, 255, 255);
         position: fixed;
-        top: @size45;
+        top: 0;
         z-index: 100;
         span{
             display: inline-block;
@@ -301,7 +304,7 @@ import {commonService} from '../../service/commonService.js'
         }
     }
     .content{
-        margin-top: @size80;
+        margin-top: @size35;
         margin-bottom: 1.2rem;
         padding: 0 @size10;
         .v_block{

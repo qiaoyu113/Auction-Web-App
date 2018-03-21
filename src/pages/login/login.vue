@@ -112,7 +112,7 @@
     export default {
         data () {
             return {
-                title: '个人中心',
+                title: '传家',
                 header:{
                     name:'LOG IN',
                     name2:'用户登录'
@@ -245,6 +245,9 @@
                     }else if(res.data.code === 513114){
                         that.hint = true;
                         that.hintText = '账号密码错误,请重新输入';
+                    }else{
+                        that.hint = true;
+                        that.hintText = res.data.message
                     }
                 })
             },

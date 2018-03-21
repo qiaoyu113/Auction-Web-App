@@ -3,7 +3,7 @@
     <div class="order">
         <div class="top">
             <p class="top_p1">PLACE ORDER</p>
-            <p class="top_p2">提交订单</p>
+            <p class="top_p2 clearfix">提交订单<span @click="Return()">. . .</span></p>
         </div>
         <div class="time clearfix">
             <p class="time_l">请在规定时间内支付，超时则扣除保证金</p>
@@ -116,7 +116,7 @@
     export default {
         data () {
             return {
-                title: '订单确认',
+                title: '传家',
                 index:1,
                 address:'',
                 datas:'',
@@ -156,6 +156,9 @@
             this.getAuctions()
         },
         methods: {
+            Return:function(){
+                window.history.go(-1)
+            },
             addresst:function(){
                 if(this.addressId==undefined){
                    this.getDefault()
@@ -237,6 +240,11 @@
             font-size: 12px;
             color: rgb(51,51,51);
             margin-top: @size10;
+            span{
+                float: right;
+                margin-right: @size10;
+                font-size: 16px;
+            }
           }
 
        }

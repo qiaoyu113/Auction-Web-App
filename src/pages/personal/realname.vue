@@ -100,7 +100,7 @@
         data () {
             return {
                 url:'',
-                title: '实名认证',
+                title: '传家',
                 dis:'dis',
                 shadow:'shadow',
                 name:'',

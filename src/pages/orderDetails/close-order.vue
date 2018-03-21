@@ -5,7 +5,7 @@
         
         <div class="header">传家</div>
         <div class="nav">
-            <span class="">&lt;</span> 
+            <span class="" @click="Return()">&lt;</span> 
             <span class="span1 display" >c</span>
         </div>
         <div class="content">
@@ -93,6 +93,9 @@ import {commonService} from '../../service/commonService.js'
         this.getOrderid()
     },
     methods: {
+         Return:function(){
+             window.history.go(-1)
+         },
         // 获取订单
          getOrderid:function(){
             let that=this;

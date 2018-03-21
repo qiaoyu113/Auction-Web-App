@@ -5,7 +5,7 @@
                 <div class="headerEn">{{header.name}}</div>
                 <div class="headerCh">{{header.name2}}</div>
             </div>
-            <div class="headerRight">
+            <div class="headerRight" @click="Return()">
                 <img src="../../../src/assets/image/mycenter/right.png"/>
             </div>
         </div>
@@ -82,6 +82,9 @@
             this.getUsers()
         },
         methods: {
+            Return:function(){
+                window.history.go(-1)
+            },
             //改变名字
             changeName:function(){
                 let that = this;

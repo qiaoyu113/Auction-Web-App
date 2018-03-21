@@ -101,7 +101,7 @@
     export default {
         data () {
             return {
-                title: '个人中心',
+                title: '传家',
                 logined:true,
                 img:[
                     'http://img0.imgtn.bdimg.com/it/u=3206453844,923580852&fm=27&gp=0.jpg',

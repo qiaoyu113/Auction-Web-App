@@ -42,7 +42,7 @@
     export default {
         data () {
             return {
-                title: '帮助中心',
+                title: '传家',
                 index:3,
             }
         },

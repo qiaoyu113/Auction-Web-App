@@ -5,7 +5,7 @@
                 <div class="headerEn">{{header.name}}</div>
                 <div class="headerCh">{{header.name2}}</div>
             </div>
-            <div class="headerRight">
+            <div class="headerRight" @click="Return()">
                 <img src="../../../src/assets/image/mycenter/right.png"/>
             </div>
         </div>
@@ -59,6 +59,9 @@
 
         },
         methods: {
+            Return:function(){
+                window.history.go(-1)
+            },
             deleteName:function(){
                 let that = this;
                 that.inputName = '';

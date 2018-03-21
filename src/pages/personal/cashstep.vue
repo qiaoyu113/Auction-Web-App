@@ -12,7 +12,7 @@
     <div class="cashstep" v-set-title="title">
         <!-- <div class="header">传家</div> -->
         <div class="nav">
-            <span class="">&lt;</span> 
+            <span class="" @click="Return()">&lt;</span> 
         </div>
         <div class="content">
             <div class="state"  v-if='index==1'>
@@ -144,6 +144,7 @@
                 </div>
             </div>
         </div>
+        <div class="footer1t" v-if="htmlx!=''">{{htmlx}}</div>
         <div class="footer1" v-if='index==1||index==2' @click="nextStep">下一步</div>
         <div class="footer1" v-if='index==3'>完成</div>
         
@@ -157,7 +158,7 @@ import {commonService} from '../../service/commonService.js'
     props: ['str'],
     data () {
       return {
-          title:'支付宝提现',
+          title:'传家',
           arrays: [],
           index:1,
           active:0,
@@ -179,6 +180,7 @@ import {commonService} from '../../service/commonService.js'
           userBankCardNo:'',//银行卡号
           userBankProvince:'',//开户行省份
           userBankDetail:'',//开户银行
+          htmlx:'',
 
       }
     },
@@ -187,6 +189,9 @@ import {commonService} from '../../service/commonService.js'
         this.yi()
     },
     methods: {
+            Return:function(){
+                window.history.go(-1)
+            },
             removeName:function(){
                 let that = this;
                 that.name = ''
@@ -257,11 +262,14 @@ import {commonService} from '../../service/commonService.js'
                    type=3
                 }
                  commonService.postForms({channelId:'UNIONPAY',channelUser:that.account,phone:that.phone,type:type,idCard:that.namecard,userName:that.userName,smsCode:that.verification,smsType:7,amount:that.money,realName:that.name,userBankName:that.userBankName,userBank:that.userBank,userBankCardNo:that.userBankCardNo,userBankProvince:that.userBankProvince,userBankDetail:that.userBankDetail}).then(function(res){
+                    console.log(res)
                     if(res.data.message=='success'){
                        that.oddNumbers=res.data.datas 
                  // setInterval(() => {
                        that.getForms()
                     // }, 1000)
+                    }else{
+                        that.htmlx=res.data.message
                     }
                  })
             },
@@ -600,6 +608,18 @@ import {commonService} from '../../service/commonService.js'
                 }
             }
         }
+    }
+    .footer1t{
+         width:100%;
+        height:0.67rem;
+        line-height:0.67rem;
+        color:#fff;
+        background:linear-gradient(70deg, #DC704A, #F44EA0);
+        text-align: center;
+        font-size:12px;
+        position:fixed;
+        bottom:1.2rem;
+        
     }
     .footer1{
         position:fixed;

@@ -7,7 +7,7 @@
         
         <div class="header">传家</div>
         <div class="nav">
-            <span class="return fl">&lt;</span> 
+            <span class="return fl" @click="Return()">&lt;</span> 
             <span class="font fl" :class="index==0 ? 'check' : ''" @click='getIndex(0)'>全部</span>
             <span class="font fl" :class="index==1 ? 'check' : ''" @click='getIndex(1)'>待付款</span>
             <span class="font fl" :class="index==2 ? 'check' : ''" @click='getIndex(2)'>待收货</span>
@@ -82,7 +82,7 @@
     export default {
         data () {
             return {
-                title: '个人中心',
+                title: '传家',
                 index:0,
                 datalist:'',
                 branch:[],
@@ -121,6 +121,9 @@
             
         },
         methods: {
+            Return:function(){
+                window.history.go(-1)
+            },
             routers:function(){
                
                  let index= this.$route.query.index

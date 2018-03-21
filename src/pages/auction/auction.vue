@@ -421,7 +421,7 @@
     export default {
         data () {
             return {
-                title: '专场详情-拍场详情',
+                title: '传家',
                 id:'',
                 useId:'',
                 img:'',

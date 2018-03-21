@@ -15,7 +15,7 @@
     export default {
         data () {
             return {
-                title: '',
+                title: '传家',
             }
         },
         mounted: function() {
