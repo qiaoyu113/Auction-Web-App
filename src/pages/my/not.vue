@@ -19,9 +19,9 @@
 
                  <div class="ros_l2">{{list.auctionCollect.newPrice}} CNY</div>
                  <div class="ros_l3">{{list.auction.title}}</div>
-                 <div class="ros_l3">{{list.auction.auctionStartTime}}-{{list.auction.no}}</div>
+                 <div class="ros_l3">{{list.auction.auctionStartTime | stampFormate}}-{{list.auction.no}}</div>
              </div>
-             <div class="ros_r"><img :src="picHead + list.auction.picItems[0]"/></div>
+             <div class="ros_r" @click="Router(list.id)"><img :src="picHead + list.auction.picItems[0]"/></div>
            
          </div>
        </div>
@@ -49,9 +49,9 @@
 
                  <div class="ros_l2">{{list.auctionCollect.newPrice}} CNY</div>
                  <div class="ros_l3">{{list.auction.title}}</div>
-                 <div class="ros_l3">{{list.auction.auctionStartTime}}-{{list.auction.no}}</div>
+                 <div class="ros_l3">{{list.auction.auctionStartTime | stampFormate}}-{{list.auction.no}}</div>
              </div>
-             <div class="ros_r"><img :src="picHead + list.auction.picItems[0]"/></div>
+             <div class="ros_r" @click="Router(list.id)"><img :src="picHead + list.auction.picItems[0]"/></div>
            
          </div>
         </div> 
@@ -79,9 +79,9 @@
 
                  <div class="ros_l2">{{list.auctionCollect.newPrice}} CNY</div>
                  <div class="ros_l3">{{list.auction.title}}</div>
-                 <div class="ros_l3">{{list.auction.auctionStartTime}}-{{list.auction.no}}</div>
+                 <div class="ros_l3">{{list.auction.auctionStartTime | stampFormate}}-{{list.auction.no}}</div>
              </div>
-             <div class="ros_r"><img :src="picHead + list.auction.picItems[0]"/></div>
+             <div class="ros_r" @click="Router(list.id)"><img :src="picHead + list.auction.picItems[0]"/></div>
            
          </div>
         </div> 
@@ -109,9 +109,9 @@
 
                  <div class="ros_l2">{{list.auctionCollect.newPrice}} CNY</div>
                  <div class="ros_l3">{{list.auction.title}}</div>
-                 <div class="ros_l3">{{list.auction.auctionStartTime}}-{{list.auction.no}}</div>
+                 <div class="ros_l3">{{list.auction.auctionStartTime | stampFormate}}-{{list.auction.no}}</div>
              </div>
-             <div class="ros_r"><img :src="picHead + list.auction.picItems[0]"/></div>
+             <div class="ros_r" @click="Router(list.id)"><img :src="picHead + list.auction.picItems[0]"/></div>
            
          </div>
         </div> 
@@ -139,9 +139,9 @@
 
                  <div class="ros_l2">{{list.auctionCollect.newPrice}} CNY</div>
                  <div class="ros_l3">{{list.auction.title}}</div>
-                 <div class="ros_l3">{{list.auction.auctionStartTime}}-{{list.auction.no}}</div>
+                 <div class="ros_l3">{{list.auction.auctionStartTime | stampFormate}}-{{list.auction.no}}</div>
              </div>
-             <div class="ros_r"><img :src="picHead + list.auction.picItems[0]"/></div>
+             <div class="ros_r" @click="Router(list.id)"><img :src="picHead + list.auction.picItems[0]"/></div>
            
          </div>
         </div> 
@@ -198,6 +198,9 @@
 
         },
         methods: {
+            Router:function(id){
+                that.$router.push({name:'auctionMore',params:{id:id}})
+            },
              getCollect:function(){
                 let that=this;
                  commonService.getCollect({pageNo:1,pageSize:30,status:3}).then(function(res){

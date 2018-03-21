@@ -193,6 +193,7 @@
             getKaptchas:function(){
                 let that=this
                  commonService.getKaptchas().then(function(res){
+                    console.log(res)
                     that.img=res.data.datas
               })
             },
@@ -210,8 +211,12 @@
                                         that.login = true;
                                         that.wxShow = false;
                                     }else if(res.data.code === 512104){
+                                        that.getKaptchas()
                                         that.hint2 = true;
                                         that.hint2Text = '短信验证码已过期';
+                                    }else{
+                                        that.hint2 = true;
+                                        that.hint2Text = res.data.message; 
                                     }
                                 })
                             }else{

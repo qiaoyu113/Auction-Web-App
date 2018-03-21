@@ -75,7 +75,7 @@
                 <div class="pic"><span class="iconfont icon-tupian"></span></div>
                 <div class="hel">HELLO!</div>
                 <div class="log">请登录</div>
-                <div class="link"><router-link to="/login">快来登录，和我们一起没羞没臊的捡漏吧！</router-link></div>
+                <div class="link" @click="logins">快来登录，和我们一起没羞没臊的捡漏吧！</div>
             </div>
             <div class="center">
                 <div class="address  clearfix">
@@ -142,10 +142,13 @@
         },
         mounted: function() {
             this.getUsers()
-            // this.getFootPrint()
+            this.getFootPrint()
 
         },
         methods: {
+            logins:function(){
+                this.$router.push({path:"/login"})
+            },
             getPos:function(index) {
                 var str = 95*(index)+'px';
                 str='left:'+str;
@@ -181,11 +184,8 @@
                  commonService.getUsers().then(function(res){
                     if(res.data.code==200){
                       that.list=res.data.datas.user
-                      if(that.list.wallet!=null){
-                         that.totalMoney=that.list.wallet.totalMoney
-                      }
-                    that.numItem=that.list.numItem  
-                    that.getFootPrint()
+                       that.totalMoney=that.list.wallet.totalMoney
+                      that.numItem=that.list.numItem  
                     }else{
                         that.logined=false
                     }
@@ -203,14 +203,14 @@
                     // console.log(genStatId())
                // let cookiesId = window.localStorage.getItem("token")
                   // console.log(cookiesId)
-                 // commonService.getFootPrint().then(function(res){
-                 //    // console.log(res)
-                 //    if(res.data.code==200){
+                 commonService.getFootPrint().then(function(res){
+                    // console.log(res)
+                    if(res.data.code==200){
                      
                         
-                 //    }
+                    }
                     
-                 // })
+                 })
             },
 
 
@@ -435,6 +435,7 @@
             overflow-x: auto;
             margin-top: @size10;
             margin-left: @size10;
+            padding-bottom: 2.4rem;
             ul {
                 width: @size375;
                 position: relative;

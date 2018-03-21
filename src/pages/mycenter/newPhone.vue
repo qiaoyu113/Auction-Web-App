@@ -25,6 +25,7 @@
             </div>
             <div id="captcha-box"></div>
             <!--保存-->
+            <div class="save" v-if="htmlx!=''">{{htmlx}}</div>
             <div class="save" @click="save">下一步</div>
         </div>
     </div>
@@ -47,6 +48,7 @@
                 codeShow:false,
                 img:'',
                 kaptchaValue:'',
+                htmlx:'',
                
             }
         },
@@ -106,7 +108,7 @@
                         if(that.timeOver === 0){
                             // clearInterval(time)
                             that.codeShow = false;
-                            that.timeOver = 60;
+                            that.timeOver = 90;
                         }else{
                             that.timeOver = that.timeOver -= 1
                         }
@@ -114,8 +116,11 @@
                 }
                 // 获取短信验码
                  commonService.getSendMessage({phone:that.phone,type:5,kaptchaKey:that.img.kaptchaKey,kaptchaValue:that.kaptchaValue}).then(function(res){
+                    console.log(res)
                     if(res.data.code == 200){
-                     // that.$router.go(-1);
+                      // that.$router.go(-1);
+                    }else{
+                        that.htmlx=res.data.message
                     }
               })
             },
@@ -306,6 +311,17 @@
             .infoList:last-child{
                 border-bottom: none;
             }
+        }
+        .saves{
+           width:100%;
+           height:0.67rem;
+           line-height:0.67rem;
+            color:#fff;
+            background:linear-gradient(70deg, #DC704A, #F44EA0);
+            text-align: center;
+            font-size:12px;
+            position:fixed;
+            bottom:1.2rem;
         }
         .save{
             width:100%;

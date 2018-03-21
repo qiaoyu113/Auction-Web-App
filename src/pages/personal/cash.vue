@@ -11,7 +11,7 @@
                 <div class='loginEn'>REFUND</div>
                 <div class="loginCn">提现</div>
             </div>
-            <div class="fr">...</div>
+            <div class="fr" @click="Return()">...</div>
         </div>
         <div class="box">
             <div class="info"><span>金额</span>
@@ -30,10 +30,7 @@
             <div class="pay" @click="getIndex(1)" v-if="wxLogin==true">
                 <div :class="index==1 ? 'check' : 'check1'"><i class="iconfont icon-duihao"></i></div>
                     <i :class="index==1 ? 'background1' : ''" class="iconfont icon-icon_weixinzhifu"></i>
-                    <div class="infoWexin">
-                        <div class="span1">微信支付</div>
-                        <div class="span2">单笔最高5,000-50,000 CNY</div>
-                    </div>
+                    <div class="infoAlipay">微信支付</div>
             </div>
             <div class="pay" @click="getIndex(2)" v-if="wxLogin==false">
                 <div :class="index==2 ? 'check' : 'check1'"><i class="iconfont icon-duihao"></i></div>
@@ -88,10 +85,12 @@
         },
         mounted: function() {
         	this.getUsers()
-               this.wxshow()
-           
+            this.wxshow()
         },
         methods: {
+            Return:function(){
+                window.history.go(-1)
+            },
             // 首次加载判断在什么浏览器下打开
              wxshow:function(){
                  let ua = navigator.userAgent.toLowerCase();
@@ -143,7 +142,6 @@
                        commonService.postForms({amount:money,type:2,channelId:'WX_JSAPI'}).then(function(res){
                           console.log(res)
                               
-
                        })
 
                     }

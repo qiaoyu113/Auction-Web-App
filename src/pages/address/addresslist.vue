@@ -6,7 +6,7 @@
     <div class="addresslist" id="" v-set-title="title">
         <!-- <div class="header">传家</div> -->
         <!-- <z-nav></z-nav> -->
-        <div class="nav">
+        <div class="nav" @click="Return()">
             <span class="">&lt;</span> 
         </div>
         <div class="content clearfix">
@@ -50,6 +50,9 @@ import {commonService} from '../../service/commonService.js'
     	 this.getAddress()
     },
     methods: {
+          Return:function(){
+            window.history.go(-1)
+          },
     	  getAddress:function(){
                let that = this
                commonService.getAddress({pageNo:1,pageSize:30}).then(function(res){

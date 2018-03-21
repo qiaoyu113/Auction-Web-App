@@ -11,7 +11,7 @@
                 <div class='loginEn'>HELP</div>
                 <div class="loginCn">帮助中心</div>
             </div>
-            <div class="fr">...</div>
+            <div class="fr" @click="Return()">...</div>
             <!--按钮-->
             <div class="menu">
                 <div class='font' :class="index==1 ?'checked':''" @click="getIndex(1)">新手帮助</div>
@@ -87,6 +87,9 @@
 
         },
         methods: {
+            Return:function(){
+                window.history.go(-1)
+            },
             getIndex:function(index){
                 let that = this;
                 if(index === 1){
@@ -186,6 +189,6 @@
             }
         }
     }
- }
+}
 </style>
 

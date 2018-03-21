@@ -76,7 +76,7 @@
               <!-- 支付方式 -->
                 <div class="payment_method">
                     <div class="payment_top">支付方式</div>
-                    <div class="ros clearfix" :class="{'ros_ll':index==1}" @click="selected(1)">
+                    <div class="ros clearfix" :class="{'ros_ll':index==1}" @click="selected(1)" v-if="wxLogin==true">
                         <div class="ros_l"><span>✔</span></div>
                         <div class="ros_con"><i class="iconfont icon-icon_weixinzhifu"></i></div>
                         <div class="ros_r">
@@ -84,7 +84,7 @@
                            <p>单笔最高5.000-50.000CNY</p>
                         </div>
                     </div>
-                    <div class="ros clearfix" :class="{'ros_ll':index==2}" @click="selected(2)">
+                    <div class="ros clearfix" :class="{'ros_ll':index==2}" @click="selected(2)" v-if="wxLogin==false">
                         <div class="ros_l"><span>✔</span></div>
                         <div class="ros_con"><i class="iconfont icon-icon_zhifubao"></i></div>
                         <div class="ros_r">
@@ -117,13 +117,14 @@
         data () {
             return {
                 title: '传家',
-                index:1,
+                index:3,
                 address:'',
                 datas:'',
                 picItems:'',
                 payLimitTime:'',//超时
                 auctionId:this.$route.query.auctionId,
                 addressId:this.$route.query.addressId,
+                wxLogin:true,
             }
         },
         syncData({store}) {
@@ -154,8 +155,20 @@
             
             this.addresst()
             this.getAuctions()
+            this.wxshow()
         },
         methods: {
+            // 首次加载判断在什么浏览器下打开
+             wxshow:function(){
+                 let ua = navigator.userAgent.toLowerCase();
+            if(ua.match(/MicroMessenger/i)=="micromessenger") {
+//                    这里是微信浏览器
+                this.wxLogin = true;
+            } else {
+//                    这里不是微信浏览器
+                this.wxLogin = false;
+            }
+             },
             Return:function(){
                 window.history.go(-1)
             },
@@ -217,6 +230,7 @@
                 }
                  commonService.postOrders(that.auctionId,{addressId:that.address.id,channelId:channelIds}).then(function(res){
                     if(res.data.code==200){
+                        window.history.go(-1)
                    // that.datas=res.data.datas
                    // that.picItems=that.datas.picItems[0]
                     }

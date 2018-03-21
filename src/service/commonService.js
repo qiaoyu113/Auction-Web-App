@@ -176,6 +176,10 @@ export const commonService = {
     getOrderCollect:function(params,id){
         return axios.get('/auctions/'+ id +'/collect' + this.getParam(params));
     },
+    /* 退出登录  */
+    deleteTokens: function () {
+        return axios.delete('/tokens')
+    },
 
 
 

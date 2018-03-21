@@ -24,6 +24,7 @@
                 <div class="infoList">短信验证码<input class="codeInp" type="number" placeholder="请输入" v-model="inputNum"/><div class="code" @click="getcode">获取验证码<span v-if="codeShow" style="margin:0;">({{timeOver}})</span></div></div>
             </div>
             <!--保存-->
+             <div class="saves" v-if="htmlx">{{htmlx}}</div>
             <div class="save" @click="save">保存</div>
         </div>
     </div>
@@ -46,6 +47,7 @@
                 codeShow:false,
                 kaptchaValue:'',
                 img:'',
+                htmlx:'',
             }
         },
         computed: {
@@ -104,7 +106,7 @@
                         if(that.timeOver === 0){
                             // clearInterval(time)
                             that.codeShow = false;
-                            that.timeOver = 60;
+                            that.timeOver = 90;
                         }else{
                             that.timeOver = that.timeOver -= 1
                         }
@@ -114,6 +116,8 @@
                  commonService.getNewPhone({phone:that.inputPhone,type:6,kaptchaKey:that.img.kaptchaKey,kaptchaValue:that.kaptchaValue}).then(function(res){
                     if(res.data.code == 200){
                      // that.$router.go(-1);
+                    }else{
+                      that.htmlx=res.data.message
                     }
               })
             },
@@ -297,6 +301,17 @@
             .infoList:last-child{
                 border-bottom: none;
             }
+        }
+        .saves{
+           width:100%;
+           height:0.67rem;
+           line-height:0.67rem;
+            color:#fff;
+            background:linear-gradient(70deg, #DC704A, #F44EA0);
+            text-align: center;
+            font-size:12px;
+            position:fixed;
+            bottom:1.2rem;
         }
         .save{
             width:100%;
