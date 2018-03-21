@@ -227,14 +227,13 @@ import {commonService} from '../../service/commonService.js'
                     that.htmlx=''
                     let money = that.money * 100
                                     // orderNo:'974154167146647552'
-               commonService.postForms({channelId:'OFFLINE_BANK',lastNum:that.lastNum,userBankDetail:that.userBankDetail,userBankCardNo:that.userBankCardNo,phone:that.phone,type:1,userName:that.name,amount:money,bankId:that.bankCardId}).then(function(res){
+               commonService.postForms({channelId:'OFFLINE_BANK',lastNum:that.lastNum,userBankDetail:that.userBankDetail,userBankCardNo:that.userBankCardNo,phone:that.phone,type:1,userBankName:that.name,amount:money,bankId:that.bankCardId}).then(function(res){
                 // console.log(res)
                     if(res.data.message=='success'){
                        that.oddNumbers=res.data.datas 
                        that.index=3
                        that.getForms()
                     }else{
-
                         that.htmlx=res.data.message
                     }
                     

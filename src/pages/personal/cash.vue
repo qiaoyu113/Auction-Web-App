@@ -30,10 +30,7 @@
             <div class="pay" @click="getIndex(1)" v-if="wxLogin==true">
                 <div :class="index==1 ? 'check' : 'check1'"><i class="iconfont icon-duihao"></i></div>
                     <i :class="index==1 ? 'background1' : ''" class="iconfont icon-icon_weixinzhifu"></i>
-                    <div class="infoWexin">
-                        <div class="span1">微信支付</div>
-                        <div class="span2">单笔最高5,000-50,000 CNY</div>
-                    </div>
+                    <div class="infoAlipay">微信支付</div>
             </div>
             <div class="pay" @click="getIndex(2)" v-if="wxLogin==false">
                 <div :class="index==2 ? 'check' : 'check1'"><i class="iconfont icon-duihao"></i></div>
@@ -145,7 +142,6 @@
                        commonService.postForms({amount:money,type:2,channelId:'WX_JSAPI'}).then(function(res){
                           console.log(res)
                               
-
                        })
 
                     }

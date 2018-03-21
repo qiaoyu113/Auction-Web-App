@@ -177,14 +177,15 @@
                     that.prompt="请同意协议"
                     return false
                 }
-               commonService.postBails({amount:that.money}).then(function(res){
+                let money=that.money * 100
+               commonService.postBails({amount:money}).then(function(res){
                     // that.wallet=res.data.datas.user.wallet
                     if(res.data.code!=200){
                         that.prompt=res.data.message
                         return false
                     }
                     if(that.index==3){
-                  that.$router.push({path:"/rechargeList",query:{money:that.money,index:that.index,orderNo:res.data.datas}})   	
+                     that.$router.push({path:"/rechargeList",query:{money:that.money,index:that.index,orderNo:res.data.datas}})   	
                     }
                     if(that.index == 1){//微信支付
                             let orderNo = res.data.datas;
