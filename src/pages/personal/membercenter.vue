@@ -3,7 +3,7 @@
         组件要小，如遇list，只将item做成组件，其他的都写在页面中
     -->
     <!-- 帮助中心 -->
-    <div class="" id="" v-set-title="title">
+    <div class="membercenter" id="" v-set-title="title">
         
         <div class="header">传家</div>
         <div class="content">
@@ -174,7 +174,7 @@
     /*rem等基本设置都放在base中，不写多个*/
     @import url('../../assets/css/base.less');
     @import url('../../assets/css/icon/iconfont.css');
-    
+    .membercenter{
     .header{
         position: fixed;
         top: 0;
@@ -367,5 +367,6 @@
             }
         }
     }
+}
 </style>
 

@@ -11,7 +11,7 @@
                 <div class='loginEn'>REFUND</div>
                 <div class="loginCn">提现</div>
             </div>
-            <div class="fr">...</div>
+            <div class="fr" @click="Return()">...</div>
         </div>
         <div class="box">
             <div class="info"><span>金额</span>
@@ -88,10 +88,12 @@
         },
         mounted: function() {
         	this.getUsers()
-               this.wxshow()
-           
+            this.wxshow()
         },
         methods: {
+            Return:function(){
+                window.history.go(-1)
+            },
             // 首次加载判断在什么浏览器下打开
              wxshow:function(){
                  let ua = navigator.userAgent.toLowerCase();

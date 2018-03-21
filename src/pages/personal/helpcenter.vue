@@ -3,7 +3,7 @@
         组件要小，如遇list，只将item做成组件，其他的都写在页面中
     -->
     <!-- 帮助中心 -->
-    <div class="" id="" v-set-title="title">
+    <div class="helpcenter" id="" v-set-title="title">
         
         <div class="header">传家</div>
         <div class="content">
@@ -11,7 +11,7 @@
                 <div class='loginEn'>HELP</div>
                 <div class="loginCn">帮助中心</div>
             </div>
-            <div class="fr">...</div>
+            <div class="fr" @click="Return()">...</div>
             <!--按钮-->
             <div class="menu">
                 <div class='font' :class="index==1 ?'checked':''" @click="getIndex(1)">新手帮助</div>
@@ -87,6 +87,9 @@
 
         },
         methods: {
+            Return:function(){
+                window.history.go(-1)
+            },
             getIndex:function(index){
                 let that = this;
                 if(index === 1){
@@ -108,7 +111,7 @@
     /*rem等基本设置都放在base中，不写多个*/
     @import url('../../assets/css/base.less');
     @import url('../../assets/css/icon/iconfont.css');
-    
+    .helpcenter{
     .header{
         position: fixed;
         top: 0;
@@ -186,5 +189,6 @@
             }
         }
     }
+}
 </style>
 

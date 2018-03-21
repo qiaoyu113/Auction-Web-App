@@ -9,9 +9,9 @@
                  <div class="ros_l3">LOT-{{list.auction.groupNo}}</div>
              </div>
              <!-- <img src="../../assets/image/error/ufo_blue_2x.png"/> -->
-             <div class="ros_r"><img :src="picHead + list.auction.picItems[0]"/></div>
+             <div class="ros_r" @click="Router(list.id)"><img :src="picHead + list.auction.picItems[0]"/></div>
              <div class="ros_con">
-                 <p>{{list.auction.auctionStartTime}}</p>
+                 <p>{{list.auction.auctionStartTime | stampFormate}}</p>
                  <p><span>即将开始</span></p>
              </div>
          </div>            
@@ -30,8 +30,6 @@
                 datas:'',
             }
         },
-
-        
         syncData({store}) {
             const that = this;
             return Promise.all([
@@ -59,6 +57,9 @@
            this.getCollect()
         },
         methods: {
+            Router:function(id){
+                that.$router.push({name:'auctionMore',params:{id:id}})
+            },
             getCollect:function(){
             	let that=this;
                  commonService.getCollect({pageNo:1,pageSize:30,status:0}).then(function(res){

@@ -1,5 +1,5 @@
 <template>
-    <div id="home" v-set-title="title">
+    <div id="home" class="mycenter" v-set-title="title">
         <div class="header">
             <div class="headerLeft">
                 <div class="headerEn">{{header.name}}</div>
@@ -29,14 +29,14 @@
             <!--修改密码-->
             <div class="info">
                 <div class="infoList">修改密码<div class="more" @click="changePass"><img src="../../../src/assets/image/mycenter/more.png"/></div></div>
-                <div class="infoList"><i class="iconfont icon-weixin1"></i>微信绑定号<div class="goBind">去绑定</div></div>
+                <div class="infoList"><i class="iconfont icon-weixin1"></i>微信绑定号<div class="goBind" @click="user.wxBind==null || user.wxBind==false">去绑定</div></div>
             </div>
             <!--实名认证-->
             <div class="info">
-                <div class="infoList">实名认证<div class="goBind" @click="realname()">去认证</div></div>
+                <div class="infoList">实名认证<div class="goBind" @click="realname()" v-if="user.realNameStatus!=2">去认证</div></div>
             </div>
             <!--退出-->
-            <div class="back">退出登陆</div>
+            <div class="back" @click="deleteTokens()">退出登陆</div>
         </div>
     </div>
 </template>
@@ -110,7 +110,18 @@
             getUsers:function(){
                 let that=this
                  commonService.getUsers().then(function(res){
+                    console.log(res)
                     that.user=res.data.datas.user
+              })
+
+             },
+             // 退出登录
+             deleteTokens:function(){
+                let that=this
+                 commonService.deleteTokens().then(function(res){
+                    if(res.data.code==200){
+                        that.$router.push({name:'login'})
+                    }
               })
 
              },
@@ -120,6 +131,7 @@
 <style lang="less">
     /*rem等基本设置都放在base中，不写多个*/
     @import url('../../assets/css/base.less');
+    .mycenter{
     .header{
         width:100%;
         height:3.7rem;
@@ -282,5 +294,6 @@
             border-top:1px solid #1A242E;
         }
     }
+}
 </style>
 

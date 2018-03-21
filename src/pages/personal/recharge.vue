@@ -9,8 +9,8 @@
         <div class="content">
             <div class="loginBox">
                 <div class='loginEn'>PAYMENT</div>
-                <div class="loginCn" v-if="money==''">充值</div>
-                <div class="loginCn" v-if="money!=''">保证金充值</div>
+                <!-- <div class="loginCn" v-if="money==''">充值</div> -->
+                <div class="loginCn">充值</div>
             </div>
             <div class="fr" @click='Return()'>...</div>
         </div>
@@ -20,17 +20,16 @@
                
             </div>
             <div class="canshoot">
-            	<p v-if="money==''">可拍金额<span>0CNY</span></p>
-            	<p v-if="money!=''">保证金不可用于支付尾款</p>
+            	<!-- <p v-if="money==''">可拍金额<span>0CNY</span></p> -->
+            	<p>保证金不可用于支付尾款</p>
             </div>
             <div class="bor"></div>
-            <div class="money clearfix" v-if="money==''">
+           <!--  <div class="money clearfix" v-if="money==''">
                 <div class="fl">
                     <p>充值<span>1.000CNY</span>可拍<span>10.000CNY</span>的拍品</p>
                     <p>保证金不可用于支付尾款</p>
                 </div>
-                <!-- <div class="fr" @click="full()">全部提现</div> -->
-            </div>
+            </div> -->
             <div class="pay" @click="getIndex(3)">
                 <div :class="show== true ? 'check' : 'check1'" @click="shows()"><i class="iconfont icon-duihao"></i></div>
                 <!-- <i :class="index==3 ? 'background3' : ''" class="iconfont icon-icon_zhifubao"></i> -->
@@ -40,15 +39,12 @@
                         <a href="javaScript:;">《竞拍规则》</a></div>
                     </div>
             </div>
-            <div class="info"><span>提现方式</span></div>
+            <div class="info"><span>充值方式</span></div>
             <div class="bor"></div>
             <div class="pay" @click="getIndex(1)" v-if="wxLogin==true">
                 <div :class="index==1 ? 'check' : 'check1'"><i class="iconfont icon-duihao"></i></div>
                     <i :class="index==1 ? 'background1' : ''" class="iconfont icon-icon_weixinzhifu"></i>
-                    <div class="infoWexin">
-                        <div class="span1">微信支付</div>
-                        <div class="span2">单笔最高5,000-50,000 CNY</div>
-                    </div>
+                    <div class="infoAlipay">微信支付</div>
             </div>
             <div class="pay" @click="getIndex(2)" v-if="wxLogin==false">
                 <div :class="index==2 ? 'check' : 'check1'"><i class="iconfont icon-duihao"></i></div>

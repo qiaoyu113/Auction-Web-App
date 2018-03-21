@@ -34,7 +34,7 @@
                  	 <div class="v_rows clearfix">
                  	 	 <p class="v_rows_l"><i class="iconfont icon-duihao"></i><span>银行账户</span></p>
                  	 	 <div class="v_rows_con">官方</div>
-                 	 	 <div class="v_rows_r v_Hook" :class="bankCardId==list.id?'v_id':''" @click="bankId(list.id)"><i class="iconfont icon-duihao"></i></div>
+                 	 	 <div class="v_rows_r v_Hook" :class="bankCardId==list.id?'v_id':''" @click="bankId(list.id,list.cardNo)"><i class="iconfont icon-duihao"></i></div>
                  	 </div>
                  	 <div class="v_rows clearfix">
                  	 	<p class="v_rows_l">开户名称</p>
@@ -101,8 +101,9 @@
                 </div>
             </div>
         </div>
+        <div class="footer1t" v-if="htmlx!=''">{{htmlx}}</div>
         <div class="footer1" v-if='index==1||index==2' @click="nextStep">下一步</div>
-        <div class="footer1" v-if='index==3'>完成</div>
+        <div class="footer1" v-if='index==3' @click="Routes()">完成</div>
         
     </div>
 </template>
@@ -132,6 +133,8 @@ import {commonService} from '../../service/commonService.js'
           userBankDetail:'',//开户银行
           userBankCardNo:'',//银行卡号
           bankCardId:'',//官方银行卡id
+          lastNum:'',
+          htmlx:'',
 
       }
     },
@@ -141,6 +144,9 @@ import {commonService} from '../../service/commonService.js'
         this.getBankCards()
     },
     methods: {
+            Routes:function(){
+                  this.$router.push({path:"/myaccount"})   
+            },
             Return:function(){
                 window.history.go(-1)
             },
@@ -172,21 +178,29 @@ import {commonService} from '../../service/commonService.js'
             // },
             nextStep:function(){
                 if(this.index==1){
+                    if(this.bankCardId==''){
+                        this.htmlx="请选择银行"
+                        return false
+                    }
                     this.index=2
+                    this.htmlx=''
                 }else if(this.index==2){
                      this.postForms()
-                    this.index=3
+                
                 }
 
             },
-            bankId:function(id){
+            bankId:function(id,lastNum){
               this.bankCardId=id;
+              this.lastNum=lastNum
+
             },
       
             // 获取银行卡列表
             getBankCards:function(){
                let that = this
                commonService.getBankCards().then(function(res){
+                console.log(res)
                 that.bankCard=res.data.datas
                   // console.log(res)
                  })
@@ -194,12 +208,34 @@ import {commonService} from '../../service/commonService.js'
             //提交申请表
             postForms:function(){
                 let that = this
+                   if(that.name==''){
+                        this.htmlx="请输入汇款人"
+                        return false
+                    }
+                    if(that.userBankDetail==''){
+                        this.htmlx="请输入开户银行"
+                        return false
+                    }
+                    if(that.userBankCardNo==''){
+                        this.htmlx="请输入银行卡号"
+                        return false
+                    }
+                    if(that.phone==''){
+                        this.htmlx="请输入手机号码"
+                        return false
+                    }
+                    that.htmlx=''
+                    let money = that.money * 100
                                     // orderNo:'974154167146647552'
-               commonService.postForms({channelId:'UNIONPAY',userBankDetail:that.userBankDetail,userBankCardNo:that.userBankCardNo,phone:that.phone,type:1,userName:that.name,amount:that.money,bankId:that.bankCardId}).then(function(res){
-                console.log(res)
+               commonService.postForms({channelId:'OFFLINE_BANK',lastNum:that.lastNum,userBankDetail:that.userBankDetail,userBankCardNo:that.userBankCardNo,phone:that.phone,type:1,userName:that.name,amount:money,bankId:that.bankCardId}).then(function(res){
+                // console.log(res)
                     if(res.data.message=='success'){
                        that.oddNumbers=res.data.datas 
+                       that.index=3
                        that.getForms()
+                    }else{
+
+                        that.htmlx=res.data.message
                     }
                     
                  })
@@ -218,7 +254,7 @@ import {commonService} from '../../service/commonService.js'
                 if(that.index === 1){//微信
                     channelIds = 'WX_JSAPI'
                 }else if(that.index === 0){//余额
-                    channelIds = 'NATIVE'
+                    channelIds = 'OFFLINE_BANK'
                 }else{//支付宝
                     channelIds = 'ALIPAY_WAP'
                 }
@@ -643,6 +679,18 @@ import {commonService} from '../../service/commonService.js'
             }
         }
     }
+    .footer1t{
+         width:100%;
+        height:0.67rem;
+        line-height:0.67rem;
+        color:#fff;
+        background:linear-gradient(70deg, #DC704A, #F44EA0);
+        text-align: center;
+        font-size:12px;
+        position:fixed;
+        bottom:1.2rem;
+        
+    }
     .footer1{
         position:fixed;
         bottom:0;
@@ -653,6 +701,7 @@ import {commonService} from '../../service/commonService.js'
         text-align: center;
         line-height: 1.2rem;
         font-size: 15px;
+        background: #fff;
     }
   }
     

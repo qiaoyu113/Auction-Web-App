@@ -38,7 +38,7 @@
                     </el-upload>
                 <div class="hig" v-if="authFrontPic!=''" @click="shuchu()"><i class="iconfont icon-closeicon"></i></div>
                   <p>身份证正面照</p>
-                    <!-- <div class="img"><img src="../../assets/image/myimage/pic.png" alt=""></div> -->
+                    <div class="img" v-if="img1!=''"><img :src="img1" alt=""></div>
                 </div>
                 <div class="z-pic fl">
                   <!-- <i class="iconfont icon-tupian"></i> -->
@@ -53,7 +53,7 @@
                     </el-upload>
                 <div class="hig" v-if="authBackPic!=''" @click="shuchu2()"><i class="iconfont icon-closeicon"></i></div>
                   <p>身份证背面照</p>
-                    <!-- <div class="img"><img src="../../assets/image/myimage/pic.png" alt=""></div> -->
+                    <div class="img" v-if="img2!=''"><img :src="img2" alt=""></div>
                 </div>
             </div>
             <div class="sample" @click="show">照片样例</div>
@@ -67,7 +67,8 @@
             </div>
             <!--登陆和提示-->
             <div class="bottom">
-                <div class="wrong">密码错误</div>
+                <div class="wrong" v-if="prompt!=''">{{prompt}}</div>
+
                 <div class="log" @click="submit">确认认证</div>
             </div>
         </div>
@@ -81,8 +82,8 @@
                     <p class="removeCon">请保持照片清晰，方便审核</p>
                 </div>
                 <div class="picbox clearfix">
-                    <div class="pic"><img v-if="imageUrl" :src="imageUrl"></div>
-                     <div class="pic"><img v-if="imageUrl2" :src="imageUrl2"></div>
+                    <div class="pic"><img src="../../assets/image/error/ufo_blue_2x.png"></div>
+                    <div class="pic"><img src="../../assets/image/error/ufo_blue_2x.png"></div>
                 </div>
                 <div class="font">
                     <span>1.证件正面照</span>
@@ -112,6 +113,10 @@
                 width:'',
                 authFrontPic:'',//正面照片
                 authBackPic:'',//方面照片
+                prompt:'',//提示文字
+                img1:'',
+                img2:'',
+                rz:'',
             }
         },
         components:{
@@ -139,12 +144,15 @@
             },
              pingjie(){
               return "http://api.sundayauction.cn/files/base64?base64Img="+this.base+"&width="+this.width+"&height="+this.height
+            },
+            picHead() {
+                return this.$store.state.picHead
+            },
 
-            }
         },
         mounted: function() {
             // this.shuchu()
-            // this.getAuths()
+            this.getAuths()
         },
         methods: {
             close:function() {
@@ -163,7 +171,20 @@
             },
             // 获取实名认证信息
             getAuths:function(){
+                let that=this
                commonService.getAuths().then(function(res){
+                console.log(res)
+                    if(res.data.code==200){
+                        that.rz=res.data.datas
+                        if(that.rz.authStatus==3){
+                             that.prompt="认证失败，" + that.rz.varifyContent
+                        }else{
+                        that.name=that.rz.authRealName
+                        that.namecard=that.rz.authIdCard
+                        that.img1=that.picHead + that.rz.authFrontPic
+                        that.img2=that.picHead + that.rz.authBackPic
+                        }
+                    }
                     })
             },
             handleAvatarSuccess(res, file) {
@@ -193,9 +214,11 @@
             img.onload = function(){
                 that.width=this.width
                 that.height=this.height
-    commonService.postBase({base64Img:that.base,width:this.width,height:this.height}).then(function(res){
+    commonService.postBase({base64Img:that.base,width:that.width,height:that.height}).then(function(res){
                     if(res.data.code==200){
-                    that.authFrontPic=res.data.datas
+                      that.authFrontPic=res.data.datas
+                    }else{
+                     that.prompt=res.data.message
                     }
                     // that.url='http://test.resource.vjuzhen.com/'+ res.data.datas
            })
@@ -221,7 +244,6 @@
              reader.readAsDataURL(file);
             reader.onload = function(e){
             var img = new Image();
-              // console.log(this.result)
               that.base=this.result
               that.base=that.base.split(',')[1];  
               that.base=window.atob(that.base);  
@@ -253,6 +275,7 @@
             // return isJPG && isLt2M;
           },
           shuchu:function(){
+
             this.imageUrl=''
             this.authFrontPic=''
           },
@@ -264,8 +287,30 @@
           //提交
           submit:function(){
             let that=this;
-            commonService.putAuths({authIdCard:that.namecard,authRealName:that.name,authFrontPic:that.authFrontPic,authBackPic:that.authBackPic}).then(function(res){
 
+            if(that.name==''){
+                 that.prompt="真实姓名不能为空"
+                 return false
+            }
+            if(that.namecard==''){
+                 that.prompt="身份证号不能为空"
+                 return false
+            }
+            if(that.authFrontPic==''){
+                that.prompt="身份证正面照不能为空"
+                return false
+            }
+            if(that.authBackPic==''){
+                that.prompt="身份证反面照不能为空"
+                return false
+            }
+
+            commonService.putAuths({authIdCard:that.namecard,authRealName:that.name,authFrontPic:that.authFrontPic,authBackPic:that.authBackPic}).then(function(res){
+                       if(res.data.code==200){
+                           that.prompt='提交成功正在审核'
+                       }else{
+                        that.prompt=res.data.message;
+                       }
                     // that.url='http://test.resource.vjuzhen.com/'+ res.data.datas
             })
           },
@@ -376,7 +421,7 @@
                     position: absolute;
                     top: 0;
                     left: 0;
-                    z-index: 1;
+                    z-index: 99;
                     height:@size115;
                     width: @size115;
                     img{

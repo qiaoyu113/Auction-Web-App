@@ -14,9 +14,9 @@
                  </div>
                  <div class="ros_l2">{{list.currentPrice}} CNY</div>
                  <div class="ros_l3">{{list.title}}</div>
-                 <div class="ros_l3">{{list.auctionStartTime}}-{{list.no}}</div>
+                 <div class="ros_l3">{{list.auctionStartTime | stampFormate}}-{{list.no}}</div>
              </div>
-             <div class="ros_r"><img :src="picHead + list.picItems[0]"/></div>
+             <div class="ros_r" @click="Router(list.id)"><img :src="picHead + list.picItems[0]"/></div>
              <div class="ros_con"  v-if="list.status=1" @click="jump(list.id)">
                  去支付
              </div>
@@ -24,7 +24,7 @@
                  查看订单
              </div>
              <div class="ros_date">
-                 <p>{{list.mqEndTime}}</p>
+                 <p>{{list.mqEndTime | stampFormate}}</p>
                  <p><span>支付拍品</span></p>
              </div>
          </div>
@@ -50,9 +50,9 @@
 
                  <div class="ros_l2">{{list.currentPrice}} CNY</div>
                  <div class="ros_l3">{{list.title}}</div>
-                 <div class="ros_l3">{{list.auctionStartTime}}-{{list.no}}</div>
+                 <div class="ros_l3">{{list.auctionStartTime | stampFormate}}-{{list.no}}</div>
              </div>
-             <div class="ros_r"><img :src="picHead + list.picItems[0]"/></div>
+             <div class="ros_r" @click="Router(list.id)"><img :src="picHead + list.picItems[0]"/></div>
              <div class="ros_con"  v-if="list.status=1"  @click="jump(list.id)">
                  去支付
              </div>
@@ -60,7 +60,7 @@
                  查看订单
              </div>
              <div class="ros_date">
-                 <p>{{list.mqEndTime}}</p>
+                 <p>{{list.mqEndTime | stampFormate}}</p>
                  <p><span>支付拍品</span></p>
              </div>
            
@@ -87,9 +87,9 @@
 
                  <div class="ros_l2">{{list.currentPrice}} CNY</div>
                  <div class="ros_l3">{{list.title}}</div>
-                 <div class="ros_l3">{{list.auctionStartTime}}-{{list.no}}</div>
+                 <div class="ros_l3">{{list.auctionStartTime | stampFormate}}-{{list.no}}</div>
              </div>
-             <div class="ros_r"><img :src="picHead + list.picItems[0]"/></div>
+             <div class="ros_r" @click="Router(list.id)"><img :src="picHead + list.picItems[0]"/></div>
              <div class="ros_con"  v-if="list.status=1" @click="jump(list.id)">
                  去支付
              </div>
@@ -97,7 +97,7 @@
                  查看订单
              </div>
              <div class="ros_date">
-                 <p>{{list.mqEndTime}}</p>
+                 <p>{{list.mqEndTime | stampFormate}}</p>
                  <p><span>支付拍品</span></p>
              </div>
            
@@ -124,9 +124,9 @@
 
                  <div class="ros_l2">{{list.currentPrice}} CNY</div>
                  <div class="ros_l3">{{list.title}}</div>
-                 <div class="ros_l3">{{list.auctionStartTime}}-{{list.no}}</div>
+                 <div class="ros_l3">{{list.auctionStartTime | stampFormate}}-{{list.no}}</div>
              </div>
-             <div class="ros_r"><img :src="picHead + list.picItems[0]"/></div>
+             <div class="ros_r" @click="Router(list.id)"><img :src="picHead + list.picItems[0]"/></div>
              <div class="ros_con"  v-if="list.status=1" @click="jump(list.id)">
                  去支付
              </div>
@@ -134,7 +134,7 @@
                  查看订单
              </div>
              <div class="ros_date">
-                 <p>{{list.mqEndTime}}</p>
+                 <p>{{list.mqEndTime | stampFormate}}</p>
                  <p><span>支付拍品</span></p>
              </div>
          </div>
@@ -160,9 +160,9 @@
 
                  <div class="ros_l2">{{list.currentPrice}} CNY</div>
                  <div class="ros_l3">{{list.title}}</div>
-                 <div class="ros_l3">{{list.auctionStartTime}}-{{list.no}}</div>
+                 <div class="ros_l3">{{list.auctionStartTime | stampFormate}}-{{list.no}}</div>
              </div>
-             <div class="ros_r"><img :src="picHead + list.picItems[0]"/></div>
+             <div class="ros_r" @click="Router(list.id)"><img :src="picHead + list.picItems[0]"/></div>
              <div class="ros_con"  v-if="list.status=1" @click="jump(list.id)">
                  去支付
              </div>
@@ -170,7 +170,7 @@
                  查看订单
              </div>
              <div class="ros_date">
-                 <p>{{list.mqEndTime}}</p>
+                 <p>{{list.mqEndTime | stampFormate}}</p>
                  <p><span>支付拍品</span></p>
              </div>
          </div>
@@ -224,6 +224,9 @@
 
         },
         methods: {
+            Router:function(id){
+                that.$router.push({name:'auctionMore',params:{id:id}})
+            },
             jump:function(id){
                 let that =this;
         commonService.getCheckOrder({auctionId:id}).then(function(res){
@@ -235,7 +238,8 @@
                         if(status!=6){//订单详情页
                          that.$router.push({path:"/normalorder",query:{id:res.data.datas.orderNo}}) 
                         }else if(status==6){//关闭
-                         that.$router.push({path:"/closeorder",query:{id:res.data.datas.orderNo}}) 
+                         // that.$router.push({path:"/closeorder",query:{id:res.data.datas.orderNo}}) 
+                          that.$router.push({path:"/my/order",query:{auctionId:id}}) 
                         }
                     }
                 })

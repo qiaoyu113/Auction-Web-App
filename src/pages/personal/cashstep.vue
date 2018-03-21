@@ -110,6 +110,10 @@
                     <input type="" placeholder="请输入手机号码" v-model="phone"/>
                     <div class="infoClose" @click='removePhone'><i class="iconfont icon-closeicon"></i></div>
                 </div>
+                <div class="info"><span>图片验证码</span>
+                    <input type="" placeholder="请输入验证码" v-model='kaptchaValue'/>
+                    <div class="infoClose" @click="getKaptchas()"><img :src="img.imageString"/></div>
+                </div>
                 <div class="info"><span>验证码</span>
                     <input type="" placeholder="请输入验证码" v-model='verification'/>
                     <div class="infoClose" @click="getFormssms">获取验证码<i v-if="count!=0">({{count}}s)</i></div>
@@ -121,20 +125,20 @@
                     <div class="infoClose">{{list.no}}</div>
                 </div>
                 <div class="info"><span>提现金额</span>
-                    <div class="infoClose"><span class="span1">{{list.amount}}CNY</span>
+                    <div class="infoClose"><span class="span1">{{list.amount | money}}CNY</span>
                        </div>
                 </div>
                 <div class="info"><span>交易时间</span>
                     <div class="infoClose" v-if="list.applyTime!=null">{{list.applyTime | stampFormate2}}</div>
                 </div>
                 <div class="info"><span>交易种类</span>
-                    <div class="infoClose" v-if="list.channelId=='ALIPAY_MOBILE'">支付宝提现</div>
-                     <div class="infoClose" v-if="list.channelId=='UNIONPAY'">线下提现</div>
+                    <div class="infoClose" v-if="list.channelId=='ALIPAY_WAP'">支付宝提现</div>
+                     <div class="infoClose" v-if="list.channelId=='OFFLINE_BANK'">线下提现</div>
                 </div>
                 <div class="info"><span>提现方式</span>
                     <div class="infoClose">
-                    <span class="span2" v-if="list.channelId=='ALIPAY_MOBILE'">支付宝<br>{{list.channelUser}}</span>
-                    <span class="span2" v-if="list.channelId=='UNIONPAY'">{{list.userBank}}<br>{{list.userBankCardNo.substr(list.userBankCardNo.length-4)}}</span>
+                    <span class="span2" v-if="list.channelId=='ALIPAY_WAP'">支付宝<br>{{list.channelUser}}</span>
+                    <span class="span2" v-if="list.channelId=='OFFLINE_BANK'">{{list.userBank}}<br>{{list.userBankCardNo.substr(list.userBankCardNo.length-4)}}</span>
                     </div>
                 </div>
                 <div class="info"><span>提现金额</span>
@@ -181,12 +185,15 @@ import {commonService} from '../../service/commonService.js'
           userBankProvince:'',//开户行省份
           userBankDetail:'',//开户银行
           htmlx:'',
+          kaptchaValue:'',
+          img:'',
 
       }
     },
     components: {},
     mounted () {
         this.yi()
+        this.getKaptchas()
     },
     methods: {
             Return:function(){
@@ -217,20 +224,62 @@ import {commonService} from '../../service/commonService.js'
                 }
             },
             nextStep:function(){
-                if(this.index==1){
-                    this.index=2
-                }else if(this.index==2){
-                     this.postForms()
-                    this.index=3
+                let that=this
+                if(that.index==1){
+                     if(that.flag==1){
+                         if(that.account==''){
+                            that.htmlx='支付宝账户不能为空'
+                            return false
+                         }
+                         if(that.userName==''){
+                            that.htmlx='姓名不能为空'
+                            return false
+                         }
+                     }else if(that.flag==2){
+                          if(that.userBankName ==''){
+                            that.htmlx='姓名不能为空'
+                            return false
+                         }
+                         if(that.userBank ==''){
+                            that.htmlx='银行不能为空'
+                            return false
+                         }
+                         if(that.userBankCardNo ==''){
+                            that.htmlx='银行卡号不能为空'
+                            return false
+                         }
+                         if(that.userBankProvince ==''){
+                            that.htmlx='开户省市不能为空'
+                            return false
+                         }
+                         if(that.userBankDetail ==''){
+                            that.htmlx='开户银行不能为空'
+                            return false
+                         }
+                     }
+                    that.index=2
+                    that.htmlx=''
+                }else if(that.index==2){
+                     that.postForms()
+              
                 }
 
+            },
+            // 获取图片验证码
+            getKaptchas:function(){
+                let that=this
+                 commonService.getKaptchas().then(function(res){
+                    that.img=res.data.datas
+              })
             },
             //手机验证码
              getFormssms:function(){
              let that = this;
             if(that.count==0){
-                 commonService.getFormssms({phone:that.phone,type:2,idCard:that.namecard,userName:that.userNamew}).then(function(res){
+                 commonService.getFormssms({phone:that.phone,type:7,idCard:that.namecard,realName:that.name,kaptchaKey:that.img.kaptchaKey,kaptchaValue:that.kaptchaValue}).then(function(res){
+                    console.log(res)
                     if(res.data.message!= 'success'){
+                       that.htmlx=res.data.message
                       return false 
                     }else{
                          // 倒计时
@@ -253,19 +302,44 @@ import {commonService} from '../../service/commonService.js'
               })
                }
             },
+            // 提交
             postForms:function(){
                 let that = this
                 let type=''
+                let channelId=''
                 if(that.flag==1){
+                   channelId='OFFLINE_BANK'
                    type=2
                 }else if(that.flag==2){
+                   channelId='ALIPAY_WAP'
                    type=3
                 }
-                 commonService.postForms({channelId:'UNIONPAY',channelUser:that.account,phone:that.phone,type:type,idCard:that.namecard,userName:that.userName,smsCode:that.verification,smsType:7,amount:that.money,realName:that.name,userBankName:that.userBankName,userBank:that.userBank,userBankCardNo:that.userBankCardNo,userBankProvince:that.userBankProvince,userBankDetail:that.userBankDetail}).then(function(res){
+                
+                  if(that.name ==''){
+                    that.htmlx='姓名不能为空'
+                    return false
+                   }
+                   if(that.namecard ==''){
+                    that.htmlx='身份证号码不能为空'
+                    return false
+                   }
+                   if(that.phone ==''){
+                    that.htmlx='手机号码不能为空'
+                    return false
+                   }
+                   if(that.verification ==''){
+                    that.htmlx='验证码不能为空'
+                    return false
+                   }
+
+                   that.htmlx=''
+                   that.index=3
+                let money=that.money * 100
+              
+                 commonService.postForms({channelId:channelId,channelUser:that.account,phone:that.phone,type:type,idCard:that.namecard,userName:that.userName,smsCode:that.verification,smsType:7,amount:money,realName:that.name,userBankName:that.userBankName,userBank:that.userBank,userBankCardNo:that.userBankCardNo,userBankProvince:that.userBankProvince,userBankCity:null,userBankDetail:that.userBankDetail}).then(function(res){                    //市
                     console.log(res)
                     if(res.data.message=='success'){
                        that.oddNumbers=res.data.datas 
-                 // setInterval(() => {
                        that.getForms()
                     // }, 1000)
                     }else{
@@ -276,6 +350,7 @@ import {commonService} from '../../service/commonService.js'
              getForms:function(){
                 let that = this;
                  commonService.getForms(that.oddNumbers).then(function(res){
+                    console.log(res)
                     that.list=res.data.datas
                     
                  })
@@ -361,6 +436,7 @@ import {commonService} from '../../service/commonService.js'
                     margin-right: 0.2rem;
                     font-size: @size12;
                     padding-top: @size1;
+
                 }
         }
         .state{
@@ -577,6 +653,9 @@ import {commonService} from '../../service/commonService.js'
                 font-size: @size12;
                 padding-top: @size1;
                 box-sizing: border-box;
+                img{
+                    height: 100%;
+                }
                 .span1{
                     font-size: @size12;
                     font-weight: bold;
