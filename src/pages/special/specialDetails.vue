@@ -10,9 +10,9 @@
             <span class="span1">
                 <img src="../../assets/image/mycenter/icon2.png"/>
             </span>
-            <span class="span2">
-                <img v-if="!collect" src="../../assets/image/mycenter/icon1.png"/>
-                <img v-if="collect" src="../../assets/image/mycenter/icon4.png"/>
+            <span class="span2" @click="goMy()">
+                <img src="../../assets/image/mycenter/icon1.png"/>
+                <!--<img v-if="collect" src="../../assets/image/mycenter/icon4.png"/>-->
             </span>
         </div>
         <div id="mescroll" class="mescroll">
@@ -71,9 +71,9 @@
                         <div class="sellList" @click="sellListGo(list.id)" v-for="list in auctionDetail">
                             <div class="pic">
                                 <img :src="$store.state.picHead + list.picItems[0]"/>
-                                <div class="money">{{reversedNum(list.currentPrice)}}CYN</div>
+                                <div class="money">{{reversedNum(list.currentPrice)}} CYN</div>
                                 <div class="title">{{list.title}}</div>
-                                <div class="number">{{list.completeNo}}</div>
+                                <div class="number">LOT-{{list.completeNo}}</div>
                             </div>
                             <div class="date">
                                 <!--收藏图标-->
@@ -342,6 +342,11 @@
             sellListGo(id){
                 let that = this;
                 that.$router.push({name:'auctionMore',params:{id:id}})
+            },
+            //跳我的
+            goMy(){
+                let that = this;
+                that.$router.replace({name:'my'})
             }
         }
     }

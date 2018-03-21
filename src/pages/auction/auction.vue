@@ -6,9 +6,9 @@
             <span class="span1">
                 <img src="../../assets/image/mycenter/icon2.png"/>
             </span>
-            <span class="span2">
-                <img v-if="!hasCollect" src="../../assets/image/mycenter/icon4.png"/>
-                <img v-if="hasCollect" src="../../assets/image/mycenter/icon4.png"/>
+            <span class="span2" @click="goMy()">
+                <img src="../../assets/image/mycenter/icon1.png"/>
+                <!--<img v-if="hasCollect" src="../../assets/image/mycenter/icon4.png"/>-->
             </span>
         </div>
         <div id="mescroll" class="mescroll content">
@@ -56,8 +56,7 @@
                             <div class="helpCenter">
                                 <span class="fl">帮助中心</span>
                                 <div class="fr2 iconfont icon-daiquanquandetanhao"></div>
-                                <a class="fr">查看如何参加拍卖</a>
-                                <!--<a class="fr" v-if="details.auctionStatus === 2">查看如何参加拍卖</a>-->
+                                <a class="fr" @click="goRule()">查看相应竞拍规则</a>
                             </div>
                         </div>
                     </div>
@@ -69,9 +68,9 @@
                         <div class="sellList" v-if="specialist.length != 0" @click="sellListGo(list.id)" v-for="list in specialist">
                             <div class="pic">
                                 <img :src="$store.state.picHead + list.picItems[0]"/>
-                                <div class="money">￥{{list.currentPrice}}</div>
+                                <div class="money">{{reversedNum(list.currentPrice)}} CNY</div>
                                 <div class="title">{{list.title}}</div>
-                                <div class="number">{{list.completeNo}}</div>
+                                <div class="number">LOT-{{list.completeNo}}</div>
                             </div>
                             <div class="date">
                                 <!--收藏图标-->
@@ -248,7 +247,7 @@
             </div>
         </div>
         <div class="infomation bground3 clearfix" v-else-if="details.auctionStatus === 3 && details.userId != userId">
-            <div class="learnMore fl" @click="lookMore()">出价记录</div>
+            <div class="learnMore fl" @click="lookMore()">出价记录{{details.offerNum}}</div>
             <div class="value fl">当前价格 {{reversedNum(details.currentPrice)}} CNY</div>
             <div class="success fr">
                 拍品成交
@@ -260,7 +259,7 @@
             </div>
         </div>
         <div class="infomation bground3 clearfix" v-else-if="details.auctionStatus === 3 && details.userId == userId && details.doneBuy == '1'">
-            <div class="learnMore fl" @click="lookMore()">出价记录</div>
+            <div class="learnMore fl" @click="lookMore()">出价记录{{details.offerNum}}</div>
             <div class="value fl">当前价格 {{reversedNum(details.currentPrice)}} CNY</div>
             <span class="warn">支付</span>
             <div class="time fr">
@@ -293,6 +292,10 @@
                 <span class="price">{{reversedNum(bidPrice)}} CNY</span>
                 <span class="btn2" @click="addPrice()">+</span>
             </div>
+            <!--<div class="value">-->
+                <!--<span class='label'>保证金</span>-->
+                <!--<span class="price2">{{reversedNum(deposit)}} CNY</span>-->
+            <!--</div>-->
             <!--收藏状态-->
             <div class="r-icon" @click="collectBtn()">
                 <img v-if="hasCollect" src="../../assets/image/mycenter/collect.png"/>
@@ -358,10 +361,11 @@
                 <div class="pay" @click="getIndex(1)" v-if="wxShow">
                     <div :class="index==1 ? 'check' : 'check1'"><i class="iconfont icon-duihao"></i></div>
                     <i :class="index==1 ? 'background1' : ''" class="iconfont icon-icon_weixinzhifu"></i>
-                    <div class="infoWexin">
-                        <div :class="index==1 ? 'span3' : 'span1'">微信支付</div>
-                        <div class="span2">单笔最高5,000-50,000 CNY</div>
-                    </div>
+                    <!--<div class="infoWexin">-->
+                        <!--<div :class="index==1 ? 'span3' : 'span1'">微信支付</div>-->
+                        <!--&lt;!&ndash;<div class="span2">单笔最高5,000-50,000 CNY</div>&ndash;&gt;-->
+                    <!--</div>-->
+                    <div  :class="index==1 ? 'infoAlipay2' : 'infoAlipay'">微信支付</div>
                 </div>
                 <div class="pay" @click="getIndex(2)" v-if="!wxShow">
                     <div :class="index==2 ? 'check' : 'check1'"><i class="iconfont icon-duihao"></i></div>
@@ -578,12 +582,24 @@
             getListData:function(pageNum,pageSize,successCallback,errorCallback) {
                 //延时一秒,模拟联网
                 const that = this;
-                commonService.putInsertion({businessType:1}).then(function(res){
-
+                commonService.putInsertion({businessType:1}).then(function(res){})
+                //查看最高价和是否缴纳保证金
+                commonService.getHasCheck({auctionId:that.id}).then(function(res){
+                    console.log(res)
                 })
                 commonService.getAuction({id:that.id},that.id).then(function(res){
                     if(res.data.code === 200){
                         that.details = res.data.datas;
+                        if(that.details.basePrice === 0){
+                            that.deposit = '300.00'
+                        }else{
+                            if(that.details.basePrice <= 10000){
+                                that.deposit = '10.00'
+                            }else{
+                                let deposit = parseInt(that.details.basePrice * 0.1);
+                                that.deposit = deposit.toString() + '.00'
+                            }
+                        }
                         let startTime = that.details.auctionStartTime
                         that.details.auctionStartTime  = common.getFormatOfDate(that.details.auctionStartTime,'yyyy-MM-dd')
                         let auctionEndTime = that.details.auctionEndTime
@@ -690,7 +706,6 @@
                                 }
                             },1000);
                         }
-
                         that.img = res.data.datas.picItems;
                         that.$nextTick(function () {
                             that.onswiper();
@@ -866,27 +881,12 @@
                         })
                     };
                     overscroll(document.querySelector('.bidRecord'));
-//                    let cc = document.querySelector('.bidRecord');
-//                    cc.addEventListener('touchmove', function(evt) {
-//                        console.log(evt)
-//                        if(cc.offsetHeight < cc.scrollHeight){
-//                            evt._isScroller = true
-//                        }else{
-//                            alert('到底')
-//                        }
-//
-//                    })
                     document.body.addEventListener('touchmove', function(evt) {
                         if(!evt._isScroller) {
                             evt.preventDefault()
                         }
                     })
                 });
-//                commonService.getUsers().then(function(res){
-//                    if(res.data.code === 200){
-//                        that.useId = res.data.datas.user.id;
-//                    }
-//                })
                 commonService.getAuctionPrice({pageNo:that.page2.num,pageSize:50,auctionId:that.id}).then(function(res){
                     if(res.data.code === 200){
                         that.pricerecord = res.data.datas.datas;
@@ -994,6 +994,7 @@
                                 that.userWallet = userWallet.toString() + '.00';
                             }
                             that.dis2Show = true;
+                            bidPrice = that.details.basePrice
                             if(bidPrice === 0){
                                 that.deposit = '300.00'
                             }else{
@@ -1222,6 +1223,16 @@
                        that.hintText = '支付失败';
                    }
                 })
+            },
+            //跳我的
+            goMy(){
+                let that = this;
+                that.$router.replace({name:'my'})
+            },
+            //跳查看规则
+            goRule(){
+                let that = this;
+                that.$router.replace({name:'my'})
             }
         },
         watch: {
@@ -1963,10 +1974,10 @@
                         top: -3px;
                         font-size: 35px;
                         line-height: 40px;
-                        color: red;
+                        color: #E85800;
                     }
                     .label{
-                        font-size: 10px;
+                        font-size: 12px;
                     }
                     .price{
                         font-size: 11px;
@@ -2108,17 +2119,17 @@
                         text-align: left;
                         float: left;
                         margin-left: @size10;
-                        margin-top: 17px;
+                        margin-top: 0.39rem;
                         color: rgb(129, 135, 140);
-                        font-size: 15px;
+                        font-size: 13px;
                     }
                     .infoAlipay2{
                         text-align: left;
                         float: left;
                         margin-left: @size10;
-                        margin-top: 17px;
+                        margin-top: 0.39rem;
                         color: #000000;
-                        font-size: 15px;
+                        font-size: 13px;
                     }
                 }
 
@@ -2240,12 +2251,19 @@
                         color: red;
                     }
                     .label{
-                        font-size: 10px;
+                        font-size: 12px;
                     }
                     .price{
                         font-size: 11px;
                         width: 2.68rem;
                         font-weight: bold;
+                    }
+
+                    .price2{
+                        font-size: 14px;
+                        width: 2.68rem;
+                        font-weight: bold;
+                        color:#E85800;
                     }
                 }
                 .worthy{
@@ -2423,7 +2441,7 @@
                 height: @size15;
                 border: 1px solid white;
                 border-radius:3px;
-                font-size:  9px;
+                font-size:  12px;
                 color: white;
                 line-height: @size15;
                 margin:@size10 @size10 @size10 0.5rem;
@@ -2569,12 +2587,18 @@
                     float: right;
                 }
                 .label{
-                    font-size: 9px;
+                    font-size: 12px;
                 }
                 .price{
                     font-size: 14px;
                     width: 2.68rem;
                     font-weight: bold;
+                }
+                .price2{
+                    font-size: 14px;
+                    width: 2.68rem;
+                    font-weight: bold;
+                    color:#E85800;
                 }
             }
             .r-icon{
@@ -2596,7 +2620,7 @@
             }
             .offer{
                 float: right;
-                width: 3.2rem;
+                width: 3.1rem;
                 height: 100%;
                 box-sizing: border-box;
                 border-left:1px solid rgb(205, 212, 220);

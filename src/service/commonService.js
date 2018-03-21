@@ -271,6 +271,10 @@ export const commonService = {
     putInsertion:function (params) {
         return axios.put('/statistics',qs.stringify(params))
     },
+    /* 是否缴纳保证金 */
+    getHasCheck:function(params){
+        return axios.get('/auctions/check' + this.getParam(params))
+    },
 
 
 

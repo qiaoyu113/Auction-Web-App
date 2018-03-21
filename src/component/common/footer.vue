@@ -23,10 +23,22 @@
 	<!--</div>-->
 	<div class="footer">
         <ul class="clearfix">
-            <li class="fl" @click="checked(0)"><i :class="index == 0 ? 'iconfont icon-shouyetianchong check' : 'iconfont icon-shouyetianchong'"></i></li>
-            <li class="fl" @click="checked(1)"><i :class="index == 1 ? 'iconfont icon-zhishitianchong check' : 'iconfont icon-zhishitianchong'"></i></li>
-            <li class="fl" @click="checked(2)"><i :class="index == 2 ? 'iconfont icon-wenzhangtianchong check' : 'iconfont icon-wenzhangtianchong'"></i></li>
-            <li class="fl" @click="checked(3)"><i :class="index == 3 ? 'iconfont icon-wodetianchong check' : 'iconfont icon-wodetianchong'"></i></li>
+            <li class="fl" @click="checked(0)">
+                <img v-if="index == 0" src="../../assets/image/mycenter/c1.png"/>
+                <img v-if="index != 0" src="../../assets/image/mycenter/i1.png"/>
+            </li>
+            <li class="fl" @click="checked(1)">
+                <img v-if="index == 1" src="../../assets/image/mycenter/c2.png"/>
+                <img v-if="index != 1" src="../../assets/image/mycenter/i2.png"/>
+            </li>
+            <li class="fl" @click="checked(2)">
+                <img v-if="index == 2" src="../../assets/image/mycenter/c3.png"/>
+                <img v-if="index != 2" src="../../assets/image/mycenter/i3.png"/>
+            </li>
+            <li class="fl" @click="checked(3)">
+                <img v-if="index == 3" src="../../assets/image/mycenter/c4.png"/>
+                <img v-if="index != 3" src="../../assets/image/mycenter/i4.png"/>
+            </li>
         </ul>
     </div>
 </template>
@@ -111,9 +123,10 @@
         bottom:0;
         width: @size375;
         height: 1.2rem;
-		background: rgb(249,248,243);
+		background: #ffffff;
 		box-sizing: border-box;
-		border-top:1px solid rgb(53, 60, 70); 
+		border-top:1px solid rgb(53, 60, 70);
+        z-index:100;
         ul{
             li{
                 width: 25%;
@@ -124,6 +137,11 @@
                     font-size: @size20;
                     color:rgb(168, 174, 180);
                     border: none;
+                }
+                img{
+                    width:0.9rem;
+                    height:0.9rem;
+                    margin-top:0.1rem;
                 }
             }
             .check{
