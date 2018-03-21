@@ -263,7 +263,14 @@ export const commonService = {
     getCheckOrder: function (params) {
         return axios.get('/auctions/checkOrder' + this.getParam(params))
     },
-
+    /* 增加浏览记录 */
+    postFootPrint: function (params) {
+        return axios.post('/users/footPrint',qs.stringify(params))
+    },
+    /* 插入统计数据 */
+    putInsertion:function (params) {
+        return axios.put('/statistics',qs.stringify(params))
+    },
 
 
 

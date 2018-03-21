@@ -34,7 +34,9 @@
                             <div class="sell-int">
                                 <div class="time">{{EndTime}}</div>
                                 <div class="title">{{details.name}}</div>
-                                <div class="info">{{overTime}} 结束</div>
+                                <div class="info" v-if="details.auctionStatus === 2">{{overTime}} 结束</div>
+                                <div class="info" v-if="details.auctionStatus === 1">{{startTime}} 开始</div>
+                                <div class="info" v-if="details.auctionStatus === 3">成交件数: {{details.doneNum}}</div>
                                 <div class="state" v-if="details.auctionStatus === 2">
                                     <!--<div  class="span1" :class="getBgcolor(details.auctionStatus)">-->
                                         <!--<div class="xian"></div>-->
@@ -69,7 +71,7 @@
                         <div class="sellList" @click="sellListGo(list.id)" v-for="list in auctionDetail">
                             <div class="pic">
                                 <img :src="$store.state.picHead + list.picItems[0]"/>
-                                <div class="money">￥{{list.currentPrice}}</div>
+                                <div class="money">{{reversedNum(list.currentPrice)}}CYN</div>
                                 <div class="title">{{list.title}}</div>
                                 <div class="number">{{list.completeNo}}</div>
                             </div>
@@ -135,7 +137,12 @@
                 collects:'',//拍品列表数据
                 auctionDetail:[],
                 isShowNoMore:false,
-                collect:false
+                collect:false,
+                // 计算
+                reversedNum: function (num) {
+                    // `this` 指向 vm 实例
+                    return common.format_number(num)
+                }
             }
         },
         components:{'special-more':specialmore},
@@ -209,6 +216,9 @@
             getListData:function(pageNum,pageSize,successCallback,errorCallback) {
                 //延时一秒,模拟联网
                 const that = this;
+                commonService.putInsertion({businessType:2}).then(function(res){
+
+                })
                 commonService.getAuctionMarketsList({id:that.id},that.id).then(function(res){
                     if(res.data.code === 200){
                         that.details = res.data.datas;
@@ -423,11 +433,12 @@
                             height: 3.47rem;
                         }
                         .money {
-                            font-size: 15px;
+                            font-size: 14px;
                             padding-top: @size15;
+                            font-weight: 500;
                         }
                         .title {
-                            font-size: 14px;
+                            font-size: 12px;
                             color: rgb(133, 133, 133);
                             padding-top: @size1;
                             overflow: hidden;
@@ -435,7 +446,7 @@
                             text-overflow:ellipsis;
                         }
                         .number {
-                            font-size: 12px;
+                            font-size: 10px;
                             color: rgb(133, 133, 133);
                             padding: 0 0 @size25 0;
                             overflow: hidden;
@@ -579,17 +590,19 @@
                 position: relative;
                 overflow: hidden;
                 .sellicon1{
-                    width:0.16rem;
-                    height:0.16rem;
+                    width:0.15rem;
+                    height:0.15rem;
                     float:right;
-                    border: 0.06rem solid #A6A9AF;
-                    margin-right:10px;
+                    border: 0.05rem solid #A6A9AF;
+                    margin-right:0.1rem;
                     margin-top:0.06rem;
                 }
                 .font{
                     font-size:10px;
                     float:right;
-                    margin-right:10px;
+                    margin-right:0.2rem;
+                    font-weight:500;
+                    line-height:0.38rem;
                     color:#A6A9AF;
                 }
                 .sellicon2{
@@ -603,9 +616,9 @@
                     /*margin-right:10px;*/
                     /*margin-top:0.04rem;*/
                     img{
-                        width: 0.4rem;
-                        height: 0.4rem;
-                        margin-right: 0.1rem;
+                        width: 0.36rem;
+                        height: 0.36rem;
+                        margin-right: 0.04rem;
                     }
                     .icon{
                         width: 0;
@@ -641,7 +654,7 @@
             }
             .sell-content{
                 box-sizing: border-box;
-                padding: @size20;
+                padding: 0.26rem 0.5333rem 0 0.5333rem;
                 .sell-html{
                     margin-top:0.2rem;
                     img{
@@ -663,17 +676,18 @@
                         color:rgb(133, 133, 133);
                     }
                     .info{
-                        font-size: 9px;
-                        padding-top: @size25;
+                        font-size: 10px;
+                        padding-top: 0.4rem;
                         padding-bottom: @size25;
                         color:rgb(133, 133, 133);
                     }
                     .state{
-                        font-size: @size10;
+                        font-size: 10px;
                         text-align: left;
                         color:rgb(133, 133, 133);
                         overflow: hidden;
                         margin-bottom:0.1rem;
+                        line-height:0.46rem;
                         img{
                             width: @size15;
                             height: @size15;
@@ -682,7 +696,7 @@
                             margin-top:0.03rem;
                         }
                         span{
-                            font-size: @size10;
+                            font-size: 10px;
                         }
                         .span1 {
                             width: @size15;
@@ -737,7 +751,7 @@
                         }
                     }
                     .sta-over{
-                        font-size: 9px;
+                        font-size: 10px;
                         text-align: left;
                         color: rgb(133, 133, 133);
                     }

@@ -97,6 +97,21 @@ export const common = {
            that.$store.state.toolBox.redirect_uri.params = that.$route.params;
            return 0;
         }
-    }
+    },
+    /*token解析*/
+    packageUserInfo (info) {
+        let that = this
+        let Base64 = require('js-base64').Base64;
+        let obj = eval('('+ Base64.decode(info) +')');
+        return obj
+    },
+    //转换数字加逗号
+    format_number(n){
+        let b=parseInt(n).toString();
+        let len=b.length;
+        if(len<=3){return b;}
+        let r=len%3;
+        return r>0?b.slice(0,r)+","+b.slice(r,len).match(/\d{3}/g).join(","):b.slice(r,len).match(/\d{3}/g).join(",");
+    },
 }
 export default {common}

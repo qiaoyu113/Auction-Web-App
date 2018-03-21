@@ -6,13 +6,14 @@
                 <h1>{{str.title}}</h1>
                 <div class="t-title">{{str.subTitle}}</div>
                 <div class="time">{{str.smTitle}}</div>
-                <i><a :href="str.url">. . .</a></i>
+                <i></i>
             </div>
         </div>
     </div>
 </template>
 
 <script>
+    import {commonService} from '../../service/commonService.js'
   export default {
     props: ['str'],
     data () {
@@ -23,12 +24,18 @@
     },
     components: {},
     mounted () {
-
+        this.Insertion()
     },
     methods: {
+        Insertion(){
+            let that = this;
+            commonService.putInsertion({businessType:5}).then(function(res){
+
+            })
+        },
         goDetails(id){
             let that = this;
-            that.$router.push({name:'specialinfo',query:{id:id}})
+            that.$router.push({name:'specialinfoMore',params:{id:id}})
         }
     }
   }
@@ -66,13 +73,8 @@
             box-sizing: border-box;
             padding-right: 3px;
             padding-left:3px;
-            background: rgb(53,60,70);
-            a{
-                color: white;
-                font-size:@size15;
-                line-height: @size8;
-                font-weight: bold;
-            }
+            background: url("../../assets/image/mycenter/more2.png")no-repeat;
+            background-size:100% 100%;
         }
         h1{
             width:80%;
@@ -81,8 +83,8 @@
             white-space: nowrap;
             text-overflow:ellipsis;
             padding-top: 1.2rem;
-            font-size: 24px;
-            font-weight: 400;
+            font-size: 20px;
+            font-weight: 500;
             color: rgb(255, 255, 255);
         }
         .t-title{
@@ -92,13 +94,13 @@
             white-space: nowrap;
             text-overflow:ellipsis;
             color: rgb(255, 255, 255);
-            font-size: 14px;
+            font-size: 13px;
             font-weight: 400;
             margin-top:@size2;
         }
         .time{
             padding-top: @size14;
-            font-size: 14px;
+            font-size: 12px;
             color: rgb(255, 255, 255);
         }
     }

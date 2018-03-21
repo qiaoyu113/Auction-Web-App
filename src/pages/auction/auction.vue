@@ -1,6 +1,6 @@
 <template>
     <div id="auction" v-set-title="title">
-        <div class="header">传家</div>
+        <!--<div class="header">传家</div>-->
         <div class="nav">
             <span class="back" @click="back()"><i class="iconfont icon-fanhui"></i></span>
             <span class="span1">
@@ -26,7 +26,7 @@
                             </div>
                         </div>
                         <div class="sell-information">
-                            <div class="font">{{details.readNum}}人</div>
+                            <div class="font">{{details.originNum}}人</div>
                             <div class="sellicon2">
                                 <img src="../../assets/image/mycenter/icon3.png"/>
                             </div>
@@ -119,18 +119,24 @@
                 <h2>ASSISTANCE</h2>
                 <p>客户服务</p>
             </div>
-            <div class="serviceList">
-                <img src="../../assets/image/mycenter/t1.png"/>
-                <p>电话委托</p>
-            </div>
-            <div class="serviceList">
-                <img src="../../assets/image/mycenter/t2.png"/>
-                <p>客服服务</p>
-            </div>
-            <div class="serviceList">
-                <img src="../../assets/image/mycenter/t3.png"/>
-                <p>私恰</p>
-            </div>
+            <a href="tel:15801619600">
+                <div class="serviceList">
+                    <img src="../../assets/image/mycenter/t1.png"/>
+                    <p>电话委托</p>
+                </div>
+            </a>
+            <a href="tel:15801619600">
+                <div class="serviceList">
+                    <img src="../../assets/image/mycenter/t2.png"/>
+                    <p>客服服务</p>
+                </div>
+            </a>
+            <a href="tel:15801619600">
+                <div class="serviceList">
+                    <img src="../../assets/image/mycenter/t3.png"/>
+                    <p>私恰</p>
+                </div>
+            </a>
             <div class="serviceWX">
                 <img src="../../assets/image/mycenter/wx.png"/>
                 <p>联系微信客服</p>
@@ -148,7 +154,7 @@
                     <div class="pic fl"><img :src="$store.state.picHead + details.picItems[0]" alt=""></div>
                     <div class="info fl">
                         <div class="tit">起拍价格</div>
-                        <div class="price">{{details.basePrice}} CNY</div>
+                        <div class="price">{{reversedNum(details.basePrice)}} CNY</div>
                         <div class="title">{{details.title}}</div>
                         <div class="time">{{details.auctionStartTime}}</div>
                     </div>
@@ -156,8 +162,8 @@
                      1.未开始 2.进行中 3.已结束 4.流拍 5.撤拍 竞拍开始后专场不可删除下架  -->
                     <div class="moneytime fr" v-if="details.auctionStatus === 2">
                         <div class="nowTit">当前价格</div>
-                        <div class="nowPrice" v-if="!offerNumDate">{{details.currentPrice}} CNY</div>
-                        <div class="nowPrice" v-if="offerNumDate">{{details.basePrice}} CNY</div>
+                        <div class="nowPrice" v-if="!offerNumDate">{{reversedNum(details.currentPrice)}} CNY</div>
+                        <div class="nowPrice" v-if="offerNumDate">{{reversedNum(details.basePrice)}} CNY</div>
                         <div class="over">离结束还有</div>
                         <div class="time fr">
                             <div class="fr num">{{s}}</div>
@@ -169,13 +175,13 @@
                             <div class="fr num">{{day}}</div>
                         </div>
                     </div>
-                    <div class="moneytime fr" v-if="details.auctionStatus === 1">
+                    <div class="moneytime fr" v-if="details.auctionStatus === 3">
                         <div class="nowTit">成交价格</div>
-                        <div class="nowPrice">200,000 CNY</div>
+                        <div class="nowPrice">{{reversedNum(details.currentPrice)}} CNY</div>
                         <div class="over">成交时间</div>
                         <div class="time1 fr">
-                            2017.10.25<br/>
-                            23:30:00
+                            {{details.auctionEndTime}}<br/>
+                            {{details.auctionEndTimeHMS}}
                         </div>
                     </div>
                     <div class="moneytime fr" v-if="index==3">
@@ -195,11 +201,11 @@
                 </div>
                 <div class="bidRecord content">
                     <div  v-for="(list,index) in pricerecord">
-                        <div :class="list.userId == useId ? 'reco mycolor': 'reco'">
-                            <div :class="index == 0 ? 'price fl':'price fl line'">{{list.offerAmount}}</div>
-                            <div class="fr">
-                                <div v-if="list.userId != useId" class="who">{{list.userName}}</div>
-                                <div v-if="list.userId == useId" class="who">我的出价</div>
+                        <div :class="list.userId == userId ? 'mycolor': 'reco'">
+                            <div :class="index == 0 ? 'price fl':'price fl line'">{{reversedNum(list.offerAmount)}} CNY</div>
+                            <div :class="index == 0 ? 'fr' : 'fr fr2'">
+                                <div v-if="list.userId != userId" class="who">{{list.userName}}</div>
+                                <div v-if="list.userId == userId" class="who">我的出价</div>
                                 <div class="time">{{list.offerTime}}</div>
                             </div>
                         </div>
@@ -228,9 +234,9 @@
         </div>
         <!--2进行中-->
         <div class="infomation bground2 clearfix" v-else-if="details.auctionStatus === 2">
-            <div class="learnMore fl" @click="lookMore()">出价记录</div>
-            <div class="value fl" v-if="!offerNumDate">当前价格 {{details.currentPrice}}CNY</div>
-            <div class="value fl" v-if="offerNumDate">当前价格 {{details.basePrice}}CNY</div>
+            <div class="learnMore fl" @click="lookMore()">查看更多{{details.offerNum}}</div>
+            <div class="value fl" v-if="!offerNumDate">当前价格 {{reversedNum(details.currentPrice)}} CNY</div>
+            <div class="value fl" v-if="offerNumDate">当前价格 {{reversedNum(details.basePrice)}} CNY</div>
             <div class="time fr">
                 <div class="fr num">{{s}}</div>
                 <div class="fr colon">:</div>
@@ -241,9 +247,9 @@
                 <div class="fr num">{{day}}</div>
             </div>
         </div>
-        <div class="infomation bground3 clearfix" v-else-if="details.auctionStatus === 3">
+        <div class="infomation bground3 clearfix" v-else-if="details.auctionStatus === 3 && details.userId != userId">
             <div class="learnMore fl" @click="lookMore()">出价记录</div>
-            <div class="value fl">当前价格 {{details.currentPrice}}CNY</div>
+            <div class="value fl">当前价格 {{reversedNum(details.currentPrice)}} CNY</div>
             <div class="success fr">
                 拍品成交
             </div>
@@ -253,18 +259,18 @@
                 拍品流拍
             </div>
         </div>
-        <div class="infomation bground3 clearfix" v-else-if="details.auctionStatus === 3">
+        <div class="infomation bground3 clearfix" v-else-if="details.auctionStatus === 3 && details.userId == userId && details.doneBuy == '1'">
             <div class="learnMore fl" @click="lookMore()">出价记录</div>
-            <div class="value fl">当前价格 {{details.currentPrice}}CNY</div>
+            <div class="value fl">当前价格 {{reversedNum(details.currentPrice)}} CNY</div>
             <span class="warn">支付</span>
             <div class="time fr">
-                <div class="fr num">01</div>
+                <div class="fr num">{{s}}</div>
                 <div class="fr colon">:</div>
-                <div class="fr num">02</div>
+                <div class="fr num">{{m}}</div>
                 <div class="fr colon">:</div>
-                <div class="fr num">03</div>
+                <div class="fr num">{{h}}</div>
                 <div class="fr colon"> :</div>
-                <div class="fr num">04</div>
+                <div class="fr num">{{day}}</div>
             </div>
         </div>
         <!--<z-info></z-info>-->
@@ -273,7 +279,7 @@
         <div class="footer" v-if="details.auctionStatus === 1">
             <div class="value">
                 <span class='label'>起拍价格</span>
-                <span class="price">{{bidPrice}}CNY</span>
+                <span class="price">{{reversedNum(bidPrice)}} CNY</span>
             </div>
             <div class="r-icon" @click="collectBtn()">
                 <img v-if="hasCollect" src="../../assets/image/mycenter/collect.png"/>
@@ -284,7 +290,7 @@
         <div class="footer" v-else-if="details.auctionStatus === 2">
             <div class="value">
                 <span :class="noPriceBtn ? 'btn1 nobtn1' : 'btn1'" @click="subtraction()">-</span>
-                <span class="price">{{bidPrice}}CNY</span>
+                <span class="price">{{reversedNum(bidPrice)}} CNY</span>
                 <span class="btn2" @click="addPrice()">+</span>
             </div>
             <!--收藏状态-->
@@ -292,21 +298,26 @@
                 <img v-if="hasCollect" src="../../assets/image/mycenter/collect.png"/>
                 <img v-if="!hasCollect" src="../../assets/image/mycenter/collectNo.png"/>
             </div>
-            <div class="offer" @click="offerPrice()">参与竞拍</div>
+            <div class="offer" @click="offerPrice()" v-if="!BayOK">参与竞拍</div>
+            <div class="offer" @click="offerPrice()" v-if="BayOK">出 价</div>
         </div>
         <!--交易结束的价格-->
         <div class="footer" v-else-if="details.auctionStatus === 3">
             <div class="value">
                 <span class='label'>成交价格</span>
-                <span class="price">{{details.currentPrice}}CNY</span>
+                <span class="price">{{reversedNum(details.currentPrice)}} CNY</span>
             </div>
-            <div class="r-icon"><i class="iconfont icon-duigoudunpai"></i></div>
+            <div class="r-icon" @click="collectBtn()">
+                <img v-if="hasCollect" src="../../assets/image/mycenter/collect.png"/>
+                <img v-if="!hasCollect" src="../../assets/image/mycenter/collectNo.png"/>
+            </div>
+            <div class="goBuy" @click="payOrder()" v-if="details.userId == userId && details.doneBuy == '1'">去支付</div>
         </div>
         <!--流拍-->
         <div class="footer" v-else-if="details.auctionStatus === 4">
             <div class="value">
                 <span class='label'>起拍价格</span>
-                <span class="price">{{details.currentPrice}}CNY</span>
+                <span class="price">{{reversedNum(details.currentPrice)}} CNY</span>
             </div>
             <div class="r-icon" @click="collectBtn()">
                 <img v-if="hasCollect" src="../../assets/image/mycenter/collect.png"/>
@@ -324,7 +335,7 @@
                 <div class="payEn">PAYMENT</div>
                 <div class="payCh">保证金缴纳</div>
                 <div class="remind">
-                    <p class="p1">{{deposit}}CNY</p>
+                    <p class="p1">{{reversedNum(deposit)}} CNY</p>
                     <p class="p2">当前需缴纳保证金金额</p>
                 </div>
                 <div class="pay" v-if="!walletDate">
@@ -424,6 +435,7 @@
                 s:'',
                 offerNumDate:false,//是否有人拍中状态
                 bidPrice:'',//出价
+                bidPrice2:'',//出价
                 isShowNoMore:false,
                 baseDetail:'',
                 arrays: [],
@@ -446,7 +458,16 @@
                 hasCollect:false,
                 noPriceBtn:true,//不能减价
                 ServiceBox:false,
-                dianIndex:''
+                dianIndex:'',
+                BayOK:false,
+                doneBuy:'',//1.未支付。2.已支付。3.违约
+                userId:'',
+                // 计算
+                reversedNum: function (num) {
+                    return common.format_number(num)
+                },
+                auctionEndTime:'',
+                auctionEndTimeHMS:'',
             }
         },
         components:{'z-foot':item,'z-info':info,'z-record':record,'z-payment':payment},
@@ -456,6 +477,7 @@
             that.id = that.$route.params.id;
             that.meScroll()
             that.WebSocketTest()
+            that.isPrint()
             that.checked = window.localStorage.getItem('checked');
             if(that.checked){
                 that.wxpay()
@@ -463,6 +485,10 @@
             let token = window.localStorage.getItem('token');
             if(token != null){
                 that.isCollect();
+                let JWT = token.split('.');
+                let info = JWT[1];
+                let tokenData = common.packageUserInfo(info);
+                that.userId = tokenData.userId
             }else{
 
             }
@@ -484,6 +510,7 @@
                     // 2.有人出价后后台会回调这里
                     stompClient.subscribe('/auction/offerHis/'+ that.id, function(r) {
 //                        console.log(eval('(' + r.body + ')'));
+                        that.details.offerNum ++;
                         let body = eval('(' + r.body + ')');
                         let Price = body.offerAmount/100;
                         that.details.currentPrice = Price.toString() + '.00';
@@ -493,6 +520,7 @@
                         if(that.dis){
                             that.lookMore()
                         }
+                        that.downCallback()
                     });
                 });
             },
@@ -550,14 +578,26 @@
             getListData:function(pageNum,pageSize,successCallback,errorCallback) {
                 //延时一秒,模拟联网
                 const that = this;
+                commonService.putInsertion({businessType:1}).then(function(res){
+
+                })
                 commonService.getAuction({id:that.id},that.id).then(function(res){
                     if(res.data.code === 200){
                         that.details = res.data.datas;
+                        let startTime = that.details.auctionStartTime
                         that.details.auctionStartTime  = common.getFormatOfDate(that.details.auctionStartTime,'yyyy-MM-dd')
+                        let auctionEndTime = that.details.auctionEndTime
+                        that.details.auctionEndTime  = common.getFormatOfDate(auctionEndTime,'yyyy-MM-dd')
+                        that.details.auctionEndTimeHMS  = common.getFormatOfDate(auctionEndTime,'hh:mm:ss')
                         if(that.details.offerNum != 0){
                             that.offerNumDate = false;
+                            that.BayOK = true;
                         }else{
                             that.offerNumDate = true;
+                            that.BayOK = false;
+                        }
+                        if(that.details.auctionStatus == '5'){
+                            that.details.auctionStatus = 3
                         }
                         let price = res.data.datas.basePrice/100;
                         let price2 = res.data.datas.currentPrice/100;
@@ -574,19 +614,83 @@
                         if(that.offerNumDate){
                             that.bidPrice = that.details.basePrice
                         }else{
-                            that.bidPrice = that.details.currentPrice
-                        }
-                        let timeRun = setInterval(function(){
-                            let timestamp = new Date();
-                            let time = that.details.mqEndTime - timestamp;
-                            that.day = parseInt(time / 1000 / 60 / 60 / 24 , 10) < 10 ? '0' + parseInt(time / 1000 / 60 / 60 / 24 , 10) : parseInt(time / 1000 / 60 / 60 / 24 , 10);
-                            that.h =  parseInt(time / 1000 / 60 / 60 % 24 , 10) < 10 ? '0' +  parseInt(time / 1000 / 60 / 60 % 24 , 10) :  parseInt(time / 1000 / 60 / 60 % 24 , 10);
-                            that.m = parseInt(time / 1000 / 60 % 60, 10) < 10 ? '0' +  parseInt(time / 1000 / 60 % 60 , 10) :  parseInt(time / 1000 / 60 % 60 , 10);
-                            that.s = parseInt(time / 1000 % 60, 10) < 10 ? '0' + parseInt(time / 1000 % 60, 10) : parseInt(time / 1000 % 60, 10);
-                            if(time < 0){
-                                clearInterval(timeRun)
+                            if(that.details.currentPrice <= 10000){
+                                that.bidPrice = Number(that.details.currentPrice) + 100
+                            }else if(that.details.currentPrice > 10000 && that.details.currentPrice < 100000){
+                                that.bidPrice = Number(that.details.currentPrice) + 1000
+                            }else if(that.details.currentPrice >= 100000){
+                                that.bidPrice = Number(that.details.currentPrice) + 10000
                             }
-                        },1000);
+                            that.bidPrice = that.bidPrice.toString() + '.00'
+                        }
+                        if(that.details.auctionStatus == '1'){
+                            startTime = Number(startTime);
+                            let timeRun = setInterval(function(){
+                                let timestamp = new Date();
+                                let time = startTime - timestamp;
+                                that.day = parseInt(time / 1000 / 60 / 60 / 24 , 10) < 10 ? '0' + parseInt(time / 1000 / 60 / 60 / 24 , 10) : parseInt(time / 1000 / 60 / 60 / 24 , 10);
+                                that.h =  parseInt(time / 1000 / 60 / 60 % 24 , 10) < 10 ? '0' +  parseInt(time / 1000 / 60 / 60 % 24 , 10) :  parseInt(time / 1000 / 60 / 60 % 24 , 10);
+                                that.m = parseInt(time / 1000 / 60 % 60, 10) < 10 ? '0' +  parseInt(time / 1000 / 60 % 60 , 10) :  parseInt(time / 1000 / 60 % 60 , 10);
+                                that.s = parseInt(time / 1000 % 60, 10) < 10 ? '0' + parseInt(time / 1000 % 60, 10) : parseInt(time / 1000 % 60, 10);
+                                if(time < 0){
+                                    clearInterval(timeRun);
+                                    that.day = '00'
+                                    that.h = '00'
+                                    that.m = '00'
+                                    that.s = '00'
+                                    if(that.details.auctionStatus == '2'){
+                                        that.page.num = 1;
+                                        that.specialist = [];
+                                        that.upCallback()
+                                    }
+                                }
+                            },1000);
+                        }else if(that.details.auctionStatus == '3'){
+                            that.details.mqEndTime = Number(that.details.mqEndTime) + 604800000;
+                            let timeRun = setInterval(function(){
+                                let timestamp = new Date();
+                                let time = that.details.mqEndTime - timestamp;
+                                that.day = parseInt(time / 1000 / 60 / 60 / 24 , 10) < 10 ? '0' + parseInt(time / 1000 / 60 / 60 / 24 , 10) : parseInt(time / 1000 / 60 / 60 / 24 , 10);
+                                that.h =  parseInt(time / 1000 / 60 / 60 % 24 , 10) < 10 ? '0' +  parseInt(time / 1000 / 60 / 60 % 24 , 10) :  parseInt(time / 1000 / 60 / 60 % 24 , 10);
+                                that.m = parseInt(time / 1000 / 60 % 60, 10) < 10 ? '0' +  parseInt(time / 1000 / 60 % 60 , 10) :  parseInt(time / 1000 / 60 % 60 , 10);
+                                that.s = parseInt(time / 1000 % 60, 10) < 10 ? '0' + parseInt(time / 1000 % 60, 10) : parseInt(time / 1000 % 60, 10);
+                                if(time < 0){
+                                    clearInterval(timeRun);
+                                    that.day = '00'
+                                    that.h = '00'
+                                    that.m = '00'
+                                    that.s = '00'
+                                    if(that.details.auctionStatus == '2'){
+                                        that.page.num = 1;
+                                        that.specialist = [];
+                                        that.upCallback()
+                                    }
+                                }
+                            },1000);
+                        }else{
+                            that.details.mqEndTime = Number(that.details.mqEndTime);
+                            let timeRun = setInterval(function(){
+                                let timestamp = new Date();
+                                let time = that.details.mqEndTime - timestamp;
+                                that.day = parseInt(time / 1000 / 60 / 60 / 24 , 10) < 10 ? '0' + parseInt(time / 1000 / 60 / 60 / 24 , 10) : parseInt(time / 1000 / 60 / 60 / 24 , 10);
+                                that.h =  parseInt(time / 1000 / 60 / 60 % 24 , 10) < 10 ? '0' +  parseInt(time / 1000 / 60 / 60 % 24 , 10) :  parseInt(time / 1000 / 60 / 60 % 24 , 10);
+                                that.m = parseInt(time / 1000 / 60 % 60, 10) < 10 ? '0' +  parseInt(time / 1000 / 60 % 60 , 10) :  parseInt(time / 1000 / 60 % 60 , 10);
+                                that.s = parseInt(time / 1000 % 60, 10) < 10 ? '0' + parseInt(time / 1000 % 60, 10) : parseInt(time / 1000 % 60, 10);
+                                if(time < 0){
+                                    clearInterval(timeRun);
+                                    that.day = '00'
+                                    that.h = '00'
+                                    that.m = '00'
+                                    that.s = '00'
+                                    if(that.details.auctionStatus == '2'){
+                                        that.page.num = 1;
+                                        that.specialist = [];
+                                        that.upCallback()
+                                    }
+                                }
+                            },1000);
+                        }
+
                         that.img = res.data.datas.picItems;
                         that.$nextTick(function () {
                             that.onswiper();
@@ -647,6 +751,21 @@
                         })
                     }else{
                         that.$router.replace({name:'none'})
+                    }
+                })
+            },
+            //浏览记录
+            isPrint(){
+                let that = this;
+                let cookiesId = window.localStorage.getItem('cookiesId');
+                let cookieId
+                if(cookiesId == undefined || cookiesId == '' || cookiesId == null){
+                    cookieId = Date.parse(new Date());
+                    cookieId = "zstat" + "-" + cookieId + "-" + Math.round(Math.random() * 3000000000);
+                    window.localStorage.setItem('cookiesId',cookieId);
+                }
+                commonService.postFootPrint({auctionId:that.id,cookiesId:cookieId}).then(function(res){
+                    if(res.data.code === 200){
                     }
                 })
             },
@@ -763,11 +882,11 @@
                         }
                     })
                 });
-                commonService.getUser().then(function(res){
-                    if(res.data.code === 200){
-                        that.useId = res.data.datas.user.id;
-                    }
-                })
+//                commonService.getUsers().then(function(res){
+//                    if(res.data.code === 200){
+//                        that.useId = res.data.datas.user.id;
+//                    }
+//                })
                 commonService.getAuctionPrice({pageNo:that.page2.num,pageSize:50,auctionId:that.id}).then(function(res){
                     if(res.data.code === 200){
                         that.pricerecord = res.data.datas.datas;
@@ -783,16 +902,16 @@
             subtraction(){
                 let that = this;
                 if(that.bidPrice <= 10000){
-                    if(that.bidPrice <= Number(that.details.basePrice) + 100){
+                    if(that.bidPrice <= Number(that.details.basePrice) + 200){
                         if(that.offerNumDate){
-                            that.bidPrice = that.details.basePrice;
+                            that.bidPrice = Number(that.details.basePrice) + 100;
                         }else{
-                            that.bidPrice = that.details.currentPrice
+                            that.bidPrice = Number(that.details.currentPrice) + 100;
                         }
                         that.noPriceBtn = true;
                     }else{
-                        if(that.bidPrice <= Number(that.details.currentPrice) + 100){
-                            that.bidPrice = that.details.currentPrice;
+                        if(that.bidPrice <= Number(that.details.currentPrice) + 200){
+                            that.bidPrice = Number(that.details.currentPrice) + 100;
                             that.noPriceBtn = true;
                         }else{
                             that.bidPrice = parseInt(that.bidPrice)
@@ -861,6 +980,7 @@
             offerPrice(){
                 let that = this;
                 let bidPrice = that.bidPrice * 100;
+//                let bidPrice = that.details.basePrice * 100
                 that.monitor();
                 //冻结保证金
                 commonService.postMyPrice({offerAmount:bidPrice,auctionId:that.id}).then(function(res){
@@ -877,8 +997,12 @@
                             if(bidPrice === 0){
                                 that.deposit = '300.00'
                             }else{
-                                let deposit = that.bidPrice * 0.1;
-                                that.deposit = deposit.toString() + '.00'
+                                if(bidPrice <= 10000){
+                                    that.deposit = '10.00'
+                                }else{
+                                    let deposit = parseInt(that.details.basePrice * 0.1);
+                                    that.deposit = deposit.toString() + '.00'
+                                }
                             }
                             if(that.deposit*1 < that.userWallet*1){
                                 that.walletDate = true;
@@ -1062,6 +1186,9 @@
                         that.hintText = "拍品已出价,不可取消收藏";
                     }else if(res.data.code === 200){//收藏成功
                         that.hasCollect = !that.hasCollect;
+                    }else{
+                        that.dis4Show = true;
+                        that.hintText = res.data.message;
                     }
                 })
             },
@@ -1074,6 +1201,27 @@
             closeService(){
                 let that = this;
                 that.ServiceBox = false;
+            },
+            //已拍中去支付
+            payOrder(){
+                let that = this;
+                commonService.getCheckOrder({auctionId:that.id}).then(function(res){
+                   if(res.data.code === 200){
+                       if(res.data.datas != null){
+                           if(res.data.datas.status != '6'){
+                               let orderNo = res.data.datas.orderNo
+                               that.$router.push({name:'normalorder',query:{id:orderNo}})
+                           }else{
+                               that.$router.push({name:'order',query:{auctionId:that.id}})
+                           }
+                       }else{
+                           that.$router.push({name:'order',query:{auctionId:that.id}})
+                       }
+                   }else{
+                       that.dis4Show = true;
+                       that.hintText = '支付失败';
+                   }
+                })
             }
         },
         watch: {
@@ -1124,7 +1272,7 @@
             border-bottom: 1px solid rgb(53, 60, 70);
             background: rgb(255, 255, 255);
             position: fixed;
-            top: @size45;
+            top: 0;
             z-index: 100;
             .back{
                 line-height: @size35;
@@ -1157,7 +1305,7 @@
             width:100%;
             max-width:10rem;
             position: fixed;
-            top:2.15rem;
+            top: @size35;
             bottom:0;
             left:0;
             right:0;
@@ -1209,6 +1357,7 @@
                 .font{
                     font-size:10px;
                     float:right;
+                    font-weight: 500;
                     margin-right:10px;
                     color: #A6A9AF;
                 }
@@ -1584,7 +1733,7 @@
                             color: rgb(122, 122, 122);
                         }
                         .price{
-                            font-size: 10px;
+                            font-size: 12px;
                             font-weight: bold;
                         }
                         .title{
@@ -1606,6 +1755,7 @@
                         .nowTit{
                             font-size: 10px;
                             line-height: 15px;
+                            color:#7a7a7a;
                         }
                         .nowPrice{
                             font-size: 16px;
@@ -1617,6 +1767,7 @@
                             padding-bottom: 0.1rem;
                             font-size: 10px;
                             line-height: 15px;
+                            color:#7a7a7a;
                         }
                         .time{
                             display: inline-block;
@@ -1655,7 +1806,33 @@
                 overflow: scroll;
                 height: auto;
                 .mycolor{
-                    color:#ED6506;
+                    width: 100%;
+                    height: 1.14rem;
+                    color:#ED6506 !important;
+                    .price{
+                        text-align: left;
+                        line-height: 1.14rem;
+                        font-size: @size14;
+                        font-weight: bold;
+                    }
+                    .line{
+                        text-decoration: line-through;
+                        color:#ED6506;
+                    }
+                    .fr{
+                        text-align: right;
+                        .who{
+                            font-size: @size10;
+                            /*color: rgb(122, 122, 122);*/
+                        }
+                        .time{
+                            font-size: @size10;
+                            /*color: rgb(122, 122, 122);*/
+                        }
+                    }
+                    .fr2{
+                        color:#ED6506;
+                    }
                 }
                 .reco{
                     width: 100%;
@@ -1668,6 +1845,7 @@
                     }
                     .line{
                         text-decoration: line-through;
+                        color:#8D8D8D;
                     }
                     .fr{
                         text-align: right;
@@ -1679,6 +1857,9 @@
                             font-size: @size10;
                             /*color: rgb(122, 122, 122);*/
                         }
+                    }
+                    .fr2{
+                        color:#8D8D8D;
                     }
                 }
             }
@@ -1763,7 +1944,7 @@
                     text-align: center;
                     border: 1px solid rgb(129, 135, 140);
                     .nobtn1{
-                        color:#3C434D !important;
+                        color:#E6E6E6 !important;
                     }
                     .btn1{
                         width: 1.46rem;
@@ -1772,7 +1953,7 @@
                         top: -3px;
                         font-size: 50px;
                         line-height: 40px;
-                        color: red;
+                        color: #3C434D;
                     }
                     .btn2{
 
@@ -2037,7 +2218,7 @@
                     text-align: center;
                     border: 1px solid rgb(129, 135, 140);
                     .nobtn1{
-                        color:#3C434D !important;
+                        color:#E6E6E6 !important;
                     }
                     .btn1{
                         width: 1.46rem;
@@ -2046,7 +2227,7 @@
                         top: -3px;
                         font-size: 50px;
                         line-height: 40px;
-                        color: red;
+                        color: #3C434D;
                     }
                     .btn2{
 
@@ -2238,15 +2419,15 @@
             font-size: 13px;
             line-height: @size25;
             .learnMore{
-
-                width: 1.6rem;
+                /*width: 1.6rem;*/
                 height: @size15;
                 border: 1px solid white;
                 border-radius:3px;
                 font-size:  9px;
                 color: white;
                 line-height: @size15;
-                margin:@size10 @size10 @size10 @size10;
+                margin:@size10 @size10 @size10 0.5rem;
+                padding:0 0.1rem;
             }
             .value{
                 font-size:  12px;
@@ -2330,7 +2511,7 @@
         }
         //已经拍中
         .bground3{
-            background:linear-gradient(30deg,#f54ea2 0%,#dd704c 100%);
+            background:linear-gradient(30deg,#dd704c 0%,#f54ea2 100%);
             max-width: 10rem;
         }
         //流拍
@@ -2352,21 +2533,32 @@
             background: #fafbfc;
             box-sizing: border-box;
             border-top: 1px solid #353c46;
+            .goBuy{
+                float: right;
+                width: 3rem;
+                height: 100%;
+                line-height: 1.2rem;
+                text-align: center;
+                font-size: 14px;
+                color:#333;
+                border-left: 1px solid #cdd4dc;
+            }
             .value{
                 float: left;
-                width: 5.6rem;
+                /*width: 5.6rem;*/
                 height: 100%;
                 line-height: @size45;
                 position: relative;
                 text-align: center;
+                padding-left: 0.5rem;
                 .nobtn1{
-                    color:#3C434D !important;
+                    color:#E6E6E6 !important;
                 }
                 .btn1{
                     width: 1.46rem;
                     line-height:@size40;
                     font-size: 35px;
-                    color: red;
+                    color: #3C434D;
                     float: left;
                 }
                 .btn2{
@@ -2377,10 +2569,10 @@
                     float: right;
                 }
                 .label{
-                    font-size: 8px;
+                    font-size: 9px;
                 }
                 .price{
-                    font-size: 11px;
+                    font-size: 14px;
                     width: 2.68rem;
                     font-weight: bold;
                 }

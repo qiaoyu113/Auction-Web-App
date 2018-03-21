@@ -76,7 +76,7 @@
                                                     <img :src="$store.state.picHead + image">
                                                 </li>
                                             </ul>
-                                            <div class="addIcon" v-if="img.length === 10">
+                                            <div class="addIcon" v-if="img.length === 10" @click="goSellMore(list.id)">
                                                 <i class="iconfont icon-fangdajing"></i>
                                                 <span>查看更多</span>
                                             </div>
@@ -130,7 +130,7 @@
                     that.checked = 3;
                 }
             }
-            that.onMove()
+            that.onMove();
             that.meScroll();
         },
         methods: {
@@ -211,6 +211,9 @@
             getListData:function(pageNum,pageSize,successCallback,errorCallback) {
                 //延时一秒,模拟联网
                 const that = this;
+                commonService.putInsertion({businessType:4}).then(function(res){
+
+                })
                 commonService.getAuctionMarkets({
                     pageNo:that.page.num,
                     pageSize:that.page.size,
@@ -324,8 +327,11 @@
             },
             //页面滑动问题
             onMove:function(){
+                let that = this;
                 let overscroll = function(el) {
                     el.addEventListener('touchstart', function() {
+
+                        that.onMove2();
                         let top = el.scrollTop
                             , totalScroll = el.scrollHeight
                             , currentScroll = top + el.offsetHeight;
@@ -341,6 +347,30 @@
                     })
                 };
                 overscroll(document.querySelector('.mescroll'));
+                document.body.addEventListener('touchmove', function(evt) {
+                    if(!evt._isScroller) {
+                        evt.preventDefault()
+                    }
+                })
+            },
+            onMove2:function(){
+                let overscroll = function(el) {
+                    el.addEventListener('touchstart', function() {
+                        let top = el.scrollLeft
+                            , totalScroll = el.scrollWidth
+                            , currentScroll = top + el.offsetWidth;
+                        if(top === 0) {
+                            el.scrollTop = 1
+                        } else if(currentScroll === totalScroll) {
+                            el.scrollTop = top - 1
+                        }
+                    });
+                    el.addEventListener('touchmove', function(evt) {
+                        if(el.offsetWidth < el.scrollWidth)
+                            evt._isScroller = true
+                    })
+                };
+                overscroll(document.querySelector('.sell-box'));
                 document.body.addEventListener('touchmove', function(evt) {
                     if(!evt._isScroller) {
                         evt.preventDefault()

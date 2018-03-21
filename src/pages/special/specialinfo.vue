@@ -96,7 +96,7 @@
         mounted: function() {
             let that = this;
             that.onMove()
-            that.id = that.$route.query.id;
+            that.id = that.$route.params.id;
             that.meScroll()
         },
         methods: {
@@ -153,6 +153,9 @@
             getListData:function(pageNum,pageSize,successCallback,errorCallback) {
                 //延时一秒,模拟联网
                 const that = this;
+                commonService.putInsertion({businessType:3}).then(function(res){
+
+                })
                 commonService.getauctionPackId({id:that.id},that.id).then(function(res){
                     if(res.data.code === 200){
                         that.details = res.data.datas;

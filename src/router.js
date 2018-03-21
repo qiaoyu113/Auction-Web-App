@@ -32,10 +32,10 @@ const short = (resolve) => {require(['./pages/short.vue'],resolve)}
 const home = (resolve) => {require(['./pages/home/home.vue'],resolve)}
 const registerweixin = (resolve) => {require(['./component/login/registerweixin.vue'],resolve)}
 const service = (resolve) => {require(['./pages/service/service.vue'],resolve)}
-// const special = (resolve) => {require(['./pages/special/special.vue'],resolve)}
+const special = (resolve) => {require(['./pages/special/special.vue'],resolve)}
 const specialinfo = (resolve) => {require(['./pages/special/specialinfo.vue'],resolve)}
-// const specialView = (resolve) => {require(['./pages/special/specialView.vue'],resolve)}
-// const specialDetails = (resolve) => {require(['./pages/special/specialDetails.vue'],resolve)}
+const specialView = (resolve) => {require(['./pages/special/specialView.vue'],resolve)}
+const specialDetails = (resolve) => {require(['./pages/special/specialDetails.vue'],resolve)}
 
 const auction = (resolve) => {require(['./pages/auction/auction.vue'],resolve)}
 const none = (resolve) => {require(['./pages/auction/none.vue'],resolve)}
@@ -91,21 +91,26 @@ const error = (resolve) => {require(['./pages/error.vue'],resolve)}
 // 创建路由器实例，配置路由规则
 const routers = [
     {name: 'home',path:'/',component: home, meta: {keepAlive: false}},
+    {name: 'home',path:'/packages',component: home, meta: {keepAlive: false}},
     {name: 'login',path:'/login',component:login},
     {name: 'registerweixin',path:'/register',component:registerweixin},
     {name: 'service',path:'/service',component:service},
-    // {name: 'special',path:'/special',component:special},
-    {name: 'specialinfo',path:'/specialinfo',component:specialinfo},
-    // {name: 'specialView',path:'/specialView',component:specialView},
-    {name: 'none',path:'/none',component:none},
-    // {name: 'specialDetails',path:'/specialDetails',component:specialDetails,
-    //     children:[
-    //         {name:'specialMore',path:'more/:id',component:specialDetails},
-    //     ]
-    // },
-    {name: 'auction',path:'/auction',component:auction,
+    {name: 'special',path:'/markets',component:special},
+    {name: 'specialinfo',path:'/packages/',component:specialinfo,
         children:[
-            {name:'auctionMore',path:'more/:id',component:auction},
+            {name:'specialinfoMore',path:':id',component:specialinfo},
+        ]
+    },
+    {name: 'specialView',path:'/specialView',component:specialView},
+    {name: 'none',path:'/none',component:none},
+    {name: 'specialDetails',path:'/markets/',component:specialDetails,
+        children:[
+            {name:'specialMore',path:':id',component:specialDetails},
+        ]
+    },
+    {name: 'auction',path:'/auctions/',component:auction,
+        children:[
+            {name:'auctionMore',path:':id',component:auction},
         ]
     },
     {name: 'auctionView',path:'/auctionView',component:auctionView,
