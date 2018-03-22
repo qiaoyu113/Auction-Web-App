@@ -43,6 +43,7 @@
                 <div class="infoAlipay">提现到银行卡</div>
             </div>
         </div>
+        <div class="prompt" v-if="prompt!=''">{{prompt}}</div>
         <div class="footer1" @click="postBails()">立即提现</div>
     </div>
 </template>
@@ -60,6 +61,7 @@
                 money:"",
                 wallet:'',
                 wxLogin:true,
+                prompt:'',
             }
         },
         components:{},
@@ -134,6 +136,10 @@
              // 获取订单号
             postBails:function(){
                 let that = this;
+                 if(that.money==''){
+                    that.prompt="请填写金额"
+                    return false
+                 }
                // commonService.postBails({amount:that.money}).then(function(res){
                     // that.wallet=res.data.datas.user.wallet
                     // console.log(res.data.datas)
@@ -360,6 +366,19 @@
                 font-size: 15px;
             }
         }
+    }
+    .prompt{
+       position:fixed;
+        bottom:1.2rem;
+        left: 0;
+        width: 100%;
+       height: 0.67rem;
+       line-height: 0.67rem;
+        color: #fff;
+        background: linear-gradient(70deg, #DC704A, #F44EA0);
+        text-align: center;
+         font-size: 12px;
+
     }
     
     .footer1{

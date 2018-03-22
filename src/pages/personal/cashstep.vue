@@ -225,6 +225,9 @@ import {commonService} from '../../service/commonService.js'
                 if(this.$route.query.index==3){
                     this.flag=2
                 }
+                if(this.$route.query.index==1){
+                     this.index=2
+                }
             },
             nextStep:function(){
                 let that=this
