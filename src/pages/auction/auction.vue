@@ -26,7 +26,7 @@
                             </div>
                         </div>
                         <div class="sell-information">
-                            <div class="font">{{details.originNum}}人</div>
+                            <div class="font">{{details.realNum}}人</div>
                             <div class="sellicon2">
                                 <img src="../../assets/image/mycenter/icon3.png"/>
                             </div>
@@ -486,14 +486,14 @@
             that.meScroll()
             that.WebSocketTest()
             that.isPrint()
-            that.checked = window.localStorage.getItem('checked');
-            if(that.checked){
-                that.wxpay()
-            }
+//            that.checked = window.localStorage.getItem('checked');
+//            if(that.checked){
+//                that.wxpay()
+//            }
             //是否支付成功
-            let payOk = that.$route.query.pay;
-            if(payOk != undefined){
-                if(payOk){
+            let payOk = window.localStorage.getItem('payOk');
+            if(payOk != null){
+                if(payOk == '1'){
                     that.dis2Show = false;
                     that.dis3Show = true;
                     that.hintText = '保证金支付成功';
@@ -502,6 +502,7 @@
                     that.hintText = '保证金支付失败';
                 }
             }
+            window.localStorage.removeItem('payOk');
             let token = window.localStorage.getItem('token');
             if(token != null){
                 that.isCollect();
@@ -598,6 +599,7 @@
             getListData:function(pageNum,pageSize,successCallback,errorCallback) {
                 //延时一秒,模拟联网
                 const that = this;
+                that.isCollect();
                 //插入统计数据
                 commonService.putInsertion({businessType:1}).then(function(res){})
                 //查看最高价和是否缴纳保证金
@@ -843,6 +845,7 @@
             back(){
                 let that = this;
                 let routerBack = window.localStorage.getItem('routerName');
+                window.localStorage.removeItem('routerName')
                 if(routerBack != 'wxPay'){
                     that.$router.back(-1);
                 }else{
@@ -1058,6 +1061,7 @@
                 that.dis2Show = false;
                 that.dis3Show = false;
                 that.dis4Show = false;
+                that.$router.replace({name:'auctionMore',params:{id:that.id}})
             },
             //判断浏览器
             monitor(){
@@ -1111,7 +1115,7 @@
                             that.dis2Show = false;
                             that.dis3Show = true;
                             that.hintText = '保证金支付成功';
-                            that.onload()
+                            that.upCallback()
                         }else{//支付宝
                             let orderNo = res.data.datas;
                             window.localStorage.setItem('orderNo',orderNo);

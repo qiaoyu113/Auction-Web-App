@@ -123,7 +123,7 @@ import {commonService} from '../../service/commonService.js'
     props: ['str'],
     data () {
       return {
-          title:'售后服务',
+          title:'传家',
           arrays: [],
           index:1,
           dis:'dis',

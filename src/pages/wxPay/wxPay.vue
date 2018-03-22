@@ -65,7 +65,8 @@
                                     if(route == 'auction'){
                                         let id = window.localStorage.getItem('id');
                                         window.localStorage.setItem('routerName','wxPay');
-                                        that.$router.replace({name:'auctionMore',params:{id:id},query:{pay:true}})
+                                        window.localStorage.setItem('payOk','1');
+                                        that.$router.replace({name:'auctionMore',params:{id:id}})
                                     }
                                     if(route == 'recharge'){
                                         that.$router.replace({name:'recharge'})
@@ -80,7 +81,8 @@
                                     if(route == 'auction'){
                                         let id = window.localStorage.getItem('id');
                                         window.localStorage.setItem('routerName','wxPay');
-                                        that.$router.replace({name:'auctionMore',params:{id:id},query:{pay:false}})
+                                        window.localStorage.setItem('payOk','2');
+                                        that.$router.replace({name:'auctionMore',params:{id:id}})
                                     }
                                     if(route == 'recharge'){
                                         that.$router.push({name:'recharge'})

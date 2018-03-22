@@ -63,8 +63,7 @@ import {commonService} from '../../service/commonService.js'
     props: ['str'],
     data () {
       return {
-          title:'线下转账',
-          arrays: [],
+          title:'传家',
           orderNo: this.$route.query.id,
           datas:'',
           orderDetail:'',

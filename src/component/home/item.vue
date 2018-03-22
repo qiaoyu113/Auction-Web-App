@@ -2,6 +2,7 @@
     <div>
         <div id='specials' class="specials" @click="goDetails(str.id)">
             <img :src="$store.state.picHead + str.cover"/>
+            <div class="bg"></div>
             <div class="text">
                 <h1>{{str.title}}</h1>
                 <div class="t-title">{{str.subTitle}}</div>
@@ -55,6 +56,14 @@
         width:100%;
         height:100%;
     }
+    .bg{
+        width:100%;
+        height:100%;
+        background: #000;
+        opacity:0.18;
+        position: absolute;
+        top: 0;
+    }
     .text{
         width:100%;
         height:100%;
@@ -83,7 +92,7 @@
             white-space: nowrap;
             text-overflow:ellipsis;
             padding-top: 1.2rem;
-            font-size: 20px;
+            font-size: 18px;
             font-weight: 500;
             color: rgb(255, 255, 255);
         }

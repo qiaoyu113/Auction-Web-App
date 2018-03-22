@@ -23,14 +23,16 @@
             let route = window.localStorage.getItem('route');
             let id = window.localStorage.getItem('id');
             if(route == 'auction'){
-                that.$router.push({name:'auctionMore',params:{id:id}})
+                let id = window.localStorage.getItem('id');
+                window.localStorage.setItem('routerName','wxPay');
+                that.$router.replace({name:'auctionMore',params:{id:id},query:{pay:true}})
             }
             if(route == 'recharge'){
-               that.$router.push({name:'recharge'})
-             }
-             if(route == 'cash'){
-               that.$router.push({name:'cash'})
-             }
+                that.$router.replace({name:'recharge'})
+            }
+            if(route == 'cash'){
+                that.$router.replace({name:'cash'})
+            }
         },
         methods: {
 

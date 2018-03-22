@@ -956,7 +956,6 @@
                                 if(res.data.success){
                                     commonService.getWxpay({loginType:'WEIXIN',platform:'WXH5',jumpRouter:'wxbaselogin',wxscope:'snsapi_base'}).then(function(res){
                                         let code = res.data.code;
-                                        alert(code)
                                         if(code === 200){
                                             //获取静默授权地址成功
                                             window.localStorage.setItem('id',that.id);
@@ -1016,13 +1015,13 @@
                                     // 支付成功后的回调函数
                                     //分别跳转的路径
                                     //1.知识。2.活动。3.会员。4.商品。5.直播
-                                    alert('支付成功');
+//                                    alert('支付成功');
                                     window.localStorage.removeItem('checked')
                                     that.checked = false
                                 },
                                 cancel:function(){
                                     window.localStorage.removeItem('checked');
-                                    alert('支付失败');
+//                                    alert('支付失败');
                                     that.checked = false
                                 }
                             });
