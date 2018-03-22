@@ -66,6 +66,7 @@
 
 <script >
 import {appService} from '../../service/appService'
+
   export default {
     props: ['str'],
     data () {

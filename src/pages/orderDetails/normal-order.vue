@@ -71,7 +71,12 @@
             </div>
             <div class="payment" v-if='index==1'>
                 <div class="witpay">待支付</div>
-                <div class="btn">更改支付方式</div>
+                <div class="btn" @click="kshow()">更改支付方式</div>
+            </div>
+            <div class="payment" v-if='index==1 && ity==true'>
+                <div class="btn" :class="{'rty':method=='WX_JSAPI'}" @click="methodlist('WX_JSAPI')">微信</div>
+                <div class="btn" :class="{'rty':method=='ALIPAY_WAP'}" @click="methodlist('ALIPAY_WAP')">支付宝</div>
+                <div class="btn" :class="{'rty':method=='UNIONPAY'}" @click="methodlist('UNIONPAY')">线下转账</div>
             </div>
             <div v-if="datas.status==4">
                <div class="logistic" @click="show">
@@ -89,29 +94,29 @@
                 <div>{{adress.detailAdress}}</div>
             </div>
             <div class="itemInfo clearfix">
-                <div class="pic fl"><img src="../../assets/image/myimage/eg.gif" alt=""></div>
+                <div class="pic fl" @click="Routerid(orderDetail.auctionId)"><img :src="picHead + orderDetail.picItems[0]" alt=""></div>
                 <div class="box fl">
-                    <div class="money">{{orderDetail.finalPrice}}CNY</div>
+                    <div class="money">{{orderDetail.finalPrice | money}}CNY</div>
                     <div class="title">{{orderDetail.auctionName}}</div>
-                    <div class="number">{{datas.createTime}}-{{orderDetail.auctionNo}}</div>
+                    <div class="number">LOT-{{orderDetail.auctionNo}}</div>
                 </div>
             </div>
             <div class="totalMoney clearfix">
                 <div class="fl">订单总额</div>
-                <div class="fr">{{datas.amount}} CNY</div>
+                <div class="fr">{{datas.amount | money}} CNY</div>
             </div>
             <div class="moneys">
-                <div class="price clearfix"><div class="fl">拍品价格:</div><div class="fr">{{orderDetail.finalPrice}} CNY</div></div>
-                <div class="price clearfix"><div class="fl">保险+运费:</div><div class="fr">{{orderDetail.finalPrice / 100}} CNY</div></div>
+                <div class="price clearfix"><div class="fl">拍品价格:</div><div class="fr">{{orderDetail.finalPrice | money}} CNY</div></div>
+                <div class="price clearfix"><div class="fl">保险+运费:</div><div class="fr">{{orderDetail.finalPrice | money}} CNY</div></div>
             </div>
             <div class="orderinfo">
                 <div class="price clearfix"><div class="fl">订单编号:</div><div class="fr">{{orderDetail.adminId}}</div></div>
-                 <div class="price clearfix" v-if="createTime!=''"><div class="fl">支付时间:</div><div class="fr">{{createTime}}</div></div>
+                 <div class="price clearfix" v-if="createTime!=''"><div class="fl">支付时间:</div><div class="fr">{{createTime | stampFormate2}}</div></div>
                 <div class="price clearfix"><div class="fl">支付方式:</div>
-                      <div class="fr"  v-if="datas.channelId=='ALIPAY_WAP'">支付宝</div>
-                      <div class="fr"  v-if="datas.channelId=='WX_NATIVE'">微信</div>
-                      <div class="fr"  v-if="datas.channelId=='UNIONPAY'">线下转账</div>
-                      <div class="fr"  v-if='index==0'>线下转账</div>
+                      <div class="fr"  v-if="method=='ALIPAY_WAP'">支付宝</div>
+                      <div class="fr"  v-if="method=='WX_JSAPI'">微信</div>
+                      <div class="fr"  v-if="method=='UNIONPAY'">线下转账</div>
+                      <!-- <div class="fr"  v-if='index==0'>线下转账</div> -->
                </div>
 
             </div>
@@ -157,18 +162,19 @@
             </div>
         </div>
     </div>
-        
+        <div class="payOK"></div>
     </div>
 </template>
 
 <script >
 import {appService} from '../../service/appService'
+import {common} from '../../assets/js/common/common'
 import {commonService} from '../../service/commonService.js'
   export default {
     props: ['str'],
     data () {
       return {
-          title:'订单详情-订单正常',
+          title:'传家',
           arrays: [],
           index:0,
           orderNo:'',//详情id
@@ -181,17 +187,44 @@ import {commonService} from '../../service/commonService.js'
           arrays: [],
           dis:'dis',
           createTime:'',//支付时间
+          method:'UNIONPAY',//支付方式
+          ity:false,
           
       }
     },
-    components: {},
+     computed: {
+            //将存在store中的数据取出
+            listImg() {
+                return this.$store.state.homeStore.listImg || []
+            },
+            noticelist() {
+                return this.$store.state.homeStore.noticelist || []
+            },
+            picHead() {
+                return this.$store.state.picHead
+            },
+        },
     mounted () {
+        common.onMove('.orderDetails')
         this.huoqu()
         this.getOrderid()
     },
     methods: {
         Return:function(){
             window.history.go(-1)
+        },
+        Routerid:function(id){
+            this.$router.push({name:'auctionMore',params:{id:id}})
+        },
+        kshow:function(){
+            if(this.ity==true){
+              this.ity=false
+            }else{
+                this.ity=true
+            }
+        },
+        methodlist:function(value){
+            this.method=value
         },
          huoqu:function(){
             this.orderNo=this.$route.query.id
@@ -206,15 +239,15 @@ import {commonService} from '../../service/commonService.js'
         rechargeList:function(){      
               let that=this;
               let index=''
-              if(that.datas.channelId=='UNIONPAY'){
+              if(that.method=='UNIONPAY'){
                      index=3
-            that.$router.push({path:"/rechargeList",query:{money:that.datas.amount,index:index,orderNo:that.datas.adminId}})
+            that.$router.push({path:"/rechargeList",query:{money:that.datas.amount,index:index,orderNo:that.datas.adminId,type:4}})
             }
              // 微信
-              if(that.datas.channelId=='WX_JSAPI'){
+              if(that.method=='WX_JSAPI'){
                            let orderNo = that.orderNo;
                             window.localStorage.setItem('orderNo',orderNo);
-                            commonService.putOrders({orderNo:orderNo,channelId:channelIds}).then(function(res){
+                            commonService.putOrders({orderNo:orderNo,channelId:'WX_JSAPI'}).then(function(res){
                                 if(res.data.success){
                                     commonService.getWxpay({loginType:'WEIXIN',platform:'WXH5',jumpRouter:'wxbaselogin',wxscope:'snsapi_base'}).then(function(res){
                                         if(res.data.code === 200){
@@ -227,7 +260,7 @@ import {commonService} from '../../service/commonService.js'
 
               }
               // 支付宝
-              if(that.datas.channelId=='ALIPAY_WAP'){
+              if(that.method=='ALIPAY_WAP'){
                     let orderNo = that.orderNo;
                     window.localStorage.setItem('orderNo',orderNo);
                     commonService.putOrders({orderNo:orderNo,channelId:'ALIPAY_WAP'}).then(function(res){
@@ -239,15 +272,15 @@ import {commonService} from '../../service/commonService.js'
                           }
                       })
               }
-
-
         },
         // 获取订单
          getOrderid:function(){
             let that=this;
             commonService.getOrderid(that.orderNo).then(function(res){
                 that.datas=res.data.datas
+                   that.method=that.datas.channelId
                 that.orderDetail=that.datas.orderDetail
+                console.log(that.orderDetail)
                 that.adress=that.orderDetail.adress
 
                  let orderLogs = res.data.datas.orderLogs
@@ -347,6 +380,12 @@ import {commonService} from '../../service/commonService.js'
     @import url('../../assets/css/base.less');
     @import url('../../assets/css/icon/iconfont.css');
 .orderDetails{
+          position: fixed;
+          left: 0;
+          right: 0;
+          top: 0;
+          overflow-x: scroll;
+          bottom: 0;
     .header{
         position: fixed;
         top: 0;
@@ -658,6 +697,9 @@ import {commonService} from '../../service/commonService.js'
                 float: right;
                 padding: 0 @size10;
                 
+            }
+            .rty{
+                background: #15b3b2;
             }
         }
         .address{

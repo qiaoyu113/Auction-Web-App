@@ -48,19 +48,18 @@
         <div class="payment">
             <div class="goods clearfix">
                 <div class="goods_l" v-if="picItems!=''">
-                    <img :src="picHead + picItems" />
-                    
+                    <img :src="picHead + picItems"/>
                 </div>
                 <div class="goods_r">
-                    <p class="p1">{{datas.finalPrice}} CNY</p>
+                    <p class="p1">{{datas.finalPrice | money}} CNY</p>
                     <p class="p2">{{datas.marketName}}</p>
-                    <p class="p3">{{datas.auctionEndTime}}-{{datas.marketNo}}</p>
+                    <p class="p3">LOT-{{datas.completeNo}}</p>
                 </div>
             </div>
             <div class="money">
                 <div class="total clearfix">
                     <div class="total_l">订单总额</div>
-                    <div class="total_r">{{datas.finalPrice + datas.finalPrice / 100}} CNY</div>
+                    <div class="total_r">{{datas.finalPrice + datas.finalPrice | money}} CNY</div>
                 </div>
                 <div class="scattered clearfix">
                     <div class="scattered_l">
@@ -68,8 +67,8 @@
                         <p>保险+运费 : </p>
                     </div>
                     <div class="scattered_r">
-                        <p>{{datas.finalPrice}} CNY</p>
-                        <p>{{datas.finalPrice / 100}} CNY</p>
+                        <p>{{datas.finalPrice | money}} CNY</p>
+                        <p>{{datas.finalPrice | money}} CNY</p>
                     </div>
                 </div>
             </div>
@@ -80,8 +79,8 @@
                         <div class="ros_l"><span>✔</span></div>
                         <div class="ros_con"><i class="iconfont icon-icon_weixinzhifu"></i></div>
                         <div class="ros_r">
-                           <p>微信支付</p>
-                           <p>单笔最高5.000-50.000CNY</p>
+                           <p class="linh">微信支付</p>
+                           
                         </div>
                     </div>
                     <div class="ros clearfix" :class="{'ros_ll':index==2}" @click="selected(2)" v-if="wxLogin==false">
@@ -99,9 +98,7 @@
                            <p class="linh">转账汇款</p>
                         </div>
                     </div>
-
                 </div>
-
         </div>
         <div class="botton" @click="postOrders()">
             <div>提交订单</div>
@@ -112,6 +109,7 @@
 
 <script>
     import {appService} from '../../service/appService'
+    import {common} from '../../assets/js/common/common'
     import {commonService} from '../../service/commonService.js'
     export default {
         data () {
@@ -152,7 +150,7 @@
 
         },
         mounted: function() {
-            
+            common.onMove('.order')
             this.addresst()
             this.getAuctions()
             this.wxshow()
@@ -211,7 +209,7 @@
                  commonService.getAuctions(that.auctionId).then(function(res){
                     if(res.data.code==200){
                    that.datas=res.data.datas
-                   // console.log(that.datas)
+                   console.log(that.datas)
                    that.picItems=that.datas.picItems[0]
                    // console.log(that.datas)
                     }
@@ -241,6 +239,12 @@
     /*rem等基本设置都放在base中，不写多个*/
     @import url('../../assets/css/base.less');
     .order{
+        position: fixed;
+          left: 0;
+          right: 0;
+          top: 0;
+          overflow-x: scroll;
+          bottom: 0;
        .top{
           padding: @size50 @size20;
           border-bottom: 2px solid rgb(53,60,70);

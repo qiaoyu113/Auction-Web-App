@@ -27,7 +27,7 @@
                     <div class="level" v-if="user.vipLevel==3">SSVIP<br><span>会员等级</span></div>
                     <div class="level" v-if="user.vipLevel==4">SSSVIP<br><span>会员等级</span></div>
                     <div class="point">{{pointNum}}分<br><span>会员积分</span></div>
-                    <div class="number">NO:000 000 000</div>
+                    <div class="number">NO:{{user.vipNo}}</div>
                     <div class="star">
                         <div><i class="iconfont icon-xianxingxing" v-if="user.vipLevel==1"></i></div>
                         <div><i class="iconfont icon-xianxingxing" v-if="user.vipLevel==2"></i></div>
@@ -61,7 +61,7 @@
         </div>
         <!-- 会员规则 -->
         <div class="text" v-if='index==2'>
-            <div class="time">更新时间：{{rule.createTime}}</div>
+            <div class="time">更新时间：{{rule.createTime | stampFormate2}}</div>
             <div v-html='rule.content'>
         <!--         <div class="tit">保证金说明</div>
                 <p class="txt">为了维护拍卖交易秩序，保障平台用户的合法权益，以下规则请大家务必遵守</p> -->
@@ -80,6 +80,7 @@
 
 <script >
     import {appService} from '../../service/appService'
+    import {common} from '../../assets/js/common/common'
     import {commonService} from '../../service/commonService.js'
     export default {
         data () {
@@ -98,6 +99,8 @@
         },
         components:{},
         mounted: function() {
+            
+            common.onMove('.membercenter')
             this.getUsers()
             this.getPoint()
             this.getDoctype()
@@ -175,6 +178,12 @@
     @import url('../../assets/css/base.less');
     @import url('../../assets/css/icon/iconfont.css');
     .membercenter{
+        position: fixed;
+          left: 0;
+          right: 0;
+          top: 0;
+          overflow-x: scroll;
+          bottom: 0;
     .header{
         position: fixed;
         top: 0;

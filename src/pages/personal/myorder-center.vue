@@ -78,6 +78,7 @@
 <script >
     import {appService} from '../../service/appService'
     import itemc from "../../component/home/item.vue"
+    import {common} from '../../assets/js/common/common'
     import {commonService} from '../../service/commonService.js'
     export default {
         data () {
@@ -115,6 +116,8 @@
             }
         },
         mounted: function() {
+            
+             common.onMove('.myorder-center')
             this.routers()
             this.getOrder()
             this.getOrdercs()
@@ -195,6 +198,12 @@
     @import url('../../assets/css/base.less');
     @import url('../../assets/css/icon/iconfont.css');
     .myorder-center{
+        position: fixed;
+          left: 0;
+          right: 0;
+          top: 0;
+          overflow-x: scroll;
+          bottom: 0;
     .header{
         position: fixed;
         top: 0;

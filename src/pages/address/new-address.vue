@@ -51,10 +51,10 @@
                 <div class="check"><i class="iconfont icon-duihao"></i></div>
                 <span class="">设置为默认地址</span>
             </div> -->
-            <div class="del">
+           <!--  <div class="del">
                 <div class="delete"><i class="iconfont icon-tupian"></i></div>
                 <span>删除地址</span>
-            </div>
+            </div> -->
         </div>
         <div class="prompt" v-if="prompt!=''">{{prompt}}</div>
         <div class="footer" @click="postAddress()" v-if="addressid==''">保&nbsp;&nbsp;存</div>
@@ -64,6 +64,7 @@
 
 <script >
 import {appService} from '../../service/appService'
+import {common} from '../../assets/js/common/common'
 import {commonService} from '../../service/commonService.js'
   export default {
     props: ['str'],
@@ -110,6 +111,7 @@ import {commonService} from '../../service/commonService.js'
 
     },
     mounted () {
+      common.onMove('.new-address')
     	// console.log(this.listImg)
     	this.getCitys()
     	this.getAddressid()
@@ -292,6 +294,12 @@ import {commonService} from '../../service/commonService.js'
     @import url('../../assets/css/base.less');
     @import url('../../assets/css/icon/iconfont.css');
     .new-address{
+         position: fixed;
+          left: 0;
+          right: 0;
+          top: 0;
+          overflow-x: scroll;
+          bottom: 0;
     .header{
         position: fixed;
         top: 0;

@@ -157,6 +157,7 @@
 
 <script >
 import {appService} from '../../service/appService'
+import {common} from '../../assets/js/common/common'
 import {commonService} from '../../service/commonService.js'
   export default {
     props: ['str'],
@@ -192,6 +193,8 @@ import {commonService} from '../../service/commonService.js'
     },
     components: {},
     mounted () {
+       
+       common.onMove('.cashstep')
         this.yi()
         this.getKaptchas()
     },
@@ -363,18 +366,12 @@ import {commonService} from '../../service/commonService.js'
     @import url('../../assets/css/base.less');
     @import url('../../assets/css/icon/iconfont.css');
   .cashstep{
-    // .header{
-    //     position: fixed;
-    //     top: 0;
-    //     z-index: 100;
-    //     width: @size375;
-    //     height: @size45;
-    //     background:rgba(2, 10, 2, 1);
-    //     font-size: @size20;
-    //     color: white;
-    //     text-align: center;
-    //     line-height: @size45;
-    // }
+    position: fixed;
+          left: 0;
+          right: 0;
+          top: 0;
+          overflow-x: scroll;
+          bottom: 0;
     .nav{
         width: @size375;
         height: @size35;

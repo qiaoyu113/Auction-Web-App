@@ -39,6 +39,7 @@
 
 <script >
     import {appService} from '../../service/appService'
+    
     export default {
         data () {
             return {

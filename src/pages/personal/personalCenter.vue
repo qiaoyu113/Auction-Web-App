@@ -86,7 +86,7 @@
         </div>
         <div class="sell-spic">
                 <ul >
-                    <li  v-for="(falg,index) in footPrint" :style= "getPos(index)" ><div class="xiajia" v-if="falg.available==false"><p>已下架</p></div><img :src="picHead + falg.picItems[0]" alt="" srcset=""></li>
+                    <li  v-for="(falg,index) in footPrint" :style= "getPos(index)" ><div class="xiajia" v-if="falg.available==false"><p>已下架</p></div><img :src="picHead + falg.picItems[0]" alt="" srcset="" @click="Routerid(falg.id)"></li>
                 </ul>
                 <!-- available -->
         </div>
@@ -98,6 +98,7 @@
 <script >
     import {appService} from '../../service/appService'
     import itemc from "../../component/home/item.vue";
+    import {common} from '../../assets/js/common/common'
     import {commonService} from '../../service/commonService.js'
     export default {
         data () {
@@ -146,6 +147,7 @@
             },
         },
         mounted: function() {
+            common.onMove('.personalCenter')
             this.getUsers()
             this.getFootPrint()
 
@@ -161,6 +163,9 @@
             },
             bond:function(){
                  this.$router.push({path:"/myaccount"})
+            },
+            Routerid:function(){
+                this.$router.push({name:'auctionMore',params:{id:id}})
             },
             mycenter:function(){
                 this.$router.push({path:"/mycenter"})
@@ -250,6 +255,12 @@
     @import url('../../assets/css/base.less');
     @import url('../../assets/css/icon/iconfont.css');
     .personalCenter{
+          position: fixed;
+          left: 0;
+          right: 0;
+          top: 0;
+          overflow-x: scroll;
+          bottom: 0;
     .header{
         position: fixed;
         top: 0;

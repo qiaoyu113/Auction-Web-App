@@ -71,6 +71,7 @@
 <script >
 
     import {appService} from '../../service/appService'
+    import {common} from '../../assets/js/common/common'
     import {commonService} from '../../service/commonService.js'
     import MeScroll from 'mescroll'
     export default {
@@ -109,6 +110,8 @@
             },
         },
         mounted: function() {
+            
+            common.onMove('.recharge')
             this.wxshow()
         	this.getUsers()
             this.checked = window.localStorage.getItem('checked');
@@ -190,7 +193,7 @@
                         return false
                     }
                     if(that.index==3){
-                     that.$router.push({path:"/rechargeList",query:{money:that.money,index:that.index,orderNo:res.data.datas}})   	
+                     that.$router.push({path:"/rechargeList",query:{money:that.money,index:that.index,orderNo:res.data.datas,type:1}})   	
                     }
                     if(that.index == 1){//微信支付
                             let orderNo = res.data.datas;
@@ -290,18 +293,24 @@
     @import url('../../assets/css/base.less');
     @import url('../../assets/css/icon/iconfont.css');
     .recharge{
-    .header{
         position: fixed;
-        top: 0;
-        z-index: 100;
-        width: 10rem;
-        height: @size45;
-        background:rgba(2, 10, 2, 1);
-        font-size: @size20;
-        color: white;
-        text-align: center;
-        line-height: @size45;
-    }
+          left: 0;
+          right: 0;
+          top: 0;
+          overflow-x: scroll;
+          bottom: 0;
+    // .header{
+    //     position: fixed;
+    //     top: 0;
+    //     z-index: 100;
+    //     width: 10rem;
+    //     height: @size45;
+    //     background:rgba(2, 10, 2, 1);
+    //     font-size: @size20;
+    //     color: white;
+    //     text-align: center;
+    //     line-height: @size45;
+    // }
     .content{
         margin-top: @size45;
         width:100%;

@@ -78,6 +78,7 @@
 
 <script>
     import {appService} from '../../service/appService'
+    import {common} from '../../assets/js/common/common'
     import {commonService} from '../../service/commonService.js'
     export default {
         data () {
@@ -110,11 +111,12 @@
             }
         },
         mounted: function() {
+            common.onMove('.lot')
            this.getCollect()
         },
         methods: {
             Router:function(id){
-                that.$router.push({name:'auctionMore',params:{id:id}})
+                this.$router.push({name:'auctionMore',params:{id:id}})
             },
             // 获取我的收藏
             getCollect:function(){
@@ -134,7 +136,12 @@
     @import url('../../assets/css/base.less');
     @import url('../../assets/css/icon/iconfont.css');
     .lot{
-
+         position: fixed;
+          left: 0;
+          right: 0;
+          top: 0;
+          overflow-x: scroll;
+          bottom: 0;
         .box{
             padding: @size10 @size20;
             .ros{

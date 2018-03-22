@@ -21,9 +21,9 @@
                     <div class="circle pos2" :class="index >=2 ?'v_red':''"></div>
                     <div class="circle pos3" :class="index >=3 ?'v_red':''"></div>
                     <div class="label">
-                        <span class="label1">确认银行卡信息</span>
-                        <span class="label2">填写汇款信息</span>
-                        <span class="label3">汇款完成</span>
+                        <span class="label1" :class="index >=1 ?'label4':''">确认银行卡信息</span>
+                        <span class="label2" :class="index >=2 ?'label4':''">填写汇款信息</span>
+                        <span class="label3" :class="index >=3 ?'label4':''">汇款完成</span>
                     </div>
                 </div>
             </div>
@@ -81,7 +81,8 @@
                     <div class="infoClose">{{list.no}}</div>
                 </div>
                 <div class="info"><span>交易金额</span>
-                    <div class="infoClose"><span class="span1">{{list.amount}}CNY</span>
+                    <div class="infoClose"><span class="span1" v-if="type==1">{{list.amount}}CNY</span>
+                                            <span class="span1"  v-if="type==4">{{list.amount | money}}CNY</span>
                        </div>
                 </div>
                 <div class="info"><span>交易时间</span>
@@ -111,6 +112,7 @@
 
 <script >
 import {appService} from '../../service/appService'
+import {common} from '../../assets/js/common/common'
 import {commonService} from '../../service/commonService.js'
   export default {
     props: ['str'],
@@ -121,7 +123,7 @@ import {commonService} from '../../service/commonService.js'
           index:1,
           active:0,
           // flag:2,
-          money:this.$route.query.money,//充值金额
+          money:'',//充值金额
           name:'',//名字
           phone:'',//手机号码
           verification:'', // 验证码
@@ -136,20 +138,37 @@ import {commonService} from '../../service/commonService.js'
           bankCardId:'',//官方银行卡id
           lastNum:'',
           htmlx:'',
+          type:'',
 
       }
     },
     components: {},
     mounted () {
         // this.yi()
+         common.onMove('.rechargeList')
         this.getBankCards()
+        this.thtype()
+        this.moneys()
     },
     methods: {
+
+
             Routes:function(){
                   this.$router.push({path:"/myaccount"})   
             },
+            moneys:function(){
+                if(this.type==1){
+                   this.money=this.$route.query.money 
+                }else{
+                   this.money=this.$route.query.money / 100
+                }
+                
+            },
             Return:function(){
                 window.history.go(-1)
+            },
+            thtype:function(){
+               this.type=this.$route.query.type
             },
             removeName:function(){
                 let that = this;
@@ -201,7 +220,6 @@ import {commonService} from '../../service/commonService.js'
             getBankCards:function(){
                let that = this
                commonService.getBankCards().then(function(res){
-                console.log(res)
                 that.bankCard=res.data.datas
                   // console.log(res)
                  })
@@ -226,9 +244,11 @@ import {commonService} from '../../service/commonService.js'
                         return false
                     }
                     that.htmlx=''
+
+
                     let money = that.money * 100
-                                    // orderNo:'974154167146647552'
-               commonService.postForms({channelId:'OFFLINE_BANK',lastNum:that.lastNum,userBankDetail:that.userBankDetail,userBankCardNo:that.userBankCardNo,phone:that.phone,type:1,userBankName:that.name,amount:money,bankId:that.bankCardId}).then(function(res){
+
+               commonService.postForms({channelId:'OFFLINE_BANK',lastNum:that.lastNum,userBankDetail:that.userBankDetail,userBankCardNo:that.userBankCardNo,phone:that.phone,type:that.type,userBankName:that.name,amount:money,bankId:that.bankCardId}).then(function(res){
                 // console.log(res)
                     if(res.data.message=='success'){
                        that.oddNumbers=res.data.datas 
@@ -304,6 +324,12 @@ import {commonService} from '../../service/commonService.js'
     @import url('../../assets/css/base.less');
     @import url('../../assets/css/icon/iconfont.css');
     .rechargeList{
+        position: fixed;
+          left: 0;
+          right: 0;
+          top: 0;
+          overflow-x: scroll;
+          bottom: 0;
     // .header{
     //     position: fixed;
     //     top: 0;
@@ -489,6 +515,9 @@ import {commonService} from '../../service/commonService.js'
                         float: right;
                         font-size: @size13;
                         color: gray;
+                    }
+                    .label4{
+                        color: red;
                     }
                 }
             }

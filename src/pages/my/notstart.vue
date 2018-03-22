@@ -22,6 +22,7 @@
 
 <script>
     import {appService} from '../../service/appService'
+    import {common} from '../../assets/js/common/common'
     import {commonService} from '../../service/commonService.js'
     export default {
         data () {
@@ -54,11 +55,12 @@
             }
         },
         mounted: function() {
+             common.onMove('.notstart')
            this.getCollect()
         },
         methods: {
             Router:function(id){
-                that.$router.push({name:'auctionMore',params:{id:id}})
+                this.$router.push({name:'auctionMore',params:{id:id}})
             },
             getCollect:function(){
             	let that=this;
@@ -77,6 +79,12 @@
     /*rem等基本设置都放在base中，不写多个*/
     @import url('../../assets/css/base.less');
     .notstart{
+        position: fixed;
+          left: 0;
+          right: 0;
+          top: 0;
+          overflow-x: scroll;
+          bottom: 0;
 
         .box{
             padding: @size10 @size20;

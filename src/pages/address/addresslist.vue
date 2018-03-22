@@ -21,8 +21,8 @@
                 <div class="resize">
                     <div class="checked" :class="list.defaultAdress==false?'check':'checked'" @click="postAddressid(list._id)"><i class="iconfont icon-duihao"></i></div>
                     <span :class="list.defaultAdress==false?'color':''">默认地址</span>
-                    <button class="fr" :class="list.defaultAdress==false?'color':''" @click="edit(list._id)">编辑</button>
-                    <button class="fr" :class="list.defaultAdress==false?'color':''" @click="deleteAddress(list._id)">删除</button>
+                    <span class="fr"  @click="edit(list._id)">编辑</span>
+                    <span class="fr"  @click="deleteAddress(list._id)">删除</span>
                 </div>
             </div>
 
@@ -33,6 +33,7 @@
 
 <script >
 import {appService} from '../../service/appService'
+import {common} from '../../assets/js/common/common'
 import {commonService} from '../../service/commonService.js'
   export default {
     props: ['str'],
@@ -47,6 +48,7 @@ import {commonService} from '../../service/commonService.js'
     },
     components: {},
     mounted () {
+         common.onMove('.addresslist')
     	 this.getAddress()
     },
     methods: {
@@ -98,6 +100,12 @@ import {commonService} from '../../service/commonService.js'
     @import url('../../assets/css/base.less');
     @import url('../../assets/css/icon/iconfont.css');
     .addresslist{
+          position: fixed;
+          left: 0;
+          right: 0;
+          top: 0;
+          overflow-x: scroll;
+          bottom: 0;
     .header{
         position: fixed;
         top: 0;
