@@ -14,8 +14,8 @@
             <div class="fr" @click="Return()">...</div>
         </div>
         <div class="box">
-            <div class="info"><span>金额</span>
-               <span class="span" v-if="money!=''">CNY</span><input type="" placeholder="请输入金额" v-model="money" @input="cny()"/>
+            <div class="info clearfix"><span>金额</span>
+               <span class="span" v-if="money!=''">CNY</span><input type="number" placeholder="请输入金额" v-model="money" @input="cny()"/>
             </div>
             <div class="bor"></div>
             <div class="money clearfix">

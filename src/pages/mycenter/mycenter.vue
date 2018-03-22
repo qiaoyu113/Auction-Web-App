@@ -110,7 +110,6 @@
             getUsers:function(){
                 let that=this
                  commonService.getUsers().then(function(res){
-                    console.log(res)
                     that.user=res.data.datas.user
               })
 

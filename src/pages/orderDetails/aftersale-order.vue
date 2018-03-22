@@ -8,7 +8,7 @@
     1，退货中
     2，审核中
     3，退款成功 -->
-    <div class="" id="" v-set-title="title">
+    <div class="aftersale-order" id="" v-set-title="title">
         <div class="header">传家</div>
         <div class="nav">
             <span class="" @click="Return()">&lt;</span> 
@@ -193,6 +193,7 @@ import {commonService} from '../../service/commonService.js'
     /*rem等基本设置都放在base中，不写多个*/
     @import url('../../assets/css/base.less');
     @import url('../../assets/css/icon/iconfont.css');
+    .aftersale-order{
     .header{
         position: fixed;
         top: 0;
@@ -514,5 +515,6 @@ import {commonService} from '../../service/commonService.js'
         }
     }
 }    
+}
 </style>
 

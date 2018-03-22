@@ -67,6 +67,12 @@
                                         let id = window.localStorage.getItem('id');
                                         that.$router.push({name:'auctionMore',params:{id:id}})
                                     }
+                                    if(route == 'recharge'){
+                                        that.$router.push({name:'recharge'})
+                                    }
+                                     if(route == 'cash'){
+                                        that.$router.push({name:'cash'})
+                                    }
                                 },
                                 cancel:function(){
                                     window.localStorage.removeItem('checked');
@@ -75,6 +81,12 @@
                                     if(route == 'auction'){
                                         let id = window.localStorage.getItem('id');
                                         that.$router.push({name:'auctionMore',params:{id:id}})
+                                    }
+                                    if(route == 'recharge'){
+                                        that.$router.push({name:'recharge'})
+                                    }
+                                    if(route == 'cash'){
+                                        that.$router.push({name:'cash'})
                                     }
                                 }
                             });

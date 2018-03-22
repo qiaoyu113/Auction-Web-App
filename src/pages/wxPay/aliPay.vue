@@ -25,6 +25,12 @@
             if(route == 'auction'){
                 that.$router.push({name:'auctionMore',params:{id:id}})
             }
+            if(route == 'recharge'){
+               that.$router.push({name:'recharge'})
+             }
+             if(route == 'cash'){
+               that.$router.push({name:'cash'})
+             }
         },
         methods: {
 

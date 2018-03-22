@@ -58,14 +58,14 @@
             <div  v-if='index==1&&flag==1'>
                 <div class="info1"><span>提现金额</span>
                      <span class="span">CNY</span>
-                    <input type="" placeholder="请输入金额" disabled="disabled" v-model="money"/>
+                    <input type="number" placeholder="请输入金额" disabled="disabled" v-model="money"/>
                 </div>
                 <div class="info"><span>支付宝帐号</span>
-                    <input type="" placeholder="请输入支付宝帐号" v-model="account"/>
+                    <input type="text" placeholder="请输入支付宝帐号" v-model="account"/>
                     <div class="infoClose" @click='removeAccount'><i class="iconfont icon-closeicon"></i></div>
                 </div>
                 <div class="info"><span>姓名</span>
-                    <input type="" placeholder="请输入姓名" v-model="userName"/>
+                    <input type="text" placeholder="请输入姓名" v-model="userName"/>
                     <div class="infoClose" @click='removeName'><i class="iconfont icon-closeicon"></i></div>
                 </div>
             </div>
@@ -73,49 +73,49 @@
             <div  v-if='index==1&&flag==2'>
                 <div class="info1"><span>提现金额</span>
                      <span class="span">CNY</span>
-                    <input type="" placeholder="请输入金额" disabled="disabled" v-model="money"/>
+                    <input type="number" placeholder="请输入金额" disabled="disabled" v-model="money"/>
                 </div>
                 <div class="info"><span>姓名</span>
-                    <input type="" placeholder="请输入收款方姓名" v-model="userBankName"/>
+                    <input type="text" placeholder="请输入收款方姓名" v-model="userBankName"/>
                     <div class="infoClose" @click='removeName'><i class="iconfont icon-closeicon"></i></div>
                 </div>
                 <div class="info"><span>银行</span>
-                    <input type="" placeholder="请选择银行" v-model="userBank"/>
+                    <input type="text" placeholder="请选择银行" v-model="userBank"/>
                     <div class="infomore" @click='removeAccount'><i class="more">...</i></div>
                 </div>
                 <div class="info"><span>银行卡号</span>
-                    <input type="" placeholder="请输入银行卡号" v-model="userBankCardNo"/>
+                    <input type="number" placeholder="请输入银行卡号" v-model="userBankCardNo"/>
                     <div class="infoClose" @click='removeAccount'><i class="iconfont icon-closeicon"></i></div>
                 </div>
                 <div class="info"><span>开户省市</span>
-                    <input type="" placeholder="请选择开户省市" v-model="userBankProvince"/>
+                    <input type="text" placeholder="请选择开户省市" v-model="userBankProvince"/>
                     <div class="infomore" @click='removeAccount'><i class="more">...</i></div>
                 </div>
                 <div class="info"><span>开户银行</span>
-                    <input type="" placeholder="请输入开户银行" v-model="userBankDetail"/>
+                    <input type="text" placeholder="请输入开户银行" v-model="userBankDetail"/>
                     <div class="infoClose" @click='removeAccount'><i class="iconfont icon-closeicon"></i></div>
                 </div>
             </div>
             <!-- 身份验证 -->
             <div  v-if='index==2'>
                 <div class="info"><span>姓名</span>
-                    <input type="" placeholder="请输入姓名" v-model="name"/>
+                    <input type="text" placeholder="请输入姓名" v-model="name"/>
                     <div class="infoClose" @click='removeName'><i class="iconfont icon-closeicon"></i></div>
                 </div>
                 <div class="info"><span>身份证号码</span>
-                    <input type="" placeholder="请输入身份证号码" v-model="namecard"/>
+                    <input type="number" placeholder="请输入身份证号码" v-model="namecard"/>
                     <div class="infoClose" @click='removeNamecard'><i class="iconfont icon-closeicon"></i></div>
                 </div>
                 <div class="info"><span>手机号码</span>
-                    <input type="" placeholder="请输入手机号码" v-model="phone"/>
+                    <input type="number" placeholder="请输入手机号码" v-model="phone"/>
                     <div class="infoClose" @click='removePhone'><i class="iconfont icon-closeicon"></i></div>
                 </div>
                 <div class="info"><span>图片验证码</span>
-                    <input type="" placeholder="请输入验证码" v-model='kaptchaValue'/>
+                    <input type="text" placeholder="请输入验证码" v-model='kaptchaValue'/>
                     <div class="infoClose" @click="getKaptchas()"><img :src="img.imageString"/></div>
                 </div>
                 <div class="info"><span>验证码</span>
-                    <input type="" placeholder="请输入验证码" v-model='verification'/>
+                    <input type="number" placeholder="请输入验证码" v-model='verification'/>
                     <div class="infoClose" @click="getFormssms">获取验证码<i v-if="count!=0">({{count}}s)</i></div>
                 </div>
             </div>
@@ -132,8 +132,8 @@
                     <div class="infoClose" v-if="list.applyTime!=null">{{list.applyTime | stampFormate2}}</div>
                 </div>
                 <div class="info"><span>交易种类</span>
-                    <div class="infoClose" v-if="list.channelId=='ALIPAY_WAP'">支付宝提现</div>
-                     <div class="infoClose" v-if="list.channelId=='OFFLINE_BANK'">线下提现</div>
+                    <div class="infoClose" v-if="list.channelId=='ALIPAY_WAP'">提现</div>
+                     <div class="infoClose" v-if="list.channelId=='OFFLINE_BANK'">提现</div>
                 </div>
                 <div class="info"><span>提现方式</span>
                     <div class="infoClose">
@@ -277,7 +277,6 @@ import {commonService} from '../../service/commonService.js'
              let that = this;
             if(that.count==0){
                  commonService.getFormssms({phone:that.phone,type:7,idCard:that.namecard,realName:that.name,kaptchaKey:that.img.kaptchaKey,kaptchaValue:that.kaptchaValue}).then(function(res){
-                    console.log(res)
                     if(res.data.message!= 'success'){
                        that.htmlx=res.data.message
                       return false 
@@ -337,7 +336,7 @@ import {commonService} from '../../service/commonService.js'
                 let money=that.money * 100
               
                  commonService.postForms({channelId:channelId,channelUser:that.account,phone:that.phone,type:type,idCard:that.namecard,userName:that.userName,smsCode:that.verification,smsType:7,amount:money,realName:that.name,userBankName:that.userBankName,userBank:that.userBank,userBankCardNo:that.userBankCardNo,userBankProvince:that.userBankProvince,userBankCity:null,userBankDetail:that.userBankDetail}).then(function(res){                    //市
-                    console.log(res)
+                    // console.log(res)
                     if(res.data.message=='success'){
                        that.oddNumbers=res.data.datas 
                        that.getForms()
@@ -350,7 +349,6 @@ import {commonService} from '../../service/commonService.js'
              getForms:function(){
                 let that = this;
                  commonService.getForms(that.oddNumbers).then(function(res){
-                    console.log(res)
                     that.list=res.data.datas
                     
                  })
@@ -364,19 +362,19 @@ import {commonService} from '../../service/commonService.js'
     /*rem等基本设置都放在base中，不写多个*/
     @import url('../../assets/css/base.less');
     @import url('../../assets/css/icon/iconfont.css');
-    .cashstep{
-    .header{
-        position: fixed;
-        top: 0;
-        z-index: 100;
-        width: @size375;
-        height: @size45;
-        background:rgba(2, 10, 2, 1);
-        font-size: @size20;
-        color: white;
-        text-align: center;
-        line-height: @size45;
-    }
+  .cashstep{
+    // .header{
+    //     position: fixed;
+    //     top: 0;
+    //     z-index: 100;
+    //     width: @size375;
+    //     height: @size45;
+    //     background:rgba(2, 10, 2, 1);
+    //     font-size: @size20;
+    //     color: white;
+    //     text-align: center;
+    //     line-height: @size45;
+    // }
     .nav{
         width: @size375;
         height: @size35;
