@@ -153,7 +153,6 @@ import {commonService} from '../../service/commonService.js'
     },
     methods: {
 
-
             Routes:function(){
                  if(this.type==1){
                      this.$router.push({path:"/myaccount"})   
@@ -169,6 +168,7 @@ import {commonService} from '../../service/commonService.js'
                    this.money=this.$route.query.money / 100
                 }
                 this.orderNo=this.$route.query.orderNo
+
                 
             },
             Return:function(){
@@ -252,6 +252,7 @@ import {commonService} from '../../service/commonService.js'
                     }
                     that.htmlx=''
                     let money = that.money * 100
+
                commonService.postForms({channelId:'OFFLINE_BANK',lastNum:that.lastNum,userBankDetail:that.userBankDetail,userBankCardNo:that.userBankCardNo,phone:that.phone,type:that.type,userBankName:that.name,amount:money,bankId:that.bankCardId,orderNo:that.orderNo}).then(function(res){
                 // console.log(res)
                     if(res.data.message=='success'){

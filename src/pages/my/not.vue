@@ -19,7 +19,7 @@
 
                  <div class="ros_l2">{{list.auctionCollect.newPrice | money}} CNY</div>
                  <div class="ros_l3">{{list.auction.title}}</div>
-                 <div class="ros_l3">{{list.auction.auctionStartTime | stampFormate}}-{{list.auction.no}}</div>
+                 <div class="ros_l3">LOT-{{list.auction.completeNo}}</div>
              </div>
              <div class="ros_r" @click="Router(list.id)"><img :src="picHead + list.auction.picItems[0]"/></div>
            
@@ -49,7 +49,7 @@
 
                  <div class="ros_l2">{{list.auctionCollect.newPrice | money}} CNY</div>
                  <div class="ros_l3">{{list.auction.title}}</div>
-                 <div class="ros_l3">{{list.auction.auctionStartTime | stampFormate}}-{{list.auction.no}}</div>
+                 <div class="ros_l3">LOT-{{list.auction.completeNo}}</div>
              </div>
              <div class="ros_r" @click="Router(list.id)"><img :src="picHead + list.auction.picItems[0]"/></div>
            
@@ -79,7 +79,7 @@
 
                  <div class="ros_l2">{{list.auctionCollect.newPrice | money}} CNY</div>
                  <div class="ros_l3">{{list.auction.title}}</div>
-                 <div class="ros_l3">{{list.auction.auctionStartTime | stampFormate}}-{{list.auction.no}}</div>
+                 <div class="ros_l3">LOT-{{list.auction.completeNo}}</div>
              </div>
              <div class="ros_r" @click="Router(list.id)"><img :src="picHead + list.auction.picItems[0]"/></div>
            
@@ -109,7 +109,7 @@
 
                  <div class="ros_l2">{{list.auctionCollect.newPrice | money}} CNY</div>
                  <div class="ros_l3">{{list.auction.title}}</div>
-                 <div class="ros_l3">{{list.auction.auctionStartTime | stampFormate}}-{{list.auction.no}}</div>
+                 <div class="ros_l3">LOT-{{list.auction.completeNo}}</div>
              </div>
              <div class="ros_r" @click="Router(list.id)"><img :src="picHead + list.auction.picItems[0]"/></div>
            
@@ -139,7 +139,7 @@
 
                  <div class="ros_l2">{{list.auctionCollect.newPrice | money}} CNY</div>
                  <div class="ros_l3">{{list.auction.title}}</div>
-                 <div class="ros_l3">{{list.auction.auctionStartTime | stampFormate}}-{{list.auction.no}}</div>
+                 <div class="ros_l3">LOT-{{list.auction.completeNo}}</div>
              </div>
              <div class="ros_r" @click="Router(list.id)"><img :src="picHead + list.auction.picItems[0]"/></div>
            

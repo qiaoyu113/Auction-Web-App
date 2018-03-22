@@ -148,8 +148,13 @@
                     }else{
                         let money=that.money * 100
                        commonService.postForms({amount:money,type:2,channelId:'WX_JSAPI'}).then(function(res){
-                          console.log(res)
-                              
+
+                          if(res.data.code==200){
+
+                              that.$router.push({path:"/cashstep",query:{money:that.money,index:that.index}}) 
+                          }else{
+                            that.prompt=res.data.message
+                          } 
                        })
 
                     }
