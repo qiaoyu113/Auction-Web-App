@@ -1,5 +1,5 @@
 <template>
-    <div id="home" v-set-title="title">
+    <div id="home" class="saveName" v-set-title="title">
         <div class="header">
             <div class="headerLeft">
                 <div class="headerEn">{{header.name}}</div>
@@ -89,6 +89,7 @@
 <style lang="less">
     /*rem等基本设置都放在base中，不写多个*/
     @import url('../../assets/css/base.less');
+    .saveName{
     .header{
         width:100%;
         height:3.7rem;
@@ -251,5 +252,6 @@
             border-top:1px solid #1A242E;
         }
     }
+}
 </style>
 

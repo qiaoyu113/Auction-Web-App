@@ -1,5 +1,5 @@
 <template>
-    <div id="home" v-set-title="title">
+    <div id="home" class="newPhone" v-set-title="title">
         <div class="header">
             <div class="headerLeft">
                 <div class="headerEn">{{header.name}}</div>
@@ -131,6 +131,7 @@
 <style lang="less">
     /*rem等基本设置都放在base中，不写多个*/
     @import url('../../assets/css/base.less');
+  .newPhone{
     .header{
         width:100%;
         height:3.7rem;
@@ -343,5 +344,6 @@
         /*overflow: hidden;*/
     }
     }
+}
 </style>
 

@@ -67,6 +67,12 @@
                                         window.localStorage.setItem('routerName','wxPay');
                                         that.$router.replace({name:'auctionMore',params:{id:id},query:{pay:true}})
                                     }
+                                    if(route == 'recharge'){
+                                        that.$router.push({name:'recharge'})
+                                    }
+                                     if(route == 'cash'){
+                                        that.$router.push({name:'cash'})
+                                    }
                                 },
                                 cancel:function(){
                                     window.localStorage.removeItem('checked');
@@ -75,6 +81,12 @@
                                         let id = window.localStorage.getItem('id');
                                         window.localStorage.setItem('routerName','wxPay');
                                         that.$router.replace({name:'auctionMore',params:{id:id},query:{pay:false}})
+                                    }
+                                    if(route == 'recharge'){
+                                        that.$router.push({name:'recharge'})
+                                    }
+                                    if(route == 'cash'){
+                                        that.$router.push({name:'cash'})
                                     }
                                 }
                             });

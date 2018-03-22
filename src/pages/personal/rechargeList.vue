@@ -53,23 +53,23 @@
             <!-- 填写银行卡信息 -->
             <div  v-if='index==2'>
                 <div class="info"><span>汇款人</span>
-                    <input type="" placeholder="请输入汇款人姓名" v-model="name"/>
+                    <input type="text" placeholder="请输入汇款人姓名" value="name" v-model="name"/>
                     <div class="infoClose" @click='removeName'><i class="iconfont icon-closeicon"></i></div>
                 </div>
                 <div class="info"><span>开户银行</span>
-                    <input type="" placeholder="请输入开户银行" v-model="userBankDetail"/>
+                    <input type="text" placeholder="请输入开户银行" value="userBankDetail" v-model="userBankDetail"/>
                     <div class="infomore" @click='removeAccount'><i class="iconfont icon-closeicon"></i></div>
                 </div>
                 <div class="info"><span>银行卡号</span>
-                    <input type="" placeholder="请输入银行卡号" v-model="userBankCardNo"/>
+                    <input type="number" placeholder="请输入银行卡号" value="userBankCardNo" v-model="userBankCardNo"/>
                     <div class="infoClose" @click='removeAccount'><i class="iconfont icon-closeicon"></i></div>
                 </div>
                <div class="info1"><span>汇款金额</span>
                      <span class="span">CNY</span>
-                    <input type="" placeholder="请输入金额" disabled="disabled" v-model="money"/>
+                    <input type="number" placeholder="请输入金额" disabled="disabled" v-model="money"/>
                 </div>
                 <div class="info"><span>手机号码</span>
-                    <input type="" placeholder="请输入手机号码" v-model="phone"/>
+                    <input type="number" placeholder="请输入手机号码" value="phone" v-model="phone"/>
                     <div class="infoClose" @click='removeAccount'><i class="iconfont icon-closeicon"></i></div>
                 </div>
             </div>
@@ -87,7 +87,7 @@
                     <div class="infoClose" v-if="list.applyTime!=null">{{list.applyTime | stampFormate2}}</div>
                 </div>
                 <div class="info"><span>交易种类</span>
-                    <div class="infoClose" v-if="list.status==1">线下充值</div>
+                    <div class="infoClose" v-if="list.status==1">充值</div>
                 </div>
                 <div class="info"><span>支付方式</span>
                     <div class="infoClose">
@@ -419,6 +419,7 @@ import {commonService} from '../../service/commonService.js'
                     // color: red;
                     font-weight: bold;
                     text-align: right;
+                    background: #fff;
                     // padding-right: @size3;
                 }
                 .infoClose{

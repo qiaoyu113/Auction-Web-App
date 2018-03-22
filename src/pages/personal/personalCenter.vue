@@ -5,7 +5,7 @@
     <!-- 个人中心 -->
     <div class="personalCenter" id="" v-set-title="title">
         
-        <div class="header">传家</div>
+        <!-- <div class="header">传家</div> -->
         <div class="content" v-if="logined">
             <div class="box clearfix ">
                 <div class="boxImg fl" @click="mycenter()">
@@ -75,7 +75,7 @@
                 <div class="pic"><span class="iconfont icon-tupian"></span></div>
                 <div class="hel">HELLO!</div>
                 <div class="log">请登录</div>
-                <div class="link" @click="logins">快来登录，和我们一起没羞没臊的捡漏吧！</div>
+                <div class="link" @click="logins()">快来登录，和我们一起没羞没臊的捡漏吧！</div>
             </div>
             <div class="center">
                 <div class="address  clearfix">
@@ -184,7 +184,9 @@
                  commonService.getUsers().then(function(res){
                     if(res.data.code==200){
                       that.list=res.data.datas.user
-                       that.totalMoney=that.list.wallet.totalMoney
+                       if(that.list.wallet!=null){
+                        that.totalMoney=that.list.wallet.totalMoney
+                       }
                       that.numItem=that.list.numItem  
                     }else{
                         that.logined=false
