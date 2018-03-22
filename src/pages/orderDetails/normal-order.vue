@@ -94,11 +94,11 @@
                 <div>{{adress.detailAdress}}</div>
             </div>
             <div class="itemInfo clearfix">
-                <div class="pic fl"><img src="../../assets/image/myimage/eg.gif" alt=""></div>
+                <div class="pic fl" @click="Routerid(orderDetail.auctionId)"><img :src="picHead + orderDetail.picItems[0]" alt=""></div>
                 <div class="box fl">
-                    <div class="money">{{orderDetail.finalPrice}}CNY</div>
+                    <div class="money">{{orderDetail.finalPrice | money}}CNY</div>
                     <div class="title">{{orderDetail.auctionName}}</div>
-                    <div class="number">{{datas.createTime}}-{{orderDetail.auctionNo}}</div>
+                    <div class="number">LOT-{{orderDetail.auctionNo}}</div>
                 </div>
             </div>
             <div class="totalMoney clearfix">
@@ -191,7 +191,18 @@ import {commonService} from '../../service/commonService.js'
           
       }
     },
-    components: {},
+     computed: {
+            //将存在store中的数据取出
+            listImg() {
+                return this.$store.state.homeStore.listImg || []
+            },
+            noticelist() {
+                return this.$store.state.homeStore.noticelist || []
+            },
+            picHead() {
+                return this.$store.state.picHead
+            },
+        },
     mounted () {
         this.huoqu()
         this.getOrderid()
@@ -199,6 +210,9 @@ import {commonService} from '../../service/commonService.js'
     methods: {
         Return:function(){
             window.history.go(-1)
+        },
+        Routerid:function(id){
+            this.$router.push({name:'auctionMore',params:{id:id}})
         },
         kshow:function(){
             if(this.ity==true){
@@ -264,6 +278,7 @@ import {commonService} from '../../service/commonService.js'
                 that.datas=res.data.datas
                    that.method=that.datas.channelId
                 that.orderDetail=that.datas.orderDetail
+                console.log(that.orderDetail)
                 that.adress=that.orderDetail.adress
 
                  let orderLogs = res.data.datas.orderLogs
