@@ -94,7 +94,7 @@
                 <div>{{adress.detailAdress}}</div>
             </div>
             <div class="itemInfo clearfix">
-                <div class="pic fl" @click="Routerid(orderDetail.auctionId)"><img :src="picHead + orderDetail.picItems[0]" alt=""></div>
+                <div class="pic fl" @click="Routerid(orderDetail.auctionId)"><img :src="picHead + orderDetail.picItems[0]" alt="" v-if="orderDetail.picItems!=null"></div>
                 <div class="box fl">
                     <div class="money">{{orderDetail.finalPrice | money}}CNY</div>
                     <div class="title">{{orderDetail.auctionName}}</div>
@@ -107,7 +107,7 @@
             </div>
             <div class="moneys">
                 <div class="price clearfix"><div class="fl">拍品价格:</div><div class="fr">{{orderDetail.finalPrice | money}} CNY</div></div>
-                <div class="price clearfix"><div class="fl">保险+运费:</div><div class="fr">{{orderDetail.finalPrice | money}} CNY</div></div>
+                <div class="price clearfix"><div class="fl">保险+运费:</div><div class="fr">{{orderDetail.finalPrice / 10000}} CNY</div></div>
             </div>
             <div class="orderinfo">
                 <div class="price clearfix"><div class="fl">订单编号:</div><div class="fr">{{orderDetail.adminId}}</div></div>
@@ -241,7 +241,7 @@ import {commonService} from '../../service/commonService.js'
               let index=''
               if(that.method=='UNIONPAY'){
                      index=3
-            that.$router.push({path:"/rechargeList",query:{money:that.datas.amount,index:index,orderNo:that.datas.adminId,type:4}})
+            that.$router.push({path:"/rechargeList",query:{money:that.datas.amount,index:index,orderNo:that.orderNo,type:4}})
             }
              // 微信
               if(that.method=='WX_JSAPI'){
@@ -265,7 +265,7 @@ import {commonService} from '../../service/commonService.js'
                     window.localStorage.setItem('orderNo',orderNo);
                     commonService.putOrders({orderNo:orderNo,channelId:'ALIPAY_WAP'}).then(function(res){
                         if(res.data.success){
-                             console.log(res)
+ 
                             let payOK = document.getElementsByClassName("payOK");
                                payOK[0].innerHTML = res.data.datas.payUrl;
                                document.punchout_form.submit()
@@ -277,10 +277,10 @@ import {commonService} from '../../service/commonService.js'
          getOrderid:function(){
             let that=this;
             commonService.getOrderid(that.orderNo).then(function(res){
+      
                 that.datas=res.data.datas
                    that.method=that.datas.channelId
                 that.orderDetail=that.datas.orderDetail
-                console.log(that.orderDetail)
                 that.adress=that.orderDetail.adress
 
                  let orderLogs = res.data.datas.orderLogs

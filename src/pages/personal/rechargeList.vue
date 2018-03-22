@@ -81,8 +81,8 @@
                     <div class="infoClose">{{list.no}}</div>
                 </div>
                 <div class="info"><span>交易金额</span>
-                    <div class="infoClose"><span class="span1" v-if="type==1">{{list.amount}}CNY</span>
-                                            <span class="span1"  v-if="type==4">{{list.amount | money}}CNY</span>
+                    <div class="infoClose">
+                         <span class="span1">{{list.amount | money}}CNY</span>
                        </div>
                 </div>
                 <div class="info"><span>交易时间</span>
@@ -139,6 +139,7 @@ import {commonService} from '../../service/commonService.js'
           lastNum:'',
           htmlx:'',
           type:'',
+          orderNo:'',
 
       }
     },
@@ -154,7 +155,12 @@ import {commonService} from '../../service/commonService.js'
 
 
             Routes:function(){
-                  this.$router.push({path:"/myaccount"})   
+                 if(this.type==1){
+                     this.$router.push({path:"/myaccount"})   
+                 }else{
+                    this.$router.push({path:"/normalorder",query:{id:this.orderNo}})  
+                 }
+                  
             },
             moneys:function(){
                 if(this.type==1){
@@ -162,6 +168,7 @@ import {commonService} from '../../service/commonService.js'
                 }else{
                    this.money=this.$route.query.money / 100
                 }
+                this.orderNo=this.$route.query.orderNo
                 
             },
             Return:function(){
@@ -244,11 +251,8 @@ import {commonService} from '../../service/commonService.js'
                         return false
                     }
                     that.htmlx=''
-
-
                     let money = that.money * 100
-
-               commonService.postForms({channelId:'OFFLINE_BANK',lastNum:that.lastNum,userBankDetail:that.userBankDetail,userBankCardNo:that.userBankCardNo,phone:that.phone,type:that.type,userBankName:that.name,amount:money,bankId:that.bankCardId}).then(function(res){
+               commonService.postForms({channelId:'OFFLINE_BANK',lastNum:that.lastNum,userBankDetail:that.userBankDetail,userBankCardNo:that.userBankCardNo,phone:that.phone,type:that.type,userBankName:that.name,amount:money,bankId:that.bankCardId,orderNo:that.orderNo}).then(function(res){
                 // console.log(res)
                     if(res.data.message=='success'){
                        that.oddNumbers=res.data.datas 

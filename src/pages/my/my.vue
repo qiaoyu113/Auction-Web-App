@@ -61,7 +61,7 @@
         },
         methods: {
             show:function(id){
-              console.log(id)
+           
                this.indexs=id
             }
 

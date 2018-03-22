@@ -193,7 +193,7 @@
             getKaptchas:function(){
                 let that=this
                  commonService.getKaptchas().then(function(res){
-                    console.log(res)
+
                     that.img=res.data.datas
               })
             },
@@ -327,7 +327,7 @@
                         if(that.password == that.password2){
                             if(that.code != ''){
                                 commonService.putUserss({infoKey:infoKey,type:1,smsCode:that.code,phone:that.phone,platfrom:'WXH5',password:that.password}).then(function(res){
-                                    console.log(res)
+               
                                     if(res.data.code === 512104){
                                         that.hint2 = true;
                                         that.hint2Text = '短信验证码已过期';
