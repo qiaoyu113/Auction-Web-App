@@ -26,18 +26,22 @@
             <li class="fl" @click="checked(0)">
                 <img v-if="index == 0" src="../../assets/image/mycenter/c1.png"/>
                 <img v-if="index != 0" src="../../assets/image/mycenter/i1.png"/>
+                <p :class="index == 0 ? '':'pc'">专题</p>
             </li>
             <li class="fl" @click="checked(1)">
                 <img v-if="index == 1" src="../../assets/image/mycenter/c2.png"/>
                 <img v-if="index != 1" src="../../assets/image/mycenter/i2.png"/>
+                <p :class="index == 1 ? '':'pc'">专场</p>
             </li>
             <li class="fl" @click="checked(2)">
                 <img v-if="index == 2" src="../../assets/image/mycenter/c3.png"/>
                 <img v-if="index != 2" src="../../assets/image/mycenter/i3.png"/>
+                <p :class="index == 2 ? '':'pc'">我的</p>
             </li>
             <li class="fl" @click="checked(3)">
                 <img v-if="index == 3" src="../../assets/image/mycenter/c4.png"/>
                 <img v-if="index != 3" src="../../assets/image/mycenter/i4.png"/>
+                <p :class="index == 3 ? '':'pc'">个人</p>
             </li>
         </ul>
     </div>
@@ -139,9 +143,16 @@
                     border: none;
                 }
                 img{
-                    width:0.9rem;
-                    height:0.9rem;
-                    margin-top:0.1rem;
+                    width: 0.8rem;
+                    height: 0.8rem;
+                    margin-top: 0.03rem;
+                }
+                p{
+                    margin-top: -0.5rem;
+                    font-size: 8px;
+                }
+                .pc{
+                    color:#A5ACB1;
                 }
             }
             .check{

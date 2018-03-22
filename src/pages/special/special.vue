@@ -9,10 +9,10 @@
             </div>
             <div id="mescroll" class="mescroll">
                 <div class="mescroll-bounce">
-                    <div v-for="(list,index) in specialRun" @click="goSellMore(list.id)">
+                    <div v-for="(list,index) in specialRun">
                         <div class="sell">
                             <!-- 内容部分 -->
-                            <div class="sell-content" v-if="checked != 3">
+                            <div class="sell-content" v-if="checked != 3"  @click="goSellMore(list.id)">
                                 <div class="sell-time">{{list.EndTime}}</div>
                                 <div class="sell-title">{{list.name}}</div>
                                 <div class="sell-information">
@@ -24,7 +24,7 @@
                                     <span class="pos1"><img class="pos1img" src="../../assets/image/mycenter/zheng.png"/> {{list.auctionNum}}</span>
                                 </div>
                             </div>
-                            <div class="sell-content" v-if="checked === 3">
+                            <div class="sell-content" v-if="checked === 3"  @click="goSellMore(list.id)">
                                 <div class="sell-time">{{list.doneAmount}}CNY</div>
                                 <div class="sell-title">{{list.name}}</div>
                                 <div class="sell-information">
@@ -35,7 +35,7 @@
                             </div>
                             <!-- 图片部分，未实现完全 -->
                             <div class="sell-picture">
-                                <div class="sell-bpic">
+                                <div class="sell-bpic"  @click="goSellMore(list.id)">
                                     <img :src="$store.state.picHead + list.coverUrl">
                                 </div>
                                 <div class="date">
@@ -72,8 +72,8 @@
                                     <div class="sell-box">
                                         <div class="sell-spic">
                                             <ul>
-                                                <li v-for="(image,index) in img" v-if="index <= 9">
-                                                    <img :src="$store.state.picHead + image">
+                                                <li v-for="(image,index) in img" v-if="index <= 9" @click="goAuction(image.id)">
+                                                    <img :src="$store.state.picHead + image.img">
                                                 </li>
                                             </ul>
                                             <div class="addIcon" v-if="img.length === 10" @click="goSellMore(list.id)">
@@ -179,7 +179,7 @@
                         isBounce: false, //此处禁止ios回弹,解析(务必认真阅读,特别是最后一点): http://www.mescroll.com/qa.html#q10
                     },
                     down: {
-                        callback: that.downCallback //下拉刷新的回调,别写成downCallback(),多了括号就自动执行方法了
+                        callback: that.downCallback, //下拉刷新的回调,别写成downCallback(),多了括号就自动执行方法了
                     }
                 });
             },
@@ -258,7 +258,7 @@
                                     let now = new Date().getTime()
                                     let time = '';
                                     if(that.checked == '2'){
-                                        time = specialist[i].auctionEndTime - now;
+                                        time = specialist[i].mqEndTime - now;
                                     }else{
                                         time = specialist[i].auctionStartTime - now;
                                     }
@@ -290,7 +290,7 @@
                                         let now = new Date().getTime()
                                         let time = '';
                                         if(that.checked == '2'){
-                                            time = specialist[i].auctionEndTime - now;
+                                            time = specialist[i].mqEndTime - now;
                                         }else{
                                             time = specialist[i].auctionStartTime - now;
                                         }
@@ -393,7 +393,12 @@
             goSellMore(id){
                 let that = this;
                 that.$router.push({name:'specialMore',params:{id:id}})
-            }
+            },
+            //跳转详情页
+            goAuction(id){
+                let that = this;
+                that.$router.push({name:'auctionMore',params:{id:id}})
+            },
         }
     }
 

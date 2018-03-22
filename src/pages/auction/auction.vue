@@ -43,7 +43,7 @@
                                     </span>
                                 </div>
                                 <div class="info">
-                                    <p>编号：{{details.completeNo}}</p>
+                                    <p>LOT-{{details.completeNo}}</p>
                                     <p v-for="item in details.authors">作者：<span style="margin-right:0.1rem;">{{item.name}}</span></p>
                                     <div v-for="(item,key) in details.properties">
                                      <p>{{key}}：{{item}}</p>
@@ -287,22 +287,28 @@
         </div>
         <!--当前价格-->
         <div class="footer" v-else-if="details.auctionStatus === 2">
-            <div class="value">
+            <div class="value" v-if="frozen && !latest">
                 <span :class="noPriceBtn ? 'btn1 nobtn1' : 'btn1'" @click="subtraction()">-</span>
                 <span class="price">{{reversedNum(bidPrice)}} CNY</span>
                 <span class="btn2" @click="addPrice()">+</span>
             </div>
-            <!--<div class="value">-->
-                <!--<span class='label'>保证金</span>-->
-                <!--<span class="price2">{{reversedNum(deposit)}} CNY</span>-->
-            <!--</div>-->
+            <div class="value2" v-if="frozen && latest">
+                <span :class="noPriceBtn ? 'btn1 nobtn1' : 'btn1'">-</span>
+                <span class="price">{{reversedNum(details.currentPrice)}} CNY</span>
+                <span class="btn2">+</span>
+            </div>
+            <div class="value" v-if="!frozen">
+                <span class='label'>保证金</span>
+                <span class="price2">{{reversedNum(deposit)}} CNY</span>
+            </div>
             <!--收藏状态-->
             <div class="r-icon" @click="collectBtn()">
                 <img v-if="hasCollect" src="../../assets/image/mycenter/collect.png"/>
                 <img v-if="!hasCollect" src="../../assets/image/mycenter/collectNo.png"/>
             </div>
-            <div class="offer" @click="offerPrice()" v-if="!BayOK">参与竞拍</div>
-            <div class="offer" @click="offerPrice()" v-if="BayOK">出 价</div>
+            <div class="offer" @click="offerPrice()" v-if="!frozen">参与竞拍</div>
+            <div class="offer" @click="offerPrice()" v-if="frozen && !latest">出 价</div>
+            <div class="offer2" v-if="frozen && latest">出价领先</div>
         </div>
         <!--交易结束的价格-->
         <div class="footer" v-else-if="details.auctionStatus === 3">
@@ -454,11 +460,7 @@
                 wxShow:false,//判断是否是微信打开
                 checked:false,//调用支付
                 hintText:'',//提示字体
-                pricerecord:[
-                    {money:'200,000CNY',
-                        name:'某某某',
-                        time:'2017.10.25 23:12:34'},
-                ],
+                pricerecord:[],
                 hasCollect:false,
                 noPriceBtn:true,//不能减价
                 ServiceBox:false,
@@ -472,6 +474,8 @@
                 },
                 auctionEndTime:'',
                 auctionEndTimeHMS:'',
+                frozen:false,//是否缴纳保证金
+                latest:false,//是否当前最高价
             }
         },
         components:{'z-foot':item,'z-info':info,'z-record':record,'z-payment':payment},
@@ -485,6 +489,18 @@
             that.checked = window.localStorage.getItem('checked');
             if(that.checked){
                 that.wxpay()
+            }
+            //是否支付成功
+            let payOk = that.$route.query.pay;
+            if(payOk != undefined){
+                if(payOk){
+                    that.dis2Show = false;
+                    that.dis3Show = true;
+                    that.hintText = '保证金支付成功';
+                }else{
+                    that.dis4Show = true;
+                    that.hintText = '保证金支付失败';
+                }
             }
             let token = window.localStorage.getItem('token');
             if(token != null){
@@ -582,10 +598,14 @@
             getListData:function(pageNum,pageSize,successCallback,errorCallback) {
                 //延时一秒,模拟联网
                 const that = this;
+                //插入统计数据
                 commonService.putInsertion({businessType:1}).then(function(res){})
                 //查看最高价和是否缴纳保证金
                 commonService.getHasCheck({auctionId:that.id}).then(function(res){
-                    console.log(res)
+                    if(res.data.code === 200){
+                        that.frozen = res.data.datas.frozen
+                        that.latest = res.data.datas.latest
+                    }
                 })
                 commonService.getAuction({id:that.id},that.id).then(function(res){
                     if(res.data.code === 200){
@@ -822,7 +842,12 @@
             //返回上一层
             back(){
                 let that = this;
-                that.$router.back(-1);
+                let routerBack = window.localStorage.getItem('routerName');
+                if(routerBack != 'wxPay'){
+                    that.$router.back(-1);
+                }else{
+                    that.$router.replace({name:'special'})
+                }
             },
             //页面滑动问题
             onMove:function(){
@@ -1097,6 +1122,7 @@
                             that.dis2Show = false;
                             that.dis3Show = true;
                             that.hintText = '保证金支付成功';
+                            that.onload()
                         }else{//支付宝
                             let orderNo = res.data.datas;
                             window.localStorage.setItem('orderNo',orderNo);
@@ -1237,7 +1263,7 @@
         },
         watch: {
             '$route' (to, from) {
-//                console.log(to.path)
+                console.log(from)
                 let that = this;
                 that.$router.go(0)
             },
@@ -1323,6 +1349,7 @@
             margin:auto;
             height:auto;
             overflow-y: scroll;
+            -webkit-overflow-scrolling:touch;
         }
         .sell-list{
             .sell-pic{
@@ -2563,12 +2590,12 @@
             }
             .value{
                 float: left;
-                /*width: 5.6rem;*/
                 height: 100%;
                 line-height: @size45;
                 position: relative;
                 text-align: center;
                 padding-left: 0.5rem;
+                box-sizing:border-box;
                 .nobtn1{
                     color:#E6E6E6 !important;
                 }
@@ -2593,6 +2620,47 @@
                     font-size: 14px;
                     width: 2.68rem;
                     font-weight: bold;
+                }
+                .price2{
+                    font-size: 14px;
+                    width: 2.68rem;
+                    font-weight: bold;
+                    color:#E85800;
+                }
+            }
+            .value2{
+                float: left;
+                /*width: 5.6rem;*/
+                height: 100%;
+                line-height: @size45;
+                position: relative;
+                text-align: center;
+                padding-left: 0.5rem;
+                .nobtn1{
+                    color:#E6E6E6 !important;
+                }
+                .btn1{
+                    width: 1.46rem;
+                    line-height:@size40;
+                    font-size: 35px;
+                    color: #E3E3E3;
+                    float: left;
+                }
+                .btn2{
+                    width: 1.46rem;
+                    line-height:@size40;
+                    font-size: 35px;
+                    color: #E3E3E3;
+                    float: right;
+                }
+                .label{
+                    font-size: 12px;
+                }
+                .price{
+                    font-size: 14px;
+                    width: 2.68rem;
+                    font-weight: bold;
+                    color:#E85800;
                 }
                 .price2{
                     font-size: 14px;
@@ -2627,6 +2695,17 @@
                 text-align: center;
                 line-height: @size45;
                 font-size: 14px;
+            }
+            .offer2{
+                float: right;
+                width: 3.1rem;
+                height: 100%;
+                box-sizing: border-box;
+                border-left:1px solid rgb(205, 212, 220);
+                text-align: center;
+                line-height: @size45;
+                font-size: 14px;
+                color:#E85800;
             }
         }
         .talk{
