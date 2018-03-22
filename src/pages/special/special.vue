@@ -470,6 +470,10 @@
                     padding-bottom: 0.2rem;
                     border-bottom: 2px solid black;
                     color: rgb(51, 51, 51);
+                    height: 1.07rem;
+                    display: block;
+                    width: 60%;
+                    margin: auto;
                 }
             }
         }

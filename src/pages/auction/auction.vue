@@ -326,7 +326,7 @@
         <div class="footer" v-else-if="details.auctionStatus === 4">
             <div class="value">
                 <span class='label'>起拍价格</span>
-                <span class="price">{{reversedNum(details.currentPrice)}} CNY</span>
+                <span class="price">{{reversedNum(details.basePrice)}} CNY</span>
             </div>
             <div class="r-icon" @click="collectBtn()">
                 <img v-if="hasCollect" src="../../assets/image/mycenter/collect.png"/>
@@ -352,7 +352,7 @@
                     <img src="../../assets/image/mycenter/mypriceno.png"/>
                     <div class="infoWexin">
                         <div class="span1">保证金可用金额支付</div>
-                        <div class="span2">保证金可用金额：{{userWallet}} CNY <span style="font-size:11px;color:#E95500;">余额不足</span></div>
+                        <div class="span2">保证金可用金额：{{reversedNum(userWallet)}} CNY <span style="font-size:11px;color:#E95500;">余额不足</span></div>
                     </div>
                 </div>
                 <div class="pay" @click="getIndex(0)" v-if="walletDate">
@@ -361,7 +361,7 @@
                     <img v-if="index!=0" src="../../assets/image/mycenter/mypriceno.png"/>
                     <div class="infoWexin">
                         <div :class="index==0 ? 'span3' : 'span1'">保证金可用金额支付</div>
-                        <div class="span2">保证金可用金额：{{userWallet}} CNY</div>
+                        <div class="span2">保证金可用金额：{{reversedNum(userWallet)}} CNY</div>
                     </div>
                 </div>
                 <div class="pay" @click="getIndex(1)" v-if="wxShow">
@@ -616,7 +616,7 @@
                             if(that.details.basePrice <= 10000){
                                 that.deposit = '10.00'
                             }else{
-                                let deposit = parseInt(that.details.basePrice * 0.1);
+                                let deposit = Math.round(that.details.basePrice/1000);
                                 that.deposit = deposit.toString() + '.00'
                             }
                         }
@@ -1015,21 +1015,10 @@
                             if(res.data.datas.user.wallet == null){
                                 that.userWallet = '0.00';
                             }else{
-                                let userWallet = res.data.datas.user.wallet.availableMoney/100;
-                                that.userWallet = userWallet.toString() + '.00';
+                                that.userWallet = Math.round(res.data.datas.user.wallet.availableMoney/100)
                             }
                             that.dis2Show = true;
-                            bidPrice = that.details.basePrice
-                            if(bidPrice === 0){
-                                that.deposit = '300.00'
-                            }else{
-                                if(bidPrice <= 10000){
-                                    that.deposit = '10.00'
-                                }else{
-                                    let deposit = parseInt(that.details.basePrice * 0.1);
-                                    that.deposit = deposit.toString() + '.00'
-                                }
-                            }
+
                             if(that.deposit*1 < that.userWallet*1){
                                 that.walletDate = true;
                                 that.getIndex(0)
@@ -1258,7 +1247,7 @@
             //跳查看规则
             goRule(){
                 let that = this;
-                that.$router.replace({name:'my'})
+                that.$router.replace({name:'helpcenter'})
             }
         },
         watch: {
