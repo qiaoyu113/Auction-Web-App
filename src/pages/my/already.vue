@@ -183,6 +183,7 @@
 
 <script>
     import {appService} from '../../service/appService'
+    import {common} from '../../assets/js/common/common'
     import {commonService} from '../../service/commonService.js' 
     export default {
         data () {
@@ -220,6 +221,7 @@
             }
         },
         mounted: function() {
+          common.onMove('.already')
           this.getCollect()
         },
         methods: {
@@ -275,6 +277,12 @@
     /*rem等基本设置都放在base中，不写多个*/
     @import url('../../assets/css/base.less');
     .already{
+          position: fixed;
+          left: 0;
+          right: 0;
+          top: 0;
+          overflow-x: scroll;
+          bottom: 0;
         .box{
             padding: @size10 @size20;
             .week{

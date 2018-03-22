@@ -57,6 +57,7 @@
 
 <script >
 import {appService} from '../../service/appService'
+import {common} from '../../assets/js/common/common'
 import {commonService} from '../../service/commonService.js'
   export default {
     props: ['str'],
@@ -90,6 +91,8 @@ import {commonService} from '../../service/commonService.js'
 
         },
     mounted () {
+        
+        common.onMove('.close-order')
         this.getOrderid()
     },
     methods: {
@@ -121,6 +124,12 @@ import {commonService} from '../../service/commonService.js'
     @import url('../../assets/css/base.less');
     @import url('../../assets/css/icon/iconfont.css');
     .close-order{
+        position: fixed;
+          left: 0;
+          right: 0;
+          top: 0;
+          overflow-x: scroll;
+          bottom: 0;
     .header{
         position: fixed;
         top: 0;

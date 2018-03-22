@@ -31,6 +31,7 @@
 
 <script>
     import {appService} from '../../service/appService'
+
     import {commonService} from '../../service/commonService.js'
     export default {
         data () {

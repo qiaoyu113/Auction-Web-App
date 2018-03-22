@@ -168,12 +168,13 @@
 
 <script >
 import {appService} from '../../service/appService'
+import {common} from '../../assets/js/common/common'
 import {commonService} from '../../service/commonService.js'
   export default {
     props: ['str'],
     data () {
       return {
-          title:'订单详情-订单正常',
+          title:'传家',
           arrays: [],
           index:0,
           orderNo:'',//详情id
@@ -204,6 +205,7 @@ import {commonService} from '../../service/commonService.js'
             },
         },
     mounted () {
+        common.onMove('.orderDetails')
         this.huoqu()
         this.getOrderid()
     },
@@ -378,6 +380,12 @@ import {commonService} from '../../service/commonService.js'
     @import url('../../assets/css/base.less');
     @import url('../../assets/css/icon/iconfont.css');
 .orderDetails{
+          position: fixed;
+          left: 0;
+          right: 0;
+          top: 0;
+          overflow-x: scroll;
+          bottom: 0;
     .header{
         position: fixed;
         top: 0;

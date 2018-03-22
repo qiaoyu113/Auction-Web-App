@@ -40,6 +40,7 @@
 
 <script >
 import {appService} from '../../service/appService'
+import {common} from '../../assets/js/common/common'
   export default {
     props: ['str'],
     data () {
@@ -52,6 +53,8 @@ import {appService} from '../../service/appService'
     },
     components: {},
     mounted () {
+        
+        common.onMove('.rules')
     },
     methods: {
         close:function() {
@@ -66,6 +69,12 @@ import {appService} from '../../service/appService'
     @import url('../../assets/css/base.less');
     @import url('../../assets/css/icon/iconfont.css');
     .rules{
+         position: fixed;
+          left: 0;
+          right: 0;
+          top: 0;
+          overflow-x: scroll;
+          bottom: 0;
     .header{
         position: fixed;
         top: 0;

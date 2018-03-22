@@ -109,6 +109,7 @@
 
 <script>
     import {appService} from '../../service/appService'
+    import {common} from '../../assets/js/common/common'
     import {commonService} from '../../service/commonService.js'
     export default {
         data () {
@@ -149,7 +150,7 @@
 
         },
         mounted: function() {
-            
+            common.onMove('.order')
             this.addresst()
             this.getAuctions()
             this.wxshow()
@@ -238,6 +239,12 @@
     /*rem等基本设置都放在base中，不写多个*/
     @import url('../../assets/css/base.less');
     .order{
+        position: fixed;
+          left: 0;
+          right: 0;
+          top: 0;
+          overflow-x: scroll;
+          bottom: 0;
        .top{
           padding: @size50 @size20;
           border-bottom: 2px solid rgb(53,60,70);
