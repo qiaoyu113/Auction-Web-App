@@ -4,7 +4,7 @@
          <div class="ros clearfix" v-for="list in datas">
              <div class="ros_l">
                 
-                 <div class="ros_l2">{{list.auctionCollect.newPrice}} CNY</div>
+                 <div class="ros_l2">{{list.auctionCollect.newPrice | money}} CNY</div>
                  <div class="ros_l3">{{list.auction.title}}</div>
                  <div class="ros_l3">LOT-{{list.auction.groupNo}}</div>
              </div>

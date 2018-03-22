@@ -5,14 +5,14 @@
          <div class="ros clearfix" v-for="list in datas">
              <div class="ros_l">
                  <div class="ros_l_top clearfix" v-if="list.auctionCollect.newPrice<list.auction.finalPrice">
-                      <div class="ros_offer">{{list.auction.finalPrice}} CNY</div>
+                      <div class="ros_offer">{{list.auction.finalPrice | money}} CNY</div>
                       <div class="ros_prompt">出价被超出</div>
                       <div class="ros_label">NEW</div>
                  </div>
                  <div class="ros_l_top clearfix" v-if="list.auctionCollect.newPrice==list.auction.finalPrice">
                       <div class="ros_prompt">暂时领先</div>
                  </div>
-                 <div class="ros_l2">{{list.auctionCollect.newPrice}} CNY</div>
+                 <div class="ros_l2">{{list.auctionCollect.newPrice | money}} CNY</div>
                  <div class="ros_l3">{{list.auction.title}}</div>
                  <div class="ros_l3">{{list.auction.auctionStartTime | stampFormate}}-{{list.auction.no}}</div>
              </div>

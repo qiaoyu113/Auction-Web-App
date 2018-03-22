@@ -1,5 +1,5 @@
 <template>
-    <div id="home" class="mycenter" v-set-title="title">
+    <div class="mycenter" v-set-title="title">
         <div class="header">
             <div class="headerLeft">
                 <div class="headerEn">{{header.name}}</div>

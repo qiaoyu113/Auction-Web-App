@@ -281,8 +281,8 @@ import {commonService} from '../../service/commonService.js'
                        that.htmlx=res.data.message
                       return false 
                     }else{
-                         // 倒计时
-              const TIME_COUNT = 90;   
+                  // 倒计时
+                 const TIME_COUNT = 90;   
                   if (!that.timer) {
                     that.count = TIME_COUNT;
                     that.show = false;
@@ -380,9 +380,7 @@ import {commonService} from '../../service/commonService.js'
         height: @size35;
         border-bottom: 0.5px solid rgb(53, 60, 70);
         background: rgb(255, 255, 255);
-        position: fixed;
-        top: @size45;
-        z-index: 100;
+     
         span{
             display: inline-block;
             line-height: @size30;
@@ -394,7 +392,7 @@ import {commonService} from '../../service/commonService.js'
         }
     }
     .content{
-        margin-top: @size80;
+    
         margin-bottom: 1.2rem;
         padding: 0 @size10;
         .info1{
@@ -417,14 +415,15 @@ import {commonService} from '../../service/commonService.js'
                 }
                 input{
                     width: 2rem;
-                    height: 100%;
+                    height: 1.rem;
                     float: right;
                     border: none;
                     outline: none;
                     font-size: @size12;
                     // color: red;
-                    font-weight: bold;
+                    // font-weight: bold;
                     text-align: right;
+                    background: #fff;
                     // padding-right: @size3;
                 }
                 .infoClose{
@@ -637,7 +636,7 @@ import {commonService} from '../../service/commonService.js'
             input{
                 // padding-left:2rem; 
                 width: 4rem;
-                height: 100%;
+                height: 1rem;
                 float: left;
                 border: none;
                 outline: none;
