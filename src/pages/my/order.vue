@@ -230,9 +230,7 @@
                 }
                  commonService.postOrders(that.auctionId,{addressId:that.address.id,channelId:channelIds}).then(function(res){
                     if(res.data.code==200){
-                        window.history.go(-1)
-                   // that.datas=res.data.datas
-                   // that.picItems=that.datas.picItems[0]
+                        that.$router.push({path:"/normalorder",query:{id:that.address.id}})
                     }
                 })
             }

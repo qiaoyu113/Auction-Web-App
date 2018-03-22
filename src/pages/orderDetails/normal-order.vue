@@ -762,6 +762,7 @@ import {commonService} from '../../service/commonService.js'
         text-align: center;
         line-height: 1.2rem;
         font-size: 15px;
+        background: #fff;
     }
     .footer{
         width: 100%;

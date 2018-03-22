@@ -27,15 +27,15 @@
                     <div class="font">全部订单</div>
                 </div>
                 <div class="litbox fl" @click="order(1)">
-                    <div class="pic"><i class="iconfont icon-tupian"></i><div class="number" v-if="numItem.noPayNum!=0">{{numItem.noPayNum}}</div></div>
+                    <div class="pic"><i class="iconfont icon-tupian"></i><div class="number" v-if="numItem.noPayNum!=0&&numItem.noPayNum!=null">{{numItem.noPayNum}}</div></div>
                     <div class="font">待付款</div>
                 </div>
                 <div class="litbox fl" @click="order(2)">
-                    <div class="pic"><i class="iconfont icon-tupian"></i><div class="number" v-if="numItem.noGetNum!=0">{{numItem.noGetNum}}</div></div>
+                    <div class="pic"><i class="iconfont icon-tupian"></i><div class="number" v-if="numItem.noGetNum!=0&&numItem.noPayNum!=null">{{numItem.noGetNum}}</div></div>
                     <div class="font">待收货</div>
                 </div>
                 <div class="litbox fl">
-                    <div class="pic"><i class="iconfont icon-tupian"></i><div class="number" v-if="numItem.saleNum!=0">{{numItem.saleNum}}</div></div>
+                    <div class="pic"><i class="iconfont icon-tupian"></i><div class="number" v-if="numItem.saleNum!=0&&numItem.noPayNum!=null">{{numItem.saleNum}}</div></div>
                     <div class="font">退款/售后</div>
                 </div>
             </div>
@@ -464,6 +464,7 @@
             padding-bottom: 2.4rem;
             ul {
                 width: @size375;
+                height: @size80;
                 position: relative;
                 li {
                     position: absolute;

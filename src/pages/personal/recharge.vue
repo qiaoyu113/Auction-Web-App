@@ -15,8 +15,10 @@
             <div class="fr" @click='Return()'>...</div>
         </div>
         <div class="box">
-            <div class="info clearfix"><span v-if="money==''">金额</span><span v-if="money!=''">金额</span>
-               <span class="span" v-if="money!=''">CNY</span><input type="number" placeholder="请输入金额" v-model="money" />
+            <div class="info clearfix"><span v-if="money==''">金额</span>
+               <span v-if="money!=''">金额</span>
+               <span class="span" v-if="money!=''">CNY</span>
+               <input type="number" placeholder="请输入金额" v-model="money"/>
                
             </div>
             <div class="canshoot">
@@ -35,8 +37,8 @@
                 <!-- <i :class="index==3 ? 'background3' : ''" class="iconfont icon-icon_zhifubao"></i> -->
                 <div class="infoAlipay">
                         <div class="span1" style="margin-top:2px;">我同意并理解
-                        <a href="javaScript:;">《竞拍协议》</a>和
-                        <a href="javaScript:;">《竞拍规则》</a></div>
+                        <a href="javaScript:;" @click="Helpcenter()">《竞拍协议》</a>和
+                        <a href="javaScript:;" @click="Helpcenter()">《竞拍规则》</a></div>
                     </div>
             </div>
             <div class="info"><span>充值方式</span></div>
@@ -125,6 +127,9 @@
 //                    这里不是微信浏览器
                 this.wxLogin = false;
             }
+             },
+             Helpcenter:function(){
+                this.$router.push({path:"/helpcenter",query:{}})
              },
             Return:function(){
                 window.history.go(-1)
@@ -345,13 +350,13 @@
             }
             input{
                 width: 2rem;
-                height: 100%;
+                height: 1rem;
                 float: right;
                 border: none;
                 outline: none;
                 font-size: @size12;
                 color: red;
-                font-weight: bold;
+                // font-weight: bold;
                 text-align: right;
                 // padding-right: @size3;
             }

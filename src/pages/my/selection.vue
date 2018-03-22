@@ -16,7 +16,7 @@
             <div class="address_l">
                 <p>{{list.name}}</p>
             </div>
-            <div class="address_r" :class="{'address_rcolor':list.defaultAdress==true}" @click="addressId(list._id)">
+            <div class="address_r" :class="{'address_rcolor':list.defaultAdress==true}" @click="addressIds(list._id)">
                 <div>✔</div>
             </div>
             <div class="address_con">
@@ -70,14 +70,15 @@
         	this.getAddress()
         },
         methods: {
-          addressId:function(id){
+          addressIds:function(id){
                  this.addressId=id
+                 this.$router.push({path:"/my/order",query:{addressId:this.addressId,auctionId:this.auctionId}})
           },
           xing:function(){
             this.$router.push({path:"/address",query:{id:''}})
           },
         	obtain:function(){
-                  this.$router.push({path:"/my/order",query:{addressId:this.addressId,auctionId:this.auctionId}})    
+            this.$router.push({path:"/my/order",query:{addressId:this.addressId,auctionId:this.auctionId}})    
         	},
         	// 获取地址
         	getAddress:function(){

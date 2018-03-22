@@ -52,23 +52,24 @@
             </div>
             <!-- 填写银行卡信息 -->
             <div  v-if='index==2'>
-                <div class="info"><span>汇款人</span>
+                <div class="info clearfix">
+                     <span>汇款人</span>
                     <input type="text" placeholder="请输入汇款人姓名" value="name" v-model="name"/>
                     <div class="infoClose" @click='removeName'><i class="iconfont icon-closeicon"></i></div>
                 </div>
-                <div class="info"><span>开户银行</span>
+                <div class="info clearfix"><span>开户银行</span>
                     <input type="text" placeholder="请输入开户银行" value="userBankDetail" v-model="userBankDetail"/>
                     <div class="infomore" @click='removeAccount'><i class="iconfont icon-closeicon"></i></div>
                 </div>
-                <div class="info"><span>银行卡号</span>
+                <div class="info clearfix"><span>银行卡号</span>
                     <input type="number" placeholder="请输入银行卡号" value="userBankCardNo" v-model="userBankCardNo"/>
                     <div class="infoClose" @click='removeAccount'><i class="iconfont icon-closeicon"></i></div>
                 </div>
-               <div class="info1"><span>汇款金额</span>
+               <div class="info1 clearfix"><span>汇款金额</span>
                      <span class="span">CNY</span>
                     <input type="number" placeholder="请输入金额" disabled="disabled" v-model="money"/>
                 </div>
-                <div class="info"><span>手机号码</span>
+                <div class="info clearfix"><span>手机号码</span>
                     <input type="number" placeholder="请输入手机号码" value="phone" v-model="phone"/>
                     <div class="infoClose" @click='removeAccount'><i class="iconfont icon-closeicon"></i></div>
                 </div>
@@ -303,26 +304,26 @@ import {commonService} from '../../service/commonService.js'
     @import url('../../assets/css/base.less');
     @import url('../../assets/css/icon/iconfont.css');
     .rechargeList{
-    .header{
-        position: fixed;
-        top: 0;
-        z-index: 100;
-        width: @size375;
-        height: @size45;
-        background:rgba(2, 10, 2, 1);
-        font-size: @size20;
-        color: white;
-        text-align: center;
-        line-height: @size45;
-    }
+    // .header{
+    //     position: fixed;
+    //     top: 0;
+    //     z-index: 100;
+    //     width: @size375;
+    //     height: @size45;
+    //     background:rgba(2, 10, 2, 1);
+    //     font-size: @size20;
+    //     color: white;
+    //     text-align: center;
+    //     line-height: @size45;
+    // }
     .nav{
         width: @size375;
         height: @size35;
         border-bottom: 0.5px solid rgb(53, 60, 70);
         background: rgb(255, 255, 255);
-        position: fixed;
-        top: 0;
-        z-index: 100;
+        // position: fixed;
+        // top: 0;
+        // z-index: 100;
         span{
             display: inline-block;
             line-height: @size30;
@@ -334,7 +335,7 @@ import {commonService} from '../../service/commonService.js'
         }
     }
     .content{
-        margin-top: @size35;
+        // margin-top: @size35;
         margin-bottom: 1.2rem;
         padding: 0 @size10;
         .v_block{
@@ -411,13 +412,13 @@ import {commonService} from '../../service/commonService.js'
                 }
                 input{
                     width: 2rem;
-                    height: 100%;
+                    height: 1rem;
                     float: right;
                     border: none;
                     outline: none;
                     font-size: @size12;
                     // color: red;
-                    font-weight: bold;
+                    // font-weight: bold;
                     text-align: right;
                     background: #fff;
                     // padding-right: @size3;
@@ -632,7 +633,7 @@ import {commonService} from '../../service/commonService.js'
             input{
                 // padding-left:2rem; 
                 width: 4rem;
-                height: 100%;
+                height: 1rem;
                 float: left;
                 border: none;
                 outline: none;
@@ -645,7 +646,7 @@ import {commonService} from '../../service/commonService.js'
                 margin-right: 0.2rem;
                 font-size: @size12;
                 padding-top: @size1;
-                box-sizing: border-box;
+                // box-sizing: border-box;
                 .span1{
                     font-size: @size12;
                     font-weight: bold;
@@ -653,6 +654,7 @@ import {commonService} from '../../service/commonService.js'
                     width: auto;
                 }
                 .span2{
+
                     display: inline-block;
                     line-height: @size14;
                     font-size:@size10;
@@ -668,7 +670,7 @@ import {commonService} from '../../service/commonService.js'
                 line-height: 1.02rem;
                 font-size: @size12;
                 padding-top: @size1;
-                box-sizing: border-box;
+                // box-sizing: border-box;
                 margin-right: 0.2rem;
                 .more{
                     font-weight: bold;
