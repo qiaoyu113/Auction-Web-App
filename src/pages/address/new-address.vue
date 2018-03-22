@@ -51,10 +51,10 @@
                 <div class="check"><i class="iconfont icon-duihao"></i></div>
                 <span class="">设置为默认地址</span>
             </div> -->
-            <div class="del">
+           <!--  <div class="del">
                 <div class="delete"><i class="iconfont icon-tupian"></i></div>
                 <span>删除地址</span>
-            </div>
+            </div> -->
         </div>
         <div class="prompt" v-if="prompt!=''">{{prompt}}</div>
         <div class="footer" @click="postAddress()" v-if="addressid==''">保&nbsp;&nbsp;存</div>

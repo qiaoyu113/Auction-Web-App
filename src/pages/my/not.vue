@@ -199,7 +199,7 @@
         },
         methods: {
             Router:function(id){
-                that.$router.push({name:'auctionMore',params:{id:id}})
+                this.$router.push({name:'auctionMore',params:{id:id}})
             },
              getCollect:function(){
                 let that=this;

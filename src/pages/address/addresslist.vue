@@ -21,8 +21,8 @@
                 <div class="resize">
                     <div class="checked" :class="list.defaultAdress==false?'check':'checked'" @click="postAddressid(list._id)"><i class="iconfont icon-duihao"></i></div>
                     <span :class="list.defaultAdress==false?'color':''">默认地址</span>
-                    <button class="fr" :class="list.defaultAdress==false?'color':''" @click="edit(list._id)">编辑</button>
-                    <button class="fr" :class="list.defaultAdress==false?'color':''" @click="deleteAddress(list._id)">删除</button>
+                    <span class="fr"  @click="edit(list._id)">编辑</span>
+                    <span class="fr"  @click="deleteAddress(list._id)">删除</span>
                 </div>
             </div>
 

@@ -97,6 +97,61 @@ export const common = {
            that.$store.state.toolBox.redirect_uri.params = that.$route.params;
            return 0;
         }
-    }
+    },
+   // onMove:function(class){
+   //              let overscroll = function(el) {
+   //                  el.addEventListener('touchstart', function() {
+   //                      let top = el.scrollTop
+   //                          , totalScroll = el.scrollHeight
+   //                          , currentScroll = top + el.offsetHeight;
+   //                      if(top === 0) {
+   //                          el.scrollTop = 1
+   //                      } else if(currentScroll === totalScroll) {
+   //                          el.scrollTop = top - 1
+   //                      }
+   //                  });
+   //                  el.addEventListener('touchmove', function(evt) {
+   //                      if(el.offsetHeight < el.scrollHeight)
+   //                          evt._isScroller = true
+   //                  })
+   //              };
+   //              overscroll(document.querySelector(class));
+   //              document.body.addEventListener('touchmove', function(evt) {
+   //                  if(!evt._isScroller) {
+   //                      evt.preventDefault()
+   //                  }
+   //              })
+   //          },
+   //   onMove2:function(){
+   //              let overscroll = function(el) {
+   //                  el.addEventListener('touchstart', function() {
+   //                      let top = el.scrollLeft
+   //                          , totalScroll = el.scrollWidth
+   //                          , currentScroll = top + el.offsetWidth;
+   //                      if(top === 0) {
+   //                          el.scrollTop = 1
+   //                      } else if(currentScroll === totalScroll) {
+   //                          el.scrollTop = top - 1
+   //                      }
+   //                  });
+   //                  el.addEventListener('touchmove', function(evt) {
+   //                      if(el.offsetWidth < el.scrollWidth)
+   //                          evt._isScroller = true
+   //                  })
+   //              };
+   //              overscroll(document.querySelector('.sell-box'));
+   //              document.body.addEventListener('touchmove', function(evt) {
+   //                  if(!evt._isScroller) {
+   //                      evt.preventDefault()
+   //                  }
+   //              })
+   //          },
+
+
 }
+
+
+
+
+
 export default {common}

@@ -21,9 +21,9 @@
                     <div class="circle pos2" :class="index >=2 ?'v_red':''"></div>
                     <div class="circle pos3" :class="index >=3 ?'v_red':''"></div>
                     <div class="label">
-                        <span class="label1">确认银行卡信息</span>
-                        <span class="label2">填写汇款信息</span>
-                        <span class="label3">汇款完成</span>
+                        <span class="label1" :class="index >=1 ?'label4':''">确认银行卡信息</span>
+                        <span class="label2" :class="index >=2 ?'label4':''">填写汇款信息</span>
+                        <span class="label3" :class="index >=3 ?'label4':''">汇款完成</span>
                     </div>
                 </div>
             </div>
@@ -218,7 +218,6 @@ import {commonService} from '../../service/commonService.js'
             getBankCards:function(){
                let that = this
                commonService.getBankCards().then(function(res){
-               
                 that.bankCard=res.data.datas
                   // console.log(res)
                  })
@@ -508,6 +507,9 @@ import {commonService} from '../../service/commonService.js'
                         float: right;
                         font-size: @size13;
                         color: gray;
+                    }
+                    .label4{
+                        color: red;
                     }
                 }
             }

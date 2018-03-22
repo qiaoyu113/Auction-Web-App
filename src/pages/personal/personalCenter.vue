@@ -86,7 +86,7 @@
         </div>
         <div class="sell-spic">
                 <ul >
-                    <li  v-for="(falg,index) in footPrint" :style= "getPos(index)" ><div class="xiajia" v-if="falg.available==false"><p>已下架</p></div><img :src="picHead + falg.picItems[0]" alt="" srcset=""></li>
+                    <li  v-for="(falg,index) in footPrint" :style= "getPos(index)" ><div class="xiajia" v-if="falg.available==false"><p>已下架</p></div><img :src="picHead + falg.picItems[0]" alt="" srcset="" @click="Routerid(falg.id)"></li>
                 </ul>
                 <!-- available -->
         </div>
@@ -161,6 +161,9 @@
             },
             bond:function(){
                  this.$router.push({path:"/myaccount"})
+            },
+            Routerid:function(){
+                this.$router.push({name:'auctionMore',params:{id:id}})
             },
             mycenter:function(){
                 this.$router.push({path:"/mycenter"})

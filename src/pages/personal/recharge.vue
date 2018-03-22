@@ -190,7 +190,7 @@
                         return false
                     }
                     if(that.index==3){
-                     that.$router.push({path:"/rechargeList",query:{money:that.money,index:that.index,orderNo:res.data.datas}})   	
+                     that.$router.push({path:"/rechargeList",query:{money:that.money,index:that.index,orderNo:res.data.datas,type:1}})   	
                     }
                     if(that.index == 1){//微信支付
                             let orderNo = res.data.datas;

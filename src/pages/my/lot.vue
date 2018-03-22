@@ -114,7 +114,7 @@
         },
         methods: {
             Router:function(id){
-                that.$router.push({name:'auctionMore',params:{id:id}})
+                this.$router.push({name:'auctionMore',params:{id:id}})
             },
             // 获取我的收藏
             getCollect:function(){

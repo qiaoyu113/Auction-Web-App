@@ -221,11 +221,10 @@
         },
         mounted: function() {
           this.getCollect()
-
         },
         methods: {
             Router:function(id){
-                that.$router.push({name:'auctionMore',params:{id:id}})
+                this.$router.push({name:'auctionMore',params:{id:id}})
             },
             jump:function(id){
                 let that =this;
