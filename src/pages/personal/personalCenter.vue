@@ -192,8 +192,8 @@
             getUsers:function(){
                 let that = this;
                 commonService.getCheck().then(function(res){
- 
-                    if(res.data.message==success){
+
+                    if(res.data.message=="success"){
                       commonService.getUsers().then(function(res){
                     if(res.data.code==200){
                       that.list=res.data.datas.user
