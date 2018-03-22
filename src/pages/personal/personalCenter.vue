@@ -3,7 +3,7 @@
         组件要小，如遇list，只将item做成组件，其他的都写在页面中
     -->
     <!-- 个人中心 -->
-    <div class="personalCenter" id="" v-set-title="title">
+    <div class="personalCenter"  v-set-title="title">
         
         <!-- <div class="header">传家</div> -->
         <div class="content" v-if="logined">
@@ -86,8 +86,9 @@
         </div>
         <div class="sell-spic">
                 <ul >
-                    <li  v-for="(falg,index) in img" :style= "getPos(index)" ><img :src="falg" alt="" srcset=""></li>
+                    <li  v-for="(falg,index) in footPrint" :style= "getPos(index)" ><div class="xiajia" v-if="falg.available==false"><p>已下架</p></div><img :src="picHead + falg.picItems[0]" alt="" srcset=""></li>
                 </ul>
+                <!-- available -->
         </div>
         <div class="give">我要送拍</div>
         <z-footer ></z-footer>
@@ -117,6 +118,7 @@
                 noPayNum:'',//待支付数量
                 noGetNum:'',//待收货数量
                 saleNum:'',//售后数量
+                footPrint:'',//浏览记录
             }
         },
         components:{'home-item':itemc},
@@ -138,6 +140,9 @@
             },
             noticelist() {
                 return this.$store.state.homeStore.noticelist || []
+            },
+            picHead() {
+                return this.$store.state.picHead
             },
         },
         mounted: function() {
@@ -194,25 +199,44 @@
                     
                  })
             },
-              // 获取浏览记录
-            getFootPrint:function(){
-                let that = this;
-             // function genStatId() {
-             //          var cookieId = getTimestamp();
-             //     cookieId = "zstat" + "-" + cookieId + "-" + Math.round(Math.random() * 3000000000);
-             //         return cookieId;
-             //          }
-                    // console.log(genStatId())
-               // let cookiesId = window.localStorage.getItem("token")
-                  // console.log(cookiesId)
-                 commonService.getFootPrint().then(function(res){
-                    // console.log(res)
-                    if(res.data.code==200){
-                     
-                        
-                    }
+            //   // 获取浏览记录
+            // getFootPrint:function(){
+            //     let that = this;
+            //  // function genStatId() {
+            //  //          var cookieId = getTimestamp();
+            //  //     cookieId = "zstat" + "-" + cookieId + "-" + Math.round(Math.random() * 3000000000);
+            //  //         return cookieId;
+            //  //          }
+
+
+
+            //         // console.log(genStatId())
+            //    // let cookiesId = window.localStorage.getItem("token")
+            //       // console.log(cookiesId)
+            //      commonService.getFootPrint().then(function(res){
+            //         // console.log(res)
+            //         if(res.data.code==200){
+                       
+            //         }
                     
-                 })
+            //      })
+            // },
+            //浏览记录
+                getFootPrint(){
+                let that = this;
+                let cookiesId = window.localStorage.getItem('cookiesId');
+                let cookieId
+                if(cookiesId == undefined || cookiesId == '' || cookiesId == null){
+                    cookieId = Date.parse(new Date());
+                    cookieId = "zstat" + "-" + cookieId + "-" + Math.round(Math.random() * 3000000000);
+                    window.localStorage.setItem('cookiesId',cookieId);
+                }
+                commonService.getFootPrint({pageNo:1,pageSize:30,cookiesId:cookieId}).then(function(res){
+                    console.log(res)
+                    if(res.data.code === 200){
+                        that.footPrint=res.data.datas.datas
+                    }
+                })
             },
 
 
@@ -447,9 +471,31 @@
                     height: @size80;
                     margin-left: @size5;
                     background: gray;
+                    
                     img {
                         width: @size80;
                         height: @size80;
+                    }
+                    .xiajia{
+                    position: absolute;
+                    width: @size80;
+                    height: @size80;
+                    // z-index: 10;
+                    // background: #000;
+                    // opacity: 0.5;
+                     background-color: rgba(0,0,0,0.5);
+                       p{
+                         position: absolute;
+                         bottom: 0;
+                         left: 0;
+                         width: 100%;
+                         height: @size20;
+                         line-height: @size20;
+                         font-size: 12px; 
+                         color:#fff;
+                         text-align: center;
+
+                      }
                     }
                 }
             }

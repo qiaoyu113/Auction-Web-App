@@ -12,7 +12,7 @@
                   <div class="ros_l_top clearfix" v-if="list.doneBuy==3">
                       <div class="ros_prompt">违约，保证金被扣除</div>
                  </div>
-                 <div class="ros_l2">{{list.currentPrice}} CNY</div>
+                 <div class="ros_l2">{{list.currentPrice | money}} CNY</div>
                  <div class="ros_l3">{{list.title}}</div>
                  <div class="ros_l3">{{list.auctionStartTime | stampFormate}}-{{list.no}}</div>
              </div>
@@ -48,7 +48,7 @@
                       <div class="ros_prompt">违约，保证金被扣除</div>
                  </div>
 
-                 <div class="ros_l2">{{list.currentPrice}} CNY</div>
+                 <div class="ros_l2">{{list.currentPrice | money}} CNY</div>
                  <div class="ros_l3">{{list.title}}</div>
                  <div class="ros_l3">{{list.auctionStartTime | stampFormate}}-{{list.no}}</div>
              </div>
@@ -85,7 +85,7 @@
                       <div class="ros_prompt">违约，保证金被扣除</div>
                  </div>
 
-                 <div class="ros_l2">{{list.currentPrice}} CNY</div>
+                 <div class="ros_l2">{{list.currentPrice | money}} CNY</div>
                  <div class="ros_l3">{{list.title}}</div>
                  <div class="ros_l3">{{list.auctionStartTime | stampFormate}}-{{list.no}}</div>
              </div>
@@ -122,7 +122,7 @@
                       <div class="ros_prompt">违约，保证金被扣除</div>
                  </div>
 
-                 <div class="ros_l2">{{list.currentPrice}} CNY</div>
+                 <div class="ros_l2">{{list.currentPrice | money}} CNY</div>
                  <div class="ros_l3">{{list.title}}</div>
                  <div class="ros_l3">{{list.auctionStartTime | stampFormate}}-{{list.no}}</div>
              </div>
@@ -158,7 +158,7 @@
                       <div class="ros_prompt">违约，保证金被扣除</div>
                  </div>
 
-                 <div class="ros_l2">{{list.currentPrice}} CNY</div>
+                 <div class="ros_l2">{{list.currentPrice | money}} CNY</div>
                  <div class="ros_l3">{{list.title}}</div>
                  <div class="ros_l3">{{list.auctionStartTime | stampFormate}}-{{list.no}}</div>
              </div>
