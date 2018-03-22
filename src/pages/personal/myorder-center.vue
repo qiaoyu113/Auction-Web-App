@@ -5,7 +5,7 @@
     <!-- 个人中心-我的订单 -->
     <div class="myorder-center" id="" v-set-title="title">
         
-        <div class="header">传家</div>
+        <!-- <div class="header">传家</div> -->
         <div class="nav">
             <span class="return fl" @click="Return()">&lt;</span> 
             <span class="font fl" :class="index==0 ? 'check' : ''" @click='getIndex(0)'>全部</span>
@@ -221,9 +221,9 @@
         height: @size35;
         border-bottom: 0.5px solid rgb(53, 60, 70);
         background: rgb(255, 255, 255);
-        position: fixed;
-        top: @size45;
-        z-index: 100;
+        // position: fixed;
+        // top: @size45;
+        // z-index: 100;
         .return{
             display: inline-block;
             line-height: @size30;

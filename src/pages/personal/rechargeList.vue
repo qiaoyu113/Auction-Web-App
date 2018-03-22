@@ -145,7 +145,7 @@ import {commonService} from '../../service/commonService.js'
     components: {},
     mounted () {
         // this.yi()
-         common.onMove('.rechargeList')
+        common.onMove('.rechargeList')
         this.getBankCards()
         this.thtype()
         this.moneys()
@@ -324,12 +324,13 @@ import {commonService} from '../../service/commonService.js'
     @import url('../../assets/css/base.less');
     @import url('../../assets/css/icon/iconfont.css');
     .rechargeList{
-        position: fixed;
+          position: fixed;
           left: 0;
           right: 0;
           top: 0;
-          overflow-x: scroll;
           bottom: 0;
+          overflow-x: scroll;
+          
     // .header{
     //     position: fixed;
     //     top: 0;
@@ -720,11 +721,15 @@ import {commonService} from '../../service/commonService.js'
         font-size:12px;
         position:fixed;
         bottom:1.2rem;
+        left: 0;
+        z-index: 99;
         
     }
     .footer1{
         position:fixed;
         bottom:0;
+        left: 0;
+        z-index: 99;
         width: @size375;
         height: 1.2rem;
 		box-sizing: border-box;

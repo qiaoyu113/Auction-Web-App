@@ -62,9 +62,9 @@
                 <div class="infoRight" @click="removePassword2"><i class="iconfont icon-closeicon"></i></div>
             </div>
             <!--微信登陆-->
-            <div class="wxLogin" v-if="wxLogin" @click="wxlogin">
+          <!--   <div class="wxLogin" v-if="wxLogin" @click="wxlogin">
                 <i class="iconfont icon-icon_weixin"></i>微信
-            </div>
+            </div> -->
             <!--登陆和提示-->
             <div class="bottom">
                 <div class="hint" v-if="hint2">{{hint2Text}}</div>

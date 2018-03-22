@@ -1,6 +1,6 @@
 <template>
     <div class="mycenter" v-set-title="title">
-        <div class="header">
+        <div class="headers">
             <div class="headerLeft">
                 <div class="headerEn">{{header.name}}</div>
                 <div class="headerCh">{{header.name2}}</div>
@@ -140,7 +140,7 @@
           top: 0;
           overflow-x: scroll;
           bottom: 0;
-    .header{
+    .headers{
         width:100%;
         height:3.7rem;
         border-bottom:1px solid #2B343D;
