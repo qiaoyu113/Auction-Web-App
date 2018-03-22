@@ -20,17 +20,17 @@
                                     <a v-if="list.EndText === 1">拍场已结束，快去看看成交结果</a>
                                     <a class="over" v-if="list.EndText === 3">即将开始</a>
                                     <a class="over" v-if="list.EndText === 4">正在进行</a>
-                                    <span class="pos2"><img class="pos2img" src="../../assets/image/mycenter/icon3.png"/>{{list.doneUserNum}}</span>
-                                    <span class="pos1"><img class="pos1img" src="../../assets/image/mycenter/zheng.png"/> {{list.auctionNum}}</span>
+                                    <span class="pos2"><img class="pos2img" src="../../assets/image/mycenter/icon3.png"/>{{list.realUserNum}} 人</span>
+                                    <span class="pos1"><img class="pos1img" src="../../assets/image/mycenter/zheng.png"/> {{list.auctionNum}} 件</span>
                                 </div>
                             </div>
                             <div class="sell-content" v-if="checked === 3"  @click="goSellMore(list.id)">
-                                <div class="sell-time">{{list.doneAmount}}CNY</div>
+                                <div class="sell-time">{{reversedNum(list.doneAmount)}}CNY</div>
                                 <div class="sell-title">{{list.name}}</div>
                                 <div class="sell-information">
                                     <a class="over">成交件数：{{list.doneNum}}</a>
-                                    <span class="pos2"><img class="pos2img" src="../../assets/image/mycenter/icon3.png"/> {{list.doneUserNum}}</span>
-                                    <span class="pos1"><img class="pos1img" src="../../assets/image/mycenter/zheng.png"/> {{list.auctionNum}}</span>
+                                    <span class="pos2"><img class="pos2img" src="../../assets/image/mycenter/icon3.png"/> {{list.realUserNum}} 人</span>
+                                    <span class="pos1"><img class="pos1img" src="../../assets/image/mycenter/zheng.png"/> {{list.auctionNum}} 件</span>
                                 </div>
                             </div>
                             <!-- 图片部分，未实现完全 -->
@@ -114,7 +114,12 @@
                 isShowNoMore:false,
                 specialRun:[],
                 EndText:'',
-                nana:''
+                nana:'',
+                // 计算
+                reversedNum: function (num) {
+                    // `this` 指向 vm 实例
+                    return common.format_number(num)
+                }
             }
         },
 //        components:{'spe-run':specialRun},

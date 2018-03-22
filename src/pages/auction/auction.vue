@@ -155,7 +155,7 @@
                         <div class="tit">起拍价格</div>
                         <div class="price">{{reversedNum(details.basePrice)}} CNY</div>
                         <div class="title">{{details.title}}</div>
-                        <div class="time">{{details.auctionStartTime}}</div>
+                        <div class="time">LOT-{{details.completeNo}}</div>
                     </div>
                     <!-- 三种状态 index
                      1.未开始 2.进行中 3.已结束 4.流拍 5.撤拍 竞拍开始后专场不可删除下架  -->
@@ -174,18 +174,18 @@
                             <div class="fr num">{{day}}</div>
                         </div>
                     </div>
-                    <div class="moneytime fr" v-if="details.auctionStatus === 3">
+                    <div class="moneytime fr" v-if="details.auctionStatus === 3 && details.userId != userId">
                         <div class="nowTit">成交价格</div>
                         <div class="nowPrice">{{reversedNum(details.currentPrice)}} CNY</div>
                         <div class="over">成交时间</div>
                         <div class="time1 fr">
-                            {{details.auctionEndTime}}<br/>
-                            {{details.auctionEndTimeHMS}}
+                            {{mqEndTime}}<br/>
+                            {{auctionEndTimeHMS}}
                         </div>
                     </div>
-                    <div class="moneytime fr" v-if="index==3">
+                    <div class="moneytime fr" v-if="details.auctionStatus === 3 && details.userId == userId && details.doneBuy == '1'">
                         <div class="nowTit">成交价格</div>
-                        <div class="nowPrice">200,000 CNY</div>
+                        <div class="nowPrice">{{reversedNum(details.currentPrice)}} CNY</div>
                         <div class="over">付款期限</div>
                         <div class="time fr">
                             <div class="fr num">{{s}}</div>
@@ -261,7 +261,7 @@
         <div class="infomation bground3 clearfix" v-else-if="details.auctionStatus === 3 && details.userId == userId && details.doneBuy == '1'">
             <div class="learnMore fl" @click="lookMore()">出价记录{{details.offerNum}}</div>
             <div class="value fl">当前价格 {{reversedNum(details.currentPrice)}} CNY</div>
-            <span class="warn">支付</span>
+            <!--<span class="warn">支付</span>-->
             <div class="time fr">
                 <div class="fr num">{{s}}</div>
                 <div class="fr colon">:</div>
@@ -472,7 +472,7 @@
                 reversedNum: function (num) {
                     return common.format_number(num)
                 },
-                auctionEndTime:'',
+                mqEndTime:'',
                 auctionEndTimeHMS:'',
                 frozen:false,//是否缴纳保证金
                 latest:false,//是否当前最高价
@@ -622,9 +622,9 @@
                         }
                         let startTime = that.details.auctionStartTime
                         that.details.auctionStartTime  = common.getFormatOfDate(that.details.auctionStartTime,'yyyy-MM-dd')
-                        let auctionEndTime = that.details.auctionEndTime
-                        that.details.auctionEndTime  = common.getFormatOfDate(auctionEndTime,'yyyy-MM-dd')
-                        that.details.auctionEndTimeHMS  = common.getFormatOfDate(auctionEndTime,'hh:mm:ss')
+                        let mqEndTime = that.details.mqEndTime
+                        that.mqEndTime  = common.getFormatOfDate(mqEndTime,'yyyy-MM-dd')
+                        that.auctionEndTimeHMS  = common.getFormatOfDate(mqEndTime,'hh:mm:ss')
                         if(that.details.offerNum != 0){
                             that.offerNumDate = false;
                             that.BayOK = true;
@@ -1398,6 +1398,7 @@
                     font-weight: 500;
                     margin-right:10px;
                     color: #A6A9AF;
+                    line-height: 0.47rem;
                 }
                 .sellicon2{
                     /*width: 0;*/
@@ -1712,6 +1713,7 @@
             /*display: none;*/
             .transparent{
                 position: fixed;
+                top:0;
                 bottom: @size45;
                 z-index: 100;
                 width: 100%;
@@ -1849,7 +1851,7 @@
                     color:#ED6506 !important;
                     .price{
                         text-align: left;
-                        line-height: 1.14rem;
+                        line-height: 0.8rem;
                         font-size: @size14;
                         font-weight: bold;
                     }
@@ -2007,7 +2009,7 @@
                         font-size: 12px;
                     }
                     .price{
-                        font-size: 11px;
+                        font-size: 12px;
                         width: 2.68rem;
                         font-weight: bold;
                     }
@@ -2281,7 +2283,7 @@
                         font-size: 12px;
                     }
                     .price{
-                        font-size: 11px;
+                        font-size: 12px;
                         width: 2.68rem;
                         font-weight: bold;
                     }
@@ -2465,14 +2467,14 @@
             line-height: @size25;
             .learnMore{
                 /*width: 1.6rem;*/
-                height: @size15;
+                //height: @size15;
                 border: 1px solid white;
                 border-radius:3px;
-                font-size:  12px;
+                font-size:  11px;
                 color: white;
-                line-height: @size15;
-                margin:@size10 @size10 @size10 0.5rem;
-                padding:0 0.1rem;
+                margin:0.22rem @size10 @size10 0.5rem;
+                padding:0.03rem 0.1rem;
+                line-height: 0.38rem;
             }
             .value{
                 font-size:  12px;
@@ -2617,7 +2619,7 @@
                     font-size: 12px;
                 }
                 .price{
-                    font-size: 14px;
+                    font-size: 15px;
                     width: 2.68rem;
                     font-weight: bold;
                 }
@@ -2645,6 +2647,7 @@
                     font-size: 35px;
                     color: #E3E3E3;
                     float: left;
+                    /*margin-top: 0.04rem;*/
                 }
                 .btn2{
                     width: 1.46rem;
@@ -2652,12 +2655,13 @@
                     font-size: 35px;
                     color: #E3E3E3;
                     float: right;
+                    /*margin-top: 0.04rem;*/
                 }
                 .label{
                     font-size: 12px;
                 }
                 .price{
-                    font-size: 14px;
+                    font-size: 15px;
                     width: 2.68rem;
                     font-weight: bold;
                     color:#E85800;

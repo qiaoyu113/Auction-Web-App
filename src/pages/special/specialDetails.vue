@@ -23,11 +23,11 @@
                             <img :src="img">
                         </div>
                         <div class="sell-information">
-                            <div class="font">{{details.auctionNum}}</div>
+                            <div class="font">{{details.realUserNum}}人</div>
                             <div class="sellicon2">
                                 <img src="../../assets/image/mycenter/icon3.png"/>
                             </div>
-                            <div class="font">{{details.doneUserNum}}</div>
+                            <div class="font">{{details.auctionNum}}件</div>
                             <div class="sellicon1"></div>
                         </div>
                         <div class='sell-content'>
@@ -250,7 +250,7 @@
                             }
                             that.EndTime = day + ':' + h + ':' + m + ':' + s;
                         },1000);
-                        that.overTime = common.getFormatOfDate(that.details.auctionEndTime,'yyyy.MM.dd h:m')
+                        that.overTime = common.getFormatOfDate(that.details.mqEndTime,'yyyy.MM.dd h:m')
                         that.startTime = common.getFormatOfDate(that.details.auctionStartTime,'yyyy.MM.dd h:m')
                         that.completeNo = that.details.completeNo;
                         commonService.getAuctionList({pageNo:pageNum,pageSize:pageSize,marketNo:that.completeNo}).then(function(res){

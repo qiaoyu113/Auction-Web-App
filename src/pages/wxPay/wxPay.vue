@@ -68,10 +68,10 @@
                                         that.$router.replace({name:'auctionMore',params:{id:id},query:{pay:true}})
                                     }
                                     if(route == 'recharge'){
-                                        that.$router.push({name:'recharge'})
+                                        that.$router.replace({name:'recharge'})
                                     }
                                      if(route == 'cash'){
-                                        that.$router.push({name:'cash'})
+                                        that.$router.replace({name:'cash'})
                                     }
                                 },
                                 cancel:function(){
