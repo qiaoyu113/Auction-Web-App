@@ -60,6 +60,7 @@
         },
         methods: {
             show:function(id){
+           
                this.indexs=id
             }
 

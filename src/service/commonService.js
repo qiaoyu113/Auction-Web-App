@@ -11,6 +11,11 @@ export const commonService = {
     getUser:function(params){
       return axios.get('/users' + this.getParam(params))
     },
+     /* 检验token */
+    getCheck:function(params){
+      return axios.get('/tokens/check')
+    },
+
     /* 获取专题列表 */
     getauctionPack: function (params) {
         return axios.get('/auctionPackages' + this.getParam(params))

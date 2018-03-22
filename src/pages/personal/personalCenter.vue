@@ -191,18 +191,23 @@
             // 获取个人信息
             getUsers:function(){
                 let that = this;
-                 commonService.getUsers().then(function(res){
+                commonService.getCheck().then(function(res){
+
+                    if(res.data.message=="success"){
+                      commonService.getUsers().then(function(res){
                     if(res.data.code==200){
                       that.list=res.data.datas.user
                        if(that.list.wallet!=null){
                         that.totalMoney=that.list.wallet.totalMoney
                        }
                       that.numItem=that.list.numItem  
+                    }
+                 })
                     }else{
                         that.logined=false
                     }
-                    
-                 })
+                })
+                
             },
             //   // 获取浏览记录
             // getFootPrint:function(){
@@ -237,7 +242,6 @@
                     window.localStorage.setItem('cookiesId',cookieId);
                 }
                 commonService.getFootPrint({pageNo:1,pageSize:30,cookiesId:cookieId}).then(function(res){
-                    console.log(res)
                     if(res.data.code === 200){
                         that.footPrint=res.data.datas.datas
                     }

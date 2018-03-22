@@ -139,7 +139,7 @@
          position: fixed;
           left: 0;
           right: 0;
-          top: 0;
+          top:@size40;
           overflow-x: scroll;
           bottom: 0;
         .box{
