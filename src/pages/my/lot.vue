@@ -2,7 +2,7 @@
 
     <div class="lot">
         <div class="box">
-         <div class="ros clearfix" v-for="list in datas">
+         <div class="ros clearfix" v-for="(list,index) in datas">
              <div class="ros_l">
                  <div class="ros_l_top clearfix" v-if="list.auctionCollect.newPrice<list.auction.finalPrice">
                       <div class="ros_offer">{{list.auction.finalPrice | money}} CNY</div>
@@ -19,7 +19,7 @@
              <!-- <img src="../../assets/image/error/ufo_blue_2x.png"/> -->
              <div class="ros_r" @click="Router(list.auction._id)"><img :src="picHead + list.auction.picItems[0]"/></div>
              <div class="ros_con">
-                 <p>{{list.auction.mqEndTime | stampFormate}}</p>
+                 <p>{{countdown[index].dd}}-{{countdown[index].hh}}-{{countdown[index].mm}}-{{countdown[index].ss}}</p>
                  <p><span>即将结束</span></p>
              </div>
          </div>
@@ -85,6 +85,7 @@
             return {
                 title: '传家',
                 datas:'',
+                countdown:[],
             }
         },
         syncData({store}) {
@@ -125,6 +126,10 @@
                  commonService.getCollect({pageNo:1,pageSize:30,status:1}).then(function(res){
                    if(res.data.code==200){
                         that.datas=res.data.datas.datas
+                          for(var i=0;i<that.datas.length;i++){
+                          that.countdown[i]=common.getTimer(that.datas[i].auction.mqEndTime)
+                          }
+                       
                     }
                 })
             }

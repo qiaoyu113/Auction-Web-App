@@ -192,9 +192,8 @@
             getUsers:function(){
                 let that = this;
                 commonService.getCheck().then(function(res){
-
                     if(res.data.message=="success"){
-                      commonService.getUsers().then(function(res){
+                  commonService.getUsers().then(function(res){
                     if(res.data.code==200){
                       that.list=res.data.datas.user
                        if(that.list.wallet!=null){
@@ -234,14 +233,14 @@
             //浏览记录
                 getFootPrint(){
                 let that = this;
-                let cookiesId = window.localStorage.getItem('cookiesId');
-                let cookieId
-                if(cookiesId == undefined || cookiesId == '' || cookiesId == null){
-                    cookieId = Date.parse(new Date());
-                    cookieId = "zstat" + "-" + cookieId + "-" + Math.round(Math.random() * 3000000000);
-                    window.localStorage.setItem('cookiesId',cookieId);
+                let cookiesId  = window.localStorage.getItem('cookiesId');
+             
+                if(cookiesId  == undefined || cookiesId  == '' || cookiesId  == null){
+                    cookiesId  = Date.parse(new Date());
+                    cookiesId  = "zstat" + "-" + cookiesId  + "-" + Math.round(Math.random() * 3000000000);
+                    window.localStorage.setItem('cookiesId',cookiesId );
                 }
-                commonService.getFootPrint({pageNo:1,pageSize:30,cookiesId:cookieId}).then(function(res){
+                commonService.getFootPrint({pageNo:1,pageSize:30,cookiesId:cookiesId }).then(function(res){
                     if(res.data.code === 200){
                         that.footPrint=res.data.datas.datas
                     }
