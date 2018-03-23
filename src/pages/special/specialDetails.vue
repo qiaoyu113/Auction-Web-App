@@ -20,7 +20,9 @@
                 <div class="container">
                     <div class="sell-list">
                         <div class="sell-pic">
-                            <img :src="img">
+                            <a href='javascript:void(0)'>
+                                <img :src="img">
+                            </a>
                         </div>
                         <div class="sell-information">
                             <div class="font">{{details.realUserNum}}人</div>
@@ -70,7 +72,9 @@
                         <!--推荐拍品列表-->
                         <div class="sellList" @click="sellListGo(list.id)" v-for="list in auctionDetail">
                             <div class="pic">
-                                <img :src="$store.state.picHead + list.picItems[0]"/>
+                                <a href='javascript:void(0)'>
+                                    <img :src="$store.state.picHead + list.picItems[0]"/>
+                                </a>
                                 <div class="money">{{reversedNum(list.currentPrice)}} CYN</div>
                                 <div class="title">{{list.title}}</div>
                                 <div class="number">LOT-{{list.completeNo}}</div>

@@ -36,7 +36,9 @@
                             <!-- 图片部分，未实现完全 -->
                             <div class="sell-picture">
                                 <div class="sell-bpic"  @click="goSellMore(list.id)">
-                                    <img :src="$store.state.picHead + list.coverUrl">
+                                    <a href='javascript:void(0)'>
+                                        <img :src="$store.state.picHead + list.coverUrl">
+                                    </a>
                                 </div>
                                 <div class="date">
                                     <!--收藏图标-->
@@ -73,7 +75,9 @@
                                         <div class="sell-spic">
                                             <ul>
                                                 <li v-for="(image,index) in img" v-if="index <= 9" @click="goAuction(image.id)">
-                                                    <img :src="$store.state.picHead + image.img">
+                                                    <a href='javascript:void(0)'>
+                                                        <img :src="$store.state.picHead + image.img">
+                                                    </a>
                                                 </li>
                                             </ul>
                                             <div class="addIcon" v-if="img.length === 10" @click="goSellMore(list.id)">

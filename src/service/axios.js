@@ -38,7 +38,7 @@ axios.interceptors.response.use(function (response) {
         if(isClient){
             localStorage.clear();
             localStorage.redirectUrl = location.href
-            location.href = location.origin+'/login/'
+            location.href = location.origin+'/gologin/'
         }
     }
     return response;

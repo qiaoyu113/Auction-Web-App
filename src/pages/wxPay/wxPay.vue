@@ -22,6 +22,21 @@
         mounted: function() {
             let that = this;
             that.checked = window.localStorage.getItem('checked');
+            let back = window.localStorage.getItem('back');
+            if(back == 'no'){
+                that.$router.replace({name:'special'})
+                let route = window.localStorage.getItem('route')
+                if(route == 'auction'){
+                    that.$router.replace({name:'auctionMore',params:{id:id}})
+                }
+                if(route == 'recharge'){
+                    that.$router.replace({name:'personalCenter'})
+                }
+                if(route == 'cash'){
+                    that.$router.replace({name:'personalCenter'})
+                }
+            }
+            window.document.location.reload();
             if(that.checked){
                 that.wxpay()
             }
@@ -85,10 +100,10 @@
                                         that.$router.replace({name:'auctionMore',params:{id:id}})
                                     }
                                     if(route == 'recharge'){
-                                        that.$router.push({name:'recharge'})
+                                        that.$router.replace({name:'recharge'})
                                     }
                                     if(route == 'cash'){
-                                        that.$router.push({name:'cash'})
+                                        that.$router.replace({name:'cash'})
                                     }
                                 }
                             });

@@ -24,7 +24,9 @@
                     <!--推荐拍品列表-->
                     <div class="sellList" @click="sellListGo(list.id)" v-for="list in auctionDetail">
                         <div class="pic">
-                            <img :src="$store.state.picHead + list.picItems[0]"/>
+                            <a href='javascript:void(0)'>
+                                <img :src="$store.state.picHead + list.picItems[0]"/>
+                            </a>
                             <div class="money">{{reversedNum(list.basePrice)}} CNY</div>
                             <div class="title">{{list.title}}</div>
                             <div class="number">LOT-{{list.completeNo}}</div>

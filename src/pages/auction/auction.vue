@@ -18,7 +18,9 @@
                         <div class="swiper-container sell-pic">
                             <div class="swiper-wrapper">
                                 <div class="swiper-slide" v-for="item in img">
-                                    <img :src="$store.state.picHead + item" >
+                                    <a href='javascript:void(0)'>
+                                        <img :src="$store.state.picHead + item" >
+                                    </a>
                                 </div>
                             </div>
                             <div class="dian">
@@ -67,7 +69,9 @@
                     <div class="sell-more clearfix">
                         <div class="sellList" v-if="specialist.length != 0" @click="sellListGo(list.id)" v-for="list in specialist">
                             <div class="pic">
-                                <img :src="$store.state.picHead + list.picItems[0]"/>
+                                <a href='javascript:void(0)'>
+                                    <img :src="$store.state.picHead + list.picItems[0]"/>
+                                </a>
                                 <div class="money">{{reversedNum(list.currentPrice)}} CNY</div>
                                 <div class="title">{{list.title}}</div>
                                 <div class="number">LOT-{{list.completeNo}}</div>
@@ -150,7 +154,11 @@
             <div :class="dis ? 'record recordShow' : 'record'"  v-if="dis">
                 <div class="down" @click="getNone()"><i class="iconfont icon-xialajiantou" style="color:#A9AEB6;font-size:32px;"></i></div>
                 <div class="disShow">
-                    <div class="pic fl"><img :src="$store.state.picHead + details.picItems[0]" alt=""></div>
+                    <div class="pic fl">
+                        <a href='javascript:void(0)'>
+                            <img :src="$store.state.picHead + details.picItems[0]" alt="">
+                        </a>
+                    </div>
                     <div class="info fl">
                         <div class="tit">起拍价格</div>
                         <div class="price">{{reversedNum(details.basePrice)}} CNY</div>
@@ -246,7 +254,7 @@
                 <div class="fr num">{{day}}</div>
             </div>
         </div>
-        <div class="infomation bground3 clearfix" v-else-if="details.auctionStatus === 3 && details.userId != userId">
+        <div class="infomation bground3 clearfix" v-else-if="details.auctionStatus === 3">
             <div class="learnMore fl" @click="lookMore()">出价记录{{details.offerNum}}</div>
             <div class="value fl">当前价格 {{reversedNum(details.currentPrice)}} CNY</div>
             <div class="success fr">
@@ -486,10 +494,8 @@
             that.meScroll()
             that.WebSocketTest()
             that.isPrint()
-//            that.checked = window.localStorage.getItem('checked');
-//            if(that.checked){
-//                that.wxpay()
-//            }
+            //记录是否返回支付页
+            window.localStorage.setItem('back','no')
             //是否支付成功
             let payOk = window.localStorage.getItem('payOk');
             if(payOk != null){
@@ -795,13 +801,12 @@
             isPrint(){
                 let that = this;
                 let cookiesId = window.localStorage.getItem('cookiesId');
-                let cookieId
                 if(cookiesId == undefined || cookiesId == '' || cookiesId == null){
-                    cookieId = Date.parse(new Date());
-                    cookieId = "zstat" + "-" + cookieId + "-" + Math.round(Math.random() * 3000000000);
-                    window.localStorage.setItem('cookiesId',cookieId);
+                    cookiesId = Date.parse(new Date());
+                    cookiesId = "zstat" + "-" + cookiesId + "-" + Math.round(Math.random() * 3000000000);
+                    window.localStorage.setItem('cookiesId',cookiesId);
                 }
-                commonService.postFootPrint({auctionId:that.id,cookiesId:cookieId}).then(function(res){
+                commonService.postFootPrint({auctionId:that.id,cookiesId:cookiesId}).then(function(res){
                     if(res.data.code === 200){
                     }
                 })
@@ -915,7 +920,7 @@
                         }
                     })
                 });
-                commonService.getAuctionPrice({pageNo:that.page2.num,pageSize:50,auctionId:that.id}).then(function(res){
+                commonService.getAuctionPrice({pageNo:that.page2.num,pageSize:1000,auctionId:that.id}).then(function(res){
                     if(res.data.code === 200){
                         that.pricerecord = res.data.datas.datas;
                         for(let i = 0;i < that.pricerecord.length;i++){
@@ -1106,6 +1111,7 @@
                                     commonService.getWxpay({loginType:'WEIXIN',platform:'WXH5',jumpRouter:'wxbaselogin',wxscope:'snsapi_base'}).then(function(res){
                                         if(res.data.code === 200){
                                             //获取静默授权地址成功
+                                            window.localStorage.removeItem('back');
                                             window.location.href = res.data.datas;
                                         }
                                     })
@@ -1121,6 +1127,7 @@
                             window.localStorage.setItem('orderNo',orderNo);
                             commonService.putOrders({orderNo:orderNo,channelId:channelIds}).then(function(res){
                                 if(res.data.success){
+                                    window.localStorage.removeItem('back');
                                     let payOK = document.getElementsByClassName("payOK");
                                     payOK[0].innerHTML = res.data.datas.payUrl;
                                     document.punchout_form.submit()

@@ -1,7 +1,9 @@
 <template>
     <div>
         <div id='specials' class="specials" @click="goDetails(str.id)">
-            <img :src="$store.state.picHead + str.cover"/>
+            <a href='javascript:void(0)'>
+                <img :src="$store.state.picHead + str.cover"/>
+            </a>
             <div class="bg"></div>
             <div class="text">
                 <h1>{{str.title}}</h1>
