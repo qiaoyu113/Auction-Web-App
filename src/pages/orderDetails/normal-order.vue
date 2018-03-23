@@ -13,10 +13,10 @@
         <!-- 返回键,当订单完成时有删除icon -->
         <div class="nav">
             <span class="" @click="Return()">&lt;</span> 
-            <span class="span1" :class="index==3 ? 'display':'' ">c</span>
+            <span class="span1" :class="index==3 ? 'display':'' "><img src="../../assets/image/mycenter/sc.png" /></span>
         </div>
         <div class="content">
-            <div class="warnTime" v-if='index==0'>
+            <div class="warnTime" v-if="datas.status==1">
                 <span>打款<i>3日</i>会处理反馈，财务审核中，请耐心等待</span>
             </div>
             <div class="warnTime" v-if='index==1'>
@@ -35,7 +35,7 @@
                     <div class="circle pos3"></div>
                     <div class="label">
                         <span class="label1">提交订单</span>
-                        <span class="label2">配送中</span>
+                   <span class="label2">配送中</span>
                         <span class="label3">交易完成</span>
                     </div>
                 </div>
@@ -78,17 +78,25 @@
                 <div class="btn" :class="{'rty':method=='ALIPAY_WAP'}" @click="methodlist('ALIPAY_WAP')">支付宝</div>
                 <div class="btn" :class="{'rty':method=='UNIONPAY'}" @click="methodlist('UNIONPAY')">线下转账</div>
             </div>
-            <div v-if="datas.status==4">
+            <div v-if="datas.status==4 || datas.status==5">
                <div class="logistic" @click="show">
                     物流信息<span class="fr">...</span>
                 </div>
-                <div class="logdetail">
+                <div class="logdetail" v-if="logistics!=''">
                     <div>{{logistics.location}}</div>
                     <div>{{logistics.context}}</div>
                     <div>{{logistics.time}}</div>
                 </div> 
+                <div class="logdetail" v-if="orderDetail.com=='tealab_songhuo'">
+                    <div>送货上门</div>
+                    <div>{{orderDetail.nu}}</div>
+                </div> 
+                 <div class="logdetail" v-if="orderDetail.com=='tealab_ziticons'">
+                    <div>自提</div>
+                    <div>{{orderDetail.nu}}</div>
+                </div> 
             </div>
-            <div class="address">
+            <div class="address" v-if="datas.status==1 || datas.status==2 || datas.status==3">
                 <div class="peo"><span>{{adress.name}}</span>  {{adress.phone}}</div>
                 <div>{{adress.provinceName}} {{adress.cityName}} {{adress.districtName}}</div>
                 <div>{{adress.detailAdress}}</div>
@@ -126,7 +134,7 @@
             <div class="value">
                 分&nbsp;&nbsp;&nbsp;享
             </div>
-            <div class="r-icon" ><i class="iconfont icon-duigoudunpai"></i></div>
+            <div class="r-icon" ><img src="../../assets/image/mycenter/sh.png" /></div>
         </div>
 
             <div class="logistics">
@@ -277,7 +285,7 @@ import {commonService} from '../../service/commonService.js'
          getOrderid:function(){
             let that=this;
             commonService.getOrderid(that.orderNo).then(function(res){
-                    console.log(res)
+               
                 that.datas=res.data.datas
                 that.method=that.datas.channelId
                 that.orderDetail=that.datas.orderDetail
@@ -291,15 +299,17 @@ import {commonService} from '../../service/commonService.js'
                             that.createTime=orderLogs[i].createTime
                       }
                  }
-                if(that.datas.status==4){
+                if(that.datas.status==4 || that.datas.status==5){
                    that.index=2
-                commonService.getKaidi({nu:that.orderDetail.nu,com:that.orderDetail.com}).then(function(res){
-                    // console.log(res)
+                   if(that.orderDetail.com=="shunfeng"){
+                      commonService.getKaidi({nu:that.orderDetail.nu,com:that.orderDetail.com}).then(function(res){
+                  
                     that.logistics=res.data.datas.data[0]
-                    // console.log(that.logistics)
                     that.logisticss=res.data.datas.data
                     that.logistic=res.data.datas
-                })
+                   })
+                   }
+              
                 }
                 if(that.datas.status==1){
                    that.index=1
@@ -421,6 +431,9 @@ import {commonService} from '../../service/commonService.js'
             float: right;
             padding-right: 20px;
             display: none;
+            img{
+                margin-top: @size6;
+            }
         }
         .display{
             display: block;
@@ -836,6 +849,11 @@ import {commonService} from '../../service/commonService.js'
             i{
                 line-height: @size45;
                 font-size: @size30;
+            }
+            img{
+                margin-top: @size10;
+                width: @size24;
+                height: @size24;
             }
         } 
     }
