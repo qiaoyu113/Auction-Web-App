@@ -8,13 +8,13 @@
         <div class="time clearfix">
             <p class="time_l">请在规定时间内支付，超时则扣除保证金</p>
             <div class="time_r clearfix ">
-                <div>00</div>
+                <div>{{countdown.dd}}</div>
                 <p>:</p>
-                <div>00</div>
+                <div>{{countdown.hh}}</div>
                 <p>:</p>
-                <div>00</div>
+                <div>{{countdown.mm}}</div>
                 <p>:</p>
-                <div>00</div>
+                <div>{{countdown.ss}}</div>
             </div>
         </div>
         <!-- 地址 -->
@@ -123,6 +123,7 @@
                 auctionId:this.$route.query.auctionId,
                 addressId:this.$route.query.addressId,
                 wxLogin:true,
+                countdown:'',
             }
         },
         syncData({store}) {
@@ -154,6 +155,17 @@
             this.addresst()
             this.getAuctions()
             this.wxshow()
+        },
+        watch:{
+             countdown:function(){
+                let that=this
+                let t;
+                clearTimeout(t)
+                 t= setTimeout(function (){
+                   let data =Number(that.datas.mqEndTime) + (7 * 24 * 3600 * 1000)
+                    that.countdown=common.getTimer(data)
+                },1000)
+             }
         },
         methods: {
             // 首次加载判断在什么浏览器下打开
@@ -209,9 +221,12 @@
                  commonService.getAuctions(that.auctionId).then(function(res){
                     if(res.data.code==200){
                    that.datas=res.data.datas
-                   console.log(that.datas)
                    that.picItems=that.datas.picItems[0]
-                   // console.log(that.datas)
+                   
+                  
+                    let data =Number(that.datas.mqEndTime) + (7 * 24 * 3600 * 1000)
+                    that.countdown=common.getTimer(data)
+                   
                     }
                 })
             },

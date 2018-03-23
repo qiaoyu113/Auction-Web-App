@@ -3,7 +3,7 @@
         <div class="box">
         <div class="now" v-if="loading">
       
-         <div class="ros clearfix" v-for="list in datas" v-if="list.auctionEndTime>=week">
+         <div class="ros clearfix" v-for="(list,index) in datas" v-if="list.auctionEndTime>=week">
              <div class="ros_l">
                  <div class="ros_l_top clearfix" v-if="list.status=1">
                       <div class="ros_prompt">拍卖成功</div>
@@ -23,15 +23,15 @@
              <div class="ros_con"  v-if="list.doneBuy!=1" @click="jump(list.id)">
                  查看订单
              </div>
-             <div class="ros_date">
-                 <p>{{list.mqEndTime | stampFormate}}</p>
+             <div class="ros_date" v-if="countdown[index]!=0">
+                 <p>{{countdown[index].dd}}:{{countdown[index].hh}}:{{countdown[index].mm}}:{{countdown[index].ss}}</p>
                  <p><span>支付拍品</span></p>
              </div>
          </div>
        </div>
       <!-- 一周以前 -->
        <div class="week"  v-if="datas.params">
-          <div class="ros clearfix" v-for="list in datas" v-if="list.auctionEndTime<week&&list.auctionEndTime>=month">
+          <div class="ros clearfix" v-for="(list,index) in datas" v-if="list.auctionEndTime<week&&list.auctionEndTime>=month">
        <!-- 分割线 -->
            <div class="line clearfix">
              <div class="line_l"></div>
@@ -59,8 +59,8 @@
              <div class="ros_con"  v-if="list.doneBuy!=1" @click="jump(list.id)">
                  查看订单
              </div>
-             <div class="ros_date">
-                 <p>{{list.mqEndTime | stampFormate}}</p>
+             <div class="ros_date" v-if="countdown[index]!=0">
+                 <p>{{countdown[index].dd}}:{{countdown[index].hh}}:{{countdown[index].mm}}:{{countdown[index].ss}}</p>
                  <p><span>支付拍品</span></p>
              </div>
            
@@ -68,7 +68,7 @@
         </div> 
         <!-- 一月以前 -->
        <div class="week" v-if="datas.params">
-          <div class="ros clearfix" v-for="list in datas" v-if="list.auctionEndTime<month&&list.auctionEndTime>=march">
+          <div class="ros clearfix" v-for="(list,index) in datas" v-if="list.auctionEndTime<month&&list.auctionEndTime>=march">
           <!-- 分割线 -->
           <div class="line clearfix">
              <div class="line_l"></div>
@@ -96,8 +96,8 @@
              <div class="ros_con"  v-if="list.doneBuy!=1" @click="jump(list.id)">
                  查看订单
              </div>
-             <div class="ros_date">
-                 <p>{{list.mqEndTime | stampFormate}}</p>
+             <div class="ros_date" v-if="countdown[index]!=0">
+                 <p>{{countdown[index].dd}}:{{countdown[index].hh}}:{{countdown[index].mm}}:{{countdown[index].ss}}</p>
                  <p><span>支付拍品</span></p>
              </div>
            
@@ -105,7 +105,7 @@
         </div> 
            <!-- 三月以前 -->
        <div class="week" v-if="datas.params">
-          <div class="ros clearfix" v-for="list in datas" v-if="list.auctionEndTime<march&&list.auctionEndTime >= year">
+          <div class="ros clearfix" v-for="(list,index) in datas" v-if="list.auctionEndTime<march&&list.auctionEndTime >= year">
            <!-- 分割线 -->
           <div class="line clearfix">
              <div class="line_l"></div>
@@ -133,15 +133,15 @@
              <div class="ros_con"  v-if="list.doneBuy!=1" @click="jump(list.id)">
                  查看订单
              </div>
-             <div class="ros_date">
-                 <p>{{list.mqEndTime | stampFormate}}</p>
+             <div class="ros_date" v-if="countdown[index]!=0">
+                 <p>{{countdown[index].dd}}:{{countdown[index].hh}}:{{countdown[index].mm}}:{{countdown[index].ss}}</p>
                  <p><span>支付拍品</span></p>
              </div>
          </div>
         </div> 
              <!-- 一年以前 -->
        <div class="week" v-if="datas.params">
-          <div class="ros clearfix" v-for="list in datas" v-if="list.auctionEndTime<year">
+          <div class="ros clearfix" v-for="(list,index) in datas" v-if="list.auctionEndTime<year">
    <!-- 分割线 -->
           <div class="line clearfix">
              <div class="line_l"></div>
@@ -169,8 +169,8 @@
              <div class="ros_con"  v-if="list.doneBuy!=1" @click="jump(list.id)">
                  查看订单
              </div>
-             <div class="ros_date">
-                 <p>{{list.mqEndTime | stampFormate}}</p>
+             <div class="ros_date" v-if="countdown[index]!=0">
+                 <p>{{countdown[index].dd}}:{{countdown[index].hh}}:{{countdown[index].mm}}:{{countdown[index].ss}}</p>
                  <p><span>支付拍品</span></p>
              </div>
          </div>
@@ -195,6 +195,7 @@
                 month:'',//一月
                 march:'',//三月
                 year:'',//一年
+                countdown:[],
             }
         },
         syncData({store}) {
@@ -253,7 +254,13 @@
  
                     if(res.data.code==200){
                         that.datas=res.data.datas.datas
-
+                      for(var i=0;i<that.datas.length;i++){
+                        let date=new Date()
+                          if(new Date(that.datas[i].mqEndTime*1)>date){
+                            that.datas[i].mqEndTime=common.getTimer(that.datas[i].mqEndTime) 
+                          }else{
+                            that.countdown[i] = 0
+                          } }
                     }
                     var now = new Date();
                     var now1=new Date()
@@ -283,9 +290,9 @@
           position: fixed;
           left: 0;
           right: 0;
-          top: @size40;
+          top: @size41;
           overflow-x: scroll;
-          bottom: 0;
+          bottom: 1.2rem;
         .box{
             padding: @size10 @size20;
             .week{

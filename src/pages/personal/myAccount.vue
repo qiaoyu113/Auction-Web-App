@@ -5,7 +5,7 @@
     <!-- 个人中心-我的订单 -->
     <div class="myAccount" id="" v-set-title="title">
         
-        <div class="header">传家</div>
+        <!-- <div class="header">传家</div> -->
         <div class="nav">
             <span class="return fl" @click="Return()">&lt;</span> 
         </div>
@@ -233,9 +233,7 @@
         height: @size35;
         border-bottom: 0.5px solid rgb(53, 60, 70);
         background: rgb(255, 255, 255);
-        position: fixed;
-        top: @size45;
-        z-index: 100;
+        
         .return{
             display: inline-block;
             line-height: @size30;
@@ -248,7 +246,7 @@
         
     }
     .content{
-        margin-top: @size80;
+     
         margin-bottom: 1.2rem;
         padding:0 @size10;
         .account{

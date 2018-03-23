@@ -9,7 +9,7 @@
     2，审核中
     3，退款成功 -->
     <div class="aftersale-order" id="" v-set-title="title">
-        <div class="header">传家</div>
+        <!-- <div class="header">传家</div> -->
         <div class="nav">
             <span class="" @click="Return()">&lt;</span> 
             <span class="span1" :class="index>2||index==0 ? 'display':'' ">c</span>
@@ -42,7 +42,7 @@
                 <div class="witpay" v-if='index==1'>退货中</div>
                 <div class="witpay" v-if='index==2'>审核中</div>
                 <div class="witpay" v-if='index==3'>已退款</div>
-                <div class="money" v-if='index>0'>{{datas.refundAmount}} CNY</div>
+                <div class="money" v-if='index>0'>{{datas.refundAmount | money}} CNY</div>
             </div>
             <div class="orderinfo">
                 <!-- <div class="price clearfix" v-if='index>0'><div class="fl">退回路径</div><div class="fr">支付宝</div></div> -->
@@ -55,11 +55,11 @@
                 <a class="fr" @click="open()">查看说明</a>
             </div>
             <div class="itemInfo clearfix">
-                <div class="pic fl"><img src="../../assets/image/myimage/eg.gif" alt=""></div>
+                <div class="pic fl"><img v-if="order.picItems!=null" :src="picHead + order.picItems[0]" alt=""></div>
                 <div class="box fl">
-                    <div class="money">{{order.finalPrice}}CNY</div>
+                    <div class="money">{{order.finalPrice | money}}CNY</div>
                     <div class="title">{{order.auctionName}}</div>
-                    <div class="number">{{lists.createTime}}-{{order.auctionNo}}</div>
+                    <div class="number">LOT-{{order.auctionNo}}</div>
                 </div>
             </div>
             <div class="totalMoney clearfix">
@@ -73,7 +73,7 @@
             </div>
             <div class="orderinfo">
                 <div class="price clearfix"><div class="fl">订单编号:</div><div class="fr">{{datas.orderNo}}</div></div>
-                <div class="price clearfix"><div class="fl">申请时间:</div><div class="fr">{{datas.dealTime}}</div></div>
+                <div class="price clearfix"><div class="fl">申请时间:</div><div class="fr">{{datas.dealTime | stampFormate2}}</div></div>
                 <div class="price clearfix"><div class="fl">联系人:</div><div class="fr">{{adress.name}}</div></div>
                 <div class="price clearfix"><div class="fl">手机号码:</div><div class="fr">{{adress.name}}</div></div>
             </div>  
@@ -139,6 +139,7 @@ import {commonService} from '../../service/commonService.js'
       }
     },
     components: {},
+
     computed: {
  
     picHead(){
@@ -169,14 +170,13 @@ import {commonService} from '../../service/commonService.js'
                  that.lists=res.data.datas
                  that.adress=that.order.adress
                 }
-                // console.log(res)
+                
 
                     })
         },
           // 获取售后详情
         getOrdercsid:function(){
                 let that=this;
-
                commonService.getOrdercsid(that.id).then(function(res){
                     if(res.data.code==200){
                      that.datas=res.data.datas
@@ -219,9 +219,7 @@ import {commonService} from '../../service/commonService.js'
         height: @size35;
         border-bottom: 0.5px solid rgb(53, 60, 70);
         background: rgb(255, 255, 255);
-        position: fixed;
-        top: @size45;
-        z-index: 100;
+       
         span{
             display: inline-block;
             line-height: @size30;
@@ -241,7 +239,6 @@ import {commonService} from '../../service/commonService.js'
         }
     }
     .content{
-        margin-top: @size80;
         margin-bottom: 1.2rem;
         box-sizing: border-box;
         padding: 0 @size10;

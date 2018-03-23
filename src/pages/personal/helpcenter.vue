@@ -5,7 +5,7 @@
     <!-- 帮助中心 -->
     <div class="helpcenter" id="" v-set-title="title">
         
-        <div class="header">传家</div>
+        <!-- <div class="header">传家</div> -->
         <div class="content">
             <div class="loginBox">
                 <div class='loginEn'>HELP</div>
@@ -126,7 +126,6 @@
         line-height: @size45;
     }
     .content{
-        margin-top: @size45;
         width:100%;
         height:3.7rem;
         border-bottom:2px solid #353535;

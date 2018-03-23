@@ -190,7 +190,7 @@
         line-height: @size45;
     }
     .content{
-        margin-top: @size45;
+        // margin-top: @size45;
         width:100%;
         height:3.7rem;
         border-bottom:2px solid #353535;

@@ -72,7 +72,7 @@
         </div>
         <div class="content" v-if='!logined'>
             <div class="unlogin">
-                <div class="pic"><span class="iconfont icon-tupian"></span></div>
+                <div class="pic"><img src="../../assets/image/mycenter/ph.png"/></div>
                 <div class="hel">HELLO!</div>
                 <div class="log">请登录</div>
                 <div class="link" @click="logins()">快来登录，和我们一起没羞没臊的捡漏吧！</div>

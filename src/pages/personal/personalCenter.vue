@@ -9,7 +9,7 @@
         <div class="content" v-if="logined">
             <div class="box clearfix ">
                 <div class="boxImg fl" @click="mycenter()">
-                    <img src="http://img0.imgtn.bdimg.com/it/u=3206453844,923580852&fm=27&gp=0.jpg"/>
+                    <img :src="picHead + list.headImg" alt="" :onerror="errorImg01"/>
                     <div class="member">v{{list.vipLevel}}</div>
                 </div>
                 <div class="info fl">
@@ -117,6 +117,7 @@
             return {
                 title: '传家',
                 logined:true,
+                errorImg01: 'this.src="' + require('../../assets/image/mycenter/head.png') + '"',
                 img:[
                     'http://img0.imgtn.bdimg.com/it/u=3206453844,923580852&fm=27&gp=0.jpg',
                     'http://img0.imgtn.bdimg.com/it/u=3206453844,923580852&fm=27&gp=0.jpg',
@@ -206,6 +207,7 @@
                   commonService.getUsers().then(function(res){
                     if(res.data.code==200){
                       that.list=res.data.datas.user
+                      console.log(that.list)
                        if(that.list.wallet!=null){
                         that.totalMoney=that.list.wallet.totalMoney
                        }
@@ -219,28 +221,7 @@
                
                 
             },
-            //   // 获取浏览记录
-            // getFootPrint:function(){
-            //     let that = this;
-            //  // function genStatId() {
-            //  //          var cookieId = getTimestamp();
-            //  //     cookieId = "zstat" + "-" + cookieId + "-" + Math.round(Math.random() * 3000000000);
-            //  //         return cookieId;
-            //  //          }
-
-
-
-            //         // console.log(genStatId())
-            //    // let cookiesId = window.localStorage.getItem("token")
-            //       // console.log(cookiesId)
-            //      commonService.getFootPrint().then(function(res){
-            //         // console.log(res)
-            //         if(res.data.code==200){
-                       
-            //         }
-                    
-            //      })
-            // },
+       
             //浏览记录
                 getFootPrint(){
                 let that = this;
@@ -298,11 +279,13 @@
                 width: 1.73rem;
                 height: 1.73rem;
                 padding: 0.866rem 0 0 @size20;
+                position: relative;
                 img{
                     width: 100%;
                     height: 100%;
                     border-radius: 50%;
                 }
+               
                 .member{
                     width: 0.4533rem;
                     height: 0.4533rem;

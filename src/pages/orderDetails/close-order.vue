@@ -3,7 +3,7 @@
     <!-- 订单详情-订单关闭 -->
     <div class="close-order" id="" v-set-title="title">
         
-        <div class="header">传家</div>
+        <!-- <div class="header">传家</div> -->
         <div class="nav">
             <span class="" @click="Return()">&lt;</span> 
             <span class="span1 display" >c</span>
@@ -35,15 +35,15 @@
             </div>
             <div class="totalMoney clearfix">
                 <div class="fl">订单总额</div>
-                <div class="fr">{{datas.amount}} CNY</div>
+                <div class="fr">{{datas.amount | money}} CNY</div>
             </div>
             <div class="moneys">
-                <div class="price clearfix"><div class="fl">拍品价格:</div><div class="fr">{{orderDetail.finalPrice}} CNY</div></div>
-                <div class="price clearfix"><div class="fl">保险+运费:</div><div class="fr">{{orderDetail.finalPrice / 100}} CNY</div></div>
+                <div class="price clearfix"><div class="fl">拍品价格:</div><div class="fr">{{orderDetail.finalPrice | money}} CNY</div></div>
+                <div class="price clearfix"><div class="fl">保险+运费:</div><div class="fr">{{orderDetail.finalPrice / 10000}} CNY</div></div>
             </div>
             <div class="orderinfo">
                 <div class="price clearfix"><div class="fl">订单编号:</div><div class="fr">{{orderDetail.adminId}}</div></div>
-                <div class="price clearfix" v-if="time.status==2"><div class="fl">支付时间:</div><div class="fr">{{time.creatPayTime}}</div></div>
+                <div class="price clearfix" v-if="time.status==2"><div class="fl">支付时间:</div><div class="fr">{{time.creatPayTime | stampFormate2}}</div></div>
                 <div class="price clearfix"><div class="fl">支付方式:</div>
                       <div class="fr"  v-if="datas.channelId=='ALIPAY_WAP'">支付宝</div>
                       <div class="fr"  v-if="datas.channelId=='WX_NATIVE'">微信</div>
@@ -147,9 +147,7 @@ import {commonService} from '../../service/commonService.js'
         height: @size35;
         border-bottom: 0.5px solid rgb(53, 60, 70);
         background: rgb(255, 255, 255);
-        position: fixed;
-        top: @size45;
-        z-index: 100;
+      
         span{
             display: inline-block;
             line-height: @size30;
@@ -169,7 +167,7 @@ import {commonService} from '../../service/commonService.js'
         }
     }
     .content{
-        margin-top: @size80;
+        // margin-top: @size80;
         margin-bottom: 1.2rem;
         box-sizing: border-box;
         padding: 0 @size10;
