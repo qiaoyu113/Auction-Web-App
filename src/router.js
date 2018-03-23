@@ -66,6 +66,8 @@ const savePhone = (resolve) => {require(['./pages/mycenter/savePhone.vue'],resol
 const password = (resolve) => {require(['./pages/mycenter/password.vue'],resolve)}
 const newPhone = (resolve) => {require(['./pages/mycenter/newPhone.vue'],resolve)}
 // 个人中心chenhaojn
+
+const gologin = (resolve) => {require(['./pages/personal/gologin.vue'],resolve)}
 const personalCenter = (resolve) => {require(['./pages/personal/personalCenter.vue'],resolve)}
 const myorder = (resolve) => {require(['./pages/personal/myorder-center.vue'],resolve)}
 const myaccount = (resolve) => {require(['./pages/personal/myAccount.vue'],resolve)}
@@ -143,6 +145,7 @@ const routers = [
     {name: 'password',path:'/password',component: password},
     {name: 'newPhone',path:'/newPhone',component: newPhone},
     // 个人中心chenhaojn
+    {name: 'gologin',path:'/gologin',component:gologin},
     {name: 'personalCenter',path:'/personalCenter',component:personalCenter},  //个人中心
     {name: 'myorder',path:'/myorder',component:myorder},            //我的订单
     {name: 'myaccount',path:'/myaccount',component:myaccount},            //保证金首页
