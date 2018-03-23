@@ -106,7 +106,7 @@
     export default {
         data () {
             return {
-                title: '专场',
+                title: '传家',
                 checked:2,
                 page:{num:1,size:5},
                 totalPage:'',
@@ -494,6 +494,7 @@
                 width: 100%;
                 height: 0.65rem;
                 box-sizing: border-box;
+                transform: translateZ(0px);
             }
             .sell-title {
                 width:100%;

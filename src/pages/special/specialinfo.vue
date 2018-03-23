@@ -74,7 +74,7 @@
     export default {
         data () {
             return {
-                title: '专题详情',
+                title: '传家',
                 id:'',
                 details:'',
                 auctionDetail:[],

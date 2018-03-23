@@ -517,7 +517,6 @@
                 let tokenData = common.packageUserInfo(info);
                 that.userId = tokenData.userId
             }else{
-
             }
         },
         beforeUpdate(){
@@ -2445,14 +2444,14 @@
                 color: white;
                 margin-right: @size15;
                 .num{
-                    height: @size20;
-                    background: black;
-                    border-radius:3px;
-                    padding: 2px;
-                    margin-top:@size6;
-                    line-height: @size22;
-                    font-size: @size12;
-                    font-weight: bold;
+                    height: .6rem;
+                    background: #000;
+                    border-radius: 3px;
+                    margin-top: .16rem;
+                    line-height: .6rem;
+                    font-size: .32rem;
+                    font-weight: 700;
+                    width: .55rem;
                 }
                 .colon{
                     text-align: center;

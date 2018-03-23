@@ -75,6 +75,7 @@
                                     //分别跳转的路径
                                     //1.知识。2.活动。3.会员。4.商品。5.直播
                                     window.localStorage.removeItem('checked')
+                                    window.localStorage.setItem('payOk','1')
                                     let route = window.localStorage.getItem('route')
                                     if(route == 'auction'){
                                         let id = window.localStorage.getItem('id');
@@ -89,6 +90,7 @@
                                 },
                                 cancel:function(){
                                     window.localStorage.removeItem('checked');
+                                    window.localStorage.setItem('payOk','2')
                                     let route = window.localStorage.getItem('route')
                                     if(route == 'auction'){
                                         let id = window.localStorage.getItem('id');
@@ -107,12 +109,14 @@
                         wx.error(function(res){
 //                            alert('订单错误')
                             window.localStorage.removeItem('checked')
+                            window.localStorage.setItem('payOk','2')
                             that.checked = false
                             // config信息验证失败会执行error函数，如签名过期导致验证失败，具体错误信息可以打开config的debug模式查看，也可以在返回的res参数中查看，对于SPA可以在这里更新签名。
                         });
                     }else{
 //                        alert('订单错误');
                         window.localStorage.removeItem('checked')
+                        window.localStorage.setItem('payOk','2')
                         that.checked = false
                     }
                 })

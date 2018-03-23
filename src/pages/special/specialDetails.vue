@@ -128,7 +128,7 @@
             return {
                 details:'',
                 img:'',
-                title: '商品详情',
+                title: '传家',
                 index:2,
                 id:'',
                 page:{num:1,size:5},
@@ -678,6 +678,7 @@
                     .time{
                         font-size: 18px;
                         font-weight: bold;
+                        transform: translateZ(0px);
                     }
                     .title{
                         font-size: 12px;
