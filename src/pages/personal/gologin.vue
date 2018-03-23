@@ -104,7 +104,7 @@
         data () {
             return {
                 title: '传家',
-                logined:true,
+                logined:false,
                 img:[
                     'http://img0.imgtn.bdimg.com/it/u=3206453844,923580852&fm=27&gp=0.jpg',
                     'http://img0.imgtn.bdimg.com/it/u=3206453844,923580852&fm=27&gp=0.jpg',
@@ -148,19 +148,13 @@
         },
         mounted: function() {
             common.onMove('.personalCenter')
-            this.getUsers()
-            this.getFootPrint()
-
+          
         },
         methods: {
             logins:function(){
                 this.$router.push({path:"/login"})
             },
-            getPos:function(index) {
-                var str = 95*(index)+'px';
-                str='left:'+str;
-                return str;
-            },
+       
             bond:function(){
                  this.$router.push({path:"/myaccount"})
             },
@@ -188,64 +182,10 @@
             help:function(){
               this.$router.push({path:"/helpcenter"})  
             },
-            // 获取个人信息
-            getUsers:function(){
-                let that = this;
-                  commonService.getUsers().then(function(res){
-                    if(res.data.code==200){
-                      that.list=res.data.datas.user
-                       if(that.list.wallet!=null){
-                        that.totalMoney=that.list.wallet.totalMoney
-                       }
-                      that.numItem=that.list.numItem  
-                    }else{
-                        that.logined=false
-                    }
+   
 
-                 })
-                 
-               
-                
-            },
-            //   // 获取浏览记录
-            // getFootPrint:function(){
-            //     let that = this;
-            //  // function genStatId() {
-            //  //          var cookieId = getTimestamp();
-            //  //     cookieId = "zstat" + "-" + cookieId + "-" + Math.round(Math.random() * 3000000000);
-            //  //         return cookieId;
-            //  //          }
-
-
-
-            //         // console.log(genStatId())
-            //    // let cookiesId = window.localStorage.getItem("token")
-            //       // console.log(cookiesId)
-            //      commonService.getFootPrint().then(function(res){
-            //         // console.log(res)
-            //         if(res.data.code==200){
-                       
-            //         }
                     
-            //      })
-            // },
-            //浏览记录
-                getFootPrint(){
-                let that = this;
-                let cookiesId  = window.localStorage.getItem('cookiesId');
-             
-                if(cookiesId  == undefined || cookiesId  == '' || cookiesId  == null){
-                    cookiesId  = Date.parse(new Date());
-                    cookiesId  = "zstat" + "-" + cookiesId  + "-" + Math.round(Math.random() * 3000000000);
-                    window.localStorage.setItem('cookiesId',cookiesId );
-                }
-                commonService.getFootPrint({pageNo:1,pageSize:30,cookiesId:cookiesId }).then(function(res){
-                    if(res.data.code === 200){
-                        that.footPrint=res.data.datas.datas
-                    }
-                })
-            },
-
+     
 
         }
     }

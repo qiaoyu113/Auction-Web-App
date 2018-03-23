@@ -110,7 +110,7 @@
             },
         },
         mounted: function() {
-            
+            window.localStorage.setItem('back','no')
             common.onMove('.recharge')
             this.wxshow()
         	this.getUsers()
@@ -205,6 +205,7 @@
                                             window.localStorage.setItem('route','recharge');
                                             //获取静默授权地址成功 
                                             window.location.href = res.data.datas;
+                                            window.localStorage.removeItem('back');
                                         }
                                     })
                                 }

@@ -56,20 +56,11 @@
         },
         mounted: function() {
              common.onMove('.notstart')
-           // this.getCollect()
+             this.getCollect()
         },
         methods: {
             Router:function(id){
                 this.$router.push({name:'auctionMore',params:{id:id}})
-            },
-            getCheck:function(){
-                 commonService.getCheck().then(function(res){
-                    if(res.data.message=="success"){
-                          that.getCollect()
-                    }else{
-                        this.$router.push({path:"/personalCenter"})  
-                    }
-                })
             },
             getCollect:function(){
             	let that=this;
