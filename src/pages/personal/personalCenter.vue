@@ -38,8 +38,8 @@
                 </div>
                 <div class="litbox fl" @click="order(2)">
                     <div class="pic">
-                    <!-- <i class="iconfont icon-tupian"></i> -->
-                    <!-- <img src="../../assets/image/mycenter/usre3.png" /> -->
+                    <i class="iconfont icon-tupian"></i>
+                    <img src="../../assets/image/mycenter/usre3.png" />
                     <div class="number" v-if="numItem.noGetNum!=0&&numItem.noPayNum!=null">{{numItem.noGetNum}}</div></div>
                     <div class="font">待收货</div>
                 </div>
