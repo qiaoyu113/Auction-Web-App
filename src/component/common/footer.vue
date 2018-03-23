@@ -78,6 +78,7 @@
 		mounted() {
 			const that = this;
 			// 请求底部数据
+            console.log(that.$route.name)
             if(that.$route.name == 'home'){
                 that.index = 0
             }else if(that.$route.name == 'special'){
@@ -91,6 +92,8 @@
             }else if(that.$route.name == 'not'){
                 that.index = 2
             }else if(that.$route.name == 'personalCenter'){
+                that.index = 3
+            }else if(that.$route.name == 'gologin'){
                 that.index = 3
             }
 		},
