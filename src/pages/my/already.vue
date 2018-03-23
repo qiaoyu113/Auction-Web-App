@@ -17,10 +17,10 @@
                  <div class="ros_l3">LOT-{{list.completeNo}}</div>
              </div>
              <div class="ros_r" @click="Router(list.id)"><img :src="picHead + list.picItems[0]"/></div>
-             <div class="ros_con"  v-if="list.status=1" @click="jump(list.id)">
+             <div class="ros_con"  v-if="list.doneBuy==1" @click="jump(list.id)">
                  去支付
              </div>
-             <div class="ros_con"  v-if="list.status!=1">
+             <div class="ros_con"  v-if="list.doneBuy!=1" @click="jump(list.id)">
                  查看订单
              </div>
              <div class="ros_date">
@@ -53,10 +53,10 @@
                  <div class="ros_l3">LOT-{{list.completeNo}}</div>
              </div>
              <div class="ros_r" @click="Router(list.id)"><img :src="picHead + list.picItems[0]"/></div>
-             <div class="ros_con"  v-if="list.status=1"  @click="jump(list.id)">
+             <div class="ros_con"  v-if="list.doneBuy==1"  @click="jump(list.id)">
                  去支付
              </div>
-             <div class="ros_con"  v-if="list.status!=1">
+             <div class="ros_con"  v-if="list.doneBuy!=1" @click="jump(list.id)">
                  查看订单
              </div>
              <div class="ros_date">
@@ -90,10 +90,10 @@
                  <div class="ros_l3">LOT-{{list.completeNo}}</div>
              </div>
              <div class="ros_r" @click="Router(list.id)"><img :src="picHead + list.picItems[0]"/></div>
-             <div class="ros_con"  v-if="list.status=1" @click="jump(list.id)">
+             <div class="ros_con"  v-if="list.doneBuy==1" @click="jump(list.id)">
                  去支付
              </div>
-             <div class="ros_con"  v-if="list.status!=1">
+             <div class="ros_con"  v-if="list.doneBuy!=1" @click="jump(list.id)">
                  查看订单
              </div>
              <div class="ros_date">
@@ -127,10 +127,10 @@
                  <div class="ros_l3">LOT-{{list.completeNo}}</div>
              </div>
              <div class="ros_r" @click="Router(list.id)"><img :src="picHead + list.picItems[0]"/></div>
-             <div class="ros_con"  v-if="list.status=1" @click="jump(list.id)">
+             <div class="ros_con"  v-if="list.doneBuy==1" @click="jump(list.id)">
                  去支付
              </div>
-             <div class="ros_con"  v-if="list.status!=1">
+             <div class="ros_con"  v-if="list.doneBuy!=1" @click="jump(list.id)">
                  查看订单
              </div>
              <div class="ros_date">
@@ -163,10 +163,10 @@
                  <div class="ros_l3">LOT-{{list.completeNo}}</div>
              </div>
              <div class="ros_r" @click="Router(list.id)"><img :src="picHead + list.picItems[0]"/></div>
-             <div class="ros_con"  v-if="list.status=1" @click="jump(list.id)">
+             <div class="ros_con"  v-if="list.doneBuy==1" @click="jump(list.id)">
                  去支付
              </div>
-             <div class="ros_con"  v-if="list.status!=1">
+             <div class="ros_con"  v-if="list.doneBuy!=1" @click="jump(list.id)">
                  查看订单
              </div>
              <div class="ros_date">
@@ -253,6 +253,7 @@
  
                     if(res.data.code==200){
                         that.datas=res.data.datas.datas
+
                     }
                     var now = new Date();
                     var now1=new Date()
