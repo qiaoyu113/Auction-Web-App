@@ -14,10 +14,10 @@
                  </div>
                  <div class="ros_l2">{{list.auctionCollect.newPrice | money}} CNY</div>
                  <div class="ros_l3">{{list.auction.title}}</div>
-                 <div class="ros_l3">{{list.auction.auctionStartTime | stampFormate}}-{{list.auction.no}}</div>
+                 <div class="ros_l3">LOT-{{list.auction.completeNo}}</div>
              </div>
              <!-- <img src="../../assets/image/error/ufo_blue_2x.png"/> -->
-             <div class="ros_r" @click="Router(list.id)"><img :src="picHead + list.auction.picItems[0]"/></div>
+             <div class="ros_r" @click="Router(list._id)"><img :src="picHead + list.auction.picItems[0]"/></div>
              <div class="ros_con">
                  <p>{{list.auction.mqEndTime | stampFormate}}</p>
                  <p><span>即将结束</span></p>
@@ -124,6 +124,8 @@
                  commonService.getCollect({pageNo:1,pageSize:30,status:1}).then(function(res){
                    if(res.data.code==200){
                         that.datas=res.data.datas.datas
+                        console.log(that.datas)
+
                     }
                 })
             }

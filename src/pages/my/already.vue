@@ -14,7 +14,7 @@
                  </div>
                  <div class="ros_l2">{{list.currentPrice | money}} CNY</div>
                  <div class="ros_l3">{{list.title}}</div>
-                 <div class="ros_l3">{{list.auctionStartTime | stampFormate}}-{{list.no}}</div>
+                 <div class="ros_l3">LOT-{{list.completeNo}}</div>
              </div>
              <div class="ros_r" @click="Router(list.id)"><img :src="picHead + list.picItems[0]"/></div>
              <div class="ros_con"  v-if="list.status=1" @click="jump(list.id)">
@@ -50,7 +50,7 @@
 
                  <div class="ros_l2">{{list.currentPrice | money}} CNY</div>
                  <div class="ros_l3">{{list.title}}</div>
-                 <div class="ros_l3">{{list.auctionStartTime | stampFormate}}-{{list.no}}</div>
+                 <div class="ros_l3">LOT-{{list.completeNo}}</div>
              </div>
              <div class="ros_r" @click="Router(list.id)"><img :src="picHead + list.picItems[0]"/></div>
              <div class="ros_con"  v-if="list.status=1"  @click="jump(list.id)">
@@ -87,7 +87,7 @@
 
                  <div class="ros_l2">{{list.currentPrice | money}} CNY</div>
                  <div class="ros_l3">{{list.title}}</div>
-                 <div class="ros_l3">{{list.auctionStartTime | stampFormate}}-{{list.no}}</div>
+                 <div class="ros_l3">LOT-{{list.completeNo}}</div>
              </div>
              <div class="ros_r" @click="Router(list.id)"><img :src="picHead + list.picItems[0]"/></div>
              <div class="ros_con"  v-if="list.status=1" @click="jump(list.id)">
@@ -124,7 +124,7 @@
 
                  <div class="ros_l2">{{list.currentPrice | money}} CNY</div>
                  <div class="ros_l3">{{list.title}}</div>
-                 <div class="ros_l3">{{list.auctionStartTime | stampFormate}}-{{list.no}}</div>
+                 <div class="ros_l3">LOT-{{list.completeNo}}</div>
              </div>
              <div class="ros_r" @click="Router(list.id)"><img :src="picHead + list.picItems[0]"/></div>
              <div class="ros_con"  v-if="list.status=1" @click="jump(list.id)">
@@ -160,7 +160,7 @@
 
                  <div class="ros_l2">{{list.currentPrice | money}} CNY</div>
                  <div class="ros_l3">{{list.title}}</div>
-                 <div class="ros_l3">{{list.auctionStartTime | stampFormate}}-{{list.no}}</div>
+                 <div class="ros_l3">LOT-{{list.completeNo}}</div>
              </div>
              <div class="ros_r" @click="Router(list.id)"><img :src="picHead + list.picItems[0]"/></div>
              <div class="ros_con"  v-if="list.status=1" @click="jump(list.id)">
@@ -232,7 +232,7 @@
                 let that =this;
         commonService.getCheckOrder({auctionId:id}).then(function(res){
                     // that.datas=res.data.datas.datas
-                 
+                
                     if(res.data.datas==null){
                          that.$router.push({path:"/my/order",query:{auctionId:id}}) 
                     }else{
@@ -250,9 +250,10 @@
             getCollect:function(){
                 let that=this;
                  commonService.getCollect({pageNo:1,pageSize:30,status:2}).then(function(res){
-
+ 
                     if(res.data.code==200){
                         that.datas=res.data.datas.datas
+                        console.log(that.datas)
                     }
                     var now = new Date();
                     var now1=new Date()

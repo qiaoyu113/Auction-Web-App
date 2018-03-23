@@ -68,7 +68,7 @@
                     </div>
                     <div class="scattered_r">
                         <p>{{datas.finalPrice | money}} CNY</p>
-                        <p>{{datas.finalPrice | money}} CNY</p>
+                        <p>{{datas.finalPrice / 10000}} CNY</p>
                     </div>
                 </div>
             </div>
@@ -227,8 +227,9 @@
                     channelIds = 'ALIPAY_WAP'
                 }
                  commonService.postOrders(that.auctionId,{addressId:that.address.id,channelId:channelIds}).then(function(res){
+                    console.log(res)
                     if(res.data.code==200){
-                        that.$router.push({path:"/normalorder",query:{id:that.address.id}})
+                        that.$router.push({path:"/normalorder",query:{id:res.data.datas.orderNo}})
                     }
                 })
             }

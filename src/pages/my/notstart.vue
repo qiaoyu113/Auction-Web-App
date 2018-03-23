@@ -6,7 +6,7 @@
                 
                  <div class="ros_l2">{{list.auctionCollect.newPrice | money}} CNY</div>
                  <div class="ros_l3">{{list.auction.title}}</div>
-                 <div class="ros_l3">LOT-{{list.auction.groupNo}}</div>
+                 <div class="ros_l3">LOT-{{list.auction.completeNo}}</div>
              </div>
              <!-- <img src="../../assets/image/error/ufo_blue_2x.png"/> -->
              <div class="ros_r" @click="Router(list.id)"><img :src="picHead + list.auction.picItems[0]"/></div>

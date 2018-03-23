@@ -110,7 +110,7 @@
                 <div class="price clearfix"><div class="fl">保险+运费:</div><div class="fr">{{orderDetail.finalPrice / 10000}} CNY</div></div>
             </div>
             <div class="orderinfo">
-                <div class="price clearfix"><div class="fl">订单编号:</div><div class="fr">{{orderDetail.adminId}}</div></div>
+                <div class="price clearfix"><div class="fl">订单编号:</div><div class="fr">{{datas.orderNo}}</div></div>
                  <div class="price clearfix" v-if="createTime!=''"><div class="fl">支付时间:</div><div class="fr">{{createTime | stampFormate2}}</div></div>
                 <div class="price clearfix"><div class="fl">支付方式:</div>
                       <div class="fr"  v-if="method=='ALIPAY_WAP'">支付宝</div>
@@ -277,12 +277,14 @@ import {commonService} from '../../service/commonService.js'
          getOrderid:function(){
             let that=this;
             commonService.getOrderid(that.orderNo).then(function(res){
-      
+                    console.log(res)
                 that.datas=res.data.datas
-                   that.method=that.datas.channelId
+                that.method=that.datas.channelId
                 that.orderDetail=that.datas.orderDetail
-                that.adress=that.orderDetail.adress
-
+                if(that.orderDetail.adress!=null){
+                   that.adress=that.orderDetail.adress 
+                }
+                
                  let orderLogs = res.data.datas.orderLogs
                  for(let i=0;i<orderLogs.length;i++){
                       if(orderLogs[i].status==3){

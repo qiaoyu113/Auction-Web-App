@@ -12,7 +12,7 @@
             <span class="font fl" :class="index==1 ? 'check' : ''" @click='getIndex(1)'>待付款</span>
             <span class="font fl" :class="index==2 ? 'check' : ''" @click='getIndex(2)'>待收货</span>
             <span class="font fl" :class="index==3 ? 'check' : ''" @click='getIndex(3)'>售后</span>
-            <span class="span1">c</span>
+            <span class="span1" @click="rto()"><img src="../../assets/image/mycenter/c3.png" /></span>
         </div>
         <div class="content">
             <!-- 待付款 -->
@@ -26,11 +26,10 @@
                     <span class="fr" v-if="list.status==4">已发货</span>
                     <span class="fr iconfont icon-tupian" v-if="list.status==6">已关闭</span>
                     <span class="fr iconfont icon-tupian" v-if="list.status==5">已完成</span>
-
                     <div class="time fr" v-if="list.status==1">
-                        <div class="fr num">01</div>
+                        <div class="fr num">15</div>
                         <div class="fr colon">:</div>
-                        <div class="fr num">02</div>
+                        <div class="fr num">00</div>
                     </div>
                 </div>
                 <div class="box clearfix ">
@@ -40,9 +39,9 @@
                     <div class="info fl">
                         <div class="hel">{{list.amount}} CNY</div>
                         <div class="name">{{list.orderTitle}}</div>
-                        <div class="prove">{{list.createTime | stampFormate}}-{{list.orderDetail.auctionNo}}</div>
+                        <div class="prove"> LOT-{{list.orderDetail.auctionNo}}</div>
                         <button class="fr" @click="details(list.status,list.orderNo)">查看订单</button>
-                        <button class="fr" v-if="list.status==1">立即付款</button>
+                        <button class="fr" v-if="list.status==1" @click="details(list.status,list.orderNo)">立即付款</button>
                         <button class="fr" v-if="list.status==2 || list.status==3">分享</button>
                     </div>
                 </div>
@@ -124,6 +123,9 @@
             
         },
         methods: {
+            rto:function(){
+                this.$router.push({path:"/my"}) 
+            },
             Return:function(){
                 window.history.go(-1)
             },
@@ -169,9 +171,9 @@
                 let that=this;
                 let status='1,2,3,4,5,6'
                 if(that.index === 1){
-                    status = '1,2,3';
+                    status = '1';
                 }else if(that.index==2){
-                    status = '4';
+                    status = '2,3,4,5';
                 }else if(that.index==0){
                     status = '1,2,3,4,5,6';
                 }
@@ -250,6 +252,10 @@
             color: rgb(157, 169, 177);
             text-align: center;
             line-height: @size30;
+            img{
+                width: @size30;
+                height: @size30;
+            }
         }
         .check{
             border-bottom:2px solid black;
@@ -257,7 +263,7 @@
         }
     }
     .content{
-        margin-top: @size80;
+        // margin-top: @size80;
         margin-bottom: 1.2rem;
         padding:0 @size10;
         .account{

@@ -91,7 +91,7 @@
                     <input type="text" placeholder="请选择开户省市" v-model="userBankProvince"/>
                     <div class="infomore" @click='removeAccount'><i class="more">...</i></div>
                 </div>
-                <div class="info"><span>开户银行</span>
+                <div class="info"><span>开户支行</span>
                     <input type="text" placeholder="请输入开户银行" v-model="userBankDetail"/>
                     <div class="infoClose" @click='removeAccount'><i class="iconfont icon-closeicon"></i></div>
                 </div>
@@ -150,7 +150,7 @@
         </div>
         <div class="footer1t" v-if="htmlx!=''">{{htmlx}}</div>
         <div class="footer1" v-if='index==1||index==2' @click="nextStep">下一步</div>
-        <div class="footer1" v-if='index==3'>完成</div>
+        <div class="footer1" v-if='index==3' @click="rto()">完成</div>
         
     </div>
 </template>
@@ -199,6 +199,9 @@ import {commonService} from '../../service/commonService.js'
         this.getKaptchas()
     },
     methods: {
+           rto:function(){
+             this.$router.push({path:"/myaccount"})  
+           },
             Return:function(){
                 window.history.go(-1)
             },
@@ -259,7 +262,7 @@ import {commonService} from '../../service/commonService.js'
                             return false
                          }
                          if(that.userBankDetail ==''){
-                            that.htmlx='开户银行不能为空'
+                            that.htmlx='开户支行不能为空'
                             return false
                          }
                      }
@@ -415,7 +418,7 @@ import {commonService} from '../../service/commonService.js'
                 }
                 input{
                     width: 2rem;
-                    height: 1.rem;
+                    height: 1rem;
                     float: right;
                     border: none;
                     outline: none;
