@@ -164,7 +164,7 @@
             bond:function(){
                  this.$router.push({path:"/myaccount"})
             },
-            Routerid:function(){
+            Routerid:function(id){
                 this.$router.push({name:'auctionMore',params:{id:id}})
             },
             mycenter:function(){
