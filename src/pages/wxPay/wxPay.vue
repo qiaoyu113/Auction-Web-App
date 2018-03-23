@@ -69,10 +69,10 @@
                                         that.$router.push({name:'auctionMore',params:{id:id}})
                                     }
                                     if(route == 'recharge'){
-                                        that.$router.push({name:'recharge'})
+                                        that.$router.push({name:'personalCenter'})
                                     }
                                      if(route == 'cash'){
-                                        that.$router.push({name:'cash'})
+                                        that.$router.push({name:'personalCenter'})
                                     }
                                 },
                                 cancel:function(){
@@ -84,10 +84,10 @@
                                         that.$router.push({name:'auctionMore',params:{id:id}})
                                     }
                                     if(route == 'recharge'){
-                                        that.$router.push({name:'recharge'})
+                                        that.$router.push({name:'personalCenter'})
                                     }
                                     if(route == 'cash'){
-                                        that.$router.replace({name:'cash'})
+                                        that.$router.replace({name:'personalCenter'})
                                     }
                                 }
                             });

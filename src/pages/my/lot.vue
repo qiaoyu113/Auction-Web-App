@@ -19,7 +19,7 @@
              <!-- <img src="../../assets/image/error/ufo_blue_2x.png"/> -->
              <div class="ros_r" @click="Router(list.auction._id)"><img :src="picHead + list.auction.picItems[0]"/></div>
              <div class="ros_con">
-                 <p>{{countdown[index].dd}}-{{countdown[index].hh}}-{{countdown[index].mm}}-{{countdown[index].ss}}</p>
+                 <p>{{countdown[index].dd}}:{{countdown[index].hh}}:{{countdown[index].mm}}:{{countdown[index].ss}}</p>
                  <p><span>即将结束</span></p>
              </div>
          </div>
