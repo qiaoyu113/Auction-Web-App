@@ -344,7 +344,7 @@
             .titleEn{
                 /*font-size: 14px;*/
                 font-weight: bold;
-                padding-top: @size30;
+                padding: .8rem .5rem 0 .5rem;
             }
             .titleCh{
                 font-size: 12px;
