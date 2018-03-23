@@ -253,7 +253,6 @@
  
                     if(res.data.code==200){
                         that.datas=res.data.datas.datas
-                        console.log(that.datas)
                     }
                     var now = new Date();
                     var now1=new Date()

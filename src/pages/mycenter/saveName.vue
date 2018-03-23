@@ -1,6 +1,6 @@
 <template>
     <div id="home" class="saveName" v-set-title="title">
-        <div class="header">
+        <div class="v_header">
             <div class="headerLeft">
                 <div class="headerEn">{{header.name}}</div>
                 <div class="headerCh">{{header.name2}}</div>
@@ -90,7 +90,7 @@
     /*rem等基本设置都放在base中，不写多个*/
     @import url('../../assets/css/base.less');
     .saveName{
-    .header{
+    .v_header{
         width:100%;
         height:3.7rem;
         border-bottom:1px solid #2B343D;

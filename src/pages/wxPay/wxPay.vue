@@ -26,6 +26,7 @@
                 that.wxpay()
             }
         },
+
         methods: {
             //自动唤醒微信支付
             wxpay:function(){
@@ -86,7 +87,7 @@
                                         that.$router.push({name:'recharge'})
                                     }
                                     if(route == 'cash'){
-                                        that.$router.push({name:'cash'})
+                                        that.$router.replace({name:'cash'})
                                     }
                                 }
                             });
