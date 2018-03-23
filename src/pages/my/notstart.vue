@@ -56,7 +56,7 @@
         },
         mounted: function() {
              common.onMove('.notstart')
-           this.getCollect()
+             this.getCollect()
         },
         methods: {
             Router:function(id){
@@ -67,8 +67,7 @@
                  commonService.getCollect({pageNo:1,pageSize:30,status:0}).then(function(res){
                  	if(res.data.code==200){
                  		that.datas=res.data.datas.datas
-                 	} 
-                    
+                 	}   
                 })
             }
 

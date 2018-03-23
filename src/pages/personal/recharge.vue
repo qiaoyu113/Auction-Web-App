@@ -110,7 +110,7 @@
             },
         },
         mounted: function() {
-            
+            window.localStorage.setItem('back','no')
             common.onMove('.recharge')
             this.wxshow()
         	this.getUsers()
@@ -202,8 +202,10 @@
                                 if(res.data.success){
                                     commonService.getWxpay({loginType:'WEIXIN',platform:'WXH5',jumpRouter:'wxbaselogin',wxscope:'snsapi_base'}).then(function(res){
                                         if(res.data.code === 200){
+                                            window.localStorage.setItem('route','recharge');
                                             //获取静默授权地址成功 
                                             window.location.href = res.data.datas;
+                                            window.localStorage.removeItem('back');
                                         }
                                     })
                                 }

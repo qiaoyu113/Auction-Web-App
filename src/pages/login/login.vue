@@ -5,7 +5,7 @@
                 <div class="headerEn">{{header.name}}</div>
                 <div class="headerCh">{{header.name2}}</div>
             </div>
-            <div class="headerRight">
+            <div class="headerRight" @click="Returns()">
                 <img src="../../assets/image/mycenter/right.png"/>
             </div>
             <!--按钮-->
@@ -178,6 +178,9 @@
             }
         },
         methods: {
+            Returns:function(){
+                this.$router.push({path:"/personalCenter"}) 
+            },
             vwximg:function(){
               this.wximg=window.localStorage.getItem('headImg')
            
