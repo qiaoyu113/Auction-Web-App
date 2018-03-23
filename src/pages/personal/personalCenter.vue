@@ -23,19 +23,31 @@
             </div>
             <div class="option clearfix">
                 <div class="litbox fl" @click="order(0)">
-                    <div class="pic"><i class="iconfont icon-tupian"></i></div>
+                    <div class="pic">
+                    <!-- <i class="iconfont icon-tupian"></i> -->
+                    <img src="../../assets/image/mycenter/usre1.png" />
+                    </div>
                     <div class="font">全部订单</div>
                 </div>
                 <div class="litbox fl" @click="order(1)">
-                    <div class="pic"><i class="iconfont icon-tupian"></i><div class="number" v-if="numItem.noPayNum!=0&&numItem.noPayNum!=null">{{numItem.noPayNum}}</div></div>
+                    <div class="pic">
+                    <!-- <i class="iconfont icon-tupian"></i> -->
+                    <img src="../../assets/image/mycenter/usre2.png" />
+                    <div class="number" v-if="numItem.noPayNum!=0&&numItem.noPayNum!=null">{{numItem.noPayNum}}</div></div>
                     <div class="font">待付款</div>
                 </div>
                 <div class="litbox fl" @click="order(2)">
-                    <div class="pic"><i class="iconfont icon-tupian"></i><div class="number" v-if="numItem.noGetNum!=0&&numItem.noPayNum!=null">{{numItem.noGetNum}}</div></div>
+                    <div class="pic">
+                    <!-- <i class="iconfont icon-tupian"></i> -->
+                    <!-- <img src="../../assets/image/mycenter/usre3.png" /> -->
+                    <div class="number" v-if="numItem.noGetNum!=0&&numItem.noPayNum!=null">{{numItem.noGetNum}}</div></div>
                     <div class="font">待收货</div>
                 </div>
                 <div class="litbox fl">
-                    <div class="pic"><i class="iconfont icon-tupian"></i><div class="number" v-if="numItem.saleNum!=0&&numItem.noPayNum!=null">{{numItem.saleNum}}</div></div>
+                    <div class="pic">
+                    <!-- <i class="iconfont icon-tupian"></i> -->
+                    <img src="../../assets/image/mycenter/usre4.png" />
+                    <div class="number" v-if="numItem.saleNum!=0&&numItem.noPayNum!=null">{{numItem.saleNum}}</div></div>
                     <div class="font">退款/售后</div>
                 </div>
             </div>
@@ -349,6 +361,11 @@
                         width: 100%;
                         height: 100%;
                         font-size: @size20;
+                    }
+                    img{
+                        width: @size22;
+                        height: @size22;
+                        
                     }
                     .number{
                       position: absolute;

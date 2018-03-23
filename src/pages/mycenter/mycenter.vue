@@ -128,7 +128,7 @@
                 let that=this
                  commonService.deleteTokens().then(function(res){
                     if(res.data.code==200){
-                        that.$router.push({name:'login'})
+                        that.$router.push({name:'personalCenter'})
                     }
               })
 

@@ -9,7 +9,7 @@
         <div class="content" v-if="logined">
             <div class="box clearfix ">
                 <div class="boxImg fl" @click="mycenter()">
-                    <img src="http://img0.imgtn.bdimg.com/it/u=3206453844,923580852&fm=27&gp=0.jpg"/>
+                    <img src="../../assets/image/mycenter/ph.png"/>
                     <div class="member">v{{list.vipLevel}}</div>
                 </div>
                 <div class="info fl">
