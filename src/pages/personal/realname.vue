@@ -17,12 +17,14 @@
             <div class="service"><span>实名认证能获得更多特权，赶快来认证吧</span></div>
             <!--认证-->
             <div class="info"><span>真实姓名</span>
-                <input type="" placeholder="请输入真实姓名" v-model="name"/>
-                <div class="infoClose" @click='removeName'><i class="iconfont icon-closeicon"></i></div>
+                <input type="text" v-if="rz.authStatus!=1" placeholder="请输入真实姓名" v-model="name"/>
+                <div class="infoClose" v-if="rz.authStatus!=1" @click='removeName'><i class="iconfont icon-closeicon"></i></div>
+                <input type="text" v-if="rz.authStatus==1" placeholder="请输入真实姓名" disabled="disabled" v-model="name"/>
             </div>
             <div class="info"><span>身份证号</span>
-                <input type="" placeholder="请输入18位证件号码" v-model="namecard"/>
-                <div class="infoClose" @click='removeNamecard'><i class="iconfont icon-closeicon"></i></div>
+                <input type="number" v-if="rz.authStatus!=1" placeholder="请输入18位证件号码" v-model="namecard"/>
+                <div class="infoClose" v-if="rz.authStatus!=1" @click='removeNamecard'><i class="iconfont icon-closeicon"></i></div>
+                 <input type="number" v-if="rz.authStatus==1" placeholder="请输入18位证件号码" disabled="disabled" v-model="namecard"/>
             </div>
             <!--正反面照-->
             <div class="picbox clearfix">
@@ -68,8 +70,9 @@
             <!--登陆和提示-->
             <div class="bottom">
                 <div class="wrong" v-if="prompt!=''">{{prompt}}</div>
-
-                <div class="log" @click="submit">确认认证</div>
+                <div class="log" @click="submit" v-if="rz.authStatus!=1 && rz.authStatus!=3">确认认证</div>
+                <div class="log log2" v-if="rz.authStatus==1">审核中</div>
+                <div class="log" @click="submit" v-if="rz.authStatus==3">去认证</div>
             </div>
         </div>
         <!-- 弹窗 -->
@@ -177,15 +180,26 @@
                 let that=this
                commonService.getAuths().then(function(res){
                 console.log(res)
-                    if(res.data.code==200){
+                    if(res.data.datas!=null){
                         that.rz=res.data.datas
                         if(that.rz.authStatus==3){
                              that.prompt="认证失败，" + that.rz.varifyContent
-                        }else{
+                              that.name=''
+                              that.namecard=''
+                              that.authFrontPic=''
+                              that.authBackPic=''
+                        }else if(that.rz.authStatus==1){
                         that.name=that.rz.authRealName
                         that.namecard=that.rz.authIdCard
                         that.img1=that.picHead + that.rz.authFrontPic
                         that.img2=that.picHead + that.rz.authBackPic
+                        that.prompt='实名认证审核中！客服正进行资料审核，请耐心等待！'
+                        }else{
+                         that.name=that.rz.authRealName
+                        that.namecard=that.rz.authIdCard
+                        that.img1=that.picHead + that.rz.authFrontPic
+                        that.img2=that.picHead + that.rz.authBackPic   
+
                         }
                     }
                     })
@@ -310,7 +324,7 @@
 
             commonService.putAuths({authIdCard:that.namecard,authRealName:that.name,authFrontPic:that.authFrontPic,authBackPic:that.authBackPic}).then(function(res){
                        if(res.data.code==200){
-                           that.prompt='提交成功正在审核'
+                           that.getAuths()
                        }else{
                         that.prompt=res.data.message;
                        }
@@ -395,6 +409,7 @@
                 float: left;
                 border: none;
                 outline: none;
+                background: #fff;
                 font-size: @size12;
             }
             .infoClose{
@@ -540,13 +555,16 @@
             text-align: center;
             font-size: 14px;
         }
+        .log2{
+            color: #ccc;
+        }
         .wrong{
             width: 100%;
             height: @size25;
             background:linear-gradient(30deg,#f54ea2 0%,#dd704c 100%);
             text-align: center;
-            color:#87828c;
-            font-size: 13px;
+            color:#fff;
+            font-size: 10px;
             line-height: @size25;
         }
     }
