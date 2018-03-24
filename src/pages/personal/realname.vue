@@ -85,8 +85,8 @@
                     <p class="removeCon">请保持照片清晰，方便审核</p>
                 </div>
                 <div class="picbox clearfix">
-                    <div class="pic"><img src="../../assets/image/error/ufo_blue_2x.png"></div>
-                    <div class="pic"><img src="../../assets/image/error/ufo_blue_2x.png"></div>
+                    <div class="pic"><img src="../../assets/image/mycenter/authFrontPic.png"></div>
+                    <div class="pic"><img src="../../assets/image/mycenter/authBackPic.png"></div>
                 </div>
                 <div class="font">
                     <span>1.证件正面照</span>
@@ -179,7 +179,6 @@
             getAuths:function(){
                 let that=this
                commonService.getAuths().then(function(res){
-                console.log(res)
                     if(res.data.datas!=null){
                         that.rz=res.data.datas
                         if(that.rz.authStatus==3){
@@ -232,6 +231,7 @@
                 that.width=this.width
                 that.height=this.height
     commonService.postBase({base64Img:that.base,width:that.width,height:that.height}).then(function(res){
+                 
                     if(res.data.code==200){
                       that.authFrontPic=res.data.datas
                     }else{
@@ -276,6 +276,7 @@
                 that.width=this.width
                 that.height=this.height
     commonService.postBase({base64Img:that.base,width:this.width,height:this.height}).then(function(res){
+
                     if(res.data.code==200){
                     that.authBackPic=res.data.datas
                     }
@@ -451,6 +452,7 @@
                     img{
                         height:@size115;
                         width: @size115;
+
                     }
                 }
                 .hig{
@@ -632,6 +634,8 @@
                 width: 2.6666rem;
                 height: @size115;
                 background: gray;
+                border-radius: 4px;
+                overflow: hidden;
                 img{
                     width: 100%;
                     height: 100%;

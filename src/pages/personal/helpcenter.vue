@@ -12,26 +12,28 @@
                 <div class="loginCn">帮助中心</div>
             </div>
             <div class="fr" @click="Return()">...</div>
-            <!--按钮-->
-            <div class="menu">
-                <div class='font' :class="index==1 ?'checked':''" @click="getIndex(1)">新手帮助</div>
-                <div class='font' :class="index==2 ?'checked':''" @click="getIndex(2)">拍卖协议</div>
-                <div class='font' :class="index==3 ?'checked':''"  @click="getIndex(3)">拍卖须知</div>
-                <div class='font' :class="index==4 ?'checked':''"  @click="getIndex(4)">保证金说明</div>
+           
+        </div> 
+        <!--按钮-->
+            <div class="menu v_rost" >
+              <div class="v_transverse">
+                <div class='font' v-for="list in datas" :class="list.order==order ?'checked':''" @click="getIndex(list.order)" >{{list.title}}</div>
+                </div>
+                
             </div>
-        </div>
-        <div class="text">
-            <div class="time">更新时间：2017.11.24</div>
-            <div class="box">
+        <div class="text" v-for="lists in datas" v-if="lists.order==order">
+            <div class="time">更新时间：{{lists.createTime | stampFormate2}}</div>
+         <!--    <div class="box">
                 <div class="tit">保证金说明</div>
                 <p class="txt">为了维护拍卖交易秩序，保障平台用户的合法权益，以下规则请大家务必遵守</p>
-            </div>
-            <div class="box">
-                <div class="tit">1.保证金金额</div>
+            </div> -->
+            <div class="box" v-html="lists.content">
+
+         <!--        <div class="tit">1.保证金金额</div>
                 <p class="txt">为了维护拍卖交易秩序，保障平台用户的合法权益，以下规则请大家务必遵守为了维护拍卖交易秩序，保障平台用户的合法权益，以下规则请大家务必遵守
                     为了维护拍卖交易秩序，保障平台用户的合法权益，以下规则请大家务必遵守为了维护拍卖交易秩序，保障平台用户的合法权益，以下规则请大家务必遵守
                     为了维护拍卖交易秩序，保障平台用户的合法权益，以下规则请大家务必遵守为了维护拍卖交易秩序，保障平台用户的合法权益，以下规则请大家务必遵守
-                </p>
+                </p> -->
             </div>
         </div>
     </div>
@@ -39,28 +41,22 @@
 
 <script >
     import {appService} from '../../service/appService'
-    
+    import {common} from '../../assets/js/common/common'
+    import {commonService} from '../../service/commonService.js'
     export default {
         data () {
             return {
                 title: '传家',
                 index:3,
+                datas:'',
+                order:1,
             }
         },
         components:{},
         
         syncData({store}) {
-            /*基本规则
-            * 所有不需要token的请求都放在这里
-            * 这里不出现window，document等DOM元素
-            * 这里获得的数据都要存储在store中
-            * 写法如下
-            * */
             const that = this;
-            /*
-            * 将所有的请求处理以数组放在promise中
-            * that.data().data调用数据
-            * */
+
             return Promise.all([
                 appervice.getParam().then(res=>{
 //                    store.state.homeStore.listImg = res.data;
@@ -80,12 +76,9 @@
             },
         },
         mounted: function() {
-            /*
-            * 所有需要token的请求都放在这里
-            * 可以使用DOM元素
-            * 这里的数据可以放在data中
-            * */
-
+            common.onMove('.helpcenter')
+            common.onMove2('.v_transverse')
+           this.getDoctype()
         },
         methods: {
             Return:function(){
@@ -93,16 +86,22 @@
             },
             getIndex:function(index){
                 let that = this;
-                if(index === 1){
-                    that.index = 1;
-                }else if(index==2){
-                    that.index = 2;
-                }else if(index==3){
-                    that.index = 3;
-                }else if(index==4){
-                    that.index = 4;
-                }
+                that.order=index
+         
             },
+               // 获取帮助信息
+            getDoctype:function(){
+                let that = this;
+                  commonService.getDoctype({type:1}).then(function(res){
+                    console.log(res)
+                    if(res.data.code==200){
+                      that.datas=res.data.datas
+                    }
+
+                 }) 
+            },
+
+
         }
     }
 
@@ -113,22 +112,16 @@
     @import url('../../assets/css/base.less');
     @import url('../../assets/css/icon/iconfont.css');
     .helpcenter{
-    .header{
-        position: fixed;
-        top: 0;
-        z-index: 100;
-        width: 10rem;
-        height: @size45;
-        background:rgba(2, 10, 2, 1);
-        font-size: @size20;
-        color: white;
-        text-align: center;
-        line-height: @size45;
-    }
+           position: fixed;
+          left: 0;
+          right: 0;
+          top: 0;
+          overflow-x: scroll;
+          bottom: 0;
     .content{
         width:100%;
         height:3.7rem;
-        border-bottom:2px solid #353535;
+        // border-bottom:2px solid #353535;
         padding:1.07rem 0.53rem;
         box-sizing: border-box;
         position: relative;
@@ -150,12 +143,33 @@
             letter-spacing: @size3;
             font-size: @size20;
         }
-        .menu{
+    
+        
+    }   
+     .menu{
             height:0.6rem;
             line-height:0.6rem;
-            position: absolute;
-            bottom:1px;
-            box-sizing: border-box;
+            width: 9rem;
+            // margin: 0 0.5rem;
+            overflow-x: scroll;
+            // position: absolute;
+            // bottom:1px;
+            // box-sizing: border-box;
+            padding:0 0.5rem 2px 0.5rem;
+            border-bottom:2px solid #353535;
+            position: relative;
+              
+              .v_transverse{
+                margin-left: 0.5rem;
+                 width: 20rem;
+                 position: absolute;
+                 left: 0;
+                 right: 0;
+                  top: 0;
+                 overflow-x: scroll;
+                  bottom: 0;
+              }
+
             .font{
                 color:rgb(153, 153, 153);
                 float:left;
@@ -169,8 +183,6 @@
                 border-bottom:2px solid #353535;
             }
         }
-        
-    }
     .text{
         padding: 0 @size20;
         .time{

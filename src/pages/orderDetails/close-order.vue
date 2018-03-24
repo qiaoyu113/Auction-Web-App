@@ -6,7 +6,7 @@
         <!-- <div class="header">传家</div> -->
         <div class="nav">
             <span class="" @click="Return()">&lt;</span> 
-            <span class="span1 display" >c</span>
+            <span class="span1 display" ><img src="../../assets/image/mycenter/sc.png" /></span>
         </div>
         <div class="content">
             <div class="state">
@@ -26,11 +26,11 @@
                 <div>{{adress.detailAdress}}</div>
             </div>
             <div class="itemInfo clearfix">
-                <div class="pic fl"><img src="../../assets/image/myimage/eg.gif" alt=""></div>
+                <div class="pic fl"><img v-if="orderDetail.picItems!=null" :src="picHead + orderDetail.picItems[0]" alt=""></div>
                 <div class="box fl">
-                    <div class="money">{{orderDetail.finalPrice}}CNY</div>
+                    <div class="money">{{orderDetail.finalPrice | money}}CNY</div>
                     <div class="title">{{orderDetail.auctionName}}</div>
-                    <div class="number">{{datas.createTime}}-{{orderDetail.auctionNo}}</div>
+                    <div class="number">LOT-{{orderDetail.auctionNo}}</div>
                 </div>
             </div>
             <div class="totalMoney clearfix">
@@ -42,7 +42,7 @@
                 <div class="price clearfix"><div class="fl">保险+运费:</div><div class="fr">{{orderDetail.finalPrice / 10000}} CNY</div></div>
             </div>
             <div class="orderinfo">
-                <div class="price clearfix"><div class="fl">订单编号:</div><div class="fr">{{orderDetail.adminId}}</div></div>
+                <div class="price clearfix"><div class="fl">订单编号:</div><div class="fr">{{datas.orderNo}}</div></div>
                 <div class="price clearfix" v-if="time.status==2"><div class="fl">支付时间:</div><div class="fr">{{time.creatPayTime | stampFormate2}}</div></div>
                 <div class="price clearfix"><div class="fl">支付方式:</div>
                       <div class="fr"  v-if="datas.channelId=='ALIPAY_WAP'">支付宝</div>
@@ -88,7 +88,9 @@ import {commonService} from '../../service/commonService.js'
             noticelist() {
                 return this.$store.state.homeStore.noticelist || []
             },
-
+            picHead() {
+                return this.$store.state.picHead
+            },
         },
     mounted () {
         
@@ -102,10 +104,10 @@ import {commonService} from '../../service/commonService.js'
         // 获取订单
          getOrderid:function(){
             let that=this;
-            console.log(that.orderNo)
             commonService.getOrderid(that.orderNo).then(function(res){
                 if(res.data.code==200){
                   that.datas=res.data.datas
+                  console.log(that.datas)
                  let payLogs=that.datas.payLogs
                  that.time=payLogs[payLogs.length-1]
                 that.orderDetail=that.datas.orderDetail
@@ -161,6 +163,10 @@ import {commonService} from '../../service/commonService.js'
             float: right;
             padding-right: 20px;
             display: none;
+            img{
+                width: @size30;
+                margin-top: @size5;
+            }
         }
         .display{
             display: block;

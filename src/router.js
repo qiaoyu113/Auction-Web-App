@@ -147,7 +147,7 @@ const routers = [
     // 个人中心chenhaojn
     {name: 'gologin',path:'/gologin',component:gologin},
     {name: 'personalCenter',path:'/personalCenter',component:personalCenter},  //个人中心
-    {name: 'myorder',path:'/myorder',component:myorder},            //我的订单
+    {name: 'myorder',path:'/myorder',component:myorder},                   //我的订单
     {name: 'myaccount',path:'/myaccount',component:myaccount},            //保证金首页
     {name: 'helpcenter',path:'/helpcenter',component:helpcenter},        //保证金说明
     {name: 'membercenter',path:'/membercenter',component:membercenter}, //会员

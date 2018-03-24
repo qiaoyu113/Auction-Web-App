@@ -59,6 +59,21 @@
              common.onMove('.notstart')
              this.getCollect()
         },
+        watch:{
+             countdown(){
+                     let that=this
+                       alert(1)
+                       let t;
+                       clearTimeout(t)
+                        t= setTimeout(function (){
+                          for(var i=0;i<that.datas.length;i++){
+                             that.countdown[i]=common.getTimer(that.datas[i].auction.auctionStartTime)
+                           }
+                       },1000)
+                  
+                
+             }
+        },
         methods: {
             Router:function(id){
                 this.$router.push({name:'auctionMore',params:{id:id}})
@@ -68,6 +83,7 @@
                  commonService.getCollect({pageNo:1,pageSize:30,status:0}).then(function(res){
                  	if(res.data.code==200){
                  		that.datas=res.data.datas.datas
+
                     for(var i=0;i<that.datas.length;i++){
                       that.countdown[i]=common.getTimer(that.datas[i].auction.auctionStartTime)
                     }

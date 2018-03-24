@@ -335,6 +335,12 @@ import {commonService} from '../../service/commonService.js'
                     that.htmlx='手机号码不能为空'
                     return false
                    }
+                   let reg = /^1[3|4|5|7|8][0-9]{9}$/;
+                    let flag = reg.test(that.phone)
+                    if(!flag){
+                        this.htmlx="手机号码不正确"
+                        return false
+                    }
                    if(that.verification ==''){
                     that.htmlx='验证码不能为空'
                     return false
@@ -654,7 +660,7 @@ import {commonService} from '../../service/commonService.js'
                 padding-top: @size1;
                 box-sizing: border-box;
                 img{
-                    height: 100%;
+                    height: 1rem;
                 }
                 .span1{
                     font-size: @size12;

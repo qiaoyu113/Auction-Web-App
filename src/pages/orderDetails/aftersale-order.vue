@@ -45,8 +45,8 @@
                 <div class="money" v-if='index>0'>{{datas.refundAmount | money}} CNY</div>
             </div>
             <div class="orderinfo">
-                <!-- <div class="price clearfix" v-if='index>0'><div class="fl">退回路径</div><div class="fr">支付宝</div></div> -->
-                <div class="price clearfix" v-if='index>0'><div class="fl">差额原因</div><div class="fr">其他</div></div>
+                <div class="price clearfix" v-if='index>0'><div class="fl">退回路径</div><div class="fr">线下转账</div></div>
+                <div class="price clearfix" v-if='index>0'><div class="fl">差额原因</div><div class="fr">{{datas.amountReason}}</div></div>
                 <div class="price clearfix" v-if='index==0'>货品属性特殊，无法进行退货。审核失败，客服驳回售后申请。如有问题，请联系售后</div>
             </div>
             <div class="helpCenter">
@@ -67,15 +67,15 @@
             </div>
             <div class="moneys">
                 <div class="price clearfix">
-                    <div class="fl">{{datas.amountReason}}</div>
-                    <div class="fr">{{datas.dealTime}}</div>
+                    <div class="fl">{{datas.problem}}</div>
+                    <!-- <div class="fr">{{datas.dealTime}}</div> -->
                 </div>
             </div>
             <div class="orderinfo">
-                <div class="price clearfix"><div class="fl">订单编号:</div><div class="fr">{{datas.orderNo}}</div></div>
+                <div class="price clearfix"><div class="fl">订单号:</div><div class="fr">{{datas.orderNo}}</div></div>
                 <div class="price clearfix"><div class="fl">申请时间:</div><div class="fr">{{datas.dealTime | stampFormate2}}</div></div>
                 <div class="price clearfix"><div class="fl">联系人:</div><div class="fr">{{adress.name}}</div></div>
-                <div class="price clearfix"><div class="fl">手机号码:</div><div class="fr">{{adress.name}}</div></div>
+                <div class="price clearfix"><div class="fl">手机号码:</div><div class="fr">{{adress.phone}}</div></div>
             </div>  
         </div>
         <div class="footer">联系售后</div>
@@ -169,6 +169,7 @@ import {commonService} from '../../service/commonService.js'
                  that.order=res.data.datas.orderDetail
                  that.lists=res.data.datas
                  that.adress=that.order.adress
+
                 }
                 
 
@@ -178,10 +179,19 @@ import {commonService} from '../../service/commonService.js'
         getOrdercsid:function(){
                 let that=this;
                commonService.getOrdercsid(that.id).then(function(res){
+               
                     if(res.data.code==200){
                      that.datas=res.data.datas
                      that.orderNo=that.datas.orderNo
                      that.getOrderid()
+                     if(that.datas.status==1){
+                         that.index=1
+                     }else if(that.datas.status==2){
+                          that.index=2
+                     }else{
+                          that.index=1
+                     }
+                      
                     }
                 })
             },
@@ -432,7 +442,7 @@ import {commonService} from '../../service/commonService.js'
                 min-height: @size25;
                 .fl{
                     float: left;
-                    width: 5rem;
+                    // width: 5rem;
                 }
                 .fr{
                    position: absolute;

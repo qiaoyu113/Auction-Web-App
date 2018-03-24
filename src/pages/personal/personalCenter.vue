@@ -207,7 +207,6 @@
                   commonService.getUsers().then(function(res){
                     if(res.data.code==200){
                       that.list=res.data.datas.user
-                      console.log(that.list)
                        if(that.list.wallet!=null){
                         that.totalMoney=that.list.wallet.totalMoney
                        }
@@ -216,10 +215,7 @@
                         that.logined=false
                     }
 
-                 })
-                 
-               
-                
+                 }) 
             },
        
             //浏览记录

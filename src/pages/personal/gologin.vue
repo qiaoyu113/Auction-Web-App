@@ -80,7 +80,7 @@
             <div class="center">
                 <div class="address  clearfix">
                     <div class="fl">帮助中心</div>
-                    <div class="fr">...</div>
+                    <div class="fr" @click="help()">...</div>
                 </div>
             </div>
         </div>
@@ -148,13 +148,21 @@
         },
         mounted: function() {
             common.onMove('.personalCenter')
+            this.getFootPrint()
           
         },
         methods: {
             logins:function(){
                 this.$router.push({path:"/login"})
             },
-       
+            helpcenters:function(){
+                this.$router.push({path:"/helpcenter"})
+            },
+            getPos:function(index) {
+                var str = 95*(index)+'px';
+                str='left:'+str;
+                return str;
+            },
             bond:function(){
                  this.$router.push({path:"/myaccount"})
             },
@@ -164,12 +172,8 @@
             mycenter:function(){
                 this.$router.push({path:"/mycenter"})
             },
-            cash:function(){
-                this.$router.push({path:"/cash"})
-            },
-            recharge:function(){
-                this.$router.push({path:"/recharge"})
-            },
+         
+       
             order:function(index){
          this.$router.push({path:"/myorder",query:{index:index}})       
             },
@@ -179,10 +183,26 @@
             member:function(){
               this.$router.push({path:"/membercenter"})   
             },
+            // 帮助中心
             help:function(){
               this.$router.push({path:"/helpcenter"})  
             },
-   
+            //浏览记录
+                getFootPrint(){
+                let that = this;
+                let cookiesId  = window.localStorage.getItem('cookiesId');
+             
+                if(cookiesId  == undefined || cookiesId  == '' || cookiesId  == null){
+                    cookiesId  = Date.parse(new Date());
+                    cookiesId  = "zstat" + "-" + cookiesId  + "-" + Math.round(Math.random() * 3000000000);
+                    window.localStorage.setItem('cookiesId',cookiesId );
+                }
+                commonService.getFootPrint({pageNo:1,pageSize:30,cookiesId:cookiesId }).then(function(res){
+                    if(res.data.code === 200){
+                        that.footPrint=res.data.datas.datas
+                    }
+                })
+            },
 
                     
      

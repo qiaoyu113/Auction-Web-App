@@ -250,6 +250,12 @@ import {commonService} from '../../service/commonService.js'
                         this.htmlx="请输入手机号码"
                         return false
                     }
+                    let reg = /^1[3|4|5|7|8][0-9]{9}$/;
+                    let flag = reg.test(that.phone)
+                    if(!flag){
+                        this.htmlx="手机号码不正确"
+                        return false
+                    }
                     that.htmlx=''
                     let money = that.money * 100
 

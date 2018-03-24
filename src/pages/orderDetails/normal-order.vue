@@ -13,7 +13,7 @@
         <!-- 返回键,当订单完成时有删除icon -->
         <div class="nav">
             <span class="" @click="Return()">&lt;</span> 
-            <span class="span1" :class="index==3 ? 'display':'' "><img src="../../assets/image/mycenter/sc.png" /></span>
+            <span class="span1" :class="index==3 ? 'display':'' " @click="putOrderid()"><img src="../../assets/image/mycenter/sc.png" /></span>
         </div>
         <div class="content">
             <div class="warnTime" v-if="datas.status==1">
@@ -134,7 +134,7 @@
             <div class="value">
                 分&nbsp;&nbsp;&nbsp;享
             </div>
-            <div class="r-icon" ><img src="../../assets/image/mycenter/sh.png" /></div>
+            <div class="r-icon" ><img src="../../assets/image/mycenter/usre4.png" /></div>
         </div>
 
             <div class="logistics">
@@ -280,6 +280,17 @@ import {commonService} from '../../service/commonService.js'
                           }
                       })
               }
+        },
+        // 取消订单
+        putOrderid:function(){
+            let that=this
+          commonService.putOrderid(that.orderNo).then(function(res){ 
+                 // console.log(res)
+                 if(res.data.message=="success"){
+                     
+
+                 }
+          }) 
         },
         // 获取订单
          getOrderid:function(){

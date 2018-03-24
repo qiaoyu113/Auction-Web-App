@@ -23,9 +23,10 @@
                     <span class="fr bgcolor" v-if="list.status==1">待付款</span>
                     <span class="fr bgcolor" v-if="list.status==2">处理中</span>
                     <span class="fr" v-if="list.status==3">待发货</span>
-                    <span class="fr" v-if="list.status==4">已发货</span>
-                    <span class="fr iconfont icon-tupian" v-if="list.status==6">已关闭</span>
-                    <span class="fr iconfont icon-tupian" v-if="list.status==5">已完成</span>
+                    <span class="fr" v-if="list.status==4">已发货</span> 
+                    <div class="v_rosr" v-if="list.status==6 || list.status==5"><img src="../../assets/image/mycenter/sc.png" /></div>
+                    <span class="fr" v-if="list.status==6">已关闭</span>
+                    <span class="fr" v-if="list.status==5">已完成</span>
                     <div class="time fr" v-if="list.status==1">
                         <div class="fr num">15</div>
                         <div class="fr colon">:</div>
@@ -37,7 +38,7 @@
                         <img :src="picHead + img" onerror="this.src='http://img0.imgtn.bdimg.com/it/u=3206453844,923580852&fm=27&gp=0.jpg'"/>
                     </div>
                     <div class="info fl">
-                        <div class="hel">{{list.amount}} CNY</div>
+                        <div class="hel">{{list.amount | money}} CNY</div>
                         <div class="name">{{list.orderTitle}}</div>
                         <div class="prove"> LOT-{{list.orderDetail.auctionNo}}</div>
                         <button class="fr" @click="details(list.status,list.orderNo)">查看订单</button>
@@ -60,9 +61,9 @@
                         <img :src="picHead + list.picItems[0]" onerror="this.src='http://img0.imgtn.bdimg.com/it/u=3206453844,923580852&fm=27&gp=0.jpg'"/>
                     </div>
                     <div class="info fl">
-                        <div class="hel">{{list.amount}} CNY</div>
+                        <div class="hel">{{list.amount | money}} CNY</div>
                         <div class="name">{{list.auctionName}}</div>
-                        <div class="prove">{{list.createTime | stampFormate}}-{{list.auctionNo}}</div>
+                        <div class="prove">LOT-{{list.auctionNo}}</div>
                         <button class="fr" @click="shouhou(list.status,list.id)">查看订单</button>
                        
                     </div>
@@ -173,13 +174,13 @@
                 if(that.index === 1){
                     status = '1';
                 }else if(that.index==2){
-                    status = '2,3,4,5';
+                    status = '2,3,4';
                 }else if(that.index==0){
                     status = '1,2,3,4,5,6';
                 }
                commonService.getOrder({pageNo:1,pageSize:10,status:status}).then(function(res){
                       that.datalist=res.data.datas.datas
-                      // console.log(res)
+                      console.log(that.datalist)
                     })
             },
              // 获取售后列表
@@ -278,6 +279,19 @@
                     color: rgb(129, 135, 140);
                     padding-right: @size10;
                 }
+                .v_rosr{
+                    float: right;
+                    width: @size20;
+                    height: @size20;
+                    margin-top: @size10;
+                    border-left: 1px solid #ccc;
+                    img{
+                        width: @size24;
+                        height: @size20;
+                    }
+
+                }
+
                 .bgcolor{
                     color: red;
                 }

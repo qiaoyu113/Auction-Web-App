@@ -23,7 +23,7 @@
              <div class="ros_con"  v-if="list.doneBuy!=1" @click="jump(list.id)">
                  查看订单
              </div>
-             <div class="ros_date" v-if="countdown[index]!=0">
+             <div class="ros_date" v-if="list.doneBuy==1">
                  <p>{{countdown[index].dd}}:{{countdown[index].hh}}:{{countdown[index].mm}}:{{countdown[index].ss}}</p>
                  <p><span>支付拍品</span></p>
              </div>
@@ -59,7 +59,7 @@
              <div class="ros_con"  v-if="list.doneBuy!=1" @click="jump(list.id)">
                  查看订单
              </div>
-             <div class="ros_date" v-if="countdown[index]!=0">
+             <div class="ros_date" v-if="list.doneBuy==1">
                  <p>{{countdown[index].dd}}:{{countdown[index].hh}}:{{countdown[index].mm}}:{{countdown[index].ss}}</p>
                  <p><span>支付拍品</span></p>
              </div>
@@ -96,7 +96,7 @@
              <div class="ros_con"  v-if="list.doneBuy!=1" @click="jump(list.id)">
                  查看订单
              </div>
-             <div class="ros_date" v-if="countdown[index]!=0">
+             <div class="ros_date" v-if="list.doneBuy==1">
                  <p>{{countdown[index].dd}}:{{countdown[index].hh}}:{{countdown[index].mm}}:{{countdown[index].ss}}</p>
                  <p><span>支付拍品</span></p>
              </div>
@@ -133,7 +133,7 @@
              <div class="ros_con"  v-if="list.doneBuy!=1" @click="jump(list.id)">
                  查看订单
              </div>
-             <div class="ros_date" v-if="countdown[index]!=0">
+             <div class="ros_date" v-if="list.doneBuy==1">
                  <p>{{countdown[index].dd}}:{{countdown[index].hh}}:{{countdown[index].mm}}:{{countdown[index].ss}}</p>
                  <p><span>支付拍品</span></p>
              </div>
@@ -169,7 +169,7 @@
              <div class="ros_con"  v-if="list.doneBuy!=1" @click="jump(list.id)">
                  查看订单
              </div>
-             <div class="ros_date" v-if="countdown[index]!=0">
+             <div class="ros_date" v-if="list.doneBuy==1">
                  <p>{{countdown[index].dd}}:{{countdown[index].hh}}:{{countdown[index].mm}}:{{countdown[index].ss}}</p>
                  <p><span>支付拍品</span></p>
              </div>
@@ -256,11 +256,12 @@
                         that.datas=res.data.datas.datas
                       for(var i=0;i<that.datas.length;i++){
                         let date=new Date()
-                          if(new Date(that.datas[i].mqEndTime*1)>date){
-                            that.datas[i].mqEndTime=common.getTimer(that.datas[i].mqEndTime) 
-                          }else{
-                            that.countdown[i] = 0
-                          } }
+                          // if(new Date(that.datas[i].mqEndTime*1)>date){
+                            that.countdown[i]=common.getTimer(Number(that.datas[i].mqEndTime)+(7 * 24 * 3600 * 1000)) 
+                          // }else{
+                          //   that.countdown[i] = 0
+                          // } 
+                      }
                     }
                     var now = new Date();
                     var now1=new Date()
