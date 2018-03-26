@@ -93,7 +93,7 @@
                     <div class="infomore" @click='removeAccount'><i class="more">...</i></div>
                 </div>
                 <div class="info"><span>开户支行</span>
-                    <input type="text" placeholder="请输入开户银行" v-model="userBankDetail"/>
+                    <input type="text" placeholder="请输入开户支行" v-model="userBankDetail"/>
                     <div class="infoClose" @click='removeAccount'><i class="iconfont icon-closeicon"></i></div>
                 </div>
             </div>

@@ -49,7 +49,7 @@
                 <div class="price clearfix" v-if='index>0'><div class="fl">差额原因</div><div class="fr">{{datas.amountReason}}</div></div>
                 <div class="price clearfix" v-if='index==0'>货品属性特殊，无法进行退货。审核失败，客服驳回售后申请。如有问题，请联系售后</div>
             </div>
-            <div class="helpCenter">
+            <div class="v_helpCenter">
                 <span class="fl">到账周期说明</span>
                 <div class="fr icon">i</div>
                 <a class="fr" @click="open()">查看说明</a>
@@ -156,7 +156,8 @@ import {commonService} from '../../service/commonService.js'
             window.history.go(-1)
         },
         open:function(){
-            this.dis='';
+            // this.dis='';
+             this.$router.push({path:"/helpcenter",query:{index:5}})
         },
         close:function() {
             this.dis='dis';
@@ -212,18 +213,18 @@ import {commonService} from '../../service/commonService.js'
           top: 0;
           overflow-x: scroll;
           bottom: 0;
-    .header{
-        position: fixed;
-        top: 0;
-        z-index: 100;
-        width: @size375;
-        height: @size45;
-        background:rgba(2, 10, 2, 1);
-        font-size: @size20;
-        color: white;
-        text-align: center;
-        line-height: @size45;
-    }
+    // .header{
+    //     position: fixed;
+    //     top: 0;
+    //     z-index: 100;
+    //     width: @size375;
+    //     height: @size45;
+    //     background:rgba(2, 10, 2, 1);
+    //     font-size: @size20;
+    //     color: white;
+    //     text-align: center;
+    //     line-height: @size45;
+    // }
     .nav{
         width: @size375;
         height: @size35;
@@ -346,7 +347,7 @@ import {commonService} from '../../service/commonService.js'
                 
             }
         }
-        .helpCenter{
+        .v_helpCenter{
                 height: @size40;
                 width: 100%;
                 border-top: 1px solid rgb(130, 135, 140);

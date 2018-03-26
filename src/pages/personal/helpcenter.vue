@@ -47,7 +47,7 @@
         data () {
             return {
                 title: '传家',
-                index:3,
+                // index:3,
                 datas:'',
                 order:1,
             }
@@ -79,8 +79,18 @@
             common.onMove('.helpcenter')
             common.onMove2('.v_transverse')
            this.getDoctype()
+           this.orderroute()
         },
         methods: {
+            orderroute:function(){
+                let index=this.$route.query.index
+                console.log(index)
+                if(index!=null || index!= undefined){
+                   this.order=index
+                }
+          
+
+            },
             Return:function(){
                 window.history.go(-1)
             },
@@ -93,11 +103,10 @@
             getDoctype:function(){
                 let that = this;
                   commonService.getDoctype({type:1}).then(function(res){
-                    console.log(res)
                     if(res.data.code==200){
                       that.datas=res.data.datas
                     }
-
+                  
                  }) 
             },
 

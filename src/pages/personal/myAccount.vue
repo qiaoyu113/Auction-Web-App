@@ -184,8 +184,8 @@
              cash:function(){
                 this.$router.push({path:"/cash"})
             },
-            helpcenter:function(){
-                this.$router.push({path:"/helpcenter"})
+            helpcenter:function(){ 
+                this.$router.push({path:"/helpcenter",query:{index:4}})
             },
             getBails:function(){
                 let that = this;

@@ -37,8 +37,8 @@
                 <!-- <i :class="index==3 ? 'background3' : ''" class="iconfont icon-icon_zhifubao"></i> -->
                 <div class="infoAlipay">
                         <div class="span1" style="margin-top:2px;">我同意并理解
-                        <a href="javaScript:;" @click="Helpcenter()">《竞拍协议》</a>和
-                        <a href="javaScript:;" @click="Helpcenter()">《竞拍规则》</a></div>
+                        <a href="javaScript:;" @click="Helpcenter(2)">《竞拍协议》</a>和
+                        <a href="javaScript:;" @click="Helpcenter(3)">《竞拍规则》</a></div>
                     </div>
             </div>
             <div class="info"><span>充值方式</span></div>
@@ -131,8 +131,8 @@
                 this.wxLogin = false;
             }
              },
-             Helpcenter:function(){
-                this.$router.push({path:"/helpcenter",query:{}})
+             Helpcenter:function(id){
+                this.$router.push({path:"/helpcenter",query:{index:id}})
              },
             Return:function(){
                 window.history.go(-1)
