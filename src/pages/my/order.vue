@@ -68,7 +68,7 @@
                     </div>
                     <div class="scattered_r">
                         <p>{{datas.finalPrice | money}} CNY</p>
-                        <p>{{datas.finalPrice / 10000}} CNY</p>
+                        <p >{{freight / 100 | money}} CNY</p>
                     </div>
                 </div>
             </div>
@@ -124,6 +124,7 @@
                 addressId:this.$route.query.addressId,
                 wxLogin:true,
                 countdown:'',
+                freight:'',//保险运费
             }
         },
         syncData({store}) {
@@ -222,7 +223,12 @@
                     if(res.data.code==200){
                    that.datas=res.data.datas
                    that.picItems=that.datas.picItems[0]
-                   
+                
+                   if(that.datas.finalPrice < 200000){
+                     that.freight=200000
+                   }else{
+                     that.freight=that.datas.finalPrice
+                   }
                   
                     let data =Number(that.datas.mqEndTime) + (7 * 24 * 3600 * 1000)
                     that.countdown=common.getTimer(data)

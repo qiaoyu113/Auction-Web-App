@@ -79,14 +79,15 @@
                     <input type="text" placeholder="请输入收款方姓名" v-model="userBankName"/>
                     <div class="infoClose" @click='removeName'><i class="iconfont icon-closeicon"></i></div>
                 </div>
-                <div class="info"><span>银行</span>
-                    <input type="text" placeholder="请选择银行" v-model="userBank"/>
-                    <div class="infomore" @click='removeAccount'><i class="more">...</i></div>
-                </div>
-                <div class="info"><span>银行卡号</span>
-                    <input type="number" placeholder="请输入银行卡号" v-model="userBankCardNo"/>
+                 <div class="info"><span>银行卡号</span>
+                    <input type="number" placeholder="请输入银行卡号" v-model="userBankCardNo" @blur="cardObtain()"/>
                     <div class="infoClose" @click='removeAccount'><i class="iconfont icon-closeicon"></i></div>
                 </div>
+                <div class="info"><span>银行</span>
+                    <input type="text" placeholder="请选择银行" disabled="disabled" value="userBank" v-model="userBank"/>
+                    <!-- <div class="infomore" @click='removeAccount'><i class="more">...</i></div> -->
+                </div>
+               
                 <div class="info"><span>开户省市</span>
                     <input type="text" placeholder="请选择开户省市" v-model="userBankProvince"/>
                     <div class="infomore" @click='removeAccount'><i class="more">...</i></div>
@@ -125,20 +126,21 @@
                     <div class="infoClose">{{list.no}}</div>
                 </div>
                 <div class="info"><span>提现金额</span>
-                    <div class="infoClose"><span class="span1">{{list.amount | money}}CNY</span>
+                    <div class="infoClose">{{list.amount | money}}CNY
                        </div>
                 </div>
                 <div class="info"><span>交易时间</span>
                     <div class="infoClose" v-if="list.applyTime!=null">{{list.applyTime | stampFormate2}}</div>
                 </div>
-                <div class="info"><span>交易种类</span>
-                    <div class="infoClose" v-if="list.channelId=='ALIPAY_WAP'">提现</div>
-                     <div class="infoClose" v-if="list.channelId=='OFFLINE_BANK'">提现</div>
+                <div class="info"><span>订单支付</span>
+                    <div class="infoClose">提现</div>
+                     <!-- <div class="infoClose" v-if="list.channelId=='OFFLINE_BANK'">提现</div> -->
                 </div>
                 <div class="info"><span>提现方式</span>
                     <div class="infoClose">
                     <span class="span2" v-if="list.channelId=='ALIPAY_WAP'">支付宝<br>{{list.channelUser}}</span>
-                    <span class="span2" v-if="list.channelId=='OFFLINE_BANK'">{{list.userBank}}<br>{{list.userBankCardNo.substr(list.userBankCardNo.length-4)}}</span>
+                    <span class="span2" v-if="list.channelId=='OFFLINE_BANK'">{{list.userBank}}<br>
+                    尾号{{list.userBankCardNo.substr(list.userBankCardNo.length-4)}}{{card.cardTypeName}}</span>
                     </div>
                 </div>
                 <div class="info"><span>提现金额</span>
@@ -158,6 +160,7 @@
 <script >
 import {appService} from '../../service/appService'
 import {common} from '../../assets/js/common/common'
+import {card} from '../../assets/js/common/card'
 import {commonService} from '../../service/commonService.js'
   export default {
     props: ['str'],
@@ -188,6 +191,7 @@ import {commonService} from '../../service/commonService.js'
           htmlx:'',
           kaptchaValue:'',
           img:'',
+          card:'',
 
       }
     },
@@ -202,6 +206,19 @@ import {commonService} from '../../service/commonService.js'
            rto:function(){
              this.$router.push({path:"/myaccount"})  
            },
+           cardObtain:function(){
+                let that=this
+                 let pattern = /^([1-9]{1})(\d{14}|\d{18})$/,  
+                       str = that.userBankCardNo.replace(/\s+/g, "");  
+                       if (!pattern.test(str)) {  
+                           that.htmlx='银行卡号不正确'
+                           return false;  
+                       } 
+
+                let cards=''
+               cards=card.bankCardAttribution(that.userBankCardNo)
+               that.userBank=cards.bankName
+            },
             Return:function(){
                 window.history.go(-1)
             },
@@ -257,6 +274,7 @@ import {commonService} from '../../service/commonService.js'
                             that.htmlx='银行卡号不能为空'
                             return false
                          }
+  
                          if(that.userBankProvince ==''){
                             that.htmlx='开户省市不能为空'
                             return false
@@ -316,10 +334,10 @@ import {commonService} from '../../service/commonService.js'
                 let type=''
                 let channelId=''
                 if(that.flag==1){
-                   channelId='OFFLINE_BANK'
-                   type=2
-                }else if(that.flag==2){
                    channelId='ALIPAY_WAP'
+                   type=2          
+                }else if(that.flag==2){
+                   channelId='OFFLINE_BANK'
                    type=3
                 }
                 
@@ -365,6 +383,8 @@ import {commonService} from '../../service/commonService.js'
                 let that = this;
                  commonService.getForms(that.oddNumbers).then(function(res){
                     that.list=res.data.datas
+                    console.log(res)
+                    that.card=card.bankCardAttribution(that.list.userBankCardNo)
                     
                  })
             },
@@ -650,6 +670,7 @@ import {commonService} from '../../service/commonService.js'
                 border: none;
                 outline: none;
                 font-size: @size12;
+                background: #fff;
             }
             .infoClose{
                 float: right;
@@ -668,6 +689,7 @@ import {commonService} from '../../service/commonService.js'
                     color: black;
                 }
                 .span2{
+                    width: 3rem;
                     display: inline-block;
                     line-height: @size14;
                     font-size:@size10;

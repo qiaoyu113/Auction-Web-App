@@ -152,6 +152,8 @@
                     that.getOrder();
                 }else if(index==3){
                     that.index = 3;
+                 
+
                 }else if(index==0){
                     that.index = 0;
                     that.getOrder();
@@ -180,7 +182,7 @@
                 }
                commonService.getOrder({pageNo:1,pageSize:10,status:status}).then(function(res){
                       that.datalist=res.data.datas.datas
-                      console.log(that.datalist)
+                    
                     })
             },
              // 获取售后列表

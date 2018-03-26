@@ -43,7 +43,7 @@
                     <div class="number" v-if="numItem.noGetNum!=0&&numItem.noPayNum!=null">{{numItem.noGetNum}}</div></div>
                     <div class="font">待收货</div>
                 </div>
-                <div class="litbox fl">
+                <div class="litbox fl" @click="order(3)">
                     <div class="pic">
                     <!-- <i class="iconfont icon-tupian"></i> -->
                     <img src="../../assets/image/mycenter/usre4.png" />
@@ -211,6 +211,7 @@
                         that.totalMoney=that.list.wallet.totalMoney
                        }
                       that.numItem=that.list.numItem  
+                      console.log(that.numItem)
                     }else{
                         that.logined=false
                     }

@@ -60,37 +60,39 @@
                 </div>
                 <div class="listcontent clearfix"  v-for="arr1 in arr"  :key="arr1.url">
                     <div class="fl">{{arr1.flowAmount | money}}</div>
-                    <div class="f2 line" v-if="arr1.flowStatus==10">线上充值</div>
+                    <div class="f2 line" v-if="arr1.flowStatus==10">充值</div>
                     <div class="f2 line" v-if="arr1.flowStatus==11">参拍冻结</div>
-                    <div class="f2 line" v-if="arr1.flowStatus==20">线下充值</div>
-                    <div class="f2 line" v-if="arr1.flowStatus==21">线下充值</div>
-                    <div class="f2 line" v-if="arr1.flowStatus==22">线下充值</div>
-                    <div class="f2 line" v-if="arr1.flowStatus==23">线下充值</div>
+                    <div class="f2 line" v-if="arr1.flowStatus==20">充值</div>
+                    <div class="f2 line" v-if="arr1.flowStatus==21">充值</div>
+                    <div class="f2 line" v-if="arr1.flowStatus==22">充值</div>
+                    <div class="f2 line" v-if="arr1.flowStatus==23">充值</div>
                     <div class="f2 line" v-if="arr1.flowStatus==30">参拍冻结</div>
                     <div class="f2 line" v-if="arr1.flowStatus==31">参拍解冻</div>
-                    <div class="f2 line" v-if="arr1.flowStatus==40">提现解冻</div>
-                    <div class="f2 line" v-if="arr1.flowStatus==41">提现解冻</div>
-                    <div class="f2 line" v-if="arr1.flowStatus==42">提现解冻</div>
-                    <div class="f2 line" v-if="arr1.flowStatus==50">提现解冻</div>
-                    <div class="f2 line" v-if="arr1.flowStatus==51">提现解冻</div>
-                    <div class="f2 line" v-if="arr1.flowStatus==52">提现解冻</div>
+                    <div class="f2 line" v-if="arr1.flowStatus==32">违约扣除</div>
+                    <div class="f2 line" v-if="arr1.flowStatus==40">提现冻冻</div>
+                    <div class="f2 line" v-if="arr1.flowStatus==41">提现扣除</div>
+                    <div class="f2 line" v-if="arr1.flowStatus==42">提现</div>
+                    <div class="f2 line" v-if="arr1.flowStatus==50">提现冻结</div>
+                    <div class="f2 line" v-if="arr1.flowStatus==51">提现扣除</div>
+                    <div class="f2 line" v-if="arr1.flowStatus==52">提现冻结</div>
                     <div class="f2 line" v-if="arr1.flowStatus==53">提现解冻</div>
                     <div class="f3">{{arr1.createTime | stampFormate2}}</div>
                     <div class="f4 line" v-if="arr1.flowStatus==10">充值成功</div>
-                    <div class="f4 line" v-if="arr1.flowStatus==11">拍卖前冻结</div>
-                    <div class="f4 line" v-if="arr1.flowStatus==20">充值申请</div>
+                    <div class="f4 line" v-if="arr1.flowStatus==11">冻结成功</div>
+                    <div class="f4 line" v-if="arr1.flowStatus==20">充值中</div>
                     <div class="f4 line" v-if="arr1.flowStatus==21">充值成功</div>
-                    <div class="f4 line" v-if="arr1.flowStatus==22">充值拒绝</div>
-                    <div class="f4 line" v-if="arr1.flowStatus==23">充值关闭</div>
-                    <div class="f4 line" v-if="arr1.flowStatus==30">出价冻结</div>
-                    <div class="f4 line" v-if="arr1.flowStatus==31">拍卖解冻</div>
-                    <div class="f4 line" v-if="arr1.flowStatus==40">提现处理中</div>
+                    <div class="f4 line" v-if="arr1.flowStatus==22">充值中</div>
+                    <div class="f4 line" v-if="arr1.flowStatus==23">交易关闭</div>
+                    <div class="f4 line" v-if="arr1.flowStatus==30">冻结成功</div>
+                    <div class="f4 line" v-if="arr1.flowStatus==31">解冻成功</div>
+                    <div class="f4 line" v-if="arr1.flowStatus==32">扣除成功</div>
+                    <div class="f4 line" v-if="arr1.flowStatus==40">提现中</div>
                     <div class="f4 line" v-if="arr1.flowStatus==41">提现成功</div>
-                    <div class="f4 line" v-if="arr1.flowStatus==42">提现失败</div>
-                    <div class="f4 line" v-if="arr1.flowStatus==50">提现申请中</div>
+                    <div class="f4 line" v-if="arr1.flowStatus==42">交易关闭</div>
+                    <div class="f4 line" v-if="arr1.flowStatus==50">提现中</div>
                     <div class="f4 line" v-if="arr1.flowStatus==51">提现成功</div>
-                    <div class="f4 line" v-if="arr1.flowStatus==52">提现拒绝</div>
-                    <div class="f4 line" v-if="arr1.flowStatus==53">提现关闭</div>
+                    <div class="f4 line" v-if="arr1.flowStatus==52">提现中</div>
+                    <div class="f4 line" v-if="arr1.flowStatus==53">交易关闭</div>
                     <div class="bor"></div>
                 </div>
             </div>

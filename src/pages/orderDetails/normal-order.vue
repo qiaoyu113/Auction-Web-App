@@ -9,7 +9,7 @@
     3.交易完成
     0.线下处理 -->
     <div class="orderDetails" id="" v-set-title="title">
-        <div class="header">传家</div>
+        <!-- <div class="header">传家</div> -->
         <!-- 返回键,当订单完成时有删除icon -->
         <div class="nav">
             <span class="" @click="Return()">&lt;</span> 
@@ -83,7 +83,7 @@
                     物流信息<span class="fr">...</span>
                 </div>
                 <div class="logdetail" v-if="logistics!=''">
-                    <div>{{logistics.location}}</div>
+                    <div>顺丰速运</div>
                     <div>{{logistics.context}}</div>
                     <div>{{logistics.time}}</div>
                 </div> 
@@ -96,7 +96,7 @@
                     <div>{{orderDetail.nu}}</div>
                 </div> 
             </div>
-            <div class="address" v-if="datas.status==1 || datas.status==2 || datas.status==3">
+            <div class="address">
                 <div class="peo"><span>{{adress.name}}</span>  {{adress.phone}}</div>
                 <div>{{adress.provinceName}} {{adress.cityName}} {{adress.districtName}}</div>
                 <div>{{adress.detailAdress}}</div>
@@ -115,7 +115,7 @@
             </div>
             <div class="moneys">
                 <div class="price clearfix"><div class="fl">拍品价格:</div><div class="fr">{{orderDetail.finalPrice | money}} CNY</div></div>
-                <div class="price clearfix"><div class="fl">保险+运费:</div><div class="fr">{{orderDetail.finalPrice / 10000}} CNY</div></div>
+                <div class="price clearfix"><div class="fl">保险+运费:</div><div class="fr">{{freight / 100 | money}} CNY</div></div>
             </div>
             <div class="orderinfo">
                 <div class="price clearfix"><div class="fl">订单编号:</div><div class="fr">{{datas.orderNo}}</div></div>
@@ -137,8 +137,8 @@
             <div class="r-icon" ><img src="../../assets/image/mycenter/usre4.png" /></div>
         </div>
 
-            <div class="logistics">
-        <div class="header">传家</div>
+     <div class="logistics">
+        <!-- <div class="header">传家</div> -->
         <div :class="dis">
             <div class="transparent"></div>
             <div class="popWin" >
@@ -197,6 +197,7 @@ import {commonService} from '../../service/commonService.js'
           createTime:'',//支付时间
           method:'UNIONPAY',//支付方式
           ity:false,
+          freight:'',//保险运费
           
       }
     },
@@ -214,6 +215,7 @@ import {commonService} from '../../service/commonService.js'
         },
     mounted () {
         common.onMove('.orderDetails')
+        common.onMove('.popWin')
         this.huoqu()
         this.getOrderid()
     },
@@ -285,7 +287,7 @@ import {commonService} from '../../service/commonService.js'
         putOrderid:function(){
             let that=this
           commonService.putOrderid(that.orderNo).then(function(res){ 
-                 // console.log(res)
+           
                  if(res.data.message=="success"){
                      
 
@@ -300,6 +302,12 @@ import {commonService} from '../../service/commonService.js'
                 that.datas=res.data.datas
                 that.method=that.datas.channelId
                 that.orderDetail=that.datas.orderDetail
+             
+                if(that.orderDetail.finalPrice < 200000){
+                     that.freight=200000
+                   }else{
+                     that.freight=that.orderDetail.finalPrice
+                   }
                 if(that.orderDetail.adress!=null){
                    that.adress=that.orderDetail.adress 
                 }
@@ -426,9 +434,7 @@ import {commonService} from '../../service/commonService.js'
         height: @size35;
         border-bottom: 0.5px solid rgb(53, 60, 70);
         background: rgb(255, 255, 255);
-        position: fixed;
-        top: @size45;
-        z-index: 100;
+      
         span{
             display: inline-block;
             line-height: @size30;
@@ -451,7 +457,7 @@ import {commonService} from '../../service/commonService.js'
         }
     }
     .content{
-        margin-top: @size80;
+
         margin-bottom: 1.2rem;
         box-sizing: border-box;
         padding: 0 @size10;
@@ -869,6 +875,8 @@ import {commonService} from '../../service/commonService.js'
         } 
     }
     .logistics{
+
+
     .header{
         position: fixed;
         top: 0;

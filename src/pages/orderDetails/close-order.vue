@@ -39,7 +39,7 @@
             </div>
             <div class="moneys">
                 <div class="price clearfix"><div class="fl">拍品价格:</div><div class="fr">{{orderDetail.finalPrice | money}} CNY</div></div>
-                <div class="price clearfix"><div class="fl">保险+运费:</div><div class="fr">{{orderDetail.finalPrice / 10000}} CNY</div></div>
+                <div class="price clearfix"><div class="fl">保险+运费:</div><div class="fr">{{freight / 100 | money}} CNY</div></div>
             </div>
             <div class="orderinfo">
                 <div class="price clearfix"><div class="fl">订单编号:</div><div class="fr">{{datas.orderNo}}</div></div>
@@ -74,7 +74,8 @@ import {commonService} from '../../service/commonService.js'
           logistic:'',
           arrays: [],
           dis:'dis',
-          time:''//支付时间
+          time:'',//支付时间
+          freight:'',  //保险运费
 
           
       }
@@ -111,6 +112,11 @@ import {commonService} from '../../service/commonService.js'
                  let payLogs=that.datas.payLogs
                  that.time=payLogs[payLogs.length-1]
                 that.orderDetail=that.datas.orderDetail
+                 if(that.orderDetail.finalPrice < 200000){
+                     that.freight=200000
+                   }else{
+                     that.freight=that.orderDetail.finalPrice
+                   }
                 that.adress=that.orderDetail.adress  
                 }
                 

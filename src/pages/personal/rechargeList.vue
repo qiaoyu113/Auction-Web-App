@@ -57,13 +57,13 @@
                     <input type="text" placeholder="请输入汇款人姓名" value="name" v-model="name"/>
                     <div class="infoClose" @click='removeName'><i class="iconfont icon-closeicon"></i></div>
                 </div>
-                <div class="info clearfix"><span>开户银行</span>
-                    <input type="text" placeholder="请输入开户银行" value="userBankDetail" v-model="userBankDetail"/>
-                    <div class="infomore" @click='removeAccount'><i class="iconfont icon-closeicon"></i></div>
-                </div>
                 <div class="info clearfix"><span>银行卡号</span>
-                    <input type="number" placeholder="请输入银行卡号" value="userBankCardNo" v-model="userBankCardNo"/>
+                    <input type="number" placeholder="请输入银行卡号" value="userBankCardNo" v-model="userBankCardNo" @blur="cardObtain()"/>
                     <div class="infoClose" @click='removeAccount'><i class="iconfont icon-closeicon"></i></div>
+                </div>
+                 <div class="info clearfix"><span>开户银行</span>
+                    <input type="text" placeholder="自动输入开户银行" value="userBankDetail" v-model="userBankDetail" disabled="disabled" />
+                    <!-- <div class="infomore" @click='removeAccount'><i class="iconfont icon-closeicon"></i></div> -->
                 </div>
                <div class="info1 clearfix"><span>汇款金额</span>
                      <span class="span">CNY</span>
@@ -88,12 +88,13 @@
                 <div class="info"><span>交易时间</span>
                     <div class="infoClose" v-if="list.applyTime!=null">{{list.applyTime | stampFormate2}}</div>
                 </div>
-                <div class="info"><span>交易种类</span>
+                <div class="info"><span>订单支付</span>
                     <div class="infoClose" v-if="list.status==1">充值</div>
                 </div>
                 <div class="info"><span>支付方式</span>
                     <div class="infoClose">
-                    <span class="span2" v-if="list.userBankCardNo!=null">{{list.userBankDetail}}<br>{{list.userBankCardNo.substr(list.userBankCardNo.length-4)}}</span>
+                    <span class="span2" v-if="list.userBankCardNo!=null">{{list.userBankDetail}}<br>
+                    尾号{{list.userBankCardNo.substr(list.userBankCardNo.length-4)}}{{card.cardTypeName}}</span>
                     </div>
                 </div>
                 <div class="info"><span>状态</span>
@@ -113,6 +114,7 @@
 <script >
 import {appService} from '../../service/appService'
 import {common} from '../../assets/js/common/common'
+import {card} from '../../assets/js/common/card.js'
 import {commonService} from '../../service/commonService.js'
   export default {
     props: ['str'],
@@ -140,7 +142,7 @@ import {commonService} from '../../service/commonService.js'
           htmlx:'',
           type:'',
           orderNo:'',
-
+          card:'',
       }
     },
     components: {},
@@ -160,6 +162,20 @@ import {commonService} from '../../service/commonService.js'
                     this.$router.push({path:"/normalorder",query:{id:this.orderNo}})  
                  }
                   
+            },
+            cardObtain:function(){
+                let that=this
+                 let pattern = /^([1-9]{1})(\d{14}|\d{18})$/,  
+                       str = that.userBankCardNo.replace(/\s+/g, "");  
+                       if (!pattern.test(str)) {  
+                           that.htmlx='银行卡号不正确'
+                           return false;  
+                       } 
+
+                let cards=''
+               cards=card.bankCardAttribution(that.userBankCardNo)
+               that.userBankDetail=cards.bankName
+
             },
             moneys:function(){
                 if(this.type==1){
@@ -246,6 +262,7 @@ import {commonService} from '../../service/commonService.js'
                         this.htmlx="请输入银行卡号"
                         return false
                     }
+                   
                     if(that.phone==''){
                         this.htmlx="请输入手机号码"
                         return false
@@ -277,6 +294,8 @@ import {commonService} from '../../service/commonService.js'
                  commonService.getForms(that.oddNumbers).then(function(res){
                     // console.log(res)
                     that.list=res.data.datas
+                    that.card=card.bankCardAttribution(that.list.userBankCardNo)
+                    console.log(that.card)
                  })
             },
             payYes(){
@@ -679,6 +698,7 @@ import {commonService} from '../../service/commonService.js'
                 border: none;
                 outline: none;
                 font-size: @size12;
+                background: #fff;
             }
             .infoClose{
                 float: right;
@@ -695,7 +715,7 @@ import {commonService} from '../../service/commonService.js'
                     width: auto;
                 }
                 .span2{
-
+                     width: 3rem;
                     display: inline-block;
                     line-height: @size14;
                     font-size:@size10;
