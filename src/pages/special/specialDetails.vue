@@ -220,7 +220,7 @@
             getListData:function(pageNum,pageSize,successCallback,errorCallback) {
                 //延时一秒,模拟联网
                 const that = this;
-                commonService.putInsertion({businessType:2}).then(function(res){
+                commonService.putInsertion({businessType:2,dimensionType:1,businessTypeId:that.id}).then(function(res){
 
                 })
                 commonService.getAuctionMarketsList({id:that.id},that.id).then(function(res){

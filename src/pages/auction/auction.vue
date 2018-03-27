@@ -606,7 +606,7 @@
                 const that = this;
                 that.isCollect();
                 //插入统计数据
-                commonService.putInsertion({businessType:1}).then(function(res){})
+                commonService.putInsertion({businessType:1,dimensionType:1,businessTypeId:that.id}).then(function(res){})
                 //查看最高价和是否缴纳保证金
                 commonService.getHasCheck({auctionId:that.id}).then(function(res){
                     if(res.data.code === 200){

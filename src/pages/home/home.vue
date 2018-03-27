@@ -35,8 +35,15 @@
             let that = this;
             that.onMove();
             that.meScroll();
+            that.Insertion();
         },
         methods: {
+            Insertion(){
+                let that = this;
+                commonService.putInsertion({businessType:5,dimensionType:1}).then(function(res){
+
+                })
+            },
             checked(index){
                 let that = this;
                 that.index = index;

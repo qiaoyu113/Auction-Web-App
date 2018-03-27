@@ -27,15 +27,9 @@
     },
     components: {},
     mounted () {
-        this.Insertion()
+//        this.Insertion()
     },
     methods: {
-        Insertion(){
-            let that = this;
-            commonService.putInsertion({businessType:5}).then(function(res){
-
-            })
-        },
         goDetails(id){
             let that = this;
             that.$router.push({name:'specialinfoMore',params:{id:id}})
