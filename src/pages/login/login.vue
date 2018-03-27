@@ -196,7 +196,6 @@
             getKaptchas:function(){
                 let that=this
                  commonService.getKaptchas().then(function(res){
-
                     that.img=res.data.datas
               })
             },
@@ -289,7 +288,8 @@
                 let that = this;
                 if(that.phoneOk){
                     if(that.codeShow){
-
+                     that.hint2 = true;
+                     that.hint2Text = '已发送';
                     }else{
                         
                         if(that.kaptchaValue==''){
@@ -308,12 +308,16 @@
                                         that.timeOver = that.timeOver -= 1
                                     }
                                 },1000)
-                            }
-                            if(res.data.code === 513109){
+                            }else{
                                 that.codeShow = false;
                                 that.hint2 = true;
-                                that.hint2Text = '用户已存在，请直接登陆';
+                                that.hint2Text = res.data.message;
                             }
+                            // if(res.data.code === 513109){
+                            //     that.codeShow = false;
+                            //     that.hint2 = true;
+                            //     that.hint2Text = '用户已存在，请直接登陆';
+                            // }
                         });
                     }
                 }else{

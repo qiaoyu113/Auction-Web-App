@@ -35,7 +35,7 @@
             <div class="info">
                 <div class="infoList">实名认证
                     <div class="goBind" @click="realname()" v-if="user.realNameStatus==0">去认证</div>
-                    <div class="goBind" v-if="user.realNameStatus==1">待审核</div>
+                    <div class="goBind" @click="realname()" v-if="user.realNameStatus==1">待审核</div>
                     <div class="goBind" v-if="user.realNameStatus==2">已认证</div>
                     <div class="goBind" @click="realname()" v-if="user.realNameStatus==3">认证失败</div>
                 </div>

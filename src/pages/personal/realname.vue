@@ -11,6 +11,9 @@
                 <div class='loginEn'>AUTHENTICANTION</div>
                 <div class="loginCn">实名认证</div>
             </div>
+            <div class="contentr" @click="Return()">
+                <img src="../../../src/assets/image/mycenter/right.png"/>
+            </div>
         </div>
         <!-- 认证下部 -->
         <div class="box1">
@@ -31,7 +34,7 @@
                 <div class="z-pic fl">
                     <el-upload
                       class="avatar-uploader"
-                      :action='pingjie'
+                      :action='imgurl'
                       :show-file-list="false"
                       :on-success="handleAvatarSuccess"
                       :before-upload="beforeAvatarUpload">
@@ -46,7 +49,7 @@
                   <!-- <i class="iconfont icon-tupian"></i> -->
                      <el-upload
                       class="avatar-uploader"
-                      :action='pingjie'
+                      :action='imgurl'
                       :show-file-list="false"
                       :on-success="handleAvatarSuccess2"
                       :before-upload="beforeAvatarUpload2">
@@ -121,6 +124,7 @@
                 img1:'',
                 img2:'',
                 rz:'',
+                imgurl:'http://api.sundayauction.cn/files',
             }
         },
         components:{
@@ -171,6 +175,9 @@
                 let that = this;
                 that.name = ''
             },
+            Return:function(){
+                window.history.go(-1)
+            },
             removeNamecard:function(){
                 let that = this;
                 that.namecard = ''
@@ -204,93 +211,102 @@
                     })
             },
             handleAvatarSuccess(res, file) {
+                // console.log(res)
+                this.authFrontPic=res.datas.file
                 this.imageUrl = URL.createObjectURL(file.raw);
              },
            beforeAvatarUpload(file) {
             const isJPG = file.type === 'image/jpeg';
             const isLt2M = file.size / 1024 / 1024 < 2;
          
-            var reader = new FileReader();
-            var that = this;
-             reader.readAsDataURL(file);
-            reader.onload = function(e){
-            var img = new Image();
-              // console.log(this.result)
-              that.base=this.result
-              that.base=that.base.split(',')[1];  
-              that.base=window.atob(that.base);  
-              var ia = new Uint8Array(that.base.length);  
-              for (var i = 0; i < that.base.length; i++) {  
-                ia[i] = that.base.charCodeAt(i);  
-              };  
-              var blob=new Blob([ia], {type:"image/png"});  
-              var formdata=new FormData();
-              that.base=formdata
-            img.src = e.target.result;
-            img.onload = function(){
-                that.width=this.width
-                that.height=this.height
-    commonService.postBase({base64Img:that.base,width:that.width,height:that.height}).then(function(res){
-                 
-                    if(res.data.code==200){
-                      that.authFrontPic=res.data.datas
-                    }else{
-                     that.prompt=res.data.message
-                    }
-                    // that.url='http://test.resource.vjuzhen.com/'+ res.data.datas
-           })
-               }
-            }
+            // var reader = new FileReader();
+            // var that = this;
+             // reader.readAsDataURL(file);
+             console.log(file)
+   
+    //         reader.onload = function(e){
+    //         var img = new Image();
+    //           // console.log(this.result)
+    //           that.base=this.result
+    //           that.base=that.base.split(',')[1];  
+    //           that.base=window.atob(that.base);  
+    //           var ia = new Uint8Array(that.base.length);  
+    //           for (var i = 0; i < that.base.length; i++) {  
+    //             ia[i] = that.base.charCodeAt(i);  
+    //           };  
+    //           var blob=new Blob([ia], {type:"image/png"});  
+    //           var formdata=new FormData();
+    //           that.base=formdata
+
+
+    //         img.src = e.target.result;
+    //         img.onload = function(){
+    //             that.width=this.width
+    //             that.height=this.height
+
+
+    // commonService.postBase({base64Img:that.base,width:that.width,height:that.height}).then(function(res){
+    //               console.log(res)
+    //                 if(res.data.code==200){
+    //                   that.authFrontPic=res.data.datas
+    //                 }else{
+    //                  that.prompt=res.data.message
+    //                 }
+    //                 // that.url='http://test.resource.vjuzhen.com/'+ res.data.datas
+    //        })
+    //            }
+    //         }
             // if (!isJPG) {
             //      this.$message.error('上传头像图片只能是 JPG 格式!');
             // }
-            // if (!isLt2M) {
-            //   this.$message.error('上传头像图片大小不能超过 2MB!');
-            // }
-            // return isJPG && isLt2M;
+            if (!isLt2M) {
+              this.$message.error('上传头像图片大小不能超过 2MB!');
+            }
+            return isLt2M;
           },
           handleAvatarSuccess2(res, file) {
+                this.authBackPic=res.datas.file
                 this.imageUrl2 = URL.createObjectURL(file.raw);
              },
            beforeAvatarUpload2(file) {
             const isJPG = file.type === 'image/jpeg';
             const isLt2M = file.size / 1024 / 1024 < 2;
          
-            var reader = new FileReader();
-            var that = this;
-             reader.readAsDataURL(file);
-            reader.onload = function(e){
-            var img = new Image();
-              that.base=this.result
-              that.base=that.base.split(',')[1];  
-              that.base=window.atob(that.base);  
-              var ia = new Uint8Array(that.base.length);  
-              for (var i = 0; i < that.base.length; i++) {  
-                ia[i] = that.base.charCodeAt(i);  
-              };  
-              var blob=new Blob([ia], {type:"image/png"});  
-              var formdata=new FormData();
-              that.base=formdata
-            img.src = e.target.result;
-            img.onload = function(){
-                that.width=this.width
-                that.height=this.height
-    commonService.postBase({base64Img:that.base,width:this.width,height:this.height}).then(function(res){
+            // var reader = new FileReader();
+            // var that = this;
+            //  reader.readAsDataURL(file);
+    //         reader.onload = function(e){
+    //         var img = new Image();
+    //           that.base=this.result
+    //           that.base=that.base.split(',')[1];  
+    //           that.base=window.atob(that.base);  
+    //           var ia = new Uint8Array(that.base.length);  
+    //           for (var i = 0; i < that.base.length; i++) {  
+    //             ia[i] = that.base.charCodeAt(i);  
+    //           };  
+    //           var blob=new Blob([ia], {type:"image/png"});  
+    //           var formdata=new FormData();
+    //           that.base=formdata
+    //         img.src = e.target.result;
+    //         img.onload = function(){
+    //             that.width=this.width
+    //             that.height=this.height
+    // commonService.postBase({base64Img:that.base,width:this.width,height:this.height}).then(function(res){
 
-                    if(res.data.code==200){
-                    that.authBackPic=res.data.datas
-                    }
-                    // that.url='http://test.resource.vjuzhen.com/'+ res.data.datas
-           })
-               }
-            }
+    //                 if(res.data.code==200){
+    //                 that.authBackPic=res.data.datas
+    //                 }
+    //                 // that.url='http://test.resource.vjuzhen.com/'+ res.data.datas
+    //        })
+    //            }
+    //         }
             // if (!isJPG) {
             //      this.$message.error('上传头像图片只能是 JPG 格式!');
             // }
-            // if (!isLt2M) {
-            //   this.$message.error('上传头像图片大小不能超过 2MB!');
-            // }
-            // return isJPG && isLt2M;
+            if (!isLt2M) {
+              this.$message.error('上传头像图片大小不能超过 2MB!');
+            }
+            return isLt2M;
           },
           shuchu:function(){
 
@@ -363,7 +379,7 @@
     //     line-height: @size45;
     // }
     .content{
-        margin-top: @size45;
+   
         width:100%;
         height:3.7rem;
         border-bottom:2px solid black;
@@ -382,6 +398,10 @@
                 font-size: 15px;
             }
             
+        }
+        .contentr{
+            float: right;
+            margin-top: 0.3rem;
         }
         
     }

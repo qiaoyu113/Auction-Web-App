@@ -251,7 +251,7 @@
             getCollect:function(){
                 let that=this;
                  commonService.getCollect({pageNo:1,pageSize:30,status:2}).then(function(res){
- 
+                     console.log(res)
                     if(res.data.code==200){
                         that.datas=res.data.datas.datas
                       for(var i=0;i<that.datas.length;i++){

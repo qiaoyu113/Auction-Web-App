@@ -211,7 +211,6 @@
                         that.totalMoney=that.list.wallet.totalMoney
                        }
                       that.numItem=that.list.numItem  
-                      console.log(that.numItem)
                     }else{
                         that.logined=false
                     }
