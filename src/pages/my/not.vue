@@ -8,17 +8,22 @@
                  <div class="ros_l_top clearfix" v-if="list.auctionCollect.newPrice<list.auction.finalPrice">
                       <div class="ros_offer">{{list.auctionCollect.newPrice | money}} CNY</div>
                       <div class="ros_prompt">未竞价成功</div>
-                      <div class="ros_label">NEW</div>
+                      <div class="ros_label" v-if="list.auctionCollect.show==true">NEW</div>
                  </div>
                   <div class="ros_l_top clearfix" v-if="list.auction.auctionStatus==4">
                       <div class="ros_prompt">流拍</div>
+                      <div class="ros_label" v-if="list.auctionCollect.show==true">NEW</div>
                  </div>
                   <div class="ros_l_top clearfix" v-if="list.auction.marketStatus==0">
                       <div class="ros_prompt">拍品以下架</div>
+                      <div class="ros_label" v-if="list.auctionCollect.show==true">NEW</div>
                  </div>
 
-                 <div class="ros_l2">{{list.auction.finalPrice | money}} CNY</div>
+                 <div class="ros_l2" v-if="list.auction.auctionStatus!=4 && list.auction.marketStatus!=0">{{list.auction.finalPrice | money}} CNY</div>
+                 <div class="ros_l2" v-if="list.auction.auctionStatus==4 || list.auction.marketStatus==0">{{list.auction.holdPrice | money}} CNY</div>
                  <div class="ros_l3">{{list.auction.title}}</div>
+                 <div class="ros_l3">{{list.auction.completeNo}}</div>
+                                        
                  <div class="ros_l3">LOT-{{list.auction.completeNo}}</div>
              </div>
              <div class="ros_r" @click="Router(list.auction._id)"><img :src="picHead + list.auction.picItems[0]"/></div>
@@ -38,13 +43,15 @@
                  <div class="ros_l_top clearfix" v-if="list.auctionCollect.newPrice<list.auction.finalPrice">
                       <div class="ros_offer">{{list.auction.finalPrice | money}} CNY</div>
                       <div class="ros_prompt">未竞价成功</div>
-                      <div class="ros_label">NEW</div>
+                      <div class="ros_label" v-if="list.auctionCollect.show==true">NEW</div>
                  </div>
                   <div class="ros_l_top clearfix" v-if="list.auction.auctionStatus==4">
                       <div class="ros_prompt">流拍</div>
+                      <div class="ros_label" v-if="list.auctionCollect.show==true">NEW</div>
                  </div>
                   <div class="ros_l_top clearfix" v-if="list.auction.marketStatus==0">
                       <div class="ros_prompt">拍品以下架</div>
+                      <div class="ros_label" v-if="list.auctionCollect.show==true">NEW</div>
                  </div>
 
                  <div class="ros_l2">{{list.auctionCollect.newPrice | money}} CNY</div>
@@ -68,13 +75,15 @@
                  <div class="ros_l_top clearfix" v-if="list.auctionCollect.newPrice<list.auction.finalPrice">
                       <div class="ros_offer">{{list.auction.finalPrice | money}} CNY</div>
                       <div class="ros_prompt">未竞价成功</div>
-                      <div class="ros_label">NEW</div>
+                      <div class="ros_label" v-if="list.auctionCollect.show==true">NEW</div>
                  </div>
                   <div class="ros_l_top clearfix" v-if="list.auction.auctionStatus==4">
                       <div class="ros_prompt">流拍</div>
+                      <div class="ros_label" v-if="list.auctionCollect.show==true">NEW</div>
                  </div>
                   <div class="ros_l_top clearfix" v-if="list.auction.marketStatus==0">
                       <div class="ros_prompt">拍品以下架</div>
+                      <div class="ros_label" v-if="list.auctionCollect.show==true">NEW</div>
                  </div>
 
                  <div class="ros_l2">{{list.auctionCollect.newPrice | money}} CNY</div>
@@ -98,13 +107,15 @@
                  <div class="ros_l_top clearfix" v-if="list.auctionCollect.newPrice<list.auction.finalPrice">
                       <div class="ros_offer">{{list.auction.finalPrice | money}} CNY</div>
                       <div class="ros_prompt">未竞价成功</div>
-                      <div class="ros_label">NEW</div>
+                      <div class="ros_label" v-if="list.auctionCollect.show==true">NEW</div>
                  </div>
                   <div class="ros_l_top clearfix" v-if="list.auction.auctionStatus==4">
                       <div class="ros_prompt">流拍</div>
+                      <div class="ros_label" v-if="list.auctionCollect.show==true">NEW</div>
                  </div>
                   <div class="ros_l_top clearfix" v-if="list.auction.marketStatus==0">
                       <div class="ros_prompt">拍品以下架</div>
+                      <div class="ros_label" v-if="list.auctionCollect.show==true">NEW</div>
                  </div>
 
                  <div class="ros_l2">{{list.auctionCollect.newPrice | money}} CNY</div>
@@ -128,13 +139,15 @@
                  <div class="ros_l_top clearfix" v-if="list.auctionCollect.newPrice<list.auction.finalPrice">
                       <div class="ros_offer">{{list.auction.finalPrice | money}} CNY</div>
                       <div class="ros_prompt">未竞价成功</div>
-                      <div class="ros_label">NEW</div>
+                      <div class="ros_label" v-if="list.auctionCollect.show==true">NEW</div>
                  </div>
                   <div class="ros_l_top clearfix" v-if="list.auction.auctionStatus==4">
                       <div class="ros_prompt">流拍</div>
+                      <div class="ros_label" v-if="list.auctionCollect.show==true">NEW</div>
                  </div>
                   <div class="ros_l_top clearfix" v-if="list.auction.marketStatus==0">
                       <div class="ros_prompt">拍品以下架</div>
+                      <div class="ros_label" v-if="list.auctionCollect.show==true">NEW</div>
                  </div>
 
                  <div class="ros_l2">{{list.auctionCollect.newPrice | money}} CNY</div>
@@ -208,6 +221,7 @@
                  commonService.getCollect({pageNo:1,pageSize:30,status:3}).then(function(res){
                    if(res.data.code==200){
                         that.datas=res.data.datas.datas
+                        console.log(that.datas)
                     }
                     
                     var now = new Date();

@@ -185,6 +185,11 @@ export const commonService = {
     deleteTokens: function () {
         return axios.delete('/tokens')
     },
+     /* 绑定微信  */
+    postWxbind: function (params) {
+        return axios.post('/tokens/wxbind' + this.getParam(params))
+    },
+
 
 
 

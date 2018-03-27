@@ -3,27 +3,28 @@
         <div class="box">
         <div class="now" v-if="loading">
       
-         <div class="ros clearfix" v-for="(list,index) in datas" v-if="list.auctionEndTime>=week">
+         <div class="ros clearfix" v-for="(list,index) in datas" v-if="list.auction.auctionEndTime>=week">
              <div class="ros_l">
-                 <div class="ros_l_top clearfix" v-if="list.status=1">
+                 <div class="ros_l_top clearfix" v-if="list.auction.doneBuy==1">
                       <div class="ros_prompt">拍卖成功</div>
-                      <div class="ros_label">NEW</div>
+                     <div class="ros_label" v-if="list.auctionCollect.show==true">NEW</div>
                  </div>
-                  <div class="ros_l_top clearfix" v-if="list.doneBuy==3">
+                  <div class="ros_l_top clearfix" v-if="list.auction.doneBuy==3">
                       <div class="ros_prompt">违约，保证金被扣除</div>
+                      <div class="ros_label" v-if="list.auctionCollect.show==true">NEW</div>
                  </div>
-                 <div class="ros_l2">{{list.currentPrice | money}} CNY</div>
-                 <div class="ros_l3">{{list.title}}</div>
-                 <div class="ros_l3">LOT-{{list.completeNo}}</div>
+                 <div class="ros_l2">{{list.auction.currentPrice | money}} CNY</div>
+                 <div class="ros_l3">{{list.auction.title}}</div>
+                 <div class="ros_l3">LOT-{{list.auction.completeNo}}</div>
              </div>
-             <div class="ros_r" @click="Router(list.id)"><img :src="picHead + list.picItems[0]"/></div>
-             <div class="ros_con"  v-if="list.doneBuy==1" @click="jump(list.id)">
+             <div class="ros_r" @click="Router(list.auction._id)"><img :src="picHead + list.auction.picItems[0]"/></div>
+             <div class="ros_con"  v-if="list.auction.doneBuy==1" @click="jump(list.auction._id)">
                  去支付
              </div>
-             <div class="ros_con"  v-if="list.doneBuy!=1" @click="jump(list.id)">
+             <div class="ros_con"  v-if="list.auction.doneBuy!=1" @click="jump(list.auction._id)">
                  查看订单
              </div>
-             <div class="ros_date" v-if="list.doneBuy==1">
+             <div class="ros_date" v-if="list.auction.doneBuy==1">
                  <p>{{countdown[index].dd}}:{{countdown[index].hh}}:{{countdown[index].mm}}:{{countdown[index].ss}}</p>
                  <p><span>支付拍品</span></p>
              </div>
@@ -31,7 +32,7 @@
        </div>
       <!-- 一周以前 -->
        <div class="week"  v-if="datas.params">
-          <div class="ros clearfix" v-for="(list,index) in datas" v-if="list.auctionEndTime<week&&list.auctionEndTime>=month">
+          <div class="ros clearfix" v-for="(list,index) in datas" v-if="list.auction.auctionEndTime<week&&list.auction.auctionEndTime>=month">
        <!-- 分割线 -->
            <div class="line clearfix">
              <div class="line_l"></div>
@@ -39,27 +40,28 @@
             <div class="line_r"></div>
           </div>
              <div class="ros_l">
-                 <div class="ros_l_top clearfix" v-if="list.status=1">
+                 <div class="ros_l_top clearfix" v-if="list.auction.doneBuy==1">
                     
                       <div class="ros_prompt">拍卖成功</div>
-                      <div class="ros_label">NEW</div>
+                     <div class="ros_label" v-if="list.auctionCollect.show==true">NEW</div>
                  </div>
-                  <div class="ros_l_top clearfix" v-if="list.doneBuy==3">
+                  <div class="ros_l_top clearfix" v-if="list.auction.doneBuy==3">
                       <div class="ros_prompt">违约，保证金被扣除</div>
+                      <div class="ros_label" v-if="list.auctionCollect.show==true">NEW</div>
                  </div>
 
-                 <div class="ros_l2">{{list.currentPrice | money}} CNY</div>
-                 <div class="ros_l3">{{list.title}}</div>
-                 <div class="ros_l3">LOT-{{list.completeNo}}</div>
+                 <div class="ros_l2">{{list.auction.currentPrice | money}} CNY</div>
+                 <div class="ros_l3">{{list.auction.title}}</div>
+                 <div class="ros_l3">LOT-{{list.auction.completeNo}}</div>
              </div>
-             <div class="ros_r" @click="Router(list.id)"><img :src="picHead + list.picItems[0]"/></div>
-             <div class="ros_con"  v-if="list.doneBuy==1"  @click="jump(list.id)">
+             <div class="ros_r" @click="Router(list.auction._id)"><img :src="picHead + list.auction.picItems[0]"/></div>
+             <div class="ros_con"  v-if="list.auction.doneBuy==1"  @click="jump(list.auction._id)">
                  去支付
              </div>
-             <div class="ros_con"  v-if="list.doneBuy!=1" @click="jump(list.id)">
+             <div class="ros_con"  v-if="list.auction.doneBuy!=1" @click="jump(list.auction._id)">
                  查看订单
              </div>
-             <div class="ros_date" v-if="list.doneBuy==1">
+             <div class="ros_date" v-if="list.auction.doneBuy==1">
                  <p>{{countdown[index].dd}}:{{countdown[index].hh}}:{{countdown[index].mm}}:{{countdown[index].ss}}</p>
                  <p><span>支付拍品</span></p>
              </div>
@@ -68,7 +70,7 @@
         </div> 
         <!-- 一月以前 -->
        <div class="week" v-if="datas.params">
-          <div class="ros clearfix" v-for="(list,index) in datas" v-if="list.auctionEndTime<month&&list.auctionEndTime>=march">
+          <div class="ros clearfix" v-for="(list,index) in datas" v-if="list.auction.auctionEndTime<month&&list.auction.auctionEndTime>=march">
           <!-- 分割线 -->
           <div class="line clearfix">
              <div class="line_l"></div>
@@ -76,27 +78,28 @@
             <div class="line_r"></div>
           </div>
              <div class="ros_l">
-                 <div class="ros_l_top clearfix" v-if="list.status=1">
+                 <div class="ros_l_top clearfix" v-if="list.auction.doneBuy==1">
                     
                       <div class="ros_prompt">拍卖成功</div>
-                      <div class="ros_label">NEW</div>
+                      <div class="ros_label" v-if="list.auctionCollect.show==true">NEW</div>
                  </div>
-                  <div class="ros_l_top clearfix" v-if="list.doneBuy==3">
+                  <div class="ros_l_top clearfix" v-if="list.auction.doneBuy==3">
                       <div class="ros_prompt">违约，保证金被扣除</div>
+                      <div class="ros_label" v-if="list.auctionCollect.show==true">NEW</div>
                  </div>
 
-                 <div class="ros_l2">{{list.currentPrice | money}} CNY</div>
-                 <div class="ros_l3">{{list.title}}</div>
-                 <div class="ros_l3">LOT-{{list.completeNo}}</div>
+                 <div class="ros_l2">{{list.auction.currentPrice | money}} CNY</div>
+                 <div class="ros_l3">{{list.auction.title}}</div>
+                 <div class="ros_l3">LOT-{{list.auction.completeNo}}</div>
              </div>
-             <div class="ros_r" @click="Router(list.id)"><img :src="picHead + list.picItems[0]"/></div>
-             <div class="ros_con"  v-if="list.doneBuy==1" @click="jump(list.id)">
+             <div class="ros_r" @click="Router(list.auction._id)"><img :src="picHead + list.auction.picItems[0]"/></div>
+             <div class="ros_con"  v-if="list.auction.doneBuy==1" @click="jump(list.auction._id)">
                  去支付
              </div>
-             <div class="ros_con"  v-if="list.doneBuy!=1" @click="jump(list.id)">
+             <div class="ros_con"  v-if="list.auction.doneBuy!=1" @click="jump(list.auction._id)">
                  查看订单
              </div>
-             <div class="ros_date" v-if="list.doneBuy==1">
+             <div class="ros_date" v-if="list.auction.doneBuy==1">
                  <p>{{countdown[index].dd}}:{{countdown[index].hh}}:{{countdown[index].mm}}:{{countdown[index].ss}}</p>
                  <p><span>支付拍品</span></p>
              </div>
@@ -105,7 +108,7 @@
         </div> 
            <!-- 三月以前 -->
        <div class="week" v-if="datas.params">
-          <div class="ros clearfix" v-for="(list,index) in datas" v-if="list.auctionEndTime<march&&list.auctionEndTime >= year">
+          <div class="ros clearfix" v-for="(list,index) in datas" v-if="list.auction.auctionEndTime<march&&list.auction.auctionEndTime >= year">
            <!-- 分割线 -->
           <div class="line clearfix">
              <div class="line_l"></div>
@@ -113,27 +116,28 @@
             <div class="line_r"></div>
           </div>
              <div class="ros_l">
-                 <div class="ros_l_top clearfix" v-if="list.status=1">
+                 <div class="ros_l_top clearfix" v-if="list.auction.doneBuy==1">
                     
                       <div class="ros_prompt">拍卖成功</div>
-                      <div class="ros_label">NEW</div>
+                      <div class="ros_label" v-if="list.auctionCollect.show==true">NEW</div>
                  </div>
-                  <div class="ros_l_top clearfix" v-if="list.doneBuy==3">
+                  <div class="ros_l_top clearfix" v-if="list.auction.doneBuy==3">
                       <div class="ros_prompt">违约，保证金被扣除</div>
+                      <div class="ros_label" v-if="list.auctionCollect.show==true">NEW</div>
                  </div>
 
-                 <div class="ros_l2">{{list.currentPrice | money}} CNY</div>
-                 <div class="ros_l3">{{list.title}}</div>
-                 <div class="ros_l3">LOT-{{list.completeNo}}</div>
+                 <div class="ros_l2">{{list.auction.currentPrice | money}} CNY</div>
+                 <div class="ros_l3">{{list.auction.title}}</div>
+                 <div class="ros_l3">LOT-{{list.auction.completeNo}}</div>
              </div>
-             <div class="ros_r" @click="Router(list.id)"><img :src="picHead + list.picItems[0]"/></div>
-             <div class="ros_con"  v-if="list.doneBuy==1" @click="jump(list.id)">
+             <div class="ros_r" @click="Router(list.auction._id)"><img :src="picHead + list.auction.picItems[0]"/></div>
+             <div class="ros_con"  v-if="list.auction.doneBuy==1" @click="jump(list.auction._id)">
                  去支付
              </div>
-             <div class="ros_con"  v-if="list.doneBuy!=1" @click="jump(list.id)">
+             <div class="ros_con"  v-if="list.auction.doneBuy!=1" @click="jump(list.auction._id)">
                  查看订单
              </div>
-             <div class="ros_date" v-if="list.doneBuy==1">
+             <div class="ros_date" v-if="list.auction.doneBuy==1">
                  <p>{{countdown[index].dd}}:{{countdown[index].hh}}:{{countdown[index].mm}}:{{countdown[index].ss}}</p>
                  <p><span>支付拍品</span></p>
              </div>
@@ -141,7 +145,7 @@
         </div> 
              <!-- 一年以前 -->
        <div class="week" v-if="datas.params">
-          <div class="ros clearfix" v-for="(list,index) in datas" v-if="list.auctionEndTime<year">
+          <div class="ros clearfix" v-for="(list,index) in datas" v-if="list.auction.auctionEndTime<year">
    <!-- 分割线 -->
           <div class="line clearfix">
              <div class="line_l"></div>
@@ -149,27 +153,28 @@
             <div class="line_r"></div>
           </div>
              <div class="ros_l">
-                 <div class="ros_l_top clearfix" v-if="list.status=1">
+                 <div class="ros_l_top clearfix" v-if="list.auction.doneBuy==1">
                     
                       <div class="ros_prompt">拍卖成功</div>
-                      <div class="ros_label">NEW</div>
+                      <div class="ros_label" v-if="list.auctionCollect.show==true">NEW</div>
                  </div>
-                  <div class="ros_l_top clearfix" v-if="list.doneBuy==3">
+                  <div class="ros_l_top clearfix" v-if="list.auction.doneBuy==3">
                       <div class="ros_prompt">违约，保证金被扣除</div>
+                      <div class="ros_label" v-if="list.auctionCollect.show==true">NEW</div>
                  </div>
 
-                 <div class="ros_l2">{{list.currentPrice | money}} CNY</div>
-                 <div class="ros_l3">{{list.title}}</div>
-                 <div class="ros_l3">LOT-{{list.completeNo}}</div>
+                 <div class="ros_l2">{{list.auction.currentPrice | money}} CNY</div>
+                 <div class="ros_l3">{{list.auction.title}}</div>
+                 <div class="ros_l3">LOT-{{list.auction.completeNo}}</div>
              </div>
-             <div class="ros_r" @click="Router(list.id)"><img :src="picHead + list.picItems[0]"/></div>
-             <div class="ros_con"  v-if="list.doneBuy==1" @click="jump(list.id)">
+             <div class="ros_r" @click="Router(list.auction._id)"><img :src="picHead + list.auction.picItems[0]"/></div>
+             <div class="ros_con"  v-if="list.auction.doneBuy==1" @click="jump(list.auction._id)">
                  去支付
              </div>
-             <div class="ros_con"  v-if="list.doneBuy!=1" @click="jump(list.id)">
+             <div class="ros_con"  v-if="list.auction.doneBuy!=1" @click="jump(list.auction._id)">
                  查看订单
              </div>
-             <div class="ros_date" v-if="list.doneBuy==1">
+             <div class="ros_date" v-if="list.auction.doneBuy==1">
                  <p>{{countdown[index].dd}}:{{countdown[index].hh}}:{{countdown[index].mm}}:{{countdown[index].ss}}</p>
                  <p><span>支付拍品</span></p>
              </div>
@@ -233,7 +238,6 @@
                 let that =this;
         commonService.getCheckOrder({auctionId:id}).then(function(res){
                     // that.datas=res.data.datas.datas
-                
                     if(res.data.datas==null){
                          that.$router.push({path:"/my/order",query:{auctionId:id}}) 
                     }else{
@@ -251,13 +255,14 @@
             getCollect:function(){
                 let that=this;
                  commonService.getCollect({pageNo:1,pageSize:30,status:2}).then(function(res){
- 
+                     console.log(res)
                     if(res.data.code==200){
                         that.datas=res.data.datas.datas
                       for(var i=0;i<that.datas.length;i++){
                         let date=new Date()
                           // if(new Date(that.datas[i].mqEndTime*1)>date){
-                            that.countdown[i]=common.getTimer(Number(that.datas[i].mqEndTime)+(7 * 24 * 3600 * 1000)) 
+                            that.countdown[i]=common.getTimer(Number(that.datas[i].auction.mqEndTime)+(7 * 24 * 3600 * 1000)) 
+                            console.log(that.countdown[i])
                           // }else{
                           //   that.countdown[i] = 0
                           // } 
