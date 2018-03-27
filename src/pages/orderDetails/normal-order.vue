@@ -78,7 +78,7 @@
                 <div class="btn" :class="{'rty':method=='ALIPAY_WAP'}" @click="methodlist('ALIPAY_WAP')">支付宝</div>
                 <div class="btn" :class="{'rty':method=='UNIONPAY'}" @click="methodlist('UNIONPAY')">线下转账</div>
             </div>
-            <div v-if="datas.status==4 || datas.status==5">
+            <div v-if="datas.status==4 || datas.status==5 || datas.status==6">
                <div class="logistic" @click="show">
                     物流信息<span class="fr">...</span>
                 </div>
@@ -91,7 +91,7 @@
                     <div>送货上门</div>
                     <div>{{orderDetail.nu}}</div>
                 </div> 
-                 <div class="logdetail" v-if="orderDetail.com=='tealab_ziticons'">
+                 <div class="logdetail" v-if="orderDetail.com=='tealab_ziti'">
                     <div>自提</div>
                     <div>{{orderDetail.nu}}</div>
                 </div> 
@@ -318,7 +318,7 @@ import {commonService} from '../../service/commonService.js'
                             that.createTime=orderLogs[i].createTime
                       }
                  }
-                if(that.datas.status==4 || that.datas.status==5){
+                if(that.datas.status==4 || that.datas.status==5 || that.datas.status==6){
                    that.index=2
                    if(that.orderDetail.com=="shunfeng"){
                       commonService.getKaidi({nu:that.orderDetail.nu,com:that.orderDetail.com}).then(function(res){
@@ -326,6 +326,7 @@ import {commonService} from '../../service/commonService.js'
                     that.logistics=res.data.datas.data[0]
                     that.logisticss=res.data.datas.data
                     that.logistic=res.data.datas
+               
                    })
                    }
               

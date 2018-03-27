@@ -23,7 +23,6 @@
 <script>
     import {appService} from '../../service/appService'
     import {common} from '../../assets/js/common/common'
-      import {card} from '../../assets/js/common/card'
     import {commonService} from '../../service/commonService.js'
     export default {
         data () {
@@ -59,7 +58,7 @@
         mounted: function() {
              common.onMove('.notstart')
              this.getCollect()
-             this.yu()
+          
         },
         watch:{
              countdown(){
@@ -77,11 +76,7 @@
              }
         },
         methods: {
-            yu:function(){
-                let tu=''
-               tu = card.bankCardAttribution('6217000010073107834')
-               console.log(tu)
-            },
+         
             Router:function(id){
                 this.$router.push({name:'auctionMore',params:{id:id}})
             },
