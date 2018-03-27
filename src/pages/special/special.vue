@@ -74,13 +74,13 @@
                                     <div class="sell-box">
                                         <div class="sell-spic">
                                             <ul>
-                                                <li v-for="(image,index) in img" v-if="index <= 9" @click="goAuction(image.id)">
+                                                <li v-for="(image,index) in img" v-if="index <= 8" @click="goAuction(image.id)">
                                                     <a href='javascript:void(0)'>
                                                         <img :src="$store.state.picHead + image.img">
                                                     </a>
                                                 </li>
                                             </ul>
-                                            <div class="addIcon" v-if="img.length === 10" @click="goSellMore(list.id)">
+                                            <div class="addIcon" v-if="img.length > 9" @click="goSellMore(list.id)">
                                                 <i class="iconfont icon-fangdajing"></i>
                                                 <span>查看更多</span>
                                             </div>
@@ -647,9 +647,9 @@
                                     float: left;
                                     overflow: hidden;
                                     img {
-                                        width: 2.6rem;
-                                        height: @size80;
-                                        margin-left:-0.3rem;
+                                        width: 2.75rem;
+                                        height: 2.1333rem;
+                                        margin-left: -0.35rem;
                                     }
                                 }
                             }

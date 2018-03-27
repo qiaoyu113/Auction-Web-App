@@ -93,7 +93,7 @@
                                     <div class="icon"></div>
                                 </div>
                                 <!--已结束-->
-                                <div class="collect4"  v-if="list.auctionStatus === 3">
+                                <div class="collect4"  v-if="list.auctionStatus === 3 || list.auctionStatus === 5">
                                     <div class="icon"></div>
                                     <div class="icon2"></div>
                                 </div>
