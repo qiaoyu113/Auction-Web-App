@@ -29,7 +29,10 @@
             <!--修改密码-->
             <div class="info">
                 <div class="infoList">修改密码<div class="more" @click="changePass"><img src="../../../src/assets/image/mycenter/more.png"/></div></div>
-                <div class="infoList"><i class="iconfont icon-weixin1"></i>微信绑定号<div class="goBind" @click="user.wxBind==null || user.wxBind==false">去绑定</div></div>
+                <div class="infoList"><i class="iconfont icon-weixin1"></i>微信绑定号
+                <div class="goBind" v-if="user.wxBind==true">已绑定</div>
+                <div class="goBind" v-if="user.wxBind==null || user.wxBind==false" @click='wxlogins'>去绑定</div>
+                </div>
             </div>
             <!--实名认证-->
             <div class="info">
@@ -124,6 +127,8 @@
                 let that=this
                  commonService.getUsers().then(function(res){
                     that.user=res.data.datas.user
+                    console.log(that.user)
+
               })
 
              },
@@ -137,6 +142,21 @@
               })
 
              },
+              //绑定微信登陆
+            wxlogins:function(){
+                let that = this;
+                // that.wxShow = true;
+
+               commonService.getWxpay({loginType:'WEIXIN',platform:'WXH5',jumpRouter:'wxlogins',wxscope:'snsapi_userinfo'}).then(function(res){
+                   let code = res.data.code;
+                   console.log(res)
+                   // return false
+                   if(code === 200){
+                       //获取静默授权地址成功
+                       window.location.href = res.data.datas;
+                   }
+               })
+            }
         }
     }
 </script>
