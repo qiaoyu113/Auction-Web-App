@@ -84,7 +84,7 @@
                     //第二步，从微信授权页面跳转回来，已经获取到了code，再次跳转到实际所需页面
 //                   var platform = that.$store.state.loginStore.platform
    //                 console.log('code:',code);
-
+   
                           commonService.postWxbind({code: code}).then(function (res) {
                               console.log(res)
                               if(res.data.message=="success"){

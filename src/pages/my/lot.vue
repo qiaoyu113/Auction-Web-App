@@ -7,7 +7,7 @@
                  <div class="ros_l_top clearfix" v-if="list.auctionCollect.newPrice<list.auction.finalPrice">
                       <div class="ros_offer">{{list.auctionCollect.newPrice | money}} CNY</div>
                       <div class="ros_prompt">出价被超出</div>
-                      <div class="ros_label">NEW</div>
+                      <div class="ros_label" v-if="list.auctionCollect.show==true">NEW</div>
                  </div>
                  <div class="ros_l_top clearfix" v-if="list.auctionCollect.newPrice==list.auction.finalPrice">
                       <div class="ros_prompt">出价领先</div>

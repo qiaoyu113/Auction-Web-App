@@ -22,7 +22,7 @@
             <!--详细信息-->
             <div class="info">
                 <div class="infoList">昵称  <span>{{user.name}}</span><div class="more" @click="changeName"><img src="../../../src/assets/image/mycenter/more.png"/></div></div>
-                <div class="infoList">性别  <span>{{user.sex}}</span><div class="more"><img src="../../../src/assets/image/mycenter/more.png"/></div></div>
+                <div class="infoList">性别  <span v-if="radio==1">男</span><span v-if="radio==2">女</span><span v-if="radio!=2&&radio!=1">未知</span><div class="more" @click="setsex"><img src="../../../src/assets/image/mycenter/more.png"/></div></div>
                 <div class="infoList">生日  <span>{{user.age}}</span><div class="more"><img src="../../../src/assets/image/mycenter/more.png"/></div></div>
                 <div class="infoList">手机  <span v-if="user.phone!=''">{{user.phone}}</span><span v-if="user.phone==''">暂无绑定手机号</span><div class="more" @click="changePhone"><img src="../../../src/assets/image/mycenter/more.png"/></div></div>
             </div>
@@ -46,6 +46,15 @@
             <!--退出-->
             <div class="back" @click="deleteTokens()">退出登陆</div>
         </div>
+       <!-- 性别 -->
+        <div class="v_modal" ref="modal">
+             <div class="v_box">
+                 <el-radio v-model="radio" label="1">男</el-radio>
+                 <el-radio v-model="radio" label="2">女</el-radio>
+             </div>
+        </div>  
+
+
     </div>
 </template>
 
@@ -65,6 +74,7 @@
                 },
                 inputName:'',//修改的名字
                 hasPhone:true,//是否有手机号绑定
+                radio:'1',
             }
         },
         syncData({store}) {
@@ -91,10 +101,15 @@
                 return this.$store.state.picHead
             },
         },
+
         mounted: function() {
-            
             common.onMove('.mycenter')
             this.getUsers()
+        },
+        watch:{
+            radio:function(){
+                this.sexPasswords()
+            }
         },
         methods: {
             Return:function(){
@@ -107,6 +122,10 @@
             },
             realname:function(){
                 this.$router.push({name:'realname'})
+            },
+            setsex:function(){
+              this.$refs.modal.style.display="block"
+
             },
             //改电话号
             changePhone:function(){
@@ -127,11 +146,19 @@
                 let that=this
                  commonService.getUsers().then(function(res){
                     that.user=res.data.datas.user
-                    console.log(that.user)
-
+                    let sex=that.user.sex
+                    that.radio=sex + ''
+                    // console.log(that.user)
               })
-
              },
+             //修改性别
+            sexPasswords:function(){
+                 let that=this
+  commonService.postUsersinfo({id:that.id,sex:that.radio}).then(function(res){
+             
+                that.$refs.modal.style.display="none"
+              })
+            },
              // 退出登录
              deleteTokens:function(){
                 let that=this
@@ -149,7 +176,6 @@
 
                commonService.getWxpay({loginType:'WEIXIN',platform:'WXH5',jumpRouter:'wxlogins',wxscope:'snsapi_userinfo'}).then(function(res){
                    let code = res.data.code;
-                   console.log(res)
                    // return false
                    if(code === 200){
                        //获取静默授权地址成功
@@ -330,6 +356,32 @@
             right:0;
             bottom:0;
             border-top:1px solid #1A242E;
+        }
+    }
+    .v_modal{
+        display: none;
+        position: fixed;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        z-index: 999;
+        width: 100%;
+        height: 100%;
+        background: rgba(0,0,0,0.5);
+        .v_box{
+            width: 6rem;
+            height: 3.4rem;
+            background:#fff;
+            border-right: 3px;
+            margin-left: 2rem;
+            margin-top: 4rem; 
+            padding-top: 0.6rem;
+            label{
+                display: block;
+                line-height: 1.4rem;
+                margin-left: 1.4rem;
+            }
         }
     }
 }
