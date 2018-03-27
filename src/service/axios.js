@@ -6,7 +6,7 @@ import store from '../vuex/'
 
 // axios.defaults.baseURL = 'http://api.saas.vjuzhen.com';
 // axios.defaults.baseURL = 'http://api.crm.shequnyi.cn';
-// axios.defaults.baseURL = 'http://mrenin.natappfree.cc';
+// axios.defaults.baseURL = 'http://cgz9wm.natappfree.cc';
 axios.defaults.baseURL = 'http://api.sundayauction.cn';   //线上
 // axios.defaults.baseURL = 'http://uyxdmh.natappfree.cc';
 // axios.defaults.baseURL = 'http://u4hphg.natappfree.cc';

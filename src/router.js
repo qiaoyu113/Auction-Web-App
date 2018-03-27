@@ -42,6 +42,7 @@ const none = (resolve) => {require(['./pages/auction/none.vue'],resolve)}
 const auctionView = (resolve) => {require(['./pages/auction/auctionView.vue'],resolve)}
 const wxbaselogin = (resolve) => {require(['./pages/auction/wxbaselogin.vue'],resolve)}
 const wxlogin = (resolve) => {require(['./pages/auction/wxlogin.vue'],resolve)}
+const wxlogins = (resolve) => {require(['./pages/auction/wxlogins.vue'],resolve)}
 const wxPay = (resolve) => {require(['./pages/wxPay/wxPay.vue'],resolve)}
 const aliPay = (resolve) => {require(['./pages/wxPay/aliPay.vue'],resolve)}
 // 直播
@@ -167,6 +168,7 @@ const routers = [
     {name:'wxPay',path:'/wxpay/',component: wxPay}, // 微信支付页
     {name:'aliPay',path:'/payOk',component: aliPay}, // 支付宝支付成功页
     {name:'wxlogin',path:'/wxlogin',component: wxlogin}, //微信登录跳转
+    {name:'wxlogins',path:'/wxlogins',component: wxlogins},//微信绑定跳转
 ]
 
 const router = new VueRouter({
