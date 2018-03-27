@@ -63,7 +63,7 @@
                                     <span>已结束</span>
                                 </div>
                                 <div class="sta-over">开始：{{startTime}}</div>
-                                <div class="sta-over">结束：{{overTime}}</div>
+                                <div class="sta-over">结束：{{details.auctionEndTime}}</div>
                             </div>
                             <div class="sell-html" v-html="details.content"></div>
                         </div>
@@ -227,15 +227,42 @@
                     if(res.data.code === 200){
                         that.details = res.data.datas;
                         that.img = that.$store.state.picHead + res.data.datas.coverUrl;
+                        setTimeout(function(){
+                            let now = new Date().getTime()
+                            let time = '';
+//                            if(that.details.auctionStatus == '1'){
+//                                time = that.details.auctionStartTime - now;
+//                            }else{
+//                                time = that.details.auctionEndTime - now;
+//                            }
+                            time = that.details.mqEndTime - now;
+                            let day = '';
+                            let h =  '';
+                            let m =  '';
+                            let s =  '';
+                            if(time < 0){
+                                day = '00';
+                                h =  '00';
+                                m =  '00';
+                                s =  '00';
+                                clearInterval(timeRun)
+                            }else{
+                                day = parseInt(time / 1000 / 60 / 60 / 24 , 10) < 10 ? '0' + parseInt(time / 1000 / 60 / 60 / 24 , 10) : parseInt(time / 1000 / 60 / 60 / 24 , 10);
+                                h =  parseInt(time / 1000 / 60 / 60 % 24 , 10) < 10 ? '0' +  parseInt(time / 1000 / 60 / 60 % 24 , 10) :  parseInt(time / 1000 / 60 / 60 % 24 , 10);
+                                m = parseInt(time / 1000 / 60 % 60, 10) < 10 ? '0' +  parseInt(time / 1000 / 60 % 60 , 10) :  parseInt(time / 1000 / 60 % 60 , 10);
+                                s = parseInt(time / 1000 % 60, 10) < 10 ? '0' + parseInt(time / 1000 % 60, 10) : parseInt(time / 1000 % 60, 10);
+                            }
+                            that.EndTime = day + ':' + h + ':' + m + ':' + s;
+                        },0)
                         let timeRun = setInterval(function(){
                             let now = new Date().getTime()
                             let time = '';
-                            if(that.details.auctionStatus == '1'){
-                                time = that.details.auctionStartTime - now;
-                            }else{
-                                time = that.details.auctionEndTime - now;
-                            }
-
+//                            if(that.details.auctionStatus == '1'){
+//                                time = that.details.auctionStartTime - now;
+//                            }else{
+//                                time = that.details.auctionEndTime - now;
+//                            }
+                            time = that.details.mqEndTime - now;
                             let day = '';
                             let h =  '';
                             let m =  '';
@@ -256,6 +283,7 @@
                         },1000);
                         that.overTime = common.getFormatOfDate(that.details.mqEndTime,'yyyy.MM.dd h:m')
                         that.startTime = common.getFormatOfDate(that.details.auctionStartTime,'yyyy.MM.dd h:m')
+                        that.details.auctionEndTime = common.getFormatOfDate(that.details.auctionEndTime,'yyyy.MM.dd h:m')
                         that.completeNo = that.details.completeNo;
                         commonService.getAuctionList({pageNo:pageNum,pageSize:pageSize,marketNo:that.completeNo}).then(function(res){
                             if(res.data.code === 200){

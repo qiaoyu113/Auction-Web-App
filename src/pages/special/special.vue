@@ -684,10 +684,11 @@
                         width:0.35rem;
                         height:0.35rem;
                         float:left;
-                        background:#333333;
+                        /*background:#333333;*/
                         box-sizing: border-box;
                         img{
                             width:100%;
+                            height:100%;
                         }
                         .collectIcon{
                             width:100%;
@@ -713,6 +714,7 @@
                         box-sizing: border-box;
                         img{
                             width:100%;
+                            height:100%;
                         }
                         .icon{
                             width: 0.06rem;
@@ -743,9 +745,10 @@
                         background:#EB6100;
                         /*padding: 0.09rem 0.09rem;*/
                         box-sizing: border-box;
-                        position: relative;
+                        /*position: relative;*/
                         img{
                             width:100%;
+                            height:100%;
                         }
                         .icon{
                             width: 0;
