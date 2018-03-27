@@ -6,7 +6,7 @@
          <div class="ros clearfix" v-for="list in datas" v-if="list.auction.auctionEndTime>=week">
              <div class="ros_l">
                  <div class="ros_l_top clearfix" v-if="list.auctionCollect.newPrice<list.auction.finalPrice">
-                      <div class="ros_offer">{{list.auction.finalPrice | money}} CNY</div>
+                      <div class="ros_offer">{{list.auctionCollect.newPrice | money}} CNY</div>
                       <div class="ros_prompt">未竞价成功</div>
                       <div class="ros_label">NEW</div>
                  </div>
@@ -17,11 +17,11 @@
                       <div class="ros_prompt">拍品以下架</div>
                  </div>
 
-                 <div class="ros_l2">{{list.auctionCollect.newPrice | money}} CNY</div>
+                 <div class="ros_l2">{{list.auction.finalPrice | money}} CNY</div>
                  <div class="ros_l3">{{list.auction.title}}</div>
                  <div class="ros_l3">LOT-{{list.auction.completeNo}}</div>
              </div>
-             <div class="ros_r" @click="Router(list.id)"><img :src="picHead + list.auction.picItems[0]"/></div>
+             <div class="ros_r" @click="Router(list.auction._id)"><img :src="picHead + list.auction.picItems[0]"/></div>
            
          </div>
        </div>
@@ -51,7 +51,7 @@
                  <div class="ros_l3">{{list.auction.title}}</div>
                  <div class="ros_l3">LOT-{{list.auction.completeNo}}</div>
              </div>
-             <div class="ros_r" @click="Router(list.id)"><img :src="picHead + list.auction.picItems[0]"/></div>
+             <div class="ros_r" @click="Router(list.auction._id)"><img :src="picHead + list.auction.picItems[0]"/></div>
            
          </div>
         </div> 
@@ -81,7 +81,7 @@
                  <div class="ros_l3">{{list.auction.title}}</div>
                  <div class="ros_l3">LOT-{{list.auction.completeNo}}</div>
              </div>
-             <div class="ros_r" @click="Router(list.id)"><img :src="picHead + list.auction.picItems[0]"/></div>
+             <div class="ros_r" @click="Router(list.auction._id)"><img :src="picHead + list.auction.picItems[0]"/></div>
            
          </div>
         </div> 
@@ -111,7 +111,7 @@
                  <div class="ros_l3">{{list.auction.title}}</div>
                  <div class="ros_l3">LOT-{{list.auction.completeNo}}</div>
              </div>
-             <div class="ros_r" @click="Router(list.id)"><img :src="picHead + list.auction.picItems[0]"/></div>
+             <div class="ros_r" @click="Router(list.auction._id)"><img :src="picHead + list.auction.picItems[0]"/></div>
            
          </div>
         </div> 
@@ -141,7 +141,7 @@
                  <div class="ros_l3">{{list.auction.title}}</div>
                  <div class="ros_l3">LOT-{{list.auction.completeNo}}</div>
              </div>
-             <div class="ros_r" @click="Router(list.id)"><img :src="picHead + list.auction.picItems[0]"/></div>
+             <div class="ros_r" @click="Router(list.auction._id)"><img :src="picHead + list.auction.picItems[0]"/></div>
            
          </div>
         </div> 
@@ -238,9 +238,9 @@
          position: fixed;
           left: 0;
           right: 0;
-          top: @size40;
+          top: @size41;
           overflow-x: scroll;
-          bottom: 0;
+          bottom: 1.2rem;
 
         .box{
             padding: @size10 @size20;
@@ -289,6 +289,7 @@
                     .ros_offer{
                         color: rgb(153,153,153);
                         font-weight: 700;
+                        text-decoration:line-through;
                     }
                     .ros_prompt{
                         color: rgb(235,97,0);

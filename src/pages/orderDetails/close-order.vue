@@ -3,10 +3,10 @@
     <!-- 订单详情-订单关闭 -->
     <div class="close-order" id="" v-set-title="title">
         
-        <div class="header">传家</div>
+        <!-- <div class="header">传家</div> -->
         <div class="nav">
             <span class="" @click="Return()">&lt;</span> 
-            <span class="span1 display" >c</span>
+            <span class="span1 display" ><img src="../../assets/image/mycenter/sc.png" /></span>
         </div>
         <div class="content">
             <div class="state">
@@ -26,24 +26,24 @@
                 <div>{{adress.detailAdress}}</div>
             </div>
             <div class="itemInfo clearfix">
-                <div class="pic fl"><img src="../../assets/image/myimage/eg.gif" alt=""></div>
+                <div class="pic fl"><img v-if="orderDetail.picItems!=null" :src="picHead + orderDetail.picItems[0]" alt=""></div>
                 <div class="box fl">
-                    <div class="money">{{orderDetail.finalPrice}}CNY</div>
+                    <div class="money">{{orderDetail.finalPrice | money}}CNY</div>
                     <div class="title">{{orderDetail.auctionName}}</div>
-                    <div class="number">{{datas.createTime}}-{{orderDetail.auctionNo}}</div>
+                    <div class="number">LOT-{{orderDetail.auctionNo}}</div>
                 </div>
             </div>
             <div class="totalMoney clearfix">
                 <div class="fl">订单总额</div>
-                <div class="fr">{{datas.amount}} CNY</div>
+                <div class="fr">{{datas.amount | money}} CNY</div>
             </div>
             <div class="moneys">
-                <div class="price clearfix"><div class="fl">拍品价格:</div><div class="fr">{{orderDetail.finalPrice}} CNY</div></div>
-                <div class="price clearfix"><div class="fl">保险+运费:</div><div class="fr">{{orderDetail.finalPrice / 100}} CNY</div></div>
+                <div class="price clearfix"><div class="fl">拍品价格:</div><div class="fr">{{orderDetail.finalPrice | money}} CNY</div></div>
+                <div class="price clearfix"><div class="fl">保险+运费:</div><div class="fr">{{freight / 100 | money}} CNY</div></div>
             </div>
             <div class="orderinfo">
-                <div class="price clearfix"><div class="fl">订单编号:</div><div class="fr">{{orderDetail.adminId}}</div></div>
-                <div class="price clearfix" v-if="time.status==2"><div class="fl">支付时间:</div><div class="fr">{{time.creatPayTime}}</div></div>
+                <div class="price clearfix"><div class="fl">订单编号:</div><div class="fr">{{datas.orderNo}}</div></div>
+                <div class="price clearfix" v-if="time.status==2"><div class="fl">支付时间:</div><div class="fr">{{time.creatPayTime | stampFormate2}}</div></div>
                 <div class="price clearfix"><div class="fl">支付方式:</div>
                       <div class="fr"  v-if="datas.channelId=='ALIPAY_WAP'">支付宝</div>
                       <div class="fr"  v-if="datas.channelId=='WX_NATIVE'">微信</div>
@@ -73,7 +73,8 @@ import {commonService} from '../../service/commonService.js'
           logistic:'',
           arrays: [],
           dis:'dis',
-          time:''//支付时间
+          time:'',//支付时间
+          freight:'',  //保险运费
 
           
       }
@@ -87,7 +88,9 @@ import {commonService} from '../../service/commonService.js'
             noticelist() {
                 return this.$store.state.homeStore.noticelist || []
             },
-
+            picHead() {
+                return this.$store.state.picHead
+            },
         },
     mounted () {
         
@@ -101,13 +104,18 @@ import {commonService} from '../../service/commonService.js'
         // 获取订单
          getOrderid:function(){
             let that=this;
-            console.log(that.orderNo)
             commonService.getOrderid(that.orderNo).then(function(res){
                 if(res.data.code==200){
                   that.datas=res.data.datas
+                  console.log(that.datas)
                  let payLogs=that.datas.payLogs
                  that.time=payLogs[payLogs.length-1]
                 that.orderDetail=that.datas.orderDetail
+                 if(that.orderDetail.finalPrice < 200000){
+                     that.freight=200000
+                   }else{
+                     that.freight=that.orderDetail.finalPrice
+                   }
                 that.adress=that.orderDetail.adress  
                 }
                 
@@ -146,9 +154,7 @@ import {commonService} from '../../service/commonService.js'
         height: @size35;
         border-bottom: 0.5px solid rgb(53, 60, 70);
         background: rgb(255, 255, 255);
-        position: fixed;
-        top: @size45;
-        z-index: 100;
+      
         span{
             display: inline-block;
             line-height: @size30;
@@ -162,13 +168,17 @@ import {commonService} from '../../service/commonService.js'
             float: right;
             padding-right: 20px;
             display: none;
+            img{
+                width: @size30;
+                margin-top: @size5;
+            }
         }
         .display{
             display: block;
         }
     }
     .content{
-        margin-top: @size80;
+        // margin-top: @size80;
         margin-bottom: 1.2rem;
         box-sizing: border-box;
         padding: 0 @size10;

@@ -1,7 +1,7 @@
 <template>
     <div class="notstart">
         <div class="box">
-         <div class="ros clearfix" v-for="list in datas">
+         <div class="ros clearfix" v-for="(list,index) in datas">
              <div class="ros_l">
                 
                  <div class="ros_l2">{{list.auctionCollect.newPrice | money}} CNY</div>
@@ -9,9 +9,9 @@
                  <div class="ros_l3">LOT-{{list.auction.completeNo}}</div>
              </div>
              <!-- <img src="../../assets/image/error/ufo_blue_2x.png"/> -->
-             <div class="ros_r" @click="Router(list.id)"><img :src="picHead + list.auction.picItems[0]"/></div>
+             <div class="ros_r" @click="Router(list.auction._id)"><img :src="picHead + list.auction.picItems[0]"/></div>
              <div class="ros_con">
-                 <p>{{list.auction.auctionStartTime | stampFormate}}</p>
+                 <p>{{countdown[index].dd}}:{{countdown[index].hh}}:{{countdown[index].mm}}:{{countdown[index].ss}}</p>
                  <p><span>即将开始</span></p>
              </div>
          </div>            
@@ -29,6 +29,7 @@
             return {
                 title: '传家',
                 datas:'',
+                countdown:[],
             }
         },
         syncData({store}) {
@@ -57,8 +58,25 @@
         mounted: function() {
              common.onMove('.notstart')
              this.getCollect()
+          
+        },
+        watch:{
+             countdown(){
+                     let that=this
+                       alert(1)
+                       let t;
+                       clearTimeout(t)
+                        t= setTimeout(function (){
+                          for(var i=0;i<that.datas.length;i++){
+                             that.countdown[i]=common.getTimer(that.datas[i].auction.auctionStartTime)
+                           }
+                       },1000)
+                  
+                
+             }
         },
         methods: {
+         
             Router:function(id){
                 this.$router.push({name:'auctionMore',params:{id:id}})
             },
@@ -67,6 +85,11 @@
                  commonService.getCollect({pageNo:1,pageSize:30,status:0}).then(function(res){
                  	if(res.data.code==200){
                  		that.datas=res.data.datas.datas
+
+                    for(var i=0;i<that.datas.length;i++){
+                      that.countdown[i]=common.getTimer(that.datas[i].auction.auctionStartTime)
+                    }
+
                  	}   
                 })
             }
@@ -81,9 +104,9 @@
         position: fixed;
           left: 0;
           right: 0;
-          top: @size40;
+          top: @size41;
           overflow-x: scroll;
-          bottom: 0;
+          bottom: 1.2rem;
 
         .box{
             padding: @size10 @size20;

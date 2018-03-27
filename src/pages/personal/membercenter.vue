@@ -5,7 +5,7 @@
     <!-- 帮助中心 -->
     <div class="membercenter" id="" v-set-title="title">
         
-        <div class="header">传家</div>
+        <!-- <div class="header">传家</div> -->
         <div class="content">
             <div class="loginBox clearfix">
                 <div class='loginEn '>MY ACCOUNT</div>
@@ -197,7 +197,7 @@
         line-height: @size45;
     }
     .content{
-        margin-top: @size45;
+      
         width:100%;
         height:3.7rem;
         border-bottom:2px solid #353535;

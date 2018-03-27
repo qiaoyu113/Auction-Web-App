@@ -9,11 +9,11 @@
     3.交易完成
     0.线下处理 -->
     <div class="orderDetails" id="" v-set-title="title">
-        <div class="header">传家</div>
+        <!-- <div class="header">传家</div> -->
         <!-- 返回键,当订单完成时有删除icon -->
         <div class="nav">
             <span class="" @click="Return()">&lt;</span> 
-            <span class="span1" :class="index==3 ? 'display':'' "><img src="../../assets/image/mycenter/sc.png" /></span>
+            <span class="span1" :class="index==3 ? 'display':'' " @click="putOrderid()"><img src="../../assets/image/mycenter/sc.png" /></span>
         </div>
         <div class="content">
             <div class="warnTime" v-if="datas.status==1">
@@ -78,12 +78,12 @@
                 <div class="btn" :class="{'rty':method=='ALIPAY_WAP'}" @click="methodlist('ALIPAY_WAP')">支付宝</div>
                 <div class="btn" :class="{'rty':method=='UNIONPAY'}" @click="methodlist('UNIONPAY')">线下转账</div>
             </div>
-            <div v-if="datas.status==4 || datas.status==5">
+            <div v-if="datas.status==4 || datas.status==5 || datas.status==6">
                <div class="logistic" @click="show">
                     物流信息<span class="fr">...</span>
                 </div>
                 <div class="logdetail" v-if="logistics!=''">
-                    <div>{{logistics.location}}</div>
+                    <div>顺丰速运</div>
                     <div>{{logistics.context}}</div>
                     <div>{{logistics.time}}</div>
                 </div> 
@@ -91,12 +91,12 @@
                     <div>送货上门</div>
                     <div>{{orderDetail.nu}}</div>
                 </div> 
-                 <div class="logdetail" v-if="orderDetail.com=='tealab_ziticons'">
+                 <div class="logdetail" v-if="orderDetail.com=='tealab_ziti'">
                     <div>自提</div>
                     <div>{{orderDetail.nu}}</div>
                 </div> 
             </div>
-            <div class="address" v-if="datas.status==1 || datas.status==2 || datas.status==3">
+            <div class="address">
                 <div class="peo"><span>{{adress.name}}</span>  {{adress.phone}}</div>
                 <div>{{adress.provinceName}} {{adress.cityName}} {{adress.districtName}}</div>
                 <div>{{adress.detailAdress}}</div>
@@ -115,7 +115,7 @@
             </div>
             <div class="moneys">
                 <div class="price clearfix"><div class="fl">拍品价格:</div><div class="fr">{{orderDetail.finalPrice | money}} CNY</div></div>
-                <div class="price clearfix"><div class="fl">保险+运费:</div><div class="fr">{{orderDetail.finalPrice / 10000}} CNY</div></div>
+                <div class="price clearfix"><div class="fl">保险+运费:</div><div class="fr">{{freight / 100 | money}} CNY</div></div>
             </div>
             <div class="orderinfo">
                 <div class="price clearfix"><div class="fl">订单编号:</div><div class="fr">{{datas.orderNo}}</div></div>
@@ -134,11 +134,11 @@
             <div class="value">
                 分&nbsp;&nbsp;&nbsp;享
             </div>
-            <div class="r-icon" ><img src="../../assets/image/mycenter/sh.png" /></div>
+            <div class="r-icon" ><img src="../../assets/image/mycenter/usre4.png" /></div>
         </div>
 
-            <div class="logistics">
-        <div class="header">传家</div>
+     <div class="logistics">
+        <!-- <div class="header">传家</div> -->
         <div :class="dis">
             <div class="transparent"></div>
             <div class="popWin" >
@@ -197,6 +197,7 @@ import {commonService} from '../../service/commonService.js'
           createTime:'',//支付时间
           method:'UNIONPAY',//支付方式
           ity:false,
+          freight:'',//保险运费
           
       }
     },
@@ -214,6 +215,7 @@ import {commonService} from '../../service/commonService.js'
         },
     mounted () {
         common.onMove('.orderDetails')
+        common.onMove('.popWin')
         this.huoqu()
         this.getOrderid()
     },
@@ -281,6 +283,17 @@ import {commonService} from '../../service/commonService.js'
                       })
               }
         },
+        // 取消订单
+        putOrderid:function(){
+            let that=this
+          commonService.putOrderid(that.orderNo).then(function(res){ 
+           
+                 if(res.data.message=="success"){
+                     
+
+                 }
+          }) 
+        },
         // 获取订单
          getOrderid:function(){
             let that=this;
@@ -289,6 +302,12 @@ import {commonService} from '../../service/commonService.js'
                 that.datas=res.data.datas
                 that.method=that.datas.channelId
                 that.orderDetail=that.datas.orderDetail
+             
+                if(that.orderDetail.finalPrice < 200000){
+                     that.freight=200000
+                   }else{
+                     that.freight=that.orderDetail.finalPrice
+                   }
                 if(that.orderDetail.adress!=null){
                    that.adress=that.orderDetail.adress 
                 }
@@ -299,7 +318,7 @@ import {commonService} from '../../service/commonService.js'
                             that.createTime=orderLogs[i].createTime
                       }
                  }
-                if(that.datas.status==4 || that.datas.status==5){
+                if(that.datas.status==4 || that.datas.status==5 || that.datas.status==6){
                    that.index=2
                    if(that.orderDetail.com=="shunfeng"){
                       commonService.getKaidi({nu:that.orderDetail.nu,com:that.orderDetail.com}).then(function(res){
@@ -307,6 +326,7 @@ import {commonService} from '../../service/commonService.js'
                     that.logistics=res.data.datas.data[0]
                     that.logisticss=res.data.datas.data
                     that.logistic=res.data.datas
+               
                    })
                    }
               
@@ -415,9 +435,7 @@ import {commonService} from '../../service/commonService.js'
         height: @size35;
         border-bottom: 0.5px solid rgb(53, 60, 70);
         background: rgb(255, 255, 255);
-        position: fixed;
-        top: @size45;
-        z-index: 100;
+      
         span{
             display: inline-block;
             line-height: @size30;
@@ -440,7 +458,7 @@ import {commonService} from '../../service/commonService.js'
         }
     }
     .content{
-        margin-top: @size80;
+
         margin-bottom: 1.2rem;
         box-sizing: border-box;
         padding: 0 @size10;
@@ -858,6 +876,8 @@ import {commonService} from '../../service/commonService.js'
         } 
     }
     .logistics{
+
+
     .header{
         position: fixed;
         top: 0;

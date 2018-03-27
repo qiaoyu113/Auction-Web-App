@@ -62,6 +62,7 @@ import {commonService} from '../../service/commonService.js'
                 that.data=res.data.datas.datas
                 })
             },
+  
             deleteAddress:function(id){
                let that = this
                commonService.deleteAddress(id).then(function(res){

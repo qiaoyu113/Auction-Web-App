@@ -9,7 +9,7 @@
     2，审核中
     3，退款成功 -->
     <div class="aftersale-order" id="" v-set-title="title">
-        <div class="header">传家</div>
+        <!-- <div class="header">传家</div> -->
         <div class="nav">
             <span class="" @click="Return()">&lt;</span> 
             <span class="span1" :class="index>2||index==0 ? 'display':'' ">c</span>
@@ -42,24 +42,24 @@
                 <div class="witpay" v-if='index==1'>退货中</div>
                 <div class="witpay" v-if='index==2'>审核中</div>
                 <div class="witpay" v-if='index==3'>已退款</div>
-                <div class="money" v-if='index>0'>{{datas.refundAmount}} CNY</div>
+                <div class="money" v-if='index>0'>{{datas.refundAmount | money}} CNY</div>
             </div>
             <div class="orderinfo">
-                <!-- <div class="price clearfix" v-if='index>0'><div class="fl">退回路径</div><div class="fr">支付宝</div></div> -->
-                <div class="price clearfix" v-if='index>0'><div class="fl">差额原因</div><div class="fr">其他</div></div>
+                <div class="price clearfix" v-if='index>0'><div class="fl">退回路径</div><div class="fr">线下转账</div></div>
+                <div class="price clearfix" v-if='index>0'><div class="fl">差额原因</div><div class="fr">{{datas.amountReason}}</div></div>
                 <div class="price clearfix" v-if='index==0'>货品属性特殊，无法进行退货。审核失败，客服驳回售后申请。如有问题，请联系售后</div>
             </div>
-            <div class="helpCenter">
+            <div class="v_helpCenter">
                 <span class="fl">到账周期说明</span>
                 <div class="fr icon">i</div>
                 <a class="fr" @click="open()">查看说明</a>
             </div>
             <div class="itemInfo clearfix">
-                <div class="pic fl"><img src="../../assets/image/myimage/eg.gif" alt=""></div>
+                <div class="pic fl"><img v-if="order.picItems!=null" :src="picHead + order.picItems[0]" alt=""></div>
                 <div class="box fl">
-                    <div class="money">{{order.finalPrice}}CNY</div>
+                    <div class="money">{{order.finalPrice | money}}CNY</div>
                     <div class="title">{{order.auctionName}}</div>
-                    <div class="number">{{lists.createTime}}-{{order.auctionNo}}</div>
+                    <div class="number">LOT-{{order.auctionNo}}</div>
                 </div>
             </div>
             <div class="totalMoney clearfix">
@@ -67,15 +67,15 @@
             </div>
             <div class="moneys">
                 <div class="price clearfix">
-                    <div class="fl">{{datas.amountReason}}</div>
-                    <div class="fr">{{datas.dealTime}}</div>
+                    <div class="fl">{{datas.problem}}</div>
+                    <!-- <div class="fr">{{datas.dealTime}}</div> -->
                 </div>
             </div>
             <div class="orderinfo">
-                <div class="price clearfix"><div class="fl">订单编号:</div><div class="fr">{{datas.orderNo}}</div></div>
-                <div class="price clearfix"><div class="fl">申请时间:</div><div class="fr">{{datas.dealTime}}</div></div>
+                <div class="price clearfix"><div class="fl">订单号:</div><div class="fr">{{datas.orderNo}}</div></div>
+                <div class="price clearfix"><div class="fl">申请时间:</div><div class="fr">{{datas.dealTime | stampFormate2}}</div></div>
                 <div class="price clearfix"><div class="fl">联系人:</div><div class="fr">{{adress.name}}</div></div>
-                <div class="price clearfix"><div class="fl">手机号码:</div><div class="fr">{{adress.name}}</div></div>
+                <div class="price clearfix"><div class="fl">手机号码:</div><div class="fr">{{adress.phone}}</div></div>
             </div>  
         </div>
         <div class="footer">联系售后</div>
@@ -139,6 +139,7 @@ import {commonService} from '../../service/commonService.js'
       }
     },
     components: {},
+
     computed: {
  
     picHead(){
@@ -155,7 +156,8 @@ import {commonService} from '../../service/commonService.js'
             window.history.go(-1)
         },
         open:function(){
-            this.dis='';
+            // this.dis='';
+             this.$router.push({path:"/helpcenter",query:{index:5}})
         },
         close:function() {
             this.dis='dis';
@@ -168,20 +170,29 @@ import {commonService} from '../../service/commonService.js'
                  that.order=res.data.datas.orderDetail
                  that.lists=res.data.datas
                  that.adress=that.order.adress
+
                 }
-                // console.log(res)
+                
 
                     })
         },
           // 获取售后详情
         getOrdercsid:function(){
                 let that=this;
-
                commonService.getOrdercsid(that.id).then(function(res){
+               
                     if(res.data.code==200){
                      that.datas=res.data.datas
                      that.orderNo=that.datas.orderNo
                      that.getOrderid()
+                     if(that.datas.status==1){
+                         that.index=1
+                     }else if(that.datas.status==2){
+                          that.index=2
+                     }else{
+                          that.index=1
+                     }
+                      
                     }
                 })
             },
@@ -202,26 +213,24 @@ import {commonService} from '../../service/commonService.js'
           top: 0;
           overflow-x: scroll;
           bottom: 0;
-    .header{
-        position: fixed;
-        top: 0;
-        z-index: 100;
-        width: @size375;
-        height: @size45;
-        background:rgba(2, 10, 2, 1);
-        font-size: @size20;
-        color: white;
-        text-align: center;
-        line-height: @size45;
-    }
+    // .header{
+    //     position: fixed;
+    //     top: 0;
+    //     z-index: 100;
+    //     width: @size375;
+    //     height: @size45;
+    //     background:rgba(2, 10, 2, 1);
+    //     font-size: @size20;
+    //     color: white;
+    //     text-align: center;
+    //     line-height: @size45;
+    // }
     .nav{
         width: @size375;
         height: @size35;
         border-bottom: 0.5px solid rgb(53, 60, 70);
         background: rgb(255, 255, 255);
-        position: fixed;
-        top: @size45;
-        z-index: 100;
+       
         span{
             display: inline-block;
             line-height: @size30;
@@ -241,7 +250,6 @@ import {commonService} from '../../service/commonService.js'
         }
     }
     .content{
-        margin-top: @size80;
         margin-bottom: 1.2rem;
         box-sizing: border-box;
         padding: 0 @size10;
@@ -339,7 +347,7 @@ import {commonService} from '../../service/commonService.js'
                 
             }
         }
-        .helpCenter{
+        .v_helpCenter{
                 height: @size40;
                 width: 100%;
                 border-top: 1px solid rgb(130, 135, 140);
@@ -435,7 +443,7 @@ import {commonService} from '../../service/commonService.js'
                 min-height: @size25;
                 .fl{
                     float: left;
-                    width: 5rem;
+                    // width: 5rem;
                 }
                 .fr{
                    position: absolute;

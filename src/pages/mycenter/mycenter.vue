@@ -13,7 +13,7 @@
         <div class="box">
             <div class="boxHeader">
                 <div class="boxHeaderLeft">
-                    <img src="http://img0.imgtn.bdimg.com/it/u=3206453844,923580852&fm=27&gp=0.jpg"/>
+                    <img :src="picHead + user.headImg" :onerror="errorImg01"/>
                 </div>
                 <div class="boxHeaderRight">
                     <img src="../../../src/assets/image/mycenter/more.png"/>
@@ -54,7 +54,7 @@
         data () {
             return {
                 title: '个人中心',
-               
+                errorImg01: 'this.src="' + require('../../assets/image/mycenter/head.png') + '"',
                 user:'',
                 header:{
                     name:'PERSONAL SETTING',
@@ -73,6 +73,7 @@
                 service.getParam().then(res=>{
 //                    store.state.homeStore.noticelist = res.data.datas;
                 }),
+
             ])
         },
         computed: {
@@ -82,6 +83,9 @@
             },
             noticelist() {
                 return this.$store.state.homeStore.noticelist || []
+            },
+            picHead() {
+                return this.$store.state.picHead
             },
         },
         mounted: function() {
@@ -115,11 +119,11 @@
                 let that = this;
                 that.$router.push({name:'password'})
             },
+            // 获取用户信息
             getUsers:function(){
                 let that=this
                  commonService.getUsers().then(function(res){
                     that.user=res.data.datas.user
-                    console.log(that.user)
               })
 
              },

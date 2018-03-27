@@ -5,14 +5,14 @@
          <div class="ros clearfix" v-for="(list,index) in datas">
              <div class="ros_l">
                  <div class="ros_l_top clearfix" v-if="list.auctionCollect.newPrice<list.auction.finalPrice">
-                      <div class="ros_offer">{{list.auction.finalPrice | money}} CNY</div>
+                      <div class="ros_offer">{{list.auctionCollect.newPrice | money}} CNY</div>
                       <div class="ros_prompt">出价被超出</div>
                       <div class="ros_label">NEW</div>
                  </div>
                  <div class="ros_l_top clearfix" v-if="list.auctionCollect.newPrice==list.auction.finalPrice">
-                      <div class="ros_prompt">暂时领先</div>
+                      <div class="ros_prompt">出价领先</div>
                  </div>
-                 <div class="ros_l2">{{list.auctionCollect.newPrice | money}} CNY</div>
+                 <div class="ros_l2">{{list.auction.finalPrice | money}} CNY</div>
                  <div class="ros_l3">{{list.auction.title}}</div>
                  <div class="ros_l3">LOT-{{list.auction.completeNo}}</div>
              </div>
@@ -23,53 +23,7 @@
                  <p><span>即将结束</span></p>
              </div>
          </div>
-<!--          <div class="ros clearfix">
-             <div class="ros_l">
-                 <div class="ros_l_top clearfix">
-                      
-                      <div class="ros_prompt">暂时领先</div>
-                   
-                 </div>
-                 <div class="ros_l2">70.000 CNY</div>
-                 <div class="ros_l3">茶壶茶壶</div>
-                 <div class="ros_l3">20180801-011</div>
-             </div>
-             <div class="ros_r"><img src="../../assets/image/error/ufo_blue_2x.png"/></div>
-             <div class="ros_con">
-                 <p>00:00:20:30</p>
-                 <p><span>即将结束</span></p>
-             </div>
-         </div>
-         <div class="ros clearfix">
-             <div class="ros_l">
-       
-                 <div class="ros_l2">70.000 CNY</div>
-                 <div class="ros_l3">茶壶茶壶</div>
-                 <div class="ros_l3">20180801-011</div>
-             </div>
-             <div class="ros_r"><img src="../../assets/image/error/ufo_blue_2x.png"/></div>
-             <div class="ros_con">
-                 <p>00:00:20:30</p>
-                 <p><span>即将结束</span></p>
-             </div>
-         </div>
-         <div class="ros clearfix">
-             <div class="ros_l">
-                 <div class="ros_l_top clearfix">
-                      <div class="ros_offer">70.000 CNY</div>
-                      <div class="ros_prompt">出价被超出</div>
-                      <div class="ros_label">NEW</div>
-                 </div>
-                 <div class="ros_l2">70.000 CNY</div>
-                 <div class="ros_l3">茶壶茶壶</div>
-                 <div class="ros_l3">20180801-011</div>
-             </div>
-             <div class="ros_r"><img src="../../assets/image/error/ufo_blue_2x.png"/></div>
-             <div class="ros_con">
-                 <p>00:00:20:30</p>
-                 <p><span>即将结束</span></p>
-             </div>
-         </div> -->
+
             
         </div>
         <z-footer ></z-footer>
@@ -126,10 +80,11 @@
                  commonService.getCollect({pageNo:1,pageSize:30,status:1}).then(function(res){
                    if(res.data.code==200){
                         that.datas=res.data.datas.datas
+                        // setTimeout(function (){
                           for(var i=0;i<that.datas.length;i++){
-                          that.countdown[i]=common.getTimer(that.datas[i].auction.mqEndTime)
-                          }
-                       
+                            that.countdown[i]=common.getTimer(that.datas[i].auction.mqEndTime)
+                          }  
+                        // },1000);
                     }
                 })
             }
@@ -145,9 +100,9 @@
          position: fixed;
           left: 0;
           right: 0;
-          top:@size40;
+          top:@size41;
           overflow-x: scroll;
-          bottom: 0;
+          bottom: 1.2rem;
         .box{
             padding: @size10 @size20;
             .ros{
@@ -167,6 +122,7 @@
                     .ros_offer{
                         color: rgb(153,153,153);
                         font-weight: 700;
+                        text-decoration:line-through;
                     }
                     .ros_prompt{
                         color: rgb(235,97,0);

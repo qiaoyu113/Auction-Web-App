@@ -9,7 +9,7 @@
         <div class="content" v-if="logined">
             <div class="box clearfix ">
                 <div class="boxImg fl" @click="mycenter()">
-                    <img src="http://img0.imgtn.bdimg.com/it/u=3206453844,923580852&fm=27&gp=0.jpg"/>
+                    <img :src="picHead + list.headImg" alt="" :onerror="errorImg01"/>
                     <div class="member">v{{list.vipLevel}}</div>
                 </div>
                 <div class="info fl">
@@ -38,12 +38,12 @@
                 </div>
                 <div class="litbox fl" @click="order(2)">
                     <div class="pic">
-                    <!--<i class="iconfont icon-tupian"></i>-->
-                    <img src="../../assets/image/mycenter/usre3.jpg" />
+                    <!-- <i class="iconfont icon-tupian"></i> -->
+                    <img src="../../assets/image/mycenter/usre3.png" />
                     <div class="number" v-if="numItem.noGetNum!=0&&numItem.noPayNum!=null">{{numItem.noGetNum}}</div></div>
                     <div class="font">待收货</div>
                 </div>
-                <div class="litbox fl">
+                <div class="litbox fl" @click="order(3)">
                     <div class="pic">
                     <!-- <i class="iconfont icon-tupian"></i> -->
                     <img src="../../assets/image/mycenter/usre4.png" />
@@ -117,6 +117,7 @@
             return {
                 title: '传家',
                 logined:true,
+                errorImg01: 'this.src="' + require('../../assets/image/mycenter/head.png') + '"',
                 img:[
                     'http://img0.imgtn.bdimg.com/it/u=3206453844,923580852&fm=27&gp=0.jpg',
                     'http://img0.imgtn.bdimg.com/it/u=3206453844,923580852&fm=27&gp=0.jpg',
@@ -159,10 +160,10 @@
             },
         },
         mounted: function() {
-            window.localStorage.removeItem('payOk');
             common.onMove('.personalCenter')
             this.getUsers()
             this.getFootPrint()
+
         },
         methods: {
             logins:function(){
@@ -210,37 +211,14 @@
                         that.totalMoney=that.list.wallet.totalMoney
                        }
                       that.numItem=that.list.numItem  
+                      console.log(that.numItem)
                     }else{
                         that.logined=false
                     }
 
-                 })
-                 
-               
-                
+                 }) 
             },
-            //   // 获取浏览记录
-            // getFootPrint:function(){
-            //     let that = this;
-            //  // function genStatId() {
-            //  //          var cookieId = getTimestamp();
-            //  //     cookieId = "zstat" + "-" + cookieId + "-" + Math.round(Math.random() * 3000000000);
-            //  //         return cookieId;
-            //  //          }
-
-
-
-            //         // console.log(genStatId())
-            //    // let cookiesId = window.localStorage.getItem("token")
-            //       // console.log(cookiesId)
-            //      commonService.getFootPrint().then(function(res){
-            //         // console.log(res)
-            //         if(res.data.code==200){
-                       
-            //         }
-                    
-            //      })
-            // },
+       
             //浏览记录
                 getFootPrint(){
                 let that = this;
@@ -298,11 +276,13 @@
                 width: 1.73rem;
                 height: 1.73rem;
                 padding: 0.866rem 0 0 @size20;
+                position: relative;
                 img{
                     width: 100%;
                     height: 100%;
                     border-radius: 50%;
                 }
+               
                 .member{
                     width: 0.4533rem;
                     height: 0.4533rem;
