@@ -7,8 +7,8 @@
                 <img src="../../assets/image/mycenter/icon2.png"/>
             </span>
             <span class="span2" @click="goMy()">
-                <img src="../../assets/image/mycenter/icon1.png"/>
-                <!--<img v-if="hasCollect" src="../../assets/image/mycenter/icon4.png"/>-->
+                <img v-if="!hintShow" src="../../assets/image/mycenter/icon1.png"/>
+                <img v-if="hintShow" src="../../assets/image/mycenter/icon4.png"/>
             </span>
         </div>
         <div id="mescroll" class="mescroll content">
@@ -484,6 +484,7 @@
                 auctionEndTimeHMS:'',
                 frozen:false,//是否缴纳保证金
                 latest:false,//是否当前最高价
+                hintShow:false,
             }
         },
         components:{'z-foot':item,'z-info':info,'z-record':record,'z-payment':payment},
@@ -607,6 +608,16 @@
                 that.isCollect();
                 //插入统计数据
                 commonService.putInsertion({businessType:1,dimensionType:1,businessTypeId:that.id}).then(function(res){})
+                //查看有无新消息
+                commonService.getHasNewHint({}).then(function(res){
+                    if(res.data.code === 200){
+                        if(res.data.datas != 4){
+                            that.hintShow = true;
+                        }else{
+                            that.hintShow = false;
+                        }
+                    }
+                })
                 //查看最高价和是否缴纳保证金
                 commonService.getHasCheck({auctionId:that.id}).then(function(res){
                     if(res.data.code === 200){

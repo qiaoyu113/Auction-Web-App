@@ -34,7 +34,8 @@
                 <p :class="index == 1 ? '':'pc'">专场</p>
             </li>
             <li class="fl" @click="checked(2)">
-                <img v-if="index == 2" src="../../assets/image/mycenter/c3.png"/>
+                <img v-if="index == 2 && !hintShow" src="../../assets/image/mycenter/c3.png"/>
+                <img v-if="index == 2 && hintShow" src="../../assets/image/mycenter/c31.png"/>
                 <img v-if="index != 2" src="../../assets/image/mycenter/i3.png"/>
                 <p :class="index == 2 ? '':'pc'">我的</p>
             </li>
@@ -48,6 +49,7 @@
 </template>
 
 <script>
+    import {commonService} from '../../service/commonService'
 	export default {
 		data() {
 			return {
@@ -72,13 +74,13 @@
                 index:'0',
 				footName: '',
 				routePath: '',
-				routeName: ''
+				routeName: '',
+                hintShow:false,
 			}
 		},
 		mounted() {
 			const that = this;
 			// 请求底部数据
-            console.log(that.$route.name)
             if(that.$route.name == 'home'){
                 that.index = 0
             }else if(that.$route.name == 'special'){
@@ -96,6 +98,7 @@
             }else if(that.$route.name == 'gologin'){
                 that.index = 3
             }
+            that.onload()
 		},
         methods: {
             checked(index){
@@ -114,6 +117,19 @@
                     that.$router.replace({name:'personalCenter'})
                     that.index = 3;
                 }
+            },
+            onload(){
+                let that = this;
+                //查看有无新消息
+                commonService.getHasNewHint({}).then(function(res){
+                    if(res.data.code === 200){
+                        if(res.data.datas != 4){
+                            that.hintShow = true;
+                        }else{
+                            that.hintShow = false;
+                        }
+                    }
+                })
             }
         }
 

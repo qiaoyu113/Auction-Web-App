@@ -7,8 +7,8 @@
                 <img src="../../assets/image/mycenter/icon2.png"/>
             </span>
             <span class="span2" @click="goMy()">
-                <img src="../../assets/image/mycenter/icon1.png"/>
-                <!--<img v-if="collect" src="../../assets/image/mycenter/icon4.png"/>-->
+                <img v-if="!hintShow" src="../../assets/image/mycenter/icon1.png"/>
+                <img v-if="hintShow" src="../../assets/image/mycenter/icon4.png"/>
             </span>
         </div>
         <div id="mescroll" class="mescroll container">
@@ -82,6 +82,7 @@
                 recoCh:false,
                 isShowNoMore:false,
                 collect:false,
+                hintShow:false,
                 // 计算
                 reversedNum: function (num) {
                     // `this` 指向 vm 实例
@@ -162,6 +163,16 @@
                 const that = this;
                 commonService.putInsertion({businessType:3,dimensionType:1,businessTypeId:that.id}).then(function(res){
 
+                })
+                //查看有无新消息
+                commonService.getHasNewHint({}).then(function(res){
+                    if(res.data.code === 200){
+                        if(res.data.datas != 4){
+                            that.hintShow = true;
+                        }else{
+                            that.hintShow = false;
+                        }
+                    }
                 })
                 commonService.getauctionPackId({id:that.id},that.id).then(function(res){
                     if(res.data.code === 200){

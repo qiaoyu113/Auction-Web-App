@@ -1,20 +1,13 @@
 <template>
-    <!--title为当前页标题
-        组件要小，如遇list，只将item做成组件，其他的都写在页面中
-    -->
     <div class="my">
       <!--  <div class="header"><div>传家</div></div> -->
-       <div class="head clearfix">
-       <div><router-link to="/my/notstart"><p :class="{'show':indexs==0}" @click="show(0)">未开始</p></router-link></div>
-           <div><router-link to="/my/lot"><p :class="{'show':indexs==1}" @click="show(1)">参拍中</p></router-link></div>
-            <div><router-link to="/my/already"><p :class="{'show':indexs==2}" @click="show(2)">已拍中</p></router-link></div>
-           <div><router-link to="/my/not"><p :class="{'show':indexs==3}" @click="show(3)">未拍中</p></router-link></div>
-          
-       </div>
-     <div>
-         <router-view></router-view>
-     </div>
-     <z-footer ></z-footer>
+        <div class="head clearfix"><div><router-link to="/my/notstart"><span :class="{'show':indexs==0}" @click="show(0)">未开始</span></router-link></div>
+            <div><router-link to="/my/lot"><span :class="{'show':indexs==1}" @click="show(1)">参拍中</span></router-link></div>
+             <div><router-link to="/my/already"><span :class="{'show':indexs==2}" @click="show(2)">已拍中</span></router-link></div>
+            <div><router-link to="/my/not"><span :class="{'show':indexs==3}" @click="show(3)">未拍中</span></router-link></div>
+        </div>
+        <router-view></router-view>
+        <z-footer ></z-footer>
     </div>
 </template>
 
@@ -60,7 +53,7 @@
         },
         methods: {
             show:function(id){
-           
+
                this.indexs=id
             }
 
@@ -87,22 +80,36 @@
       //     }
       // }
         .head{
-             height: @size40;
-             border-bottom: 1px solid rgb(53,60,70);
-             padding-bottom: 1px;
+            width:100%;
+            height: @size40;
+            border-bottom: 1px solid rgb(53,60,70);
+            padding-bottom: 1px;
+            position: fixed;
+            top:0;
+            background:#fff;
+            z-index:100;
             div{
                 float:left;
                 width: 25%;
                 text-align: center;
                 line-height: @size40;
+                font-size:0.3733rem;
                 p{
-                font-size: 12px; 
-                color: rgb(153,153,153);
+                    font-size:0.3733rem;
+                    color: rgb(153,153,153);
                 }
                 .show{
-                    color: rgb(51,51,51);
-                    border-bottom: 2px solid rgb(53,60,70);
-                }    
+                    color: #333333;
+                    border-bottom: 2px solid #353c46;
+                    height: 1.0667rem;
+                    display: inline-block;
+                    padding: 0 0.16rem;
+                    font-size:0.3733rem;
+                }
+                span{
+                    color: #999999;
+                    font-size:0.3733rem;
+                }
             }
         }
 

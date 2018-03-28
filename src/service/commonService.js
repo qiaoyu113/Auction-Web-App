@@ -292,6 +292,10 @@ export const commonService = {
     getHasCheck:function(params){
         return axios.get('/auctions/check' + this.getParam(params))
     },
+    /* 是否有新消息 */
+    getHasNewHint:function(params){
+        return axios.get('/auctions/message' + this.getParam(params))
+    },
 
 
 

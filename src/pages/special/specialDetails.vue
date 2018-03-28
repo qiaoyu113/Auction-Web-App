@@ -11,8 +11,8 @@
                 <img src="../../assets/image/mycenter/icon2.png"/>
             </span>
             <span class="span2" @click="goMy()">
-                <img src="../../assets/image/mycenter/icon1.png"/>
-                <!--<img v-if="collect" src="../../assets/image/mycenter/icon4.png"/>-->
+                <img v-if="!hintShow" src="../../assets/image/mycenter/icon1.png"/>
+                <img v-if="hintShow" src="../../assets/image/mycenter/icon4.png"/>
             </span>
         </div>
         <div id="mescroll" class="mescroll">
@@ -34,7 +34,8 @@
                         </div>
                         <div class='sell-content'>
                             <div class="sell-int">
-                                <div class="time">{{EndTime}}</div>
+                                <div class="time" v-if="details.auctionStatus != '3'">{{EndTime}}</div>
+                                <div class="time" v-if="details.auctionStatus == '3'">{{reversedNum(details.doneAmount/100)}} CNY</div>
                                 <div class="title">{{details.name}}</div>
                                 <div class="info" v-if="details.auctionStatus === 2">{{overTime}} 结束</div>
                                 <div class="info" v-if="details.auctionStatus === 1">{{startTime}} 开始</div>
@@ -142,6 +143,7 @@
                 auctionDetail:[],
                 isShowNoMore:false,
                 collect:false,
+                hintShow:false,
                 // 计算
                 reversedNum: function (num) {
                     // `this` 指向 vm 实例
@@ -222,6 +224,16 @@
                 const that = this;
                 commonService.putInsertion({businessType:2,dimensionType:1,businessTypeId:that.id}).then(function(res){
 
+                })
+                //查看有无新消息
+                commonService.getHasNewHint({}).then(function(res){
+                    if(res.data.code === 200){
+                        if(res.data.datas != 4){
+                            that.hintShow = true;
+                        }else{
+                            that.hintShow = false;
+                        }
+                    }
                 })
                 commonService.getAuctionMarketsList({id:that.id},that.id).then(function(res){
                     if(res.data.code === 200){
