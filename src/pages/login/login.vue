@@ -31,7 +31,14 @@
                 <div class="infoRight" @click="deletePassword"><i class="iconfont icon-closeicon"></i></div>
             </div>
             <!--联系客服-->
-            <div class="talk"><a href="javaScript:;" @click="resetpassword()"><span>登录遇到问题，联系客服</span></a></div>
+            <div class="talk"  v-if="wximg!=null"><a href="javaScript:;"><span>登录遇到问题，联系客服</span></a></div>
+            <div class="wxLogin" v-if="wxLogin" @click="wxlogin">
+                <i class="iconfont icon-icon_weixin"></i>微信
+            </div>
+            <div class="v_talk" v-if="wxLogin">
+                 <a href="javaScript:;"  @click="resetpassword()">忘记密码</a> | 
+                 <a href="javaScript:;">联系客服</a>
+            </div>
             <!--登陆和提示-->
             <div class="bottom">
                 <div class="hint" v-if="hint">{{hintText}}</div>
@@ -621,6 +628,16 @@
                     border-bottom:1px solid #333;
                     font-size: 11px;
                 }
+            }
+            .v_talk{
+                font-size: 12px;
+                text-align: center;
+                margin-top: 3rem;
+                a{
+                    font-size: 12px;
+                    text-decoration: underline;
+                }
+
             }
         }
         .sign{

@@ -41,6 +41,7 @@
                         <div class="hel">{{list.amount | money}} CNY</div>
                         <div class="name">{{list.orderTitle}}</div>
                         <div class="prove"> LOT-{{list.orderDetail.auctionNo}}</div>
+                        
                         <button class="fr" @click="details(list.status,list.orderNo)">查看订单</button>
                         <button class="fr" v-if="list.status==1" @click="details(list.status,list.orderNo)">立即付款</button>
                         <button class="fr" v-if="list.status==2 || list.status==3">分享</button>
@@ -189,7 +190,7 @@
                 let that=this;
                commonService.getOrdercs({pageNo:1,pageSize:30}).then(function(res){
                       that.ordercs=res.data.datas.datas
-                      console.log(res)
+                      
                     })
             },
 
