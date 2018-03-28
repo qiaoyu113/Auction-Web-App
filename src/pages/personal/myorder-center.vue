@@ -152,7 +152,6 @@
                     that.getOrder();
                 }else if(index==3){
                     that.index = 3;
-                 
 
                 }else if(index==0){
                     that.index = 0;
@@ -190,6 +189,7 @@
                 let that=this;
                commonService.getOrdercs({pageNo:1,pageSize:30}).then(function(res){
                       that.ordercs=res.data.datas.datas
+                      console.log(res)
                     })
             },
 

@@ -17,8 +17,8 @@
         <!--登陆中心-->
         <div class="box" v-if="login">
             <div class="boxHeader">
-                <div class="boxImg">
-                    <img src="http://img0.imgtn.bdimg.com/it/u=3206453844,923580852&fm=27&gp=0.jpg"/>
+                <div class="boxImg" >
+                    <img :src="wximg" v-if="wximg!=null"/>
                 </div>
             </div>
             <!--登陆账号-->
@@ -31,7 +31,7 @@
                 <div class="infoRight" @click="deletePassword"><i class="iconfont icon-closeicon"></i></div>
             </div>
             <!--联系客服-->
-            <div class="talk"><a href="tel:+10086"><span>登录遇到问题，联系客服</span></a></div>
+            <div class="talk"><a href="javaScript:;" @click="resetpassword()"><span>登录遇到问题，联系客服</span></a></div>
             <!--登陆和提示-->
             <div class="bottom">
                 <div class="hint" v-if="hint">{{hintText}}</div>
@@ -62,9 +62,9 @@
                 <div class="infoRight" @click="removePassword2"><i class="iconfont icon-closeicon"></i></div>
             </div>
             <!--微信登陆-->
-          <!--   <div class="wxLogin" v-if="wxLogin" @click="wxlogin">
+            <div class="wxLogin" v-if="wxLogin" @click="wxlogin">
                 <i class="iconfont icon-icon_weixin"></i>微信
-            </div> -->
+            </div>
             <!--登陆和提示-->
             <div class="bottom">
                 <div class="hint" v-if="hint2">{{hint2Text}}</div>
@@ -178,12 +178,16 @@
             }
         },
         methods: {
+            resetpassword:function(){
+                this.$router.push({path:"/resetpassword"}) 
+            },
             Returns:function(){
                 this.$router.push({path:"/personalCenter"}) 
             },
             vwximg:function(){
+
               this.wximg=window.localStorage.getItem('headImg')
-           
+              
             },
             vwx:function(){
               if(this.wx=='wx'){
@@ -216,9 +220,11 @@
                                         that.getKaptchas()
                                         that.hint2 = true;
                                         that.hint2Text = '短信验证码已过期';
+                                        that.getKaptchas()
                                     }else{
                                         that.hint2 = true;
                                         that.hint2Text = res.data.message; 
+
                                     }
                                 })
                             }else{
@@ -231,7 +237,7 @@
                         }
                     }else{
                         that.hint2 = true;
-                        that.hint2Text = '密码为字母、数字、下划线组合且长度为6-16的字符';
+                        that.hint2Text = '密码为字母、数字、组合且长度为6-10的字符';
                     }
                 }else{
                     that.hint2 = true;
@@ -312,6 +318,7 @@
                                 that.codeShow = false;
                                 that.hint2 = true;
                                 that.hint2Text = res.data.message;
+                                that.getKaptchas()
                             }
                             // if(res.data.code === 513109){
                             //     that.codeShow = false;
@@ -338,6 +345,7 @@
                                     if(res.data.code === 512104){
                                         that.hint2 = true;
                                         that.hint2Text = '短信验证码已过期';
+                                        that.getKaptchas()
                                     }else if(res.data.code === 200){
                                        that.phoneUser = that.phone;
                                         window.localStorage.setItem('phone',that.phone)
@@ -355,7 +363,7 @@
                         }
                     }else{
                         that.hint2 = true;
-                        that.hint2Text = '密码为字母、数字、下划线组合且长度为6-16的字符';
+                        that.hint2Text = '密码为字母、数字、组合且长度为6-10的字符';
                     }
                 }else{
                     that.hint2 = true;
@@ -452,7 +460,7 @@
             },
             password(curVal){
                 let that = this;
-                let re = /^([\d]|[\w]){6,16}$/;
+                let re = /^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{6,10}$/;
                 that.checkPassword = re.test(curVal);
                 if(that.checkPassword){
                     that.hint2 = false;

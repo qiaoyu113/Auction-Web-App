@@ -16,15 +16,15 @@
             <span class="span1" :class="index==3 ? 'display':'' " @click="putOrderid()"><img src="../../assets/image/mycenter/sc.png" /></span>
         </div>
         <div class="content">
-            <div class="warnTime" v-if="datas.status==1">
+            <div class="warnTime" v-if="datas.status==2">
                 <span>打款<i>3日</i>会处理反馈，财务审核中，请耐心等待</span>
             </div>
             <div class="warnTime" v-if='index==1'>
                 <span>请在规定时间内支付</span>
                 <div class="time fr">
-                    <div class="fr num">01</div>
+                    <div class="fr num">{{countdown.ss}}</div>
                     <div class="fr colon">:</div>
-                    <div class="fr num">02</div>
+                    <div class="fr num">{{countdown.mm}}</div>
                 </div>
             </div>
             
@@ -198,6 +198,7 @@ import {commonService} from '../../service/commonService.js'
           method:'UNIONPAY',//支付方式
           ity:false,
           freight:'',//保险运费
+          countdown:'',
           
       }
     },
@@ -219,6 +220,23 @@ import {commonService} from '../../service/commonService.js'
         this.huoqu()
         this.getOrderid()
     },
+    watch:{
+             countdown:function(){
+                let that=this
+                let t;
+                clearTimeout(t)
+                let date=Date.parse( new Date())
+                 t= setTimeout(function (){
+                    if(that.datas.expireTime > date){
+                       let data =Number(that.datas.expireTime)
+                    that.countdown=common.getTimer(data) 
+                    }else{
+                      that.$router.push({name:'closeorder',params:{id:that.orderNo}})
+                    }
+                   
+                },1000)
+             }
+        },
     methods: {
         Return:function(){
             window.history.go(-1)
@@ -300,6 +318,10 @@ import {commonService} from '../../service/commonService.js'
             commonService.getOrderid(that.orderNo).then(function(res){
                
                 that.datas=res.data.datas
+                console.log(that.datas)
+                let data =Number(that.datas.expireTime)
+                 that.countdown=common.getTimer(data)
+
                 that.method=that.datas.channelId
                 that.orderDetail=that.datas.orderDetail
              
