@@ -88,6 +88,7 @@ const rules = (resolve) => {require(['./pages/orderDetails/rules.vue'],resolve)}
 
 //登陆页
 const login = (resolve) => {require(['./pages/login/login.vue'],resolve)}
+const resetpassword = (resolve) => {require(['./pages/mycenter/resetpassword.vue'],resolve)}
 // 404错误页面
 const error = (resolve) => {require(['./pages/error.vue'],resolve)}
 
@@ -124,6 +125,8 @@ const routers = [
     {name: 'liveDetails',path:'/lives/details/:liveDetailId',component: liveDetails},
     //登陆
     {name: 'signup',path:'/signup',component: login},
+    {name: 'resetpassword',path:'/resetpassword',component:resetpassword},
+    
     //地址
     {name: 'address',path:'/address',component:address},        //新建地址
     {name: 'addresslist',path:'/addresslist',component:addresslist}, //地址列表

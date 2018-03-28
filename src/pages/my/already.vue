@@ -255,14 +255,14 @@
             getCollect:function(){
                 let that=this;
                  commonService.getCollect({pageNo:1,pageSize:30,status:2}).then(function(res){
-                     console.log(res)
+                
                     if(res.data.code==200){
                         that.datas=res.data.datas.datas
                       for(var i=0;i<that.datas.length;i++){
                         let date=new Date()
                           // if(new Date(that.datas[i].mqEndTime*1)>date){
                             that.countdown[i]=common.getTimer(Number(that.datas[i].auction.mqEndTime)+(7 * 24 * 3600 * 1000)) 
-                            console.log(that.countdown[i])
+                          
                           // }else{
                           //   that.countdown[i] = 0
                           // } 

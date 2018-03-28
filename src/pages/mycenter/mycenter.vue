@@ -62,6 +62,8 @@
     import {appService} from '../../service/appService'
     import {common} from '../../assets/js/common/common'
     import {commonService} from '../../service/commonService.js'
+    // import LCalendar from '../../assets/js/LCalendar/LCalendar.js'
+    // import "../../assets/js/LCalendar/LCalendar.css"
     export default {
         data () {
             return {
@@ -75,6 +77,10 @@
                 inputName:'',//修改的名字
                 hasPhone:true,//是否有手机号绑定
                 radio:'1',
+                startTime:'',
+                 // date: null,
+            
+                          
             }
         },
         syncData({store}) {
@@ -105,6 +111,8 @@
         mounted: function() {
             common.onMove('.mycenter')
             this.getUsers()
+
+   
         },
         watch:{
             radio:function(){
@@ -112,6 +120,7 @@
             }
         },
         methods: {
+        
             Return:function(){
                 window.history.go(-1)
             },
@@ -189,6 +198,7 @@
 <style lang="less">
     /*rem等基本设置都放在base中，不写多个*/
     @import url('../../assets/css/base.less');
+
     .mycenter{
         position: fixed;
           left: 0;

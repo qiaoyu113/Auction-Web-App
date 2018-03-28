@@ -126,9 +126,11 @@
             if(ua.match(/MicroMessenger/i)=="micromessenger") {
 //                    这里是微信浏览器
                 this.wxLogin = true;
+                this.index=1
             } else {
 //                    这里不是微信浏览器
                 this.wxLogin = false;
+                this.index=2
             }
              },
              Helpcenter:function(id){

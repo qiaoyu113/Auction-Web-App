@@ -97,6 +97,14 @@ export const commonService = {
     getSms: function (params) {
         return axios.get('/sms' + this.getParam(params))
     },
+    /* 重置密码验证手机号  */
+    postResetpassword: function (params) {
+        return axios.post('/resetpassword/one' + this.getParam(params))
+    },
+    /* 重置密码  */
+    postResetpasswordtwo: function (params) {
+        return axios.post('/resetpassword/two' + this.getParam(params))
+    },
      /* 获取旧手机短信验证发信息 */
     getSendMessage: function (params) {
         return axios.get('/user/oldPhone/sendMessage' + this.getParam(params))
