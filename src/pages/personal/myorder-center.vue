@@ -26,11 +26,20 @@
                     <span class="fr" v-if="list.status==4">已发货</span> 
                     <div class="v_rosr" v-if="list.status==6 || list.status==5"><img src="../../assets/image/mycenter/sc.png" /></div>
                     <span class="fr" v-if="list.status==6">已关闭</span>
-                    <span class="fr" v-if="list.status==5">已完成</span>
+                    <span class="fr" v-if="list.status==5&&list.csStatus==0">已完成</span>
+                    <span class="fr" v-if="list.status==5&&list.csStatus==1">已完成</span>
+                    <span class="fr" v-if="list.status==5&&list.csStatus==2">售后中</span>
+                    <span class="fr" v-if="list.status==5&&list.csStatus==3">售后中</span>
+                    <span class="fr" v-if="list.status==5&&list.csStatus==4">已完成</span>
+                    <span class="fr" v-if="list.status==5&&list.csStatus==5">售后中</span>
+                    <span class="fr" v-if="list.status==5&&list.csStatus==6">已完成</span>
+                    <span class="fr" v-if="list.status==5&&list.csStatus==7">售后中</span>
+                    <span class="fr" v-if="list.status==5&&list.csStatus==8">已完成</span>
+                    <span class="fr" v-if="list.status==5&&list.csStatus==9">售后中</span>
                     <div class="time fr" v-if="list.status==1">
-                        <div class="fr num">15</div>
+                        <div class="fr num">{{countdown[index].ss}}</div>
                         <div class="fr colon">:</div>
-                        <div class="fr num">00</div>
+                        <div class="fr num">{{countdown[index].mm}}</div>
                     </div>
                 </div>
                 <div class="box clearfix ">
@@ -42,7 +51,9 @@
                         <div class="name">{{list.orderTitle}}</div>
                         <div class="prove"> LOT-{{list.orderDetail.auctionNo}}</div>
                         
-                        <button class="fr" @click="details(list.status,list.orderNo)">查看订单</button>
+                        <button class="fr"  v-if="list.status==5&&list.csStatus==0" @click="details(list.status,list.orderNo)">查看订单</button>
+                        <button class="fr"  v-if="list.status==5&&list.csStatus!=0" @click="shouhou(list.status,list.id)">查看订单</button>
+
                         <button class="fr" v-if="list.status==1" @click="details(list.status,list.orderNo)">立即付款</button>
                         <button class="fr" v-if="list.status==2 || list.status==3">分享</button>
                     </div>
@@ -90,6 +101,7 @@
                 branch:[],
                 hour:[],
                 ordercs:'',//售后
+                countdown:[],
             }
         },
         components:{'home-item':itemc},
@@ -153,7 +165,7 @@
                     that.getOrder();
                 }else if(index==3){
                     that.index = 3;
-
+                    that.getOrdercs()
                 }else if(index==0){
                     that.index = 0;
                     that.getOrder();
@@ -182,6 +194,14 @@
                 }
                commonService.getOrder({pageNo:1,pageSize:10,status:status}).then(function(res){
                       that.datalist=res.data.datas.datas
+                    console.log(that.datalist)
+                      let data=[]
+                      for(let i=0;i<that.datalist.length;i++){
+                          data[i]=Number(that.datalist[i].expireTime)
+                          that.countdown[i]=common.getTimer(data[i]) 
+                      }
+                      
+                      
                     
                     })
             },
@@ -190,9 +210,10 @@
                 let that=this;
                commonService.getOrdercs({pageNo:1,pageSize:30}).then(function(res){
                       that.ordercs=res.data.datas.datas
-                      
+                     
                     })
             },
+            
 
         }
     }

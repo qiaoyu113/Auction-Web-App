@@ -184,16 +184,13 @@
                     that.imgler=that.user.headImg
                     let sex=that.user.sex
                     that.radio=sex + ''
-                   
               })
              },
              //修改性别
             sexPasswords:function(){
                  let that=this
               commonService.postUsersinfo({sex:that.radio,headImg:that.imgler}).then(function(res){
-             
                     that.$refs.modal.style.display="none"
-                    console.log(res)
               })
             },
              // 退出登录

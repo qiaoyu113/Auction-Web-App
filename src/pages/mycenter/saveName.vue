@@ -72,6 +72,15 @@
                       that.htmlx='昵称不能为空'
                       return false
                   }
+                  // ^[A-Za-z0-9\u4e00-\u9fa5]+$
+                  let reg= /^[A-Za-z0-9\u4e00-\u9fa5]{1,32}$/
+                  let flag=reg.test(that.inputName)
+                    if(!flag){
+                        this.htmlx="昵称限32个字符,不能有空格和特殊符号"
+                        return false
+                    }
+
+                
                  commonService.postUsersinfo({id:that.id,name:that.inputName}).then(function(res){
                     if(res.data.code == 200){
                       that.$router.push({path:"/mycenter"})

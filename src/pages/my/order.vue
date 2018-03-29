@@ -3,7 +3,7 @@
     <div class="order">
         <div class="top">
             <p class="top_p1">PLACE ORDER</p>
-            <p class="top_p2 clearfix">提交订单<span @click="Return()">. . .</span></p>
+            <p class="top_p2 clearfix"><span>提交订单</span><span class="span" @click="Return()"><img src="../../../src/assets/image/mycenter/right.png"/></span></p>
         </div>
         <div class="time clearfix">
             <p class="time_l">请在规定时间内支付，超时则扣除保证金</p>
@@ -59,7 +59,7 @@
             <div class="money">
                 <div class="total clearfix">
                     <div class="total_l">订单总额</div>
-                    <div class="total_r">{{datas.finalPrice + datas.finalPrice | money}} CNY</div>
+                    <div class="total_r">{{datas.finalPrice + freight / 100 | money}} CNY</div>
                 </div>
                 <div class="scattered clearfix">
                     <div class="scattered_l">
@@ -175,9 +175,11 @@
             if(ua.match(/MicroMessenger/i)=="micromessenger") {
 //                    这里是微信浏览器
                 this.wxLogin = true;
+                this.index=1
             } else {
 //                    这里不是微信浏览器
                 this.wxLogin = false;
+                this.index=2
             }
              },
             Return:function(){
@@ -222,6 +224,7 @@
                  commonService.getAuctions(that.auctionId).then(function(res){
                     if(res.data.code==200){
                    that.datas=res.data.datas
+               
                    that.picItems=that.datas.picItems[0]
                 
                    if(that.datas.finalPrice < 200000){
@@ -229,7 +232,6 @@
                    }else{
                      that.freight=that.datas.finalPrice
                    }
-                  
                     let data =Number(that.datas.mqEndTime) + (7 * 24 * 3600 * 1000)
                     that.countdown=common.getTimer(data)
                    
@@ -243,7 +245,7 @@
                  if(that.index === 1){//微信
                     channelIds = 'WX_JSAPI'
                 }else if(that.index === 3){//转账汇款
-                    channelIds = 'UNIONPAY'
+                    channelIds = 'OFFLINE_BANK'
                 }else if(that.index === 2){//支付宝
                     channelIds = 'ALIPAY_WAP'
                 }
@@ -279,9 +281,14 @@
             color: rgb(51,51,51);
             margin-top: @size10;
             span{
+                float: left;
+                font-size: 16px;
+            }
+            .span{
                 float: right;
                 margin-right: @size10;
                 font-size: 16px;
+                margin-top: -0.2rem;
             }
           }
 

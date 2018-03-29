@@ -72,6 +72,7 @@ const gologin = (resolve) => {require(['./pages/personal/gologin.vue'],resolve)}
 const personalCenter = (resolve) => {require(['./pages/personal/personalCenter.vue'],resolve)}
 const myorder = (resolve) => {require(['./pages/personal/myorder-center.vue'],resolve)}
 const myaccount = (resolve) => {require(['./pages/personal/myAccount.vue'],resolve)}
+const detailed = (resolve) => {require(['./pages/personal/detailed.vue'],resolve)}
 const helpcenter = (resolve) => {require(['./pages/personal/helpcenter.vue'],resolve)}
 const membercenter = (resolve) => {require(['./pages/personal/membercenter.vue'],resolve)}
 const realname = (resolve) => {require(['./pages/personal/realname.vue'],resolve)}
@@ -153,6 +154,7 @@ const routers = [
     {name: 'personalCenter',path:'/personalCenter',component:personalCenter},  //个人中心
     {name: 'myorder',path:'/myorder',component:myorder},                   //我的订单
     {name: 'myaccount',path:'/myaccount',component:myaccount},            //保证金首页
+    {name: 'detailed',path:'/detailed',component:detailed},                //保证金明细
     {name: 'helpcenter',path:'/helpcenter',component:helpcenter},        //保证金说明
     {name: 'membercenter',path:'/membercenter',component:membercenter}, //会员
     {name: 'realname',path:'/realname',component:realname},             //实名认证
