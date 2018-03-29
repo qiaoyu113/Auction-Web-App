@@ -2,6 +2,7 @@
     <!--title为当前页标题
         组件要小，如遇list，只将item做成组件，其他的都写在页面中
     -->
+    <!-- 测试~~~~~~~~~~ -->
     <!-- 帮助中心 -->
     <div class="helpcenter" id="" v-set-title="title">
         
@@ -11,8 +12,9 @@
                 <div class='loginEn'>HELP</div>
                 <div class="loginCn">帮助中心</div>
             </div>
-            <div class="fr" @click="Return()">...</div>
-           
+            <div class="fr" @click="Return()">
+            <img src="../../../src/assets/image/mycenter/right.png"/>
+            </div>
         </div> 
         <!--按钮-->
             <div class="menu v_rost" >
