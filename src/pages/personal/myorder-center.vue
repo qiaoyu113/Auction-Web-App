@@ -186,9 +186,9 @@
                 let that=this;
                 let status='1,2,3,4,5,6'
                 if(that.index === 1){
-                    status = '1';
+                    status = '1,2';
                 }else if(that.index==2){
-                    status = '2,3,4';
+                    status = '3,4';
                 }else if(that.index==0){
                     status = '1,2,3,4,5,6';
                 }

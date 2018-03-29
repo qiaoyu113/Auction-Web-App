@@ -15,7 +15,7 @@
             <div class="fr" @click='Return()'>...</div>
         </div>
         <div class="box">
-            <div class="info clearfix"><span v-if="money==''">金额</span>
+            <div class="info clearfix"><span v-if="money==''" onkeyup="if(this.value.length==1){this.value=this.value.replace(/[^1-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}">金额</span>
                <span v-if="money!=''">金额</span>
                <span class="span" v-if="money!=''">CNY</span>
                <input type="number" placeholder="请输入金额" v-model="money"/>

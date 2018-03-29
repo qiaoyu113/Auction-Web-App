@@ -19,7 +19,9 @@
                         <i class="iconfont icon-duigoudunpai"></i>&nbsp;实名认证
                     </div>
                 </div>
-                <div class="fr" @click="mycenter()">...</div>
+                <div class="fr" @click="mycenter()">
+                 <img src="../../../src/assets/image/mycenter/right.png"/>
+                </div>
             </div>
             <div class="option clearfix">
                 <div class="litbox fl" @click="order(0)">
@@ -39,7 +41,7 @@
                 <div class="litbox fl" @click="order(2)">
                     <div class="pic">
                     <!-- <i class="iconfont icon-tupian"></i> -->
-                    <img src="../../assets/image/mycenter/usre3.jpg" />
+                    <img src="../../assets/image/mycenter/usre3.png" />
                     <div class="number" v-if="numItem.noGetNum!=0&&numItem.noPayNum!=null">{{numItem.noGetNum}}</div></div>
                     <div class="font">待收货</div>
                 </div>
@@ -320,7 +322,7 @@
             .fr{
                 letter-spacing: @size3;
                 font-weight: bold;
-                margin-top: 1.8rem;
+                margin-top: 1.2rem;
             }
         }
         .option{

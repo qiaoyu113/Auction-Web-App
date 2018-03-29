@@ -88,8 +88,9 @@
                 <div class="info"><span>交易时间</span>
                     <div class="infoClose" v-if="list.applyTime!=null">{{list.applyTime | stampFormate2}}</div>
                 </div>
-                <div class="info"><span>订单支付</span>
-                    <div class="infoClose" v-if="list.status==1">充值</div>
+                <div class="info"><span>交易种类</span>
+                    <div class="infoClose" v-if="type!=4">充值</div>
+                     <div class="infoClose" v-if="type==4">订单支付</div>
                 </div>
                 <div class="info"><span>支付方式</span>
                     <div class="infoClose">
