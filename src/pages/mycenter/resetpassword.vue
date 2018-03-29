@@ -140,7 +140,7 @@
                         return false
                     }
                commonService.postResetpassword({phone:that.phone,smsCode:that.inputNum,type:3}).then(function(res){
-  
+                    console.log(res)
                     if(res.data.code == 200){
                       // that.$router.go(-1);
                       that.key=res.data.datas

@@ -4,14 +4,14 @@
             <div class="mescroll-bounce">
                 <div class="notstart">
                     <div class="box">
-                        <div class="ros clearfix" v-for="(list,index) in myList">
+                        <div class="ros clearfix" v-for="(list,index) in myList" @click="Router(list.auction._id)">
                             <div class="ros_l">
                                 <div class="ros_l2">{{reversedNum(list.auction.basePrice/100)}} CNY</div>
                                 <div class="ros_l3">{{list.auction.title}}</div>
                                 <div class="ros_l4">LOT-{{list.auction.completeNo}}</div>
                             </div>
                             <!-- <img src="../../assets/image/error/ufo_blue_2x.png"/> -->
-                            <div class="ros_r" @click="Router(list.auction._id)">
+                            <div class="ros_r">
                                 <img :src="picHead + list.auction.picItems[0]"/>
                                 <div class="date">
                                     <!--收藏图标-->
@@ -197,6 +197,9 @@
                         evt.preventDefault()
                     }
                 })
+            },
+            Router:function(id){
+                this.$router.push({name:'auctionMore',params:{id:id}})
             },
         }
     }

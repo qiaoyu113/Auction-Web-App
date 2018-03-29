@@ -11,9 +11,7 @@
                 <div class='loginEn'>HELP</div>
                 <div class="loginCn">帮助中心</div>
             </div>
-            <div class="fr" @click="Return()">
-            <img src="../../../src/assets/image/mycenter/right.png"/>
-            </div>
+            <div class="fr" @click="Return()">...</div>
            
         </div> 
         <!--按钮-->

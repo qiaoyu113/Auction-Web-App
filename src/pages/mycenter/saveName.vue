@@ -16,7 +16,6 @@
                 <div class="infoList">请输入昵称<input type="text" placeholder="请输入" v-model="inputName"/><div class="del" @click="deleteName"><i class="iconfont icon-closeicon"></i></div></div>
             </div>
             <!--保存-->
-            <div class="saves" v-if="htmlx!=''">{{htmlx}}</div>
             <div class="save" @click="postUsersinfo()">保存</div>
         </div>
     </div>
@@ -39,8 +38,7 @@
                     name:'USERNAME',
                     name2:'昵称设置'
                 },
-                inputName:'',//修改的名字
-                htmlx:'',
+                inputName:''//修改的名字
             }
         },
         computed: {
@@ -53,12 +51,14 @@
             },
         },
         mounted: function() {
-             this.name()
+            /*
+             * 所有需要token的请求都放在这里
+             * 可以使用DOM元素
+             * 这里的数据可以放在data中
+             * */
+
         },
         methods: {
-            name:function(){
-                this.inputName=this.$route.query.name
-            },
             Return:function(){
                 window.history.go(-1)
             },
@@ -66,26 +66,20 @@
                 let that = this;
                 that.inputName = '';
             },
+            //保存名字
+            saveName:function(){
+                let that = this;
+                that.show = '1';
+                that.user.name = that.inputName
+                that.inputName = '';
+                that.$router.go(-1);
+            },
             postUsersinfo:function(){
                  let that=this
-                  if(that.inputName==''){
-                      that.htmlx='昵称不能为空'
-                      return false
-                  }
-                  // ^[A-Za-z0-9\u4e00-\u9fa5]+$
-                  let reg= /^[A-Za-z0-9\u4e00-\u9fa5]{1,32}$/
-                  let flag=reg.test(that.inputName)
-                    if(!flag){
-                        this.htmlx="昵称限32个字符,不能有空格和特殊符号"
-                        return false
-                    }
-
-                
                  commonService.postUsersinfo({id:that.id,name:that.inputName}).then(function(res){
+                    
                     if(res.data.code == 200){
-                      that.$router.push({path:"/mycenter"})
-                    }else{
-                         that.htmlx=res.data.message
+                     that.$router.go(-1);
                     }
               })
             },
@@ -246,22 +240,10 @@
                 border-bottom: none;
             }
         }
-        .saves{
-           width:100%;
-           height:0.67rem;
-           line-height:0.67rem;
-            color:#fff;
-            background:linear-gradient(70deg, #DC704A, #F44EA0);
-            text-align: center;
-            font-size:12px;
-            position:fixed;
-            left: 0;
-            bottom:1.2rem;
-        }
         .save{
             width:100%;
-            height:1.2rem;
-            line-height:1.2rem;
+            height:1.4rem;
+            line-height:1.4rem;
             text-align: center;
             position: fixed;
             left:0;

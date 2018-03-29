@@ -4,7 +4,7 @@
             <div class="mescroll-bounce">
                 <div class="lot">
                     <div class="box">
-                        <div class="ros clearfix" v-for="(list,index) in myList">
+                        <div class="ros clearfix" v-for="(list,index) in myList" @click="Router(list.auction._id)">
                             <div class="ros_l">
                                 <div class="ros_l_top clearfix" v-if="list.auctionCollect.newPrice<list.auction.finalPrice">
                                     <div class="ros_offer">{{reversedNum(list.auctionCollect.newPrice/100)}} CNY</div>
@@ -19,7 +19,7 @@
                                 <div class="ros_l4">LOT-{{list.auction.completeNo}}</div>
                             </div>
                             <!-- <img src="../../assets/image/error/ufo_blue_2x.png"/> -->
-                            <div class="ros_r" @click="Router(list.auction._id)">
+                            <div class="ros_r">
                                 <img :src="picHead + list.auction.picItems[0]"/>
                                 <div class="date">
                                     <!--收藏图标-->
@@ -30,8 +30,7 @@
                                     </div>
                                     <!--进行中-->
                                     <div class="collect2">
-                                        <div class="icon"></div>
-                                        <div class="icon"></div>
+                                        <img src="../../assets/image/mycenter/zan.png" />
                                     </div>
                                 </div>
                             </div>
@@ -182,6 +181,9 @@
                     }
                 })
             },
+            Router:function(id){
+                this.$router.push({name:'auctionMore',params:{id:id}})
+            },
             //页面滑动问题
             onMove:function(){
                 let overscroll = function(el) {
@@ -325,14 +327,18 @@
                             height:0.35rem;
                             float:right;
                             background:#5EBAA9;
-                            padding: 0.09rem 0.03rem;
                             box-sizing: border-box;
                             .icon{
-                                width: 0.06rem;
+                                width: 0.05rem;
                                 height: 100%;
                                 float: left;
                                 background: #fff;
                                 margin: 0 0.04rem;
+                            }
+                            img{
+                                width:100%;
+                                height:100%;
+                                margin:0;
                             }
                         }
                         .collect3{

@@ -70,7 +70,7 @@
         },
         methods: {
             Return:function(){
-                this.$router.replace({name:'mycenter'});
+                window.history.go(-1)
             },
             deleteName:function(){
                 let that = this;
@@ -79,7 +79,6 @@
             //换手机号
             save:function(){
                 let that = this;
-
                 
              commonService.putPhoneset({phone:that.inputPhone,smsCode:this.inputNum,type:6}).then(function(res){
                     if(res.data.code==200){
@@ -98,16 +97,6 @@
             //获取验证码
           getcode:function(){
                 let that = this;
-                 if(that.inputPhone ==''){
-                    that.htmlx='手机号码不能为空'
-                    return false
-                   }
-                   let reg = /^1[3|4|5|7|8][0-9]{9}$/;
-                    let flag = reg.test(that.inputPhone)
-                    if(!flag){
-                        this.htmlx="手机号码不正确"
-                        return false
-                    }
                 if(that.codeShow){
 
                 }else{
@@ -124,7 +113,6 @@
                     },1000)
                 }
                 // 获取短信验码
-
                  commonService.getNewPhone({phone:that.inputPhone,type:6,kaptchaKey:that.img.kaptchaKey,kaptchaValue:that.kaptchaValue}).then(function(res){
                     if(res.data.code == 200){
                      // that.$router.go(-1);
@@ -328,8 +316,8 @@
         }
         .save{
             width:100%;
-            height:1.2rem;
-            line-height:1.2rem;
+            height:1.4rem;
+            line-height:1.4rem;
             text-align: center;
             position: fixed;
             left:0;

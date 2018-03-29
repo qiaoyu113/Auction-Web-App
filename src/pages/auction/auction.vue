@@ -3,7 +3,7 @@
         <!--<div class="header">传家</div>-->
         <div class="nav">
             <span class="back" @click="back()"><i class="iconfont icon-fanhui"></i></span>
-            <span class="span1">
+            <span class="span1" @click="share()">
                 <img src="../../assets/image/mycenter/icon2.png"/>
             </span>
             <span class="span2" @click="goMy()">
@@ -64,7 +64,7 @@
                     </div>
                     <div class="others">
                         <div class="othersEn">OTHERS</div>
-                        <div class="othersCh">本场其他</div>
+                        <div class="othersCh">更多拍品</div>
                     </div>
                     <div class="sell-more clearfix">
                         <div class="sellList" v-if="specialist.length != 0" @click="sellListGo(list.id)" v-for="list in specialist">
@@ -171,7 +171,7 @@
                         <div class="nowTit">当前价格</div>
                         <div class="nowPrice" v-if="!offerNumDate">{{reversedNum(details.currentPrice)}} CNY</div>
                         <div class="nowPrice" v-if="offerNumDate">{{reversedNum(details.basePrice)}} CNY</div>
-                        <div class="over">离结束还有</div>
+                        <div class="over">距结束</div>
                         <div class="time fr">
                             <div class="fr num">{{s}}</div>
                             <div class="fr colon">:</div>
@@ -194,7 +194,7 @@
                     <div class="moneytime fr" v-if="details.auctionStatus === 3 && details.userId == userId && details.doneBuy == '1'">
                         <div class="nowTit">成交价格</div>
                         <div class="nowPrice">{{reversedNum(details.currentPrice)}} CNY</div>
-                        <div class="over">付款期限</div>
+                        <div class="over">支付期限</div>
                         <div class="time fr">
                             <div class="fr num">{{s}}</div>
                             <div class="fr colon">:</div>
@@ -241,7 +241,7 @@
         </div>
         <!--2进行中-->
         <div class="infomation bground2 clearfix" v-else-if="details.auctionStatus === 2">
-            <div class="learnMore fl" @click="lookMore()">查看更多{{details.offerNum}}</div>
+            <div class="learnMore fl" @click="lookMore()">出价记录{{details.offerNum}}</div>
             <div class="value fl" v-if="!offerNumDate">当前价格 {{reversedNum(details.currentPrice)}} CNY</div>
             <div class="value fl" v-if="offerNumDate">当前价格 {{reversedNum(details.basePrice)}} CNY</div>
             <div class="time fr">
@@ -254,7 +254,7 @@
                 <div class="fr num">{{day}}</div>
             </div>
         </div>
-        <div class="infomation bground3 clearfix" v-else-if="details.auctionStatus === 3">
+        <div class="infomation bground3 clearfix" v-else-if="details.auctionStatus === 3 && details.userId == userId && details.doneBuy != '1'">
             <div class="learnMore fl" @click="lookMore()">出价记录{{details.offerNum}}</div>
             <div class="value fl">当前价格 {{reversedNum(details.currentPrice)}} CNY</div>
             <div class="success fr">
@@ -328,7 +328,7 @@
                 <img v-if="hasCollect" src="../../assets/image/mycenter/collect.png"/>
                 <img v-if="!hasCollect" src="../../assets/image/mycenter/collectNo.png"/>
             </div>
-            <div class="goBuy" @click="payOrder()" v-if="details.userId == userId && details.doneBuy == '1'">去支付</div>
+            <div class="goBuy" @click="payOrder()" v-if="details.userId == userId && details.doneBuy == '1'">立即支付</div>
         </div>
         <!--流拍-->
         <div class="footer" v-else-if="details.auctionStatus === 4">
@@ -421,6 +421,9 @@
         </div>
 
         <div class="payOK"></div>
+
+        <!--分享提示-->
+        <div class="shareBox" v-if="shareHint">可以使用浏览器分享按钮分享给好友哦</div>
     </div>
 </template>
 
@@ -485,6 +488,8 @@
                 frozen:false,//是否缴纳保证金
                 latest:false,//是否当前最高价
                 hintShow:false,
+                shareHint:false,
+                goMyNum:'0',
             }
         },
         components:{'z-foot':item,'z-info':info,'z-record':record,'z-payment':payment},
@@ -606,13 +611,12 @@
                 //延时一秒,模拟联网
                 const that = this;
                 that.isCollect();
-                //插入统计数据
-                commonService.putInsertion({businessType:1,dimensionType:1,businessTypeId:that.id}).then(function(res){})
                 //查看有无新消息
                 commonService.getHasNewHint({}).then(function(res){
                     if(res.data.code === 200){
                         if(res.data.datas != 4){
                             that.hintShow = true;
+                            that.goMyNum = res.data.datas
                         }else{
                             that.hintShow = false;
                         }
@@ -628,6 +632,8 @@
                 commonService.getAuction({id:that.id},that.id).then(function(res){
                     if(res.data.code === 200){
                         that.details = res.data.datas;
+                        //插入统计数据
+                        commonService.putInsertion({businessType:1,dimensionType:1,businessTypeId:that.id,businessNo:that.details.completeNo,businessName:that.details.title,}).then(function(res){})
                         if(that.details.basePrice === 0){
                             that.deposit = '300.00'
                         }else{
@@ -1205,13 +1211,29 @@
             //跳我的
             goMy(){
                 let that = this;
-                that.$router.replace({name:'my'})
+                if(that.goMyNum == 0){
+                    that.$router.replace({name:'my'})
+                }else if(that.goMyNum == 1){
+                    that.$router.replace({name:'lot'})
+                }else if(that.goMyNum == 2){
+                    that.$router.replace({name:'already'})
+                }else if(that.goMyNum == 3){
+                    that.$router.replace({name:'not'})
+                }
             },
             //跳查看规则
             goRule(){
                 let that = this;
                 that.$router.replace({name:'helpcenter'})
-            }
+            },
+            //分享
+            share(){
+                let that = this;
+                that.shareHint = true;
+                setTimeout(function(res){
+                    that.shareHint = false;
+                },2500)
+            },
         },
         watch: {
             '$route' (to, from) {
@@ -1242,6 +1264,24 @@
     @import url("../../assets/css/common/mescroll.min.css");
     @import '../../assets/css/common/swiper.min.css';
     #auction{
+        .shareBox{
+            width:6rem;
+            height:2rem;
+            padding:0.5rem;
+            box-sizing: border-box;
+            position: fixed;
+            top:0;
+            left:0;
+            right:0;
+            bottom:0;
+            margin:auto;
+            background:#333;
+            opacity: 0.9;
+            text-align: center;
+            color:#fff;
+            font-size:14px;
+            border-radius: 8px;
+        }
         .header{
             position: fixed;
             z-index: 100;

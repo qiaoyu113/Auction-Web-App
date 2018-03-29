@@ -58,9 +58,9 @@
                     <div class="f4">状态</div>
                     <div class="bor"></div>
                 </div>
-                <div class="listcontent clearfix"  v-for="arr1 in arr"  :key="arr1.url" @click="detailed(arr1.formId)">
+                <div class="listcontent clearfix"  v-for="arr1 in arr"  :key="arr1.url">
                     <div class="fl">{{arr1.flowAmount | money}}</div>
-                   <!--  <div class="f2 line" v-if="arr1.flowStatus==10">充值</div>
+                    <div class="f2 line" v-if="arr1.flowStatus==10">充值</div>
                     <div class="f2 line" v-if="arr1.flowStatus==11">参拍冻结</div>
                     <div class="f2 line" v-if="arr1.flowStatus==20">充值</div>
                     <div class="f2 line" v-if="arr1.flowStatus==21">充值</div>
@@ -69,32 +69,31 @@
                     <div class="f2 line" v-if="arr1.flowStatus==30">参拍冻结</div>
                     <div class="f2 line" v-if="arr1.flowStatus==31">参拍解冻</div>
                     <div class="f2 line" v-if="arr1.flowStatus==32">违约扣除</div>
-                    <div class="f2 line" v-if="arr1.flowStatus==40">提现冻结</div>
+                    <div class="f2 line" v-if="arr1.flowStatus==40">提现冻冻</div>
                     <div class="f2 line" v-if="arr1.flowStatus==41">提现扣除</div>
                     <div class="f2 line" v-if="arr1.flowStatus==42">提现</div>
                     <div class="f2 line" v-if="arr1.flowStatus==50">提现冻结</div>
                     <div class="f2 line" v-if="arr1.flowStatus==51">提现扣除</div>
                     <div class="f2 line" v-if="arr1.flowStatus==52">提现冻结</div>
-                    <div class="f2 line" v-if="arr1.flowStatus==53">提现解冻</div> -->
-                    <div class="f2">{{arr1.title}}</div>
+                    <div class="f2 line" v-if="arr1.flowStatus==53">提现解冻</div>
                     <div class="f3">{{arr1.createTime | stampFormate2}}</div>
-                    <div class="f4 line" v-if="arr1.flowStatus==10">充值成功<i class="el-icon-arrow-right" v-if="arr1.formId!=null"></i></div>
-                    <div class="f4 line" v-if="arr1.flowStatus==11">冻结成功<i class="el-icon-arrow-right" v-if="arr1.formId!=null"></i></div>
-                    <div class="f4 line" v-if="arr1.flowStatus==20">充值中<i class="el-icon-arrow-right" v-if="arr1.formId!=null"></i></div>
-                    <div class="f4 line" v-if="arr1.flowStatus==21">充值成功<i class="el-icon-arrow-right" v-if="arr1.formId!=null"></i></div>
-                    <div class="f4 line" v-if="arr1.flowStatus==22">充值中<i class="el-icon-arrow-right" v-if="arr1.formId!=null"></i></div>
-                    <div class="f4 line" v-if="arr1.flowStatus==23">交易关闭<i class="el-icon-arrow-right" v-if="arr1.formId!=null"></i></div>
-                    <div class="f4 line" v-if="arr1.flowStatus==30">冻结成功<i class="el-icon-arrow-right" v-if="arr1.formId!=null"></i></div>
-                    <div class="f4 line" v-if="arr1.flowStatus==31">解冻成功<i class="el-icon-arrow-right" v-if="arr1.formId!=null"></i></div>
-                    <div class="f4 line" v-if="arr1.flowStatus==32">扣除成功<i class="el-icon-arrow-right" v-if="arr1.formId!=null"></i></div>
-                    <div class="f4 line" v-if="arr1.flowStatus==40">提现中<i class="el-icon-arrow-right" v-if="arr1.formId!=null"></i></div>
-                    <div class="f4 line" v-if="arr1.flowStatus==41">提现成功<i class="el-icon-arrow-right" v-if="arr1.formId!=null"></i></div>
-                    <div class="f4 line" v-if="arr1.flowStatus==42">交易关闭<i class="el-icon-arrow-right" v-if="arr1.formId!=null"></i></div>
-                    <div class="f4 line" v-if="arr1.flowStatus==50">提现中<i class="el-icon-arrow-right" v-if="arr1.formId!=null"></i></div>
-                    <div class="f4 line" v-if="arr1.flowStatus==51">提现成功<i class="el-icon-arrow-right" v-if="arr1.formId!=null"></i></div>
-                    <div class="f4 line" v-if="arr1.flowStatus==52">提现中<i class="el-icon-arrow-right" v-if="arr1.formId!=null"></i></div>
-                    <div class="f4 line" v-if="arr1.flowStatus==53">交易关闭<i class="el-icon-arrow-right" v-if="arr1.formId!=null"></i></div>
-                    
+                    <div class="f4 line" v-if="arr1.flowStatus==10">充值成功</div>
+                    <div class="f4 line" v-if="arr1.flowStatus==11">冻结成功</div>
+                    <div class="f4 line" v-if="arr1.flowStatus==20">充值中</div>
+                    <div class="f4 line" v-if="arr1.flowStatus==21">充值成功</div>
+                    <div class="f4 line" v-if="arr1.flowStatus==22">充值中</div>
+                    <div class="f4 line" v-if="arr1.flowStatus==23">交易关闭</div>
+                    <div class="f4 line" v-if="arr1.flowStatus==30">冻结成功</div>
+                    <div class="f4 line" v-if="arr1.flowStatus==31">解冻成功</div>
+                    <div class="f4 line" v-if="arr1.flowStatus==32">扣除成功</div>
+                    <div class="f4 line" v-if="arr1.flowStatus==40">提现中</div>
+                    <div class="f4 line" v-if="arr1.flowStatus==41">提现成功</div>
+                    <div class="f4 line" v-if="arr1.flowStatus==42">交易关闭</div>
+                    <div class="f4 line" v-if="arr1.flowStatus==50">提现中</div>
+                    <div class="f4 line" v-if="arr1.flowStatus==51">提现成功</div>
+                    <div class="f4 line" v-if="arr1.flowStatus==52">提现中</div>
+                    <div class="f4 line" v-if="arr1.flowStatus==53">交易关闭</div>
+                    <div class="bor"></div>
                 </div>
             </div>
         </div>
@@ -173,14 +172,6 @@
         methods: {
             Return:function(){
               window.history.go(-1)
-            },
-            detailed:function(id){
-                // console.log(id)
-                // return false
-                if(id!=null&&id!=undefined){
-                   this.$router.push({path:"/detailed",query:{id:id}})  
-                }
-              
             },
             getPos:function(index) {
                 var str = 95*(index)+'px';
@@ -364,7 +355,6 @@
                     width: 20%;
                     font-size: @size10;
                     line-height: @size30;
-
                 }
                 .f3{
                     float: left;
@@ -377,9 +367,6 @@
                     width: 25%;
                     font-size: @size10;
                     line-height: @size30;
-                    i{
-                        font-size: @size10;
-                    }
                 }
                 .line{
                     text-decoration: underline;

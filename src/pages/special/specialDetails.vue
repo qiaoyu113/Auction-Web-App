@@ -7,7 +7,7 @@
         <!--<div class="header">传家</div>-->
         <div class="nav">
             <span class="back" @click="back()"><i class="iconfont icon-fanhui"></i></span>
-            <span class="span1">
+            <span class="span1" @click="share()">
                 <img src="../../assets/image/mycenter/icon2.png"/>
             </span>
             <span class="span2" @click="goMy()">
@@ -63,8 +63,8 @@
                                     <img src="../../assets/image/mycenter/end.png"/>
                                     <span>已结束</span>
                                 </div>
-                                <div class="sta-over">开始：{{startTime}}</div>
-                                <div class="sta-over">结束：{{details.auctionEndTime}}</div>
+                                <div class="sta-over">开始时间：{{startTime}}</div>
+                                <div class="sta-over">结束时间：{{details.auctionEndTime}}</div>
                             </div>
                             <div class="sell-html" v-html="details.content"></div>
                         </div>
@@ -115,6 +115,8 @@
                 </div>
             </div>
         </div>
+        <!--分享提示-->
+        <div class="shareBox" v-if="shareHint">可以使用浏览器分享按钮分享给好友哦</div>
     </div>
 </template>
 
@@ -144,6 +146,8 @@
                 isShowNoMore:false,
                 collect:false,
                 hintShow:false,
+                shareHint:false,
+                goMyNum:'0',
                 // 计算
                 reversedNum: function (num) {
                     // `this` 指向 vm 实例
@@ -222,14 +226,12 @@
             getListData:function(pageNum,pageSize,successCallback,errorCallback) {
                 //延时一秒,模拟联网
                 const that = this;
-                commonService.putInsertion({businessType:2,dimensionType:1,businessTypeId:that.id}).then(function(res){
-
-                })
                 //查看有无新消息
                 commonService.getHasNewHint({}).then(function(res){
                     if(res.data.code === 200){
                         if(res.data.datas != 4){
                             that.hintShow = true;
+                            that.goMyNum = res.data.datas
                         }else{
                             that.hintShow = false;
                         }
@@ -238,6 +240,7 @@
                 commonService.getAuctionMarketsList({id:that.id},that.id).then(function(res){
                     if(res.data.code === 200){
                         that.details = res.data.datas;
+                        commonService.putInsertion({businessType:2,dimensionType:1,businessTypeId:that.id,businessNo:that.details.completeNo,businessName:that.details.name}).then(function(res){})
                         that.img = that.$store.state.picHead + res.data.datas.coverUrl;
                         setTimeout(function(){
                             let now = new Date().getTime()
@@ -341,6 +344,14 @@
                     }
                 })
             },
+            //分享
+            share(){
+                let that = this;
+                that.shareHint = true;
+                setTimeout(function(res){
+                    that.shareHint = false;
+                },2500)
+            },
             //页面滑动问题
             onMove:function(){
                 let overscroll = function(el) {
@@ -390,8 +401,16 @@
             //跳我的
             goMy(){
                 let that = this;
-                that.$router.replace({name:'my'})
-            }
+                if(that.goMyNum == 0){
+                    that.$router.replace({name:'my'})
+                }else if(that.goMyNum == 1){
+                    that.$router.replace({name:'lot'})
+                }else if(that.goMyNum == 2){
+                    that.$router.replace({name:'already'})
+                }else if(that.goMyNum == 3){
+                    that.$router.replace({name:'not'})
+                }
+            },
         }
     }
 </script>
@@ -402,6 +421,24 @@
     @import url('../../assets/css/icon/iconfont.css');
     @import url("../../assets/css/common/mescroll.min.css");
     #specialDetails{
+        .shareBox{
+            width:6rem;
+            height:2rem;
+            padding:0.5rem;
+            box-sizing: border-box;
+            position: fixed;
+            top:0;
+            left:0;
+            right:0;
+            bottom:0;
+            margin:auto;
+            background:#333;
+            opacity: 0.9;
+            text-align: center;
+            color:#fff;
+            font-size:14px;
+            border-radius: 8px;
+        }
         .header{
             position: fixed;
             z-index: 100;

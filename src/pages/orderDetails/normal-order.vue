@@ -79,8 +79,8 @@
                 <div class="btn" :class="{'rty':method=='UNIONPAY'}" @click="methodlist('UNIONPAY')">线下转账</div>
             </div>
             <div v-if="datas.status==4 || datas.status==5 || datas.status==6">
-               <div class="logistic">
-                    物流信息<span class="fr" @click="show" v-if="logistics!=''">...</span>
+               <div class="logistic" @click="show">
+                    物流信息<span class="fr">...</span>
                 </div>
                 <div class="logdetail" v-if="logistics!=''">
                     <div>顺丰速运</div>
@@ -146,7 +146,7 @@
                 <div class="titleEn">SHIPPING</div>
                 <div class="titleCh">物流信息</div>
                 <div class="num">运单号<span class="fr">{{logistic.nu}}</span></div>
-                <div class="num num1">快递公司<span class="fr">顺丰</span></div>
+                <div class="num num1">快递公司<span class="fr">{{logistic.com}}</span></div>
                 <!-- <div class="num num1">预计送达<span class="fr">2018.05.11</span></div> -->
                 <div class="box">
                     
@@ -262,9 +262,7 @@ import {commonService} from '../../service/commonService.js'
             this.dis='dis';
         },
         show:function(){
-        
             this.dis=''
-         
         },
         rechargeList:function(){      
               let that=this;
@@ -321,11 +319,8 @@ import {commonService} from '../../service/commonService.js'
                
                 that.datas=res.data.datas
                 console.log(that.datas)
-                if(that.datas.status==1){
-                  let data =Number(that.datas.expireTime)
+                let data =Number(that.datas.expireTime)
                  that.countdown=common.getTimer(data)
-                }
-                
 
                 that.method=that.datas.channelId
                 that.orderDetail=that.datas.orderDetail
@@ -933,20 +928,19 @@ import {commonService} from '../../service/commonService.js'
 }
 .popWin{
     height: 14.72rem;
-    width: 8.68rem;
+    width: 8.67rem;
     background: white;
     position: fixed;
-    top: @size50;
-    right: 0.66rem;
+    bottom:@size25;
+    left: @size25;
     z-index: 1000;
     text-align: center;
     box-sizing: border-box;
     padding: 0 @size20;
     overflow: scroll;
     .close{
-            position: fixed;
-            right: 0.66rem;
-            top: @size50;
+            position: absolute;
+            right: 0;top: 0;
             width: @size30;
             height: @size30;
             background: #eb6100;
@@ -1019,7 +1013,6 @@ import {commonService} from '../../service/commonService.js'
             position: absolute;
             left: -@size5;
             top: 0;
-            background: #eb6100;
 
          }
 

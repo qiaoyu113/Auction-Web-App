@@ -36,7 +36,8 @@
             <li class="fl" @click="checked(2)">
                 <img v-if="index == 2 && !hintShow" src="../../assets/image/mycenter/c3.png"/>
                 <img v-if="index == 2 && hintShow" src="../../assets/image/mycenter/c31.png"/>
-                <img v-if="index != 2" src="../../assets/image/mycenter/i3.png"/>
+                <img v-if="index != 2 && !hintShow" src="../../assets/image/mycenter/i3.png"/>
+                <img v-if="index != 2 && hintShow" src="../../assets/image/mycenter/i31.png"/>
                 <p :class="index == 2 ? '':'pc'">我的</p>
             </li>
             <li class="fl" @click="checked(3)">
@@ -76,6 +77,7 @@
 				routePath: '',
 				routeName: '',
                 hintShow:false,
+                goMyNum:'0',
 			}
 		},
 		mounted() {
@@ -104,6 +106,7 @@
             checked(index){
                 let that = this;
                 that.index = index;
+                that.onload()
                 if(index === 0){
                     that.$router.replace({name:'home'})
                     that.index = 0;
@@ -111,7 +114,15 @@
                     that.$router.replace({name:'special'})
                     that.index = 1;
                 }else if(index === 2){
-                    that.$router.replace({name:'my'})
+                    if(that.goMyNum == 0){
+                        that.$router.replace({name:'my'})
+                    }else if(that.goMyNum == 1){
+                        that.$router.replace({name:'lot'})
+                    }else if(that.goMyNum == 2){
+                        that.$router.replace({name:'already'})
+                    }else if(that.goMyNum == 3){
+                        that.$router.replace({name:'not'})
+                    }
                     that.index = 2;
                 }else if(index === 3){
                     that.$router.replace({name:'personalCenter'})
@@ -125,6 +136,7 @@
                     if(res.data.code === 200){
                         if(res.data.datas != 4){
                             that.hintShow = true;
+                            that.goMyNum = res.data.datas
                         }else{
                             that.hintShow = false;
                         }

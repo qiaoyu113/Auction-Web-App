@@ -18,8 +18,8 @@
                                 <div class="sell-information">
                                     <a v-if="list.EndText === 2">拍场已开始，快去捡漏吧</a>
                                     <a v-if="list.EndText === 1">拍场已结束，快去看看成交结果</a>
-                                    <a class="over" v-if="list.EndText === 3">即将开始</a>
-                                    <a class="over" v-if="list.EndText === 4">正在进行</a>
+                                    <a class="over" v-if="list.EndText === 3">{{list.StartTime}}开始</a>
+                                    <a class="over" v-if="list.EndText === 4">{{list.endTime}}结束</a>
                                     <span class="pos2"><img class="pos2img" src="../../assets/image/mycenter/icon3.png"/>{{list.realUserNum}} 人</span>
                                     <span class="pos1"><img class="pos1img" src="../../assets/image/mycenter/zheng.png"/> {{list.auctionNum}} 件</span>
                                 </div>
@@ -28,7 +28,7 @@
                                 <div class="sell-time">{{reversedNum(list.doneAmount)}}CNY</div>
                                 <div class="sell-title">{{list.name}}</div>
                                 <div class="sell-information">
-                                    <a class="over">成交件数：{{list.doneNum}}</a>
+                                    <a class="over2">成交件数：{{list.doneNum}} 件</a>
                                     <span class="pos2"><img class="pos2img" src="../../assets/image/mycenter/icon3.png"/> {{list.realUserNum}} 人</span>
                                     <span class="pos1"><img class="pos1img" src="../../assets/image/mycenter/zheng.png"/> {{list.auctionNum}} 件</span>
                                 </div>
@@ -74,13 +74,13 @@
                                     <div class="sell-box">
                                         <div class="sell-spic">
                                             <ul>
-                                                <li v-for="(image,index) in img" v-if="index <= 8" @click="goAuction(image.id)">
+                                                <li v-for="(image,index) in img" v-if="index <= 9" @click="goAuction(image.id)">
                                                     <a href='javascript:void(0)'>
                                                         <img :src="$store.state.picHead + image.img">
                                                     </a>
                                                 </li>
                                             </ul>
-                                            <div class="addIcon" v-if="img.length > 9" @click="goSellMore(list.id)">
+                                            <div class="addIcon" v-if="img.length > 10" @click="goSellMore(list.id)">
                                                 <i class="iconfont icon-fangdajing"></i>
                                                 <span>查看更多</span>
                                             </div>
@@ -277,6 +277,8 @@
                                     let m = parseInt(time / 1000 / 60 % 60, 10) < 10 ? '0' +  parseInt(time / 1000 / 60 % 60 , 10) :  parseInt(time / 1000 / 60 % 60 , 10);
                                     let s = parseInt(time / 1000 % 60, 10) < 10 ? '0' + parseInt(time / 1000 % 60, 10) : parseInt(time / 1000 % 60, 10);
                                     specialist[i].EndTime = day + ':' + h + ':' + m + ':' + s;
+                                    specialist[i].StartTime  = common.getFormatOfDate(specialist[i].auctionStartTime,'yyyy.MM.dd hh:mm')
+                                    specialist[i].endTime  = common.getFormatOfDate(specialist[i].auctionEndTime,'yyyy.MM.dd hh:mm')
                                     if(time <= 0){
                                         if(that.checked === 2){
                                             specialist[i].EndText = 1;
@@ -494,14 +496,18 @@
                 width: 100%;
                 height: 0.65rem;
                 box-sizing: border-box;
+                color:#272727;
                 transform: translateZ(0px);
             }
             .sell-title {
-                width:100%;
-                font-size: 12px;
-                text-align: left;
+                width: 5.35rem;
                 padding-left: 20px;
                 box-sizing: border-box;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                font-size:13px;
+                color:#737373;
+                white-space: nowrap;
             }
             .sell-information {
                 width:100%;
@@ -511,8 +517,14 @@
                 overflow: hidden;
                 .over{
                     font-size:12px;
-                    text-decoration: underline;
-                    color:#333;
+                    text-decoration: initial;
+                    color:#837C7C;
+                    padding-left: 20px;
+                }
+                .over2{
+                    font-size:12px;
+                    text-decoration: initial;
+                    color:#837C7C;
                     padding-left: 20px;
                 }
                 a {
@@ -524,8 +536,9 @@
                 .pos2 {
                     float:right;
                     font-size: 10px;
-                    color: #A9AEB6;
+                    color: #837C7C;
                     margin-right:0.2rem;
+                    margin-top:0.08rem;
                     line-height: 0.38rem;
                     font-weight: 500;
                     .pos2img{
@@ -559,8 +572,9 @@
                 .pos1 {
                     float:right;
                     font-size: 10px;
-                    color: #A9AEB6;
+                    color: #837C7C;
                     margin-right:0.4rem;
+                    margin-top:0.08rem;
                     line-height: 0.38rem;
                     font-weight: 500;
                     .pos1img{

@@ -56,14 +56,14 @@
                             <div class="helpCenter">
                                 <span class="fl">帮助中心</span>
                                 <div class="fr2 iconfont icon-daiquanquandetanhao"></div>
-                                <a class="fr">查看如何参加拍卖</a>
+                                <a class="fr">查看相应竞拍规则</a>
                                 <!--<a class="fr" v-if="details.auctionStatus === 2">查看如何参加拍卖</a>-->
                             </div>
                         </div>
                     </div>
                     <div class="others">
                         <div class="othersEn">OTHERS</div>
-                        <div class="othersCh">本场其他</div>
+                        <div class="othersCh">更多拍品</div>
                     </div>
                     <div class="sell-more clearfix">
                         <div class="sellList" v-if="specialist.length != 0" v-for="list in specialist">
@@ -158,7 +158,7 @@
                         <div class="nowTit">当前价格</div>
                         <div class="nowPrice" v-if="!offerNumDate">{{details.currentPrice}} CNY</div>
                         <div class="nowPrice" v-if="offerNumDate">{{details.basePrice}} CNY</div>
-                        <div class="over">离结束还有</div>
+                        <div class="over">距结束</div>
                         <div class="time fr">
                             <div class="fr num">{{s}}</div>
                             <div class="fr colon">:</div>

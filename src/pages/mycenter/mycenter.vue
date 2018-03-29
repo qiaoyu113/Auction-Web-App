@@ -13,18 +13,10 @@
         <div class="box">
             <div class="boxHeader">
                 <div class="boxHeaderLeft">
-                    <img :src="picHead + imgler" :onerror="errorImg01"/>
+                    <img :src="picHead + user.headImg" :onerror="errorImg01"/>
                 </div>
                 <div class="boxHeaderRight">
-                   <el-upload
-                      class="avatar-uploader"
-                      :action='imgurl'
-                      :show-file-list="false"
-                      :on-success="handleAvatarSuccess"
-                      :before-upload="beforeAvatarUpload">
-                      <img v-if="imageUrl" :src="imageUrl" class="avatar">
-                      <i v-else class="el-icon-more avatar-uploader-icon"></i>
-                    </el-upload>
+                    <img src="../../../src/assets/image/mycenter/more.png"/>
                 </div>
             </div>
             <!--详细信息-->
@@ -62,8 +54,8 @@
              </div>
         </div>  
 
-                
-                </div>
+
+    </div>
 </template>
 
 <script>
@@ -87,9 +79,6 @@
                 radio:'1',
                 startTime:'',
                  // date: null,
-                 imgurl:'http://api.sundayauction.cn/files',
-                 imageUrl:'',
-                 imgler:'',
             
                           
             }
@@ -138,29 +127,14 @@
             //改变名字
             changeName:function(){
                 let that = this;
-                that.$router.push({name:'saveName',query:{id:that.user.id,name:that.user.name}})
+                that.$router.push({name:'saveName',query:{id:that.user.id}})
             },
             realname:function(){
                 this.$router.push({name:'realname'})
             },
             setsex:function(){
               this.$refs.modal.style.display="block"
-            },
-             handleAvatarSuccess(res, file) {
-                this.imgler=res.datas.file
-                this.sexPasswords()
-                
-                // this.imageUrl = URL.createObjectURL(file.raw);
-             },
-             beforeAvatarUpload(file) {
-            const isJPG = file.type === 'image/jpeg';
-            const isLt2M = file.size / 1024 / 1024 < 2;
-         
 
-            if (!isLt2M) {
-              this.$message.error('上传头像图片大小不能超过 2MB!');
-            }
-            return isLt2M;
             },
             //改电话号
             changePhone:function(){
@@ -181,16 +155,17 @@
                 let that=this
                  commonService.getUsers().then(function(res){
                     that.user=res.data.datas.user
-                    that.imgler=that.user.headImg
                     let sex=that.user.sex
                     that.radio=sex + ''
+                    // console.log(that.user)
               })
              },
              //修改性别
             sexPasswords:function(){
                  let that=this
-              commonService.postUsersinfo({sex:that.radio,headImg:that.imgler}).then(function(res){
-                    that.$refs.modal.style.display="none"
+  commonService.postUsersinfo({id:that.id,sex:that.radio}).then(function(res){
+             
+                that.$refs.modal.style.display="none"
               })
             },
              // 退出登录
@@ -419,7 +394,6 @@
             }
         }
     }
-   
 }
 </style>
 

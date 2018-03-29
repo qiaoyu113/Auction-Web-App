@@ -20,7 +20,7 @@
         <div class="value1 fr">即将开始</div>
     </div>
     <div class="infomation bground2 clearfix" v-else-if="index==2">
-            <div class="learnMore fl">查看更多</div>
+            <div class="learnMore fl">出价记录</div>
             <div class="value fl">当前价格 200,000CNY</div>
             <div class="time fr">
                <div class="fr num">01</div>
@@ -33,7 +33,7 @@
             </div>
     </div>
     <div class="infomation bground3 clearfix" v-else-if="index==3">
-            <div class="learnMore fl">查看更多</div>
+            <div class="learnMore fl">出价记录</div>
             <div class="value fl">当前价格 200,000CNY</div>
             <div class="success fr">
                拍品成交
@@ -45,7 +45,7 @@
             </div>
     </div>
     <div class="infomation bground3 clearfix" v-else-if="index==5">
-            <div class="learnMore fl">查看更多</div>
+            <div class="learnMore fl">出价记录</div>
             <div class="value fl">当前价格 200,000CNY</div>
             <span class="warn">支付</span>
             <div class="time fr">

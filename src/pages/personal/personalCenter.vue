@@ -19,9 +19,7 @@
                         <i class="iconfont icon-duigoudunpai"></i>&nbsp;实名认证
                     </div>
                 </div>
-                <div class="fr" @click="mycenter()">
-                 <img src="../../../src/assets/image/mycenter/right.png"/>
-                </div>
+                <div class="fr" @click="mycenter()">...</div>
             </div>
             <div class="option clearfix">
                 <div class="litbox fl" @click="order(0)">
@@ -322,7 +320,7 @@
             .fr{
                 letter-spacing: @size3;
                 font-weight: bold;
-                margin-top: 1.2rem;
+                margin-top: 1.8rem;
             }
         }
         .option{

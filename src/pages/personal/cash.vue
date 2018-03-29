@@ -15,7 +15,7 @@
         </div>
         <div class="box">
             <div class="info clearfix"><span>金额</span>
-               <span class="span" v-if="money!=''">CNY</span><input type="number" placeholder="请输入金额" v-model="money" @input="cny()" onkeyup="if(this.value.length==1){this.value=this.value.replace(/[^1-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}" />
+               <span class="span" v-if="money!=''">CNY</span><input type="number" placeholder="请输入金额" v-model="money" @input="cny()"/>
             </div>
             <div class="bor"></div>
             <div class="money clearfix">
@@ -91,7 +91,6 @@
         	this.getUsers()
             this.wxshow()
         },
-
         methods: {
             Return:function(){
                 window.history.go(-1)
@@ -129,15 +128,12 @@
             },
             full:function(){
             	  let that = this;
-            	  that.money=(that.wallet.availableMoney / 100).toFixed(0)
+            	  that.money=that.wallet.availableMoney / 100
             },
             cny:function(){
                 let that = this;
-                 // if(){
-
-                 // }
                  if(that.money>that.wallet.availableMoney / 100){
-                     that.money=(that.wallet.availableMoney / 100).toFixed(0)
+                     that.money=that.wallet.availableMoney / 100
                  }
             },
              // 获取订单号

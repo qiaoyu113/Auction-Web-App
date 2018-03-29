@@ -254,17 +254,6 @@
                 weekEndsOpen4:true,
             }
         },
-        syncData({store}) {
-            const that = this;
-            return Promise.all([
-                appervice.getParam().then(res=>{
-//                    store.state.homeStore.listImg = res.data;
-                }),
-                service.getParam().then(res=>{
-//                    store.state.homeStore.noticelist = res.data.datas;
-                }),
-            ])
-        },
         computed: {
             //将存在store中的数据取出
             listImg() {
@@ -677,9 +666,9 @@
                     font-size: 12px;
                     color: #4D4D4D;
                     width: 1.8666rem;
-                    height: 0.58rem;
+                    height: 0.75rem;
                     border: 1px solid #4D4D4D;
-                    line-height: 0.58rem;
+                    line-height: 0.75rem;
                     text-align: center;
                 }
                 .ros_date{
