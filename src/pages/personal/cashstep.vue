@@ -365,7 +365,7 @@ import {commonService} from '../../service/commonService.js'
                    }
 
                    that.htmlx=''
-                   that.index=3
+                   
                 let money=that.money * 100
               
                  commonService.postForms({channelId:channelId,channelUser:that.account,phone:that.phone,type:type,idCard:that.namecard,userName:that.userName,smsCode:that.verification,smsType:7,amount:money,realName:that.name,userBankName:that.userBankName,userBank:that.userBank,userBankCardNo:that.userBankCardNo,userBankProvince:that.userBankProvince,userBankCity:null,userBankDetail:that.userBankDetail}).then(function(res){                    //市
@@ -373,6 +373,7 @@ import {commonService} from '../../service/commonService.js'
                     if(res.data.message=='success'){
                        that.oddNumbers=res.data.datas 
                        that.getForms()
+                       that.index=3
                     // }, 1000)
                     }else{
                         that.htmlx=res.data.message

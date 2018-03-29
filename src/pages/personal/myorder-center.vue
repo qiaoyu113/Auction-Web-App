@@ -51,11 +51,11 @@
                         <div class="name">{{list.orderTitle}}</div>
                         <div class="prove"> LOT-{{list.orderDetail.auctionNo}}</div>
                         
-                        <button class="fr"  v-if="list.status==5&&list.csStatus==0" @click="details(list.status,list.orderNo)">查看订单</button>
-                        <button class="fr"  v-if="list.status==5&&list.csStatus!=0" @click="shouhou(list.status,list.id)">查看订单</button>
+                        <button class="fr"  v-if="list.csStatus==0" @click="details(list.status,list.orderNo)">查看订单</button>
+                        <button class="fr"  v-if="list.csStatus!=0" @click="shouhou(list.status,list.id)">查看订单</button>
 
                         <button class="fr" v-if="list.status==1" @click="details(list.status,list.orderNo)">立即付款</button>
-                        <button class="fr" v-if="list.status==2 || list.status==3">分享</button>
+                        <button class="fr" v-if="list.status==2 || list.status==5">分享</button>
                     </div>
                 </div>
             </div>
@@ -194,15 +194,13 @@
                 }
                commonService.getOrder({pageNo:1,pageSize:10,status:status}).then(function(res){
                       that.datalist=res.data.datas.datas
-                    console.log(that.datalist)
+                      console.log(that.datalist)
                       let data=[]
                       for(let i=0;i<that.datalist.length;i++){
                           data[i]=Number(that.datalist[i].expireTime)
                           that.countdown[i]=common.getTimer(data[i]) 
                       }
                       
-                      
-                    
                     })
             },
              // 获取售后列表
@@ -213,7 +211,7 @@
                      
                     })
             },
-            
+
 
         }
     }
