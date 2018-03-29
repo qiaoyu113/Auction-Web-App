@@ -60,6 +60,10 @@ export const commonService = {
     postMyBail:function(){
         return axios.post('/bails/frozen',qs.stringify(params))
     },
+    /* 获取保证金明细 */
+    getBailsid: function (id) {
+        return axios.get('/bails/' + id)
+    },
     /* 获取拍品详情 */
     getAuctions: function (id) {
         return axios.get('/auctions/'+ id)

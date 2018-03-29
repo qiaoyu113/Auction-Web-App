@@ -132,7 +132,7 @@
                 <div class="info"><span>交易时间</span>
                     <div class="infoClose" v-if="list.applyTime!=null">{{list.applyTime | stampFormate2}}</div>
                 </div>
-                <div class="info"><span>订单支付</span>
+                <div class="info"><span>交易种类</span>
                     <div class="infoClose">提现</div>
                      <!-- <div class="infoClose" v-if="list.channelId=='OFFLINE_BANK'">提现</div> -->
                 </div>

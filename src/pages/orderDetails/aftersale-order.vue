@@ -45,7 +45,7 @@
                 <div class="money" v-if='index>0'>{{datas.refundAmount | money}} CNY</div>
             </div>
             <div class="orderinfo">
-                <div class="price clearfix" v-if='index>0'><div class="fl">退回路径</div><div class="fr">线下转账</div></div>
+                <div class="price clearfix" v-if='index>0'><div class="fl">退回路径</div><div class="fr">银行卡</div></div>
                 <div class="price clearfix" v-if='index>0'><div class="fl">差额原因</div><div class="fr">{{datas.amountReason}}</div></div>
                 <div class="price clearfix" v-if='index==0'>货品属性特殊，无法进行退货。审核失败，客服驳回售后申请。如有问题，请联系售后</div>
             </div>
@@ -79,39 +79,8 @@
             </div>  
         </div>
         <div class="footer">联系售后</div>
-        <!-- 到账周期说明弹窗 -->
-        <div :class="dis">
-            <div class="transparent"></div>
-            <div class="popWin" >
-                <div class="close" @click="close()"><i class="iconfont icon-closeicon"></i></div>
-                <div class="titleEn">RULES</div>
-                <div class="titleCh">到账周期说明</div>
-                <div class="explain1">
-                    <p class="title">到账周期说明</p>
-                    <p>为了维护拍卖交易秩序，保障平台用户的合法权益，以下规则请大家务必遵守：</p>
-                </div>
-                <div class="explain1">
-                    <p class="title">到账周期说明</p>
-                    <p>为了维护拍卖交易秩序，保障平台用户的合法权益，以下规则请大家务必遵守：
-                    为了维护拍卖交易秩序，保障平台用户的合法权益，以下规则请大家务必遵守：
-                    </p>
-                </div>
-                <div class="explain1">
-                    <p class="title">到账周期说明</p>
-                    <p>为了维护拍卖交易秩序，保障平台用户的合法权益，以下规则请大家务必遵守：
-                    为了维护拍卖交易秩序，保障平台用户的合法权益，以下规则请大家务必遵守：
-                    </p>
-                </div>
-                <div class="explain1">
-                    <p class="title">到账周期说明</p>
-                    <p>为了维护拍卖交易秩序，保障平台用户的合法权益，以下规则请大家务必遵守：
-                    为了维护拍卖交易秩序，保障平台用户的合法权益，以下规则请大家务必遵守：
-                    </p>
-                </div>
-                
-                
-            </div>
-        </div>
+        
+ 
     </div>
 </template>
 
@@ -172,25 +141,25 @@ import {commonService} from '../../service/commonService.js'
                  that.adress=that.order.adress
 
                 }
-                
-
-                    })
+           })
         },
           // 获取售后详情
         getOrdercsid:function(){
                 let that=this;
                commonService.getOrdercsid(that.id).then(function(res){
-               
                     if(res.data.code==200){
                      that.datas=res.data.datas
+                    
                      that.orderNo=that.datas.orderNo
                      that.getOrderid()
-                     if(that.datas.status==1){
+                     if(that.datas.status==2){
                          that.index=1
-                     }else if(that.datas.status==2){
+                     }else if(that.datas.status==3||that.datas.status==5||that.datas.status==7||that.datas.status==9){
                           that.index=2
-                     }else{
-                          that.index=1
+                     }else if(that.datas.status==8){
+                          that.index=3
+                     }else if(that.datas.status==6){
+                          that.index=0
                      }
                       
                     }

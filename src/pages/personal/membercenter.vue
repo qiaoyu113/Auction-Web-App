@@ -2,7 +2,7 @@
     <!--title为当前页标题
         组件要小，如遇list，只将item做成组件，其他的都写在页面中
     -->
-    <!-- 帮助中心 -->
+    <!-- 会员 -->
     <div class="membercenter" id="" v-set-title="title">
         
         <!-- <div class="header">传家</div> -->
