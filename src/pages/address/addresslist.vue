@@ -22,10 +22,18 @@
                     <div class="checked" :class="list.defaultAdress==false?'check':'checked'" @click="postAddressid(list._id)"><i class="iconfont icon-duihao"></i></div>
                     <span :class="list.defaultAdress==false?'color':''">默认地址</span>
                     <span class="fr"  @click="edit(list._id)">编辑</span>
-                    <span class="fr"  @click="deleteAddress(list._id)">删除</span>
+                    <span class="fr"  @click="vmodeal(list._id)">删除</span>
                 </div>
             </div>
-
+        </div>
+        <div class="v_modal" ref="v_modal" v-if="v_modal">
+           <div class="v_box">
+                 <p>是否确定删除?</p>
+                 <div class="v_button">
+                     <el-button @click="heig()">取消</el-button>
+                     <el-button @click='deleteAddress()'>确定</el-button>
+                 </div>
+           </div>
         </div>
         <div class="footer" @click="jump()">添加新地址&nbsp;&nbsp;<span>+</span></div>
     </div>
@@ -43,6 +51,8 @@ import {commonService} from '../../service/commonService.js'
           arrays: [],
           index:1,
           data:'',
+          v_modal:false,
+          id:'',
           
       }
     },
@@ -55,6 +65,13 @@ import {commonService} from '../../service/commonService.js'
           Return:function(){
             window.history.go(-1)
           },
+          heig:function(){
+            this.v_modal=false
+          },
+          vmodeal:function(id){
+            this.v_modal=true
+            this.id=id
+          },
     	  getAddress:function(){
                let that = this
                commonService.getAddress({pageNo:1,pageSize:30}).then(function(res){
@@ -63,12 +80,13 @@ import {commonService} from '../../service/commonService.js'
                 })
             },
   
-            deleteAddress:function(id){
+            deleteAddress:function(){
                let that = this
-               commonService.deleteAddress(id).then(function(res){
+               commonService.deleteAddress(that.id).then(function(res){
                 // that.bankCard=res.data.datas
                   if(res.data.code==200){
                      that.getAddress()
+                     that.v_modal=false
                   }
   
                 })
@@ -87,7 +105,13 @@ import {commonService} from '../../service/commonService.js'
             },
             edit:function(id){
             this.$router.push({path:"/address",query:{id:id}})
-            }
+            },
+            // v_modal:function(){
+            //    this.$refs.modal.style.display="none"
+            //    this.$refs.add_layer.style.display="none"   
+
+            // }
+            
 
             
 
@@ -225,6 +249,35 @@ import {commonService} from '../../service/commonService.js'
             font-weight: bold;
             line-height: 1rem;
         }
+    }
+    .v_modal{
+          position: fixed;
+          left: 0;
+          top: 0;
+          right: 0;
+          bottom: 0;
+          width: 100%;
+          height: 100%;
+          z-index: 9999;
+          background: rgba(0,0,0,0.5);
+         
+          
+          .v_box{
+            width: 6rem;
+            height: 4rem;
+            background: #fff;
+            margin: 4rem auto 0; 
+            border:1px solid #fff;
+            border-radius: 4px;
+            p{
+                font-size: 12px;
+                padding:1rem 0.5rem;
+                
+            }
+            .v_button{
+              padding-left: 0.5rem;
+             }
+          }
     }
  }
 </style>

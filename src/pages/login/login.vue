@@ -45,10 +45,10 @@
                 <input type="number" placeholder="输入手机号" v-model="phone"/>
                 <div class="infoRight" @click="removePhone"><i class="iconfont icon-closeicon"></i></div>
             </div>
-            <div class="info">
+            <!-- <div class="info">
                 <input style="width:6rem;" type="text" placeholder="输入图片验证码" v-model="kaptchaValue"/>
                 <div class="code" @click="getKaptchas()"><img :src="img.imageString"/></div>
-            </div>
+            </div> -->
             <div class="info">
                 <input style="width:6rem;" type="number" placeholder="输入验证码" v-model="code"/>
                 <div class="code" @click="getcode">获取验证码<span v-if="codeShow" style="margin:0;">({{timeOver}})</span></div>
@@ -82,10 +82,10 @@
                 <input type="number" placeholder="输入手机号" v-model="phone"/>
                 <div class="infoRight" @click="removePhone"><i class="iconfont icon-closeicon"></i></div>
             </div>
-            <div class="info">
+        <!--     <div class="info">
                 <input style="width:6rem;" type="text" placeholder="输入图片验证码" v-model="kaptchaValue"/>
                 <div class="code" @click="getKaptchas()"><img :src="img.imageString"/></div>
-            </div>
+            </div> -->
             <div class="info">
                 <input style="width:6rem;" type="number" placeholder="输入验证码" v-model="code"/>
                 <div class="code" @click="getcode">获取验证码<span v-if="codeShow" style="margin:0;">({{timeOver}})</span></div>
@@ -138,7 +138,7 @@
                 passwordUser:'',//登陆账户
                 phoneUser:'',//登陆密码
                 wxLogin:false,//微信登陆
-                kaptchaValue:'',
+                // kaptchaValue:'',
                 img:'',
                 wx:this.$route.query.wx,
                 wximg:'',
@@ -160,7 +160,7 @@
         },
         mounted: function() {
             this.onMove()
-            this.getKaptchas()
+            // this.getKaptchas()
             this.vwx()
             this.vwximg()
             if(this.login){
@@ -196,13 +196,13 @@
                 this.login = false;
             }
             },
-            // 获取图片验证码
-            getKaptchas:function(){
-                let that=this
-                 commonService.getKaptchas().then(function(res){
-                    that.img=res.data.datas
-              })
-            },
+            // // 获取图片验证码
+            // getKaptchas:function(){
+            //     let that=this
+            //      commonService.getKaptchas().then(function(res){
+            //         that.img=res.data.datas
+            //   })
+            // },
             //点击注册
             sign:function(){
                 let that = this;
@@ -217,10 +217,10 @@
                                         that.login = true;
                                         that.wxShow = false;
                                     }else if(res.data.code === 512104){
-                                        that.getKaptchas()
+                                        // that.getKaptchas()
                                         that.hint2 = true;
                                         that.hint2Text = '短信验证码已过期';
-                                        that.getKaptchas()
+                                        // that.getKaptchas()
                                     }else{
                                         that.hint2 = true;
                                         that.hint2Text = res.data.message; 
@@ -237,7 +237,7 @@
                         }
                     }else{
                         that.hint2 = true;
-                        that.hint2Text = '密码为字母、数字、组合且长度为6-10的字符';
+                        that.hint2Text = '密码为字母、数字、组合且长度为6-20的字符';
                     }
                 }else{
                     that.hint2 = true;
@@ -251,7 +251,7 @@
                     if(res.data.code === 200){
                         let token = res.data.datas;
                         window.localStorage.setItem('token',token)
-                        that.$router.replace({name:'home'})
+                        that.$router.replace({name:'personalCenter'})
                     }else if(res.data.code === 513110){
                         that.hint = true;
                         that.hintText = '用户不存在,请注册';
@@ -298,11 +298,11 @@
                      that.hint2Text = '已发送';
                     }else{
                         
-                        if(that.kaptchaValue==''){
-                             that.hint2 = true;
-                             that.hint2Text = '请填写图片验证码';
-                        }
-                        commonService.getQR({phone:that.phone,type:1,kaptchaKey:that.img.kaptchaKey,kaptchaValue:that.kaptchaValue}).then(function(res){
+                        // if(that.kaptchaValue==''){
+                        //      that.hint2 = true;
+                        //      that.hint2Text = '请填写图片验证码';
+                        // }
+                        commonService.getQR({phone:that.phone,type:1}).then(function(res){
                             if(res.data.code === 200){
                                 that.codeShow = true;
                                 let time = setInterval(function(){
@@ -318,7 +318,7 @@
                                 that.codeShow = false;
                                 that.hint2 = true;
                                 that.hint2Text = res.data.message;
-                                that.getKaptchas()
+                                // that.getKaptchas()
                             }
                             // if(res.data.code === 513109){
                             //     that.codeShow = false;
@@ -345,7 +345,7 @@
                                     if(res.data.code === 512104){
                                         that.hint2 = true;
                                         that.hint2Text = '短信验证码已过期';
-                                        that.getKaptchas()
+                                        // that.getKaptchas()
                                     }else if(res.data.code === 200){
                                        that.phoneUser = that.phone;
                                         window.localStorage.setItem('phone',that.phone)
@@ -363,7 +363,7 @@
                         }
                     }else{
                         that.hint2 = true;
-                        that.hint2Text = '密码为字母、数字、组合且长度为6-10的字符';
+                        that.hint2Text = '密码为字母、数字、组合且长度为6-20的字符';
                     }
                 }else{
                     that.hint2 = true;
@@ -460,7 +460,7 @@
             },
             password(curVal){
                 let that = this;
-                let re = /^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{6,10}$/;
+                let re = /^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{6,20}$/;
                 that.checkPassword = re.test(curVal);
                 if(that.checkPassword){
                     that.hint2 = false;

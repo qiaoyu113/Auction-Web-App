@@ -15,6 +15,7 @@
     import Element from 'element-ui'
     import 'element-ui/lib/theme-chalk/index.css'
     import './mixin/filter';
+    // import './assets/js/lcalendar/js/lcalendar';
     Vue.use(Element)
     export default {
         name: 'app',

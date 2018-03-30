@@ -164,9 +164,14 @@
                 let that=this
                 let t;
                 clearTimeout(t)
+                let date=Date.parse( new Date())
                  t= setTimeout(function (){
+                    if((that.datas.mqEndTime) + (7 * 24 * 3600 * 1000) < date){
                    let data =Number(that.datas.mqEndTime) + (7 * 24 * 3600 * 1000)
                     that.countdown=common.getTimer(data)
+                }else{
+                      that.countdown=common.getTimer(date)
+                }
                 },1000)
              }
         },

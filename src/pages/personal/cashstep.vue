@@ -257,6 +257,17 @@ import {commonService} from '../../service/commonService.js'
                             that.htmlx='支付宝账户不能为空'
                             return false
                          }
+                           let mailbox=/^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/;
+                          let reg = /^1[3|4|5|7|8][0-9]{9}$/;
+                          let flag = reg.test(that.account)
+                          let flag2=mailbox.test(that.account)
+                       if(flag || flag2){
+                          
+                       }else{
+                          this.htmlx="请填写正确的支付宝账号"
+                          return false
+                       }
+                         
                          if(that.userName==''){
                             that.htmlx='姓名不能为空'
                             return false

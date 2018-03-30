@@ -230,7 +230,7 @@
                     cookiesId  = "zstat" + "-" + cookiesId  + "-" + Math.round(Math.random() * 3000000000);
                     window.localStorage.setItem('cookiesId',cookiesId );
                 }
-                commonService.getFootPrint({pageNo:1,pageSize:30,cookiesId:cookiesId }).then(function(res){
+                commonService.getFootPrint({pageNo:1,pageSize:50,cookiesId:cookiesId }).then(function(res){
                     if(res.data.code === 200){
                         that.footPrint=res.data.datas.datas
                     }
