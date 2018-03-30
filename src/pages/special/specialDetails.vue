@@ -99,7 +99,7 @@
                                     <div class="icon"></div>
                                 </div>
                                 <!--已结束-->
-                                <div class="collect4"  v-if="list.auctionStatus === 3">
+                                <div class="collect4"  v-if="list.auctionStatus === 3 || list.auctionStatus === 5">
                                     <!--<div class="icon"></div>-->
                                     <!--<div class="icon2"></div>-->
                                     <img src="../../assets/image/mycenter/end.png" />
@@ -473,8 +473,10 @@
                 padding-right: 20px;
                 color:#A9AEB6;
                 img{
-                    width: 0.6rem;
-                    margin-top: 0.15rem;
+                    /*width: 0.6rem;*/
+                    /*margin-top: 0.15rem;*/
+                    width: 0.45rem;
+                    margin-top: 0.23rem;
                 }
             }
             .span2{

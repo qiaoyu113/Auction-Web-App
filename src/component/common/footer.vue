@@ -107,6 +107,7 @@
                 let that = this;
                 that.index = index;
                 that.onload()
+                let tokenYes = window.localStorage.getItem('token')
                 if(index === 0){
                     that.$router.replace({name:'home'})
                     that.index = 0;
@@ -114,19 +115,28 @@
                     that.$router.replace({name:'special'})
                     that.index = 1;
                 }else if(index === 2){
-                    if(that.goMyNum == 0){
-                        that.$router.replace({name:'my'})
-                    }else if(that.goMyNum == 1){
-                        that.$router.replace({name:'lot'})
-                    }else if(that.goMyNum == 2){
-                        that.$router.replace({name:'already'})
-                    }else if(that.goMyNum == 3){
-                        that.$router.replace({name:'not'})
+                    if(tokenYes == null || tokenYes == ''){
+                        that.$router.replace({name:'gologin'})
+                        that.index = 3;
+                    }else{
+                        if(that.goMyNum == 0){
+                            that.$router.replace({name:'my'})
+                        }else if(that.goMyNum == 1){
+                            that.$router.replace({name:'lot'})
+                        }else if(that.goMyNum == 2){
+                            that.$router.replace({name:'already'})
+                        }else if(that.goMyNum == 3){
+                            that.$router.replace({name:'not'})
+                        }
+                        that.index = 2;
                     }
-                    that.index = 2;
                 }else if(index === 3){
-                    that.$router.replace({name:'personalCenter'})
-                    that.index = 3;
+                    if(tokenYes == null || tokenYes == ''){
+                        that.$router.replace({name:'gologin'})
+                    }else {
+                        that.$router.replace({name: 'personalCenter'})
+                        that.index = 3;
+                    }
                 }
             },
             onload(){
