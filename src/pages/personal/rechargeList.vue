@@ -160,7 +160,7 @@ import {commonService} from '../../service/commonService.js'
                  if(this.type==1){
                      this.$router.push({path:"/myaccount"})   
                  }else{
-                    this.$router.push({path:"/normalorder",query:{id:this.orderNo}})  
+                    this.$router.push({path:"/myorder",query:{index:0}})  
                  }
                   
             },
@@ -278,7 +278,7 @@ import {commonService} from '../../service/commonService.js'
                     let money = that.money * 100
 
                commonService.postForms({channelId:'OFFLINE_BANK',lastNum:that.lastNum,userBankDetail:that.userBankDetail,userBankCardNo:that.userBankCardNo,phone:that.phone,type:that.type,userBankName:that.name,amount:money,bankId:that.bankCardId,orderNo:that.orderNo}).then(function(res){
-                // console.log(res)
+           
                     if(res.data.message=='success'){
                        that.oddNumbers=res.data.datas 
                        that.index=3
@@ -293,10 +293,10 @@ import {commonService} from '../../service/commonService.js'
              getForms:function(){
                 let that = this
                  commonService.getForms(that.oddNumbers).then(function(res){
-                    // console.log(res)
+                   
                     that.list=res.data.datas
                     that.card=card.bankCardAttribution(that.list.userBankCardNo)
-                    console.log(that.card)
+                  
                  })
             },
             payYes(){
@@ -310,13 +310,13 @@ import {commonService} from '../../service/commonService.js'
                     channelIds = 'ALIPAY_WAP'
                 }
                 commonService.setbails({auctionId:that.id,channelId:channelIds}).then(function(res){
-                    // console.log(res)
+                  
                     if(res.data.code === 200){
                         if(that.index === 1){//微信支付
                             let orderNo = res.data.datas;
                             window.localStorage.setItem('orderNo',orderNo);
                             commonService.putOrders({orderNo:orderNo,channelId:channelIds}).then(function(res){
-                                // console.log(res)
+                               
                                 if(res.data.success){
                                     commonService.getWxpay({loginType:'WEIXIN',platform:'WXH5',jumpRouter:'wxbaselogin',wxscope:'snsapi_base'}).then(function(res){
                                         let code = res.data.code;

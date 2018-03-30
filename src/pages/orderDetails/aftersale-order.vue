@@ -122,7 +122,7 @@ import {commonService} from '../../service/commonService.js'
     },
     methods: {
         Return:function(){
-            window.history.go(-1)
+            this.$router.push({path:"/myorder",query:{index:3}})
         },
         open:function(){
             // this.dis='';

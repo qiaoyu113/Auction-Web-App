@@ -239,7 +239,7 @@ import {commonService} from '../../service/commonService.js'
         },
     methods: {
         Return:function(){
-            window.history.go(-1)
+           this.$router.push({path:"/myorder",query:{index:0}})
         },
         Routerid:function(id){
             this.$router.push({name:'auctionMore',params:{id:id}})
@@ -256,7 +256,7 @@ import {commonService} from '../../service/commonService.js'
         },
          huoqu:function(){
             this.orderNo=this.$route.query.id
-            // console.log(this.orderNo)
+           
         },
         close:function() {
             this.dis='dis';
@@ -320,7 +320,7 @@ import {commonService} from '../../service/commonService.js'
             commonService.getOrderid(that.orderNo).then(function(res){
                
                 that.datas=res.data.datas
-                console.log(that.datas)
+            
                 if(that.datas.status==1){
                   let data =Number(that.datas.expireTime)
                  that.countdown=common.getTimer(data)
@@ -367,7 +367,7 @@ import {commonService} from '../../service/commonService.js'
                 if(that.datas.status==5){
                     that.index=3
                 }
-                // console.log(that.orderDetail)
+              
             })
           },
           

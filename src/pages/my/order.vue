@@ -100,6 +100,7 @@
                     </div>
                 </div>
         </div>
+         <div class="saves" v-if="htmlx!=''">{{htmlx}}</div>
         <div class="botton" @click="postOrders()">
             <div>提交订单</div>
         </div>
@@ -125,6 +126,7 @@
                 wxLogin:true,
                 countdown:'',
                 freight:'',//保险运费
+                htmlx:'',
             }
         },
         syncData({store}) {
@@ -208,7 +210,7 @@
             getAddressid:function(){
                  let that=this;
                  commonService.getAddressid(that.addressId).then(function(res){
-                    // console.log(res)
+                  
                     if(res.data.datas!=null){
                         that.address=res.data.datas
                     }
@@ -249,10 +251,17 @@
                 }else if(that.index === 2){//支付宝
                     channelIds = 'ALIPAY_WAP'
                 }
+                if(that.address.id==undefined || that.address.id==''){
+                    that.htmlx='请选择地址'
+                       return false
+                }
+
                  commonService.postOrders(that.auctionId,{addressId:that.address.id,channelId:channelIds}).then(function(res){
                     console.log(res)
                     if(res.data.code==200){
                         that.$router.push({path:"/normalorder",query:{id:res.data.datas.orderNo}})
+                    }else{
+                        that.htmlx=res.data.message
                     }
                 })
             }
@@ -524,6 +533,18 @@
                     }
             }
        }
+       .saves{
+           width:100%;
+           height:0.67rem;
+           line-height:0.67rem;
+            color:#fff;
+            background:linear-gradient(70deg, #DC704A, #F44EA0);
+            text-align: center;
+            font-size:12px;
+            position:fixed;
+            bottom:1.2rem;
+            left: 0;
+        }
        .botton{
           height: @size45;
           div{

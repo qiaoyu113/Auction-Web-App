@@ -211,7 +211,7 @@
                     })
             },
             handleAvatarSuccess(res, file) {
-                // console.log(res)
+                
                 this.authFrontPic=res.datas.file
                 this.imageUrl = URL.createObjectURL(file.raw);
              },
@@ -222,11 +222,11 @@
             // var reader = new FileReader();
             // var that = this;
              // reader.readAsDataURL(file);
-             console.log(file)
+      
    
     //         reader.onload = function(e){
     //         var img = new Image();
-    //           // console.log(this.result)
+    //          
     //           that.base=this.result
     //           that.base=that.base.split(',')[1];  
     //           that.base=window.atob(that.base);  

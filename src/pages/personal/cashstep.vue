@@ -369,7 +369,7 @@ import {commonService} from '../../service/commonService.js'
                 let money=that.money * 100
               
                  commonService.postForms({channelId:channelId,channelUser:that.account,phone:that.phone,type:type,idCard:that.namecard,userName:that.userName,smsCode:that.verification,smsType:7,amount:money,realName:that.name,userBankName:that.userBankName,userBank:that.userBank,userBankCardNo:that.userBankCardNo,userBankProvince:that.userBankProvince,userBankCity:null,userBankDetail:that.userBankDetail}).then(function(res){                    //市
-                    // console.log(res)
+                  
                     if(res.data.message=='success'){
                        that.oddNumbers=res.data.datas 
                        that.getForms()
@@ -384,7 +384,7 @@ import {commonService} from '../../service/commonService.js'
                 let that = this;
                  commonService.getForms(that.oddNumbers).then(function(res){
                     that.list=res.data.datas
-                    console.log(res)
+          
                     that.card=card.bankCardAttribution(that.list.userBankCardNo)
                     
                  })

@@ -131,9 +131,8 @@
             }
         },
         methods: {
-        
             Return:function(){
-                window.history.go(-1)
+               this.$router.push({name:'personalCenter'})
             },
             //改变名字
             changeName:function(){

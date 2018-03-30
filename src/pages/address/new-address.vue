@@ -112,7 +112,7 @@ import {commonService} from '../../service/commonService.js'
     },
     mounted () {
       common.onMove('.new-address')
-    	// console.log(this.listImg)
+    
     	this.getCitys()
     	this.getAddressid()
     	

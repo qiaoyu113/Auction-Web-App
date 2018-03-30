@@ -86,7 +86,7 @@
         methods: {
             orderroute:function(){
                 let index=this.$route.query.index
-                console.log(index)
+             
                 if(index!=null || index!= undefined){
                    this.order=index
                 }

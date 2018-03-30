@@ -70,7 +70,7 @@
         },
         methods: {
             Return:function(){
-                window.history.go(-1)
+                this.$router.push({name:'mycenter'})
             },
             deleteName:function(){
                 let that = this;
@@ -83,6 +83,8 @@
              commonService.putPhoneset({phone:that.inputPhone,smsCode:this.inputNum,type:6}).then(function(res){
                     if(res.data.code==200){
                       that.$router.replace({name:'mycenter'});
+                    }else{
+                        that.htmlx=res.data.message
                     }
               }) 
             },
@@ -313,17 +315,19 @@
             font-size:12px;
             position:fixed;
             bottom:1.2rem;
+            left: 0;
         }
         .save{
             width:100%;
-            height:1.4rem;
-            line-height:1.4rem;
+            height:1.2rem;
+            line-height:1.2rem;
             text-align: center;
             position: fixed;
             left:0;
             right:0;
             bottom:0;
             border-top:1px solid #1A242E;
+            background: #fff;
         }
     }
 }

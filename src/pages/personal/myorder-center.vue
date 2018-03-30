@@ -141,7 +141,7 @@
                 this.$router.push({path:"/my"}) 
             },
             Return:function(){
-                window.history.go(-1)
+                 this.$router.push({path:"/personalCenter"}) 
             },
             routers:function(){
                
@@ -196,7 +196,7 @@
                 }
                commonService.getOrder({pageNo:1,pageSize:10,status:status}).then(function(res){
                       that.datalist=res.data.datas.datas
-                      console.log(that.datalist)
+                    
                       let data=[]
                       for(let i=0;i<that.datalist.length;i++){
                           data[i]=Number(that.datalist[i].expireTime)

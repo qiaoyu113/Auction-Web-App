@@ -149,7 +149,7 @@
                  }
                // commonService.postBails({amount:that.money}).then(function(res){
                     // that.wallet=res.data.datas.user.wallet
-                    // console.log(res.data.datas)
+                 
                     if(that.index!=1){
                       that.$router.push({path:"/cashstep",query:{money:that.money,index:that.index}})  
                     }else{

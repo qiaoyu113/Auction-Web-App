@@ -218,7 +218,7 @@
                             window.localStorage.setItem('orderNo',orderNo);
                             commonService.putOrders({orderNo:orderNo,channelId:channelIds}).then(function(res){
                                 if(res.data.success){
-                                    console.log(res)
+                       
                                     let payOK = document.getElementsByClassName("payOK");
                                     payOK[0].innerHTML = res.data.datas.payUrl;
                                     document.punchout_form.submit()

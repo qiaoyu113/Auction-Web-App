@@ -99,7 +99,7 @@ import {commonService} from '../../service/commonService.js'
     },
     methods: {
          Return:function(){
-             window.history.go(-1)
+              this.$router.push({path:"/myorder",query:{index:0}})
          },
         // 获取订单
          getOrderid:function(){
