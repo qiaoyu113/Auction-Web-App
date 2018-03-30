@@ -24,9 +24,10 @@
                                 <div class="date">
                                     <!--收藏图标-->
                                     <div class="collect">
-                                        <div class="collectIcon">
-                                            <div class="bottom"></div>
-                                        </div>
+                                        <!--<div class="collectIcon">-->
+                                            <!--<div class="bottom"></div>-->
+                                        <!--</div>-->
+                                        <img src="../../assets/image/mycenter/collectIcon.png" />
                                     </div>
                                     <!--进行中-->
                                     <div class="collect2">
@@ -304,8 +305,13 @@
                             height:0.35rem;
                             float:left;
                             background:#333333;
-                            padding:0.08rem 0.1rem;
+                            /*padding:0.08rem 0.1rem;*/
                             box-sizing: border-box;
+                            img{
+                                width:100%;
+                                height:100%;
+                                margin-left:0;
+                            }
                             .collectIcon{
                                 width:100%;
                                 height:100%;

@@ -39,9 +39,10 @@
                                 <div class="intrCh">{{details.title}}</div>
                                 <div class="prove">
                                     <span v-for="list in details.identifications">
-                                        <span class="list" v-if="list === 1"><i class="iconfont icon-duigoudunpai"></i>质量认证</span>
-                                        <span class="list" v-if="list === 2"><i class="iconfont icon-duigoudunpai"></i>作者认证</span>
-                                        <span class="list" v-if="list === 3"><i class="iconfont icon-duigoudunpai"></i>专家认证</span>
+                                        <!--<span class="list" v-if="list === 1"><i class="iconfont icon-duigoudunpai"></i>质量认证</span>-->
+                                        <span class="list" v-if="list === 1"><img src="../../assets/image/mycenter/rzIcon.png">质量认证</span>
+                                        <span class="list" v-if="list === 2"><img src="../../assets/image/mycenter/rzIcon.png">作者认证</span>
+                                        <span class="list" v-if="list === 3"><img src="../../assets/image/mycenter/rzIcon.png">专家认证</span>
                                     </span>
                                 </div>
                                 <div class="info">
@@ -57,7 +58,9 @@
                             <div class="sell-inf" v-html="content"></div>
                             <div class="helpCenter">
                                 <span class="fl">帮助中心</span>
-                                <div class="fr2 iconfont icon-daiquanquandetanhao"></div>
+                                <div class="fr2">
+                                    <img src="../../assets/image/mycenter/hint.png">
+                                </div>
                                 <a class="fr" @click="goRule()">查看相应竞拍规则</a>
                             </div>
                         </div>
@@ -79,14 +82,16 @@
                             <div class="date">
                                 <!--收藏图标-->
                                 <div class="collect" v-if="list.collect">
-                                    <div class="collectIcon">
-                                        <div class="bottom"></div>
-                                    </div>
+                                    <!--<div class="collectIcon">-->
+                                        <!--<div class="bottom"></div>-->
+                                    <!--</div>-->
+                                    <img src="../../assets/image/mycenter/collectIcon.png" />
                                 </div>
                                 <!--进行中-->
                                 <div class="collect2" v-if="list.auctionStatus === 2">
-                                    <div class="icon"></div>
-                                    <div class="icon"></div>
+                                    <!--<div class="icon"></div>-->
+                                    <!--<div class="icon"></div>-->
+                                    <img src="../../assets/image/mycenter/zan.png" />
                                 </div>
                                 <!--预展中-->
                                 <div class="collect3"  v-if="list.auctionStatus === 1">
@@ -254,7 +259,7 @@
                 <div class="fr num">{{day}}</div>
             </div>
         </div>
-        <div class="infomation bground3 clearfix" v-else-if="details.auctionStatus === 3 && details.userId == userId && details.doneBuy != '1'">
+        <div class="infomation bground3 clearfix" v-else-if="(details.auctionStatus == 3 && details.userId != userId && details.doneBuy == '1')||(details.auctionStatus == 3 && details.userId == userId && details.doneBuy == '2')||(details.auctionStatus == 3 && details.userId == userId && details.doneBuy == '4')">
             <div class="learnMore fl" @click="lookMore()">出价记录{{details.offerNum}}</div>
             <div class="value fl">当前价格 {{reversedNum(details.currentPrice)}} CNY</div>
             <div class="success fr">
@@ -284,7 +289,7 @@
         <!--底部-->
         <!--起拍价格-->
         <div class="footer" v-if="details.auctionStatus === 1">
-            <div class="value">
+            <div class="value values">
                 <span class='label'>起拍价格</span>
                 <span class="price">{{reversedNum(bidPrice)}} CNY</span>
             </div>
@@ -305,7 +310,7 @@
                 <span class="price">{{reversedNum(details.currentPrice)}} CNY</span>
                 <span class="btn2">+</span>
             </div>
-            <div class="value" v-if="!frozen">
+            <div class="value values" v-if="!frozen">
                 <span class='label'>保证金</span>
                 <span class="price2">{{reversedNum(deposit)}} CNY</span>
             </div>
@@ -320,7 +325,7 @@
         </div>
         <!--交易结束的价格-->
         <div class="footer" v-else-if="details.auctionStatus === 3">
-            <div class="value">
+            <div class="value3">
                 <span class='label'>成交价格</span>
                 <span class="price">{{reversedNum(details.currentPrice)}} CNY</span>
             </div>
@@ -332,7 +337,7 @@
         </div>
         <!--流拍-->
         <div class="footer" v-else-if="details.auctionStatus === 4">
-            <div class="value">
+            <div class="value values">
                 <span class='label'>起拍价格</span>
                 <span class="price">{{reversedNum(details.basePrice)}} CNY</span>
             </div>
@@ -1316,8 +1321,10 @@
                 padding-right: 20px;
                 color:#A9AEB6;
                 img{
-                    width: 0.6rem;
-                    margin-top: 0.15rem;
+                    /*width: 0.6rem;*/
+                    /*margin-top: 0.15rem;*/
+                    width: 0.45rem;
+                    margin-top: 0.23rem;
                 }
             }
             .span2{
@@ -1325,8 +1332,8 @@
                 padding-right: 20px;
                 color:#A9AEB6;
                 img{
-                    width: 0.6rem;
-                    margin-top: 0.15rem;
+                    width: 0.7rem;
+                    margin-top: 0.1rem;
                 }
             }
         }
@@ -1449,6 +1456,11 @@
                         }
                         .list{
                             margin:0 0.1rem;
+                            img{
+                                width:0.35rem;
+                                margin-right:0.15rem;
+                                margin-top:0.05rem;
+                            }
                         }
                     }
                     .info{
@@ -1504,6 +1516,11 @@
                     .fr2{
                         float:right;
                         margin-right:0.2rem;
+                        img{
+                            width: 0.45rem;
+                            height: 0.45rem;
+                            margin-top: 0.3rem;
+                        }
                     }
                     span{
                         padding-left:@size10;
@@ -1512,7 +1529,7 @@
                     }
                     a{
                         font-size: @size10;
-                        text-decoration: underline;
+                        text-decoration: initial;
                         color: rgb(130, 135, 140);
                         margin-right: @size5;
                     }
@@ -1593,8 +1610,11 @@
                         height:0.35rem;
                         float:left;
                         background:#333333;
-                        padding:0.08rem 0.1rem;
+                        /*padding:0.08rem 0.1rem;*/
                         box-sizing: border-box;
+                        img{
+                            width:100%;
+                        }
                         .collectIcon{
                             width:100%;
                             height:100%;
@@ -1616,8 +1636,11 @@
                         height:0.35rem;
                         float:right;
                         background:#5EBAA9;
-                        padding: 0.09rem 0.03rem;
+                        /*padding: 0.09rem 0.03rem;*/
                         box-sizing: border-box;
+                        img{
+                            width:100%;
+                        }
                         .icon{
                             width: 0.06rem;
                             height: 100%;
@@ -1806,17 +1829,19 @@
                             color: white;
                             margin-left: @size15;
                             .num{
-                                height: @size20;
-                                background: black;
-                                border-radius:3px;
-                                padding: 2px;
-                                line-height: @size22;
-                                font-size: @size12;
-                                font-weight: bold;
+                                height: .6rem;
+                                background: #000;
+                                border-radius: 3px;
+                                margin-top: .16rem;
+                                line-height: .6rem;
+                                font-size: .32rem;
+                                font-weight: 700;
+                                width: .55rem;
+                                text-align: center;
                             }
                             .colon{
                                 text-align: center;
-                                line-height: @size22;
+                                line-height: 0.85rem;
                                 width: @size10;
                                 color: #000;
                                 font-weight: bold;
@@ -2584,6 +2609,7 @@
             }
             .value{
                 float: left;
+                width: 5.8rem;
                 height: 100%;
                 line-height: @size45;
                 position: relative;
@@ -2599,6 +2625,7 @@
                     font-size: 35px;
                     color: #3C434D;
                     float: left;
+                    margin-left: -0.4rem;
                 }
                 .btn2{
                     width: 1.46rem;
@@ -2624,7 +2651,7 @@
             }
             .value2{
                 float: left;
-                /*width: 5.6rem;*/
+                width: 5.4rem;
                 height: 100%;
                 line-height: @size45;
                 position: relative;
@@ -2639,7 +2666,7 @@
                     font-size: 35px;
                     color: #E3E3E3;
                     float: left;
-                    /*margin-top: 0.04rem;*/
+                    margin-left: -0.4rem;
                 }
                 .btn2{
                     width: 1.46rem;
@@ -2665,6 +2692,28 @@
                     color:#E85800;
                 }
             }
+            .values{
+                text-align: left !important;
+            }
+            .value3{
+                float: left;
+                width: 5.6rem;
+                height: 100%;
+                line-height: @size45;
+                position: relative;
+                text-align: left;
+                padding-left: 0.5rem;
+                box-sizing:border-box;
+                .label{
+                    font-size: 12px;
+                }
+                .price{
+                    font-size: 15px;
+                    width: 2.68rem;
+                    font-weight: bold;
+                    color:#E85800;
+                }
+            }
             .r-icon{
                 float: right;
                 height: 100%;
@@ -2684,7 +2733,7 @@
             }
             .offer{
                 float: right;
-                width: 3.1rem;
+                width: 2.8rem;
                 height: 100%;
                 box-sizing: border-box;
                 border-left:1px solid rgb(205, 212, 220);
@@ -2694,7 +2743,7 @@
             }
             .offer2{
                 float: right;
-                width: 3.1rem;
+                width: 2.8rem;
                 height: 100%;
                 box-sizing: border-box;
                 border-left:1px solid rgb(205, 212, 220);

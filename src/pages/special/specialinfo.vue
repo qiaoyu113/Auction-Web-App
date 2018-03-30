@@ -34,9 +34,10 @@
                         <div class="date">
                             <!--收藏图标-->
                             <div class="collect" v-if="list.collect">
-                                <div class="collectIcon">
-                                    <div class="bottom"></div>
-                                </div>
+                                <!--<div class="collectIcon">-->
+                                    <!--<div class="bottom"></div>-->
+                                <!--</div>-->
+                                <img src="../../assets/image/mycenter/collectIcon.png" />
                             </div>
                             <!--进行中-->
                             <div class="collect2" v-if="list.auctionStatus === 2">
@@ -364,8 +365,10 @@
                 color:#A9AEB6;
                 font-size:20px;
                 img{
-                    width: 0.6rem;
-                    margin-top: 0.15rem;
+                    /*width: 0.6rem;*/
+                    /*margin-top: 0.15rem;*/
+                    width: 0.45rem;
+                    margin-top: 0.23rem;
                 }
             }
             .span2{
@@ -373,8 +376,8 @@
                 padding-right: 20px;
                 color:#A9AEB6;
                 img{
-                    width: 0.6rem;
-                    margin-top: 0.15rem;
+                    width: 0.7rem;
+                    margin-top: 0.1rem;
                 }
             }
         }
@@ -486,8 +489,11 @@
                             height:0.35rem;
                             float:left;
                             background:#333333;
-                            padding:0.08rem 0.1rem;
+                            /*padding:0.08rem 0.1rem;*/
                             box-sizing: border-box;
+                            img{
+                                width:100%;
+                            }
                             .collectIcon{
                                 width:100%;
                                 height:100%;

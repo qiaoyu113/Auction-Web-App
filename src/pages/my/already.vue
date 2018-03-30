@@ -50,9 +50,10 @@
                                     <div class="date">
                                         <!--收藏图标-->
                                         <div class="collect">
-                                            <div class="collectIcon">
-                                                <div class="bottom"></div>
-                                            </div>
+                                            <!--<div class="collectIcon">-->
+                                                <!--<div class="bottom"></div>-->
+                                            <!--</div>-->
+                                            <img class="conImg" src="../../assets/image/mycenter/collectIcon.png" />
                                         </div>
                                         <!--已结束-->
                                         <div class="collect4">
@@ -384,6 +385,10 @@
                                 let week = Number(boxlist[i].auction.mqEndTime) + 7 * 24 * 3600 * 1000;
                                 time = week - now;
                                 //初始化时间
+                                if(time < 0){
+                                    boxlist[i].EndTimes = '00:00:00:00'
+                                    break;
+                                }
                                 let day = parseInt(time / 1000 / 60 / 60 / 24, 10) < 10 ? '0' + parseInt(time / 1000 / 60 / 60 / 24, 10) : parseInt(time / 1000 / 60 / 60 / 24, 10);
                                 let h = parseInt(time / 1000 / 60 / 60 % 24, 10) < 10 ? '0' + parseInt(time / 1000 / 60 / 60 % 24, 10) : parseInt(time / 1000 / 60 / 60 % 24, 10);
                                 let m = parseInt(time / 1000 / 60 % 60, 10) < 10 ? '0' + parseInt(time / 1000 / 60 % 60, 10) : parseInt(time / 1000 / 60 % 60, 10);
@@ -392,7 +397,6 @@
                                 let timeRun = setInterval(function() {
 //                                  //初始化时间
                                     let now = new Date().getTime()
-                                    let time = '';
                                     let week = Number(boxlist[i].auction.mqEndTime) + 7 * 24 * 3600 * 1000;
                                     time = week - now;
                                     let days = parseInt(time / 1000 / 60 / 60 / 24, 10) < 10 ? '0' + parseInt(time / 1000 / 60 / 60 / 24, 10) : parseInt(time / 1000 / 60 / 60 / 24, 10);
@@ -403,7 +407,6 @@
                                     if(time < 0){
                                         clearInterval(timeRun);
                                         boxlist[i].EndTimes = '00:00:00:00'
-                                        that.meScroll()
                                     }
                                 },1000)
                             }
@@ -543,6 +546,7 @@
                     width: 3rem;
                     height: 3rem;
                     overflow: hidden;
+                    position: relative;
                     img{
                         width: 4rem;
                         height: 3rem;
@@ -558,8 +562,13 @@
                             height:0.35rem;
                             float:left;
                             background:#333333;
-                            padding:0.08rem 0.1rem;
+                            /*padding:0.08rem 0.1rem;*/
                             box-sizing: border-box;
+                            .conImg{
+                                width:100%;
+                                height:100%;
+                                margin-left:0;
+                            }
                             .collectIcon{
                                 width:100%;
                                 height:100%;

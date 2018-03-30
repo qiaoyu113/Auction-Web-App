@@ -50,9 +50,10 @@
                                     <div class="date">
                                         <!--收藏图标-->
                                         <div class="collect">
-                                            <div class="collectIcon">
-                                                <div class="bottom"></div>
-                                            </div>
+                                            <!--<div class="collectIcon">-->
+                                                <!--<div class="bottom"></div>-->
+                                            <!--</div>-->
+                                            <img class="conImg" src="../../assets/image/mycenter/collectIcon.png" />
                                         </div>
                                         <!--进行中-->
                                         <div class="collect2" v-if="list.auction.auctionStatus == 2">
@@ -526,6 +527,7 @@
                     width: 3rem;
                     height: 3rem;
                     overflow: hidden;
+                    position: relative;
                     img{
                         width: 4rem;
                         height: 3rem;
@@ -541,8 +543,17 @@
                             height:0.35rem;
                             float:left;
                             background:#333333;
-                            padding:0.08rem 0.1rem;
+                            /*padding:0.08rem 0.1rem;*/
                             box-sizing: border-box;
+                            .conImg{
+                                width:100%;
+                                height:100%;
+                                margin-left:0;
+                            }
+                            img{
+                                width:100%;
+                                height:100%;
+                            }
                             .collectIcon{
                                 width:100%;
                                 height:100%;
