@@ -172,10 +172,10 @@
         },
         methods: {
             Return:function(){
-              window.history.go(-1)
+              this.$router.push({path:"/personalCenter"})  
             },
             detailed:function(id){
-                // console.log(id)
+           
                 // return false
                 if(id!=null&&id!=undefined){
                    this.$router.push({path:"/detailed",query:{id:id}})  
@@ -199,7 +199,7 @@
             getBails:function(){
                 let that = this;
                commonService.getBails({pageNo:1,pageSize:30}).then(function(res){
-                console.log(res)
+                
                     that.arr=res.data.datas.datas
                     
               })

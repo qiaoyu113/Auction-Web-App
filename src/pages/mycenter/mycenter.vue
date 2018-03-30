@@ -31,7 +31,11 @@
             <div class="info">
                 <div class="infoList">昵称  <span>{{user.name}}</span><div class="more" @click="changeName"><img src="../../../src/assets/image/mycenter/more.png"/></div></div>
                 <div class="infoList">性别  <span v-if="radio==1">男</span><span v-if="radio==2">女</span><span v-if="radio!=2&&radio!=1">未知</span><div class="more" @click="setsex"><img src="../../../src/assets/image/mycenter/more.png"/></div></div>
-                <div class="infoList">生日  <span>{{user.age}}</span><div class="more"><img src="../../../src/assets/image/mycenter/more.png"/></div></div>
+                <div class="infoList">生日  <span><input type="text" name="start_date" id="start_date" v-model="startTime" placeholder="未提交" readonly="readonly" /></span>
+                <div class="more">
+                <img src="../../../src/assets/image/mycenter/more.png"/>
+            
+                </div></div>
                 <div class="infoList">手机  <span v-if="user.phone!=''">{{user.phone}}</span><span v-if="user.phone==''">暂无绑定手机号</span><div class="more" @click="changePhone"><img src="../../../src/assets/image/mycenter/more.png"/></div></div>
             </div>
             <!--修改密码-->
@@ -62,20 +66,24 @@
              </div>
         </div>  
 
+<!-- <div style="margin: 50px;">
+<input type="text" name="start_date" id="start_date" v-model="startTime" placeholder="选择开始日期" readonly="readonly" /> -->
+</div>
                 
-                </div>
+   </div>
 </template>
 
 <script>
     import {appService} from '../../service/appService'
     import {common} from '../../assets/js/common/common'
     import {commonService} from '../../service/commonService.js'
-    // import LCalendar from '../../assets/js/LCalendar/LCalendar.js'
-    // import "../../assets/js/LCalendar/LCalendar.css"
+
+    // import LCalendar from '../../assets/js/lcalendar/js/lcalendar'
+    import "../../assets/js/lcalendar/css/lcalendar.css"
     export default {
         data () {
             return {
-                title: '个人中心',
+                title: '传家',
                 errorImg01: 'this.src="' + require('../../assets/image/mycenter/head.png') + '"',
                 user:'',
                 header:{
@@ -122,18 +130,31 @@
         mounted: function() {
             common.onMove('.mycenter')
             this.getUsers()
-
+            this.timeSelect();
    
         },
         watch:{
             radio:function(){
                 this.sexPasswords()
+               
+            },
+            startTime:function(){
+                this.sexPasswords()
             }
+
         },
         methods: {
-        
+            timeSelect:function(){
+          var calendar = new LCalendar();
+          calendar.init({
+            'trigger': '#start_date', //标签id
+            'type': 'date', //date 调出日期选择 datetime 调出日期时间选择 time 调出时间选择 ym 调出年月选择,
+            'minDate': '1900-1-1', //最小日期
+            'maxDate': new Date().getFullYear() + '-' + (new Date().getMonth() + 1) + '-' + new Date().getDate() //最大日期
+          });
+        },
             Return:function(){
-                window.history.go(-1)
+               this.$router.push({name:'personalCenter'})
             },
             //改变名字
             changeName:function(){
@@ -184,12 +205,14 @@
                     that.imgler=that.user.headImg
                     let sex=that.user.sex
                     that.radio=sex + ''
+                    that.startTime=that.user.birthday
               })
              },
              //修改性别
             sexPasswords:function(){
                  let that=this
-              commonService.postUsersinfo({sex:that.radio,headImg:that.imgler}).then(function(res){
+              commonService.postUsersinfo({sex:that.radio,birthday:that.startTime,headImg:that.imgler}).then(function(res){
+
                     that.$refs.modal.style.display="none"
               })
             },
@@ -294,6 +317,7 @@
                 border-bottom:1px solid #C9D0D8;
                 font-size:13px;
                 color:#333;
+                position: relative;
                 span{
                     color:#B1B1B1;
                     font-size:13px;
@@ -312,6 +336,19 @@
                     color:#6F6F6F;
                     font-size:13px;
                     padding-right:0.2rem;
+                }
+                #start_date{
+                   position: absolute;
+                   left: 1.5rem;
+                   top: 0rem;
+                    width: 7.2rem;
+                    height: 1rem;
+                   background:transparent;
+                   border: none;
+                   font-size: 13px;
+                  color: #B1B1B1;
+                  //  text-align: center;
+
                 }
             }
             .infoList:last-child{

@@ -106,7 +106,7 @@ import {commonService} from '../../service/commonService.js'
 
                  commonService.getBailsid(oddNumbers).then(function(res){
                     that.list=res.data.datas
-                    console.log(res)
+                
                     // that.card=card.bankCardAttribution(that.list.userBankCardNo)
                     
                  })

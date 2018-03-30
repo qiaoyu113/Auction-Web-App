@@ -10,8 +10,8 @@ import store from './vuex';
 import './mixin/directive';
 import './mixin/filter';
 import VueCropper from 'vue-cropper';
-import wx from 'weixin-js-sdk'
-
+import wx from 'weixin-js-sdk';
+// import './assets/js/lcalendar/js/lcalendar';
 // import './assets/js/common/infinite'
 // import infiniteScroll from 'vue-infinite-scroll';
 

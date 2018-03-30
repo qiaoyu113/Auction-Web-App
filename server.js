@@ -46,7 +46,7 @@ const serve = (path, cache) => express.static(resolve(path), {
 app.use('/dist', serve('./dist', true))
 // app.use(favicon(path.resolve('./src/assets/excel.png')))
 app.use('/service-worker.js', serve('./dist/service-worker.js'))
-app.use('/src/assets/js/swiper.min.js', serve('./src/assets/js/swiper.min.js'))
+app.use('/src/assets/', serve('./src/assets/'))
 
 app.get('*', (req, res) => {
   if (!renderer) {

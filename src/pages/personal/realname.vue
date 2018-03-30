@@ -63,7 +63,7 @@
             </div>
             <div class="sample" @click="show">照片样例</div>
             <div class="hit">
-                <p>1.每日只可验证<span>三次</span>，如有问题 <a href="">联系客服</a>。 </p>
+                <p>1.每日只可验证<span>三次</span>，如有问题 <a href="tel:15801619600">联系客服</a>。 </p>
                 <p>2.请手持相关证件，要求手持证件正面及背面的照片。</p>
                 <p>3.手持证件照必须是正面头部照。</p>
                 <p>4.必须看清证件号且证件号不被遮挡。</p>
@@ -211,7 +211,7 @@
                     })
             },
             handleAvatarSuccess(res, file) {
-                // console.log(res)
+                
                 this.authFrontPic=res.datas.file
                 this.imageUrl = URL.createObjectURL(file.raw);
              },
@@ -222,11 +222,11 @@
             // var reader = new FileReader();
             // var that = this;
              // reader.readAsDataURL(file);
-             console.log(file)
+      
    
     //         reader.onload = function(e){
     //         var img = new Image();
-    //           // console.log(this.result)
+    //          
     //           that.base=this.result
     //           that.base=that.base.split(',')[1];  
     //           that.base=window.atob(that.base);  

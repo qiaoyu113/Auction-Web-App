@@ -257,6 +257,17 @@ import {commonService} from '../../service/commonService.js'
                             that.htmlx='支付宝账户不能为空'
                             return false
                          }
+                           let mailbox=/^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/;
+                          let reg = /^1[3|4|5|7|8][0-9]{9}$/;
+                          let flag = reg.test(that.account)
+                          let flag2=mailbox.test(that.account)
+                       if(flag || flag2){
+                          
+                       }else{
+                          this.htmlx="请填写正确的支付宝账号"
+                          return false
+                       }
+                         
                          if(that.userName==''){
                             that.htmlx='姓名不能为空'
                             return false
@@ -369,7 +380,7 @@ import {commonService} from '../../service/commonService.js'
                 let money=that.money * 100
               
                  commonService.postForms({channelId:channelId,channelUser:that.account,phone:that.phone,type:type,idCard:that.namecard,userName:that.userName,smsCode:that.verification,smsType:7,amount:money,realName:that.name,userBankName:that.userBankName,userBank:that.userBank,userBankCardNo:that.userBankCardNo,userBankProvince:that.userBankProvince,userBankCity:null,userBankDetail:that.userBankDetail}).then(function(res){                    //市
-                    // console.log(res)
+                  
                     if(res.data.message=='success'){
                        that.oddNumbers=res.data.datas 
                        that.getForms()
@@ -384,7 +395,7 @@ import {commonService} from '../../service/commonService.js'
                 let that = this;
                  commonService.getForms(that.oddNumbers).then(function(res){
                     that.list=res.data.datas
-                    console.log(res)
+          
                     that.card=card.bankCardAttribution(that.list.userBankCardNo)
                     
                  })

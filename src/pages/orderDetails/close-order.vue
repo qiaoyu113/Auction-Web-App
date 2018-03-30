@@ -99,7 +99,7 @@ import {commonService} from '../../service/commonService.js'
     },
     methods: {
          Return:function(){
-             window.history.go(-1)
+              this.$router.push({path:"/myorder",query:{index:0}})
          },
         // 获取订单
          getOrderid:function(){
@@ -107,9 +107,9 @@ import {commonService} from '../../service/commonService.js'
             commonService.getOrderid(that.orderNo).then(function(res){
                 if(res.data.code==200){
                   that.datas=res.data.datas
-                  console.log(that.datas)
                  let payLogs=that.datas.payLogs
                  that.time=payLogs[payLogs.length-1]
+
                 that.orderDetail=that.datas.orderDetail
                  if(that.orderDetail.finalPrice < 200000){
                      that.freight=200000

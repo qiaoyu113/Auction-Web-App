@@ -25,7 +25,7 @@
             </div>
             <div id="captcha-box"></div>
             <!--保存-->
-            <div class="save" v-if="htmlx!=''">{{htmlx}}</div>
+            <div class="saves" v-if="htmlx!=''">{{htmlx}}</div>
             <div class="save" @click="save">下一步</div>
         </div>
     </div>
@@ -88,6 +88,9 @@
          commonService.getCheckCode({phone:that.phone,type:5,smsCode:that.inputNum}).then(function(res){
                     if(res.data.code == 200){
                       that.$router.push({name:'savePhone'})
+                    }else{
+                        that.htmlx=res.data.message
+
                     }
               })
             },
@@ -332,17 +335,19 @@
             font-size:12px;
             position:fixed;
             bottom:1.2rem;
+            left: 0;
         }
         .save{
             width:100%;
-            height:1.4rem;
-            line-height:1.4rem;
+            height:1.2rem;
+            line-height:1.2rem;
             text-align: center;
             position: fixed;
             left:0;
             right:0;
             bottom:0;
             border-top:1px solid #1A242E;
+            background: #fff;
         }
          #captcha-box{
         width:100%;

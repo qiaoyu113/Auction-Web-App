@@ -33,7 +33,7 @@
                     <div class="label">
                         <span class="label1">提交审核</span>
                         <span class="label2">审核中</span>
-                        <span class="label3">已解决</span>
+                        <span class="label3">审核失败</span>
                     </div>
                 </div>
             </div>
@@ -78,7 +78,7 @@
                 <div class="price clearfix"><div class="fl">手机号码:</div><div class="fr">{{adress.phone}}</div></div>
             </div>  
         </div>
-        <div class="footer">联系售后</div>
+        <div class="footer"><a href="tel:15801619600">联系售后</a></div>
         
  
     </div>
@@ -122,7 +122,7 @@ import {commonService} from '../../service/commonService.js'
     },
     methods: {
         Return:function(){
-            window.history.go(-1)
+            this.$router.push({path:"/myorder",query:{index:3}})
         },
         open:function(){
             // this.dis='';

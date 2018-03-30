@@ -100,6 +100,7 @@
                     </div>
                 </div>
         </div>
+         <div class="saves" v-if="htmlx!=''">{{htmlx}}</div>
         <div class="botton" @click="postOrders()">
             <div>提交订单</div>
         </div>
@@ -125,6 +126,7 @@
                 wxLogin:true,
                 countdown:'',
                 freight:'',//保险运费
+                htmlx:'',
             }
         },
         syncData({store}) {
@@ -162,9 +164,14 @@
                 let that=this
                 let t;
                 clearTimeout(t)
+                let date=Date.parse( new Date())
                  t= setTimeout(function (){
+                    if((that.datas.mqEndTime) + (7 * 24 * 3600 * 1000) < date){
                    let data =Number(that.datas.mqEndTime) + (7 * 24 * 3600 * 1000)
                     that.countdown=common.getTimer(data)
+                }else{
+                      that.countdown=common.getTimer(date)
+                }
                 },1000)
              }
         },
@@ -183,7 +190,7 @@
             }
              },
             Return:function(){
-                window.history.go(-1)
+               this.$router.push({path:"/my/already"})
             },
             addresst:function(){
                 if(this.addressId==undefined){
@@ -208,7 +215,7 @@
             getAddressid:function(){
                  let that=this;
                  commonService.getAddressid(that.addressId).then(function(res){
-                    // console.log(res)
+                  
                     if(res.data.datas!=null){
                         that.address=res.data.datas
                     }
@@ -249,10 +256,17 @@
                 }else if(that.index === 2){//支付宝
                     channelIds = 'ALIPAY_WAP'
                 }
+                if(that.address.id==undefined || that.address.id==''){
+                    that.htmlx='请选择地址'
+                       return false
+                }
+
                  commonService.postOrders(that.auctionId,{addressId:that.address.id,channelId:channelIds}).then(function(res){
                     console.log(res)
                     if(res.data.code==200){
                         that.$router.push({path:"/normalorder",query:{id:res.data.datas.orderNo}})
+                    }else{
+                        that.htmlx=res.data.message
                     }
                 })
             }
@@ -524,6 +538,18 @@
                     }
             }
        }
+       .saves{
+           width:100%;
+           height:0.67rem;
+           line-height:0.67rem;
+            color:#fff;
+            background:linear-gradient(70deg, #DC704A, #F44EA0);
+            text-align: center;
+            font-size:12px;
+            position:fixed;
+            bottom:1.2rem;
+            left: 0;
+        }
        .botton{
           height: @size45;
           div{

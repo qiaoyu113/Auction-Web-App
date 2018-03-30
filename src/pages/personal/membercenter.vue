@@ -146,7 +146,7 @@
                     if(res.data.datas!=null){
                       that.integral=res.data.datas.pointNum - that.pointNum
                     that.width=that.pointNum / res.data.datas.pointNum * 100+ '%'
-                    console.log(that.width)
+                   
                    
                     }
               })
@@ -162,7 +162,7 @@
               getDoctype:function(){
                 let that=this
                  commonService.getDoctype({type:2}).then(function(res){
-                  console.log(res)
+              
                   that.rule=res.data.datas
 
               })
