@@ -1332,8 +1332,8 @@
                 padding-right: 20px;
                 color:#A9AEB6;
                 img{
-                    width: 0.6rem;
-                    margin-top: 0.15rem;
+                    width: 0.7rem;
+                    margin-top: 0.1rem;
                 }
             }
         }
