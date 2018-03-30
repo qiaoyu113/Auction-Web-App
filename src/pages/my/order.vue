@@ -170,7 +170,7 @@
                    let data =Number(that.datas.mqEndTime) + (7 * 24 * 3600 * 1000)
                     that.countdown=common.getTimer(data)
                 }else{
-                      that.countdown=common.getTimer(date)
+                      that.countdown=common.getTimer(date + 1000)
                 }
                 },1000)
              }
@@ -314,7 +314,7 @@
          .time_l{
             float: left;
             color: #fff;
-            font-size: 6px;
+            font-size: 10px;
             line-height: 1rem;
 
          }
