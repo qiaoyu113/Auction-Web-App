@@ -51,8 +51,8 @@
                         <div class="name">{{list.orderTitle}}</div>
                         <div class="prove"> LOT-{{list.orderDetail.auctionNo}}</div>
                         
-                        <button class="fr"  v-if="list.csStatus==0" @click="details(list.status,list.orderNo)">查看订单</button>
-                        <button class="fr"  v-if="list.csStatus!=0" @click="shouhou(list.status,list.id)">查看订单</button>
+                        <button class="fr" @click="details(list.status,list.orderNo,list.csStatus)">查看订单</button>
+                     <!--    <button class="fr"  v-if="list.csStatus!=0" @click="shouhou(list.status,list.id)">查看订单</button> -->
 
                         <button class="fr" v-if="list.status==1" @click="details(list.status,list.orderNo)">立即付款</button>
                         <button class="fr" v-if="list.status==2 || list.status==5">分享</button>
@@ -171,11 +171,13 @@
                     that.getOrder();
                 }
             },
-            details:function(type,id){
+            details:function(type,id,csStatus){
                 if(type==6){
                     this.$router.push({path:"/closeorder",query:{id:id}})  
+                }else if(type==5 && csStatus!=0){
+                     this.$router.push({path:"/afterorder",query:{id:id}}) 
                 }else{
-                    this.$router.push({path:"/normalorder",query:{id:id}})  
+                    this.$router.push({path:"/normalorder",query:{id:id}}) 
                 }
             },
             shouhou:function(type,id){

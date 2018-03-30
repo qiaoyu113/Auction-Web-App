@@ -183,7 +183,7 @@
             }
              },
             Return:function(){
-                window.history.go(-1)
+               this.$router.push({path:"/my/already"})
             },
             addresst:function(){
                 if(this.addressId==undefined){
