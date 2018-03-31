@@ -57,8 +57,12 @@ export const commonService = {
         return axios.post('/auctions/offer',qs.stringify(params))
     },
     /*保证金相关操作*/
-    postMyBail:function(){
+    postMyBail:function(params){
         return axios.post('/bails/frozen',qs.stringify(params))
+    },
+     /*保证金详情*/
+    getBailsid:function(id){
+        return axios.get('/bails/'+ id)
     },
     /* 获取拍品详情 */
     getAuctions: function (id) {

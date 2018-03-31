@@ -3,10 +3,8 @@
         组件要小，如遇list，只将item做成组件，其他的都写在页面中
     -->
     <!-- 个人中心-我的订单 -->
-    <div class="myorder-center" id="" v-set-title="title">
-        
-        <!-- <div class="header">传家</div> -->
-        <div class="nav">
+    <div class="v_myorder-center"> 
+     <div class="nav">
             <span class="return fl" @click="Return()">&lt;</span> 
             <span class="font fl" :class="index==0 ? 'check' : ''" @click='getIndex(0)'>全部</span>
             <span class="font fl" :class="index==1 ? 'check' : ''" @click='getIndex(1)'>待付款</span>
@@ -14,10 +12,17 @@
             <span class="font fl" :class="index==3 ? 'check' : ''" @click='getIndex(3)'>售后</span>
             <span class="span1" @click="rto()"><img src="../../assets/image/mycenter/c3.png" /></span>
         </div>
+    <div id="myorder-center">
+        <div id="mescroll" class="mescroll notatarts">
+            <div class="mescroll-bounce">
+    <div class="myorder-center" id="" v-set-title="title">
+        
+        <!-- <div class="header">传家</div> -->
+      
         <div class="content">
             <!-- 待付款 -->
             <div v-if="index!=3">
-            <div class="account" v-if="index!=3" v-for="(list,index) in datalist">
+            <div class="account" v-for="(list,index) in myList">
                 <div class="item">
                     <span>订单号:{{list.orderNo}}</span>
                     <span class="fr bgcolor" v-if="list.status==1">待付款</span>
@@ -46,7 +51,7 @@
                     <div class="boxImg fl" v-for="(img,index) in list.orderDetail.picItems" v-if="index==0">
                         <img :src="picHead + img" onerror="this.src='http://img0.imgtn.bdimg.com/it/u=3206453844,923580852&fm=27&gp=0.jpg'"/>
                     </div>
-                    <div class="info fl">
+                    <div class="info fl clearfix">
                         <div class="hel">{{list.amount | money}} CNY</div>
                         <div class="name">{{list.orderTitle}}</div>
                         <div class="prove"> LOT-{{list.orderDetail.auctionNo}}</div>
@@ -72,7 +77,7 @@
                     <div class="boxImg fl">
                         <img :src="picHead + list.picItems[0]" onerror="this.src='http://img0.imgtn.bdimg.com/it/u=3206453844,923580852&fm=27&gp=0.jpg'"/>
                     </div>
-                    <div class="info fl">
+                    <div class="info fl clearfix">
                         <div class="hel">{{list.amount | money}} CNY</div>
                         <div class="name">{{list.auctionName}}</div>
                         <div class="prove">LOT-{{list.auctionNo}}</div>
@@ -84,10 +89,15 @@
             </div>
 
         </div>
+        </div>
+        </div>
+        </div>
+        </div>
     </div>
 </template>
 
 <script >
+     import MeScroll from 'mescroll'
     import {appService} from '../../service/appService'
     import itemc from "../../component/home/item.vue"
     import {common} from '../../assets/js/common/common'
@@ -102,6 +112,12 @@
                 hour:[],
                 ordercs:'',//售后
                 countdown:[],
+                myList:[
+
+                ],
+                page:{num:1,size:10},
+                isShowNoMore:false,
+                totalPage:'',
             }
         },
         components:{'home-item':itemc},
@@ -130,10 +146,11 @@
         },
         mounted: function() {
             
-             common.onMove('.myorder-center')
+             // common.onMove('.myorder-center')
             this.routers()
-            this.getOrder()
+            // this.getOrder()
             this.getOrdercs()
+            this.meScroll()
             
         },
         methods: {
@@ -159,16 +176,16 @@
                 let that = this;
                 if(index === 1){
                     that.index = 1;
-                    that.getOrder();
+                    that.meScroll();
                 }else if(index==2){
                     that.index = 2;
-                    that.getOrder();
+                    that.meScroll();
                 }else if(index==3){
                     that.index = 3;
                     that.getOrdercs()
                 }else if(index==0){
                     that.index = 0;
-                    that.getOrder();
+                    that.meScroll();
                 }
             },
             details:function(type,id,csStatus){
@@ -210,10 +227,110 @@
                 let that=this;
                commonService.getOrdercs({pageNo:1,pageSize:30}).then(function(res){
                       that.ordercs=res.data.datas.datas
-                     
                     })
             },
+            //下拉刷新、加载
+            meScroll: function (){
+                let that = this;
+                let scrollUp = document.getElementsByClassName('mescroll-upwarp');
+                let scrollDown = document.getElementsByClassName('mescroll-downwarp-reset');
+                for(let i = 0;i<scrollUp.length;i++){
+                    scrollUp[i].parentNode.removeChild(scrollUp[i]);
+                }
+                for(let i = 0;i<scrollDown.length;i++){
+                    scrollDown[i].parentNode.removeChild(scrollDown[i]);
+                }
+                let scrollWarp = document.getElementsByClassName('mescroll-downwarp');
+                for(let i = 0;i<scrollWarp.length;i++){
+                    scrollWarp[i].parentNode.removeChild(scrollWarp[i]);
+                }
+                that.mescroll = new MeScroll("mescroll", {
+                    up: {
+                        callback: that.upCallback,
+                        page:{size:that.page.size},
+                        isBounce: false, //此处禁止ios回弹,解析(务必认真阅读,特别是最后一点): http://www.mescroll.com/qa.html#q10
+                    },
+                    down: {
+                        callback: that.downCallback //下拉刷新的回调,别写成downCallback(),多了括号就自动执行方法了
+                    }
+                });
+            },
+            downCallback(){
+                let that = this;
+                that.page.num = 1;
+                that.myList = [];
+                that.upCallback()
+            },
+            upCallback: function () {
+                const that = this;
+                that.getListData(that.page.num, that.page.size,function(curPageData) {
+                    if(that.page.num === 1)  that.myList = [];//如果是第一页需手动制空列表
+                    that.myList = that.myList.concat(curPageData); //更新列表数据
+                    // 加载完成后busy为false，如果最后一页则lastpage为true
+                    //          加载完成后给页数+1
+                    if(that.page.num >= that.totalPage) {
+                        that.isShowNoMore = true;
+                    }else{
+                        that.isShowNoMore = false;
+                    }
+                    that.page.num = that.page.num + 1;
+                    that.mescroll.endSuccess(curPageData.length,that.totalPage);
+                    that.mescroll.endUpScroll(that.isShowNoMore)
+                }, function() {
+                    that.mescroll.endErr(); //联网失败的回调,隐藏下拉刷新和上拉加载的状态;
+                });
+            },
+            getListData:function(pageNum,pageSize,successCallback,errorCallback) {
+                //延时一秒,模拟联网
+                const that = this;
 
+                let status='1,2,3,4,5,6'
+                if(that.index === 1){
+                    status = '1,2';
+                }else if(that.index==2){
+                    status = '3,4';
+                }else if(that.index==0){
+                    status = '1,2,3,4,5,6';
+                }
+
+                commonService.getOrder({pageNo:pageNum,pageSize:pageSize,status:status}).then(function(res){
+                    if(res.data.code === 200){
+                        let boxlist = res.data.datas.datas;
+                        console.log(boxlist)
+                        that.totalPage = res.data.datas.totalPage;
+                      
+                        successCallback&&successCallback(boxlist);//成功回调
+                    }else{
+                        let boxlist = [];
+                        successCallback&&successCallback(boxlist);//成功回调
+                    }
+                })
+            },
+            //页面滑动问题
+            onMove:function(){
+                let overscroll = function(el) {
+                    el.addEventListener('touchstart', function() {
+                        let top = el.scrollTop
+                            , totalScroll = el.scrollHeight
+                            , currentScroll = top + el.offsetHeight;
+                        if(top === 0) {
+                            el.scrollTop = 1
+                        } else if(currentScroll === totalScroll) {
+                            el.scrollTop = top - 1
+                        }
+                    });
+                    el.addEventListener('touchmove', function(evt) {
+                        if(el.offsetHeight < el.scrollHeight)
+                            evt._isScroller = true
+                    })
+                };
+                overscroll(document.querySelector('.myorder-center'));
+                document.body.addEventListener('touchmove', function(evt) {
+                    if(!evt._isScroller) {
+                        evt.preventDefault()
+                    }
+                })
+            },
 
         }
     }
@@ -224,26 +341,12 @@
     /*rem等基本设置都放在base中，不写多个*/
     @import url('../../assets/css/base.less');
     @import url('../../assets/css/icon/iconfont.css');
-    .myorder-center{
-        position: fixed;
-          left: 0;
-          right: 0;
-          top: 0;
-          overflow-x: scroll;
-          bottom: 0;
-    .header{
-        position: fixed;
-        top: 0;
-        z-index: 100;
-        width: @size375;
-        height: @size45;
-        background:rgba(2, 10, 2, 1);
-        font-size: @size20;
-        color: white;
-        text-align: center;
-        line-height: @size45;
-    }
+    @import url("../../assets/css/common/mescroll.min.css");
+.v_myorder-center{
     .nav{
+        position: fixed;
+        left: 0;
+        top:0;
         width: @size375;
         height: @size35;
         border-bottom: 0.5px solid rgb(53, 60, 70);
@@ -287,6 +390,43 @@
             color: black;
         }
     }
+
+
+    #myorder-center{
+        overflow: hidden;
+        #mescroll{
+            width:100%;
+            max-width:10rem;
+            position: fixed;
+            top: @size36;
+            bottom:0;
+            left:0;
+            right:0;
+            margin:auto;
+            height:auto;
+            overflow-y: scroll;
+            -webkit-overflow-scrolling:touch;
+        }
+    .myorder-center{
+        // position: fixed;
+        //   left: 0;
+        //   right: 0;
+        //   top: 0;
+        //   overflow-x: scroll;
+        //   bottom: 0;
+    .header{
+        position: fixed;
+        top: 0;
+        z-index: 100;
+        width: @size375;
+        height: @size45;
+        background:rgba(2, 10, 2, 1);
+        font-size: @size20;
+        color: white;
+        text-align: center;
+        line-height: @size45;
+    }
+
     .content{
         // margin-top: @size80;
         margin-bottom: 1.2rem;
@@ -310,8 +450,9 @@
                     margin-top: @size10;
                     border-left: 1px solid #ccc;
                     img{
-                        width: @size24;
+                        width: @size20;
                         height: @size20;
+                        margin-left: @size4;
                     }
 
                 }
@@ -360,7 +501,7 @@
                 }
                 .info{
                     margin-top: @size15;
-                    padding-left: @size20;
+                    padding-left: @size10;
                     width: 6.4rem;
                     .hel{
                         font-weight: bold;
@@ -402,6 +543,8 @@
         line-height: @size35;
         padding-left: @size20;
     }
+}
+}
 }
 </style>
 

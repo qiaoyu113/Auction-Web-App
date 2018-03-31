@@ -77,7 +77,10 @@
                     <div class="payment_top">支付方式</div>
                     <div class="ros clearfix" :class="{'ros_ll':index==1}" @click="selected(1)" v-if="wxLogin==true">
                         <div class="ros_l"><span>✔</span></div>
-                        <div class="ros_con"><i class="iconfont icon-icon_weixinzhifu"></i></div>
+                        <div class="ros_con">
+                           <img class="v_img" v-if="index==1" src="../../assets/image/mycenter/wxzf.png" />
+                           <img class="v_img" v-if="index!=1" src="../../assets/image/mycenter/wxzf2.png" />
+                         </div>
                         <div class="ros_r">
                            <p class="linh">微信支付</p>
                            
@@ -85,7 +88,10 @@
                     </div>
                     <div class="ros clearfix" :class="{'ros_ll':index==2}" @click="selected(2)" v-if="wxLogin==false">
                         <div class="ros_l"><span>✔</span></div>
-                        <div class="ros_con"><i class="iconfont icon-icon_zhifubao"></i></div>
+                        <div class="ros_con">
+                           <img class="v_img" v-if="index==2" src="../../assets/image/mycenter/zfb.png" />
+                           <img class="v_img" v-if="index!=2" src="../../assets/image/mycenter/zfb2.png" />
+                        </div>
                         <div class="ros_r">
                            <p class="linh">支付宝支付</p>
                            
@@ -93,7 +99,10 @@
                     </div>
                     <div class="ros clearfix" :class="{'ros_ll':index==3}" @click="selected(3)">
                         <div class="ros_l"><span>✔</span></div>
-                        <div class="ros_con"><i class="iconfont icon-icon_zhifubao"></i></div>
+                        <div class="ros_con">
+                            <img class="v_img" v-if="index==3" src="../../assets/image/mycenter/xxzf.png" />
+                           <img class="v_img" v-if="index!=3" src="../../assets/image/mycenter/xxzf2.png" />
+                           </div>
                         <div class="ros_r">
                            <p class="linh">转账汇款</p>
                         </div>
@@ -260,9 +269,10 @@
                     that.htmlx='请选择地址'
                        return false
                 }
-
+             
+                
                  commonService.postOrders(that.auctionId,{addressId:that.address.id,channelId:channelIds}).then(function(res){
-                    console.log(res)
+                  
                     if(res.data.code==200){
                         that.$router.push({path:"/normalorder",query:{id:res.data.datas.orderNo}})
                     }else{
@@ -303,6 +313,10 @@
                 margin-right: @size10;
                 font-size: 16px;
                 margin-top: -0.2rem;
+            }
+            img{
+                width: 1rem;
+                margin-top: 0.2rem;
             }
           }
 
@@ -507,6 +521,10 @@
                         i{
                           font-size: @size26;  
                           color:rgb(224,224,224);
+                        }
+                        img{
+                            width: @size26;
+                            height: @size26;
                         }
                         
                     }

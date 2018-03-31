@@ -88,7 +88,6 @@ import {commonService} from '../../service/commonService.js'
     mounted () {
        
        common.onMove('.detailed')
-
         this.getForms()
     },
     methods: {
@@ -105,8 +104,8 @@ import {commonService} from '../../service/commonService.js'
                 let oddNumbers=this.$route.query.id
 
                  commonService.getBailsid(oddNumbers).then(function(res){
+               
                     that.list=res.data.datas
-                
                     // that.card=card.bankCardAttribution(that.list.userBankCardNo)
                     
                  })
@@ -154,6 +153,10 @@ import {commonService} from '../../service/commonService.js'
             font-weight: bold;
             letter-spacing: @size3;
             font-size: @size20;
+            img{
+                width: 1rem;
+                margin-top: 1rem;
+            }
         }
     }
     

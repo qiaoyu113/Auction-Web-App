@@ -10,7 +10,12 @@
             <div class="box clearfix ">
                 <div class="boxImg fl" @click="mycenter()">
                     <img :src="picHead + list.headImg" alt="" :onerror="errorImg01"/>
-                    <div class="member">v{{list.vipLevel}}</div>
+                    <div class="member">
+                    <img v-if="list.vipLevel==1" src="../../../src/assets/image/mycenter/v1.png"/>
+                    <img v-if="list.vipLevel==2" src="../../../src/assets/image/mycenter/v2.png"/>
+                    <img v-if="list.vipLevel==3" src="../../../src/assets/image/mycenter/v3.png"/>
+                    <img v-if="list.vipLevel==4" src="../../../src/assets/image/mycenter/v4.png"/>
+                    </div>
                 </div>
                 <div class="info fl">
                     <div class="hel">HELLO!</div>
@@ -285,10 +290,10 @@
                 }
                
                 .member{
-                    width: 0.4533rem;
-                    height: 0.4533rem;
+                    width: 0.5rem;
+                    height: 0.5rem;
                     position: relative;
-                    border:1px solid red;
+                    // border:1px solid red;
                     border-radius: 50%;
                     background: #fff;
                     margin-top: -1.7rem;
@@ -297,6 +302,10 @@
                     line-height: 0.4533rem;
                     color: red;
                     font-size: 8px;
+                    img{
+                        width: 0.5rem;
+                        height: 0.5rem;
+                    }
                 }
             }
              .info{

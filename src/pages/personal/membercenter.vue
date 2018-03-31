@@ -11,7 +11,9 @@
                 <div class='loginEn '>MY ACCOUNT</div>
                 <div class="loginCn ">会员中心</div>
             </div>
-            <div class="fr" @click="Return()">...</div>
+            <div class="fr" @click="Return()">
+            <img src="../../../src/assets/image/mycenter/right.png"/>
+            </div>
             <!--按钮-->
             <div class="menu">
                 <div class='font' :class="index==1 ?'checked':''" @click="getIndex(1)">会员等级</div>
@@ -21,6 +23,10 @@
         <!-- 会员等级 -->
         <div class="membox" v-if='index==1'>
             <div class="card">
+               <img class="v_vip" v-if="user.vipLevel==1" src="../../assets/image/mycenter/v1_b.png" />
+               <img class="v_vip" v-if="user.vipLevel==2" src="../../assets/image/mycenter/v2_b.png" />
+               <img class="v_vip" v-if="user.vipLevel==3" src="../../assets/image/mycenter/v3_b.png" />
+               <img class="v_vip" v-if="user.vipLevel==4" src="../../assets/image/mycenter/v4_b.png" />
                 <div class="box">
                     <div class="level" v-if="user.vipLevel==1">VIP<br><span>会员等级</span></div>
                     <div class="level" v-if="user.vipLevel==2">SVIP<br><span>会员等级</span></div>
@@ -28,12 +34,12 @@
                     <div class="level" v-if="user.vipLevel==4">SSSVIP<br><span>会员等级</span></div>
                     <div class="point">{{pointNum}}分<br><span>会员积分</span></div>
                     <div class="number">NO:{{user.vipNo}}</div>
-                    <div class="star">
+                   <!--  <div class="star">
                         <div><i class="iconfont icon-xianxingxing" v-if="user.vipLevel==1"></i></div>
                         <div><i class="iconfont icon-xianxingxing" v-if="user.vipLevel==2"></i></div>
                         <div><i class="iconfont icon-xianxingxing" v-if="user.vipLevel==3"></i></div>
                         <div><i class="iconfont icon-xianxingxing" v-if="user.vipLevel==4"></i></div>
-                    </div>
+                    </div> -->
                 </div>
             </div>
             <div class="bar" v-if="integral!=''">
@@ -221,6 +227,10 @@
             font-weight: bold;
             letter-spacing: @size3;
             font-size: @size20;
+            img{
+                width: 1rem;
+                margin-top: 1rem;
+            }
         }
         .menu{
             height:0.6rem;
@@ -268,8 +278,16 @@
             margin: @size20 @size10;
             width: 8.9333rem;
             height: 4.5333rem;
-            background: rgb(55, 59, 70);
+            // background: rgb(55, 59, 70);
             border-radius: @size5;
+            position: relative;
+            .v_vip{
+                position: absolute;
+                left: 0;
+                top:0;
+                width: 8.9333rem;
+                height: 4.5333rem;
+            }
             .box{
                 position: relative;
                 width: 100%;

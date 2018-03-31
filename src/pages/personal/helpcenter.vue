@@ -153,6 +153,10 @@
             font-weight: bold;
             letter-spacing: @size3;
             font-size: @size20;
+            img{
+                width: 1rem;
+                margin-top: 1rem;
+            }
         }
     
         

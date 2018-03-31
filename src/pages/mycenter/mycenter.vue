@@ -60,7 +60,7 @@
         </div>
        <!-- 性别 -->
         <div class="v_modal" ref="modal">
-             <div class="v_box">
+             <div class="v_box" @click="heigmodal">
                  <el-radio v-model="radio" label="1">男</el-radio>
                  <el-radio v-model="radio" label="2">女</el-radio>
              </div>
@@ -153,6 +153,9 @@
             'maxDate': new Date().getFullYear() + '-' + (new Date().getMonth() + 1) + '-' + new Date().getDate() //最大日期
           });
         },
+           heigmodal:function(){
+            this.$refs.modal.style.display="none"
+           },
             Return:function(){
                this.$router.push({name:'personalCenter'})
             },

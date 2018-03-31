@@ -69,14 +69,39 @@
                 <div class="witpay">处理中</div>
                 <div class="btn"><a href="tel:15801619600">联系客服</a></div>
             </div>
-            <div class="payment" v-if='index==1'>
+            <div class="payment clearfix" v-if='index==1'>
                 <div class="witpay">待支付</div>
-                <div class="btn" @click="kshow()">更改支付方式</div>
+                <!-- <div class="btn" @click="kshow()">更改支付方式</div> -->
             </div>
-            <div class="payment" v-if='index==1 && ity==true'>
-                <div class="btn" :class="{'rty':method=='WX_JSAPI'}" @click="methodlist('WX_JSAPI')">微信</div>
-                <div class="btn" :class="{'rty':method=='ALIPAY_WAP'}" @click="methodlist('ALIPAY_WAP')">支付宝</div>
-                <div class="btn" :class="{'rty':method=='UNIONPAY'}" @click="methodlist('UNIONPAY')">线下转账</div>
+            <div class="payment" v-if='index==1 && wxLogin==true'>
+             <div class="pay" @click="methodlist('WX_JSAPI')">
+                <div :class="method=='WX_JSAPI' ? 'check' : 'check1'"><i class="iconfont icon-duihao"></i></div>
+                <img class="v_img" v-if="method=='WX_JSAPI'" src="../../assets/image/mycenter/wxzf.png" />
+                <img class="v_img" v-if="method!='WX_JSAPI'" src="../../assets/image/mycenter/wxzf2.png" />
+                <!-- <i :class="index==2 ? 'background2' : ''" class="iconfont icon-icon_zhifubao"></i> -->
+                <div class="infoAlipay">微信支付</div>
+            </div>
+
+            </div>
+            <div class="payment" v-if='index==1 && wxLogin==false'>
+             <div class="pay" @click="methodlist('ALIPAY_WAP')">
+                <div :class="method=='ALIPAY_WAP' ? 'check' : 'check1'"><i class="iconfont icon-duihao"></i></div>
+                <img class="v_img" v-if="method=='ALIPAY_WAP'" src="../../assets/image/mycenter/zfb.png" />
+                <img class="v_img" v-if="method!='ALIPAY_WAP'" src="../../assets/image/mycenter/zfb2.png" />
+                <!-- <i :class="index==2 ? 'background2' : ''" class="iconfont icon-icon_zhifubao"></i> -->
+                <div class="infoAlipay">支付宝支付</div>
+            </div>
+
+            </div>
+            <div class="payment" v-if='index==1'>
+             <div class="pay" @click="methodlist('OFFLINE_BANK')">
+                <div :class="method=='OFFLINE_BANK' ? 'check' : 'check1'"><i class="iconfont icon-duihao"></i></div>
+                <img class="v_img" v-if="method=='OFFLINE_BANK'" src="../../assets/image/mycenter/xxzf.png" />
+                <img class="v_img" v-if="method!='OFFLINE_BANK'" src="../../assets/image/mycenter/xxzf2.png" />
+                <!-- <i :class="index==2 ? 'background2' : ''" class="iconfont icon-icon_zhifubao"></i> -->
+                <div class="infoAlipay">转账汇款</div>
+            </div>
+
             </div>
             <div v-if="datas.status==4 || datas.status==5 || datas.status==6">
                <div class="logistic">
@@ -123,7 +148,7 @@
                 <div class="price clearfix"><div class="fl">支付方式:</div>
                       <div class="fr"  v-if="method=='ALIPAY_WAP'">支付宝</div>
                       <div class="fr"  v-if="method=='WX_JSAPI'">微信</div>
-                      <div class="fr"  v-if="method=='UNIONPAY'">线下转账</div>
+                      <div class="fr"  v-if="method=='OFFLINE_BANK'">线下转账</div>
                       <!-- <div class="fr"  v-if='index==0'>线下转账</div> -->
                </div>
 
@@ -194,10 +219,11 @@ import {commonService} from '../../service/commonService.js'
           arrays: [],
           dis:'dis',
           createTime:'',//支付时间
-          method:'UNIONPAY',//支付方式
+          method:'OFFLINE_BANK',//支付方式
           ity:false,
           freight:'',//保险运费
           countdown:'',
+          wxLogin:true,
           
       }
     },
@@ -218,6 +244,8 @@ import {commonService} from '../../service/commonService.js'
         common.onMove('.popWin')
         this.huoqu()
         this.getOrderid()
+        this.wxshow()
+
     },
     watch:{
              countdown:function(){
@@ -237,6 +265,19 @@ import {commonService} from '../../service/commonService.js'
              }
         },
     methods: {
+        wxshow:function(){
+                 let ua = navigator.userAgent.toLowerCase();
+            if(ua.match(/MicroMessenger/i)=="micromessenger") {
+//                    这里是微信浏览器
+                this.wxLogin = true;
+               
+
+            } else {
+//                    这里不是微信浏览器
+                this.wxLogin = false;
+               
+            }
+             },
         Return:function(){
            this.$router.push({path:"/myorder",query:{index:0}})
         },
@@ -244,11 +285,11 @@ import {commonService} from '../../service/commonService.js'
             this.$router.push({name:'auctionMore',params:{id:id}})
         },
         kshow:function(){
-            if(this.ity==true){
-              this.ity=false
-            }else{
-                this.ity=true
-            }
+            // if(this.ity==true){
+            //   this.ity=false
+            // }else{
+            //     this.ity=true
+            // }
         },
         methodlist:function(value){
             this.method=value
@@ -268,7 +309,7 @@ import {commonService} from '../../service/commonService.js'
         rechargeList:function(){      
               let that=this;
               let index=''
-              if(that.method=='UNIONPAY'){
+              if(that.method=='OFFLINE_BANK'){
                      index=3
             that.$router.push({path:"/rechargeList",query:{money:that.datas.amount,index:index,orderNo:that.orderNo,type:4}})
             }
@@ -319,13 +360,12 @@ import {commonService} from '../../service/commonService.js'
             commonService.getOrderid(that.orderNo).then(function(res){
                
                 that.datas=res.data.datas
-            
+              
                 if(that.datas.status==1){
                   let data =Number(that.datas.expireTime)
                  that.countdown=common.getTimer(data)
                 }
                 
-
                 that.method=that.datas.channelId
                 that.orderDetail=that.datas.orderDetail
              
@@ -737,7 +777,7 @@ import {commonService} from '../../service/commonService.js'
             }
         }
         .payment{
-            height: @size40;
+            // height: @size40;
             box-sizing: border-box;
             border-bottom: 1px solid rgb(129, 135, 140);
             .witpay{
@@ -760,6 +800,96 @@ import {commonService} from '../../service/commonService.js'
             .rty{
                 background: #15b3b2;
             }
+            .pay{
+            height: @size50;
+            // border-bottom: 1px solid #87828c;
+            margin-left: @size10;
+            .check{
+                float: left;
+                margin-top: 18px;
+                box-sizing: border-box;
+                border: 3px solid rgb(0, 185, 181);
+                width: @size14;
+                height: @size14;
+                position: relative;
+                i{
+                    font-size: @size10;
+                    line-height: @size10;
+                    position: absolute;
+                    top: -1px;
+                    left: -11px;
+                    color: rgb(0, 185, 181);
+                }
+
+            }
+            .check1{
+                float: left;
+                margin-top: 18px;
+                box-sizing: border-box;
+                border: 3px solid rgb(168, 174, 180);
+                width: @size14;
+                height: @size14;
+                position: relative;
+                i{
+                    font-size: @size10;
+                    line-height: @size10;
+                    position: absolute;
+                    top: -1px;
+                    left: -11px;
+                    display: none
+                }
+            }
+            i{
+                font-size: 25px;
+                color: rgb(168, 174, 180);
+                float: left;
+                margin-left: @size10;
+                line-height:  @size50;
+                
+            }
+            .v_img{
+                float: left;
+                width: @size25;
+                height: @size25;
+                margin-left: @size10;
+                margin-top: @size12;
+            }
+            .background1{
+                color: rgb(107, 184, 105);
+            }
+            .background2{
+                color: rgb(0, 157, 235);
+            }
+            .background3{
+                color:rgb(252, 202, 112);
+            }
+            .infoWexin{
+                text-align: left;
+                float: left;
+                margin-left: @size10;
+                margin-top: @size10;
+                color: rgb(129, 135, 140);
+                .span1{
+                    font-size: 10px;
+                    line-height: 10px;
+                    color: rgb(129, 135, 140);
+                }
+                .span2{
+                    font-size: 10px;
+                    line-height: 10px;
+                    margin-top: @size4;
+                    color: rgb(129, 135, 140);
+                }
+            }
+            .infoAlipay{
+                text-align: left;
+                float: left;
+                margin-left: @size10;
+                line-height: 1.3333rem;
+                color: rgb(129, 135, 140);
+                font-size: 15px;
+            }
+        }
         }
         .address{
             height: 2.3333rem;

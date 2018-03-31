@@ -12,7 +12,9 @@
                 <!-- <div class="loginCn" v-if="money==''">充值</div> -->
                 <div class="loginCn">充值</div>
             </div>
-            <div class="fr" @click='Return()'>...</div>
+            <div class="fr" @click='Return()'>
+            <img src="../../../src/assets/image/mycenter/right.png"/>
+            </div>
         </div>
         <div class="box">
             <div class="info clearfix"><span v-if="money==''" onkeyup="if(this.value.length==1){this.value=this.value.replace(/[^1-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}">金额</span>
@@ -45,21 +47,24 @@
             <div class="bor"></div>
             <div class="pay" @click="getIndex(1)" v-if="wxLogin==true">
                 <div :class="index==1 ? 'check' : 'check1'"><i class="iconfont icon-duihao"></i></div>
-                    <i :class="index==1 ? 'background1' : ''" class="iconfont icon-icon_weixinzhifu"></i>
+                    <!-- <i :class="index==1 ? 'background1' : ''" class="iconfont icon-icon_weixinzhifu"></i> -->
+                    <img class="v_img" v-if="index==1" src="../../assets/image/mycenter/wxzf.png" />
+                <img class="v_img" v-if="index!=1" src="../../assets/image/mycenter/wxzf2.png" />
                     <div class="infoAlipay">微信支付</div>
             </div>
             <div class="pay" @click="getIndex(2)" v-if="wxLogin==false">
                 <div :class="index==2 ? 'check' : 'check1'"><i class="iconfont icon-duihao"></i></div>
-                <i :class="index==2 ? 'background2' : ''" class="iconfont icon-icon_zhifubao"></i>
+                <!-- <i :class="index==2 ? 'background2' : ''" class="iconfont icon-icon_zhifubao"></i> -->
+                 <img class="v_img" v-if="index==2" src="../../assets/image/mycenter/zfb.png" />
+                <img class="v_img" v-if="index!=2" src="../../assets/image/mycenter/zfb2.png" />
                 <div class="infoAlipay">支付宝支付</div>
             </div>
             <div class="pay" @click="getIndex(3)">
                 <div :class="index==3 ? 'check' : 'check1'"><i class="iconfont icon-duihao"></i></div>
-                <i :class="index==3 ? 'background3' : ''" class="iconfont icon-icon_zhifubao"></i>
-                <div class="infoWexin">
-                        <div class="span1">转账汇款</div>
-                        <div class="span2">ATM 网银转账 柜台转账</div>
-                    </div>
+                <!-- <i :class="index==3 ? 'background3' : ''" class="iconfont icon-icon_zhifubao"></i> -->
+                 <img class="v_img" v-if="index==3" src="../../assets/image/mycenter/xxzf.png" />
+                <img class="v_img" v-if="index!=3" src="../../assets/image/mycenter/xxzf2.png" />
+                <div class="infoAlipay">转账汇款</div>
             </div>
         </div>
         <div class="prompt" v-if="prompt!=''">{{prompt}}</div>
@@ -340,6 +345,10 @@
             font-weight: bold;
             letter-spacing: @size3;
             font-size: @size20;
+            img{
+                width: 1rem;
+                margin-top: 1rem;
+            }
         }
     }
     .box{
@@ -488,6 +497,13 @@
                 margin-left: @size10;
                 line-height:  @size50;
                 
+            }
+            .v_img{
+                float: left;
+                width: @size25;
+                height: @size25;
+                margin-left: @size10;
+                margin-top: @size12;
             }
             .background1{
                 color: rgb(107, 184, 105);
