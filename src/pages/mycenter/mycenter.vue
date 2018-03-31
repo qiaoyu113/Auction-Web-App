@@ -272,6 +272,10 @@
         .headerRight{
             float: right;
             margin-top:0.3rem;
+            img{
+                padding-top: 0.4rem;
+                 width: 1rem;
+            }
         }
     }
     .box{
@@ -303,6 +307,9 @@
                 bottom:0;
                 right:0;
                 margin:auto;
+                i{
+                    font-size: @size20;
+                }
             }
         }
         .info{
@@ -327,6 +334,9 @@
                     width: 1rem;
                     float:right;
                     margin-top:0.24rem;
+                    img{
+                        width: 0.6rem;
+                    }
                 }
                 .icon-weixin1{
                     margin-right:0.2rem;
@@ -348,7 +358,6 @@
                    font-size: 13px;
                   color: #B1B1B1;
                   //  text-align: center;
-
                 }
             }
             .infoList:last-child{

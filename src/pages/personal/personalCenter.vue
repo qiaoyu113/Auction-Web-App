@@ -323,6 +323,11 @@
                 letter-spacing: @size3;
                 font-weight: bold;
                 margin-top: 1.2rem;
+                img{
+                    padding-top: 0.4rem;
+                    width: 1rem;
+                }
+
             }
         }
         .option{

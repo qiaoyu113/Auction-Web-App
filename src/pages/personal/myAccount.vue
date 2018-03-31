@@ -263,13 +263,14 @@
         .account{
             box-sizing: border-box;
             .item{
-                border-bottom: 1px solid rgb(129, 135, 140);
+                // border-bottom: 1px solid rgb(129, 135, 140);
                 padding-top: @size10;
                 text-align: center;
                 .boxx{
                     height: @size98;
                     width:9.466rem;
-                    background: blue;
+                    background-image:url('../../assets/image/mycenter/suiyuan.png');
+                    background-size: 100% 100%;
                     margin-top: @size10;
                     .money{
                         font-weight: bold;
