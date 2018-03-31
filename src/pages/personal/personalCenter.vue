@@ -109,7 +109,7 @@
                 </ul>
                 <!-- available -->
         </div>
-        <div class="give">我要送拍</div>
+        <div class="give"><p>我要送拍</p></div>
         <z-footer ></z-footer>
     </div>
 </template>
@@ -529,7 +529,8 @@
     .give{
         height: @size35;
         width: 100%;
-        background: gray;
+        background-image:url('../../assets/image/mycenter/zu8.png') ;
+        background-size: 100% 100%;
         color: white;
         position: fixed;
         left: 0;
@@ -537,6 +538,13 @@
         font-size: @size10;
         line-height: @size35;
         padding-left: @size20;
+        p{
+            margin-right: 1.4rem;
+            font-size: 10px;
+            text-align: right; 
+        }
+        
+        
     }
 }
 

@@ -175,7 +175,7 @@
                 clearTimeout(t)
                 let date=Date.parse( new Date())
                  t= setTimeout(function (){
-                    if((that.datas.mqEndTime) + (7 * 24 * 3600 * 1000) < date){
+                    if((that.datas.mqEndTime) + (7 * 24 * 3600 * 1000) > date){
                    let data =Number(that.datas.mqEndTime) + (7 * 24 * 3600 * 1000)
                     that.countdown=common.getTimer(data)
                 }else{
@@ -185,6 +185,7 @@
              }
         },
         methods: {
+
             // 首次加载判断在什么浏览器下打开
              wxshow:function(){
                  let ua = navigator.userAgent.toLowerCase();
@@ -569,8 +570,9 @@
             left: 0;
         }
        .botton{
-          height: @size45;
-          div{
+
+            height: @size45;
+          
             position: fixed;
             left: 0;
             bottom: 0;
@@ -582,7 +584,7 @@
             text-align: center;
             line-height: @size45;
             font-size: 12px;
-          }
+         
        }
 
 
