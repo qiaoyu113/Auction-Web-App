@@ -365,8 +365,12 @@ import {commonService} from '../../service/commonService.js'
                   let data =Number(that.datas.expireTime)
                  that.countdown=common.getTimer(data)
                 }
+                if(that.datas.channelId!=''){
+                  that.method=that.datas.channelId
+                }else{
+                  that.method='OFFLINE_BANK'
+                }
                 
-                that.method=that.datas.channelId
                 that.orderDetail=that.datas.orderDetail
              
                 if(that.orderDetail.finalPrice < 200000){

@@ -140,7 +140,7 @@
                         return false
                     }
                commonService.postResetpassword({phone:that.phone,smsCode:that.inputNum,type:3}).then(function(res){
-                    console.log(res)
+                   
                     if(res.data.code == 200){
                       // that.$router.go(-1);
                       that.key=res.data.datas
@@ -166,7 +166,7 @@
                     return false
                 }
                commonService.postResetpasswordtwo({phone:that.phone,random:that.key,newPassword:that.newPassword}).then(function(res){
-                    console.log(res)
+                    
                     if(res.data.code == 200){
                       // that.$router.go(-1);
                       that.$router.push({name:'login'})
@@ -197,7 +197,7 @@
                 }
                 // 获取短信验码
                  commonService.getSms({phone:that.phone,type:3,kaptchaKey:that.img.kaptchaKey,kaptchaValue:that.kaptchaValue}).then(function(res){
-                    console.log(res)
+                    
                     if(res.data.code == 200){
                       // that.$router.go(-1);
 

@@ -1242,7 +1242,7 @@
         },
         watch: {
             '$route' (to, from) {
-                console.log(from)
+              
                 let that = this;
                 that.$router.go(0)
             },

@@ -296,7 +296,7 @@
                 commonService.getOrder({pageNo:pageNum,pageSize:pageSize,status:status}).then(function(res){
                     if(res.data.code === 200){
                         let boxlist = res.data.datas.datas;
-                        console.log(boxlist)
+     
                         that.totalPage = res.data.datas.totalPage;
                       
                         successCallback&&successCallback(boxlist);//成功回调

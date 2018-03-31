@@ -110,7 +110,7 @@
                 }else{
                     that.codeShow = true;
                     let time = setInterval(function(){
-                        // console.log(that.timeOver);
+                   
                         if(that.timeOver === 0){
                             // clearInterval(time)
                             that.codeShow = false;
@@ -122,7 +122,7 @@
                 }
                 // 获取短信验码
                  commonService.getSendMessage({phone:that.phone,type:5,kaptchaKey:that.img.kaptchaKey,kaptchaValue:that.kaptchaValue}).then(function(res){
-                    console.log(res)
+               
                     if(res.data.code == 200){
                       // that.$router.go(-1);
                     }else{

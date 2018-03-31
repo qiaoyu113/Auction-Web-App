@@ -246,7 +246,7 @@
 
 
     // commonService.postBase({base64Img:that.base,width:that.width,height:that.height}).then(function(res){
-    //               console.log(res)
+    //               
     //                 if(res.data.code==200){
     //                   that.authFrontPic=res.data.datas
     //                 }else{
