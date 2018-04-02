@@ -402,6 +402,10 @@
         .contentr{
             float: right;
             margin-top: 0.3rem;
+            img{
+                width: 1rem;
+                margin-top: 0.4rem;
+            }
         }
         
     }
@@ -469,10 +473,10 @@
                     z-index: 99;
                     height:@size115;
                     width: @size115;
+                    overflow: hidden;
                     img{
-                        height:@size115;
+                        // height:@size115;
                         width: @size115;
-
                     }
                 }
                 .hig{
@@ -516,10 +520,13 @@
                     // border-radius: 6px;
                     cursor: pointer;
                     position: relative;
+                     width: @size115;
+                    height: @size115;
                     overflow: hidden;
                   }
                   .avatar-uploader .el-upload:hover {
                     border-color: #409EFF;
+
                   }
                   .avatar-uploader-icon {
                     font-size: 28px;
@@ -531,7 +538,7 @@
                   }
                   .avatar {
                     width: @size115;
-                    height: @size115;
+                    // height: @size115;
                     display: block;
                   }
             }

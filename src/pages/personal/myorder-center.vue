@@ -267,9 +267,10 @@
             upCallback: function () {
                 const that = this;
                 that.getListData(that.page.num, that.page.size,function(curPageData) {
+
                     if(that.page.num === 1)  that.myList = [];//如果是第一页需手动制空列表
                     that.myList = that.myList.concat(curPageData);    //更新列表数据
-
+                    
                     // 加载完成后busy为false，如果最后一页则lastpage为true
                     //          加载完成后给页数+1
                     if(that.page.num >= that.totalPage) {
@@ -298,10 +299,20 @@
                 }
 
                 commonService.getOrder({pageNo:pageNum,pageSize:pageSize,status:status}).then(function(res){
+                     
                     if(res.data.code == 200){
+
                         let boxlist = res.data.datas.datas;
                         that.totalPage = res.data.datas.totalPage;
                       
+                     
+                       let data=[]
+                      for(let i=0;i<that.datalist.length;i++){
+                          data[i]=Number(that.datalist[i].expireTime)
+                          that.countdown[i]=common.getTimer(data[i]) 
+                      }
+                             
+                    
                         successCallback&&successCallback(boxlist);//成功回调
                     }else{
                         let boxlist = [];
