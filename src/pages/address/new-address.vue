@@ -338,7 +338,9 @@ import {commonService} from '../../service/commonService.js'
             float: right;
             div{
                 margin-top: @size20;
-                i{
+                img{
+                  width: 1rem;
+                  margin-top: 0.2rem;
                     
                 }
             }

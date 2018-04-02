@@ -3,7 +3,7 @@
         组件要小，如遇list，只将item做成组件，其他的都写在页面中
     -->
     <!-- 个人中心-我的订单 -->
-    <div class="myAccount" id="" v-set-title="title">
+    <div class="v_myaccount" id="" v-set-title="title">
         
         <!-- <div class="header">传家</div> -->
         <div class="nav">
@@ -98,12 +98,13 @@
                 </div>
             </div>
         </div>
+
     </div>
 </template>
 
 <script >
     import {appService} from '../../service/appService'
-    import itemc from "../../component/home/item.vue";
+    import itemc from "../../component/home/item.vue"
     import {common} from '../../assets/js/common/common'
     import {commonService} from '../../service/commonService.js'
     export default {
@@ -129,17 +130,7 @@
         },
         components:{'home-item':itemc},
         syncData({store}) {
-            /*基本规则
-            * 所有不需要token的请求都放在这里
-            * 这里不出现window，document等DOM元素
-            * 这里获得的数据都要存储在store中
-            * 写法如下
-            * */
             const that = this;
-            /*
-            * 将所有的请求处理以数组放在promise中
-            * that.data().data调用数据
-            * */
             return Promise.all([
                 appervice.getParam().then(res=>{
 //                    store.state.homeStore.listImg = res.data;
@@ -165,7 +156,7 @@
             * 这里的数据可以放在data中
             * */ 
             
-            common.onMove('.myAccount')
+            common.onMove('.v_myaccount')
             this.getBails()
             this.getUsers()
 
@@ -220,25 +211,27 @@
     /*rem等基本设置都放在base中，不写多个*/
     @import url('../../assets/css/base.less');
     @import url('../../assets/css/icon/iconfont.css');
-    .myAccount{
-        position: fixed;
+    .v_myaccount{
+          position: fixed;
           left: 0;
           right: 0;
           top: 0;
-          overflow-x: scroll;
           bottom: 0;
-    .header{
-        position: fixed;
-        top: 0;
-        z-index: 100;
-        width: @size375;
-        height: @size45;
-        background:rgba(2, 10, 2, 1);
-        font-size: @size20;
-        color: white;
-        text-align: center;
-        line-height: @size45;
-    }
+          width: auto;
+          height: auto;
+            overflow-x: scroll;
+    //  .header{
+    //       position: fixed;
+    //        top: 0;
+    //     z-index: 100;
+    //     width: @size375;
+    //     height: @size45;
+    //     background:rgba(2, 10, 2, 1);
+    //     font-size: @size20;
+    //     color: white;
+    //     text-align: center;
+    //     line-height: @size45;
+    // }
     .nav{
         width: @size375;
         height: @size35;
@@ -392,6 +385,7 @@
             }
         }
     }
+
     }
 </style>
 

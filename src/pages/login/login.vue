@@ -10,18 +10,18 @@
             </div>
             <!--按钮-->
             <div class="menu">
-                <div :class="login ? 'check' : 'login'" @click="getMenu(1)">登陆</div>
+                <div :class="login ? 'check' : 'login'" @click="getMenu(1)">登录</div>
                 <div :class="!login ? 'check2' : 'register'" @click="getMenu(2)">注册</div>
             </div>
         </div>
-        <!--登陆中心-->
+        <!--登录中心-->
         <div class="box" v-if="login">
             <div class="boxHeader">
                 <div class="boxImg" >
                     <img :src="wximg" v-if="wximg!=null"/>
                 </div>
             </div>
-            <!--登陆账号-->
+            <!--登录账号-->
             <div class="info">
                 <input type="number" placeholder="输入手机号" v-model="phoneUser"/>
                 <div class="infoRight" @click="deletePhone"><i class="iconfont icon-closeicon"></i></div>
@@ -30,12 +30,17 @@
                 <input type="password" placeholder="输入密码" v-model="passwordUser"/>
                 <div class="infoRight" @click="deletePassword"><i class="iconfont icon-closeicon"></i></div>
             </div>
+              <!--微信登录-->
+            <div class="wxLogin" v-if="wximg==null&&wxLogin==true" @click="wxlogin">
+                <i class="iconfont icon-icon_weixin"></i>微信
+            </div>
             <!--联系客服-->
-            <div class="talk"><a href="javaScript:;" @click="resetpassword()"><span>登录遇到问题，联系客服</span></a></div>
-            <!--登陆和提示-->
+            <div class="talk" v-if="wximg!=null"><a href="tel:15801619600" @click="resetpassword()"><span>登录遇到问题，联系客服</span></a></div>
+            <!--登录和提示-->
             <div class="bottom">
+                <div class="v_kefu" v-if="wximg==null"><a href="javaScript:;" @click="resetpassword()">忘记密码</a> | <a href="tel:15801619600">联系客服</a></div>
                 <div class="hint" v-if="hint">{{hintText}}</div>
-                <div class="ok" @click="loginBtn">登 陆</div>
+                <div class="ok" @click="loginBtn">登 录</div>
             </div>
         </div>
         <!--注册中心-->
@@ -506,6 +511,10 @@
             .headerRight{
                 float: right;
                 margin-top:0.3rem;
+                img{
+                    width: 1rem;
+                    margin-top: 0.4rem;
+                }
             }
             .menu{
                 height:0.8rem;
@@ -642,6 +651,17 @@
             right:0;
             position: fixed;
             bottom:0;
+            .v_kefu{
+                text-align: center;
+                font-size: 10px;
+                margin-bottom: 0.2rem;
+
+                a{
+                  font-size: 10px;  
+                  text-decoration: underline; 
+                }
+               
+            }
             .hint{
                 width:100%;
                 height:0.67rem;

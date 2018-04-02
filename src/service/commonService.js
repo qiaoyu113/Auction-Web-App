@@ -277,6 +277,10 @@ export const commonService = {
         return axios.get('/ordercs' + this.getParam(params))
     },
      /* 获取售后详情  */
+    getOrdercsorderid: function (id) {
+        return axios.get('/ordercs/order/' + id)
+    },
+     /* 获取售后详情  */
     getOrdercsid: function (id) {
         return axios.get('/ordercs/' + id)
     },

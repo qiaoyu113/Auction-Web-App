@@ -31,7 +31,9 @@
             <div class="info">
                 <div class="infoList">昵称  <span>{{user.name}}</span><div class="more" @click="changeName"><img src="../../../src/assets/image/mycenter/more.png"/></div></div>
                 <div class="infoList">性别  <span v-if="radio==1">男</span><span v-if="radio==2">女</span><span v-if="radio!=2&&radio!=1">未知</span><div class="more" @click="setsex"><img src="../../../src/assets/image/mycenter/more.png"/></div></div>
-                <div class="infoList">生日  <span><input type="text" name="start_date" id="start_date" v-model="startTime" placeholder="未提交" readonly="readonly" /></span>
+                <div class="infoList">生日  
+                <span><input type="text" name="start_date" id="start_date" v-model="startTime" placeholder="未提交" readonly="readonly" /></span>
+
                 <div class="more">
                 <img src="../../../src/assets/image/mycenter/more.png"/>
             
@@ -111,7 +113,6 @@
                 service.getParam().then(res=>{
 //                    store.state.homeStore.noticelist = res.data.datas;
                 }),
-
             ])
         },
         computed: {
@@ -126,22 +127,18 @@
                 return this.$store.state.picHead
             },
         },
-
         mounted: function() {
-            common.onMove('.mycenter')
+            // common.onMove('.mycenter')
             this.getUsers()
             this.timeSelect();
-   
         },
         watch:{
             radio:function(){
                 this.sexPasswords()
-               
             },
             startTime:function(){
                 this.sexPasswords()
             }
-
         },
         methods: {
             timeSelect:function(){
@@ -151,8 +148,10 @@
             'type': 'date', //date 调出日期选择 datetime 调出日期时间选择 time 调出时间选择 ym 调出年月选择,
             'minDate': '1900-1-1', //最小日期
             'maxDate': new Date().getFullYear() + '-' + (new Date().getMonth() + 1) + '-' + new Date().getDate() //最大日期
-          });
-        },
+            });
+          },
+
+
            heigmodal:function(){
             this.$refs.modal.style.display="none"
            },
@@ -178,13 +177,13 @@
              },
              beforeAvatarUpload(file) {
             const isJPG = file.type === 'image/jpeg';
-            const isLt2M = file.size / 1024 / 1024 < 2;
-         
-
-            if (!isLt2M) {
-              this.$message.error('上传头像图片大小不能超过 2MB!');
-            }
-            return isLt2M;
+            // const isLt2M = file.size / 1024 / 1024 < 2;
+            
+             
+            // if (!isLt2M) {
+            //   this.$message.error('上传头像图片大小不能超过 2MB!');
+            // }
+            // return isLt2M;
             },
             //改电话号
             changePhone:function(){
@@ -251,12 +250,12 @@
     @import url('../../assets/css/base.less');
 
     .mycenter{
-        position: fixed;
-          left: 0;
-          right: 0;
-          top: 0;
-          overflow-x: scroll;
-          bottom: 0;
+        // position: fixed;
+        //   left: 0;
+        //   right: 0;
+        //   top: 0;
+        //   overflow-x: scroll;
+        //   bottom: 0;
     .headers{
         width:100%;
         height:3.7rem;
@@ -297,9 +296,10 @@
                 border-radius: 100%;
                 overflow: hidden;
                 img{
-                    width:100%;
-                    height:100%;
-                }
+                    width: 2.2rem;
+                    // width:100%;
+                    // height:100%;
+                 }
             }
             .boxHeaderRight{
                 width:1rem;

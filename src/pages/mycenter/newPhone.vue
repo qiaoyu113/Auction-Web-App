@@ -16,9 +16,9 @@
                 <div class="infoList">原手机号码<div class="phone">{{phone}}</div></div>
             </div>
             <!--图片-->
-            <div class="info">
+          <!--   <div class="info">
                 <div class="infoList">图片验证 <input class="codeInp" type="text" placeholder="请输入" v-model="kaptchaValue"/><div class="code" @click="getKaptchas()"><img :src="img.imageString"/></div></div>
-            </div>
+            </div> -->
             <!--短信验证码-->
             <div class="info">
                 <div class="infoList">短信验证码<input class="codeInp" type="number" placeholder="请输入" v-model="inputNum"/><div class="code" @click="getcode">获取验证码<span v-if="codeShow" style="margin:0;">({{timeOver}})</span></div></div>
@@ -72,7 +72,7 @@
              
              // this.getGaptchas()
              // this.mounted()
-             this.getKaptchas()
+             // this.getKaptchas()
         },
         methods: {
             Return:function(){
@@ -95,12 +95,12 @@
               })
             },
             // 获取图片验证码
-            getKaptchas:function(){
-                let that=this
-                 commonService.getKaptchas().then(function(res){
-                    that.img=res.data.datas
-              })
-            },
+            // getKaptchas:function(){
+            //     let that=this
+            //      commonService.getKaptchas().then(function(res){
+            //         that.img=res.data.datas
+            //   })
+            // },
  
             //获取验证码
           getcode:function(){
@@ -121,8 +121,8 @@
                     },1000)
                 }
                 // 获取短信验码
-                 commonService.getSendMessage({phone:that.phone,type:5,kaptchaKey:that.img.kaptchaKey,kaptchaValue:that.kaptchaValue}).then(function(res){
-               
+                 commonService.getSendMessage({phone:that.phone,type:5}).then(function(res){
+                    
                     if(res.data.code == 200){
                       // that.$router.go(-1);
                     }else{
@@ -162,6 +162,10 @@
         .headerRight{
             float: right;
             margin-top:0.3rem;
+            img{
+                width: 1rem;
+                margin-top: 0.4rem;
+            }
         }
     }
     .box{

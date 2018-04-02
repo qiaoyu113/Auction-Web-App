@@ -239,6 +239,10 @@
         .headerRight{
             float: right;
             margin-top:0.3rem;
+            img{
+                width: 1rem;
+                margin-top: 0.2rem;
+            }
         }
     }
     .box{

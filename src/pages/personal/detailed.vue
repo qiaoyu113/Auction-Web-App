@@ -37,11 +37,12 @@
                     <div class="infoClose">{{list.title}}</div>
                      <!-- <div class="infoClose" v-if="list.channelId=='OFFLINE_BANK'">提现</div> -->
                 </div>
-                <div class="info"><span>提现方式</span>
+                <div class="info"><span>交易方式</span>
                     <div class="infoClose">
                     <span class="span2" v-if="list.channelId=='WX_JSAPI'">微信</span>
                     <span class="span2" v-if="list.channelId=='ALIPAY_WAP'">支付宝</span>
-                    <span class="span2" v-if="list.channelId=='OFFLINE_BANK'">线下</span>
+                    <span class="span2" v-if="list.channelId=='OFFLINE_BANK'">银行卡</span></span>
+
                     </div>
                 </div>
                 <div class="info"><span>状态</span>
@@ -81,6 +82,7 @@ import {commonService} from '../../service/commonService.js'
       return {
           title:'传家',
           list:'',
+          card:'',
 
       }
     },
@@ -100,13 +102,10 @@ import {commonService} from '../../service/commonService.js'
      
              getForms:function(){
                 let that = this;
-
                 let oddNumbers=this.$route.query.id
-
                  commonService.getBailsid(oddNumbers).then(function(res){
-               
                     that.list=res.data.datas
-                    // that.card=card.bankCardAttribution(that.list.userBankCardNo)
+                    that.card=card.bankCardAttribution(that.list.userBankCardNo)
                     
                  })
             },

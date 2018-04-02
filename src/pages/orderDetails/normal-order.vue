@@ -65,7 +65,7 @@
                 </div>
             </div>
 
-            <div class="payment" v-if='index==0'>
+            <div class="payment clearfix" v-if='index==0'>
                 <div class="witpay">处理中</div>
                 <div class="btn"><a href="tel:15801619600">联系客服</a></div>
             </div>
@@ -73,7 +73,7 @@
                 <div class="witpay">待支付</div>
                 <!-- <div class="btn" @click="kshow()">更改支付方式</div> -->
             </div>
-            <div class="payment" v-if='index==1 && wxLogin==true'>
+            <div class="payment clearfix" v-if='index==1 && wxLogin==true'>
              <div class="pay" @click="methodlist('WX_JSAPI')">
                 <div :class="method=='WX_JSAPI' ? 'check' : 'check1'"><i class="iconfont icon-duihao"></i></div>
                 <img class="v_img" v-if="method=='WX_JSAPI'" src="../../assets/image/mycenter/wxzf.png" />
@@ -83,7 +83,7 @@
             </div>
 
             </div>
-            <div class="payment" v-if='index==1 && wxLogin==false'>
+            <div class="payment clearfix" v-if='index==1 && wxLogin==false'>
              <div class="pay" @click="methodlist('ALIPAY_WAP')">
                 <div :class="method=='ALIPAY_WAP' ? 'check' : 'check1'"><i class="iconfont icon-duihao"></i></div>
                 <img class="v_img" v-if="method=='ALIPAY_WAP'" src="../../assets/image/mycenter/zfb.png" />
@@ -93,7 +93,7 @@
             </div>
 
             </div>
-            <div class="payment" v-if='index==1'>
+            <div class="payment clearfix" v-if='index==1'>
              <div class="pay" @click="methodlist('OFFLINE_BANK')">
                 <div :class="method=='OFFLINE_BANK' ? 'check' : 'check1'"><i class="iconfont icon-duihao"></i></div>
                 <img class="v_img" v-if="method=='OFFLINE_BANK'" src="../../assets/image/mycenter/xxzf.png" />
@@ -170,7 +170,7 @@
                 <div class="titleEn">SHIPPING</div>
                 <div class="titleCh">物流信息</div>
                 <div class="num">运单号<span class="fr">{{logistic.nu}}</span></div>
-                <div class="num num1">快递公司<span class="fr">顺丰</span></div>
+                <div class="num num1">快递公司<span class="fr">顺丰速运</span></div>
                 <!-- <div class="num num1">预计送达<span class="fr">2018.05.11</span></div> -->
                 <div class="box">
                     
@@ -521,6 +521,7 @@ import {commonService} from '../../service/commonService.js'
             display: none;
             img{
                 margin-top: @size6;
+                width: 0.5rem;
             }
         }
         .display{
@@ -903,6 +904,7 @@ import {commonService} from '../../service/commonService.js'
                 padding: @size13 @size10;
                 font-size: @size14;
                 color: black;
+                // margin-top: 1rem;
                 span{
                     float: left;
                     font-size: @size14;
@@ -925,11 +927,14 @@ import {commonService} from '../../service/commonService.js'
                 width: @size80;
                 height: @size80;
                 padding-top:@size9;
+                overflow: hidden;
                 margin-left: @size10; 
                 display: inline-block;
                 img{
-                    width: 100%;
-                    height: 100%;
+                       width: 2.75rem;
+                      height: 2.1333rem;
+                      margin-left: -0.35rem;
+                      vertical-align: top;
                 }
             }
             .box{
@@ -1142,6 +1147,7 @@ import {commonService} from '../../service/commonService.js'
             padding-bottom: @size13;
             p{
                 font-size: @size10;
+                color:#ccc;
             }
         }
         }
@@ -1154,6 +1160,11 @@ import {commonService} from '../../service/commonService.js'
             top: 0;
             background: #eb6100;
 
+         }
+         .contents_box{
+          p{
+            color:#000;
+          }
          }
 
     }

@@ -75,7 +75,7 @@
                 <div class="pic"><img src="../../assets/image/mycenter/ph.png"/></div>
                 <div class="hel">HELLO!</div>
                 <div class="log">请登录</div>
-                <div class="link" @click="logins()">快来登录，和我们一起没羞没臊的捡漏吧！</div>
+                <div class="link" @click="logins()">快来登录，和我们一起没羞没臊的捡漏吧</div>
             </div>
             <div class="center">
                 <div class="address  clearfix">
@@ -90,7 +90,9 @@
                 </ul>
                 <!-- available -->
         </div>
-        <div class="give"><p>我要送拍</p></div>
+        <div class="give">
+           <p><a href="tel:15801619600">我要送拍</a></p>
+        </div>
         <z-footer ></z-footer>
     </div>
 </template>
@@ -148,6 +150,7 @@
         },
         mounted: function() {
             common.onMove('.personalCenter')
+            common.onMove2('.sell-spic')
             this.getFootPrint()
           
         },
@@ -236,7 +239,7 @@
         line-height: @size45;
     }
     .content{
-        margin-top: @size45;
+        // margin-top: @size45;
         padding:0 @size10;
         .box{
             height: 3.4rem;
@@ -415,11 +418,13 @@
             }
             .log{
                 font-size:@size12;
+                font-size: 12px;
             }
             .link{
+                font-size: 10px;
                 padding-top: @size25;
                 text-decoration: underline;
-                color: red;
+                color: rgb(237, 121, 60);
                 a{
                     font-size: @size10;
                     color: red;
@@ -445,10 +450,11 @@
                     height: @size80;
                     margin-left: @size5;
                     background: gray;
-                    
                     img {
-                        width: @size80;
-                        height: @size80;
+                      width: 2.75rem;
+                      height: 2.1333rem;
+                      margin-left: -0.35rem;
+                      vertical-align: top;
                     }
                     .xiajia{
                     position: absolute;
@@ -490,6 +496,10 @@
             margin-right: 1.4rem;
             font-size: 10px;
             text-align: right; 
+            a{
+                color: #fff;
+                font-size: 12px;
+            }
         }
     }
 }

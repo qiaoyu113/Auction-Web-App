@@ -12,7 +12,7 @@
         <!-- <div class="header">传家</div> -->
         <div class="nav">
             <span class="" @click="Return()">&lt;</span> 
-            <span class="span1" :class="index>2||index==0 ? 'display':'' ">c</span>
+            <span class="span1" :class="index>2||index==0 ? 'display':'' "><img src="../../assets/image/mycenter/sc.png" /></span>
         </div>
         <div class="content">
             <div class="state">
@@ -101,10 +101,7 @@ import {commonService} from '../../service/commonService.js'
           id:this.$route.query.id,
           order:'',
           lists:'',
-          adress:'',
-
-        
-          
+          adress:'',   
       }
     },
     components: {},
@@ -146,7 +143,10 @@ import {commonService} from '../../service/commonService.js'
           // 获取售后详情
         getOrdercsid:function(){
                 let that=this;
-               commonService.getOrdercsid(that.id).then(function(res){
+               let type=this.$route.query.type
+                if(type=='cs'){
+               commonService.getOrdercsorderid(that.id).then(function(res){
+
                     if(res.data.code==200){
                      that.datas=res.data.datas
                     
@@ -164,6 +164,27 @@ import {commonService} from '../../service/commonService.js'
                       
                     }
                 })
+               }else{
+                   commonService.getOrdercsid(that.id).then(function(res){
+                
+                    if(res.data.code==200){
+                     that.datas=res.data.datas
+                    
+                     that.orderNo=that.datas.orderNo
+                     that.getOrderid()
+                     if(that.datas.status==2){
+                         that.index=1
+                     }else if(that.datas.status==3||that.datas.status==5||that.datas.status==7||that.datas.status==9){
+                          that.index=2
+                     }else if(that.datas.status==8){
+                          that.index=3
+                     }else if(that.datas.status==6){
+                          that.index=0
+                     }
+                      
+                    }
+                })
+               }
             },
 
        
@@ -213,6 +234,10 @@ import {commonService} from '../../service/commonService.js'
             float: right;
             padding-right: 20px;
             display: none;
+             img{
+                width: @size20;
+                margin-top: @size5;
+            }
         }
         .display{
             display: block;
@@ -355,10 +380,13 @@ import {commonService} from '../../service/commonService.js'
                 height: @size80;
                 padding-top:@size9;
                 margin-left: @size10; 
+                overflow: hidden;
                 display: inline-block;
                 img{
-                    width: 100%;
-                    height: 100%;
+                      width: 2.75rem;
+                      height: 2.1333rem;
+                      margin-left: -0.35rem;
+                      vertical-align: top;
                 }
             }
             .box{

@@ -24,7 +24,7 @@
                 
             </div>
         <div class="text" v-for="lists in datas" v-if="lists.order==order">
-            <div class="time">更新时间：{{lists.createTime | stampFormate2}}</div>
+            <div class="time">更新时间：{{lists.createTime | stampFormate}}</div>
          <!--    <div class="box">
                 <div class="tit">保证金说明</div>
                 <p class="txt">为了维护拍卖交易秩序，保障平台用户的合法权益，以下规则请大家务必遵守</p>
@@ -183,6 +183,9 @@
                   top: 0;
                  overflow-x: scroll;
                   bottom: 0;
+                  div{
+                    font-size: 12px;
+                  }
               }
 
             .font{

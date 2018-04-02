@@ -105,10 +105,14 @@ import {commonService} from '../../service/commonService.js'
          getOrderid:function(){
             let that=this;
             commonService.getOrderid(that.orderNo).then(function(res){
+                console.log(res)
                 if(res.data.code==200){
                   that.datas=res.data.datas
-                 let payLogs=that.datas.payLogs
-                 that.time=payLogs[payLogs.length-1]
+                  if(that.datas.payLogs!=null){
+                  let payLogs=that.datas.payLogs
+                  that.time=payLogs[payLogs.length-1]
+                  }
+                 
 
                 that.orderDetail=that.datas.orderDetail
                  if(that.orderDetail.finalPrice < 200000){
@@ -169,7 +173,7 @@ import {commonService} from '../../service/commonService.js'
             padding-right: 20px;
             display: none;
             img{
-                width: @size30;
+                width: @size20;
                 margin-top: @size5;
             }
         }
@@ -274,11 +278,14 @@ import {commonService} from '../../service/commonService.js'
                 width: @size80;
                 height: @size80;
                 padding-top:@size9;
+                overflow: hidden;
                 margin-left: @size10; 
                 display: inline-block;
                 img{
-                    width: 100%;
-                    height: 100%;
+                    width: 2.75rem;
+                      height: 2.1333rem;
+                      margin-left: -0.35rem;
+                      vertical-align: top;
                 }
             }
             .box{

@@ -424,6 +424,7 @@
         text-align: center;
         line-height: 1.2rem;
         font-size: 15px;
+        background: #fff;
     }
    }
 </style>

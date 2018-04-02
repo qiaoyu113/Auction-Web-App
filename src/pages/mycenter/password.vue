@@ -270,24 +270,25 @@
             width: 100%;
             position: fixed;
             left: 0;
-            bottom: 1.4rem;
-          
-                font-size: 14px;
-                line-height: 20px;
-                color: red;
-                text-align: center;
+            bottom: 1.2rem;
+            font-size: 14px;
+            line-height: 20px;
+            color: red;
+            text-align: center;
+            background:linear-gradient(70deg, #DC704A, #F44EA0);
             
         }
         .save{
             width:100%;
-            height:1.4rem;
-            line-height:1.4rem;
+            height:1.2rem;
+            line-height:1.2rem;
             text-align: center;
             position: fixed;
             left:0;
             right:0;
             bottom:0;
             border-top:1px solid #1A242E;
+            background: #fff;
         }
     }
 }

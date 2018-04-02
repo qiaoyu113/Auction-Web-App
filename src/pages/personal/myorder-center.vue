@@ -10,7 +10,7 @@
             <span class="font fl" :class="index==1 ? 'check' : ''" @click='getIndex(1)'>待付款</span>
             <span class="font fl" :class="index==2 ? 'check' : ''" @click='getIndex(2)'>待收货</span>
             <span class="font fl" :class="index==3 ? 'check' : ''" @click='getIndex(3)'>售后</span>
-            <span class="span1" @click="rto()"><img src="../../assets/image/mycenter/c3.png" /></span>
+            <span class="span1" @click="rto()"><img src="../../assets/image/mycenter/icon1.png" /></span>
         </div>
     <div id="myorder-center">
         <div id="mescroll" class="mescroll notatarts">
@@ -36,11 +36,12 @@
                     <span class="fr" v-if="list.status==5&&list.csStatus==2">售后中</span>
                     <span class="fr" v-if="list.status==5&&list.csStatus==3">售后中</span>
                     <span class="fr" v-if="list.status==5&&list.csStatus==4">已完成</span>
-                    <span class="fr" v-if="list.status==5&&list.csStatus==5">售后中</span>
+                    <span class="fr" v-if="list.status==5&&list.csStatus==5">已完成</span>
                     <span class="fr" v-if="list.status==5&&list.csStatus==6">已完成</span>
-                    <span class="fr" v-if="list.status==5&&list.csStatus==7">售后中</span>
+
+                   <!--  <span class="fr" v-if="list.status==5&&list.csStatus==7">售后中</span>
                     <span class="fr" v-if="list.status==5&&list.csStatus==8">已完成</span>
-                    <span class="fr" v-if="list.status==5&&list.csStatus==9">售后中</span>
+                    <span class="fr" v-if="list.status==5&&list.csStatus==9">售后中</span> -->
                     <div class="time fr" v-if="list.status==1">
                         <div class="fr num">{{countdown[index].ss}}</div>
                         <div class="fr colon">:</div>
@@ -118,6 +119,7 @@
                 page:{num:1,size:10},
                 isShowNoMore:false,
                 totalPage:'',
+
             }
         },
         components:{'home-item':itemc},
@@ -146,9 +148,10 @@
         },
         mounted: function() {
             
-             // common.onMove('.myorder-center')
+             common.onMove('#mescroll')
             this.routers()
             // this.getOrder()
+
             this.getOrdercs()
             this.meScroll()
             
@@ -192,13 +195,13 @@
                 if(type==6){
                     this.$router.push({path:"/closeorder",query:{id:id}})  
                 }else if(type==5 && csStatus!=0){
-                     this.$router.push({path:"/afterorder",query:{id:id}}) 
+                     this.$router.push({path:"/afterorder",query:{id:id,type:'whole'}}) 
                 }else{
                     this.$router.push({path:"/normalorder",query:{id:id}}) 
                 }
             },
             shouhou:function(type,id){
-                  this.$router.push({path:"/afterorder",query:{id:id}})    
+                  this.$router.push({path:"/afterorder",query:{id:id,type:'cs'}})    
             },
             // 获取我的订单
             getOrder:function(){
@@ -265,7 +268,8 @@
                 const that = this;
                 that.getListData(that.page.num, that.page.size,function(curPageData) {
                     if(that.page.num === 1)  that.myList = [];//如果是第一页需手动制空列表
-                    that.myList = that.myList.concat(curPageData); //更新列表数据
+                    that.myList = that.myList.concat(curPageData);    //更新列表数据
+
                     // 加载完成后busy为false，如果最后一页则lastpage为true
                     //          加载完成后给页数+1
                     if(that.page.num >= that.totalPage) {
@@ -294,9 +298,8 @@
                 }
 
                 commonService.getOrder({pageNo:pageNum,pageSize:pageSize,status:status}).then(function(res){
-                    if(res.data.code === 200){
+                    if(res.data.code == 200){
                         let boxlist = res.data.datas.datas;
-                   
                         that.totalPage = res.data.datas.totalPage;
                       
                         successCallback&&successCallback(boxlist);//成功回调
@@ -324,7 +327,7 @@
                             evt._isScroller = true
                     })
                 };
-                overscroll(document.querySelector('.myorder-center'));
+                overscroll(document.querySelector('#mescroll'));
                 document.body.addEventListener('touchmove', function(evt) {
                     if(!evt._isScroller) {
                         evt.preventDefault()
@@ -347,6 +350,7 @@
         position: fixed;
         left: 0;
         top:0;
+        z-index: 999;
         width: @size375;
         height: @size35;
         border-bottom: 0.5px solid rgb(53, 60, 70);
@@ -393,17 +397,17 @@
 
 
     #myorder-center{
-        overflow: hidden;
+        // overflow: hidden;
         #mescroll{
             width:100%;
             max-width:10rem;
             position: fixed;
-            top: @size36;
-            bottom:0;
+            top: 2rem;
+            bottom:1rem;
             left:0;
             right:0;
             margin:auto;
-            height:auto;
+            // height:auto;
             overflow-y: scroll;
             -webkit-overflow-scrolling:touch;
         }
@@ -429,7 +433,7 @@
 
     .content{
         // margin-top: @size80;
-        margin-bottom: 1.2rem;
+        // margin-bottom: 1.2rem;
         padding:0 @size10;
         .account{
             box-sizing: border-box;
@@ -450,8 +454,9 @@
                     margin-top: @size10;
                     border-left: 1px solid #ccc;
                     img{
-                        width: @size20;
-                        height: @size20;
+                        width: @size16;
+                        height: @size16;
+                        margin-top: @size2;
                         margin-left: @size4;
                     }
 
@@ -494,9 +499,14 @@
                     width: @size80;
                     height: @size80;
                     padding: @size15 0 0 @size10;
+                    overflow: hidden;
                     img{
-                        width: 100%;
-                        height: 100%;
+                        // width: 100%;
+                        // height: 100%;
+                        width: 2.75rem;
+                      height: 2.1333rem;
+                      margin-left: -0.35rem;
+                      vertical-align: top;
                     }
                 }
                 .info{
@@ -518,13 +528,16 @@
                         padding-top:@size3 ;
                     }
                     .fr{
-                        border: 1px solid rgb(202, 209, 217);
+                        border: 1px solid rgb(51, 51, 51);
                         margin-left: @size10;
                         background: white;
                         outline: none;
                         height: @size25;
                         width: 1.8666rem;
                         font-size: @size10;
+                    }
+                    button{
+                        color:rgb(51, 51, 51);
                     }
                 }
                 

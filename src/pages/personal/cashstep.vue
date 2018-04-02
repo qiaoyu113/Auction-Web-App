@@ -745,11 +745,12 @@ import {commonService} from '../../service/commonService.js'
         bottom:0;
         width: @size375;
         height: 1.2rem;
-		box-sizing: border-box;
+	    	box-sizing: border-box;
         border-top:1px solid rgb(53, 60, 70); 
         text-align: center;
         line-height: 1.2rem;
         font-size: 15px;
+        background: #fff;
     }
   }
     

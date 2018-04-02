@@ -8,8 +8,8 @@
         <!-- <div class="header">传家</div> -->
         <div class="content" v-if="logined">
             <div class="box clearfix ">
-                <div class="boxImg fl" @click="mycenter()">
-                    <img :src="picHead + list.headImg" alt="" :onerror="errorImg01"/>
+                <div class="v_boxImg fl" @click="mycenter()">
+                    <div class="v_img"><img :src="picHead + list.headImg" alt="" :onerror="errorImg01"/></div>
                     <div class="member">
                     <img v-if="list.vipLevel==1" src="../../../src/assets/image/mycenter/v1.png"/>
                     <img v-if="list.vipLevel==2" src="../../../src/assets/image/mycenter/v2.png"/>
@@ -21,11 +21,11 @@
                     <div class="hel">HELLO!</div>
                     <div class="name">{{list.name}}</div>
                     <div class="prove" v-if="list.realNameStatus==2">
-                        <i class="iconfont icon-duigoudunpai"></i>&nbsp;实名认证
+                        <img src="../../../src/assets/image/mycenter/rzIcon.png"/>&nbsp;实名认证
                     </div>
                 </div>
                 <div class="fr" @click="mycenter()">
-                 <img src="../../../src/assets/image/mycenter/right.png"/>
+                 <img src="../../../src/assets/image/mycenter/more.png"/>
                 </div>
             </div>
             <div class="option clearfix">
@@ -109,7 +109,7 @@
                 </ul>
                 <!-- available -->
         </div>
-        <div class="give"><p>我要送拍</p></div>
+        <div class="give"><p><a href="tel:15801619600">马上送拍</a></p></div>
         <z-footer ></z-footer>
     </div>
 </template>
@@ -168,6 +168,7 @@
         },
         mounted: function() {
             common.onMove('.personalCenter')
+            common.onMove2('.sell-spic')
             this.getUsers()
             this.getFootPrint()
 
@@ -272,22 +273,29 @@
         line-height: @size45;
     }
     .content{
-        margin-top: @size45;
+        // margin-top: @size45;
         padding:0 @size10;
         .box{
             height: 3.4rem;
             width: 100%;
             border-bottom: 1px solid rgb(51, 51, 51);
-            .boxImg{
+            .v_boxImg{
                 width: 1.73rem;
                 height: 1.73rem;
-                padding: 0.866rem 0 0 @size20;
+                margin: 0.866rem 0 0 @size20;
+               
                 position: relative;
+                .v_img{
+                    width: 1.73rem;
+                    height: 1.73rem;
+                    border-radius: 50%;
+                    overflow: hidden;
                 img{
                     width: 100%;
-                    height: 100%;
-                    border-radius: 50%;
+                    // height: 100%;
+                     
                 }
+               }
                
                 .member{
                     width: 0.5rem;
@@ -320,11 +328,12 @@
                     line-height: @size14;
                 }
                 .prove{
-                        font-size: 8px;
+                        font-size: 10px;
+                        line-height: 12px;
                         color:rgb(133, 133, 133);
                         padding-top:@size3 ;
-                        i{
-                            color: rgb(0, 184, 176)
+                        img{
+                            width: 12px;
                         }
                 }
             }
@@ -333,8 +342,9 @@
                 font-weight: bold;
                 margin-top: 1.2rem;
                 img{
-                    padding-top: 0.4rem;
-                    width: 1rem;
+                    padding-top: 0.8rem;
+                    width: 0.8rem;
+                    margin-right: 0.4rem;
                 }
 
             }
@@ -350,7 +360,7 @@
                     height: @size18;
                     display: inline-block;
                     margin-top: @size30;
-                    margin-left: @size35;
+                    margin-left: @size30;
                     position: relative;
                     i{
                         width: 100%;
@@ -358,14 +368,14 @@
                         font-size: @size20;
                     }
                     img{
-                        width: @size22;
-                        height: @size22;
+                        width: @size30;
+                        height: @size30;
                         
                     }
                     .number{
                       position: absolute;
-                      right: -@size6;
-                      top: -@size6;
+                      right: -@size10;
+                      top: -@size2;
                       width: @size14;
                       height: @size14;
                       background: red;
@@ -378,7 +388,7 @@
                     }
                 }
                 .font{
-                    font-size: @size15;
+                    font-size: 10px;
                     text-align: center;
                     padding-top: @size10;
                     font-size: @size10;
@@ -457,6 +467,7 @@
             text-align: center;
             .pic{
                 padding-top: 3rem;
+
                 span{
                     font-size: @size80;
                 }
@@ -497,10 +508,14 @@
                     height: @size80;
                     margin-left: @size5;
                     background: gray;
+                    overflow: hidden;
                     
                     img {
-                        width: @size80;
-                        height: @size80;
+                        // width: @size80;
+                       width: 2.75rem;
+                      height: 2.1333rem;
+                      margin-left: -0.35rem;
+                      vertical-align: top;
                     }
                     .xiajia{
                     position: absolute;
@@ -542,6 +557,10 @@
             margin-right: 1.4rem;
             font-size: 10px;
             text-align: right; 
+            a{
+                color: #fff;
+                font-size: 12px;
+            }
         }
         
         
