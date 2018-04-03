@@ -3,7 +3,7 @@
         组件要小，如遇list，只将item做成组件，其他的都写在页面中
     -->
     <!-- 个人中心-我的订单 -->
-    <div class="v_myaccount" id="" v-set-title="title">
+    <div class="v_myaccount" v-set-title="title">
         
         <!-- <div class="header">传家</div> -->
         <div class="nav">
@@ -105,6 +105,7 @@
 <script >
     import {appService} from '../../service/appService'
     import itemc from "../../component/home/item.vue"
+
     import {common} from '../../assets/js/common/common'
     import {commonService} from '../../service/commonService.js'
     export default {
@@ -156,7 +157,8 @@
             * 这里的数据可以放在data中
             * */ 
             
-            common.onMove('.v_myaccount')
+            // common.onMove('.v_myaccount')
+            this.onMove()
             this.getBails()
             this.getUsers()
 
@@ -201,6 +203,32 @@
                     that.wallet=res.data.datas.user.wallet
               })
             },
+             //页面滑动问题
+            onMove:function(){
+                let overscroll = function(el) {
+                    el.addEventListener('touchstart', function() {
+                        let top = el.scrollTop
+                            , totalScroll = el.scrollHeight
+                            , currentScroll = top + el.offsetHeight;
+                        if(top === 0) {
+                            el.scrollTop = 1
+                        } else if(currentScroll === totalScroll) {
+                            el.scrollTop = top - 1
+                        }
+                    });
+                    el.addEventListener('touchmove', function(evt) {
+                        if(el.offsetHeight < el.scrollHeight)
+                            evt._isScroller = true
+                    })
+
+                };
+                overscroll(document.querySelector('.content'));
+                document.body.addEventListener('touchmove', function(evt) {
+                    if(!evt._isScroller) {
+                        evt.preventDefault()
+                    }
+                })
+            },
             
         }
     }
@@ -212,27 +240,10 @@
     @import url('../../assets/css/base.less');
     @import url('../../assets/css/icon/iconfont.css');
     .v_myaccount{
-          position: fixed;
-          left: 0;
-          right: 0;
-          top: 0;
-          bottom: 0;
-          width: auto;
-          height: auto;
-            overflow-x: scroll;
-    //  .header{
-    //       position: fixed;
-    //        top: 0;
-    //     z-index: 100;
-    //     width: @size375;
-    //     height: @size45;
-    //     background:rgba(2, 10, 2, 1);
-    //     font-size: @size20;
-    //     color: white;
-    //     text-align: center;
-    //     line-height: @size45;
-    // }
+          
+
     .nav{
+       
         width: @size375;
         height: @size35;
         border-bottom: 0.5px solid rgb(53, 60, 70);
@@ -250,9 +261,15 @@
         
     }
     .content{
-     
-        margin-bottom: 1.2rem;
-        padding:0 @size10;
+            width:100%;
+            max-width:10rem;
+            position: fixed;
+            top: @size36;
+            bottom:1.2rem;
+            left:0;
+            right:0;
+            overflow-y: scroll;
+            -webkit-overflow-scrolling:touch;
         .account{
             box-sizing: border-box;
             .item{
@@ -334,7 +351,8 @@
                 }
         }
         .cashDetail{
-            box-sizing: border-box;
+            
+            // box-sizing: border-box;
             .address{
                 // box-sizing: border-box;
                 height: @size35;

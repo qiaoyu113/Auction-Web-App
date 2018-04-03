@@ -267,8 +267,8 @@ import {commonService} from '../../service/commonService.js'
                 position: relative;
                 top: @size25;
                 .circle{
-                    width: @size9;
-                    height: @size9;
+                    width: @size6;
+                    height: @size6;
                     border-radius: 50%;
                     border: 3px solid rgb(21, 179, 187);
                     display: inline-block;
@@ -297,7 +297,8 @@ import {commonService} from '../../service/commonService.js'
                 .label {
                     margin-left: -1.5rem;
                     margin-right: -1.5rem; 
-                    text-align: center;   
+                    text-align: center;  
+                    font-size: 10px; 
                     
                     .label1{
                         float: left;
@@ -414,7 +415,7 @@ import {commonService} from '../../service/commonService.js'
         .totalMoney{
             height: @size40;
             width: 8.933rem;
-            border-bottom: 1px solid rgb(129, 135, 140);
+            border-bottom: 1px solid rgb(231, 236, 239);
             margin-left: @size10;
             line-height: @size40;
             .fl{
@@ -466,7 +467,11 @@ import {commonService} from '../../service/commonService.js'
         border-top:1px solid rgb(53, 60, 70); 
         text-align: center;
         line-height: 1.2rem;
-        font-size: 15px;
+        a{
+           font-size: 10px; 
+        }
+        
+
     }
     //到账周期说明弹窗
 .dis{

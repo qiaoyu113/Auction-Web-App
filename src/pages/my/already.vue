@@ -281,6 +281,8 @@
                 let that =this;
                 commonService.getCheckOrder({auctionId:id}).then(function(res){
                     // that.datas=res.data.datas.datas
+                   
+                   
                     if(res.data.datas==null){
                          that.$router.push({path:"/my/order",query:{auctionId:id}}) 
                     }else{
@@ -331,6 +333,7 @@
                 that.getListData(that.page.num, that.page.size,function(curPageData) {
                     if(that.page.num === 1)  that.myList = [];//如果是第一页需手动制空列表
                     that.myList = that.myList.concat(curPageData); //更新列表数据
+
                     // 加载完成后busy为false，如果最后一页则lastpage为true
                     //          加载完成后给页数+1
                     if(that.page.num >= that.totalPage) {

@@ -586,8 +586,8 @@ import {commonService} from '../../service/commonService.js'
                 position: relative;
                 top: @size25;
                 .circle{
-                    width: @size9;
-                    height: @size9;
+                    width: @size6;
+                    height: @size6;
                     border-radius: 50%;
                     border: 3px solid red;
                     display: inline-block;
@@ -611,8 +611,8 @@ import {commonService} from '../../service/commonService.js'
                 .label {
                     margin-left: -1.5rem;
                     margin-right: -1.5rem; 
-                    text-align: center;   
-                    
+                    text-align: center;  
+                    font-size: 10px; 
                     .label1{
                         float: left;
                         color: red;

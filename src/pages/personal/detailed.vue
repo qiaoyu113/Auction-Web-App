@@ -41,7 +41,7 @@
                     <div class="infoClose">
                     <span class="span2" v-if="list.channelId=='WX_JSAPI'">微信</span>
                     <span class="span2" v-if="list.channelId=='ALIPAY_WAP'">支付宝</span>
-                    <span class="span2" v-if="list.channelId=='OFFLINE_BANK'">银行卡</span></span>
+                    <span class="span2" v-if="list.channelId=='OFFLINE_BANK'">银行卡</span>
 
                     </div>
                 </div>
@@ -207,7 +207,8 @@ import {commonService} from '../../service/commonService.js'
                     line-height: @size14;
                     font-size:@size10;
                     text-align: right;
-                    padding-top: @size6;
+                    line-height: 1.02rem;
+                    // padding-top: @size6;
     
                 }
                 

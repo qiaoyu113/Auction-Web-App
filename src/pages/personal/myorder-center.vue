@@ -307,8 +307,8 @@
                       
                      
                        let data=[]
-                      for(let i=0;i<that.datalist.length;i++){
-                          data[i]=Number(that.datalist[i].expireTime)
+                      for(let i=0;i<boxlist.length;i++){
+                          data[i]=Number(boxlist[i].expireTime)
                           that.countdown[i]=common.getTimer(data[i]) 
                       }
                              
@@ -413,7 +413,7 @@
             width:100%;
             max-width:10rem;
             position: fixed;
-            top: 2rem;
+            top: 3rem;
             bottom:1rem;
             left:0;
             right:0;

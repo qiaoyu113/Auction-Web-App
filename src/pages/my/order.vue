@@ -174,14 +174,16 @@
                 let t;
                 clearTimeout(t)
                 let date=Date.parse( new Date())
+               
+                if((that.datas.mqEndTime) + (7 * 24 * 3600 * 1000) > date){
                  t= setTimeout(function (){
-                    if((that.datas.mqEndTime) + (7 * 24 * 3600 * 1000) > date){
+                    
                    let data =Number(that.datas.mqEndTime) + (7 * 24 * 3600 * 1000)
                     that.countdown=common.getTimer(data)
-                }else{
+                },1000)
+               }else{
                       that.countdown=common.getTimer(date + 1000)
                 }
-                },1000)
              }
         },
         methods: {
@@ -288,12 +290,16 @@
     /*rem等基本设置都放在base中，不写多个*/
     @import url('../../assets/css/base.less');
     .order{
-        position: fixed;
-          left: 0;
-          right: 0;
-          top: 0;
-          overflow-x: scroll;
-          bottom: 0;
+       
+            width:100%;
+            max-width:10rem;
+            position: fixed;
+            top: 0;
+            bottom:1.2rem;
+            left:0;
+            right:0;
+            overflow-y: scroll;
+            -webkit-overflow-scrolling:touch;
        .top{
           padding: @size50 @size20;
           border-bottom: 2px solid rgb(53,60,70);
