@@ -29,7 +29,31 @@
             <div class="info"><span>所在地区</span>
                 <!-- <input type="" placeholder="请选择"/> -->
            <span class="diqu">
-        	<select id="citySel" @change="selChange()">
+            <el-select v-model="provinceIndex" filterable placeholder="请选择" @change="selChange()" class="select-city">
+                <el-option
+                        v-for="item,index in province"
+                        :key="item.id"
+                        :label="item.name"
+                        :value="index+1">
+                </el-option>
+            </el-select>
+            <el-select v-model="cityIndex" filterable placeholder="请选择" @change="selChange2()" class="select-city">
+                <el-option
+                        v-for="item,index in city"
+                        :key="item.id"
+                        :label="item.name"
+                        :value="index+1">
+                </el-option>
+            </el-select>
+            <el-select v-model="countyIndex" filterable placeholder="请选择" @change="selChange3()" class="select-city">
+                <el-option
+                        v-for="item,index in county"
+                        :key="item.id"
+                        :label="item.name"
+                        :value="index+1">
+                </el-option>
+            </el-select>
+        	<!--<select id="citySel" @change="selChange()">
         	    <option>请选择</option>
         		<option v-for="list in province">{{list.name}}</option>
         	</select>
@@ -40,7 +64,7 @@
         	<select id="citySel3" @change="selChange3()">
         	    <option>请选择</option>
         		<option v-for="list in county">{{list.name}}</option>
-        	</select>
+        	</select>-->
         </span>
                 <div class="infoClose"><i>. . .</i></div>
             </div>
@@ -89,10 +113,14 @@ import {commonService} from '../../service/commonService.js'
         addressid:'',//地址id
         defaultAdress:'',//是否是默认地址
         prompt:'',
+          provinceIndex:'',
+          cityIndex:'',
+          countyIndex:'',
 
       }
     },
-     syncData({store}) {
+//      components:{'city-picker':city},
+      syncData({store}) {
       const that = this;
       return Promise.all([
         appervice.getCitys().then(res=>{
@@ -202,10 +230,9 @@ import {commonService} from '../../service/commonService.js'
             },
             // 选择省
             selChange:function(){
-
-            	var  Sel=document.getElementById("citySel");
+                var  Sel=document.getElementById("citySel");
             	// var oTxt = document.getElementById('citySel2').select();
-            	var index=Sel.selectedIndex;
+            	var index=this.provinceIndex;
             	if(index!=0){
             	this.provinceid=this.province[index-1].cityId
             	this.provinceName=this.province[index-1].name	
@@ -218,8 +245,8 @@ import {commonService} from '../../service/commonService.js'
             },
             // 选择市
              selChange2:function(){
-            	var  Sel=document.getElementById("citySel2");
-            	var index=Sel.selectedIndex;
+//            	var  Sel=document.getElementById("citySel2");
+            	var index=this.cityIndex;
             	if(index!=0){
                   this.cityid=this.city[index-1].cityId
                   this.cityName=this.city[index-1].name
@@ -231,8 +258,8 @@ import {commonService} from '../../service/commonService.js'
             },
             // 选择县
               selChange3:function(){
-            	var  Sel=document.getElementById("citySel3");
-            	var index=Sel.selectedIndex;
+//            	var  Sel=document.getElementById("citySel3");
+            	var index=this.countyIndex;
             	if(index!=0){
                 this.countyid=this.county[index-1].cityId
             	this.countyName=this.county[index-1].name
@@ -482,6 +509,19 @@ import {commonService} from '../../service/commonService.js'
         line-height: 1.2rem;
         font-size: 15px;
     }
+        .select-city.el-select {
+            height: 38px;
+            line-height: 38px;
+            display: inline-block;
+            width: 1.8rem;
+            overflow: hidden;
+            span{
+                display: none;
+            }
+        }
 }
+    .el-select-dropdown {
+        margin-top: 40px!important;
+    }
 </style>
 
