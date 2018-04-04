@@ -1,5 +1,5 @@
 <template>
-
+ <div class="v_order">
     <div class="order">
         <div class="top">
             <p class="top_p1">PLACE ORDER</p>
@@ -109,9 +109,10 @@
                     </div>
                 </div>
         </div>
+        </div>
          <div class="saves" v-if="htmlx!=''">{{htmlx}}</div>
         <div class="botton" @click="postOrders()">
-            <div>提交订单</div>
+            提交订单
         </div>
 
     </div>
@@ -289,13 +290,14 @@
 <style lang="less">
     /*rem等基本设置都放在base中，不写多个*/
     @import url('../../assets/css/base.less');
+    .v_order{
     .order{
        
             width:100%;
             max-width:10rem;
             position: fixed;
             top: 0;
-            bottom:1.2rem;
+            bottom:1.88rem;
             left:0;
             right:0;
             overflow-y: scroll;
@@ -563,7 +565,9 @@
                     }
             }
        }
-       .saves{
+       
+    }
+ .saves{
            width:100%;
            height:0.67rem;
            line-height:0.67rem;
@@ -576,24 +580,20 @@
             left: 0;
         }
        .botton{
-
-            height: @size45;
-          
+            height: 1.2rem;
             position: fixed;
             left: 0;
             bottom: 0;
-            z-index: 999;
+            // z-index: 999;
             width: 100%;
-            height: @size45;
+            height: 1.2rem;
             background: #fff;
             border-top: 1px solid rgb(53,60,70);
             text-align: center;
-            line-height: @size45;
-            font-size: 12px;
-         
+            color:#000;
+            line-height: 1.2rem;
+            font-size: 10px;
        }
-
-
-    }
+  }
 </style>
 

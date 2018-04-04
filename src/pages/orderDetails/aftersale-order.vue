@@ -55,7 +55,7 @@
                 <a class="fr" @click="open()">查看说明</a>
             </div>
             <div class="itemInfo clearfix">
-                <div class="pic fl"><img v-if="order.picItems!=null" :src="picHead + order.picItems[0]" alt=""></div>
+                <div class="pic fl"  @click="Routerid(order.auctionId)"><img v-if="order.picItems!=null" :src="picHead + order.picItems[0]" alt=""></div>
                 <div class="box fl">
                     <div class="money">{{order.finalPrice | money}}CNY</div>
                     <div class="title">{{order.auctionName}}</div>
@@ -92,7 +92,7 @@ import {commonService} from '../../service/commonService.js'
     props: ['str'],
     data () {
       return {
-          title:'售后服务',
+          title:'传家',
           arrays: [],
           index:1,
           dis:'dis',
@@ -121,6 +121,9 @@ import {commonService} from '../../service/commonService.js'
         Return:function(){
             this.$router.push({path:"/myorder",query:{index:3}})
         },
+        Routerid:function(id){
+            this.$router.push({name:'auctionMore',params:{id:id}})
+        },
         open:function(){
             // this.dis='';
              this.$router.push({path:"/helpcenter",query:{index:5}})
@@ -132,6 +135,7 @@ import {commonService} from '../../service/commonService.js'
         getOrderid:function(){
             let that=this
             commonService.getOrderid(that.orderNo).then(function(res){
+                
                 if(res.data.code==200){
                  that.order=res.data.datas.orderDetail
                  that.lists=res.data.datas
@@ -146,7 +150,7 @@ import {commonService} from '../../service/commonService.js'
                let type=this.$route.query.type
                 if(type=='cs'){
                commonService.getOrdercsorderid(that.id).then(function(res){
-
+               
                     if(res.data.code==200){
                      that.datas=res.data.datas
                     
@@ -201,7 +205,7 @@ import {commonService} from '../../service/commonService.js'
           left: 0;
           right: 0;
           top: 0;
-          overflow-x: scroll;
+          overflow-y: scroll;
           bottom: 0;
     // .header{
     //     position: fixed;

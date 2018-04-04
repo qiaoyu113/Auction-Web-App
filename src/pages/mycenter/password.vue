@@ -132,6 +132,10 @@
         .headerRight{
             float: right;
             margin-top:0.3rem;
+            img{
+                width: 1rem;
+                margin-top: 0.6rem;
+            }
         }
     }
     .box{
@@ -273,7 +277,7 @@
             bottom: 1.2rem;
             font-size: 14px;
             line-height: 20px;
-            color: red;
+            color: #fff;
             text-align: center;
             background:linear-gradient(70deg, #DC704A, #F44EA0);
             

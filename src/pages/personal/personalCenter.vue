@@ -3,8 +3,8 @@
         组件要小，如遇list，只将item做成组件，其他的都写在页面中
     -->
     <!-- 个人中心 -->
-    <div class="personalCenter"  v-set-title="title">
-        
+    <div class="v_personalCenter"  v-set-title="title">
+        <div class="personalCenter">
         <!-- <div class="header">传家</div> -->
         <div class="content" v-if="logined">
             <div class="box clearfix ">
@@ -110,6 +110,7 @@
                 <!-- available -->
         </div>
         <div class="give"><p><a href="tel:15801619600">马上送拍</a></p></div>
+        </div>
         <z-footer ></z-footer>
     </div>
 </template>
@@ -253,13 +254,14 @@
     /*rem等基本设置都放在base中，不写多个*/
     @import url('../../assets/css/base.less');
     @import url('../../assets/css/icon/iconfont.css');
+    .v_personalCenter{
     .personalCenter{
           position: fixed;
           left: 0;
           right: 0;
           top: 0;
-          overflow-x: scroll;
-          bottom: 0;
+          overflow-y: scroll;
+          bottom: 1.2rem;
     .header{
         position: fixed;
         top: 0;
@@ -565,6 +567,7 @@
         
         
     }
+}
 }
 
 </style>

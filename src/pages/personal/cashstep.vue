@@ -265,33 +265,54 @@ import {commonService} from '../../service/commonService.js'
                           
                        }else{
                           this.htmlx="请填写正确的支付宝账号"
+                          setTimeout(() => {  
+                      this.htmlx=''
+                         },2000) 
                           return false
                        }
                          
                          if(that.userName==''){
                             that.htmlx='姓名不能为空'
+                              setTimeout(() => {  
+                                 that.htmlx=''
+                             },2000) 
                             return false
                          }
                      }else if(that.flag==2){
                           if(that.userBankName ==''){
                             that.htmlx='姓名不能为空'
+                            setTimeout(() => {  
+                                 that.htmlx=''
+                             },2000) 
                             return false
                          }
                          if(that.userBank ==''){
                             that.htmlx='银行不能为空'
+                            setTimeout(() => {  
+                                 that.htmlx=''
+                             },2000) 
                             return false
                          }
                          if(that.userBankCardNo ==''){
                             that.htmlx='银行卡号不能为空'
+                            setTimeout(() => {  
+                                 that.htmlx=''
+                             },2000) 
                             return false
                          }
   
                          if(that.userBankProvince ==''){
                             that.htmlx='开户省市不能为空'
+                            setTimeout(() => {  
+                                 that.htmlx=''
+                             },2000) 
                             return false
                          }
                          if(that.userBankDetail ==''){
                             that.htmlx='开户支行不能为空'
+                            setTimeout(() => {  
+                                 that.htmlx=''
+                             },2000) 
                             return false
                          }
                      }
@@ -354,24 +375,39 @@ import {commonService} from '../../service/commonService.js'
                 
                   if(that.name ==''){
                     that.htmlx='姓名不能为空'
+                    setTimeout(() => {  
+                                 that.htmlx=''
+                             },2000) 
                     return false
                    }
                    if(that.namecard ==''){
                     that.htmlx='身份证号码不能为空'
+                    setTimeout(() => {  
+                                 that.htmlx=''
+                             },2000) 
                     return false
                    }
                    if(that.phone ==''){
                     that.htmlx='手机号码不能为空'
+                    setTimeout(() => {  
+                                 that.htmlx=''
+                             },2000) 
                     return false
                    }
                    let reg = /^1[3|4|5|7|8][0-9]{9}$/;
                     let flag = reg.test(that.phone)
                     if(!flag){
                         this.htmlx="手机号码不正确"
+                        setTimeout(() => {  
+                                 that.htmlx=''
+                             },2000) 
                         return false
                     }
                    if(that.verification ==''){
                     that.htmlx='验证码不能为空'
+                    setTimeout(() => {  
+                                 that.htmlx=''
+                             },2000) 
                     return false
                    }
 
@@ -388,6 +424,9 @@ import {commonService} from '../../service/commonService.js'
                     // }, 1000)
                     }else{
                         that.htmlx=res.data.message
+                        setTimeout(() => {  
+                                 that.htmlx=''
+                             },2000) 
                     }
                  })
             },
@@ -414,7 +453,7 @@ import {commonService} from '../../service/commonService.js'
           left: 0;
           right: 0;
           top: 0;
-          overflow-x: scroll;
+          overflow-y: scroll;
           bottom: 0;
     .nav{
         width: @size375;
@@ -491,8 +530,8 @@ import {commonService} from '../../service/commonService.js'
                 position: relative;
                 top: @size25;
                 .circle{
-                    width: @size9;
-                    height: @size9;
+                    width: @size6;
+                    height: @size6;
                     border-radius: 50%;
                     border: 3px solid red;
                     display: inline-block;
@@ -516,7 +555,8 @@ import {commonService} from '../../service/commonService.js'
                 .label {
                     margin-left: -1.8rem;
                     margin-right: -1.3rem; 
-                    text-align: center;  
+                    text-align: center; 
+                    font-size: 10px; 
                     .label1{
                         float: left;
                         color: red;

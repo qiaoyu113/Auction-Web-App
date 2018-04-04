@@ -364,8 +364,8 @@
           left: 0;
           right: 0;
           top: 0;
-          overflow-x: scroll;
-          bottom: 0;
+          overflow-y: scroll;
+          bottom: 1.2rem;
     // .header{
     //     position: fixed;
     //     top: 0;

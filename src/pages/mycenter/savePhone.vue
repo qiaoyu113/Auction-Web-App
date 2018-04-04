@@ -86,6 +86,9 @@
                       that.$router.replace({name:'mycenter'});
                     }else{
                         that.htmlx=res.data.message
+                        setTimeout(() => {  
+                                 that.htmlx=''
+                             },2000) 
                     }
               }) 
             },
@@ -121,6 +124,9 @@
                      // that.$router.go(-1);
                     }else{
                       that.htmlx=res.data.message
+                      setTimeout(() => {  
+                                 that.htmlx=''
+                             },2000) 
                     }
               })
             },
