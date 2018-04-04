@@ -105,6 +105,7 @@ import {commonService} from '../../service/commonService.js'
                 let oddNumbers=this.$route.query.id
                  commonService.getBailsid(oddNumbers).then(function(res){
                     that.list=res.data.datas
+                    console.log(that.list)
                     that.card=card.bankCardAttribution(that.list.userBankCardNo)
                     
                  })

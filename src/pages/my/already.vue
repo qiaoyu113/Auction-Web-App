@@ -41,7 +41,7 @@
                                     <div class="ros_con"  v-if="list.auction.doneBuy==1" @click="jump(list.auction._id)">
                                         去支付
                                     </div>
-                                    <div class="ros_con"  v-if="list.auction.doneBuy!=1" @click="jump(list.auction._id)">
+                                    <div class="ros_con"  v-if="list.auction.doneBuy!=1 && list.auction.doneBuy!=3" @click="jump(list.auction._id)">
                                         查看订单
                                     </div>
                                 </div>

@@ -233,6 +233,8 @@ import {commonService} from '../../service/commonService.js'
                 var  Sel=document.getElementById("citySel");
             	// var oTxt = document.getElementById('citySel2').select();
             	var index=this.provinceIndex;
+          
+              
             	if(index!=0){
             	this.provinceid=this.province[index-1].cityId
             	this.provinceName=this.province[index-1].name	
@@ -242,11 +244,13 @@ import {commonService} from '../../service/commonService.js'
             	}
             	
             	this.getCitysId()
+              this.selChange2()
             },
             // 选择市
              selChange2:function(){
 //            	var  Sel=document.getElementById("citySel2");
             	var index=this.cityIndex;
+              this.county=''
             	if(index!=0){
                   this.cityid=this.city[index-1].cityId
                   this.cityName=this.city[index-1].name

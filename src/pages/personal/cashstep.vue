@@ -89,7 +89,23 @@
                 </div>
                
                 <div class="info"><span>开户省市</span>
-                    <input type="text" placeholder="请选择开户省市" v-model="userBankProvince"/>
+                    <!-- <input type="text" placeholder="请选择开户省市" v-model="userBankProvince"/> -->
+                    <el-select v-model="provinceIndex" filterable placeholder="请选择" @change="selChange()" class="select-city">
+                <el-option
+                        v-for="item,index in province"
+                        :key="item.id"
+                        :label="item.name"
+                        :value="index+1">
+                </el-option>
+            </el-select>
+            <el-select v-model="cityIndex" filterable placeholder="请选择" @change="selChange2()" class="select-city">
+                <el-option
+                        v-for="item,index in city"
+                        :key="item.id"
+                        :label="item.name"
+                        :value="index+1">
+                </el-option>
+            </el-select>
                     <div class="infomore" @click='removeAccount'><i class="more">...</i></div>
                 </div>
                 <div class="info"><span>开户支行</span>
@@ -192,6 +208,14 @@ import {commonService} from '../../service/commonService.js'
           kaptchaValue:'',
           img:'',
           card:'',
+          provinceid:'',
+          provinceName:'',
+          cityid:'',
+          cityName:'',
+          provinceIndex:'',
+          cityIndex:'',
+          province:'',
+          city:'',
 
       }
     },
@@ -201,6 +225,7 @@ import {commonService} from '../../service/commonService.js'
        common.onMove('.cashstep')
         this.yi()
         this.getKaptchas()
+        this.getCitys()
     },
     methods: {
            rto:function(){
@@ -237,6 +262,47 @@ import {commonService} from '../../service/commonService.js'
             removePhone:function(){
                 let that = this;
                 that.phone = ''
+            }, 
+            // 选择省
+            selChange:function(){
+                var  Sel=document.getElementById("citySel");
+              // var oTxt = document.getElementById('citySel2').select();
+              var index=this.provinceIndex;
+              if(index!=0){
+              this.provinceid=this.province[index-1].cityId
+              this.provinceName=this.province[index-1].name 
+              }else{
+              this.provinceid=''
+              this.provinceName=''
+              }
+              
+              this.getCitysId()
+            },
+            // 选择市
+             selChange2:function(){
+//              var  Sel=document.getElementById("citySel2");
+              var index=this.cityIndex;
+              if(index!=0){
+                  this.cityid=this.city[index-1].cityId
+                  this.cityName=this.city[index-1].name
+              }else{
+                this.cityid=''
+                this.cityName=''
+              }
+              // this.getCitysId2()
+            },
+            getCitys:function(){
+               let that = this;
+               commonService.getCitys().then(function(res){
+                  that.province=res.data.datas
+                 })
+            },
+            // 获取市
+            getCitysId:function(){
+               let that = this
+               commonService.getCitysId(that.provinceid).then(function(res){
+                  that.city=res.data.datas
+                 })
             },
             yi:function(){
                 if(this.$route.query.index==2){
@@ -251,6 +317,7 @@ import {commonService} from '../../service/commonService.js'
             },
             nextStep:function(){
                 let that=this
+
                 if(that.index==1){
                      if(that.flag==1){
                          if(that.account==''){
@@ -301,7 +368,7 @@ import {commonService} from '../../service/commonService.js'
                             return false
                          }
   
-                         if(that.userBankProvince ==''){
+                         if(that.cityName ==''&&that.provinceName){
                             that.htmlx='开户省市不能为空'
                             setTimeout(() => {  
                                  that.htmlx=''
@@ -412,10 +479,10 @@ import {commonService} from '../../service/commonService.js'
                    }
 
                    that.htmlx=''
-                   
+               
                 let money=that.money * 100
               
-                 commonService.postForms({channelId:channelId,channelUser:that.account,phone:that.phone,type:type,idCard:that.namecard,userName:that.userName,smsCode:that.verification,smsType:7,amount:money,realName:that.name,userBankName:that.userBankName,userBank:that.userBank,userBankCardNo:that.userBankCardNo,userBankProvince:that.userBankProvince,userBankCity:null,userBankDetail:that.userBankDetail}).then(function(res){                    //市
+                 commonService.postForms({channelId:channelId,channelUser:that.account,phone:that.phone,type:type,idCard:that.namecard,userName:that.userName,smsCode:that.verification,smsType:7,amount:money,realName:that.name,userBankName:that.userBankName,userBank:that.userBank,userBankCardNo:that.userBankCardNo,userBankProvince:that.provinceName,userBankCity:that.cityName,userBankDetail:that.userBankDetail}).then(function(res){                    //市
                   
                     if(res.data.message=='success'){
                        that.oddNumbers=res.data.datas 
@@ -792,8 +859,20 @@ import {commonService} from '../../service/commonService.js'
         font-size: 15px;
         background: #fff;
     }
+    .select-city.el-select {
+            height: 38px;
+            line-height: 38px;
+            display: inline-block;
+            width: 1.8rem;
+            overflow: hidden;
+            span{
+                display: none;
+            }
+        }
   }
-    
+    .el-select-dropdown {
+        margin-top: 40px!important;
+    }
     
 </style>
 

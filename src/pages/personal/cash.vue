@@ -154,6 +154,9 @@
                 let that = this;
                  if(that.money==''){
                     that.prompt="请填写金额"
+                    setTimeout(() => { 
+                        that.prompt = ''
+                              },2000) 
                     return false
                  }
                // commonService.postBails({amount:that.money}).then(function(res){
@@ -170,6 +173,9 @@
                           }else{
                             
                             that.prompt=res.data.message
+                            setTimeout(() => { 
+                                that.prompt = ''
+                              },2000)
                           } 
                        })
 

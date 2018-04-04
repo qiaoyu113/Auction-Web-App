@@ -37,8 +37,8 @@
             <!--联系客服-->
             <div class="talk" v-if="wximg!=null"><a href="tel:15801619600" @click="resetpassword()"><span>登录遇到问题，联系客服</span></a></div>
             <!--登录和提示-->
+            <div class="v_kefu" v-if="wximg==null"><a href="javaScript:;" @click="resetpassword()">忘记密码</a> | <a href="tel:15801619600">联系客服</a></div>
             <div class="bottom">
-                <div class="v_kefu" v-if="wximg==null"><a href="javaScript:;" @click="resetpassword()">忘记密码</a> | <a href="tel:15801619600">联系客服</a></div>
                 <div class="hint" v-if="hint">{{hintText}}</div>
                 <div class="ok" @click="loginBtn">登 录</div>
             </div>
@@ -225,6 +225,10 @@
                                         // that.getKaptchas()
                                         that.hint2 = true;
                                         that.hint2Text = '短信验证码已过期';
+                                        setTimeout(() => { 
+                                    that.hint2 = false;
+                                    that.hint2Text = ''
+                                      },2000) 
                                         // that.getKaptchas()
                                     }else{
                                         that.hint2 = true;
@@ -239,18 +243,34 @@
                             }else{
                                 that.hint2 = true;
                                 that.hint2Text = '请输入验证码';
+                                setTimeout(() => { 
+                                    that.hint2 = false;
+                                    that.hint2Text = ''
+                                      },2000) 
                             }
                         }else{
                             that.hint2 = true;
                             that.hint2Text = '两次密码输入不一致';
+                            setTimeout(() => { 
+                                    that.hint2 = false;
+                                    that.hint2Text = ''
+                                      },2000) 
                         }
                     }else{
                         that.hint2 = true;
                         that.hint2Text = '密码为字母、数字、组合且长度为6-20的字符';
+                        setTimeout(() => { 
+                                    that.hint2 = false;
+                                    that.hint2Text = ''
+                                      },2000) 
                     }
                 }else{
                     that.hint2 = true;
                     that.hint2Text = '手机号格式错误';
+                    setTimeout(() => { 
+                                    that.hint2 = false;
+                                    that.hint2Text = ''
+                                      },2000) 
                 }
             },
             //点击登陆
@@ -264,12 +284,24 @@
                     }else if(res.data.code === 513110){
                         that.hint = true;
                         that.hintText = '用户不存在,请注册';
+                        setTimeout(() => { 
+                                    that.hint2 = false;
+                                    that.hint2Text = ''
+                                      },2000) 
                     }else if(res.data.code === 513114){
                         that.hint = true;
                         that.hintText = '账号密码错误,请重新输入';
+                        setTimeout(() => { 
+                                    that.hint2 = false;
+                                    that.hint2Text = ''
+                                      },2000) 
                     }else{
                         that.hint = true;
                         that.hintText = res.data.message
+                        setTimeout(() => { 
+                                    that.hint2 = false;
+                                    that.hint2Text = ''
+                                      },2000) 
                     }
                 })
             },
@@ -339,6 +371,10 @@
                 }else{
                     that.hint2 = true;
                     that.hint2Text = '手机号格式错误';
+                    setTimeout(() => { 
+                                    that.hint2 = false;
+                                    that.hint2Text = ''
+                                      },2000) 
                 }
             },
             //微信注册提交
@@ -354,6 +390,10 @@
                                     if(res.data.code === 512104){
                                         that.hint2 = true;
                                         that.hint2Text = '短信验证码已过期';
+                                        setTimeout(() => { 
+                                    that.hint2 = false;
+                                    that.hint2Text = ''
+                                      },2000) 
                                         // that.getKaptchas()
                                     }else if(res.data.code === 200){
                                        that.phoneUser = that.phone;
@@ -365,18 +405,34 @@
                             }else{
                                 that.hint2 = true;
                                 that.hint2Text = '请输入验证码';
+                                setTimeout(() => { 
+                                    that.hint2 = false;
+                                    that.hint2Text = ''
+                                      },2000) 
                             }
                         }else{
                             that.hint2 = true;
                             that.hint2Text = '两次密码输入不一致';
+                            setTimeout(() => { 
+                                    that.hint2 = false;
+                                    that.hint2Text = ''
+                                      },2000) 
                         }
                     }else{
                         that.hint2 = true;
                         that.hint2Text = '密码为字母、数字、组合且长度为6-20的字符';
+                        setTimeout(() => { 
+                                    that.hint2 = false;
+                                    that.hint2Text = ''
+                                      },2000) 
                     }
                 }else{
                     that.hint2 = true;
                     that.hint2Text = '手机号格式错误';
+                    setTimeout(() => { 
+                                    that.hint2 = false;
+                                    that.hint2Text = ''
+                                      },2000) 
                 }
                  
 
@@ -494,7 +550,7 @@
         left:0;
         top:0;
         right:0;
-        bottom:0;
+        bottom:1.87rem;
         margin:auto;
         .header{
             width:100%;
@@ -649,16 +705,11 @@
             span{
                 font-size: 12px;
             }
-        }
-        .bottom{
-            position: fixed;
-            left:0;
-            right:0;
-            bottom:0;
-            .v_kefu{
+        }  
+        .v_kefu{
                 text-align: center;
                 font-size: 10px;
-                margin-bottom: 0.2rem;
+                margin-top: 2.3rem;
 
                 a{
                   font-size: 10px;  
@@ -666,6 +717,12 @@
                 }
                
             }
+        .bottom{
+            position: fixed;
+            left:0;
+            right:0;
+            bottom:0;
+          
             .hint{
                 width:100%;
                 height:0.67rem;
