@@ -170,6 +170,9 @@ import {commonService} from '../../service/commonService.js'
                        str = that.userBankCardNo.replace(/\s+/g, "");  
                        if (!pattern.test(str)) {  
                            that.htmlx='银行卡号不正确'
+                           setTimeout(() => {  
+                                 that.htmlx=''
+                             },2000) 
                            return false;  
                        } 
 
@@ -224,6 +227,9 @@ import {commonService} from '../../service/commonService.js'
                 if(this.index==1){
                     if(this.bankCardId==''){
                         this.htmlx="请选择银行"
+                        setTimeout(() => {  
+                                 this.htmlx=''
+                             },2000) 
                         return false
                     }
                     this.index=2
@@ -253,25 +259,40 @@ import {commonService} from '../../service/commonService.js'
                 let that = this
                    if(that.name==''){
                         this.htmlx="请输入汇款人"
+                        setTimeout(() => {  
+                                 this.htmlx=''
+                             },2000) 
                         return false
                     }
                     if(that.userBankDetail==''){
                         this.htmlx="请输入开户银行"
+                        setTimeout(() => {  
+                                 this.htmlx=''
+                             },2000) 
                         return false
                     }
                     if(that.userBankCardNo==''){
                         this.htmlx="请输入银行卡号"
+                        setTimeout(() => {  
+                                 this.htmlx=''
+                             },2000) 
                         return false
                     }
                    
                     if(that.phone==''){
                         this.htmlx="请输入手机号码"
+                        setTimeout(() => {  
+                                 this.htmlx=''
+                             },2000) 
                         return false
                     }
                     let reg = /^1[3|4|5|7|8][0-9]{9}$/;
                     let flag = reg.test(that.phone)
                     if(!flag){
                         this.htmlx="手机号码不正确"
+                        setTimeout(() => {  
+                                 this.htmlx=''
+                             },2000) 
                         return false
                     }
                     that.htmlx=''
@@ -285,6 +306,9 @@ import {commonService} from '../../service/commonService.js'
                        that.getForms()
                     }else{
                         that.htmlx=res.data.message
+                        setTimeout(() => {  
+                                 that.htmlx=''
+                             },2000) 
                     }
                     
                  })
@@ -360,7 +384,7 @@ import {commonService} from '../../service/commonService.js'
           right: 0;
           top: 0;
           bottom: 0;
-          overflow-x: scroll;
+          overflow-y: scroll;
           
     // .header{
     //     position: fixed;
@@ -504,8 +528,8 @@ import {commonService} from '../../service/commonService.js'
                 position: relative;
                 top: @size25;
                 .circle{
-                    width: @size9;
-                    height: @size9;
+                    width: @size6;
+                    height: @size6;
                     border-radius: 50%;
                     border: 3px solid red;
                     display: inline-block;
@@ -533,6 +557,7 @@ import {commonService} from '../../service/commonService.js'
                     margin-left: -1.8rem;
                     margin-right: -1.3rem; 
                     text-align: center;  
+                    font-size: 10px;
                     .label1{
                         float: left;
                         color: red;

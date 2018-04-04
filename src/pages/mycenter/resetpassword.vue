@@ -131,12 +131,18 @@
                 let that=this;
                  if(that.phone ==''){
                     that.htmlx='手机号码不能为空'
+                    setTimeout(() => {  
+                                 that.htmlx=''
+                             },2000) 
                     return false
                    }
                    let reg = /^1[3|4|5|7|8][0-9]{9}$/;
                     let flag = reg.test(that.phone)
                     if(!flag){
                         this.htmlx="手机号码不正确"
+                        setTimeout(() => {  
+                                 that.htmlx=''
+                             },2000) 
                         return false
                     }
                commonService.postResetpassword({phone:that.phone,smsCode:that.inputNum,type:3}).then(function(res){
@@ -148,6 +154,9 @@
 
                     }else{
                         that.htmlx=res.data.message
+                        setTimeout(() => {  
+                                 that.htmlx=''
+                             },2000) 
                     }
               })
             },
@@ -159,10 +168,16 @@
           
                 if(zhe==false){
                     that.htmlx="密码为字母、数字、组合且长度为6-10的字符"
+                    setTimeout(() => {  
+                                 that.htmlx=''
+                             },2000) 
                     return false
                 }
                 if(that.newPassword!=that.newPassword2){
                     that.htmlx="两次密码不一致"
+                    setTimeout(() => {  
+                                 that.htmlx=''
+                             },2000) 
                     return false
                 }
                commonService.postResetpasswordtwo({phone:that.phone,random:that.key,newPassword:that.newPassword}).then(function(res){
@@ -173,6 +188,9 @@
 
                     }else{
                         that.htmlx=res.data.message
+                        setTimeout(() => {  
+                                 that.htmlx=''
+                             },2000) 
                     }
               })
             },
@@ -204,6 +222,9 @@
 
                     }else{
                         that.htmlx=res.data.message
+                        setTimeout(() => {  
+                                 that.htmlx=''
+                             },2000) 
                     }
               })
             },
@@ -219,7 +240,7 @@
           left: 0;
           right: 0;
           top: 0;
-          overflow-x: scroll;
+          overflow-y: scroll;
           bottom: 0;
     .headertts{
         width:100%;

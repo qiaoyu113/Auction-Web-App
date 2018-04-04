@@ -151,11 +151,16 @@
              common.onMove('#mescroll')
             this.routers()
             // this.getOrder()
-
             this.getOrdercs()
             this.meScroll()
             
         },
+        //  watch:{
+        //      index:function(){
+        //           this.myList=[]
+        //           this.page= {num:1,size:10}
+        //      }
+        // },
         methods: {
             rto:function(){
                 this.$router.push({path:"/my"}) 
@@ -179,22 +184,35 @@
                 let that = this;
                 if(index === 1){
                     that.index = 1;
+                     that.myList=[]
+                     that.page.num= 1
+                     that.totalPage=''
+                     that.isShowNoMore=true,
                     that.meScroll();
                 }else if(index==2){
                     that.index = 2;
+                     that.myList=[]
+                     that.page.num= 1
+                     that.totalPage=''
+                     that.isShowNoMore=true,
                     that.meScroll();
                 }else if(index==3){
                     that.index = 3;
                     that.getOrdercs()
                 }else if(index==0){
-                    that.index = 0;
+                     that.index = 0;
+                     that.myList=[]
+                     that.totalPage=''
+                     that.page.num= 1
+                     that.isShowNoMore=true,
                     that.meScroll();
                 }
             },
-            details:function(type,id,csStatus){
+            details:function(type,id,csStatus,list){
+        
                 if(type==6){
                     this.$router.push({path:"/closeorder",query:{id:id}})  
-                }else if(type==5 && csStatus!=0){
+                }else if(type==5 && csStatus!=0 && csStatus!=1 ){
                      this.$router.push({path:"/afterorder",query:{id:id,type:'whole'}}) 
                 }else{
                     this.$router.push({path:"/normalorder",query:{id:id}}) 
@@ -255,6 +273,7 @@
                     },
                     down: {
                         callback: that.downCallback //下拉刷新的回调,别写成downCallback(),多了括号就自动执行方法了
+
                     }
                 });
             },
@@ -266,10 +285,16 @@
             },
             upCallback: function () {
                 const that = this;
+                   
                 that.getListData(that.page.num, that.page.size,function(curPageData) {
+              
+                    if(that.page.num === 1){
+                        that.myList = [];//如果是第一页需手动制空列表
 
-                    if(that.page.num === 1)  that.myList = [];//如果是第一页需手动制空列表
-                    that.myList = that.myList.concat(curPageData);    //更新列表数据
+                    }
+                       that.myList = that.myList.concat(curPageData);    //更新列表数据 
+                    
+
                     
                     // 加载完成后busy为false，如果最后一页则lastpage为true
                     //          加载完成后给页数+1
@@ -288,7 +313,6 @@
             getListData:function(pageNum,pageSize,successCallback,errorCallback) {
                 //延时一秒,模拟联网
                 const that = this;
-
                 let status='1,2,3,4,5,6'
                 if(that.index === 1){
                     status = '1,2';
@@ -299,13 +323,11 @@
                 }
 
                 commonService.getOrder({pageNo:pageNum,pageSize:pageSize,status:status}).then(function(res){
-                     
+                
                     if(res.data.code == 200){
-
                         let boxlist = res.data.datas.datas;
                         that.totalPage = res.data.datas.totalPage;
-                      
-                     
+                
                        let data=[]
                       for(let i=0;i<boxlist.length;i++){
                           data[i]=Number(boxlist[i].expireTime)

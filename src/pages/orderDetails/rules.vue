@@ -73,7 +73,7 @@ import {common} from '../../assets/js/common/common'
           left: 0;
           right: 0;
           top: 0;
-          overflow-x: scroll;
+          overflow-y: scroll;
           bottom: 0;
     .header{
         position: fixed;

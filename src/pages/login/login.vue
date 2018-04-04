@@ -229,7 +229,11 @@
                                     }else{
                                         that.hint2 = true;
                                         that.hint2Text = res.data.message; 
-
+                                         setTimeout(() => {  
+                      
+                                          that.hint2 = false;
+                                          that.hint2Text = ''
+                                      },2000) 
                                     }
                                 })
                             }else{
@@ -647,9 +651,9 @@
             }
         }
         .bottom{
+            position: fixed;
             left:0;
             right:0;
-            position: fixed;
             bottom:0;
             .v_kefu{
                 text-align: center;

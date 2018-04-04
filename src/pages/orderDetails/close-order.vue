@@ -139,7 +139,7 @@ import {commonService} from '../../service/commonService.js'
           left: 0;
           right: 0;
           top: 0;
-          overflow-x: scroll;
+          overflow-y: scroll;
           bottom: 0;
     .header{
         position: fixed;

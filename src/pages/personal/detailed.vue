@@ -24,7 +24,7 @@
             <!-- 已完成 -->
             <div>
                 <div class="info"><span>交易号</span>
-                    <div class="infoClose">{{list.flowNo}}</div>
+                    <div class="infoClose">{{list.formNo}}</div>
                 </div>
                 <div class="info"><span>交易金额</span>
                     <div class="infoClose">{{list.flowAmount | money}}CNY
@@ -123,7 +123,7 @@ import {commonService} from '../../service/commonService.js'
           left: 0;
           right: 0;
           top: 0;
-          overflow-x: scroll;
+          overflow-y: scroll;
           bottom: 0;
  
     .content{

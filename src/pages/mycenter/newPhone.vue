@@ -90,6 +90,9 @@
                       that.$router.push({name:'savePhone'})
                     }else{
                         that.htmlx=res.data.message
+                        setTimeout(() => {  
+                                 that.htmlx=''
+                             },2000) 
 
                     }
               })
@@ -127,6 +130,9 @@
                       // that.$router.go(-1);
                     }else{
                         that.htmlx=res.data.message
+                        setTimeout(() => {  
+                                 that.htmlx=''
+                             },2000) 
                     }
               })
             },
@@ -142,7 +148,7 @@
           left: 0;
           right: 0;
           top: 0;
-          overflow-x: scroll;
+          overflow-y: scroll;
           bottom: 0;
     .headertt{
         width:100%;

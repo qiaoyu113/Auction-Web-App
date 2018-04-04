@@ -351,7 +351,7 @@
                 }
         }
         .cashDetail{
-            
+             height: 500px;
             // box-sizing: border-box;
             .address{
                 // box-sizing: border-box;

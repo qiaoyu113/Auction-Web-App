@@ -127,7 +127,7 @@
           left: 0;
           right: 0;
           top: 0;
-          overflow-x: scroll;
+          overflow-y: scroll;
           bottom: 0;
     .content{
         width:100%;
