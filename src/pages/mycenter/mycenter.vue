@@ -70,8 +70,43 @@
 
 <!-- <div style="margin: 50px;">
 <input type="text" name="start_date" id="start_date" v-model="startTime" placeholder="选择开始日期" readonly="readonly" /> -->
-</div>
-                
+<!--</div>-->
+        <!--联系客服-->
+        <div class="talk" @click="openService()">
+            <img src="../../assets/image/mycenter/icon5.png"/>
+        </div>
+        <!--客户服务-->
+        <div class="serviceBox" v-if="ServiceBox">
+            <div class="serviceClose" @click="closeService()">×</div>
+            <div class="serviceTop">
+                <h2>ASSISTANCE</h2>
+                <p>客户服务</p>
+            </div>
+            <a href="tel:15801619600">
+                <div class="serviceList">
+                    <img src="../../assets/image/mycenter/t1.png"/>
+                    <p>电话委托</p>
+                </div>
+            </a>
+            <a href="tel:15801619600">
+                <div class="serviceList">
+                    <img src="../../assets/image/mycenter/t2.png"/>
+                    <p>客服服务</p>
+                </div>
+            </a>
+            <a href="tel:15801619600">
+                <div class="serviceList">
+                    <img src="../../assets/image/mycenter/t3.png"/>
+                    <p>私恰</p>
+                </div>
+            </a>
+            <div class="serviceWX">
+                <img src="../../assets/image/mycenter/wx.png"/>
+                <p>联系微信客服</p>
+                <p class="p">长按识别二维码</p>
+            </div>
+        </div>
+        <div class="serviceBk" v-if="ServiceBox"></div>
    </div>
 </template>
 
@@ -96,12 +131,11 @@
                 hasPhone:true,//是否有手机号绑定
                 radio:'1',
                 startTime:'',
-                 // date: null,
-                 imgurl:'http://api.sundayauction.cn/files',
-                 imageUrl:'',
-                 imgler:'',
-            
-                          
+                // date: null,
+                imgurl:'http://api.sundayauction.cn/files',
+                imageUrl:'',
+                imgler:'',
+                ServiceBox:false,
             }
         },
         syncData({store}) {
@@ -150,7 +184,16 @@
             'maxDate': new Date().getFullYear() + '-' + (new Date().getMonth() + 1) + '-' + new Date().getDate() //最大日期
             });
           },
-
+            //打开客服
+            openService(){
+                let that = this;
+                that.ServiceBox = true;
+            },
+            //关闭客服
+            closeService(){
+                let that = this;
+                that.ServiceBox = false;
+            },
 
            heigmodal:function(){
             this.$refs.modal.style.display="none"
@@ -256,6 +299,111 @@
         //   top: 0;
         //   overflow-x: scroll;
         //   bottom: 0;
+        .talk{
+            width: 1rem;
+            height: 0.9rem;
+            background: #fff;
+            position: fixed;
+            right: 0;
+            top: 5.5rem;
+            bottom: 0;
+            margin: auto;
+            border: 2px solid #000;
+            border-right: none;
+            border-bottom-left-radius: 6px;
+            border-top-left-radius:6px;
+            padding:0.2rem;
+            box-sizing:border-box;
+            img{
+                width:0.56rem;
+                height:0.5rem;
+            }
+        }
+        .serviceBk{
+            width:100%;
+            height:100%;
+            position: fixed;
+            top:0;
+            bottom:0;
+            left:0;
+            right:0;
+            margin:auto;
+            background:#000000;
+            opacity: 0.65;
+            z-index:200;
+
+        }
+        .serviceBox{
+            width:7rem;
+            height:9.2rem;
+            position: absolute;
+            left:0;
+            right:0;
+            top:0;
+            bottom:0;
+            margin:auto;
+            background:#fff;
+            padding:0.5rem;
+            z-index:201;
+            .serviceClose{
+                position: absolute;
+                right:0;
+                top:0;
+                width:0.8rem;
+                height:0.8rem;
+                background:#EB6100;
+                color:#fff;
+                text-align: center;
+                line-height:0.7rem;
+                font-size: 0.9rem;
+            }
+            .serviceTop{
+                text-align: center;
+                margin-top:0.5rem;
+                margin-bottom:0.4rem;
+                h2{
+                    font-size:18px;
+                }
+                p{
+                    font-size:12px;
+                    margin-top:0.2rem;
+                }
+            }
+            .serviceList{
+                overflow: hidden;
+                font-size: 12px;
+                padding:0.3rem 0 0.3rem 2.3rem;
+                border-top:1px solid #B5B8BA;
+                img{
+                    float:left;
+                    width:0.5rem;
+                }
+                p{
+                    width:2rem;
+                    text-align: center;
+                    float:left;
+                    font-size:12px;
+                }
+            }
+            .serviceWX{
+                overflow: hidden;
+                font-size: 12px;
+                border-top:1px solid #B5B8BA;
+                text-align: center;
+                img{
+                    width:2rem;
+                    height:2rem;
+                    margin: 0.4rem auto;
+                }
+                p{
+                    font-size:12px;
+                }
+                .p{
+                    font-size:9px;
+                    color:#C3C3C3;
+                }
+            }
+        }
     .headers{
         width:100%;
         height:3.7rem;

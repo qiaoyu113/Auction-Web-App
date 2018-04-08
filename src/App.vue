@@ -31,7 +31,7 @@
                     appService.putToken()
                 }
             }*/
-            appService.onBridgeReady();
+//            appService.onBridgeReady();
         },
         methods: {
         }

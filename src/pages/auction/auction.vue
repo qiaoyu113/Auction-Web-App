@@ -56,7 +56,7 @@
                             <!--修复v-html不能滑动的bug-->
                             <div class="bug" v-if="bugShow"></div>
                             <div class="sell-inf" v-html="content"></div>
-                            <div class="helpCenter">
+                            <div class="helpCenters">
                                 <span class="fl">帮助中心</span>
                                 <div class="fr2">
                                     <img src="../../assets/image/mycenter/hint.png">
@@ -1033,10 +1033,11 @@
             //确认出价
             offerPrice(){
                 let that = this;
-                let bidPrice = that.bidPrice * 100;
+                let bidPrice = (Number(that.bidPrice) + 100) * 100;
 //                let bidPrice = that.details.basePrice * 100
                 that.monitor();
                 //冻结保证金
+                console.log(bidPrice)
                 commonService.postMyPrice({offerAmount:bidPrice,auctionId:that.id}).then(function(res){
                     if(res.data.code === 537126){
                         //查看用户余额是否够冻结
@@ -1229,7 +1230,7 @@
             //跳查看规则
             goRule(){
                 let that = this;
-                that.$router.replace({name:'helpcenter'})
+                that.$router.push({name:'helpcenter'})
             },
             //分享
             share(){
@@ -1506,7 +1507,7 @@
                         padding-top: @size10;
                     }
                 }
-                .helpCenter{
+                .helpCenters{
                     height: @size40;
                     width: 100%;
                     border-top: 1px solid rgb(130, 135, 140);

@@ -5,7 +5,9 @@
         
         <!-- <div class="header">传家</div> -->
         <div class="nav">
-            <span class="" @click="Return()">&lt;</span> 
+            <span class="" @click="Return()">
+                <i class="iconfont icon-fanhui"></i>
+            </span>
             <span class="span1 display" ><img src="../../assets/image/mycenter/sc.png" /></span>
         </div>
         <div class="content">
@@ -153,34 +155,42 @@ import {commonService} from '../../service/commonService.js'
         text-align: center;
         line-height: @size45;
     }
-    .nav{
-        width: @size375;
-        height: @size35;
-        border-bottom: 0.5px solid rgb(53, 60, 70);
-        background: rgb(255, 255, 255);
-      
-        span{
-            display: inline-block;
-            line-height: @size30;
-            text-align: center;
-            font-size: @size30;
-            font-weight: lighter;
-            color: rgb(157, 169, 177);
-            margin-left: 20px;
-        }
-        .span1{
-            float: right;
-            padding-right: 20px;
-            display: none;
-            img{
-                width: @size20;
-                margin-top: @size5;
+        .nav{
+            width: @size375;
+            height: @size35;
+            line-height: @size35;
+            border-bottom: 1px solid rgb(53, 60, 70);
+            background: rgb(255, 255, 255);
+            position: fixed;
+            top: 0;
+            z-index: 100;
+            i{
+                font-size:28px;
+                color:#A9AEB6;
+                line-height:@size35;
+            }
+            span{
+                display: inline-block;
+                line-height: @size30;
+                text-align: center;
+                font-size: @size30;
+                font-weight: lighter;
+                color: rgb(157, 169, 177);
+                margin-left: 0.3rem;
+            }
+            .span1{
+                float: right;
+                padding-right: 20px;
+                display: none;
+                img{
+                    margin-top: @size6;
+                    width: 0.5rem;
+                }
+            }
+            .display{
+                display: block;
             }
         }
-        .display{
-            display: block;
-        }
-    }
     .content{
         // margin-top: @size80;
         margin-bottom: 1.2rem;
