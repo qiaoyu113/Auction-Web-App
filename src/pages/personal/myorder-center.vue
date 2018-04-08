@@ -45,9 +45,9 @@
                     <span class="fr" v-if="list.status==5&&list.csStatus==8">已完成</span>
                     <span class="fr" v-if="list.status==5&&list.csStatus==9">售后中</span> -->
                     <div class="time fr" v-if="list.status==1">
-                        <div class="fr num">{{countdown[index].ss}}</div>
+                        <div class="fr num">{{list.expireTimes2}}</div>
                         <div class="fr colon">:</div>
-                        <div class="fr num">{{countdown[index].mm}}</div>
+                        <div class="fr num">{{list.expireTimes}}</div>
                     </div>
                 </div>
                 <div class="box clearfix ">
@@ -205,6 +205,7 @@
             // this.getOrder()
             this.getOrdercs()
             this.meScroll()
+        
             
         },
         //  watch:{
@@ -224,6 +225,7 @@
                 let that = this;
                 that.ServiceBox = false;
             },
+         
             rto:function(){
                 this.$router.push({path:"/my"}) 
             },
@@ -296,12 +298,9 @@
                 }
                commonService.getOrder({pageNo:1,pageSize:10,status:status}).then(function(res){
                       that.datalist=res.data.datas.datas
-                    
-                      let data=[]
-                      for(let i=0;i<that.datalist.length;i++){
-                          data[i]=Number(that.datalist[i].expireTime)
-                          that.countdown[i]=common.getTimer(data[i]) 
-                      }
+                     
+                  
+                
                       
                     })
             },
@@ -407,14 +406,78 @@
                     if(res.data.code == 200){
                         let boxlist = res.data.datas.datas;
                         that.totalPage = res.data.datas.totalPage;
+
+                      //       for(let i=0;i<that.datalist.length;i++){
+                      //     data[i]=Number(that.datalist[i].expireTime)
+                      //       setInterval(() => { 
+                      //        
+                      //        that.countdown[i]=common.getTimer(data[i]) 
+                      //            },1000) 
+                         
+
+                      // }
+                for(let i=0;i<boxlist.length;i++){
+                            // let date=new Date()
+                            // let now = new Date().getTime()
+                            // let weekEnd = Number(boxlist[i].auction.mqEndTime) + 7 * 24 * 3600 * 1000;
+                            // let weekEnd2 = Number(boxlist[i].auction.mqEndTime) + 7 * 24 * 3600 * 1000 * 30;
+                            // let weekEnd3 = Number(boxlist[i].auction.mqEndTime) + 7 * 24 * 3600 * 1000 * 180;
+                            // let weekEnd4 = Number(boxlist[i].auction.mqEndTime) + 7 * 24 * 3600 * 1000 * 365;
+                            // let weekEnds = weekEnd - now;
+                            // let weekEnds2 = weekEnd2 - now;
+                            // let weekEnds3 = weekEnd3 - now;
+                            // let weekEnds4 = weekEnd4 - now;
+                            // if(weekEnds < 0 && that.weekEndsOpen){
+                            //     that.lineId = boxlist[i].auction._id
+                            //     that.weekEndsOpen = false;
+                            // }
+                            // if(weekEnds2 < 0 && that.weekEndsOpen2){
+                            //     that.lineId2 = boxlist[i].auction._id
+                            //     that.weekEndsOpen2 = false;
+                            // }
+                            // if(weekEnds3 < 0 && that.weekEndsOpen3){
+                            //     that.lineId3 = boxlist[i].auction._id
+                            //     that.weekEndsOpen3 = false;
+                            // }
+                            // if(weekEnds4 < 0 && that.weekEndsOpen4){
+                            //     that.lineId4 = boxlist[i].auction._id
+                            //     that.weekEndsOpen4 = false;
+                            // }
+                            if(boxlist[i].status == 1){
+                                let now = new Date().getTime()
+                                let time = '';
+                                let week = Number(boxlist[i].expireTime)
+                                time = week - now;
+                                //初始化时间
+                                if(time < 0){
+                                    boxlist[i].expireTimes = '00'
+                                    boxlist[i].expireTimes2 = '00'
+                                    break;
+                                }
                 
-                       let data=[]
-                      for(let i=0;i<boxlist.length;i++){
-                          data[i]=Number(boxlist[i].expireTime)
-                          that.countdown[i]=common.getTimer(data[i]) 
-                      }
-                             
-                    
+                                let m = parseInt(time / 1000 / 60 % 60, 10) < 10 ? '0' + parseInt(time / 1000 / 60 % 60, 10) : parseInt(time / 1000 / 60 % 60, 10);
+                                let s = parseInt(time / 1000 % 60, 10) < 10 ? '0' + parseInt(time / 1000 % 60, 10) : parseInt(time / 1000 % 60, 10);
+                                boxlist[i].expireTimes = m;
+                                boxlist[i].expireTimes2 = s;
+                                let timeRun = setInterval(function() {
+//                                  //初始化时间
+                                    let now = new Date().getTime()
+                                    let week = Number(boxlist[i].expireTime);
+                                    time = week - now;
+                                   
+                                    let ms = parseInt(time / 1000 / 60 % 60, 10) < 10 ? '0' + parseInt(time / 1000 / 60 % 60, 10) : parseInt(time / 1000 / 60 % 60, 10);
+                                    let ss = parseInt(time / 1000 % 60, 10) < 10 ? '0' + parseInt(time / 1000 % 60, 10) : parseInt(time / 1000 % 60, 10);
+                                    boxlist[i].expireTimes = ms;
+                                    boxlist[i].expireTimes2 = ss;
+                                    if(time < 0){
+                                        clearInterval(timeRun);
+                                        boxlist[i].expireTimes = '00'
+                                        boxlist[i].expireTimes2 = '00'
+                                    }
+                                },1000)
+                            }
+                        }
+
                         successCallback&&successCallback(boxlist);//成功回调
                     }else{
                         let boxlist = [];
