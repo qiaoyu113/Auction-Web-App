@@ -4,15 +4,17 @@
     -->
     <!-- 个人中心-我的订单 -->
     <div class="v_myorder-center"> 
-     <div class="nav">
-            <span class="return fl" @click="Return()">&lt;</span> 
+        <div class="nav">
+            <span class="return fl" @click="Return()">
+                <i class="iconfont icon-fanhui"></i>
+            </span>
             <span class="font fl" :class="index==0 ? 'check' : ''" @click='getIndex(0)'>全部</span>
             <span class="font fl" :class="index==1 ? 'check' : ''" @click='getIndex(1)'>待付款</span>
             <span class="font fl" :class="index==2 ? 'check' : ''" @click='getIndex(2)'>待收货</span>
             <span class="font fl" :class="index==3 ? 'check' : ''" @click='getIndex(3)'>售后</span>
             <span class="span1" @click="rto()"><img src="../../assets/image/mycenter/icon1.png" /></span>
         </div>
-    <div id="myorder-center">
+        <div id="myorder-center">
         <div id="mescroll" class="mescroll notatarts">
             <div class="mescroll-bounce">
     <div class="myorder-center" id="" v-set-title="title">
@@ -94,6 +96,42 @@
         </div>
         </div>
         </div>
+        <!--联系客服-->
+        <div class="talk" @click="openService()">
+            <img src="../../assets/image/mycenter/icon5.png"/>
+        </div>
+        <!--客户服务-->
+        <div class="serviceBox" v-if="ServiceBox">
+            <div class="serviceClose" @click="closeService()">×</div>
+            <div class="serviceTop">
+                <h2>ASSISTANCE</h2>
+                <p>客户服务</p>
+            </div>
+            <a href="tel:15801619600">
+                <div class="serviceList">
+                    <img src="../../assets/image/mycenter/t1.png"/>
+                    <p>电话委托</p>
+                </div>
+            </a>
+            <a href="tel:15801619600">
+                <div class="serviceList">
+                    <img src="../../assets/image/mycenter/t2.png"/>
+                    <p>客服服务</p>
+                </div>
+            </a>
+            <a href="tel:15801619600">
+                <div class="serviceList">
+                    <img src="../../assets/image/mycenter/t3.png"/>
+                    <p>私恰</p>
+                </div>
+            </a>
+            <div class="serviceWX">
+                <img src="../../assets/image/mycenter/wx.png"/>
+                <p>联系微信客服</p>
+                <p class="p">长按识别二维码</p>
+            </div>
+        </div>
+        <div class="serviceBk" v-if="ServiceBox"></div>
     </div>
 </template>
 
@@ -119,7 +157,7 @@
                 page:{num:1,size:10},
                 isShowNoMore:false,
                 totalPage:'',
-
+                ServiceBox:false,
             }
         },
         components:{'home-item':itemc},
@@ -162,6 +200,16 @@
         //      }
         // },
         methods: {
+            //打开客服
+            openService(){
+                let that = this;
+                that.ServiceBox = true;
+            },
+            //关闭客服
+            closeService(){
+                let that = this;
+                that.ServiceBox = false;
+            },
             rto:function(){
                 this.$router.push({path:"/my"}) 
             },
@@ -379,31 +427,142 @@
     @import url('../../assets/css/icon/iconfont.css');
     @import url("../../assets/css/common/mescroll.min.css");
 .v_myorder-center{
-    .nav{
+    .talk{
+        width: 1rem;
+        height: 0.9rem;
+        background: #fff;
         position: fixed;
-        left: 0;
+        right: 0;
+        top: 5.5rem;
+        bottom: 0;
+        margin: auto;
+        border: 2px solid #000;
+        border-right: none;
+        border-bottom-left-radius: 6px;
+        border-top-left-radius:6px;
+        padding:0.2rem;
+        box-sizing:border-box;
+        img{
+            width:0.56rem;
+            height:0.5rem;
+        }
+    }
+    .serviceBk{
+        width:100%;
+        height:100%;
+        position: fixed;
         top:0;
-        z-index: 999;
-        width: @size375;
-        height: @size35;
-        border-bottom: 0.5px solid rgb(53, 60, 70);
-        background: rgb(255, 255, 255);
+        bottom:0;
+        left:0;
+        right:0;
+        margin:auto;
+        background:#000000;
+        opacity: 0.65;
+        z-index:200;
+
+    }
+    .serviceBox{
+        width:7rem;
+        height:9.2rem;
+        position: absolute;
+        left:0;
+        right:0;
+        top:0;
+        bottom:0;
+        margin:auto;
+        background:#fff;
+        padding:0.5rem;
+        z-index:201;
+        .serviceClose{
+            position: absolute;
+            right:0;
+            top:0;
+            width:0.8rem;
+            height:0.8rem;
+            background:#EB6100;
+            color:#fff;
+            text-align: center;
+            line-height:0.7rem;
+            font-size: 0.9rem;
+        }
+        .serviceTop{
+            text-align: center;
+            margin-top:0.5rem;
+            margin-bottom:0.4rem;
+            h2{
+                font-size:18px;
+            }
+            p{
+                font-size:12px;
+                margin-top:0.2rem;
+            }
+        }
+        .serviceList{
+            overflow: hidden;
+            font-size: 12px;
+            padding:0.3rem 0 0.3rem 2.3rem;
+            border-top:1px solid #B5B8BA;
+            img{
+                float:left;
+                width:0.5rem;
+            }
+            p{
+                width:2rem;
+                text-align: center;
+                float:left;
+                font-size:12px;
+            }
+        }
+        .serviceWX{
+            overflow: hidden;
+            font-size: 12px;
+            border-top:1px solid #B5B8BA;
+            text-align: center;
+            img{
+                width:2rem;
+                height:2rem;
+                margin: 0.4rem auto;
+            }
+            p{
+                font-size:12px;
+            }
+            .p{
+                font-size:9px;
+                color:#C3C3C3;
+            }
+        }
+    }
+    .nav{
+        width: 10rem;
+        height: 0.9333rem;
+        line-height: 0.9333rem;
+        border-bottom: 1px solid #353c46;
+        background: #ffffff;
+        position: fixed;
+        top: 0;
+        z-index: 100;
         // position: fixed;
         // top: @size45;
         // z-index: 100;
         .return{
             display: inline-block;
-            line-height: @size30;
+            line-height: @size35;
             text-align: center;
             font-size: @size30;
             font-weight: lighter;
             color: rgb(157, 169, 177);
-            margin-left: @size20;
+            margin-left: 0.3rem;
+            i{
+                font-size:28px;
+                color:#A9AEB6;
+                line-height: @size35;
+                margin-right:0.3rem;
+            }
         }
         .font{
             display: inline-block;
             font-size: @size14;
-            line-height: @size30;
+            line-height: 0.84rem;
             
             padding-top: @size3; 
             margin-left: @size25;
@@ -418,12 +577,12 @@
             text-align: center;
             line-height: @size30;
             img{
-                width: @size30;
-                height: @size30;
+                width: .7rem;
+                margin-top: .1rem;
             }
         }
         .check{
-            border-bottom:2px solid black;
+            border-bottom:1px solid black;
             color: black;
         }
     }

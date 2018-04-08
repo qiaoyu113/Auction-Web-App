@@ -3,7 +3,7 @@
         组件要小，如遇list，只将item做成组件，其他的都写在页面中
     -->
     <!-- 个人中心 -->
-    <div class="personalCenter"  v-set-title="title">
+    <div class="gologin"  v-set-title="title">
         
         <!-- <div class="header">传家</div> -->
         <div class="content" v-if="logined">
@@ -93,6 +93,42 @@
         <div class="give">
            <p><a href="tel:15801619600">我要送拍</a></p>
         </div>
+        <!--联系客服-->
+        <div class="talk" @click="openService()">
+            <img src="../../assets/image/mycenter/icon5.png"/>
+        </div>
+        <!--客户服务-->
+        <div class="serviceBox" v-if="ServiceBox">
+            <div class="serviceClose" @click="closeService()">×</div>
+            <div class="serviceTop">
+                <h2>ASSISTANCE</h2>
+                <p>客户服务</p>
+            </div>
+            <a href="tel:15801619600">
+                <div class="serviceList">
+                    <img src="../../assets/image/mycenter/t1.png"/>
+                    <p>电话委托</p>
+                </div>
+            </a>
+            <a href="tel:15801619600">
+                <div class="serviceList">
+                    <img src="../../assets/image/mycenter/t2.png"/>
+                    <p>客服服务</p>
+                </div>
+            </a>
+            <a href="tel:15801619600">
+                <div class="serviceList">
+                    <img src="../../assets/image/mycenter/t3.png"/>
+                    <p>私恰</p>
+                </div>
+            </a>
+            <div class="serviceWX">
+                <img src="../../assets/image/mycenter/wx.png"/>
+                <p>联系微信客服</p>
+                <p class="p">长按识别二维码</p>
+            </div>
+        </div>
+        <div class="serviceBk" v-if="ServiceBox"></div>
         <z-footer ></z-footer>
     </div>
 </template>
@@ -122,6 +158,7 @@
                 noGetNum:'',//待收货数量
                 saleNum:'',//售后数量
                 footPrint:'',//浏览记录
+                ServiceBox:false,
             }
         },
         components:{'home-item':itemc},
@@ -149,8 +186,9 @@
             },
         },
         mounted: function() {
-            common.onMove('.personalCenter')
+            common.onMove('.gologin')
             common.onMove2('.sell-spic')
+//            this.onMove();
             this.getFootPrint()
           
         },
@@ -207,7 +245,45 @@
                 })
             },
 
-                    
+//打开客服
+            openService(){
+                let that = this;
+                that.ServiceBox = true;
+            },
+            //关闭客服
+            closeService(){
+                let that = this;
+                that.ServiceBox = false;
+            },
+            //页面滑动问题
+            onMove:function(){
+                let overscroll = function(el) {
+                    el.addEventListener('touchstart', function() {
+                        let top = el.scrollTop
+                            , totalScroll = el.scrollHeight
+                            , currentScroll = top + el.offsetHeight
+                        if(top === 0) {
+                            el.scrollTop = 1
+                        } else if(currentScroll === totalScroll) {
+                            el.scrollTop = top - 1
+                        }
+                    })
+                    el.addEventListener('touchmove', function(evt) {
+                        //if the content is actually scrollable, i.e. the content is long enough
+                        //that scrolling can occur
+                        if(el.offsetHeight < el.scrollHeight)
+                            evt._isScroller = true
+                    })
+                }
+                overscroll(document.querySelector('.gologin'));
+                document.body.addEventListener('touchmove', function(evt) {
+                    //In this case, the default behavior is scrolling the body, which
+                    //would result in an overflow.  Since we don't want that, we preventDefault.
+                    if(!evt._isScroller) {
+                        evt.preventDefault()
+                    }
+                })
+            },
      
 
         }
@@ -219,13 +295,119 @@
     /*rem等基本设置都放在base中，不写多个*/
     @import url('../../assets/css/base.less');
     @import url('../../assets/css/icon/iconfont.css');
-    .personalCenter{
+    .gologin{
           position: fixed;
           left: 0;
           right: 0;
           top: 0;
           overflow-y: scroll;
           bottom: 0;
+          margin:auto;
+        .talk{
+            width: 1rem;
+            height: 0.9rem;
+            background: #fff;
+            position: fixed;
+            right: 0;
+            top: 5.5rem;
+            bottom: 0;
+            margin: auto;
+            border: 2px solid #000;
+            border-right: none;
+            border-bottom-left-radius: 6px;
+            border-top-left-radius:6px;
+            padding:0.2rem;
+            box-sizing:border-box;
+            img{
+                width:0.56rem;
+                height:0.5rem;
+            }
+        }
+        .serviceBk{
+            width:100%;
+            height:100%;
+            position: fixed;
+            top:0;
+            bottom:0;
+            left:0;
+            right:0;
+            margin:auto;
+            background:#000000;
+            opacity: 0.65;
+            z-index:200;
+
+        }
+        .serviceBox{
+            width:7rem;
+            height:9.2rem;
+            position: absolute;
+            left:0;
+            right:0;
+            top:0;
+            bottom:0;
+            margin:auto;
+            background:#fff;
+            padding:0.5rem;
+            z-index:201;
+            .serviceClose{
+                position: absolute;
+                right:0;
+                top:0;
+                width:0.8rem;
+                height:0.8rem;
+                background:#EB6100;
+                color:#fff;
+                text-align: center;
+                line-height:0.7rem;
+                font-size: 0.9rem;
+            }
+            .serviceTop{
+                text-align: center;
+                margin-top:0.5rem;
+                margin-bottom:0.4rem;
+                h2{
+                    font-size:18px;
+                }
+                p{
+                    font-size:12px;
+                    margin-top:0.2rem;
+                }
+            }
+            .serviceList{
+                overflow: hidden;
+                font-size: 12px;
+                padding:0.3rem 0 0.3rem 2.3rem;
+                border-top:1px solid #B5B8BA;
+                img{
+                    float:left;
+                    width:0.5rem;
+                }
+                p{
+                    width:2rem;
+                    text-align: center;
+                    float:left;
+                    font-size:12px;
+                }
+            }
+            .serviceWX{
+                overflow: hidden;
+                font-size: 12px;
+                border-top:1px solid #B5B8BA;
+                text-align: center;
+                img{
+                    width:2rem;
+                    height:2rem;
+                    margin: 0.4rem auto;
+                }
+                p{
+                    font-size:12px;
+                }
+                .p{
+                    font-size:9px;
+                    color:#C3C3C3;
+                }
+            }
+        }
     .header{
         position: fixed;
         top: 0;
@@ -388,7 +570,6 @@
             .address{
                 // box-sizing: border-box;
                 height: @size35;
-                border-bottom: 1px solid rgb(202, 209, 217);
                 margin-left: @size10;
                 .fl{
                     font-size: @size12;
@@ -398,6 +579,7 @@
                     letter-spacing: @size3;
                     font-weight: bold;  
                     padding-right: @size10;
+                    margin-top: 0.06rem;
                 }
             }
         }

@@ -98,8 +98,9 @@ export const common = {
             return 0;
         }
     },
-    onMove: function (valeu) {
+    onMove: function (value) {
         let overscroll = function (el) {
+            console.log(el)
             el.addEventListener('touchstart', function () {
                 let top = el.scrollTop
                     , totalScroll = el.scrollHeight
@@ -115,7 +116,7 @@ export const common = {
                     evt._isScroller = true
             })
         };
-        overscroll(document.querySelector(valeu));
+        overscroll(document.querySelector(value));
         document.body.addEventListener('touchmove', function (evt) {
             if (!evt._isScroller) {
                 evt.preventDefault()
