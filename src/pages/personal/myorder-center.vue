@@ -246,31 +246,33 @@
             },
             getIndex:function(index){
                 let that = this;
-                if(index === 1){
-                    that.index = 1;
-                     that.myList=[]
-                     that.page.num= 1
-                     that.totalPage=''
-                     that.isShowNoMore=true,
-                    that.meScroll();
-                }else if(index==2){
-                    that.index = 2;
-                     that.myList=[]
-                     that.page.num= 1
-                     that.totalPage=''
-                     that.isShowNoMore=true,
-                    that.meScroll();
-                }else if(index==3){
-                    that.index = 3;
-                    that.getOrdercs()
-                }else if(index==0){
-                     that.index = 0;
-                     that.myList=[]
-                     that.totalPage=''
-                     that.page.num= 1
-                     that.isShowNoMore=true,
-                    that.meScroll();
-                }
+                this.$router.push({path:"/myorder",query:{index:index}})  
+                location.reload();
+                // if(index === 1){
+                //     that.index = 1;
+                //      that.myList=[]
+                //      that.page.num= 1
+                //      that.totalPage=''
+                //      that.isShowNoMore=true,
+                //     that.meScroll();
+                // }else if(index==2){
+                //     that.index = 2;
+                //      that.myList=[]
+                //      that.page.num= 1
+                //      that.totalPage=''
+                //      that.isShowNoMore=true,
+                //     that.meScroll();
+                // }else if(index==3){
+                //     that.index = 3;
+                //     that.getOrdercs()
+                // }else if(index==0){
+                //      that.index = 0;
+                //      that.myList=[]
+                //      that.totalPage=''
+                //      that.page.num= 1
+                //      that.isShowNoMore=true,
+                //     that.meScroll();
+                // }
             },
             details:function(type,id,csStatus,list){
         
@@ -407,42 +409,8 @@
                         let boxlist = res.data.datas.datas;
                         that.totalPage = res.data.datas.totalPage;
 
-                      //       for(let i=0;i<that.datalist.length;i++){
-                      //     data[i]=Number(that.datalist[i].expireTime)
-                      //       setInterval(() => { 
-                      //        
-                      //        that.countdown[i]=common.getTimer(data[i]) 
-                      //            },1000) 
-                         
-
-                      // }
                 for(let i=0;i<boxlist.length;i++){
-                            // let date=new Date()
-                            // let now = new Date().getTime()
-                            // let weekEnd = Number(boxlist[i].auction.mqEndTime) + 7 * 24 * 3600 * 1000;
-                            // let weekEnd2 = Number(boxlist[i].auction.mqEndTime) + 7 * 24 * 3600 * 1000 * 30;
-                            // let weekEnd3 = Number(boxlist[i].auction.mqEndTime) + 7 * 24 * 3600 * 1000 * 180;
-                            // let weekEnd4 = Number(boxlist[i].auction.mqEndTime) + 7 * 24 * 3600 * 1000 * 365;
-                            // let weekEnds = weekEnd - now;
-                            // let weekEnds2 = weekEnd2 - now;
-                            // let weekEnds3 = weekEnd3 - now;
-                            // let weekEnds4 = weekEnd4 - now;
-                            // if(weekEnds < 0 && that.weekEndsOpen){
-                            //     that.lineId = boxlist[i].auction._id
-                            //     that.weekEndsOpen = false;
-                            // }
-                            // if(weekEnds2 < 0 && that.weekEndsOpen2){
-                            //     that.lineId2 = boxlist[i].auction._id
-                            //     that.weekEndsOpen2 = false;
-                            // }
-                            // if(weekEnds3 < 0 && that.weekEndsOpen3){
-                            //     that.lineId3 = boxlist[i].auction._id
-                            //     that.weekEndsOpen3 = false;
-                            // }
-                            // if(weekEnds4 < 0 && that.weekEndsOpen4){
-                            //     that.lineId4 = boxlist[i].auction._id
-                            //     that.weekEndsOpen4 = false;
-                            // }
+                  
                             if(boxlist[i].status == 1){
                                 let now = new Date().getTime()
                                 let time = '';
