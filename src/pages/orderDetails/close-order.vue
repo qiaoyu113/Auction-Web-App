@@ -5,10 +5,8 @@
         
         <!-- <div class="header">传家</div> -->
         <div class="nav">
-            <span class="" @click="Return()">
-                <i class="iconfont icon-fanhui"></i>
-            </span>
-            <span class="span1 display" ><img src="../../assets/image/mycenter/sc.png" /></span>
+            <span class="" @click="Return()"><i class="iconfont icon-fanhui"></i></span> 
+            <span class="span1 display" ><img src="../../assets/image/mycenter/sc.png" @click="deleteorder(datas.orderNo)"/></span>
         </div>
         <div class="content">
             <div class="state">
@@ -53,7 +51,15 @@
                 </div>
             </div>
         </div>
-        
+         <div class="v_modal" ref="v_modal" v-if="v_modal">
+           <div class="v_box">
+                 <p>是否确定删除订单?</p>
+                 <div class="v_button">
+                     <el-button @click="heigorder()">取消</el-button>
+                     <el-button @click='deleteOrderid()'>确定</el-button>
+                 </div>
+           </div>
+        </div>
     </div>
 </template>
 
@@ -77,6 +83,8 @@ import {commonService} from '../../service/commonService.js'
           dis:'dis',
           time:'',//支付时间
           freight:'',  //保险运费
+          v_modal:false,
+          deleteorderid:'',//删除订单ID
 
           
       }
@@ -100,6 +108,7 @@ import {commonService} from '../../service/commonService.js'
         this.getOrderid()
     },
     methods: {
+
          Return:function(){
               this.$router.push({path:"/myorder",query:{index:0}})
          },
@@ -107,7 +116,7 @@ import {commonService} from '../../service/commonService.js'
          getOrderid:function(){
             let that=this;
             commonService.getOrderid(that.orderNo).then(function(res){
-                console.log(res)
+              
                 if(res.data.code==200){
                   that.datas=res.data.datas
                   if(that.datas.payLogs!=null){
@@ -128,6 +137,25 @@ import {commonService} from '../../service/commonService.js'
            
             })
           },
+          // 取消删除
+            heigorder:function(){
+                   this.v_modal=false
+                   this.deleteorderid=''
+            },
+            // 删除订单
+            deleteorder:function(id){
+                this.v_modal=true
+                this.deleteorderid=id
+            },
+            deleteOrderid:function(){
+                   let that=this;
+                
+               commonService.deleteOrderid(that.deleteorderid).then(function(res){
+                       
+                          that.v_modal=false
+                          that.$router.push({path:"/myorder",query:{index:0}})
+                    })
+            },
     }
   }
 </script>
@@ -155,42 +183,40 @@ import {commonService} from '../../service/commonService.js'
         text-align: center;
         line-height: @size45;
     }
-        .nav{
-            width: @size375;
-            height: @size35;
-            line-height: @size35;
-            border-bottom: 1px solid rgb(53, 60, 70);
-            background: rgb(255, 255, 255);
-            position: fixed;
-            top: 0;
-            z-index: 100;
+    .nav{
+        width: @size375;
+        height: @size35;
+        border-bottom: 0.5px solid rgb(53, 60, 70);
+        background: rgb(255, 255, 255);
+      
+        span{
+            display: inline-block;
+            line-height: @size30;
+            text-align: center;
+            font-size: @size30;
+            font-weight: lighter;
+            color: rgb(157, 169, 177);
+            // margin-left: 20px;
             i{
-                font-size:28px;
-                color:#A9AEB6;
-                line-height:@size35;
-            }
-            span{
-                display: inline-block;
-                line-height: @size30;
-                text-align: center;
-                font-size: @size30;
-                font-weight: lighter;
-                color: rgb(157, 169, 177);
+                font-size: 28px;
+                color:#a9aeb6;
                 margin-left: 0.3rem;
-            }
-            .span1{
-                float: right;
-                padding-right: 20px;
-                display: none;
-                img{
-                    margin-top: @size6;
-                    width: 0.5rem;
-                }
-            }
-            .display{
-                display: block;
+                
             }
         }
+        .span1{
+            float: right;
+            padding-right: 20px;
+            display: none;
+            img{
+                width: @size20;
+                margin-top: @size5;
+            }
+        }
+        .display{
+            display: block;
+        }
+    }
     .content{
         // margin-top: @size80;
         margin-bottom: 1.2rem;
@@ -352,6 +378,35 @@ import {commonService} from '../../service/commonService.js'
                 line-height: @size20;
             }
         }
+    }
+     .v_modal{
+          position: fixed;
+          left: 0;
+          top: 0;
+          right: 0;
+          bottom: 0;
+          width: 100%;
+          height: 100%;
+          z-index: 9999;
+          background: rgba(0,0,0,0.5);
+         
+          
+          .v_box{
+            width: 6rem;
+            height: 4rem;
+            background: #fff;
+            margin: 4rem auto 0; 
+            border:1px solid #fff;
+            border-radius: 4px;
+            p{
+                font-size: 12px;
+                padding:1rem 0.5rem;
+                
+            }
+            .v_button{
+              padding-left: 0.5rem;
+             }
+          }
     }
     }
 </style>

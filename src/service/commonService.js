@@ -272,6 +272,10 @@ export const commonService = {
     putOrderid: function (id) {
         return axios.put('/orders/'+ id + '/cancel')
     },
+    // 删除订单
+     deleteOrderid: function (id) {
+        return axios.delete('/orders/'+ id)
+    },
       /* 获取售后列表单  */
     getOrdercs: function (params) {
         return axios.get('/ordercs' + this.getParam(params))

@@ -20,11 +20,11 @@
         <div class="box2">
             <div class="info"><span>联系人</span>
                 <input type="" placeholder="请输入" v-model="name"/>
-                <div class="infoClose"><i class="iconfont icon-closeicon"></i></div>
+                <div class="infoClose" @click="remname()" v-if="name!=''"><i class="iconfont icon-closeicon"></i></div>
             </div>
             <div class="info"><span>手机号</span>
                 <input type="number" placeholder="请输入" v-model="phone"/>
-                <div class="infoClose"><i class="iconfont icon-closeicon"></i></div>
+                <div class="infoClose" @click="remphone()" v-if="phone!=''"><i class="iconfont icon-closeicon"></i></div>
             </div>
             <div class="info"><span>所在地区</span>
                 <!-- <input type="" placeholder="请选择"/> -->
@@ -195,13 +195,20 @@ import {commonService} from '../../service/commonService.js'
             let that = this;
             that.ServiceBox = false;
         },
+        remname:function(){
+          this.name=''
+        },
+        remphone:function(){
+           this.phone=""
+        },
     	getAddressid:function(){
             let that = this
             that.addressid=this.$route.query.id
              if(that.addressid!=''){
-             	commonService.getAddressid(that.addressid).then(function(res){
+              commonService.getAddressid(that.addressid).then(function(res){
                 // that.bankCard=res.data.datas
                   let list=res.data.datas
+                  console.log(list)
                   that.name=list.name
                   that.phone=list.phone
                   that.detailAdress=list.detailAdress
@@ -212,17 +219,23 @@ import {commonService} from '../../service/commonService.js'
                   that.cityName=list.cityName
                   that.countyid=list.districtId
                   that.countyName=list.districtName
+
+                  that.provinceIndex=list.provinceName
+                  that.cityIndex=list.cityName
+                  that.countyIndex=list.districtName
                   that.getCitys()
                   that.getCitysId()
                   that.getCitysId2()
-                  setTimeout(function (){
-                       that.defaults()
-                     }, 1000);
+
+                  // setTimeout(function (){
+                  //      that.defaults()
+                  //    }, 1000);
+
                  
                  })
              }
                
-    	},
+      },
           // 获取省
     	 getCitys:function(){
                let that = this;
@@ -245,34 +258,34 @@ import {commonService} from '../../service/commonService.js'
                  })
             },
             // 默认地址
-            defaults:function(){
-            	let that=this;
-                  if(that.province!=''){
-                  	var Sel=document.getElementById("citySel");
-                    for (var i = 0; i < Sel.options.length; i++){
-                     if (Sel.options[i].value == that.provinceName){  
-                         Sel.options[i].selected = true;   
-                        }  
-                       } 
-                  }
-                    if(that.city!=''){
-                  	var Sel2=document.getElementById("citySel2");
-                  for (var i = 0; i < Sel2.options.length; i++){ 
-                     if (Sel2.options[i].value == that.cityName){  
-                         Sel2.options[i].selected = true;   
-                        }  
-                    } 
-                  }
-                    if(that.county!=''){
-                 var  Sel3=document.getElementById("citySel3");
-                  for (var i = 0; i < Sel3.options.length; i++){  
-                     if (Sel3.options[i].value == that.countyName){  
-                         Sel3.options[i].selected = true;   
-                        }  
-                       } 
-                 }
+            // defaults:function(){
+            // 	let that=this;
+            //       if(that.province!=''){
+            //       	var Sel=document.getElementById("citySel");
+            //         for (var i = 0; i < Sel.options.length; i++){
+            //          if (Sel.options[i].value == that.provinceName){  
+            //              Sel.options[i].selected = true;   
+            //             }  
+            //            } 
+            //       }
+            //         if(that.city!=''){
+            //       	var Sel2=document.getElementById("citySel2");
+            //       for (var i = 0; i < Sel2.options.length; i++){ 
+            //          if (Sel2.options[i].value == that.cityName){  
+            //              Sel2.options[i].selected = true;   
+            //             }  
+            //         } 
+            //       }
+            //         if(that.county!=''){
+            //      var  Sel3=document.getElementById("citySel3");
+            //       for (var i = 0; i < Sel3.options.length; i++){  
+            //          if (Sel3.options[i].value == that.countyName){  
+            //              Sel3.options[i].selected = true;   
+            //             }  
+            //            } 
+            //      }
 
-            },
+            // },
             // 选择省
             selChange:function(){
                 var  Sel=document.getElementById("citySel");
@@ -289,7 +302,8 @@ import {commonService} from '../../service/commonService.js'
             	}
             	
             	this.getCitysId()
-              this.selChange2()
+              this.cityIndex=''
+              this.countyIndex=''
             },
             // 选择市
              selChange2:function(){
@@ -304,6 +318,7 @@ import {commonService} from '../../service/commonService.js'
             		this.cityName=''
             	}
             	this.getCitysId2()
+              this.countyIndex=''
             },
             // 选择县
               selChange3:function(){

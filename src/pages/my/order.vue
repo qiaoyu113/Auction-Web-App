@@ -43,7 +43,7 @@
          
         </div>
         <!-- 颜色条 -->
-        <div class="color_bar"></div>
+       <div class="color_bar"><img src="../../../src/assets/image/mycenter/backimg.png"/></div>
         <!-- 拍品支付 -->
         <div class="payment">
             <div class="goods clearfix">
@@ -441,7 +441,7 @@
                 }
             }
         }
-    .order{
+.order{
        
             width:100%;
             max-width:10rem;
@@ -482,7 +482,9 @@
        }
        .time{
          padding: 0 @size10;
-         background-color: red;
+         // background-color: #f16253;
+         background-image: url("../../../src/assets/image/mycenter/gradient.png");
+         background-size: 100% 100%;
          height: 1rem;
          .time_l{
             float: left;
@@ -499,7 +501,7 @@
                 width: 0.56rem;
                 height: 0.56rem;
                 background-color: rgb(0,0,0);
-                font-size: 9px;
+                font-size: 10px;
                 text-align: center;
                 line-height: 0.56rem;
                 border-radius: 3px;
@@ -518,7 +520,7 @@
           .address_l{
             float: left;
             p{
-                font-size: 11px;
+                font-size: 10px;
                 color: rgb(51,51,51);
             }
           }
@@ -527,9 +529,9 @@
             padding-left: @size20;
             border-left: 1px solid rgb(217,217,217);
             line-height: 1.3rem;
-            margin-left: @size20;
+            margin-left: @size10;
             i{
-                font-size: 12px;
+                font-size: 16px;
                 color: rgb(169,174,180);
             }
           }
@@ -547,7 +549,7 @@
           .address_con{
                 float: right;
                 p{
-                    font-size: 11px;
+                    font-size: 12px;
                     color: rgb(51,51,51);
                     text-align: right;
                 }
@@ -555,7 +557,7 @@
                     margin-top: 0.1rem;
                     p{
                         font-size: 10px;
-                        color: rgb(102,102,102);
+                        color: rgb(204,204,204);
                     }
                 }
           }
@@ -564,6 +566,10 @@
        .color_bar{
         height: 4px;
         background-color: red;
+        img{
+            height: 100%;
+            width: 100%;
+        }
        }
        .payment{
           .goods{

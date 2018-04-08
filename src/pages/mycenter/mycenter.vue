@@ -460,6 +460,7 @@
                 margin:auto;
                 i{
                     font-size: @size20;
+                    color: #a9aeb6;
                 }
             }
         }
@@ -486,7 +487,8 @@
                     float:right;
                     margin-top:0.24rem;
                     img{
-                        width: 0.6rem;
+                        width: 0.5rem;
+                        margin-top: 0.2rem;
                     }
                 }
                 .icon-weixin1{

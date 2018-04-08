@@ -20,9 +20,9 @@
                 <div class="bor"></div>
                 <div class="resize">
                     <div class="checked" :class="list.defaultAdress==false?'check':'checked'" @click="postAddressid(list._id)"><i class="iconfont icon-duihao"></i></div>
-                    <span :class="list.defaultAdress==false?'color':''">默认地址</span>
-                    <span class="fr"  @click="edit(list._id)">编辑</span>
-                    <span class="fr"  @click="vmodeal(list._id)">删除</span>
+                     <span :class="list.defaultAdress==false?'':'color'">默认地址</span>
+                    <span class="fr v_fr"  @click="edit(list._id)">编辑</span>
+                    <span class="fr v_fr"  @click="vmodeal(list._id)">删除 |</span>
                 </div>
             </div>
         </div>
@@ -341,6 +341,9 @@ import {commonService} from '../../service/commonService.js'
             padding-top: @size15;
             padding-left: @size10;
             border-bottom: 1px solid rgb(96, 99, 104);
+         
+              
+            
             .checked{
                 float: left;
                 box-sizing: border-box;
@@ -353,8 +356,11 @@ import {commonService} from '../../service/commonService.js'
                     line-height: @size10;
                     position: absolute;
                     top: -@size1;
-                    left: 0;
+                    left: -@size1;
                     color: rgb(0, 185, 181);
+                }
+                .v_span{
+                   color: rgb(0, 185, 181);
                 }
             }
             .check{
@@ -370,17 +376,21 @@ import {commonService} from '../../service/commonService.js'
             }
             span{
                 font-size: @size14;
-                padding-left: @size12;
+                padding-left: @size10;
                 line-height: @size15;
+               
             }
             .color{
-                color: rgb(153, 153, 153);
+               color: rgb(0, 185, 181);
             }
             button{
                 margin:0 @size10;
                 outline: none;
                 font-size: @size14;
                 line-height: @size11;
+            }
+            .v_fr{
+               color: gray;
             }
         }
     }

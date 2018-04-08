@@ -31,7 +31,7 @@
                     <span class="fr bgcolor" v-if="list.status==2">处理中</span>
                     <span class="fr" v-if="list.status==3">待发货</span>
                     <span class="fr" v-if="list.status==4">已发货</span> 
-                    <div class="v_rosr" v-if="list.status==6 || list.status==5"><img src="../../assets/image/mycenter/sc.png" /></div>
+                    <div class="v_rosr" v-if="list.status==6 || list.status==5"><img src="../../assets/image/mycenter/sc.png"  @click="deleteorder(list.orderNo)"/></div>
                     <span class="fr" v-if="list.status==6">已关闭</span>
                     <span class="fr" v-if="list.status==5&&list.csStatus==0">已完成</span>
                     <span class="fr" v-if="list.status==5&&list.csStatus==1">已完成</span>
@@ -96,6 +96,17 @@
         </div>
         </div>
         </div>
+         <div class="v_modal" ref="v_modal" v-if="v_modal">
+           <div class="v_box">
+                 <p>是否确定删除订单?</p>
+                 <div class="v_button">
+                     <el-button @click="heigorder()">取消</el-button>
+                     <el-button @click='deleteOrderid()'>确定</el-button>
+                 </div>
+           </div>
+        </div>
+        <!--分享提示-->
+        <div class="shareBox" v-if="shareHint">可以使用浏览器分享按钮分享给好友哦</div>
         <!--联系客服-->
         <div class="talk" @click="openService()">
             <img src="../../assets/image/mycenter/icon5.png"/>
@@ -158,6 +169,9 @@
                 isShowNoMore:false,
                 totalPage:'',
                 ServiceBox:false,
+                shareHint:false,
+                v_modal:false,
+                deleteorderid:'',//删除订单ID
             }
         },
         components:{'home-item':itemc},
@@ -289,6 +303,24 @@
                           that.countdown[i]=common.getTimer(data[i]) 
                       }
                       
+                    })
+            },
+            // 取消删除
+            heigorder:function(){
+                   this.v_modal=false
+                   this.deleteorderid=''
+            },
+            // 删除订单
+            deleteorder:function(id){
+                this.v_modal=true
+                this.deleteorderid=id
+            },
+            deleteOrderid:function(){
+                   let that=this;
+               commonService.deleteOrderid(that.deleteorderid).then(function(res){
+                      
+                          that.v_modal=false
+                          that.meScroll()
                     })
             },
              // 获取售后列表
@@ -532,37 +564,55 @@
             }
         }
     }
+    .shareBox{
+            width:6rem;
+            height:2rem;
+            padding:0.5rem;
+            box-sizing: border-box;
+            position: fixed;
+            top:0;
+            left:0;
+            right:0;
+            bottom:0;
+            margin:auto;
+            background:#333;
+            opacity: 0.9;
+            text-align: center;
+            color:#fff;
+            font-size:14px;
+            border-radius: 8px;
+        }
     .nav{
-        width: 10rem;
-        height: 0.9333rem;
-        line-height: 0.9333rem;
-        border-bottom: 1px solid #353c46;
-        background: #ffffff;
         position: fixed;
-        top: 0;
-        z-index: 100;
+        left: 0;
+        top:0;
+        z-index: 999;
+        width: @size375;
+        height: @size35;
+        border-bottom: 0.5px solid rgb(53, 60, 70);
+        background: rgb(255, 255, 255);
         // position: fixed;
         // top: @size45;
         // z-index: 100;
         .return{
             display: inline-block;
-            line-height: @size35;
+            line-height: @size30;
             text-align: center;
             font-size: @size30;
             font-weight: lighter;
             color: rgb(157, 169, 177);
-            margin-left: 0.3rem;
-            i{
-                font-size:28px;
-                color:#A9AEB6;
-                line-height: @size35;
-                margin-right:0.3rem;
-            }
+            // margin-left: @size20;
+             i{
+                    font-size:28px;
+                    margin-left: 0.3rem;
+                    color:#A9AEB6;
+                    line-height: @size35;
+                }
         }
         .font{
             display: inline-block;
             font-size: @size14;
-            line-height: 0.84rem;
+            line-height: @size30;
             
             padding-top: @size3; 
             margin-left: @size25;
@@ -577,12 +627,12 @@
             text-align: center;
             line-height: @size30;
             img{
-                width: .7rem;
-                margin-top: .1rem;
+                width: @size30;
+                height: @size30;
             }
         }
         .check{
-            border-bottom:1px solid black;
+            border-bottom:2px solid black;
             color: black;
         }
     }
@@ -594,12 +644,12 @@
             width:100%;
             max-width:10rem;
             position: fixed;
-            top: 3rem;
-            bottom:1rem;
+            top: 1.2rem;
+            bottom:0rem;
             left:0;
             right:0;
             margin:auto;
-            // height:auto;
+            height:inherit;
             overflow-y: scroll;
             -webkit-overflow-scrolling:touch;
         }
@@ -750,6 +800,35 @@
     }
 }
 }
+ .v_modal{
+          position: fixed;
+          left: 0;
+          top: 0;
+          right: 0;
+          bottom: 0;
+          width: 100%;
+          height: 100%;
+          z-index: 9999;
+          background: rgba(0,0,0,0.5);
+         
+          
+          .v_box{
+            width: 6rem;
+            height: 4rem;
+            background: #fff;
+            margin: 4rem auto 0; 
+            border:1px solid #fff;
+            border-radius: 4px;
+            p{
+                font-size: 12px;
+                padding:1rem 0.5rem;
+                
+            }
+            .v_button{
+              padding-left: 0.5rem;
+             }
+          }
+    }
 }
 </style>
 

@@ -12,10 +12,8 @@
         <!-- <div class="header">传家</div> -->
         <!-- 返回键,当订单完成时有删除icon -->
         <div class="nav">
-            <span class="" @click="Return()">
-                <i class="iconfont icon-fanhui"></i>
-            </span>
-            <span class="span1" :class="index==3 ? 'display':'' " @click="putOrderid()"><img src="../../assets/image/mycenter/sc.png" /></span>
+            <span class="" @click="Return()"><i class="iconfont icon-fanhui"></i></span> 
+            <span class="span1" :class="index==3 ? 'display':'' " @click="putOrderid()"><img src="../../assets/image/mycenter/sc.png"  @click="deleteorder(datas.orderNo)"/></span>
         </div>
         <div class="content">
             <div class="warnTime" v-if="datas.status==2">
@@ -158,7 +156,7 @@
         </div>
         <div class="footer1" v-if='index==1' @click="rechargeList">支&nbsp;&nbsp;&nbsp;付</div>
         <div class="footer" v-if='index==3'>
-            <div class="value">
+            <div class="value" @click="share()">
                 分&nbsp;&nbsp;&nbsp;享
             </div>
             <div class="r-icon" ><a href="tel:15801619600"><img src="../../assets/image/mycenter/usre4.png" /></a></div>
@@ -195,7 +193,20 @@
                 </div>
             </div>
         </div>
+
     </div>
+     <div class="v_modal" ref="v_modal" v-if="v_modal">
+           <div class="v_box">
+                 <p>是否确定删除订单?</p>
+                 <div class="v_button">
+                     <el-button @click="heigorder()">取消</el-button>
+                     <el-button @click='deleteOrderid()'>确定</el-button>
+                 </div>
+           </div>
+        </div>
+     <!--分享提示-->
+        <div class="shareBox" v-if="shareHint">可以使用浏览器分享按钮分享给好友哦</div>
+
         <div class="payOK"></div>
         <!--联系客服-->
         <div class="talk" @click="openService()">
@@ -254,6 +265,7 @@ import {commonService} from '../../service/commonService.js'
           logistics:'',//物流
           logisticss:'',//物流列表
           logistic:'',
+          arrays: [],
           dis:'dis',
           createTime:'',//支付时间
           method:'OFFLINE_BANK',//支付方式
@@ -261,7 +273,11 @@ import {commonService} from '../../service/commonService.js'
           freight:'',//保险运费
           countdown:'',
           wxLogin:true,
+          shareHint:false,
+          v_modal:false,
+          deleteorderid:'',//删除订单ID
           ServiceBox:false,
+          
       }
     },
      computed: {
@@ -302,7 +318,7 @@ import {commonService} from '../../service/commonService.js'
              }
         },
     methods: {
-        //打开客服
+         //打开客服
         openService(){
             let that = this;
             that.ServiceBox = true;
@@ -338,6 +354,14 @@ import {commonService} from '../../service/commonService.js'
             //     this.ity=true
             // }
         },
+         //分享
+          share(){
+                let that = this;
+                that.shareHint = true;
+                setTimeout(function(res){
+                    that.shareHint = false;
+                },2500)
+            },
         methodlist:function(value){
             this.method=value
         },
@@ -519,6 +543,23 @@ import {commonService} from '../../service/commonService.js'
                     }
                 })
             },
+             // 取消删除
+            heigorder:function(){
+                   this.v_modal=false
+                   this.deleteorderid=''
+            },
+            // 删除订单
+            deleteorder:function(id){
+                this.v_modal=true
+                this.deleteorderid=id
+            },
+            deleteOrderid:function(){
+                   let that=this;
+               commonService.deleteOrderid(that.deleteorderid).then(function(res){  
+                          that.v_modal=false
+                          that.$router.push({path:"/myorder",query:{index:0}})
+                    })
+            },
 
     }
   }
@@ -535,7 +576,7 @@ import {commonService} from '../../service/commonService.js'
           top: 0;
           overflow-y: scroll;
           bottom: 0;
-    .talk{
+      .talk{
         width: 1rem;
         height: 0.9rem;
         background: #fff;
@@ -640,6 +681,24 @@ import {commonService} from '../../service/commonService.js'
             }
         }
     }
+          .shareBox{
+            width:6rem;
+            height:2rem;
+            padding:0.5rem;
+            box-sizing: border-box;
+            position: fixed;
+            top:0;
+            left:0;
+            right:0;
+            bottom:0;
+            margin:auto;
+            background:#333;
+            opacity: 0.9;
+            text-align: center;
+            color:#fff;
+            font-size:14px;
+            border-radius: 8px;
+        }
     .header{
         position: fixed;
         top: 0;
@@ -655,17 +714,9 @@ import {commonService} from '../../service/commonService.js'
     .nav{
         width: @size375;
         height: @size35;
-        line-height: @size35;
-        border-bottom: 1px solid rgb(53, 60, 70);
+        border-bottom: 0.5px solid rgb(53, 60, 70);
         background: rgb(255, 255, 255);
-        position: fixed;
-        top: 0;
-        z-index: 100;
-        i{
-            font-size:28px;
-            color:#A9AEB6;
-            line-height:@size35;
-        }
+      
         span{
             display: inline-block;
             line-height: @size30;
@@ -673,7 +724,12 @@ import {commonService} from '../../service/commonService.js'
             font-size: @size30;
             font-weight: lighter;
             color: rgb(157, 169, 177);
-            margin-left: 0.3rem;
+            // margin-left: 20px;
+            i{
+              font-size: 28px;
+              margin-left: 0.3rem;
+              color: #a9aeb6;
+            }
         }
         .span1{
             float: right;
@@ -740,7 +796,7 @@ import {commonService} from '../../service/commonService.js'
             padding: 0 @size45;
             .redline{
                 box-sizing: border-box;
-                border-top: 0.08rem solid red;
+                border-top: 0.08rem solid rgb(252, 85, 0);
                 padding: @size30;
                 padding-top: @size15;
                 position: relative;
@@ -749,7 +805,7 @@ import {commonService} from '../../service/commonService.js'
                     width: @size6;
                     height: @size6;
                     border-radius: 50%;
-                    border: 3px solid red;
+                    border: 3px solid rgb(252, 85, 0);
                     display: inline-block;
                     position: absolute;
                     
@@ -758,7 +814,7 @@ import {commonService} from '../../service/commonService.js'
                 .pos1{
                     top: -@size8;
                     left: -1px;
-                    background: red;
+                    background: #fc5500;
                 }
                 .pos2{
                     top: -@size8;
@@ -769,13 +825,14 @@ import {commonService} from '../../service/commonService.js'
                     right: -1px;
                 }
                 .label {
+                  
                     margin-left: -1.5rem;
                     margin-right: -1.5rem; 
                     text-align: center;  
                     font-size: 10px; 
                     .label1{
                         float: left;
-                        color: red;
+                        color: #fc5500;
                         font-size: @size16;
                     }
                     .label2{
@@ -861,7 +918,7 @@ import {commonService} from '../../service/commonService.js'
             padding: 0 @size45;
             .redline{
                 box-sizing: border-box;
-                border-top: 0.08rem solid red;
+                border-top: 0.08rem solid #fc5a06;
                 padding: @size30;
                 padding-top: @size15;
                 position: relative;
@@ -870,7 +927,7 @@ import {commonService} from '../../service/commonService.js'
                     width: @size9;
                     height: @size9;
                     border-radius: 50%;
-                    border: 3px solid red;
+                    border: 3px solid #fc5a06;
                     display: inline-block;
                     position: absolute;
                     
@@ -879,17 +936,17 @@ import {commonService} from '../../service/commonService.js'
                 .pos1{
                     top: -@size8;
                     left: -1px;
-                    background: red;
+                    background: #fc5a06;
                 }
                 .pos2{
                     top: -@size8;
                     left: 3.3rem;
-                    background: red;
+                    background: #fc5a06;
                 }
                 .pos3{
                     top: -@size8;
                     right: -1px;
-                    background: red;
+                    background: #fc5a06;
                 }
                 .label {
                     margin-left: -1.5rem;
@@ -898,18 +955,18 @@ import {commonService} from '../../service/commonService.js'
                     
                     .label1{
                         float: left;
-                        color: red;
+                        color: #fc5a06;
                         font-size: @size16;
                     }
                     .label2{
                         text-align: center;
                         font-size: @size16;
-                        color: red;
+                        color: #fc5a06;
                     }
                     .label3{
                         float: right;
                         font-size: @size16;
-                        color: red;
+                        color: #fc5a06;
                     }
                 }
             }
@@ -948,18 +1005,21 @@ import {commonService} from '../../service/commonService.js'
             .witpay{
                 padding-left: @size10;
                 line-height: @size40;
-                font-size: @size14;
+                font-size: 14px;
                 float: left;
             }
             .btn{
                 margin-right: @size10;
                 margin-top: @size6;
                 line-height: @size25;
-                font-size: @size15;
+                font-size: @size12;
                 border: 1px solid rgb(129, 135, 140);
                 color: rgb(129, 135, 140);
                 float: right;
                 padding: 0 @size10;
+                a{
+                  font-size: 14px;
+                }
                 
             }
             .rty{
@@ -1067,7 +1127,7 @@ import {commonService} from '../../service/commonService.js'
                 // margin-top: 1rem;
                 span{
                     float: left;
-                    font-size: @size14;
+                    font-size: 14px;
                 }
             }
             div{
@@ -1127,11 +1187,12 @@ import {commonService} from '../../service/commonService.js'
             line-height: @size40;
             .fl{
                 font-size: @size14;
+
             }
             .fr{
                 font-size: @size14;
                 font-weight: bold;
-                color: red;
+                color: rgb(252, 90, 6);
             }
         }
         .moneys{
@@ -1157,7 +1218,7 @@ import {commonService} from '../../service/commonService.js'
         bottom:0;
         width: @size375;
         height: 1.2rem;
-		box-sizing: border-box;
+        box-sizing: border-box;
         border-top:1px solid rgb(53, 60, 70); 
         text-align: center;
         line-height: 1.2rem;
@@ -1333,6 +1394,35 @@ import {commonService} from '../../service/commonService.js'
 
 }
 }
+ .v_modal{
+          position: fixed;
+          left: 0;
+          top: 0;
+          right: 0;
+          bottom: 0;
+          width: 100%;
+          height: 100%;
+          z-index: 9999;
+          background: rgba(0,0,0,0.5);
+         
+          
+          .v_box{
+            width: 6rem;
+            height: 4rem;
+            background: #fff;
+            margin: 4rem auto 0; 
+            border:1px solid #fff;
+            border-radius: 4px;
+            p{
+                font-size: 12px;
+                padding:1rem 0.5rem;
+                
+            }
+            .v_button{
+              padding-left: 0.5rem;
+             }
+          }
+    }
 
     }
 </style>

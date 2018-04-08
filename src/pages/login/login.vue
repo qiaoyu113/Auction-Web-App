@@ -24,11 +24,11 @@
             <!--登录账号-->
             <div class="info">
                 <input type="number" placeholder="输入手机号" v-model="phoneUser"/>
-                <div class="infoRight" @click="deletePhone"><i class="iconfont icon-closeicon"></i></div>
+                <div class="infoRight" @click="remphoneUser()" v-if="phoneUser!=''"><i class="iconfont icon-closeicon"></i></div>
             </div>
             <div class="info">
                 <input type="password" placeholder="输入密码" v-model="passwordUser"/>
-                <div class="infoRight" @click="deletePassword"><i class="iconfont icon-closeicon"></i></div>
+                <div class="infoRight" @click="rempasswordUser()" v-if="passwordUser!=''"><i class="iconfont icon-closeicon"></i></div>
             </div>
               <!--微信登录-->
             <div class="wxLogin" v-if="wximg==null&&wxLogin==true" @click="wxlogin">
@@ -48,23 +48,23 @@
             <!--注册账号-->
             <div class="info">
                 <input type="number" placeholder="输入手机号" v-model="phone"/>
-                <div class="infoRight" @click="removePhone"><i class="iconfont icon-closeicon"></i></div>
+                 <div class="infoRight" @click="remphone()" v-if="phone!=''"><i class="iconfont icon-closeicon"></i></div>
             </div>
             <!-- <div class="info">
                 <input style="width:6rem;" type="text" placeholder="输入图片验证码" v-model="kaptchaValue"/>
                 <div class="code" @click="getKaptchas()"><img :src="img.imageString"/></div>
             </div> -->
-            <div class="info">
+           <div class="info">
                 <input style="width:6rem;" type="number" placeholder="输入验证码" v-model="code"/>
                 <div class="code" @click="getcode">获取验证码<span v-if="codeShow" style="margin:0;">({{timeOver}})</span></div>
             </div>
             <div class="info">
                 <input type="password" placeholder="输入密码" v-model="password"/>
-                <div class="infoRight" @click="removePassword"><i class="iconfont icon-closeicon"></i></div>
+                <div class="infoRight" @click="rempassword()" v-if='password!=""'><i class="iconfont icon-closeicon"></i></div>
             </div>
             <div class="info">
                 <input type="password" placeholder="确认密码" v-model="password2"/>
-                <div class="infoRight" @click="removePassword2"><i class="iconfont icon-closeicon"></i></div>
+                <div class="infoRight" @click="rempassword2()" v-if="password2!=''"><i class="iconfont icon-closeicon"></i></div>
             </div>
             <!--微信登陆-->
             <div class="wxLogin" v-if="wxLogin" @click="wxlogin">
@@ -83,25 +83,25 @@
                     <img :src="wximg"/>
                 </div>
             </div>
-            <div class="info">
+           <div class="info">
                 <input type="number" placeholder="输入手机号" v-model="phone"/>
-                <div class="infoRight" @click="removePhone"><i class="iconfont icon-closeicon"></i></div>
+                 <div class="infoRight" @click="remphone()" v-if="phone!=''"><i class="iconfont icon-closeicon"></i></div>
             </div>
-        <!--     <div class="info">
+            <!-- <div class="info">
                 <input style="width:6rem;" type="text" placeholder="输入图片验证码" v-model="kaptchaValue"/>
                 <div class="code" @click="getKaptchas()"><img :src="img.imageString"/></div>
             </div> -->
-            <div class="info">
+           <div class="info">
                 <input style="width:6rem;" type="number" placeholder="输入验证码" v-model="code"/>
                 <div class="code" @click="getcode">获取验证码<span v-if="codeShow" style="margin:0;">({{timeOver}})</span></div>
             </div>
             <div class="info">
                 <input type="password" placeholder="输入密码" v-model="password"/>
-                <div class="infoRight" @click="removePassword"><i class="iconfont icon-closeicon"></i></div>
+                <div class="infoRight" @click="rempassword()" v-if='password!=""'><i class="iconfont icon-closeicon"></i></div>
             </div>
             <div class="info">
                 <input type="password" placeholder="确认密码" v-model="password2"/>
-                <div class="infoRight" @click="removePassword2"><i class="iconfont icon-closeicon"></i></div>
+                <div class="infoRight" @click="rempassword2()" v-if="password2!=''"><i class="iconfont icon-closeicon"></i></div>
             </div>
             <!--登陆和提示-->
             <div class="bottom">
@@ -229,6 +229,21 @@
             closeService(){
                 let that = this;
                 that.ServiceBox = false;
+            },
+            remphoneUser:function(){
+                this.phoneUser=''
+            },
+            rempasswordUser:function(){
+                this.passwordUser=''
+            },
+            remphone:function(){
+                this.phone=''
+            },
+            rempassword:function(){
+                this.password=''
+            },
+            rempassword2:function(){
+                this.password2=''
             },
             resetpassword:function(){
                 this.$router.push({path:"/resetpassword"}) 

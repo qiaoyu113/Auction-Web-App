@@ -11,8 +11,8 @@
     <div class="aftersale-order" id="" v-set-title="title">
         <!-- <div class="header">传家</div> -->
         <div class="nav">
-            <span class="" @click="Return()">&lt;</span> 
-            <span class="span1" :class="index>2||index==0 ? 'display':'' "><img src="../../assets/image/mycenter/sc.png" /></span>
+            <span class="" @click="Return()"><i class="iconfont icon-fanhui"></i></span> 
+            <span class="span1" :class="index>2||index==0 ? 'display':'' "><img src="../../assets/image/mycenter/sc.png" @click="deleteorder(datas.orderNo)"/></span>
         </div>
         <div class="content">
             <div class="state">
@@ -78,6 +78,16 @@
                 <div class="price clearfix"><div class="fl">手机号码:</div><div class="fr">{{adress.phone}}</div></div>
             </div>  
         </div>
+
+         <div class="v_modal" ref="v_modal" v-if="v_modal">
+           <div class="v_box">
+                 <p>是否确定删除订单?</p>
+                 <div class="v_button">
+                     <el-button @click="heigorder()">取消</el-button>
+                     <el-button @click='deleteOrderid()'>确定</el-button>
+                 </div>
+           </div>
+        </div>
         <div class="footer"><a href="tel:15801619600">联系售后</a></div>
         
  
@@ -102,6 +112,8 @@ import {commonService} from '../../service/commonService.js'
           order:'',
           lists:'',
           adress:'',   
+          v_modal:false,
+          deleteorderid:'',//删除订单ID
       }
     },
     components: {},
@@ -190,6 +202,23 @@ import {commonService} from '../../service/commonService.js'
                 })
                }
             },
+             // 取消删除
+            heigorder:function(){
+                   this.v_modal=false
+                   this.deleteorderid=''
+            },
+            // 删除订单
+            deleteorder:function(id){
+                this.v_modal=true
+                this.deleteorderid=id
+            },
+            deleteOrderid:function(){
+                   let that=this;
+               commonService.deleteOrderid(that.deleteorderid).then(function(res){  
+                          that.v_modal=false
+                          that.$router.push({path:"/myorder",query:{index:0}})
+                    })
+            },
 
        
     }
@@ -232,14 +261,19 @@ import {commonService} from '../../service/commonService.js'
             font-size: @size30;
             font-weight: lighter;
             color: rgb(157, 169, 177);
-            margin-left: 20px;
+            // margin-left: 20px;
+            i{
+                font-size: 28px;
+                color: #a9aeb6;
+                margin-left: 0.3rem;
+            }
         }
         .span1{
             float: right;
             padding-right: 20px;
             display: none;
              img{
-                width: @size20;
+                width: @size16;
                 margin-top: @size5;
             }
         }
@@ -261,7 +295,7 @@ import {commonService} from '../../service/commonService.js'
                 border-top: 0.08rem solid rgb(21, 179, 187);
             }
             .linecolor1{
-                border-top: 0.08rem solid gray;
+                border-top: 0.08rem solid rgb(168, 174, 181);
             }
             .redline{
                 box-sizing: border-box;
@@ -280,8 +314,8 @@ import {commonService} from '../../service/commonService.js'
                     background: white;
                 }
                 .grayBg{
-                    background: gray;
-                    border-color:gray; 
+                    background: rgb(168, 174, 181);
+                    border-color: rgb(168, 174, 181); 
                 }
                 .pos1{
                     top: -@size8;
@@ -467,12 +501,12 @@ import {commonService} from '../../service/commonService.js'
         bottom:0;
         width: @size375;
         height: 1.2rem;
-		box-sizing: border-box;
+        box-sizing: border-box;
         border-top:1px solid rgb(53, 60, 70); 
         text-align: center;
         line-height: 1.2rem;
         a{
-           font-size: 10px; 
+           font-size: 12px; 
         }
         
 
@@ -537,6 +571,35 @@ import {commonService} from '../../service/commonService.js'
         }
     }
 }    
+.v_modal{
+          position: fixed;
+          left: 0;
+          top: 0;
+          right: 0;
+          bottom: 0;
+          width: 100%;
+          height: 100%;
+          z-index: 9999;
+          background: rgba(0,0,0,0.5);
+         
+          
+          .v_box{
+            width: 6rem;
+            height: 4rem;
+            background: #fff;
+            margin: 4rem auto 0; 
+            border:1px solid #fff;
+            border-radius: 4px;
+            p{
+                font-size: 12px;
+                padding:1rem 0.5rem;
+                
+            }
+            .v_button{
+              padding-left: 0.5rem;
+             }
+          }
+    }
 }
 </style>
 

@@ -12,7 +12,7 @@
     <div class="rechargeList" v-set-title="title">
         <!-- <div class="header">传家</div> -->
         <div class="nav">
-            <span class="" @click="Return()">&lt;</span> 
+            <span class="" @click="Return()"><i class="iconfont icon-fanhui"></i></span> 
         </div>
         <div class="content">
             <div class="state">
@@ -31,23 +31,23 @@
             <!-- 填写银行卡信息 -->
             <div  v-if='index==1'>
                  <div class="v_block" v-for="list in bankCard">
-                 	 <div class="v_rows clearfix">
-                 	 	 <p class="v_rows_l"><i class="iconfont icon-duihao"></i><span>银行账户</span></p>
-                 	 	 <div class="v_rows_con">官方</div>
-                 	 	 <div class="v_rows_r v_Hook" :class="bankCardId==list.id?'v_id':''" @click="bankId(list.id,list.cardNo)"><i class="iconfont icon-duihao"></i></div>
-                 	 </div>
-                 	 <div class="v_rows clearfix">
-                 	 	<p class="v_rows_l">开户名称</p>
-                 	 	<p class="v_rows_r">{{list.name}}</p>
-                 	 </div>
-                 	 <div class="v_rows clearfix">
-                 	 	<p class="v_rows_l">银行账户</p>
-                 	 	<p class="v_rows_r">{{list.cardNo}}</p>
-                 	 </div>
-                 	 <div class="v_rows clearfix">
-                 	 	<p class="v_rows_l">开户银行</p>
-                 	 	<p class="v_rows_r">{{list.bank}} {{list.subBank}}</p>
-                 	 </div>
+                   <div class="v_rows clearfix">
+                     <p class="v_rows_l"><i class="iconfont icon-duihao"></i><span>银行账户</span></p>
+                     <div class="v_rows_con">官方</div>
+                     <div class="v_rows_r v_Hook" :class="bankCardId==list.id?'v_id':''" @click="bankId(list.id,list.cardNo)"><i class="iconfont icon-duihao"></i></div>
+                   </div>
+                   <div class="v_rows clearfix">
+                    <p class="v_rows_l">开户名称</p>
+                    <p class="v_rows_r">{{list.name}}</p>
+                   </div>
+                   <div class="v_rows clearfix">
+                    <p class="v_rows_l">银行账户</p>
+                    <p class="v_rows_r">{{list.cardNo}}</p>
+                   </div>
+                   <div class="v_rows clearfix">
+                    <p class="v_rows_l">开户银行</p>
+                    <p class="v_rows_r">{{list.bank}} {{list.subBank}}</p>
+                   </div>
                  </div>
             </div>
             <!-- 填写银行卡信息 -->
@@ -55,11 +55,11 @@
                 <div class="info clearfix">
                      <span>汇款人</span>
                     <input type="text" placeholder="请输入汇款人姓名" value="name" v-model="name"/>
-                    <div class="infoClose" @click='removeName'><i class="iconfont icon-closeicon"></i></div>
+                    <div class="infoClose" @click='remname()' v-if="name!=''"><i class="iconfont icon-closeicon"></i></div>
                 </div>
                 <div class="info clearfix"><span>银行卡号</span>
                     <input type="number" placeholder="请输入银行卡号" value="userBankCardNo" v-model="userBankCardNo" @blur="cardObtain()"/>
-                    <div class="infoClose" @click='removeAccount'><i class="iconfont icon-closeicon"></i></div>
+                    <div class="infoClose" @click='remuserBankCardNo()' v-if="userBankCardNo!=''"><i class="iconfont icon-closeicon"></i></div>
                 </div>
                  <div class="info clearfix"><span>开户银行</span>
                     <input type="text" placeholder="自动输入开户银行" value="userBankDetail" v-model="userBankDetail" disabled="disabled" />
@@ -71,7 +71,7 @@
                 </div>
                 <div class="info clearfix"><span>手机号码</span>
                     <input type="number" placeholder="请输入手机号码" value="phone" v-model="phone"/>
-                    <div class="infoClose" @click='removeAccount'><i class="iconfont icon-closeicon"></i></div>
+                    <div class="infoClose" @click='remphone()' v-if="phone!=''"><i class="iconfont icon-closeicon"></i></div>
                 </div>
             </div>
       
@@ -194,25 +194,19 @@ import {commonService} from '../../service/commonService.js'
             Return:function(){
                 window.history.go(-1)
             },
+            remname:function(){
+              this.name=''
+            },
+            remuserBankCardNo:function(){
+               this.userBankCardNo=''
+            },
+            remphone:function(){
+              this.phone=''
+            },
             thtype:function(){
                this.type=this.$route.query.type
             },
-            removeName:function(){
-                let that = this;
-                that.name = ''
-            },
-            removeNamecard:function(){
-                let that = this;
-                that.namecard = ''
-            },
-            removeAccount:function(){
-                let that = this;
-                that.account = ''
-            },
-            removePhone:function(){
-                let that = this;
-                that.phone = ''
-            },
+         
             // yi:function(){
             //     if(this.$route.query.index==2){
             //         this.flag=1
@@ -413,7 +407,12 @@ import {commonService} from '../../service/commonService.js'
             font-size: @size30;
             font-weight: lighter;
             color: rgb(157, 169, 177);
-            margin-left: 20px;
+            // margin-left: 20px;
+             i{
+              font-size: 28px;
+              margin-left: 0.3rem;
+              color: #a9aeb6;
+            }
         }
     }
     .content{
@@ -421,45 +420,45 @@ import {commonService} from '../../service/commonService.js'
         margin-bottom: 1.2rem;
         padding: 0 @size10;
         .v_block{
-        	border-bottom: 1px solid rgb(53, 60, 70);
-        	.v_rows{
-        		margin: 0 @size10;
-        		border-bottom: 1px solid #87828c;
-        		line-height: @size54;
+          border-bottom: 1px solid rgb(53, 60, 70);
+          .v_rows{
+            margin: 0 @size10;
+            border-bottom: 1px solid #87828c;
+            line-height: @size54;
                 
-        		.v_rows_l{
-        			float: left;
-        			font-size: 10px;
-        		}
-        		.v_rows_con{
-        			float: left;
-        			width: 1.22rem;
-        			height: @size24;
-        			background: #15b3b3;
-        			margin-top: @size15;
-        			line-height: @size24;
-        			text-align: center;
-        			color: #fff;
-        			margin-left: @size4;
-        		}
-        		.v_rows_r{
-        			float: right;
-        			font-size: 10px;
+            .v_rows_l{
+              float: left;
+              font-size: 10px;
+            }
+            .v_rows_con{
+              float: left;
+              width: 1.22rem;
+              height: @size24;
+              background: #15b3b3;
+              margin-top: @size15;
+              line-height: @size24;
+              text-align: center;
+              color: #fff;
+              margin-left: @size4;
+            }
+            .v_rows_r{
+              float: right;
+              font-size: 10px;
                      color:#5b5b5b;
-        		}
-        		.v_Hook{
-        			width: @size16;
-        			height: @size16;
-        			border:2px solid #ccc;
-        			margin-top: @size18;
-        			i{
+            }
+            .v_Hook{
+              width: @size16;
+              height: @size16;
+              border:2px solid #ccc;
+              margin-top: @size18;
+              i{
                         display: none;
-        				font-size: @size16;
+                font-size: @size16;
                         line-height: @size16;
                         color: #15b3b3;
 
-        			}
-        		}
+              }
+            }
                 .v_id{
                     border:2px solid #15b3b3;
                     i{
@@ -467,10 +466,10 @@ import {commonService} from '../../service/commonService.js'
                     }
                 }
 
-        	}
-        	.v_rows:last-child{
-        		border-bottom: none;
-        	}
+          }
+          .v_rows:last-child{
+            border-bottom: none;
+          }
 
         }
         .info1{
@@ -522,7 +521,7 @@ import {commonService} from '../../service/commonService.js'
             padding: 0 @size45;
             .redline{
                 box-sizing: border-box;
-                border-top: 0.08rem solid red;
+                border-top: 0.08rem solid #fc5a06;
                 padding: @size30;
                 padding-top: @size15;
                 position: relative;
@@ -531,7 +530,7 @@ import {commonService} from '../../service/commonService.js'
                     width: @size6;
                     height: @size6;
                     border-radius: 50%;
-                    border: 3px solid red;
+                    border: 3px solid #fc5a06;
                     display: inline-block;
                     position: absolute;
                     
@@ -540,7 +539,7 @@ import {commonService} from '../../service/commonService.js'
                 .pos1{
                     top: -@size8;
                     left: -1px;
-                    background: red;
+                    background: #fc5a06;
                 }
                 .pos2{
                     top: -@size8;
@@ -551,7 +550,7 @@ import {commonService} from '../../service/commonService.js'
                     right: -1px;
                 }
                 .v_red{
-                    background: red;
+                    background: #fc5a06;
                 }
                 .label {
                     margin-left: -1.8rem;
@@ -560,7 +559,7 @@ import {commonService} from '../../service/commonService.js'
                     font-size: 10px;
                     .label1{
                         float: left;
-                        color: red;
+                        color: #fc5a06;
                         font-size: @size13;
                     }
                     .label2{
@@ -574,7 +573,7 @@ import {commonService} from '../../service/commonService.js'
                         color: gray;
                     }
                     .label4{
-                        color: red;
+                        color: #fc5a06;
                     }
                 }
             }
@@ -789,7 +788,7 @@ import {commonService} from '../../service/commonService.js'
         z-index: 99;
         width: @size375;
         height: 1.2rem;
-		box-sizing: border-box;
+    box-sizing: border-box;
         border-top:1px solid rgb(53, 60, 70); 
         text-align: center;
         line-height: 1.2rem;

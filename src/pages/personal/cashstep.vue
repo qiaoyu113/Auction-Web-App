@@ -12,7 +12,7 @@
     <div class="cashstep" v-set-title="title">
         <!-- <div class="header">传家</div> -->
         <div class="nav">
-            <span class="" @click="Return()">&lt;</span> 
+            <span class="" @click="Return()"><i class="iconfont icon-fanhui"></i></span> 
         </div>
         <div class="content">
             <div class="state"  v-if='index==1'>
@@ -62,11 +62,11 @@
                 </div>
                 <div class="info"><span>支付宝帐号</span>
                     <input type="text" placeholder="请输入支付宝帐号" v-model="account"/>
-                    <div class="infoClose" @click='removeAccount'><i class="iconfont icon-closeicon"></i></div>
+                    <div class="infoClose" @click='remaccount()' v-if="account!=''"><i class="iconfont icon-closeicon"></i></div>
                 </div>
                 <div class="info"><span>姓名</span>
                     <input type="text" placeholder="请输入姓名" v-model="userName"/>
-                    <div class="infoClose" @click='removeName'><i class="iconfont icon-closeicon"></i></div>
+                    <div class="infoClose" @click='remuserName()' v-if="userName!=''"><i class="iconfont icon-closeicon"></i></div>
                 </div>
             </div>
             <!-- 填写银行卡信息 -->
@@ -77,11 +77,11 @@
                 </div>
                 <div class="info"><span>姓名</span>
                     <input type="text" placeholder="请输入收款方姓名" v-model="userBankName"/>
-                    <div class="infoClose" @click='removeName'><i class="iconfont icon-closeicon"></i></div>
+                    <div class="infoClose" @click='remuserBankName()' v-if="userBankName!=''"><i class="iconfont icon-closeicon"></i></div>
                 </div>
                  <div class="info"><span>银行卡号</span>
                     <input type="number" placeholder="请输入银行卡号" v-model="userBankCardNo" @blur="cardObtain()"/>
-                    <div class="infoClose" @click='removeAccount'><i class="iconfont icon-closeicon"></i></div>
+                    <div class="infoClose" @click='remuserBankCardNo()' v-if="userBankCardNo!=''"><i class="iconfont icon-closeicon"></i></div>
                 </div>
                 <div class="info"><span>银行</span>
                     <input type="text" placeholder="请选择银行" disabled="disabled" value="userBank" v-model="userBank"/>
@@ -106,26 +106,26 @@
                         :value="index+1">
                 </el-option>
             </el-select>
-                    <div class="infomore" @click='removeAccount'><i class="more">...</i></div>
+                    <div class="infomore" ><i class="more">...</i></div>
                 </div>
                 <div class="info"><span>开户支行</span>
                     <input type="text" placeholder="请输入开户支行" v-model="userBankDetail"/>
-                    <div class="infoClose" @click='removeAccount'><i class="iconfont icon-closeicon"></i></div>
+                    <div class="infoClose" @click='remuserBankDetail' v-if="userBankDetail!=''"><i class="iconfont icon-closeicon"></i></div>
                 </div>
             </div>
             <!-- 身份验证 -->
             <div  v-if='index==2'>
                 <div class="info"><span>姓名</span>
                     <input type="text" placeholder="请输入姓名" v-model="name"/>
-                    <div class="infoClose" @click='removeName'><i class="iconfont icon-closeicon"></i></div>
+                    <div class="infoClose" @click='remname()' v-if="name!=''"><i class="iconfont icon-closeicon"></i></div>
                 </div>
                 <div class="info"><span>身份证号码</span>
                     <input type="number" placeholder="请输入身份证号码" v-model="namecard"/>
-                    <div class="infoClose" @click='removeNamecard'><i class="iconfont icon-closeicon"></i></div>
+                    <div class="infoClose" @click='remnamecard()' v-if="namecard!=''"><i class="iconfont icon-closeicon"></i></div>
                 </div>
                 <div class="info"><span>手机号码</span>
                     <input type="number" placeholder="请输入手机号码" v-model="phone"/>
-                    <div class="infoClose" @click='removePhone'><i class="iconfont icon-closeicon"></i></div>
+                    <div class="infoClose" @click='remphone()' v-if="phone!=''"><i class="iconfont icon-closeicon"></i></div>
                 </div>
                 <div class="info"><span>图片验证码</span>
                     <input type="text" placeholder="请输入验证码" v-model='kaptchaValue'/>
@@ -231,12 +231,39 @@ import {commonService} from '../../service/commonService.js'
            rto:function(){
              this.$router.push({path:"/myaccount"})  
            },
+           remaccount:function(){
+            this.account=''
+           },
+           remuserName:function(){
+            this.userName=''
+           },
+           remuserBankName:function(){
+            this.userBankName=''
+           },
+           remuserBankCardNo:function(){
+             this.userBankCardNo=''
+           },
+           remuserBankDetail:function(){
+             this.userBankDetail=''
+           },
+           remname:function(){
+            this.name=''
+           },
+           remnamecard:function(){
+            this.namecard=''
+           },
+           remphone:function(){
+            this.phone=''
+           },
            cardObtain:function(){
                 let that=this
                  let pattern = /^([1-9]{1})(\d{14}|\d{18})$/,  
                        str = that.userBankCardNo.replace(/\s+/g, "");  
                        if (!pattern.test(str)) {  
                            that.htmlx='银行卡号不正确'
+                            setTimeout(() => {  
+                           that.htmlx=''
+                         },2000) 
                            return false;  
                        } 
 
@@ -247,22 +274,7 @@ import {commonService} from '../../service/commonService.js'
             Return:function(){
                 window.history.go(-1)
             },
-            removeName:function(){
-                let that = this;
-                that.name = ''
-            },
-            removeNamecard:function(){
-                let that = this;
-                that.namecard = ''
-            },
-            removeAccount:function(){
-                let that = this;
-                that.account = ''
-            },
-            removePhone:function(){
-                let that = this;
-                that.phone = ''
-            }, 
+        
             // 选择省
             selChange:function(){
                 var  Sel=document.getElementById("citySel");
@@ -322,6 +334,9 @@ import {commonService} from '../../service/commonService.js'
                      if(that.flag==1){
                          if(that.account==''){
                             that.htmlx='支付宝账户不能为空'
+                             setTimeout(() => {  
+                             that.htmlx=''
+                         },2000) 
                             return false
                          }
                            let mailbox=/^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/;
@@ -331,9 +346,9 @@ import {commonService} from '../../service/commonService.js'
                        if(flag || flag2){
                           
                        }else{
-                          this.htmlx="请填写正确的支付宝账号"
+                          that.htmlx="请填写正确的支付宝账号"
                           setTimeout(() => {  
-                      this.htmlx=''
+                           that.htmlx=''
                          },2000) 
                           return false
                        }
@@ -367,6 +382,15 @@ import {commonService} from '../../service/commonService.js'
                              },2000) 
                             return false
                          }
+                      let pattern = /^([1-9]{1})(\d{14}|\d{18})$/,  
+                       str = that.userBankCardNo.replace(/\s+/g, "");  
+                       if (!pattern.test(str)) {  
+                           that.htmlx='银行卡号不正确'
+                            setTimeout(() => {  
+                           that.htmlx=''
+                         },2000) 
+                           return false;  
+                       } 
   
                          if(that.cityName ==''&&that.provinceName){
                             that.htmlx='开户省市不能为空'
@@ -405,6 +429,9 @@ import {commonService} from '../../service/commonService.js'
                  commonService.getFormssms({phone:that.phone,type:7,idCard:that.namecard,realName:that.name,kaptchaKey:that.img.kaptchaKey,kaptchaValue:that.kaptchaValue}).then(function(res){
                     if(res.data.message!= 'success'){
                        that.htmlx=res.data.message
+                        setTimeout(() => {  
+                                 that.htmlx=''
+                             },2000) 
                       return false 
                     }else{
                   // 倒计时
@@ -535,7 +562,12 @@ import {commonService} from '../../service/commonService.js'
             font-size: @size30;
             font-weight: lighter;
             color: rgb(157, 169, 177);
-            margin-left: 20px;
+            // margin-left: 20px;
+            i{
+              font-size: 28px;
+              margin-left: 0.3rem;
+              color: #a9aeb6;
+            }
         }
     }
     .content{
@@ -591,7 +623,7 @@ import {commonService} from '../../service/commonService.js'
             padding: 0 @size45;
             .redline{
                 box-sizing: border-box;
-                border-top: 0.08rem solid red;
+                border-top: 0.08rem solid #fc5a06;
                 padding: @size30;
                 padding-top: @size15;
                 position: relative;
@@ -600,7 +632,7 @@ import {commonService} from '../../service/commonService.js'
                     width: @size6;
                     height: @size6;
                     border-radius: 50%;
-                    border: 3px solid red;
+                    border: 3px solid #fc5a06;
                     display: inline-block;
                     position: absolute;
                     
@@ -609,7 +641,7 @@ import {commonService} from '../../service/commonService.js'
                 .pos1{
                     top: -@size8;
                     left: -1px;
-                    background: red;
+                    background: #fc5a06;
                 }
                 .pos2{
                     top: -@size8;
@@ -626,7 +658,7 @@ import {commonService} from '../../service/commonService.js'
                     font-size: 10px; 
                     .label1{
                         float: left;
-                        color: red;
+                        color: #fc5a06;
                         font-size: @size13;
                     }
                     .label2{
@@ -652,7 +684,7 @@ import {commonService} from '../../service/commonService.js'
             padding: 0 @size45;
             .redline{
                 box-sizing: border-box;
-                border-top: 0.08rem solid red;
+                border-top: 0.08rem solid #fc5a06;
                 padding: @size30;
                 padding-top: @size15;
                 position: relative;
@@ -661,7 +693,7 @@ import {commonService} from '../../service/commonService.js'
                     width: @size9;
                     height: @size9;
                     border-radius: 50%;
-                    border: 3px solid red;
+                    border: 3px solid #fc5a06;
                     display: inline-block;
                     position: absolute;
                     
@@ -670,12 +702,12 @@ import {commonService} from '../../service/commonService.js'
                 .pos1{
                     top: -@size8;
                     left: -1px;
-                    background: red;
+                    background: #fc5a06;
                 }
                 .pos2{
                     top: -@size8;
                     left: 3.3rem;
-                    background: red;
+                    background: #fc5a06;
                 }
                 .pos3{
                     top: -@size8;
@@ -688,13 +720,13 @@ import {commonService} from '../../service/commonService.js'
                     
                     .label1{
                         float: left;
-                        color: red;
+                        color: #fc5a06;
                         font-size: @size14;
                     }
                     .label2{
                         text-align: center;
                         font-size: @size14;
-                        color: red;
+                        color: #fc5a06;
                         margin-left: -@size20;
                     }
                     .label3{
@@ -714,7 +746,7 @@ import {commonService} from '../../service/commonService.js'
             padding: 0 @size45;
             .redline{
                 box-sizing: border-box;
-                border-top: 0.08rem solid red;
+                border-top: 0.08rem solid #fc5a06;
                 padding: @size30;
                 padding-top: @size15;
                 position: relative;
@@ -723,7 +755,7 @@ import {commonService} from '../../service/commonService.js'
                     width: @size9;
                     height: @size9;
                     border-radius: 50%;
-                    border: 3px solid red;
+                    border: 3px solid #fc5a06;
                     display: inline-block;
                     position: absolute;
                     
@@ -732,17 +764,17 @@ import {commonService} from '../../service/commonService.js'
                 .pos1{
                     top: -@size8;
                     left: -1px;
-                    background: red;
+                    background: #fc5a06;
                 }
                 .pos2{
                     top: -@size8;
                     left: 3.3rem;
-                    background: red;
+                    background: #fc5a06;
                 }
                 .pos3{
                     top: -@size8;
                     right: -1px;
-                    background: red;
+                    background: #fc5a06;
                 }
                 .label {
                     margin-left: -1.5rem;
@@ -751,18 +783,18 @@ import {commonService} from '../../service/commonService.js'
                     
                     .label1{
                         float: left;
-                        color: red;
+                        color: #fc5a06;
                         font-size: @size14;
                     }
                     .label2{
                         text-align: center;
                         font-size: @size14;
-                        color: red;
+                        color: #fc5a06;
                     }
                     .label3{
                         float: right;
                         font-size: @size14;
-                        color: red;
+                        color: #fc5a06;
                     }
                 }
             }
@@ -852,7 +884,7 @@ import {commonService} from '../../service/commonService.js'
         bottom:0;
         width: @size375;
         height: 1.2rem;
-	    	box-sizing: border-box;
+        box-sizing: border-box;
         border-top:1px solid rgb(53, 60, 70); 
         text-align: center;
         line-height: 1.2rem;

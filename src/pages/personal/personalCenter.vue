@@ -61,7 +61,7 @@
             <div class="account">
                 <div class="acc  clearfix">
                     <div class="fl">保证金管理</div>
-                    <div class="fr" @click="bond">...</div>
+                    <div class="fr" @click="bond"><img src="../../../src/assets/image/mycenter/more.png"/></div>
                 </div>
                 <div class="remain clearfix">
                     <div class="mon fl">
@@ -76,15 +76,15 @@
             <div class="center">
                 <div class="address  clearfix">
                     <div class="fl">地址管理</div>
-                    <div class="fr" @click="address()">...</div>
+                    <div class="fr" @click="address()"><img src="../../../src/assets/image/mycenter/more.png"/></div>
                 </div>
                 <div class="address  clearfix">
                     <div class="fl">会员中心</div>
-                    <div class="fr" @click="member">...</div>
+                    <div class="fr" @click="member"><img src="../../../src/assets/image/mycenter/more.png"/></div>
                 </div>
                 <div class="address  clearfix">
                     <div class="fl">帮助中心</div>
-                    <div class="fr" @click="help">...</div>
+                    <div class="fr" @click="help"><img src="../../../src/assets/image/mycenter/more.png"/></div>
                 </div>
             </div>
             
@@ -497,7 +497,7 @@
                 margin-top: 1.2rem;
                 img{
                     padding-top: 0.8rem;
-                    width: 0.8rem;
+                    width: 0.5rem;
                     margin-right: 0.4rem;
                 }
 
@@ -542,9 +542,9 @@
                     }
                 }
                 .font{
-                    /*font-size: 10px;*/
+                    font-size: 10px;
                     text-align: center;
-                    padding-top: 0.35rem;
+                    padding-top: @size20;
                     font-size: @size10;
                 }
             }
@@ -567,6 +567,11 @@
                     font-weight: bold;  
                     padding-right: @size10;
                     line-height: 0.8rem;
+                     img{
+                        width: 0.5rem;
+                        margin-top: @size16;
+                    }
+
                 }
             }
             .remain{
@@ -613,6 +618,10 @@
                     font-weight: bold;  
                     padding-right: @size10;
                     line-height: 0.8rem;
+                     img{
+                        width: 0.5rem;
+                        margin-top: @size16;
+                    }
                 }
             }
             .address:last-child{

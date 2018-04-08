@@ -36,17 +36,17 @@
             <div class="center">
                 <div class="address  clearfix" style="border-bottom: 1px solid rgb(202, 209, 217);">
                     <div class="fl">保证金充值</div>
-                    <div class="fr" @click="recharge()">...</div>
+                    <div class="fr" @click="recharge()"><img src="../../../src/assets/image/mycenter/more.png"/></div>
                 </div>
                 <div class="address  clearfix">
                     <div class="fl">保证金提现</div>
-                    <div class="fr" @click="cash()">...</div>
+                    <div class="fr" @click="cash()"><img src="../../../src/assets/image/mycenter/more.png"/></div>
                 </div>
             </div>
             <div class="center">
                 <div class="address  clearfix">
                     <div class="fl">保证金说明</div>
-                    <div class="fr" @click="helpcenter()">...</div>
+                    <div class="fr" @click="helpcenter()"><img src="../../../src/assets/image/mycenter/more.png"/></div>
                 </div>
             </div>
             <div class="cashDetail">
@@ -506,6 +506,10 @@
                         letter-spacing: @size3;
                         font-weight: bold;  
                         padding-right: @size10;
+                        img{
+                        width: 0.5rem;
+                        margin-top: @size16;
+                    }
                     }
                 }
         }
