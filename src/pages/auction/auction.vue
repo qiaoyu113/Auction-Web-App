@@ -259,7 +259,7 @@
                 <div class="fr num">{{day}}</div>
             </div>
         </div>
-        <div class="infomation bground3 clearfix" v-else-if="(details.auctionStatus == 3 && details.userId != userId && details.doneBuy == '1')||(details.auctionStatus == 3 && details.userId == userId && details.doneBuy == '2')||(details.auctionStatus == 3 && details.userId == userId && details.doneBuy == '4')">
+        <div class="infomation bground3 clearfix" v-else-if="(details.auctionStatus == 3 && details.userId != userId && details.doneBuy == '1')||(details.auctionStatus == 3 && details.doneBuy == '2')||(details.auctionStatus == 3 && details.doneBuy == '3')||(details.auctionStatus == 3 && details.doneBuy == '4')">
             <div class="learnMore fl" @click="lookMore()">出价记录{{details.offerNum}}</div>
             <div class="value fl">当前价格 {{reversedNum(details.currentPrice)}} CNY</div>
             <div class="success fr">
