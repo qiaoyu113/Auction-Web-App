@@ -29,7 +29,7 @@
             <div class="info"><span>所在地区</span>
                 <!-- <input type="" placeholder="请选择"/> -->
            <span class="diqu">
-            <el-select v-model="provinceIndex" filterable placeholder="请选择" @change="selChange()" class="select-city">
+            <el-select v-model="provinceIndex"  placeholder="请选择" @change="selChange()" class="select-city">
                 <el-option
                         v-for="item,index in province"
                         :key="item.id"
@@ -37,7 +37,7 @@
                         :value="index+1">
                 </el-option>
             </el-select>
-            <el-select v-model="cityIndex" filterable placeholder="请选择" @change="selChange2()" class="select-city">
+            <el-select v-model="cityIndex"  placeholder="请选择" @change="selChange2()" class="select-city">
                 <el-option
                         v-for="item,index in city"
                         :key="item.id"
@@ -45,7 +45,7 @@
                         :value="index+1">
                 </el-option>
             </el-select>
-            <el-select v-model="countyIndex" filterable placeholder="请选择" @change="selChange3()" class="select-city">
+            <el-select v-model="countyIndex"  placeholder="请选择" @change="selChange3()" class="select-city">
                 <el-option
                         v-for="item,index in county"
                         :key="item.id"
@@ -119,6 +119,30 @@
             </div>
         </div>
         <div class="serviceBk" v-if="ServiceBox"></div>
+      <!--   <div class="vv_anbu">
+          <p>1</p>
+          <p>2</p>
+          <p>3</p>
+          <p>4</p>
+          <p>5</p>
+          <p>6</p>
+          <p>3</p>
+          <p>4</p>
+          <p>5</p>
+          <p>6</p>
+          <p>5</p>
+          <p>6</p>
+          <p>3</p>
+          <p>4</p>
+          <p>5</p>
+          <p>6</p>
+          <p>5</p>
+          <p>6</p>
+          <p>3</p>
+          <p>4</p>
+          <p>5</p>
+          <p>6</p>
+        </div> -->
     </div>
 </template>
 
@@ -389,7 +413,7 @@ import {commonService} from '../../service/commonService.js'
           left: 0;
           right: 0;
           top: 0;
-          overflow-x: scroll;
+          overflow-y: scroll;
           bottom: 0;
         .talk{
             width: 1rem;
@@ -690,9 +714,17 @@ import {commonService} from '../../service/commonService.js'
                 display: none;
             }
         }
+        
+
+
 }
     .el-select-dropdown {
         margin-top: 40px!important;
+       
     }
+   
+  
+
+
 </style>
 

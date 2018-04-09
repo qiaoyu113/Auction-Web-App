@@ -246,7 +246,7 @@
                 this.$router.push({path:"/recharge"})
             },
             order:function(index){
-         this.$router.push({path:"/myorder",query:{index:index}})       
+              this.$router.push({path:"/myorder",query:{index:index}})       
             },
             address:function(){
           this.$router.push({path:"/addresslist"}) 
