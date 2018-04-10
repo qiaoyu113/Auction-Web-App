@@ -222,7 +222,12 @@ import {commonService} from '../../service/commonService.js'
     components: {},
     mounted () {
        
-       common.onMove('.cashstep')
+       // common.onMove('.cashstep')
+        document.body.addEventListener('touchmove', function (event) {
+            // if (!evt._isScroller) {
+                event.returnValue = true;
+            // }
+        },false)
         this.yi()
         this.getKaptchas()
         this.getCitys()
@@ -543,18 +548,22 @@ import {commonService} from '../../service/commonService.js'
     @import url('../../assets/css/base.less');
     @import url('../../assets/css/icon/iconfont.css');
   .cashstep{
-    position: fixed;
-          left: 0;
-          right: 0;
-          top: 0;
-          overflow-y: scroll;
-          bottom: 0;
+    // position: fixed;
+    //       left: 0;
+    //       right: 0;
+    //       top: 0;
+    //       overflow-y: scroll;
+    //       bottom: 0;
+       padding-bottom: 1.2rem;
     .nav{
         width: @size375;
         height: @size35;
         border-bottom: 0.5px solid rgb(53, 60, 70);
         background: rgb(255, 255, 255);
-     
+        position: fixed;
+        left: 0;
+        top: 0;
+        z-index: 999;
         span{
             display: inline-block;
             line-height: @size30;
@@ -571,8 +580,8 @@ import {commonService} from '../../service/commonService.js'
         }
     }
     .content{
-    
-        margin-bottom: 1.2rem;
+        margin-top: @size36;
+         margin-bottom: 1.2rem;
         padding: 0 @size10;
         .info1{
                 width: 100%;

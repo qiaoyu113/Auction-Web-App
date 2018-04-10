@@ -226,7 +226,7 @@
                 this.$router.push({path:"/login"})
             },
             getPos:function(index) {
-                var str = 95*(index)+'px';
+                var str = 90*(index)+'px';
                 str='left:'+str;
                 return str;
             },
@@ -648,12 +648,13 @@
                 font-size:@size12;
             }
             .link{
+                font-size: 10px;
                 padding-top: @size25;
                 text-decoration: underline;
-                color: red;
+                color: rgb(237, 121, 60);
                 a{
                     font-size: @size10;
-                    color: red;
+                    color: rgb(237, 121, 60);
                 }
             }
         }

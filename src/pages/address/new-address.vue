@@ -29,12 +29,13 @@
             <div class="info"><span>所在地区</span>
                 <!-- <input type="" placeholder="请选择"/> -->
            <span class="diqu">
-            <el-select v-model="provinceIndex"  placeholder="请选择" @change="selChange()" class="select-city">
+            <el-select v-model="provinceIndex" placeholder="请选择" @change="selChange()" class="select-city">
                 <el-option
                         v-for="item,index in province"
                         :key="item.id"
                         :label="item.name"
-                        :value="index+1">
+                        :value="index+1"
+                        >
                 </el-option>
             </el-select>
             <el-select v-model="cityIndex"  placeholder="请选择" @change="selChange2()" class="select-city">
@@ -119,7 +120,7 @@
             </div>
         </div>
         <div class="serviceBk" v-if="ServiceBox"></div>
-      <!--   <div class="vv_anbu">
+ <!--        <div class="vv_anbu">
           <p>1</p>
           <p>2</p>
           <p>3</p>
@@ -199,10 +200,15 @@ import {commonService} from '../../service/commonService.js'
 
     },
     mounted () {
-      common.onMove('.new-address')
-    
+      // common.onMove('.new-address')
+     document.body.addEventListener('touchmove', function (event) {
+            // if (!evt._isScroller) {
+                event.returnValue = true;
+            // }
+        },false)
     	this.getCitys()
     	this.getAddressid()
+      // this.onMove()
     	
     },
     methods: {
@@ -399,6 +405,33 @@ import {commonService} from '../../service/commonService.js'
                   
                  })
             },
+    //       onMove: function () {
+    //     let overscroll = function (el) {
+    //       console.log(el)
+    //       for (var i = 0; i < el.length; i++) {
+    //         el[i].addEventListener('touchstart', function () {
+    //             let top = el[i].scrollTop
+    //                 , totalScroll = el[i].scrollHeight
+    //                 , currentScroll = top + el[i].offsetHeight;
+    //             if (top === 0) {
+    //                 el[i].scrollTop = 1
+    //             } else if (currentScroll === totalScroll) {
+    //                 el[i].scrollTop = top - 1
+    //             }
+    //         });
+    //         el[i].addEventListener('touchmove', function (evt) {
+    //             if (el[i].offsetHeight < el[i].scrollHeight)
+    //                 evt._isScroller = true
+    //         })
+    //       }
+    //     };
+    //     overscroll(document.getElementsByClassName('el-scrollbar__wrap'));
+    //     document.body.addEventListener('touchmove', function (evt) {
+    //         if (!evt._isScroller) {
+    //             evt.preventDefault()
+    //         }
+    //     })
+    // },
        
     }
   }
@@ -409,12 +442,12 @@ import {commonService} from '../../service/commonService.js'
     @import url('../../assets/css/base.less');
     @import url('../../assets/css/icon/iconfont.css');
     .new-address{
-         position: fixed;
-          left: 0;
-          right: 0;
-          top: 0;
-          overflow-y: scroll;
-          bottom: 0;
+         // position: fixed;
+         //  left: 0;
+         //  right: 0;
+         //  top: 0;
+         //  overflow-y: scroll;
+         //  bottom: 0;
         .talk{
             width: 1rem;
             height: 0.9rem;
@@ -520,18 +553,18 @@ import {commonService} from '../../service/commonService.js'
                 }
             }
         }
-    .header{
-        position: fixed;
-        top: 0;
-        z-index: 100;
-        width: @size375;
-        height: @size45;
-        background:rgba(2, 10, 2, 1);
-        font-size: @size20;
-        color: white;
-        text-align: center;
-        line-height: @size45;
-    }
+    // .header{
+    //     position: fixed;
+    //     top: 0;
+    //     z-index: 100;
+    //     width: @size375;
+    //     height: @size45;
+    //     background:rgba(2, 10, 2, 1);
+    //     font-size: @size20;
+    //     color: white;
+    //     text-align: center;
+    //     line-height: @size45;
+    // }
     .content{
         margin-top: @size45;
         width:100%;
@@ -721,6 +754,20 @@ import {commonService} from '../../service/commonService.js'
     .el-select-dropdown {
         margin-top: 40px!important;
        
+    }
+    .el-scrollbar__wrap{
+       overflow: hidden!important;
+       overflow-y: auto!important;
+    }
+    .vv_anbu{
+      width: 300px;
+      max-height: 100px;
+      background: red;
+      
+      p{
+        line-height: 20px;
+
+      }
     }
    
   

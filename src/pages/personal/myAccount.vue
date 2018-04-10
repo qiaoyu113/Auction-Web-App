@@ -195,7 +195,7 @@
             * 这里的数据可以放在data中
             * */ 
             
-            // common.onMove('.v_myaccount')
+            common.onMove('.content')
             this.onMove()
             this.getBails()
             this.getUsers()

@@ -100,7 +100,7 @@ export const common = {
     },
     onMove: function (value) {
         let overscroll = function (el) {
-            console.log(el)
+       
             el.addEventListener('touchstart', function () {
                 let top = el.scrollTop
                     , totalScroll = el.scrollHeight

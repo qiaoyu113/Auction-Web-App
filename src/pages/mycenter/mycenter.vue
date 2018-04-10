@@ -293,12 +293,12 @@
     @import url('../../assets/css/base.less');
 
     .mycenter{
-        // position: fixed;
-        //   left: 0;
-        //   right: 0;
-        //   top: 0;
-        //   overflow-x: scroll;
-        //   bottom: 0;
+        position: fixed;
+          left: 0;
+          right: 0;
+          top: 0;
+          overflow-y: scroll;
+          bottom: 0;
         .talk{
             width: 1rem;
             height: 0.9rem;

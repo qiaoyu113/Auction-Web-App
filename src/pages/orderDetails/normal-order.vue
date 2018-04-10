@@ -387,13 +387,16 @@ import {commonService} from '../../service/commonService.js'
              // 微信
               if(that.method=='WX_JSAPI'){
                            let orderNo = that.orderNo;
+                            window.localStorage.setItem('id',orderNo);
                             window.localStorage.setItem('orderNo',orderNo);
                             commonService.putOrders({orderNo:orderNo,channelId:'WX_JSAPI'}).then(function(res){
                                 if(res.data.success){
                                     commonService.getWxpay({loginType:'WEIXIN',platform:'WXH5',jumpRouter:'wxbaselogin',wxscope:'snsapi_base'}).then(function(res){
                                         if(res.data.code === 200){
                                             //获取静默授权地址成功 
+                                            window.localStorage.setItem('route','order');
                                             window.location.href = res.data.datas;
+                                             window.localStorage.removeItem('back');
                                         }
                                     })
                                 }

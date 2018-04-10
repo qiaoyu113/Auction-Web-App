@@ -76,7 +76,7 @@
                 <div class="payment_method">
                     <div class="payment_top">支付方式</div>
                     <div class="ros clearfix" :class="{'ros_ll':index==1}" @click="selected(1)" v-if="wxLogin==true">
-                        <div class="ros_l"><span>✔</span></div>
+                        <div class="ros_l"><span v-if="index==1">✔</span></div>
                         <div class="ros_con">
                            <img class="v_img" v-if="index==1" src="../../assets/image/mycenter/wxzf.png" />
                            <img class="v_img" v-if="index!=1" src="../../assets/image/mycenter/wxzf2.png" />
@@ -87,7 +87,7 @@
                         </div>
                     </div>
                     <div class="ros clearfix" :class="{'ros_ll':index==2}" @click="selected(2)" v-if="wxLogin==false">
-                        <div class="ros_l"><span>✔</span></div>
+                        <div class="ros_l"><span v-if="index==2">✔</span></div>
                         <div class="ros_con">
                            <img class="v_img" v-if="index==2" src="../../assets/image/mycenter/zfb.png" />
                            <img class="v_img" v-if="index!=2" src="../../assets/image/mycenter/zfb2.png" />
@@ -98,7 +98,7 @@
                         </div>
                     </div>
                     <div class="ros clearfix" :class="{'ros_ll':index==3}" @click="selected(3)">
-                        <div class="ros_l"><span>✔</span></div>
+                        <div class="ros_l"><span v-if="index==3">✔</span></div>
                         <div class="ros_con">
                             <img class="v_img" v-if="index==3" src="../../assets/image/mycenter/xxzf.png" />
                            <img class="v_img" v-if="index!=3" src="../../assets/image/mycenter/xxzf2.png" />
@@ -114,6 +114,7 @@
         <div class="botton" @click="postOrders()">
             提交订单
         </div>
+        <div class="payOK"></div>
      <!--联系客服-->
      <div class="talk" @click="openService()">
          <img src="../../assets/image/mycenter/icon5.png"/>
@@ -200,6 +201,7 @@
 
         },
         mounted: function() {
+            window.localStorage.setItem('back','no')
             common.onMove('.order')
             this.addresst()
             this.getAuctions()
@@ -210,17 +212,20 @@
                 let that=this
                 let t;
                 clearTimeout(t)
-                let date=Date.parse( new Date())
+                let datess=Date.parse( new Date())
                
-                if((that.datas.mqEndTime) + (7 * 24 * 3600 * 1000) > date){
+                
                  t= setTimeout(function (){
-                    
                    let data =Number(that.datas.mqEndTime) + (7 * 24 * 3600 * 1000)
+                   if(datess < data){
                     that.countdown=common.getTimer(data)
-                },1000)
-               }else{
-                      that.countdown=common.getTimer(date + 1000)
+                      }else{
+                      that.countdown=common.getTimer(datess + 1000)
+                     
                 }
+                },1000)
+
+             
              }
         },
         methods: {
@@ -297,8 +302,17 @@
                    }else{
                      that.freight=that.datas.finalPrice
                    }
+
                     let data =Number(that.datas.mqEndTime) + (7 * 24 * 3600 * 1000)
+                    let datess=Date.parse( new Date())
+
+                   if(datess < data){
                     that.countdown=common.getTimer(data)
+                      }else{
+                      that.countdown=common.getTimer(datess + 1000)
+                     
+                }
+            
                    
                     }
                 })
@@ -311,19 +325,49 @@
                     channelIds = 'WX_JSAPI'
                 }else if(that.index === 3){//转账汇款
                     channelIds = 'OFFLINE_BANK'
+
                 }else if(that.index === 2){//支付宝
                     channelIds = 'ALIPAY_WAP'
                 }
                 if(that.address.id==undefined || that.address.id==''){
                     that.htmlx='请选择地址'
                        return false
+
                 }
-             
-                
+
+            
                  commonService.postOrders(that.auctionId,{addressId:that.address.id,channelId:channelIds}).then(function(res){
-                  
+                    
                     if(res.data.code==200){
-                        that.$router.push({path:"/normalorder",query:{id:res.data.datas.orderNo}})
+                         if(res.data.datas.channelId=='WX_JSAPI'){
+                        
+                            let orderNo = res.data.datas.orderNo;
+                             window.localStorage.setItem('id',orderNo);
+                            window.localStorage.setItem('orderNo',orderNo);
+                             commonService.getWxpay({loginType:'WEIXIN',platform:'WXH5',jumpRouter:'wxbaselogin',wxscope:'snsapi_base'}).then(function(res){
+                                        if(res.data.code === 200){
+                                            //获取静默授权地址成功 
+                                            window.localStorage.setItem('route','order');
+                                            window.location.href = res.data.datas;
+                                            window.localStorage.removeItem('back');
+                                        }
+                                    })
+                         }
+                          if(res.data.datas.channelId=='ALIPAY_WAP'){
+                               let orderNo = res.data.datas.orderNo;
+                       window.localStorage.setItem('orderNo',orderNo);
+                     commonService.putOrders({orderNo:orderNo,channelId:'ALIPAY_WAP'}).then(function(res){
+                        if(res.data.success){
+                            let payOK = document.getElementsByClassName("payOK");
+                               payOK[0].innerHTML = res.data.datas.payUrl;
+                               document.punchout_form.submit()
+                          }
+                        })
+                  }
+                if(res.data.datas.channelId=='OFFLINE_BANK'||res.data.datas.channelId==''){
+               that.$router.push({path:"/rechargeList",query:{money:res.data.datas.amount,index:that.index,orderNo:res.data.datas.orderNo,type:4}})
+                }
+                        // that.$router.push({path:"/normalorder",query:{id:res.data.datas.orderNo}})
                     }else{
                         that.htmlx=res.data.message
                     }
@@ -447,7 +491,7 @@
             max-width:10rem;
             position: fixed;
             top: 0;
-            bottom:1.88rem;
+            bottom:1.2rem;
             left:0;
             right:0;
             overflow-y: scroll;
@@ -581,9 +625,12 @@
                 width: 2.1333rem;
                 height: 2.1333rem;
                 margin-left: @size10;
+                overflow: hidden;
                 img{
-                    width: 100%;
-                    height: 100%;
+                     width: 2.75rem;
+                      height: 2.1333rem;
+                      margin-left: -0.35rem;
+                      vertical-align: top;
                 }
             }
             .goods_r{
@@ -672,10 +719,11 @@
                         height: @size10;
                         margin-top: @size6;
                         text-align: center;
+
                         border:2px solid rgb(224,224,224);
                         span{
                             font-size: @size6;
-                            color:rgb(224,224,224);
+                            color:#15b3b2;
                             line-height: @size10;
                            
                         }

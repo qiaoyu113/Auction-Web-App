@@ -13,7 +13,7 @@
         <div class="box2">
             <!--修改昵称-->
             <div class="info">
-                <div class="infoList">请输入昵称<input type="text" placeholder="请输入" v-model="inputName"/><div class="del" @click="deleteName"><i class="iconfont icon-closeicon"></i></div></div>
+                <div class="infoList">请输入昵称<input type="text" placeholder="请输入" v-model="inputName"/><div class="del" @click="deleteName" v-if="inputName!=''"><i class="iconfont icon-closeicon"></i></div></div>
             </div>
             <!--保存-->
             <div class="saves" v-if="htmlx!=''">{{htmlx}}</div>
@@ -123,6 +123,10 @@
         .headerRight{
             float: right;
             margin-top:0.3rem;
+            img{
+                width: 1rem;
+                margin-top: 0.4rem;
+            }
         }
     }
     .box{

@@ -153,7 +153,7 @@
         },
         mounted: function() {
             window.localStorage.setItem('back','no')
-            common.onMove('.recharge')
+            // common.onMove('.recharge')
             this.wxshow()
         	this.getUsers()
             this.checked = window.localStorage.getItem('checked');
@@ -349,12 +349,13 @@
     @import url('../../assets/css/base.less');
     @import url('../../assets/css/icon/iconfont.css');
     .recharge{
-        position: fixed;
-          left: 0;
-          right: 0;
-          top: 0;
-          overflow-y: scroll;
-          bottom: 0;
+        // position: fixed;
+        //   left: 0;
+        //   right: 0;
+        //   top: 0;
+        //   overflow-y: scroll;
+        //   bottom: 0;
+        padding-bottom: 1.2rem;  
         .talk{
             width: 1rem;
             height: 0.9rem;

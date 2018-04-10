@@ -5,7 +5,7 @@
             <p class="top_p1">SHIPPING ADDRESS</p>
             <div class="top_div clearfix">
             <p class="top_p2">地址选择</p>
-            <div @click="obtain()"><img src="../../assets/image/mycenter/right.png"/></div>	
+            <div @click="obtain()" class="v_dian"><img src="../../assets/image/mycenter/right.png"/></div>	
             </div>
             
 
@@ -13,19 +13,21 @@
       
         <!-- 地址 -->
         <div class="address clearfix" v-for="list in address">
-            <div class="address_l">
-                <p>{{list.name}}</p>
-            </div>
-            <div class="address_r" :class="{'address_rcolor':list.defaultAdress==true}" @click="addressIds(list._id)">
-                <div>✔</div>
-            </div>
-            <div class="address_con">
-                <p>{{list.phone}}</p>
-                <div>
+            <div class="address_l clearfix">
+                <p class="address_l_l">{{list.name}}</p>
+                <p class="address_l_r">{{list.phone}}</p>
+                <div class="address_con">
+                <div class="v_fei">
                     <p>{{list.provinceName}} {{list.cityName}} {{list.districtName}}</p>
                     <p>{{list.detailAdress}}</p>
                 </div>
             </div>
+            <div class="v_moren" v-if="list.defaultAdress==true">默认地址</div>
+            </div>
+            <div class="address_r" :class="{'address_rcolor':list.defaultAdress==true}" @click="addressIds(list._id)">
+                <div><i class="iconfont icon-duihao" v-if="list.defaultAdress==true"></i></div>
+            </div>
+            
         </div>
         <div class="botton">
             <div @click="xing()">添加新地址 + </div>
@@ -127,51 +129,46 @@
           		
           	}
           }
+          .v_dian{
+              img{
+                width: 1rem;
+                margin-top: 0.2rem;
+              }
            }
+          }
        }
 
 
        .address{
-          padding: @size15 @size20 @size10;
+          padding: @size15 @size4 @size10;
           border-bottom: 1px solid #82878c;
           margin: 0 @size20;
           .address_l{
             float: left;
+            width: 7.4rem;
+            position: relative;
             p{
-                font-size: 11px;
+                font-size: 10px;
                 color: rgb(51,51,51);
             }
-          }
-          .address_r{
-            float: right;
-            padding-left: @size20;
-            border-left: 1px solid rgb(217,217,217);
-            height: 1.3rem;
-            margin-left: @size20;
-            div{
-
-            	// background: #000;
-            	width: @size12;
-            	height: @size12;
-                font-size: @size10;
-                margin-top: @size18;
-                color: rgb(169,174,180);
-                border:1px solid rgb(169,174,180);
-                line-height: @size12;
-                text-align: center;
+            .v_moren{
+               position: absolute;
+               bottom: 0;
+               left: 0;
+               color: #ee8640;
+               font-size: 10px;
             }
-          }
-           .address_rcolor{
-           	  div{
-           	  	border:1px solid #15b3b2;
-           	  	color:#15b3b2;
-           	  }
-           }
-
-          .address_con{
+            .address_l_l{
+              float: left;
+              min-width: 5rem;
+            }
+            .address_l_r{
+              float: right;
+            }
+             .address_con{
                 float: right;
                 p{
-                    font-size: 11px;
+                    font-size: 10px;
                     color: rgb(51,51,51);
                     text-align: right;
                 }
@@ -182,7 +179,47 @@
                         color: rgb(102,102,102);
                     }
                 }
+                .v_fei{
+                   p{
+                     max-width: 5.8rem;
+                     // text-align: left;
+                     color: rgb(190, 190, 190);
+                   }
+                }
           }
+
+          }
+          .address_r{
+            float: right;
+            padding-left: @size20;
+            border-left: 1px solid rgb(217,217,217);
+            height: 1.3rem;
+            // margin-left: @size20;
+            div{
+
+            	// background: #000;
+            	width: @size10;
+            	height: @size10;
+                font-size: @size10;
+                margin-top: @size18;
+                color: rgb(169,174,180);
+                border:1px solid rgb(169,174,180);
+                line-height: @size12;
+                text-align: center;
+                i{
+                  font-size: 10px;
+                  margin-left: -1px;
+                }
+            }
+          }
+           .address_rcolor{
+           	  div{
+           	  	border:1px solid #15b3b2;
+           	  	color:#15b3b2;
+           	  }
+           }
+
+         
 
        }
      

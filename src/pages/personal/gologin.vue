@@ -609,7 +609,7 @@
                 color: rgb(237, 121, 60);
                 a{
                     font-size: @size10;
-                    color: red;
+                    color: rgb(237, 121, 60);
                 }
             }
         }

@@ -608,7 +608,7 @@
             height: @size35;
             line-height: @size35;
             border-bottom: 1px solid rgb(53, 60, 70);
-            background: rgb(255, 255, 255);
+            background: rgba(255, 255, 255,0.5);
             position: fixed;
             top: 0;
             z-index: 100;
@@ -645,7 +645,7 @@
             width:100%;
             max-width:10rem;
             position: fixed;
-            top:@size35;
+            top:0;
             bottom:0;
             left:0;
             right:0;

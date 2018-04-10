@@ -14,7 +14,7 @@
             <!--新手机号码-->
             <div class="info">
                 <div class="infoList">注册手机号<input class="codeInp" type="number" placeholder="请输入" v-model="phone"/>
-               <div class="goBind"> <i class="iconfont icon-closeicon"></i></div>
+               <div class="goBind" @click="remphone()" v-if="phone!=''"> <i class="iconfont icon-closeicon"></i></div>
                 </div>
             </div>
            <!--  <div class="info">
@@ -39,13 +39,13 @@
         <div class="box2" v-if="index==2">
             <!--新手机号码-->
             <div class="info">
-                <div class="infoList">新密码<input class="codeInp" type="text" placeholder="请输入" v-model="newPassword"/>
-               <div class="goBind"> <i class="iconfont icon-closeicon"></i></div>
+                <div class="infoList">新密码<input class="codeInp" type="password" placeholder="请输入" v-model="newPassword"/>
+               <div class="goBind" @click="remnewPassword()" v-if="newPassword!=''"> <i class="iconfont icon-closeicon"></i></div>
                 </div>
             </div>
             <div class="info">
-                <div class="infoList">确认新密码<input class="codeInp" type="text" placeholder="请输入" v-model="newPassword2"/>
-               <div class="goBind"> <i class="iconfont icon-closeicon"></i></div>
+                <div class="infoList">确认新密码<input class="codeInp" type="password" placeholder="请输入" v-model="newPassword2"/>
+               <div class="goBind" @click="remnewPassword2()" v-if="newPassword2!=''"> <i class="iconfont icon-closeicon"></i></div>
                 </div>
             </div>
            <!--  <div class="info">
@@ -146,6 +146,15 @@
              this.getKaptchas()
         },
         methods: {
+           remphone:function(){
+            this.phone=''
+           },
+           remnewPassword:function(){
+            this.newPassword=''
+           },
+           remnewPassword2:function(){
+            this.newPassword2=''
+           },
             Return:function(){
                 window.history.go(-1)
             },
@@ -209,11 +218,11 @@
             //提交
             postResetpasswordtwo:function(){
                 let that=this;
-                let re = /^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{6,10}$/;
+                let re = /^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{6,20}$/;
                 let zhe = re.test(that.newPassword);
           
                 if(zhe==false){
-                    that.htmlx="密码为字母、数字、组合且长度为6-10的字符"
+                    that.htmlx="密码为字母、数字、组合且长度为6-20的字符"
                     setTimeout(() => {  
                                  that.htmlx=''
                              },2000) 
@@ -413,7 +422,7 @@
             margin-top:0.3rem;
             img{
                 width: 1rem;
-                margin-top: 0.2rem;
+                margin-top: 0.4rem;
             }
         }
     }

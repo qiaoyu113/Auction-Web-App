@@ -9,7 +9,7 @@
     3.微信提现 
     index三种状1.填写信息 2.审核中 3.已完成
     -->
-    <div class="rechargeList" v-set-title="title">
+    <div class="rechargeList">
         <!-- <div class="header">传家</div> -->
         <div class="nav">
             <span class="" @click="Return()"><i class="iconfont icon-fanhui"></i></span> 
@@ -30,7 +30,7 @@
           
             <!-- 填写银行卡信息 -->
             <div  v-if='index==1'>
-                 <div class="v_block" v-for="list in bankCard">
+                 <div class="v_block" v-for="list in bankCard" >
                    <div class="v_rows clearfix">
                      <p class="v_rows_l"><i class="iconfont icon-duihao"></i><span>银行账户</span></p>
                      <div class="v_rows_con">官方</div>
@@ -121,7 +121,7 @@ import {commonService} from '../../service/commonService.js'
     props: ['str'],
     data () {
       return {
-          title:'传家',
+          
           arrays: [],
           index:1,
           active:0,
@@ -149,7 +149,12 @@ import {commonService} from '../../service/commonService.js'
     components: {},
     mounted () {
         // this.yi()
-        common.onMove('.rechargeList')
+        // common.onMove('.rechargeList')
+        document.body.addEventListener('touchmove', function (event) {
+            // if (!evt._isScroller) {
+                event.returnValue = true;
+            // }
+        },false)
         this.getBankCards()
         this.thtype()
         this.moneys()
@@ -373,12 +378,15 @@ import {commonService} from '../../service/commonService.js'
     @import url('../../assets/css/base.less');
     @import url('../../assets/css/icon/iconfont.css');
     .rechargeList{
-          position: fixed;
-          left: 0;
-          right: 0;
-          top: 0;
-          bottom: 0;
-          overflow-y: scroll;
+         
+          //   max-width:10rem;
+          //   position: fixed;
+          //   top: 0;
+          //   bottom: 1.2rem;
+          //   left:0;
+          //   right:0;
+          //   overflow-y: scroll;
+            // -webkit-overflow-scrolling:touch;
           
     // .header{
     //     position: fixed;
@@ -397,9 +405,10 @@ import {commonService} from '../../service/commonService.js'
         height: @size35;
         border-bottom: 0.5px solid rgb(53, 60, 70);
         background: rgb(255, 255, 255);
-        // position: fixed;
-        // top: 0;
-        // z-index: 100;
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: 100;
         span{
             display: inline-block;
             line-height: @size30;
@@ -416,7 +425,7 @@ import {commonService} from '../../service/commonService.js'
         }
     }
     .content{
-        // margin-top: @size35;
+        margin-top: @size36;
         margin-bottom: 1.2rem;
         padding: 0 @size10;
         .v_block{
@@ -778,22 +787,23 @@ import {commonService} from '../../service/commonService.js'
         position:fixed;
         bottom:1.2rem;
         left: 0;
-        z-index: 99;
+        z-index: 999;
         
     }
     .footer1{
         position:fixed;
         bottom:0;
         left: 0;
-        z-index: 99;
+        z-index: 999;
         width: @size375;
         height: 1.2rem;
-    box-sizing: border-box;
+        box-sizing: border-box;
         border-top:1px solid rgb(53, 60, 70); 
         text-align: center;
         line-height: 1.2rem;
         font-size: 15px;
         background: #fff;
+
     }
   }
     

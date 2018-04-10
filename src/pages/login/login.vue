@@ -110,7 +110,7 @@
             </div>
         </div>
         <!--联系客服-->
-        <div class="talk" @click="openService()">
+        <div class="q_talk" @click="openService()">
             <img src="../../assets/image/mycenter/icon5.png"/>
         </div>
         <!--客户服务-->
@@ -347,22 +347,22 @@
                         that.hint = true;
                         that.hintText = '用户不存在,请注册';
                         setTimeout(() => { 
-                                    that.hint2 = false;
+                                    that.hint = false;
                                     that.hint2Text = ''
                                       },2000) 
                     }else if(res.data.code === 513114){
                         that.hint = true;
                         that.hintText = '账号密码错误,请重新输入';
                         setTimeout(() => { 
-                                    that.hint2 = false;
-                                    that.hint2Text = ''
+                                    that.hint = false;
+                                    that.hintText = ''
                                       },2000) 
                     }else{
                         that.hint = true;
                         that.hintText = res.data.message
                         setTimeout(() => { 
-                                    that.hint2 = false;
-                                    that.hint2Text = ''
+                                    that.hint = false;
+                                    that.hintText = ''
                                       },2000) 
                     }
                 })
@@ -399,6 +399,10 @@
                     if(that.codeShow){
                      that.hint2 = true;
                      that.hint2Text = '已发送';
+                     setTimeout(() => { 
+                                    that.hint2 = false;
+                                    that.hint2Text = ''
+                                      },2000) 
                     }else{
                         
                         // if(that.kaptchaValue==''){
@@ -421,6 +425,10 @@
                                 that.codeShow = false;
                                 that.hint2 = true;
                                 that.hint2Text = res.data.message;
+                                setTimeout(() => { 
+                                    that.hint2 = false;
+                                    that.hint2Text = ''
+                                      },2000) 
                                 // that.getKaptchas()
                             }
                             // if(res.data.code === 513109){
@@ -614,7 +622,7 @@
         right:0;
         bottom:1.87rem;
         margin:auto;
-        .talk{
+        .q_talk{
             width: 1rem;
             height: 0.9rem;
             background: #fff;

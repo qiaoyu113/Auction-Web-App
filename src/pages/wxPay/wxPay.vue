@@ -84,6 +84,10 @@
                                     if(route == 'recharge'){
                                         that.$router.replace({name:'personalCenter'})
                                     }
+                                     if(route == 'order'){
+                                         let id = window.localStorage.getItem('id');
+                                        that.$router.push({path:"/normalorder",query:{id:id}}) 
+                                    }
                                      if(route == 'cash'){
                                         that.$router.replace({name:'personalCenter'})
                                     }
@@ -99,6 +103,11 @@
                                     if(route == 'recharge'){
                                         that.$router.replace({name:'personalCenter'})
                                     }
+                                     if(route == 'order'){
+                                         let id = window.localStorage.getItem('id');
+                                        that.$router.push({path:"/normalorder",query:{id:id}}) 
+                                    }
+                                    
                                     if(route == 'cash'){
                                         that.$router.replace({name:'personalCenter'})
                                     }

@@ -2,13 +2,14 @@
     <!--title为当前页标题
         组件要小，如遇list，只将item做成组件，其他的都写在页面中
     -->
-   
+   <div class="v_addresslist"> 
+     <div class="nav">
+            <span class="back" @click="Return()"><i class="iconfont icon-fanhui"></i></span>
+        </div>
     <div class="addresslist" id="" v-set-title="title">
         <!-- <div class="header">传家</div> -->
         <!-- <z-nav></z-nav> -->
-        <div class="nav">
-            <span class="back" @click="Return()"><i class="iconfont icon-fanhui"></i></span>
-        </div>
+     
         <div class="content clearfix">
             <div v-for="list in data">
                 <div class="peo clearfix">
@@ -35,7 +36,7 @@
                  </div>
            </div>
         </div>
-        <div class="footer" @click="jump()">添加新地址&nbsp;&nbsp;<span>+</span></div>
+       
         <!--联系客服-->
         <div class="talk" @click="openService()">
             <img src="../../assets/image/mycenter/icon5.png"/>
@@ -72,6 +73,8 @@
             </div>
         </div>
         <div class="serviceBk" v-if="ServiceBox"></div>
+    </div>
+     <div class="footer" @click="jump()">添加新地址&nbsp;&nbsp;<span>+</span></div>
     </div>
 </template>
 
@@ -170,6 +173,26 @@ import {commonService} from '../../service/commonService.js'
     /*rem等基本设置都放在base中，不写多个*/
     @import url('../../assets/css/base.less');
     @import url('../../assets/css/icon/iconfont.css');
+    .v_addresslist{
+         .nav{
+        width: @size375;
+        height: @size35;
+        line-height: @size35;
+        border-bottom: 1px solid rgb(53, 60, 70);
+        background: rgb(255, 255, 255);
+        position: fixed;
+        top: 0;
+        z-index: 100;
+        .back{
+            line-height: @size35;
+            i{
+                font-size:28px;
+                margin-left: 0.3rem;
+                color:#A9AEB6;
+            }
+        }
+    }
+
     .addresslist{
           position: fixed;
           left: 0;
@@ -294,24 +317,7 @@ import {commonService} from '../../service/commonService.js'
         text-align: center;
         line-height: @size45;
     }
-    .nav{
-        width: @size375;
-        height: @size35;
-        line-height: @size35;
-        border-bottom: 1px solid rgb(53, 60, 70);
-        background: rgb(255, 255, 255);
-        position: fixed;
-        top: 0;
-        z-index: 100;
-        .back{
-            line-height: @size35;
-            i{
-                font-size:28px;
-                margin-left: 0.3rem;
-                color:#A9AEB6;
-            }
-        }
-    }
+   
     .content{
         padding: 0 @size10;
         margin-top:@size35;
@@ -394,23 +400,7 @@ import {commonService} from '../../service/commonService.js'
             }
         }
     }
-    .footer{
-    	background: #fff;
-        position:fixed;
-        bottom:0;
-        width: 9.73rem;
-        height: 1.2rem;
-        box-sizing: border-box;
-        margin:@size5; 
-        border:1px solid rgb(53, 60, 70); 
-        text-align: center;
-        line-height: 1.2rem;
-        font-size: 15px;
-        span{
-            font-weight: bold;
-            line-height: 1rem;
-        }
-    }
+  
     .v_modal{
           position: fixed;
           left: 0;
@@ -441,5 +431,23 @@ import {commonService} from '../../service/commonService.js'
           }
     }
  }
+   .footer{
+        background: #fff;
+        position:fixed;
+        bottom:0;
+        width: 9.73rem;
+        height: 1.2rem;
+        box-sizing: border-box;
+        margin:@size5; 
+        border:1px solid rgb(53, 60, 70); 
+        text-align: center;
+        line-height: 1.2rem;
+        font-size: 15px;
+        span{
+            font-weight: bold;
+            line-height: 1rem;
+        }
+    }
+}
 </style>
 

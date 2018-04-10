@@ -41,18 +41,18 @@
 <style lang="less">
     @import url('assets/css/base.less');
     @import url('assets/css/icon/iconfont.css');
-    html, body {
-        margin: 0 auto;
-        width: 100%;
-        word-wrap: break-word;
-        overflow: scroll;
-        height: 100%;
-        max-width: 450px;
-        -webkit-tap-highlight-color: transparent;
-        -webkit-touch-callout: none;
-        -webkit-user-select: none;
-        user-select:none;
-    }
+    // html, body {
+    //     margin: 0 auto;
+    //     width: 100%;
+    //     word-wrap: break-word;
+    //     overflow: scroll;
+    //     height: 100%;
+    //     max-width: 450px;
+    //     -webkit-tap-highlight-color: transparent;
+    //     -webkit-touch-callout: none;
+    //     -webkit-user-select: none;
+    //     user-select:none;
+    // }
     body {
         font-family: PingFang SC,Hiragino Sans GB,Microsoft YaHei,WenQuanYi Micro Hei,Helvetica Neue,Arial,sans-serif;
     }

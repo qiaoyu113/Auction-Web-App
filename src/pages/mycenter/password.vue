@@ -12,15 +12,15 @@
         <div class="box2">
             <!--原密码-->
             <div class="info">
-                <div class="infoList">输入原密码<input type="password" placeholder="请输入" v-model="oldPassword"/><div class="del" @click="deleteName"><i class="iconfont icon-closeicon"></i></div></div>
+                <div class="infoList">输入原密码<input type="password" placeholder="请输入" v-model="oldPassword"/><div class="del" @click="deleteName" v-if="oldPassword!=''"><i class="iconfont icon-closeicon"></i></div></div>
             </div>
             <!--新密码-->
             <div class="info">
-                <div class="infoList">请输新密码<input type="password" placeholder="请输入" v-model="newPassword"/><div class="del" @click="deleteName2"><i class="iconfont icon-closeicon"></i></div></div>
+                <div class="infoList">请输新密码<input type="password" placeholder="请输入" v-model="newPassword"/><div class="del" @click="deleteName2" v-if="newPassword!=''"><i class="iconfont icon-closeicon"></i></div></div>
             </div>
             <!--新密码-->
             <div class="info">
-                <div class="infoList">确认新密码<input type="password" placeholder="请输入" v-model="newPassword2" /><div class="del" @click="deleteName3"><i class="iconfont icon-closeicon"></i></div></div>
+                <div class="infoList">确认新密码<input type="password" placeholder="请输入" v-model="newPassword2" /><div class="del" @click="deleteName3" v-if="newPassword2!=''"><i class="iconfont icon-closeicon"></i></div></div>
             </div>
             <div class="v_prompt" ref="v_prompt">{{prompt}}</div>
             <!--保存-->

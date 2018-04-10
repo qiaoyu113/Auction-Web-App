@@ -3,7 +3,8 @@
         组件要小，如遇list，只将item做成组件，其他的都写在页面中
     -->
     <!-- 帮助中心 -->
-    <div class="membercenter" id="" v-set-title="title">
+  <div class="v_membercenter">
+    <div class="membercenter">
         
         <!-- <div class="header">传家</div> -->
         <div class="content">
@@ -60,8 +61,9 @@
 
             <div class="pointDetail">
                 <div class="tit">积分明细</div>
-                <div class="record" v-for="list in records"    >
-                  <div class="fl">{{list.name}}</div>{{list.num}}<div class="fr" v-if="list.getTime!=null">{{list.getTime | stampFormate2 }}</div></div>
+                <div class="record" v-for="list in records">
+                  <div class="fl">{{list.name}}</div>{{list.num}}<div class="fr" v-if="list.getTime!=null">{{list.getTime | stampFormate2 }}</div>
+                </div>
                 <!-- <div class="record"><div class="fl">拍卖成交</div> +5 <div class="fr">2018.4.44 20:11:50</div></div> --> 
             </div>
         </div>
@@ -118,6 +120,7 @@
         </div>
         <div class="serviceBk" v-if="ServiceBox"></div>
     </div>
+  </div>
 </template>
 
 <script >
@@ -127,7 +130,7 @@
     export default {
         data () {
             return {
-                title: '传家',
+               
                 index:1,
                 user:'',
                 records:'',
@@ -147,6 +150,7 @@
             this.getUsers()
             this.getPoint()
             this.getDoctype()
+            
         },
         methods: {
             //打开客服
@@ -208,7 +212,7 @@
              getPoint:function(){
                 let that=this
                  commonService.getPoint({pageNo:1,pageSize:30}).then(function(res){
-                 that.records=res.data.datas.datas
+                   that.records=res.data.datas.datas
               })
              },
              // 获取会员规则
@@ -220,6 +224,7 @@
 
               })
              },
+          
 
         }
     }
@@ -230,13 +235,17 @@
     /*rem等基本设置都放在base中，不写多个*/
     @import url('../../assets/css/base.less');
     @import url('../../assets/css/icon/iconfont.css');
+  .v_membercenter{
     .membercenter{
-        position: fixed;
-          left: 0;
-          right: 0;
-          top: 0;
-          overflow-y: scroll;
-          bottom: 0;
+             width:100%;
+            max-width:10rem;
+            position: fixed;
+            top: 0;
+            bottom:0;
+            left:0;
+            right:0;
+            overflow-y: scroll;
+            -webkit-overflow-scrolling:touch;
         .talk{
             width: 1rem;
             height: 0.9rem;
@@ -426,6 +435,7 @@
     }
     .membox{
         padding: 0 @size10;
+        // margin-bottom: 1rem;
         .card{
             margin: @size20 @size10;
             width: 8.9333rem;
@@ -521,6 +531,7 @@
         }
         .pointDetail{
             padding-left: @size10;
+            min-height: 1000px;
             .tit{
                 height: @size40;
                 text-align: left;
@@ -547,5 +558,7 @@
         }
     }
 }
+}
+
 </style>
 
