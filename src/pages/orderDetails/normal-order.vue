@@ -314,7 +314,8 @@ import {commonService} from '../../service/commonService.js'
                        let data =Number(that.datas.expireTime)
                     that.countdown=common.getTimer(data) 
                     }else{
-                      that.$router.push({name:'closeorder',params:{id:that.orderNo}})
+                      // that.$router.push({name:'/closeorder',query:{id:that.orderNo}})
+                      that.$router.push({path:"/myorder",query:{index:0}})   
                     }
                    
                 },1000)
