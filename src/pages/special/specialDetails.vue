@@ -66,7 +66,7 @@
                                 <div class="sta-over">开始时间：{{startTime}}</div>
                                 <div class="sta-over">结束时间：{{details.auctionEndTime}}</div>
                             </div>
-                            <div class="sell-html" v-html="details.content"></div>
+                            <div class="sell-html" id="html" v-html="details.content"></div>
                         </div>
                     </div>
                     <div class="sell-more clearfix" v-if="recoCh">
@@ -207,23 +207,25 @@
             that.id = that.$route.params.id;
             that.onMove()
             that.meScroll();
-            that.wxShare()
         },
         methods: {
             //微信分享
             wxShare(){
                 let that = this;
                 let url = window.location.href;
+                let html = document.getElementById("html").innerText;
                 commonService.getWxShare({url:url}).then(function(res){
                     if(res.data.code === 200){
                         let wxMore = res.data.datas
                         wx.config({
-                            debug: true, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
+                            debug: false, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
                             appId: wxMore.appId, // 必填，公众号的唯一标识
                             timestamp:wxMore.wxTimestamp , // 必填，生成签名的时间戳
                             nonceStr: wxMore.wxNoncestr, // 必填，生成签名的随机串
                             signature: wxMore.wxSignature,// 必填，签名，见附录1
-                            jsApiList: [] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
+                            jsApiList: ['onMenuShareTimeline',
+                                'onMenuShareAppMessage'
+                            ] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
                         });
                         commonService.getShares({type:30,typeId:that.id}).then(function(res){
                             if(res.data.code === 200){
@@ -232,7 +234,7 @@
                                     wx.onMenuShareTimeline({
                                         title: wxShare.title, // 分享标题
                                         link: url, // 分享链接
-                                        imgUrl: wxShare.imgUrl, // 分享图标
+                                        imgUrl: that.$store.state.picHead + wxShare.imgUrl, // 分享图标
                                         success: function () {
                                             // 用户确认分享后执行的回调函数
                                         },
@@ -243,8 +245,8 @@
                                     wx.onMenuShareAppMessage({
                                         title: wxShare.title, // 分享标题
                                         link: url, // 分享链接
-                                        imgUrl: wxShare.imgUrl, // 分享图标
-                                        desc: wxShare.desc, // 分享描述
+                                        imgUrl: that.$store.state.picHead + wxShare.imgUrl, // 分享图标
+                                        desc: html, // 分享描述
                                         type: '', // 分享类型,music、video或link，不填默认为link
                                         dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
                                         success: function () {
@@ -307,6 +309,7 @@
                     that.page.num = that.page.num+1;
                     that.mescroll.endSuccess(curPageData.length,that.totalPage);
                     that.mescroll.endUpScroll(that.isShowNoMore)
+                    that.wxShare()
                 }, function() {
                     that.mescroll.endErr(); //联网失败的回调,隐藏下拉刷新和上拉加载的状态;
                 });
@@ -488,8 +491,8 @@
             //返回按钮
             back(){
               let that = this;
-//              that.$router.replace({name:'special'});
-              that.$router.back(-1);
+              that.$router.replace({name:'special'});
+//              that.$router.back(-1);
             },
             //前往拍品详情
             sellListGo(id){
