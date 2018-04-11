@@ -55,7 +55,7 @@
                             </div>
                             <!--修复v-html不能滑动的bug-->
                             <div class="bug" v-if="bugShow"></div>
-                            <div class="sell-inf" v-html="content"></div>
+                            <div class="sell-inf" id="html" v-html="content"></div>
                             <div class="helpCenters">
                                 <span class="fl">帮助中心</span>
                                 <div class="fr2">
@@ -535,7 +535,6 @@
             }else{
                 that.isX = false;
             }
-            that.wxShare()
         },
         beforeUpdate(){
             let that = this;
@@ -550,11 +549,12 @@
             wxShare(){
                 let that = this;
                 let url = window.location.href;
+                let html = document.getElementById("html").innerText;
                 commonService.getWxShare({url:url}).then(function(res){
                     if(res.data.code === 200){
                         let wxMore = res.data.datas;
                         wx.config({
-                            debug: true, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
+                            debug: false, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
                             appId: wxMore.appId, // 必填，公众号的唯一标识
                             timestamp:wxMore.wxTimestamp , // 必填，生成签名的时间戳
                             nonceStr: wxMore.wxNoncestr, // 必填，生成签名的随机串
@@ -570,7 +570,7 @@
                                     wx.onMenuShareTimeline({
                                         title: wxShare.title, // 分享标题
                                         link: url, // 分享链接
-                                        imgUrl: wxShare.imgUrl, // 分享图标
+                                        imgUrl: that.$store.state.picHead + wxShare.imgUrl, // 分享图标
                                         success: function () {
                                             // 用户确认分享后执行的回调函数
                                         },
@@ -581,8 +581,8 @@
                                     wx.onMenuShareAppMessage({
                                         title: wxShare.title, // 分享标题
                                         link: url, // 分享链接
-                                        imgUrl: wxShare.imgUrl, // 分享图标
-                                        desc: wxShare.desc, // 分享描述
+                                        imgUrl: that.$store.state.picHead + wxShare.imgUrl, // 分享图标
+                                        desc: html, // 分享描述
                                         type: '', // 分享类型,music、video或link，不填默认为link
                                         dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
                                         success: function () {
@@ -670,6 +670,7 @@
                     that.page.num = that.page.num+1;
                     that.mescroll.endSuccess(curPageData.length,that.totalPage);
                     that.mescroll.endUpScroll(that.isShowNoMore)
+                    that.wxShare()
                 }, function() {
                     that.mescroll.endErr(); //联网失败的回调,隐藏下拉刷新和上拉加载的状态;
                 });

@@ -455,7 +455,8 @@
             //跳转详情页
             goAuction(id){
                 let that = this;
-                that.$router.push({name:'auctionMore',params:{id:id}})
+//                that.$router.push({name:'auctionMore',params:{id:id}})
+                window.location.href = 'http://sundayauction.cn/markets/'+ id;
             },
         }
     }

@@ -32,7 +32,8 @@
     methods: {
         goDetails(id){
             let that = this;
-            that.$router.push({name:'specialinfoMore',params:{id:id}})
+//            that.$router.push({name:'specialinfoMore',params:{id:id}})
+            window.location.href = 'http://sundayauction.cn/packages/'+ id;
         }
     }
   }

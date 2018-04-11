@@ -208,7 +208,7 @@ export const commonService = {
     },
     /* 微信分享 */
     getWxShare:function(params){
-        return axios.get('/wxconfig' + this.getParam(params));
+        return axios.post('/wxconfig' ,qs.stringify(params));
     },
     /* 微信分享内容 */
     getShares:function(params){
