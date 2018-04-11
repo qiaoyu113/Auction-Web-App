@@ -64,6 +64,14 @@ export const commonService = {
     getBailsid:function(id){
         return axios.get('/bails/'+ id)
     },
+    /* 是否缴纳保证金 */
+    getHasCheck:function(params){
+        return axios.get('/auctions/check' + this.getParam(params))
+    },
+    /* 是否有新消息 */
+    getHasNewHint:function(params){
+        return axios.get('/auctions/message' + this.getParam(params))
+    },
     /* 获取拍品详情 */
     getAuctions: function (id) {
         return axios.get('/auctions/'+ id)
@@ -173,6 +181,16 @@ export const commonService = {
     getWxpay:function(params,loginType,platform,jumpRouter,wxscope){
         return axios.get('/tokens/oauth' + this.getParam(params,loginType,platform,jumpRouter,wxscope))
     },
+
+    /* 微信分享 */
+   getWxShare:function(params){
+       return axios.get('/wxconfig' + this.getParam(params));
+   },
+   /* 微信分享内容 */
+   getShares:function(params){
+      return axios.get('/shares' + this.getParam(params));
+   },
+
     /* 获取code */
     getWXbaseCode: function(params) {
         return axios.get('/tokens/wxbaseinfo' + this.getParam(params));
@@ -200,6 +218,10 @@ export const commonService = {
      /* 绑定微信  */
     postWxbind: function (params) {
         return axios.post('/tokens/wxbind' + this.getParam(params))
+    },
+     /* 微信解绑  */
+    postUnbind: function () {
+        return axios.post('/tokens/unbind')
     },
 
 

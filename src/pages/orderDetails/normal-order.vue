@@ -195,12 +195,15 @@
         </div>
 
     </div>
-     <div class="v_modal" ref="v_modal" v-if="v_modal">
+    <div class="v_modal" ref="v_modal" v-if="v_modal">
            <div class="v_box">
-                 <p>是否确定删除订单?</p>
-                 <div class="v_button">
-                     <el-button @click="heigorder()">取消</el-button>
-                     <el-button @click='deleteOrderid()'>确定</el-button>
+                  <div class="v_box_top" @click="heigorder()"><i class="iconfont icon-closeicon"></i></div>
+                 <p class="v_box_p">REMOVE ITEM</p>
+                 <p>删除</p>
+                 <div class="v_box_img"><img src="../../assets/image/mycenter/scy.png" /></div>
+                 <p>是否删除订单?</p>
+                 <div class="v_button" @click='deleteOrderid()'> 
+                     确定
                  </div>
            </div>
         </div>
@@ -860,16 +863,16 @@ import {commonService} from '../../service/commonService.js'
             padding: 0 @size45;
             .redline{
                 box-sizing: border-box;
-                border-top: 0.08rem solid red;
+                border-top: 0.08rem solid  #fc5500;
                 padding: @size30;
                 padding-top: @size15;
                 position: relative;
                 top: @size25;
                 .circle{
-                    width: @size9;
-                    height: @size9;
+                    width: @size6;
+                    height: @size6;
                     border-radius: 50%;
-                    border: 3px solid red;
+                    border: 3px solid  #fc5500;
                     display: inline-block;
                     position: absolute;
                     
@@ -878,12 +881,12 @@ import {commonService} from '../../service/commonService.js'
                 .pos1{
                     top: -@size8;
                     left: -1px;
-                    background: red;
+                    background:  #fc5500;
                 }
                 .pos2{
                     top: -@size8;
                     left: 3.3rem;
-                    background: red;
+                    background:  #fc5500;
                 }
                 .pos3{
                     top: -@size8;
@@ -896,13 +899,13 @@ import {commonService} from '../../service/commonService.js'
                     
                     .label1{
                         float: left;
-                        color: red;
+                        color:  #fc5500;
                         font-size: @size16;
                     }
                     .label2{
                         text-align: center;
                         font-size: @size16;
-                        color: red;
+                        color:  #fc5500;
                     }
                     .label3{
                         float: right;
@@ -927,8 +930,8 @@ import {commonService} from '../../service/commonService.js'
                 position: relative;
                 top: @size25;
                 .circle{
-                    width: @size9;
-                    height: @size9;
+                    width: @size6;
+                    height: @size6;
                     border-radius: 50%;
                     border: 3px solid #fc5a06;
                     display: inline-block;
@@ -1161,6 +1164,7 @@ import {commonService} from '../../service/commonService.js'
                 }
             }
             .box{
+                width: 6.3rem;
                 display: inline-block;
                 margin-left: @size15;
                 padding-top: @size10;
@@ -1172,6 +1176,13 @@ import {commonService} from '../../service/commonService.js'
                     font-size: 14px;
                     color: rgb(133, 133, 133);
                     padding-top: @size1;
+                    line-height: @size20;
+                    max-height: @size40;
+                    height: @size20;
+                    width: 174px;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    white-space: nowrap; 
                 }
                 .number {
                     font-size: 12px;
@@ -1294,21 +1305,25 @@ import {commonService} from '../../service/commonService.js'
     opacity:0.6;
 }
 .popWin{
-    height: 14.72rem;
+     
+
+    // height: 14.72rem;
     width: 8.68rem;
     background: white;
     position: fixed;
-    top: @size50;
+    top: @size20;
+    bottom: 1.2rem;
     right: 0.66rem;
     z-index: 1000;
     text-align: center;
     box-sizing: border-box;
     padding: 0 @size20;
-    overflow: scroll;
+    overflow: hidden;
+    overflow-y: auto;
     .close{
             position: fixed;
             right: 0.66rem;
-            top: @size50;
+            top: @size20;
             width: @size30;
             height: @size30;
             background: #eb6100;
@@ -1320,7 +1335,7 @@ import {commonService} from '../../service/commonService.js'
     .titleEn{
         padding-top: @size50;
         letter-spacing: 2px;
-        font-size: @size14;
+        font-size: 16px;
         font-weight: bold;
     }
     .titleCh{
@@ -1410,19 +1425,55 @@ import {commonService} from '../../service/commonService.js'
          
           
           .v_box{
-            width: 6rem;
-            height: 4rem;
+            width: 6.5rem;
+            height: 6.6rem;
             background: #fff;
             margin: 4rem auto 0; 
-            border:1px solid #fff;
-            border-radius: 4px;
+            position: relative;
+            .v_box_top{
+                 position: absolute;
+                 right: 0;
+                 top: 0;
+                 width: @size30;
+                 height: @size30;
+                 background: #eb6100;
+                 i{
+                    font-size: @size30;
+                    color:#fff;
+                 }
+            }
+            .v_box_p{
+                 padding-top: @size50;
+                 font-size: 14px;
+                 color: rgb(57, 57, 57);
+                 font-weight: 700;
+            }
+            .v_box_img{
+                 margin:@size24 0 @size14; 
+                 width: 100%;
+                 img{
+                    width: @size40;
+                    height: @size40;
+                    margin-left: 2.72rem;
+                 }
+            }
             p{
-                font-size: 12px;
-                padding:1rem 0.5rem;
+                font-size: 14px;
+                text-align: center;
+                color: rgb(98, 98, 98);
+                // padding:1rem 0.5rem;
                 
             }
             .v_button{
-              padding-left: 0.5rem;
+               position: absolute;
+               bottom: 0;
+               left: 0;
+               height: @size44;
+               width: 100%;
+               border-top:1px solid #353c47;
+               text-align: center;
+               line-height: @size44;
+               font-size: 14px;
              }
           }
     }

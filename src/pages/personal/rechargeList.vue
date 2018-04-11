@@ -429,26 +429,39 @@ import {commonService} from '../../service/commonService.js'
         margin-bottom: 1.2rem;
         padding: 0 @size10;
         .v_block{
-          border-bottom: 1px solid rgb(53, 60, 70);
+          border-bottom: 1px solid #c7cacb;
           .v_rows{
             margin: 0 @size10;
-            border-bottom: 1px solid #87828c;
-            line-height: @size54;
+            border-bottom: 1px solid #e7ebee;
+            line-height: 0.9rem;
                 
             .v_rows_l{
               float: left;
               font-size: 10px;
+              height: 0.9rem;
+              line-height: 0.9rem;
+              i{
+                font-size: 14px;
+                line-height: 0.9rem;
+
+              }
+              span{
+                font-size: 14px;
+                line-height: 0.9rem;
+                margin-left: @size10;
+              }
             }
             .v_rows_con{
               float: left;
-              width: 1.22rem;
-              height: @size24;
+              width: @size30;
+              height: @size15;
               background: #15b3b3;
-              margin-top: @size15;
-              line-height: @size24;
+              margin-top: @size10;
+              line-height: @size15;
               text-align: center;
               color: #fff;
-              margin-left: @size4;
+              margin-left: @size10;
+              font-size: 8px;
             }
             .v_rows_r{
               float: right;
@@ -456,14 +469,15 @@ import {commonService} from '../../service/commonService.js'
                      color:#5b5b5b;
             }
             .v_Hook{
-              width: @size16;
-              height: @size16;
+              width: @size10;
+              height: @size10;
               border:2px solid #ccc;
-              margin-top: @size18;
+              margin-top: @size10;
               i{
                         display: none;
-                font-size: @size16;
-                        line-height: @size16;
+                         font-size: @size10;
+                         line-height: @size10;
+                        // line-height: @size16;
                         color: #15b3b3;
 
               }
@@ -525,7 +539,7 @@ import {commonService} from '../../service/commonService.js'
         .state{
             height: @size80;
             width: 100%;
-            border-bottom: 1px solid rgb(129, 135, 140);
+            border-bottom: 1px solid #c7cacb;
             box-sizing: border-box;
             padding: 0 @size45;
             .redline{

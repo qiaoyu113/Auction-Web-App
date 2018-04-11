@@ -105,9 +105,25 @@
         </div>
         <div class="sell-spic">
                 <ul >
-                    <li  v-for="(falg,index) in footPrint" :style= "getPos(index)" ><div class="xiajia" v-if="falg.available==false"><p>已下架</p></div><img :src="picHead + falg.picItems[0]" alt="" srcset="" @click="Routerid(falg.id)"></li>
+                    <li  v-for="(falg,index) in footPrint" :style= "getPos(index)" >
+                       <div class="xiajia" v-if="falg.available==false"><p>已下架</p></div>
+                       <img :src="picHead + falg.picItems[0]" alt="" srcset="" @click="Routerid(falg.id)">
+                    </li>
                 </ul>
                 <!-- available -->
+        </div>
+        <div class="v_modaltou" ref="v_modaltou" v-if="v_modal">
+           <div class="v_box">
+                  <div class="v_box_top" @click="remrealname()"><i class="iconfont icon-closeicon"></i></div>
+                 <p class="v_box_p">PROMPT</p>
+
+                 <p>提示</p>
+                 <p  class="v_box_img">请先实名认证</p>
+                 <!-- <div><img src="../../assets/image/mycenter/scy.png" /></div> -->
+                 <div class="v_button" @click='realname()'> 
+                     去认证
+                 </div>
+           </div>
         </div>
         <div class="give"><p><a href="tel:15801619600">马上送拍</a></p></div>
         </div>
@@ -178,6 +194,7 @@
                 saleNum:'',//售后数量
                 footPrint:'',//浏览记录
                 ServiceBox:false,
+                v_modal:false,
             }
         },
         components:{'home-item':itemc},
@@ -240,10 +257,15 @@
                 this.$router.push({path:"/mycenter"})
             },
             cash:function(){
-                this.$router.push({path:"/cash"})
+                if(this.list.realNameStatus==2){
+                    this.$router.push({path:"/cash"})
+                }else{
+                    this.v_modal=true
+                }
             },
             recharge:function(){
-                this.$router.push({path:"/recharge"})
+
+               this.$router.push({path:"/recharge"}) 
             },
             order:function(index){
               this.$router.push({path:"/myorder",query:{index:index}})       
@@ -256,6 +278,13 @@
             },
             help:function(){
               this.$router.push({path:"/helpcenter"})  
+            },
+            remrealname:function(){
+             this.v_modal=false
+            },
+            //去认证 
+             realname:function(){
+                this.$router.push({name:'realname'})
             },
             // 获取个人信息
             getUsers:function(){
@@ -485,7 +514,7 @@
                         font-size: 10px;
                         line-height: 12px;
                         color:rgb(133, 133, 133);
-                        padding-top:@size3 ;
+                        padding-top:@size12;
                         img{
                             width: 12px;
                         }
@@ -532,8 +561,8 @@
                       top: -@size2;
                       width: @size14;
                       height: @size14;
-                      background: red;
-                      border:1px solid red;
+                      background: #eb6200;
+                      border:1px solid #eb6200;
                       border-radius: 50%;
                       font-size: 8px;
                       color: #fff;
@@ -542,10 +571,10 @@
                     }
                 }
                 .font{
-                    font-size: 10px;
+                    font-size: 12px;
                     text-align: center;
                     padding-top: @size20;
-                    font-size: @size10;
+                    font-size: 10px;
                 }
             }
             
@@ -559,7 +588,7 @@
                 border-bottom: 1px solid rgb(202, 209, 217);
                 margin-left: @size10;
                 .fl{
-                    font-size: @size12;
+                    font-size: 12px;
                     line-height: @size35;
                 }
                 .fr{
@@ -735,6 +764,71 @@
         
     }
 }
+ .v_modaltou{
+          position: fixed;
+          left: 0;
+          top: 0;
+          right: 0;
+          bottom: 0;
+          width: 100%;
+          height: 100%;
+          z-index: 9999;
+          background: rgba(0,0,0,0.5);
+         
+          
+          .v_box{
+            width: 6.5rem;
+            height: 6.6rem;
+            background: #fff;
+            margin: 4rem auto 0; 
+            position: relative;
+            .v_box_top{
+                 position: absolute;
+                 right: 0;
+                 top: 0;
+                 width: @size30;
+                 height: @size30;
+                 background: #eb6100;
+                 i{
+                    font-size: @size30;
+                    color:#fff;
+                 }
+            }
+            .v_box_p{
+                 padding-top: @size50;
+                 font-size: 14px;
+                 color: rgb(57, 57, 57);
+                 font-weight: 700;
+            }
+            .v_box_img{
+                 margin:@size24 0 @size14; 
+                 width: 100%;
+                 img{
+                    width: @size40;
+                    height: @size40;
+                    margin-left: 2.72rem;
+                 }
+            }
+            p{
+                font-size: 14px;
+                text-align: center;
+                color: rgb(98, 98, 98);
+                // padding:1rem 0.5rem;
+                
+            }
+            .v_button{
+               position: absolute;
+               bottom: 0;
+               left: 0;
+               height: @size44;
+               width: 100%;
+               border-top:1px solid #353c47;
+               text-align: center;
+               line-height: @size44;
+               font-size: 14px;
+             }
+          }
+    }
 }
 
 </style>

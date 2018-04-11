@@ -580,7 +580,7 @@ import {commonService} from '../../service/commonService.js'
             .loginEn{
                 height:0.75rem;
                 font-weight: 600;
-                font-size:20px;
+                font-size:16px;
                 letter-spacing: @size3;
             }
             .loginCn{
@@ -615,7 +615,7 @@ import {commonService} from '../../service/commonService.js'
                 width: 2rem;
                 line-height: 1.02rem;
                 float: left;
-                font-size: @size15;
+                font-size: 14px;
             }
             input{
                 // padding-left:2rem; 
@@ -624,6 +624,7 @@ import {commonService} from '../../service/commonService.js'
                 float: left;
                 border: none;
                 outline: none;
+                font-size: 14px;
             }
             .diqu{
             	width: 6rem;
@@ -666,7 +667,7 @@ import {commonService} from '../../service/commonService.js'
                 outline: none;
                 box-sizing: border-box;
                 padding: @size10;
-                font-size: @size13;
+                font-size: 13px;
                 letter-spacing: @size1;
             }
         }
@@ -681,7 +682,7 @@ import {commonService} from '../../service/commonService.js'
                 height: @size14;
                 position: relative;
                 i{
-                    font-size: @size10;
+                    font-size: 10px;
                     line-height: @size10;
                     position: absolute;
                     top: -1px;
@@ -690,7 +691,7 @@ import {commonService} from '../../service/commonService.js'
                 }
             }
             span{
-                font-size: @size14;
+                font-size: 14px;
                 padding-left: @size8;
                 line-height: @size15;
             }
@@ -707,7 +708,7 @@ import {commonService} from '../../service/commonService.js'
                 height: @size14;
             }
             span{
-                font-size: @size14;
+                font-size: 14px;
                 padding-left: @size8;
                 color: red;
             }

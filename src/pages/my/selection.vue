@@ -110,6 +110,7 @@
           padding: @size50 @size20;
           border-bottom: 2px solid rgb(53,60,70);
           .top_p1{
+            font-weight: bold;
             font-size: 14px;
             color: rgb(51,51,51);
           }
@@ -203,7 +204,7 @@
                 font-size: @size10;
                 margin-top: @size18;
                 color: rgb(169,174,180);
-                border:1px solid rgb(169,174,180);
+                border:2px solid rgb(169,174,180);
                 line-height: @size12;
                 text-align: center;
                 i{
@@ -214,7 +215,7 @@
           }
            .address_rcolor{
            	  div{
-           	  	border:1px solid #15b3b2;
+           	  	border:2px solid #15b3b2;
            	  	color:#15b3b2;
            	  }
            }

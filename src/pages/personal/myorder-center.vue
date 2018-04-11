@@ -73,8 +73,8 @@
             <div class="account" v-for="(list,index) in ordercs">
                 <div class="item">
                     <span>订单号:{{list.orderNo}}</span>
-                    <span class="fr" v-if="list.status!=4">售后中</span>
-                    <span class="fr" v-if="list.status==4">已完成</span>
+                    <span class="fr" v-if="list.status!=6 && list.status!=8">售后中</span>
+                    <span class="fr" v-if="list.status==6 || list.status==8">已完成</span>
                 </div>
                 <div class="box clearfix ">
                     <div class="boxImg fl">
@@ -98,10 +98,13 @@
         </div>
          <div class="v_modal" ref="v_modal" v-if="v_modal">
            <div class="v_box">
-                 <p>是否确定删除订单?</p>
-                 <div class="v_button">
-                     <el-button @click="heigorder()">取消</el-button>
-                     <el-button @click='deleteOrderid()'>确定</el-button>
+                  <div class="v_box_top" @click="heigorder()"><i class="iconfont icon-closeicon"></i></div>
+                 <p class="v_box_p">REMOVE ITEM</p>
+                 <p>删除</p>
+                 <div class="v_box_img"><img src="../../assets/image/mycenter/scy.png" /></div>
+                 <p>是否删除订单?</p>
+                 <div class="v_button" @click='deleteOrderid()'> 
+                     确定
                  </div>
            </div>
         </div>
@@ -235,6 +238,7 @@
             routers:function(){
                
                  let index= this.$route.query.index
+                 
                 if(index!=''){
                     this.index=index
                 }
@@ -319,7 +323,6 @@
             deleteOrderid:function(){
                    let that=this;
                commonService.deleteOrderid(that.deleteorderid).then(function(res){
-                      
                           that.v_modal=false
                           that.meScroll()
                     })
@@ -395,14 +398,15 @@
                 //延时一秒,模拟联网
                 const that = this;
                 let status='1,2,3,4,5,6'
-                if(that.index === 1){
+
+                if(that.index == 1){
                     status = '1,2';
                 }else if(that.index==2){
                     status = '3,4';
                 }else if(that.index==0){
                     status = '1,2,3,4,5,6';
                 }
-
+          
                 commonService.getOrder({pageNo:pageNum,pageSize:pageSize,status:status}).then(function(res){
                 
                     if(res.data.code == 200){
@@ -716,7 +720,7 @@
                 line-height: @size40;
                 margin-left: @size10;
                 span{
-                    font-size: @size10;
+                    font-size: 10px;
                     color: rgb(129, 135, 140);
                     padding-right: @size10;
                 }
@@ -753,7 +757,9 @@
                         padding: @size3 @size2; 
                         margin-top:@size5; 
                         line-height: 0.50rem;
-                        font-size: @size12;
+                        font-size: 12px;
+                        width: 24px;
+                        text-align: center;
                         font-weight: bold;
                     }
                     .colon{
@@ -771,7 +777,7 @@
                 .boxImg{
                     width: @size80;
                     height: @size80;
-                    padding: @size15 0 0 @size10;
+                    margin: @size15 0 0 @size10;
                     overflow: hidden;
                     img{
                         // width: 100%;
@@ -788,17 +794,23 @@
                     width: 6.4rem;
                     .hel{
                         font-weight: bold;
-                        font-size: @size15;
+                        font-size: 14px;
+                        line-height: 18px;
                         letter-spacing: 1px;
                     }
                     .name{
-                        font-size: @size14;
-                        line-height: @size14;
+                        font-size: 12px;
+                        line-height: 18px;
+                        height: 18px;
+                        width: 168px;
+                        overflow: hidden;
+                        text-overflow: ellipsis;
+                        white-space: nowrap; 
                     }
                     .prove{
-                        font-size: 8px;
+                        font-size: 10px;
                         color:rgb(133, 133, 133);
-                        padding-top:@size3 ;
+                        line-height: 14px;
                     }
                     .fr{
                         border: 1px solid rgb(51, 51, 51);
@@ -806,8 +818,9 @@
                         background: white;
                         outline: none;
                         height: @size25;
+                        line-height: @size25;
                         width: 1.8666rem;
-                        font-size: @size10;
+                        font-size: 10px;
                     }
                     button{
                         color:rgb(51, 51, 51);
@@ -831,6 +844,7 @@
     }
 }
 }
+
  .v_modal{
           position: fixed;
           left: 0;
@@ -844,19 +858,55 @@
          
           
           .v_box{
-            width: 6rem;
-            height: 4rem;
+            width: 6.5rem;
+            height: 6.6rem;
             background: #fff;
             margin: 4rem auto 0; 
-            border:1px solid #fff;
-            border-radius: 4px;
+            position: relative;
+            .v_box_top{
+                 position: absolute;
+                 right: 0;
+                 top: 0;
+                 width: @size30;
+                 height: @size30;
+                 background: #eb6100;
+                 i{
+                    font-size: @size30;
+                    color:#fff;
+                 }
+            }
+            .v_box_p{
+                 padding-top: @size50;
+                 font-size: 14px;
+                 color: rgb(57, 57, 57);
+                 font-weight: 700;
+            }
+            .v_box_img{
+                 margin:@size24 0 @size14; 
+                 width: 100%;
+                 img{
+                    width: @size40;
+                    height: @size40;
+                    margin-left: 2.72rem;
+                 }
+            }
             p{
-                font-size: 12px;
-                padding:1rem 0.5rem;
+                font-size: 14px;
+                text-align: center;
+                color: rgb(98, 98, 98);
+                // padding:1rem 0.5rem;
                 
             }
             .v_button{
-              padding-left: 0.5rem;
+               position: absolute;
+               bottom: 0;
+               left: 0;
+               height: @size44;
+               width: 100%;
+               border-top:1px solid #353c47;
+               text-align: center;
+               line-height: @size44;
+               font-size: 14px;
              }
           }
     }

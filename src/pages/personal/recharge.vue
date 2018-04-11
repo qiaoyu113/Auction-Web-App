@@ -17,10 +17,10 @@
             </div>
         </div>
         <div class="box">
-            <div class="info clearfix"><span v-if="money==''" onkeyup="if(this.value.length==1){this.value=this.value.replace(/[^1-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}">金额</span>
+            <div class="info clearfix"><span v-if="money==''">金额</span>
                <span v-if="money!=''">金额</span>
                <span class="span" v-if="money!=''">CNY</span>
-               <input type="number" placeholder="请输入金额" v-model="money"/>
+               <input type="number" placeholder="请输入金额" v-model="money" @keyup="moneyreplor()"/>
                
             </div>
             <div class="canshoot">
@@ -34,7 +34,7 @@
                     <p>保证金不可用于支付尾款</p>
                 </div>
             </div> -->
-            <div class="pay" @click="getIndex(3)">
+            <div class="pay clearfix" @click="getIndex(3)">
                 <div :class="show== true ? 'check' : 'check1'" @click="shows()"><i class="iconfont icon-duihao"></i></div>
                 <!-- <i :class="index==3 ? 'background3' : ''" class="iconfont icon-icon_zhifubao"></i> -->
                 <div class="infoAlipay">
@@ -43,8 +43,8 @@
                         <a href="javaScript:;" @click="Helpcenter(3)">《竞拍规则》</a></div>
                     </div>
             </div>
-            <div class="info"><span>充值方式</span></div>
-            <div class="bor"></div>
+            <div class="v_info"><p>充值方式</p></div>
+            <!-- <div class="bor"></div> -->
             <div class="pay" @click="getIndex(1)" v-if="wxLogin==true">
                 <div :class="index==1 ? 'check' : 'check1'"><i class="iconfont icon-duihao"></i></div>
                     <!-- <i :class="index==1 ? 'background1' : ''" class="iconfont icon-icon_weixinzhifu"></i> -->
@@ -171,6 +171,14 @@
             closeService(){
                 let that = this;
                 that.ServiceBox = false;
+            },
+             // 不可开头输入0
+            moneyreplor:function(){
+                if(this.money.length==1){
+                    this.money=this.money.replace(/[^1-9]/g,'')
+                }else{
+                    this.money=this.money.replace(/\D/g,'')
+                }
             },
             // 首次加载判断在什么浏览器下打开
              wxshow:function(){
@@ -485,12 +493,12 @@
             width:80%;
             float:left;
             .loginEn{
-                height:0.75rem;
+                height:24px;
                 font-weight: bold;
-                font-size:20px;
+                font-size:16px;
             }
             .loginCn{
-                font-size: 15px;
+                font-size: 14px;
             }
             
         }
@@ -508,7 +516,7 @@
         padding: 0 @size10;
         box-sizing: border-box;
         .bor{
-            border-bottom: 1px solid #87828c;
+            border-bottom: 1px solid #e7ebee;
             margin-left: @size10;
         }
         .info{
@@ -563,12 +571,27 @@
                 padding-top: @size1;
             }
         }
+        .v_info{
+             height: 1.3rem;
+             margin-top: -1px;
+             border-bottom: 1px solid #c7cacb;
+             border-top: 1px solid #c7cacb;
+
+             p{
+                font-size: 14px;
+                margin-left: @size20;
+                line-height: 1.3rem;
+                color: #707070;
+             }
+
+        }
         .canshoot{
                 font-size: @size12;
               p{
             	font-size: @size12;
             	text-align: right;
             	margin-bottom: @size10;
+                color: #c4c4c4;
             	span{
             		font-weight: 700;
             		float: none;
@@ -607,7 +630,7 @@
         }
         .pay{
             height: @size50;
-            border-bottom: 1px solid #87828c;
+            border-bottom: 1px solid #e7ebee;
             margin-left: @size10;
             .check{
                 float: left;
@@ -690,14 +713,18 @@
                 float: left;
                 margin-left: @size10;
                 // margin-top: 17px;
-                line-height: @size50;
+                line-height: 1.3rem;
                 color: rgb(129, 135, 140);
                 font-size: 12px;
-                 a{
-                    	color: #ee7d3b;
-                    	font-size: 12px;
-                    	
+                .span1{
+                    font-size: 12px;
+                    a{
+                        color: #ee7d3b;
+                        font-size: 12px;
+                        
                     }
+                }
+                 
             }
         }
     }
@@ -724,7 +751,8 @@
         border-top:1px solid rgb(53, 60, 70); 
         text-align: center;
         line-height: 1.2rem;
-        font-size: 15px;
+        font-size: 14px;
+        color:#777;
         background: #fff;
     }
    }

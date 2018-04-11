@@ -187,7 +187,7 @@
                             <div class="fr num">{{day}}</div>
                         </div>
                     </div>
-                    <div class="moneytime fr" v-if="details.auctionStatus === 3 && details.userId != userId">
+                    <div class="moneytime fr" v-if="details.auctionStatus === 3 && details.doneBuy != '1'">
                         <div class="nowTit">成交价格</div>
                         <div class="nowPrice">{{reversedNum(details.currentPrice)}} CNY</div>
                         <div class="over">成交时间</div>
@@ -509,16 +509,16 @@
             window.localStorage.setItem('back','no')
             //是否支付成功
             let payOk = window.localStorage.getItem('payOk');
-            if(payOk != null){
-                if(payOk == '1'){
-                    that.dis2Show = false;
-                    that.dis3Show = true;
-                    that.hintText = '保证金支付成功';
-                }else{
-                    that.dis4Show = true;
-                    that.hintText = '保证金支付失败';
-                }
-            }
+//            if(payOk != null){
+//                if(payOk == '1'){
+//                    that.dis2Show = false;
+//                    that.dis3Show = true;
+//                    that.hintText = '保证金支付成功';
+//                }else{
+//                    that.dis4Show = true;
+//                    that.hintText = '保证金支付失败';
+//                }
+//            }
             window.localStorage.removeItem('payOk');
             let token = window.localStorage.getItem('token');
             if(token != null){
@@ -529,6 +529,7 @@
                 that.userId = tokenData.userId
             }else{
             }
+            that.wxShare()
         },
         beforeUpdate(){
             let that = this;
@@ -536,6 +537,56 @@
             that.bugShow = false;
         },
         methods: {
+            //微信分享
+            wxShare(){
+                let that = this;
+                let url = window.location.href;
+                commonService.getWxShare({url:url}).then(function(res){
+                    if(res.data.code === 200){
+                        let wxMore = res.data.datas
+                        wx.config({
+                            debug: true, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
+                            appId: wxMore.appId, // 必填，公众号的唯一标识
+                            timestamp:wxMore.wxTimestamp , // 必填，生成签名的时间戳
+                            nonceStr: wxMore.wxNoncestr, // 必填，生成签名的随机串
+                            signature: wxMore.wxSignature,// 必填，签名，见附录1
+                            jsApiList: [] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
+                        });
+                        commonService.getShares({type:10,typeId:that.id}).then(function(res){
+                            if(res.data.code === 200){
+                                wx.ready(function(){
+                                    let wxShare = res.data.datas
+                                    wx.onMenuShareTimeline({
+                                        title: wxShare.title, // 分享标题
+                                        link: url, // 分享链接
+                                        imgUrl: wxShare.imgUrl, // 分享图标
+                                        success: function () {
+                                            // 用户确认分享后执行的回调函数
+                                        },
+                                        cancel: function () {
+                                            // 用户取消分享后执行的回调函数
+                                        }
+                                    });
+                                    wx.onMenuShareAppMessage({
+                                        title: wxShare.title, // 分享标题
+                                        link: url, // 分享链接
+                                        imgUrl: wxShare.imgUrl, // 分享图标
+                                        desc: wxShare.desc, // 分享描述
+                                        type: '', // 分享类型,music、video或link，不填默认为link
+                                        dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
+                                        success: function () {
+                                            // 用户确认分享后执行的回调函数
+                                        },
+                                        cancel: function () {
+                                            // 用户取消分享后执行的回调函数
+                                        }
+                                    });
+                                });
+                            }
+                        })
+                    }
+                })
+            },
             //socket连接
             WebSocketTest(){
                 let that = this;
@@ -1033,11 +1084,9 @@
             //确认出价
             offerPrice(){
                 let that = this;
-                let bidPrice = (Number(that.bidPrice) + 100) * 100;
-//                let bidPrice = that.details.basePrice * 100
+                let bidPrice = Number(that.bidPrice) * 100
                 that.monitor();
                 //冻结保证金
-                console.log(bidPrice)
                 commonService.postMyPrice({offerAmount:bidPrice,auctionId:that.id}).then(function(res){
                     if(res.data.code === 537126){
                         //查看用户余额是否够冻结
@@ -1305,7 +1354,7 @@
             height: @size35;
             line-height: @size35;
             border-bottom: 1px solid rgb(53, 60, 70);
-            background:  rgba(255, 255, 255,0.5);
+            background: rgba(255, 255, 255,0.5);
             position: fixed;
             top: 0;
             z-index: 100;

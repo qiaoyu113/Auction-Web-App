@@ -44,6 +44,10 @@
                                     <div class="ros_con"  v-if="list.auction.doneBuy!=1 && list.auction.doneBuy!=3" @click="jump(list.auction._id)">
                                         查看订单
                                     </div>
+                                     <div class="v_tros_con" v-if="list.auction.doneBuy==3">
+                                       
+                                    </div>
+
                                 </div>
                                 <div class="ros_r" @click="Router(list.auction._id)">
                                     <img :src="picHead + list.auction.picItems[0]"/>
@@ -536,7 +540,12 @@
                     .ros_l3{
                         color: #4D4D4D;
                         font-size: 12px;
-                        line-height: @size15;
+                        line-height: 18px;
+                        height: 18px;
+                        width: 168px;
+                        overflow: hidden;
+                        text-overflow: ellipsis;
+                        white-space: nowrap; 
                     }
                     .ros_l4{
                         color: #4D4D4D;
@@ -682,6 +691,19 @@
                     border: 1px solid #4D4D4D;
                     line-height: 0.75rem;
                     text-align: center;
+                }
+                .v_tros_con{
+                     margin-top:0.2rem;
+                    // left: 0;
+                    margin-right: @size10;
+                    // font-size: 12px;
+                    // color: #4D4D4D;
+                    width: 1.8666rem;
+                    height: 0.75rem;
+                    // border: 1px solid #4D4D4D;
+                    line-height: 0.75rem;
+                    // text-align: center;
+
                 }
                 .ros_date{
                     position: absolute;

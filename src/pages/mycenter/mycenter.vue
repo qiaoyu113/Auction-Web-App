@@ -44,7 +44,7 @@
             <div class="info">
                 <div class="infoList">修改密码<div class="more" @click="changePass"><img src="../../../src/assets/image/mycenter/more.png"/></div></div>
                 <div class="infoList"><i class="iconfont icon-weixin1"></i>微信绑定号
-                <div class="goBind" v-if="user.wxBind==true">已绑定</div>
+                <div class="goBind" @click="deleteorderwx()" v-if="user.wxBind==true">已绑定</div>
                 <div class="goBind" v-if="user.wxBind==null || user.wxBind==false" @click='wxlogins'>去绑定</div>
                 </div>
             </div>
@@ -58,7 +58,7 @@
                 </div>
             </div>
             <!--退出-->
-            <div class="back" @click="deleteTokens()">退出登陆</div>
+            <div class="back" @click="deleteorder()">退出登陆</div>
         </div>
        <!-- 性别 -->
         <div class="v_modal" ref="modal">
@@ -68,6 +68,32 @@
              </div>
         </div>  
 
+ <div class="v_modaltou" ref="v_modaltou" v-if="v_modal">
+           <div class="v_box">
+                  <div class="v_box_top" @click="heigorder()"><i class="iconfont icon-closeicon"></i></div>
+                 <p class="v_box_p">QUIT</p>
+
+                 <p>退出</p>
+                 <p  class="v_box_img">是否退出当前登录?</p>
+                 <!-- <div><img src="../../assets/image/mycenter/scy.png" /></div> -->
+                 <div class="v_button" @click='deleteTokens()'> 
+                     确定
+                 </div>
+           </div>
+        </div>
+        <div class="v_modaltou" ref="v_modaltou" v-if="v_modalwx">
+           <div class="v_box">
+                  <div class="v_box_top" @click="heigorderwx()"><i class="iconfont icon-closeicon"></i></div>
+                 <p class="v_box_p">UNBUNDLING</p>
+
+                 <p>解绑</p>
+                 <p  class="v_box_img">是否解绑微信?</p>
+                 <!-- <div><img src="../../assets/image/mycenter/scy.png" /></div> -->
+                 <div class="v_button" @click='postUnbind()'> 
+                     确定
+                 </div>
+           </div>
+        </div>
 <!-- <div style="margin: 50px;">
 <input type="text" name="start_date" id="start_date" v-model="startTime" placeholder="选择开始日期" readonly="readonly" /> -->
 <!--</div>-->
@@ -136,6 +162,8 @@
                 imageUrl:'',
                 imgler:'',
                 ServiceBox:false,
+                v_modal:false,
+                v_modalwx:false,
             }
         },
         syncData({store}) {
@@ -261,16 +289,40 @@
                     that.$refs.modal.style.display="none"
               })
             },
+
+            // 取消删除
+            heigorder:function(){
+                   this.v_modal=false
+                   
+            },
+            // 删除订单
+            deleteorder:function(){
+                this.v_modal=true
+                
+            },
+
              // 退出登录
              deleteTokens:function(){
                 let that=this
                  commonService.deleteTokens().then(function(res){
                     if(res.data.code==200){
+                        that.v_modal=false
                         that.$router.push({name:'personalCenter'})
+
                     }
               })
 
              },
+              // 取消解绑
+            heigorderwx:function(){
+                   this.v_modalwx=false
+                   
+            },
+             // 解绑微信
+            deleteorderwx:function(){
+                this.v_modalwx=true
+                
+            },
               //绑定微信登陆
             wxlogins:function(){
                 let that = this;
@@ -284,7 +336,18 @@
                        window.location.href = res.data.datas;
                    }
                })
-            }
+            },
+            // 解绑微信
+            postUnbind:function(){
+                let that = this;
+               commonService.postUnbind().then(function(res){
+                 
+                      if(res.data.code==200){
+                         that.getUsers()
+                          that.heigorderwx()
+                    }
+               })
+            },
         }
     }
 </script>
@@ -617,6 +680,71 @@
                 margin-left: 1.4rem;
             }
         }
+    }
+     .v_modaltou{
+          position: fixed;
+          left: 0;
+          top: 0;
+          right: 0;
+          bottom: 0;
+          width: 100%;
+          height: 100%;
+          z-index: 9999;
+          background: rgba(0,0,0,0.5);
+         
+          
+          .v_box{
+            width: 6.5rem;
+            height: 6.6rem;
+            background: #fff;
+            margin: 4rem auto 0; 
+            position: relative;
+            .v_box_top{
+                 position: absolute;
+                 right: 0;
+                 top: 0;
+                 width: @size30;
+                 height: @size30;
+                 background: #eb6100;
+                 i{
+                    font-size: @size30;
+                    color:#fff;
+                 }
+            }
+            .v_box_p{
+                 padding-top: @size50;
+                 font-size: 14px;
+                 color: rgb(57, 57, 57);
+                 font-weight: 700;
+            }
+            .v_box_img{
+                 margin:@size24 0 @size14; 
+                 width: 100%;
+                 img{
+                    width: @size40;
+                    height: @size40;
+                    margin-left: 2.72rem;
+                 }
+            }
+            p{
+                font-size: 14px;
+                text-align: center;
+                color: rgb(98, 98, 98);
+                // padding:1rem 0.5rem;
+                
+            }
+            .v_button{
+               position: absolute;
+               bottom: 0;
+               left: 0;
+               height: @size44;
+               width: 100%;
+               border-top:1px solid #353c47;
+               text-align: center;
+               line-height: @size44;
+               font-size: 14px;
+             }
+          }
     }
    
 }

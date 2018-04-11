@@ -375,12 +375,13 @@
             width:80%;
             float:left;
             .loginEn{
-                height:0.75rem;
+                height:24px;
                 font-weight: bold;
-                font-size:20px;
+                line-height: 24px;
+                font-size:16px;
             }
             .loginCn{
-                font-size: 15px;
+                font-size: 14px;
             }
             
         }
@@ -390,7 +391,7 @@
             font-size: @size20;
             img{
                 width: 1rem;
-                margin-top: 1rem;
+                margin-top: 0.8rem;
             }
         }
         .menu{
@@ -405,7 +406,7 @@
                 box-sizing: border-box;
                 padding-left: @size2;
                 padding-right: @size2;
-                font-size: @size10;
+                font-size: 12px;
                 margin-right: @size20;
             }
             .checked{

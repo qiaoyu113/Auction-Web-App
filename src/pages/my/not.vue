@@ -514,7 +514,12 @@
                     .ros_l3{
                         color: #4D4D4D;
                         font-size: 12px;
-                        line-height: @size15;
+                        line-height: 18px;
+                        height: 18px;
+                        width: 168px;
+                        overflow: hidden;
+                        text-overflow: ellipsis;
+                        white-space: nowrap; 
                     }
                     .ros_l4{
                         color: #4D4D4D;

@@ -81,10 +81,13 @@
 
          <div class="v_modal" ref="v_modal" v-if="v_modal">
            <div class="v_box">
-                 <p>是否确定删除订单?</p>
-                 <div class="v_button">
-                     <el-button @click="heigorder()">取消</el-button>
-                     <el-button @click='deleteOrderid()'>确定</el-button>
+                  <div class="v_box_top" @click="heigorder()"><i class="iconfont icon-closeicon"></i></div>
+                 <p class="v_box_p">REMOVE ITEM</p>
+                 <p>删除</p>
+                 <div class="v_box_img"><img src="../../assets/image/mycenter/scy.png" /></div>
+                 <p>是否删除订单?</p>
+                 <div class="v_button" @click='deleteOrderid()'> 
+                     确定
                  </div>
            </div>
         </div>
@@ -274,7 +277,7 @@ import {commonService} from '../../service/commonService.js'
             display: none;
              img{
                 width: @size16;
-                margin-top: @size5;
+                margin-top: @size8;
             }
         }
         .display{
@@ -440,6 +443,12 @@ import {commonService} from '../../service/commonService.js'
                     font-size: 14px;
                     color: rgb(133, 133, 133);
                     padding-top: @size1;
+                     height: 20px;
+                    line-height: 20px;
+                     width: 174px;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    white-space: nowrap; 
                 }
                 .number {
                     font-size: 12px;
@@ -462,7 +471,7 @@ import {commonService} from '../../service/commonService.js'
             .fr{
                 font-size: @size14;
                 font-weight: bold;
-                color: red;
+                color: #fc5500;
             }
         }
         .moneys{
@@ -584,19 +593,55 @@ import {commonService} from '../../service/commonService.js'
          
           
           .v_box{
-            width: 6rem;
-            height: 4rem;
+            width: 6.5rem;
+            height: 6.6rem;
             background: #fff;
             margin: 4rem auto 0; 
-            border:1px solid #fff;
-            border-radius: 4px;
+            position: relative;
+            .v_box_top{
+                 position: absolute;
+                 right: 0;
+                 top: 0;
+                 width: @size30;
+                 height: @size30;
+                 background: #eb6100;
+                 i{
+                    font-size: @size30;
+                    color:#fff;
+                 }
+            }
+            .v_box_p{
+                 padding-top: @size50;
+                 font-size: 14px;
+                 color: rgb(57, 57, 57);
+                 font-weight: 700;
+            }
+            .v_box_img{
+                 margin:@size24 0 @size14; 
+                 width: 100%;
+                 img{
+                    width: @size40;
+                    height: @size40;
+                    margin-left: 2.72rem;
+                 }
+            }
             p{
-                font-size: 12px;
-                padding:1rem 0.5rem;
+                font-size: 14px;
+                text-align: center;
+                color: rgb(98, 98, 98);
+                // padding:1rem 0.5rem;
                 
             }
             .v_button{
-              padding-left: 0.5rem;
+               position: absolute;
+               bottom: 0;
+               left: 0;
+               height: @size44;
+               width: 100%;
+               border-top:1px solid #353c47;
+               text-align: center;
+               line-height: @size44;
+               font-size: 14px;
              }
           }
     }

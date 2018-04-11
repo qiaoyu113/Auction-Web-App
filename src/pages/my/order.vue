@@ -52,7 +52,7 @@
                 </div>
                 <div class="goods_r">
                     <p class="p1">{{datas.finalPrice | money}} CNY</p>
-                    <p class="p2">{{datas.marketName}}</p>
+                    <p class="p2">{{datas.title}}</p>
                     <p class="p3">LOT-{{datas.completeNo}}</p>
                 </div>
             </div>
@@ -76,7 +76,7 @@
                 <div class="payment_method">
                     <div class="payment_top">支付方式</div>
                     <div class="ros clearfix" :class="{'ros_ll':index==1}" @click="selected(1)" v-if="wxLogin==true">
-                        <div class="ros_l"><span v-if="index==1">✔</span></div>
+                        <div class="ros_l"><i class="iconfont icon-duihao" v-if="index==1"></i></div>
                         <div class="ros_con">
                            <img class="v_img" v-if="index==1" src="../../assets/image/mycenter/wxzf.png" />
                            <img class="v_img" v-if="index!=1" src="../../assets/image/mycenter/wxzf2.png" />
@@ -87,7 +87,7 @@
                         </div>
                     </div>
                     <div class="ros clearfix" :class="{'ros_ll':index==2}" @click="selected(2)" v-if="wxLogin==false">
-                        <div class="ros_l"><span v-if="index==2">✔</span></div>
+                        <div class="ros_l"><i class="iconfont icon-duihao" v-if="index==2"></i></div>
                         <div class="ros_con">
                            <img class="v_img" v-if="index==2" src="../../assets/image/mycenter/zfb.png" />
                            <img class="v_img" v-if="index!=2" src="../../assets/image/mycenter/zfb2.png" />
@@ -98,7 +98,7 @@
                         </div>
                     </div>
                     <div class="ros clearfix" :class="{'ros_ll':index==3}" @click="selected(3)">
-                        <div class="ros_l"><span v-if="index==3">✔</span></div>
+                        <div class="ros_l"><i class="iconfont icon-duihao" v-if="index==3"></i></div>
                         <div class="ros_con">
                             <img class="v_img" v-if="index==3" src="../../assets/image/mycenter/xxzf.png" />
                            <img class="v_img" v-if="index!=3" src="../../assets/image/mycenter/xxzf2.png" />
@@ -213,8 +213,6 @@
                 let t;
                 clearTimeout(t)
                 let datess=Date.parse( new Date())
-               
-                
                  t= setTimeout(function (){
                    let data =Number(that.datas.mqEndTime) + (7 * 24 * 3600 * 1000)
                    if(datess < data){
@@ -294,7 +292,6 @@
                  commonService.getAuctions(that.auctionId).then(function(res){
                     if(res.data.code==200){
                    that.datas=res.data.datas
-               
                    that.picItems=that.datas.picItems[0]
                 
                    if(that.datas.finalPrice < 200000){
@@ -486,7 +483,6 @@
             }
         }
 .order{
-       
             width:100%;
             max-width:10rem;
             position: fixed;
@@ -721,7 +717,7 @@
                         text-align: center;
 
                         border:2px solid rgb(224,224,224);
-                        span{
+                        i{
                             font-size: @size6;
                             color:#15b3b2;
                             line-height: @size10;

@@ -17,11 +17,12 @@
             </div>
         </div> 
         <!--按钮-->
+        <div class="v_menu">
             <div class="menu v_rost" >
               <div class="v_transverse">
                 <div class='font' v-for="list in datas" :class="list.order==order ?'checked':''" @click="getIndex(list.order)" >{{list.title}}</div>
                 </div>
-                
+            </div>
             </div>
         <div class="text" v-for="lists in datas" v-if="lists.order==order">
             <div class="time">更新时间：{{lists.createTime | stampFormate}}</div>
@@ -116,7 +117,7 @@
         },
         mounted: function() {
             common.onMove('.helpcenter')
-            common.onMove2('.v_transverse')
+            common.onMove2('.menu')
            this.getDoctype()
            this.orderroute()
         },
@@ -292,12 +293,12 @@
             width:80%;
             float:left;
             .loginEn{
-                height:0.75rem;
+                height:24px;
                 font-weight: bold;
-                font-size:20px;
+                font-size:16px;
             }
             .loginCn{
-                font-size: 15px;
+                font-size: 14px;
             }
             
         }
@@ -309,42 +310,53 @@
                 width: 1rem;
                 margin-top: 1rem;
             }
-        }
-    
-        
+        }    
     }   
+  .v_menu{
+     height: 0.6rem;  
+     padding:0 @size10 2px @size10;
+     // margin: 
+     border-bottom:2px solid #353535;
+     width: 9.3333rem;
+     overflow: hidden;
+     background: rgba(255, 255, 255,0);
+     // background: red;
+  }
+
      .menu{
-            height:0.6rem;
+            height:0.8rem;
             line-height:0.6rem;
-            width: 9rem;
+            width: 9.3333rem;
+            overflow: hidden;
+            overflow-x: auto;
             // margin: 0 0.5rem;
-            overflow-x: scroll;
+            
             // position: absolute;
             // bottom:1px;
             // box-sizing: border-box;
-            padding:0 0.5rem 2px 0.5rem;
-            border-bottom:2px solid #353535;
-            position: relative;
-              
+          
+            // position: relative;
               .v_transverse{
-                margin-left: 0.5rem;
-                 width: 20rem;
-                 position: absolute;
-                 left: 0;
-                 right: 0;
-                  top: 0;
-                 overflow-x: scroll;
-                  bottom: 0;
+                 // margin-left: 0.5rem;
+                 
+                 width: 30rem;
+                 // height: 0.6rem;
+                 // position: fixed;
+                 // left: 0;
+                 // right: 0;
+                 //  top: 0;
+                 //  overflow-x: scroll;
+                 //  bottom: 0;
                   div{
                     font-size: 12px;
                   }
               }
 
+
             .font{
                 color:rgb(153, 153, 153);
                 float:left;
                 box-sizing: border-box;
-                
                 font-size: @size10;
                 margin-right: @size10;
             }

@@ -205,10 +205,10 @@
             // this.getKaptchas()
             this.vwx()
             this.vwximg()
-            if(this.login){
-                let phoneNum = window.localStorage.getItem('phone');
-                this.phoneUser = phoneNum
-            }
+            // if(this.login){
+            //     let phoneNum = window.localStorage.getItem('phone');
+            //     this.phoneUser = phoneNum
+            // }
 //            首次加载判断在什么浏览器下打开
             let ua = navigator.userAgent.toLowerCase();
             if(ua.match(/MicroMessenger/i)=="micromessenger") {
@@ -273,6 +273,14 @@
             //点击注册
             sign:function(){
                 let that = this;
+                if(that.phone==''){
+                     that.hint2 = true;
+                    that.hint2Text = '手机号不能为空';
+                    setTimeout(() => { 
+                                    that.hint2 = false;
+                                    that.hint2Text = ''
+                                      },2000) 
+                }
                 if(that.phoneOk){
                     if(that.checkPassword){
                         if(that.password == that.password2){
@@ -367,16 +375,8 @@
                     }
                 })
             },
-            //删除登陆手机号
-            deletePhone:function(){
-                let that = this;
-                that.phoneUser = '';
-            },
-            //删除密码
-            deletePassword:function(){
-                let that = this;
-                that.passwordUser = '';
-            },
+           
+         
             getMenu:function(index){
                 let that = this;
                 if(index === 1){

@@ -137,7 +137,7 @@ const routers = [
     {name: 'address',path:'/address',component:address},        //新建地址
     {name: 'addresslist',path:'/addresslist',component:addresslist}, //地址列表
     // 我的
-    {name: 'my',path:'/my',component: my,redirect:'/my/notstart',
+    {name: 'my',path:'/my',component: my,redirect:'/my/lot',
             children:[
                {name: 'notstart',path:'/my/notstart',component: notstart},
                {name: 'lot',path:'/my/lot',component: lot},

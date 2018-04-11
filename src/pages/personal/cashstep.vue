@@ -127,10 +127,10 @@
                     <input type="number" placeholder="请输入手机号码" v-model="phone"/>
                     <div class="infoClose" @click='remphone()' v-if="phone!=''"><i class="iconfont icon-closeicon"></i></div>
                 </div>
-                <div class="info"><span>图片验证码</span>
+               <!--  <div class="info"><span>图片验证码</span>
                     <input type="text" placeholder="请输入验证码" v-model='kaptchaValue'/>
                     <div class="infoClose" @click="getKaptchas()"><img :src="img.imageString"/></div>
-                </div>
+                </div> -->
                 <div class="info"><span>验证码</span>
                     <input type="number" placeholder="请输入验证码" v-model='verification'/>
                     <div class="infoClose" @click="getFormssms">获取验证码<i v-if="count!=0">({{count}}s)</i></div>
@@ -431,7 +431,7 @@ import {commonService} from '../../service/commonService.js'
              getFormssms:function(){
              let that = this;
             if(that.count==0){
-                 commonService.getFormssms({phone:that.phone,type:7,idCard:that.namecard,realName:that.name,kaptchaKey:that.img.kaptchaKey,kaptchaValue:that.kaptchaValue}).then(function(res){
+                 commonService.getFormssms({phone:that.phone,type:7,idCard:that.namecard,realName:that.name,kaptchaKey:that.img.kaptchaKey}).then(function(res){
                     if(res.data.message!= 'success'){
                        that.htmlx=res.data.message
                         setTimeout(() => {  

@@ -17,7 +17,7 @@
         </div>
         <div class="box">
             <div class="info clearfix"><span>金额</span>
-               <span class="span" v-if="money!=''">CNY</span><input type="number" placeholder="请输入金额" v-model="money" @input="cny()" onkeyup="if(this.value.length==1){this.value=this.value.replace(/[^1-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}" />
+               <span class="span" v-if="money!=''">CNY</span><input type="number" placeholder="请输入金额" v-model="money" @input="cny()" @keyup="moneyreplor()" />
             </div>
             <div class="bor"></div>
             <div class="money clearfix">
@@ -151,6 +151,14 @@
             },
             Return:function(){
                 window.history.go(-1)
+            },
+            // 不可开头输入0
+             moneyreplor:function(){
+                if(this.money.length==1){
+                    this.money=this.money.replace(/[^1-9]/g,'')
+                }else{
+                    this.money=this.money.replace(/\D/g,'')
+                }
             },
             // 首次加载判断在什么浏览器下打开
              wxshow:function(){
@@ -375,12 +383,12 @@
             width:80%;
             float:left;
             .loginEn{
-                height:0.75rem;
+                height:24px;
                 font-weight: bold;
-                font-size:20px;
+                font-size:16px;
             }
             .loginCn{
-                font-size: 15px;
+                font-size: 14px;
             }
             
         }
