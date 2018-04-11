@@ -1184,19 +1184,19 @@ import {commonService} from '../../service/commonService.js'
                     font-weight: bold;
                 }
                 .title {
-                    font-size: 14px;
+                    font-size: 12px;
                     color: rgb(133, 133, 133);
                     padding-top: @size1;
                     line-height: @size20;
                     max-height: @size40;
                     height: @size20;
-                    width: 174px;
+                    width: 168px;
                     overflow: hidden;
                     text-overflow: ellipsis;
                     white-space: nowrap; 
                 }
                 .number {
-                    font-size: 12px;
+                    font-size: 10px;
                     color: rgb(133, 133, 133);
                     padding: 0 0 @size25 0;
                     line-height: @size10;

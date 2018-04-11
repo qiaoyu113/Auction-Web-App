@@ -130,7 +130,6 @@ import {commonService} from '../../service/commonService.js'
                  
 
                 that.orderDetail=that.datas.orderDetail
-                   console.log(that.datas)
                  if(that.orderDetail.finalPrice < 200000){
                      that.freight=200000
                    }else{

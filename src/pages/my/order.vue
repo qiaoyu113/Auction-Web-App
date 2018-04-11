@@ -641,7 +641,11 @@
                    font-weight: 700;
                 }
                 .p2{
-                    font-size: 11px;
+                    width: 168px;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    white-space: nowrap;
+                    font-size: 12px;
                     color: rgb(77,77,77);
                 }
                 .p3{
