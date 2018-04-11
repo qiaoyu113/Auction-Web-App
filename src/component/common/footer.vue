@@ -21,7 +21,7 @@
 			<!--&lt;!&ndash;<p>{{item.name}}</p>&ndash;&gt;-->
 		<!--</router-link>-->
 	<!--</div>-->
-	<div class="footer">
+	<div :class="isX ? 'footers' : 'footer'">
         <ul class="clearfix">
             <li class="fl" @click="checked(0)">
                 <img v-if="index == 0" src="../../assets/image/mycenter/c1.png"/>
@@ -78,6 +78,7 @@
 				routeName: '',
                 hintShow:false,
                 goMyNum:'0',
+                isX:false,
 			}
 		},
 		mounted() {
@@ -101,8 +102,17 @@
                 that.index = 3
             }
             that.onload()
+            if(that.isIphoneX()){
+                that.isX = true;
+            }else{
+                that.isX = false;
+            }
+
 		},
         methods: {
+            isIphoneX(){
+                return /iphone/gi.test(navigator.userAgent) && (screen.height == 812 && screen.width == 375)
+            },
             checked(index){
                 let that = this;
                 that.index = index;
@@ -163,6 +173,44 @@
     @import url('../../assets/css/base.less');
     @import url('../../assets/css/icon/iconfont.css');
 //自己做的
+    .footers{
+        position:fixed;
+        bottom:0.4rem;
+        width: @size375;
+        height: 1.2rem;
+        background: #ffffff;
+        box-sizing: border-box;
+        border-top:1px solid rgb(53, 60, 70);
+        z-index:100;
+        ul{
+            li{
+                width: 25%;
+                height: 1.2rem;
+                text-align: center;
+                line-height: 1.2rem;
+                i{
+                    font-size: @size20;
+                    color:rgb(168, 174, 180);
+                    border: none;
+                }
+                img{
+                    width: 0.8rem;
+                    height: 0.8rem;
+                    margin-top: 0.03rem;
+                }
+                p{
+                    margin-top: -0.5rem;
+                    font-size: 8px;
+                }
+                .pc{
+                    color:#A5ACB1;
+                }
+            }
+            .check{
+                color: black;
+            }
+        }
+    }
 	.footer{
         position:fixed;
         bottom:0;

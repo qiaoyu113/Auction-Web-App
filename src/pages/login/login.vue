@@ -38,7 +38,7 @@
             <div class="talk" v-if="wximg!=null"><a href="tel:15801619600" @click="resetpassword()"><span>登录遇到问题，联系客服</span></a></div>
             <!--登录和提示-->
             <div class="v_kefu" v-if="wximg==null"><a href="javaScript:;" @click="resetpassword()">忘记密码</a> | <a href="tel:15801619600">联系客服</a></div>
-            <div class="bottom">
+            <div :class="isX ? 'bottoms':'bottom'">
                 <div class="hint" v-if="hint">{{hintText}}</div>
                 <div class="ok" @click="loginBtn">登 录</div>
             </div>
@@ -71,7 +71,7 @@
                 <i class="iconfont icon-icon_weixin"></i>微信
             </div>
             <!--登陆和提示-->
-            <div class="bottom">
+            <div :class="isX ? 'bottoms':'bottom'">
                 <div class="hint" v-if="hint2">{{hint2Text}}</div>
                 <div class="ok" @click="sign">注 册</div>
             </div>
@@ -104,7 +104,7 @@
                 <div class="infoRight" @click="rempassword2()" v-if="password2!=''"><i class="iconfont icon-closeicon"></i></div>
             </div>
             <!--登陆和提示-->
-            <div class="bottom">
+            <div :class="isX ? 'bottoms':'bottom'">
                 <div class="hint" v-if="hint2">{{hint2Text}}</div>
                 <div class="ok" @click="putUsers()">注 册</div>
             </div>
@@ -184,6 +184,7 @@
                 wx:this.$route.query.wx,
                 wximg:'',
                 ServiceBox:false,
+                isX:false,
             }
         },
      // asyncData({store,route}) {
@@ -218,8 +219,16 @@
 //                    这里不是微信浏览器
                 this.wxLogin = true;
             }
+            if(this.isIphoneX()){
+                this.isX = true;
+            }else{
+                this.isX = false;
+            }
         },
         methods: {
+            isIphoneX(){
+                return /iphone/gi.test(navigator.userAgent) && (screen.height == 812 && screen.width == 375)
+            },
             //打开客服
             openService(){
                 let that = this;
@@ -898,6 +907,31 @@
             right:0;
             bottom:0;
           
+            .hint{
+                width:100%;
+                height:0.67rem;
+                line-height:0.67rem;
+                color:#fff;
+                background:linear-gradient(70deg, #DC704A, #F44EA0);
+                text-align: center;
+                font-size:12px;
+            }
+            .ok{
+                width:100%;
+                height:1.2rem;
+                line-height:1.2rem;
+                border-top:1px solid #333;
+                text-align: center;
+                font-size:14px;
+                background: #fff;
+            }
+        }
+        .bottoms{
+            position: fixed;
+            left:0;
+            right:0;
+            bottom:0.4rem;
+
             .hint{
                 width:100%;
                 height:0.67rem;
