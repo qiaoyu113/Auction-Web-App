@@ -20,7 +20,7 @@
             <div class="info clearfix"><span v-if="money==''">金额</span>
                <span v-if="money!=''">金额</span>
                <span class="span" v-if="money!=''">CNY</span>
-               <input type="number" placeholder="请输入金额" v-model="money" @keyup="moneyreplor()"/>
+               <input type="number" placeholder="请输入金额" v-model="money" @input="moneyreplor()"/>
                
             </div>
             <div class="canshoot">
@@ -34,7 +34,7 @@
                     <p>保证金不可用于支付尾款</p>
                 </div>
             </div> -->
-            <div class="pay clearfix" @click="getIndex(3)">
+            <div class="pay clearfix">
                 <div :class="show== true ? 'check' : 'check1'" @click="shows()"><i class="iconfont icon-duihao"></i></div>
                 <!-- <i :class="index==3 ? 'background3' : ''" class="iconfont icon-icon_zhifubao"></i> -->
                 <div class="infoAlipay">
@@ -123,7 +123,7 @@
                 money:"",
                 wallet:'',
                 checked:false,
-                show:true,
+                show:false,
                 prompt:'',
                 wxLogin:true,
                 ServiceBox:false,
@@ -174,8 +174,11 @@
             },
              // 不可开头输入0
             moneyreplor:function(){
+               
                 if(this.money.length==1){
                     this.money=this.money.replace(/[^1-9]/g,'')
+                }else if(this.money.length>5){
+                     this.money=this.money.slice(0,6)
                 }else{
                     this.money=this.money.replace(/\D/g,'')
                 }
@@ -245,6 +248,9 @@
                 }
                 if(that.show==false){
                     that.prompt="请同意协议"
+                     setTimeout(() => { 
+                                   that.prompt=""
+                                      },2000) 
                     return false
                 }
                 let money=that.money * 100

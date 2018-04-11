@@ -196,7 +196,6 @@
             }else{
                 this.isX = false;
             }
-          
         },
         methods: {
             isIphoneX(){

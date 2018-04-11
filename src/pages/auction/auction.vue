@@ -187,7 +187,7 @@
                             <div class="fr num">{{day}}</div>
                         </div>
                     </div>
-                    <div class="moneytime fr" v-if="details.auctionStatus === 3 && details.doneBuy != '1'">
+                    <div class="moneytime fr" v-if="(details.auctionStatus === 3 && details.doneBuy != '1')||(details.auctionStatus === 3 && details.userId != userId && details.doneBuy == '1')">
                         <div class="nowTit">成交价格</div>
                         <div class="nowPrice">{{reversedNum(details.currentPrice)}} CNY</div>
                         <div class="over">成交时间</div>
