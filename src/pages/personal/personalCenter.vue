@@ -125,7 +125,7 @@
                  </div>
            </div>
         </div>
-        <div class="give"><p><a href="tel:15801619600">马上送拍</a></p></div>
+        <div :class="isX ? 'gives':'give'"><p><a href="tel:15801619600">马上送拍</a></p></div>
         </div>
         <!--联系客服-->
         <div class="talk" @click="openService()">
@@ -195,6 +195,7 @@
                 footPrint:'',//浏览记录
                 ServiceBox:false,
                 v_modal:false,
+                isX:false,
             }
         },
         components:{'home-item':itemc},
@@ -226,9 +227,16 @@
             common.onMove2('.sell-spic')
             this.getUsers()
             this.getFootPrint()
-
+            if(this.isIphoneX()){
+                this.isX = true;
+            }else{
+                this.isX = false;
+            }
         },
         methods: {
+            isIphoneX(){
+                return /iphone/gi.test(navigator.userAgent) && (screen.height == 812 && screen.width == 375)
+            },
             //打开客服
             openService(){
                 let that = this;
@@ -762,6 +770,30 @@
         }
         
         
+    }
+    .gives{
+        height: @size35;
+        width: 100%;
+        background-image:url('../../assets/image/mycenter/zu8.png') ;
+        background-size: 100% 100%;
+        color: white;
+        position: fixed;
+        left: 0;
+        bottom: 1.6rem;
+        font-size: @size10;
+        line-height: @size35;
+        padding-left: @size20;
+        p{
+            margin-right: 1.4rem;
+            font-size: 10px;
+            text-align: right;
+            a{
+                color: #fff;
+                font-size: 12px;
+            }
+        }
+
+
     }
 }
  .v_modaltou{

@@ -232,7 +232,7 @@
         3拍品别人拍中
         4拍品被流拍
         5拍品被自己拍中-->
-        <div class="infomation bground1 clearfix" v-if="details.auctionStatus === 1">
+        <div :class="isX ? 'infomations bground1 clearfix':'infomation bground1 clearfix'" v-if="details.auctionStatus === 1">
             <div class="time1 fr">
                 <div class="fr num">{{s}}</div>
                 <div class="fr colon">:</div>
@@ -245,7 +245,7 @@
             <div class="value1 fr">即将开始</div>
         </div>
         <!--2进行中-->
-        <div class="infomation bground2 clearfix" v-else-if="details.auctionStatus === 2">
+        <div :class="isX ? 'infomations bground2 clearfix' : 'infomation bground2 clearfix'" v-else-if="details.auctionStatus === 2">
             <div class="learnMore fl" @click="lookMore()">出价记录{{details.offerNum}}</div>
             <div class="value fl" v-if="!offerNumDate">当前价格 {{reversedNum(details.currentPrice)}} CNY</div>
             <div class="value fl" v-if="offerNumDate">当前价格 {{reversedNum(details.basePrice)}} CNY</div>
@@ -259,19 +259,19 @@
                 <div class="fr num">{{day}}</div>
             </div>
         </div>
-        <div class="infomation bground3 clearfix" v-else-if="(details.auctionStatus == 3 && details.userId != userId && details.doneBuy == '1')||(details.auctionStatus == 3 && details.doneBuy == '2')||(details.auctionStatus == 3 && details.doneBuy == '3')||(details.auctionStatus == 3 && details.doneBuy == '4')">
+        <div :class="isX ? 'infomations bground3 clearfix' : 'infomation bground3 clearfix'" v-else-if="(details.auctionStatus == 3 && details.userId != userId && details.doneBuy == '1')||(details.auctionStatus == 3 && details.doneBuy == '2')||(details.auctionStatus == 3 && details.doneBuy == '3')||(details.auctionStatus == 3 && details.doneBuy == '4')">
             <div class="learnMore fl" @click="lookMore()">出价记录{{details.offerNum}}</div>
             <div class="value fl">当前价格 {{reversedNum(details.currentPrice)}} CNY</div>
             <div class="success fr">
                 拍品成交
             </div>
         </div>
-        <div class="infomation bground4 clearfix" v-else-if="details.auctionStatus === 4">
+        <div :class="isX ? 'infomations bground4 clearfix':'infomation bground4 clearfix'" v-else-if="details.auctionStatus === 4">
             <div class="success fr">
                 拍品流拍
             </div>
         </div>
-        <div class="infomation bground3 clearfix" v-else-if="details.auctionStatus === 3 && details.userId == userId && details.doneBuy == '1'">
+        <div :class="isX ? 'infomations bground3 clearfix':'infomation bground3 clearfix'" v-else-if="details.auctionStatus === 3 && details.userId == userId && details.doneBuy == '1'">
             <div class="learnMore fl" @click="lookMore()">出价记录{{details.offerNum}}</div>
             <div class="value fl">当前价格 {{reversedNum(details.currentPrice)}} CNY</div>
             <!--<span class="warn">支付</span>-->
@@ -288,7 +288,7 @@
         <!--<z-info></z-info>-->
         <!--底部-->
         <!--起拍价格-->
-        <div class="footer" v-if="details.auctionStatus === 1">
+        <div :class="isX ? 'footers':'footer'" v-if="details.auctionStatus === 1">
             <div class="value values">
                 <span class='label'>起拍价格</span>
                 <span class="price">{{reversedNum(bidPrice)}} CNY</span>
@@ -299,7 +299,7 @@
             </div>
         </div>
         <!--当前价格-->
-        <div class="footer" v-else-if="details.auctionStatus === 2">
+        <div :class="isX ? 'footers':'footer'" v-else-if="details.auctionStatus === 2">
             <div class="value" v-if="frozen && !latest">
                 <span :class="noPriceBtn ? 'btn1 nobtn1' : 'btn1'" @click="subtraction()">-</span>
                 <span class="price">{{reversedNum(bidPrice)}} CNY</span>
@@ -324,7 +324,7 @@
             <div class="offer2" v-if="frozen && latest">出价领先</div>
         </div>
         <!--交易结束的价格-->
-        <div class="footer" v-else-if="details.auctionStatus === 3">
+        <div :class="isX ? 'footers':'footer'" v-else-if="details.auctionStatus === 3">
             <div class="value3">
                 <span class='label'>成交价格</span>
                 <span class="price">{{reversedNum(details.currentPrice)}} CNY</span>
@@ -336,7 +336,7 @@
             <div class="goBuy" @click="payOrder()" v-if="details.userId == userId && details.doneBuy == '1'">立即支付</div>
         </div>
         <!--流拍-->
-        <div class="footer" v-else-if="details.auctionStatus === 4">
+        <div :class="isX ? 'footers':'footer'" v-else-if="details.auctionStatus === 4">
             <div class="value values">
                 <span class='label'>起拍价格</span>
                 <span class="price">{{reversedNum(details.basePrice)}} CNY</span>
@@ -495,6 +495,7 @@
                 hintShow:false,
                 shareHint:false,
                 goMyNum:'0',
+                isX:false,
             }
         },
         components:{'z-foot':item,'z-info':info,'z-record':record,'z-payment':payment},
@@ -529,6 +530,11 @@
                 that.userId = tokenData.userId
             }else{
             }
+            if(that.isIphoneX()){
+                that.isX = true;
+            }else{
+                that.isX = false;
+            }
             that.wxShare()
         },
         beforeUpdate(){
@@ -537,6 +543,9 @@
             that.bugShow = false;
         },
         methods: {
+            isIphoneX(){
+                return /iphone/gi.test(navigator.userAgent) && (screen.height == 812 && screen.width == 375)
+            },
             //微信分享
             wxShare(){
                 let that = this;
@@ -2612,6 +2621,95 @@
                 }
             }
         }
+        .infomations{
+            box-sizing: border-box;
+            position: fixed;
+            bottom: 1.6rem;
+            width: 100%;
+            height: @size35;
+            text-align: center;
+            font-size: 13px;
+            line-height: @size25;
+            .learnMore{
+                /*width: 1.6rem;*/
+                //height: @size15;
+                border: 1px solid white;
+                border-radius:3px;
+                font-size:  11px;
+                color: white;
+                margin:0.22rem @size10 @size10 0.5rem;
+                padding:0.03rem 0.1rem;
+                line-height: 0.38rem;
+            }
+            .value{
+                font-size:  12px;
+                color: white;
+                margin-top:@size6;
+            }
+            .value1{
+                color: black;
+                font-size:  12px;
+                margin-top:@size6;
+                margin-right: @size10;
+            }
+            .success{
+                font-size: 12px;
+                color: white;
+                line-height: @size35;
+                padding-right: @size20;
+            }
+            .warn{
+                font-size: @size10;
+                color: white;
+                line-height: @size35;
+            }
+            .time{
+                display: inline-block;
+                color: white;
+                margin-right: @size15;
+                .num{
+                    height: .6rem;
+                    background: #000;
+                    border-radius: 3px;
+                    margin-top: .16rem;
+                    line-height: .6rem;
+                    font-size: .32rem;
+                    font-weight: 700;
+                    width: .55rem;
+                }
+                .colon{
+                    text-align: center;
+                    margin-top:@size6;
+                    line-height: @size22;
+                    width: @size10;
+                }
+            }
+            .time1{
+                display: inline-block;
+                color: black;
+                margin-right: @size15;
+                box-sizing: border-box;
+                .num{
+                    // box-sizing: border-box;
+                    border: 0.5px solid rgb(129, 135, 140);
+                    height: @size20;
+                    background: white;
+                    border-radius:3px;
+                    padding: 2px;
+                    margin-top:@size6;
+                    line-height: @size21;
+                    font-size: @size12;
+                    font-weight: bold;
+                }
+                .colon{
+                    font-weight: bold;
+                    text-align: center;
+                    margin-top:@size6;
+                    line-height: @size22;
+                    width: @size10;
+                }
+            }
+        }
         //即将开始
         .bground1{
             background: white;
@@ -2634,6 +2732,176 @@
             max-width: 10rem;
         }
         //底部
+        //底部
+        .footers{
+            width: 100%;
+            max-width: 10rem;
+            height: 1.6rem;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            margin: auto;
+            z-index: 101;
+            background: #fafbfc;
+            box-sizing: border-box;
+            border-top: 1px solid #353c46;
+            .goBuy{
+                float: right;
+                width: 3rem;
+                height: 100%;
+                line-height: 1.2rem;
+                text-align: center;
+                font-size: 14px;
+                color:#333;
+                border-left: 1px solid #cdd4dc;
+            }
+            .value{
+                float: left;
+                width: 5.8rem;
+                height: 100%;
+                line-height: @size45;
+                position: relative;
+                text-align: center;
+                padding-left: 0.5rem;
+                box-sizing:border-box;
+                .nobtn1{
+                    color:#E6E6E6 !important;
+                }
+                .btn1{
+                    width: 1.46rem;
+                    line-height:@size40;
+                    font-size: 35px;
+                    color: #3C434D;
+                    float: left;
+                    margin-left: -0.4rem;
+                }
+                .btn2{
+                    width: 1.46rem;
+                    line-height:@size40;
+                    font-size: 35px;
+                    color: red;
+                    float: right;
+                }
+                .label{
+                    font-size: 12px;
+                }
+                .price{
+                    font-size: 15px;
+                    width: 2.68rem;
+                    font-weight: bold;
+                }
+                .price2{
+                    font-size: 14px;
+                    width: 2.68rem;
+                    font-weight: bold;
+                    color:#E85800;
+                }
+            }
+            .value2{
+                float: left;
+                width: 5.4rem;
+                height: 100%;
+                line-height: @size45;
+                position: relative;
+                text-align: center;
+                padding-left: 0.5rem;
+                .nobtn1{
+                    color:#E6E6E6 !important;
+                }
+                .btn1{
+                    width: 1.46rem;
+                    line-height:@size40;
+                    font-size: 35px;
+                    color: #E3E3E3;
+                    float: left;
+                    margin-left: -0.4rem;
+                }
+                .btn2{
+                    width: 1.46rem;
+                    line-height:@size40;
+                    font-size: 35px;
+                    color: #E3E3E3;
+                    float: right;
+                    /*margin-top: 0.04rem;*/
+                }
+                .label{
+                    font-size: 12px;
+                }
+                .price{
+                    font-size: 15px;
+                    width: 2.68rem;
+                    font-weight: bold;
+                    color:#E85800;
+                }
+                .price2{
+                    font-size: 14px;
+                    width: 2.68rem;
+                    font-weight: bold;
+                    color:#E85800;
+                }
+            }
+            .values{
+                text-align: left !important;
+            }
+            .value3{
+                float: left;
+                width: 5.6rem;
+                height: 100%;
+                line-height: @size45;
+                position: relative;
+                text-align: left;
+                padding-left: 0.5rem;
+                box-sizing:border-box;
+                .label{
+                    font-size: 12px;
+                }
+                .price{
+                    font-size: 15px;
+                    width: 2.68rem;
+                    font-weight: bold;
+                    color:#E85800;
+                }
+            }
+            .r-icon{
+                float: right;
+                height: 1.2rem;
+                width: @size45;
+                box-sizing: border-box;
+                border-left:1px solid rgb(205, 212, 220);
+                text-align: center;
+                i{
+                    line-height: @size45;
+                    font-size: @size30;
+                }
+                img{
+                    width: 70%;
+                    height: 67%;
+                    margin: 0.2rem auto;
+                }
+            }
+            .offer{
+                float: right;
+                width: 2.8rem;
+                height: 1.2rem;
+                box-sizing: border-box;
+                border-left:1px solid rgb(205, 212, 220);
+                text-align: center;
+                line-height: @size45;
+                font-size: 14px;
+            }
+            .offer2{
+                float: right;
+                width: 2.8rem;
+                height: 1.2rem;
+                box-sizing: border-box;
+                border-left:1px solid rgb(205, 212, 220);
+                text-align: center;
+                line-height: @size45;
+                font-size: 14px;
+                color:#E85800;
+            }
+        }
         .footer{
             width: 100%;
             max-width: 10rem;
