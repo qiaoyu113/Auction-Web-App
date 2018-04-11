@@ -84,7 +84,7 @@
         <div class="v_modaltou" ref="v_modaltou" v-if="v_modalwx">
            <div class="v_box">
                   <div class="v_box_top" @click="heigorderwx()"><i class="iconfont icon-closeicon"></i></div>
-                 <p class="v_box_p">UNBUNDLING</p>
+                 <p class="v_box_p">UNDIND</p>
 
                  <p>解绑</p>
                  <p  class="v_box_img">是否解绑微信?</p>
@@ -479,15 +479,18 @@
             .headerEn{
                 height:0.75rem;
                 font-weight: bold;
-                font-size:20px;
+                font-size:14px;
+            }
+            .headerCh{
+                font-size: 12px;
             }
         }
         .headerRight{
             float: right;
             margin-top:0.3rem;
             img{
-                padding-top: 0.4rem;
-                 width: 1rem;
+                padding-top: 0.6rem;
+                 width: 0.8rem;
             }
         }
     }
@@ -588,7 +591,7 @@
             text-align: center;
             box-sizing: border-box;
             margin-top:0.8rem;
-            font-size:14px;
+            font-size:12px;
         }
     }
     .box2{

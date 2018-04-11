@@ -43,11 +43,11 @@
             </div>
             <div class="orderinfo">
                 <div class="price clearfix"><div class="fl">订单编号:</div><div class="fr">{{datas.orderNo}}</div></div>
-                <div class="price clearfix" v-if="time.status==2"><div class="fl">支付时间:</div><div class="fr">{{time.creatPayTime | stampFormate2}}</div></div>
+                <div class="price clearfix" v-if="time.creatPayTime!=null&&time.creatPayTime!=''"><div class="fl">支付时间:</div><div class="fr">{{time.creatPayTime | stampFormate2}}</div></div>
                 <div class="price clearfix"><div class="fl">支付方式:</div>
                       <div class="fr"  v-if="datas.channelId=='ALIPAY_WAP'">支付宝</div>
                       <div class="fr"  v-if="datas.channelId=='WX_NATIVE'">微信</div>
-                      <div class="fr"  v-if="datas.channelId=='UNIONPAY'">线下转账</div>
+                      <div class="fr"  v-if="datas.channelId=='OFFLINE_BANK'||datas.channelId==''">线下转账</div>
                 </div>
             </div>
         </div>
@@ -125,10 +125,12 @@ import {commonService} from '../../service/commonService.js'
                   if(that.datas.payLogs!=null){
                   let payLogs=that.datas.payLogs
                   that.time=payLogs[payLogs.length-1]
+                
                   }
                  
 
                 that.orderDetail=that.datas.orderDetail
+                   console.log(that.datas)
                  if(that.orderDetail.finalPrice < 200000){
                      that.freight=200000
                    }else{

@@ -154,9 +154,9 @@
                 </div>
                 <div class="info"><span>提现方式</span>
                     <div class="infoClose">
-                    <span class="span2" v-if="list.channelId=='ALIPAY_WAP'">支付宝<br>{{list.channelUser}}</span>
+                    <span class="span2" v-if="list.channelId=='ALIPAY_WAP'">支付宝<br><i>{{list.channelUser}}</i></span>
                     <span class="span2" v-if="list.channelId=='OFFLINE_BANK'">{{list.userBank}}<br>
-                    尾号{{list.userBankCardNo.substr(list.userBankCardNo.length-4)}}{{card.cardTypeName}}</span>
+                    <i>尾号{{list.userBankCardNo.substr(list.userBankCardNo.length-4)}}{{card.cardTypeName}}</i></span>
                     </div>
                 </div>
                 <div class="info"><span>提现金额</span>
@@ -396,7 +396,7 @@ import {commonService} from '../../service/commonService.js'
                          },2000) 
                            return false;  
                        } 
-  
+                       
                          if(that.cityName ==''&&that.provinceName){
                             that.htmlx='开户省市不能为空'
                             setTimeout(() => {  
@@ -590,10 +590,10 @@ import {commonService} from '../../service/commonService.js'
                 border-bottom: 1px solid #87828c;
                 span{
                     width: 2rem;
-                    line-height: 1.02rem;
+                    line-height: 1rem;
                     float: left;
-                    font-size: @size12;
-                    padding-top: @size1;
+                    font-size: 12px;
+                    // padding-top: @size1;
                     padding-left: @size10;
                 }
                 .span{
@@ -607,20 +607,21 @@ import {commonService} from '../../service/commonService.js'
                     float: right;
                     border: none;
                     outline: none;
-                    font-size: @size12;
+                    font-size: 12px;
                     // color: red;
                     // font-weight: bold;
                     text-align: right;
                     background: #fff;
+                    line-height: 1rem;
                     // padding-right: @size3;
                 }
                 .infoClose{
                     float: right;
                     color:#87828c;
-                    line-height: 1.02rem;
+                    line-height: 1rem;
                     margin-right: 0.2rem;
-                    font-size: @size12;
-                    padding-top: @size1;
+                    font-size: 10px;
+                    // padding-top: @size1;
 
                 }
         }
@@ -632,7 +633,7 @@ import {commonService} from '../../service/commonService.js'
             padding: 0 @size45;
             .redline{
                 box-sizing: border-box;
-                border-top: 0.08rem solid #fc5a06;
+                border-top: 0.08rem solid #eb6000;
                 padding: @size30;
                 padding-top: @size15;
                 position: relative;
@@ -641,7 +642,7 @@ import {commonService} from '../../service/commonService.js'
                     width: @size6;
                     height: @size6;
                     border-radius: 50%;
-                    border: 3px solid #fc5a06;
+                    border: 3px solid #eb6000;
                     display: inline-block;
                     position: absolute;
                     
@@ -650,7 +651,7 @@ import {commonService} from '../../service/commonService.js'
                 .pos1{
                     top: -@size8;
                     left: -1px;
-                    background: #fc5a06;
+                    background: #eb6000;
                 }
                 .pos2{
                     top: -@size8;
@@ -661,13 +662,13 @@ import {commonService} from '../../service/commonService.js'
                     right: -1px;
                 }
                 .label {
-                    margin-left: -1.8rem;
-                    margin-right: -1.3rem; 
+                    margin-left: -2rem;
+                    margin-right: -1.4rem; 
                     text-align: center; 
                     font-size: 10px; 
                     .label1{
                         float: left;
-                        color: #fc5a06;
+                        color: #eb6000;
                         font-size: @size13;
                     }
                     .label2{
@@ -693,7 +694,7 @@ import {commonService} from '../../service/commonService.js'
             padding: 0 @size45;
             .redline{
                 box-sizing: border-box;
-                border-top: 0.08rem solid #fc5a06;
+                border-top: 0.08rem solid #eb6000;
                 padding: @size30;
                 padding-top: @size15;
                 position: relative;
@@ -702,7 +703,7 @@ import {commonService} from '../../service/commonService.js'
                     width: @size9;
                     height: @size9;
                     border-radius: 50%;
-                    border: 3px solid #fc5a06;
+                    border: 3px solid #eb6000;
                     display: inline-block;
                     position: absolute;
                     
@@ -711,31 +712,31 @@ import {commonService} from '../../service/commonService.js'
                 .pos1{
                     top: -@size8;
                     left: -1px;
-                    background: #fc5a06;
+                    background: #eb6000;
                 }
                 .pos2{
                     top: -@size8;
                     left: 3.3rem;
-                    background: #fc5a06;
+                    background: #eb6000;
                 }
                 .pos3{
                     top: -@size8;
                     right: -1px;
                 }
                 .label {
-                    margin-left: -1.5rem;
-                    margin-right: -1.5rem; 
+                    margin-left: -2rem;
+                    margin-right: -1.4rem; 
                     text-align: center;   
                     
                     .label1{
                         float: left;
-                        color: #fc5a06;
+                        color: #eb6000;
                         font-size: @size14;
                     }
                     .label2{
                         text-align: center;
                         font-size: @size14;
-                        color: #fc5a06;
+                        color: #eb6000;
                         margin-left: -@size20;
                     }
                     .label3{
@@ -755,7 +756,7 @@ import {commonService} from '../../service/commonService.js'
             padding: 0 @size45;
             .redline{
                 box-sizing: border-box;
-                border-top: 0.08rem solid #fc5a06;
+                border-top: 0.08rem solid #eb6000;
                 padding: @size30;
                 padding-top: @size15;
                 position: relative;
@@ -764,7 +765,7 @@ import {commonService} from '../../service/commonService.js'
                     width: @size9;
                     height: @size9;
                     border-radius: 50%;
-                    border: 3px solid #fc5a06;
+                    border: 3px solid #eb6000;
                     display: inline-block;
                     position: absolute;
                     
@@ -773,21 +774,21 @@ import {commonService} from '../../service/commonService.js'
                 .pos1{
                     top: -@size8;
                     left: -1px;
-                    background: #fc5a06;
+                    background: #eb6000;
                 }
                 .pos2{
                     top: -@size8;
                     left: 3.3rem;
-                    background: #fc5a06;
+                    background: #eb6000;
                 }
                 .pos3{
                     top: -@size8;
                     right: -1px;
-                    background: #fc5a06;
+                    background: #eb6000;
                 }
                 .label {
-                    margin-left: -1.5rem;
-                    margin-right: -1.5rem; 
+                    margin-left: -2rem;
+                    margin-right: -1.4rem;  
                     text-align: center;   
                     
                     .label1{
@@ -818,7 +819,7 @@ import {commonService} from '../../service/commonService.js'
                 width: 2rem;
                 line-height: 1.02rem;
                 float: left;
-                font-size: @size12;
+                font-size: 12px;
                 padding-left: @size10;
                 padding-top: @size1;
             }
@@ -829,7 +830,7 @@ import {commonService} from '../../service/commonService.js'
                 float: left;
                 border: none;
                 outline: none;
-                font-size: @size12;
+                font-size: 12px;
                 background: #fff;
             }
             .infoClose{
@@ -837,14 +838,14 @@ import {commonService} from '../../service/commonService.js'
                 color:#87828c;
                 line-height: 1.02rem;
                 margin-right: 0.2rem;
-                font-size: @size12;
-                padding-top: @size1;
+                font-size: 12px;
+                // padding-top: @size1;
                 box-sizing: border-box;
                 img{
                     height: 1rem;
                 }
                 .span1{
-                    font-size: @size12;
+                    font-size: 12px;
                     font-weight: bold;
                     color: black;
                 }
@@ -852,9 +853,12 @@ import {commonService} from '../../service/commonService.js'
                     width: 3rem;
                     display: inline-block;
                     line-height: @size14;
-                    font-size:@size10;
+                    font-size:12px;
                     text-align: right;
                     padding-top: @size6;
+                    i{
+                      font-size: 10px;
+                    }
     
                 }
                 

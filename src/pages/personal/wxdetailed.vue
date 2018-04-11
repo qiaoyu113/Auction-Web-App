@@ -24,17 +24,17 @@
             <!-- 已完成 -->
             <div>
                 <div class="info"><span>交易号</span>
-                    <div class="infoClose">{{list.formNo}}</div>
+                    <div class="infoClose">{{list.no}}</div>
                 </div>
                 <div class="info"><span>交易金额</span>
-                    <div class="infoClose">{{list.flowAmount | money}}CNY
+                    <div class="infoClose">{{list.amount | money}}CNY
                        </div>
                 </div>
                 <div class="info"><span>交易时间</span>
-                    <div class="infoClose" v-if="list.createTime!=null">{{list.createTime | stampFormate2}}</div>
+                    <div class="infoClose" v-if="list.applyTime!=null">{{list.applyTime | stampFormate2}}</div>
                 </div>
                 <div class="info"><span>交易种类</span>
-                    <div class="infoClose">{{list.title}}</div>
+                    <div class="infoClose">提现</div>
                      <!-- <div class="infoClose" v-if="list.channelId=='OFFLINE_BANK'">提现</div> -->
                 </div>
                 <div class="info"><span>交易方式</span>
@@ -46,23 +46,10 @@
                     </div>
                 </div>
                 <div class="info"><span>状态</span>
-                    <div class="infoClose" v-if="list.flowStatus==10">已完成</div>
-                    <div class="infoClose" v-if="list.flowStatus==11">已完成</div>
-                    <div class="infoClose" v-if="list.flowStatus==20">处理中</div>
-                    <div class="infoClose" v-if="list.flowStatus==21">已完成</div>
-                    <div class="infoClose" v-if="list.flowStatus==22">处理中</div>
-                    <div class="infoClose" v-if="list.flowStatus==23">交易关闭</div>
-                    <div class="infoClose" v-if="list.flowStatus==30">交易关闭</div>
-                    <div class="infoClose" v-if="list.flowStatus==31">交易关闭</div>
-                    <div class="infoClose" v-if="list.flowStatus==32">交易关闭</div>
-                    <div class="infoClose" v-if="list.flowStatus==40">处理中</div>
-                    <div class="infoClose" v-if="list.flowStatus==41">已完成</div>
-                    <div class="infoClose" v-if="list.flowStatus==42">交易关闭</div>
-                    <div class="infoClose" v-if="list.flowStatus==50">处理中</div>
-                    <div class="infoClose" v-if="list.flowStatus==51">已完成</div>
-                    <div class="infoClose" v-if="list.flowStatus==52">处理中</div>
-                    <div class="infoClose" v-if="list.flowStatus==53">交易关闭</div>
-
+                    <div class="infoClose">交易关闭</div>
+                  <!--   <div class="infoClose" v-if="list.status==1">提现中</div>
+                    <div class="infoClose" v-if="list.status==2">交易关闭</div>
+                    <div class="infoClose" v-if="list.status==3">交易失败</div> -->
                 </div>
             </div>
         </div>
@@ -96,16 +83,15 @@ import {commonService} from '../../service/commonService.js'
            
       
             Return:function(){
-                window.history.go(-1)
+               this.$router.push({path:"/myaccount"}) 
             },
         
      
              getForms:function(){
                 let that = this;
                 let oddNumbers=this.$route.query.id
-                 commonService.getBailsid(oddNumbers).then(function(res){
+                 commonService.getForms(oddNumbers).then(function(res){
                     that.list=res.data.datas
-                    that.card=card.bankCardAttribution(that.list.userBankCardNo)
                     
                  })
             },

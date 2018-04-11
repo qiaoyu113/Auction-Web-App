@@ -497,15 +497,18 @@
           border-bottom: 2px solid rgb(53,60,70);
           .top_p1{
             font-size: 14px;
+            font-weight: 700;
+            line-height: 24px;
             color: rgb(51,51,51);
           }
           .top_p2{
             font-size: 12px;
             color: rgb(51,51,51);
-            margin-top: @size10;
+            // margin-top: @size10;
             span{
                 float: left;
-                font-size: 16px;
+                font-size: 14px;
+                line-height: 20px;
             }
             .span{
                 float: right;
@@ -514,8 +517,8 @@
                 margin-top: -0.2rem;
             }
             img{
-                width: 1rem;
-                margin-top: 0.2rem;
+                width: 0.8rem;
+                margin-top: 0.4rem;
             }
           }
 
@@ -664,8 +667,9 @@
                 .total_r{
                     float: right;
                     // margin-right: @size10;
+                    font-weight: 700;
                     line-height: @size40;
-                    color: rgb(221,112,74);
+                    color: rgb(235,97,0);
                     font-size: 13px;
                 }
             }
@@ -675,7 +679,7 @@
                    float: left;
                    // margin-left: @size10;
                    p{
-                    font-size: 11px;
+                    font-size: 12px;
                    line-height: 15px;
                    color: rgb(51,51,51);
                    }
@@ -718,8 +722,9 @@
 
                         border:2px solid rgb(224,224,224);
                         i{
-                            font-size: @size6;
+                            font-size: @size10;
                             color:#15b3b2;
+                            
                             line-height: @size10;
                            
                         }
@@ -792,7 +797,7 @@
             text-align: center;
             color:#000;
             line-height: 1.2rem;
-            font-size: 10px;
+            font-size: 12px;
        }
   }
 </style>

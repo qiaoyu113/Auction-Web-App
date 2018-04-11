@@ -664,6 +664,7 @@
             img{
                 width: @size30;
                 height: @size30;
+                margin-top: @size4;
             }
         }
         .check{
@@ -740,7 +741,7 @@
                 }
 
                 .bgcolor{
-                    color: red;
+                    color: rgb(235, 97, 0);
                 }
                 .time{
                     display: inline-block;

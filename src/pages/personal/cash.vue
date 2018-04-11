@@ -176,13 +176,7 @@
              },
              getIndex: function(index) {
                 let that = this;
-                if(index==1){
-                    that.index=1
-                }else if(index==2){
-                    that.index=2
-                }else{
-                    that.index=3;
-                }
+                that.index=index
             },
             // 获取金额信息
              getUsers:function(){
@@ -222,11 +216,17 @@
                     }else{
                         let money=that.money * 100
                        commonService.postForms({amount:money,type:2,channelId:'WX_JSAPI'}).then(function(res){
-
+                
                           if(res.data.code==200){
-                              that.$router.push({path:"/cashstep",query:{money:that.money,index:that.index}}) 
+                             // console.log(res.data.datas)
+                              that.$router.push({path:"/wxdetailed",query:{id:res.data.datas}}) 
+                           // commonService.getForms(res.data.datas).then(function(res){
+                           //      console.log(res)
+                           // })
+                      
+                              
                           }else{
-                            
+
                             that.prompt=res.data.message
                             setTimeout(() => { 
                                 that.prompt = ''
@@ -415,10 +415,11 @@
             text-align: left;
             span{
                 width: 2rem;
-                line-height: 1.02rem;
+                line-height: 1rem;
                 float: left;
-                font-size: @size12;
-                padding-top: @size1;
+                font-size: 13px;
+
+                // padding-top: @size1;
                 padding-left: @size10;
             }
             input{
@@ -427,16 +428,17 @@
                 float: right;
                 border: none;
                 outline: none;
-                font-size: @size12;
-                color: red;
+                font-size: 13px;
+                color: #eb6200;
                 font-weight: bold;
+                line-height: 1rem;
                 text-align: right;
                 // padding-right: @size3;
             }
             .span{
                 width: auto;
                float: right;
-               color: red;
+               color: #eb6200;
                font-size: @size12;
                padding-right: @size3;
                padding-left:0;
@@ -457,9 +459,10 @@
                 margin-top: @size8;
                 padding-left: @size10;
                 p{
-                    font-size: @size10;
+                    font-size: 10px;
+                    line-height: @size18;
                     span{
-                        font-size: @size14;
+                        font-size: 12px;
                         font-weight: bold;
                     }
                 }
@@ -481,47 +484,47 @@
             margin-left: @size10;
             .check{
                 float: left;
-                margin-top: 18px;
-                box-sizing: border-box;
-                border: 3px solid rgb(0, 185, 181);
-                width: @size14;
-                height: @size14;
-                position: relative;
+                margin-top: @size18;
+                // box-sizing: border-box;
+                border: 2px solid rgb(0, 185, 181);
+                width: @size10;
+                height: @size10;
+                // position: relative;
                 i{
                     font-size: @size10;
                     line-height: @size10;
-                    position: absolute;
-                    top: -1px;
-                    left: -11px;
+                    // position: absolute;
+                    // top: -1px;
+                    // left: -11px;
                     color: rgb(0, 185, 181);
                 }
 
             }
             .check1{
                 float: left;
-                margin-top: 18px;
-                box-sizing: border-box;
-                border: 3px solid rgb(168, 174, 180);
-                width: @size14;
-                height: @size14;
-                position: relative;
+                margin-top: @size18;
+                // box-sizing: border-box;
+                border: 2px solid rgb(168, 174, 180);
+                width: @size10;
+                height: @size10;
+                // position: relative;
                 i{
                     font-size: @size10;
                     line-height: @size10;
-                    position: absolute;
-                    top: -1px;
-                    left: -11px;
+                    // position: absolute;
+                    // top: -1px;
+                    // left: -11px;
                     display: none
                 }
             }
-            i{
-                font-size: 25px;
-                color: rgb(168, 174, 180);
-                float: left;
-                margin-left: @size10;
-                line-height:  @size50;
+            // i{
+            //     font-size: 25px;
+            //     color: rgb(168, 174, 180);
+            //     float: left;
+            //     margin-left: @size10;
+            //     line-height:  @size50;
                 
-            }
+            // }
             .v_img{
                 float: left;
                 width: @size25;
@@ -562,7 +565,7 @@
                 margin-left: @size10;
                 line-height: 1.3333rem;
                 color: rgb(129, 135, 140);
-                font-size: 15px;
+                font-size: 12px;
             }
         }
     }

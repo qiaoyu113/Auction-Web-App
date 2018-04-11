@@ -479,7 +479,7 @@ import {commonService} from '../../service/commonService.js'
         border:1px solid rgb(53, 60, 70); 
         text-align: center;
         line-height: 1.2rem;
-        font-size: 15px;
+        font-size: 12px;
         span{
             font-weight: bold;
             line-height: 1rem;

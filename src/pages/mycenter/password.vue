@@ -123,17 +123,20 @@
         .headerLeft{
             width:80%;
             float:left;
-            .headerEn{
+           .headerEn{
                 height:0.75rem;
                 font-weight: bold;
-                font-size:20px;
+                font-size:14px;
+            }
+            .headerCh{
+                font-size: 12px;
             }
         }
         .headerRight{
             float: right;
             margin-top:0.3rem;
             img{
-                width: 1rem;
+                width: 0.8rem;
                 margin-top: 0.6rem;
             }
         }
@@ -293,6 +296,7 @@
             bottom:0;
             border-top:1px solid #1A242E;
             background: #fff;
+            font-size: 12px;
         }
     }
 }

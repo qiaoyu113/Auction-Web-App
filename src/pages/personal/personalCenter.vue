@@ -582,7 +582,7 @@
                     font-size: 12px;
                     text-align: center;
                     padding-top: @size20;
-                    font-size: 10px;
+                
                 }
             }
             

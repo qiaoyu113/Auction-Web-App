@@ -205,11 +205,12 @@
                 margin-top: @size18;
                 color: rgb(169,174,180);
                 border:2px solid rgb(169,174,180);
-                line-height: @size12;
+                // line-height: @size10;
                 text-align: center;
                 i{
-                  font-size: 10px;
-                  margin-left: -1px;
+                  font-size: @size10;
+                  line-height: @size10;
+                  // margin-left: -1px;
                 }
             }
           }

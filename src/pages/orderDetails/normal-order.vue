@@ -110,7 +110,7 @@
                 <div class="logdetail" v-if="logistics!=''">
                     <div>顺丰速运</div>
                     <div>{{logistics.context}}</div>
-                    <div>{{logistics.time}}</div>
+                    <div class="v_logdetail">{{logistics.time}}</div>
                 </div> 
                 <div class="logdetail" v-if="orderDetail.com=='tealab_songhuo'">
                     <div>送货上门</div>
@@ -761,11 +761,11 @@ import {commonService} from '../../service/commonService.js'
             border-bottom: 1px solid rgb(129, 135, 140);
             line-height: @size35;
             span{
-                font-size: @size10;
+                font-size: 10px;
                 color: rgb(129, 135, 140);
                 padding-left: @size10;
                 i{
-                    font-size: @size10;
+                    font-size: 10px;
                     color: red;
                 }
             }
@@ -786,6 +786,8 @@ import {commonService} from '../../service/commonService.js'
                     line-height: 0.50rem;
                     font-size: @size12;
                     font-weight: bold;
+                    width: @size25;
+                    text-align: center;
                 }
                 .colon{
                     text-align: center;
@@ -986,12 +988,12 @@ import {commonService} from '../../service/commonService.js'
             border-bottom: 1px solid rgb(129, 135, 140);
             margin-left: @size10;
             line-height: @size40;
-            font-size: @size14;
+            font-size: 12px;
             span{
                 letter-spacing: @size5;
                 line-height: @size30;
                 font-weight: bold;
-                font-size: @size14;
+                font-size: 12px;
             }
         }
         .logdetail{
@@ -1001,8 +1003,16 @@ import {commonService} from '../../service/commonService.js'
             box-sizing: border-box;
             padding-top: @size10;
             div{
-                font-size: @size13;
+                font-size: 12px;
                 color: rgb(129, 135, 140);
+                line-height: @size18;
+                max-height: @size18;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+            }
+            .v_logdetail{
+                 font-size: 10px;
             }
         }
         .payment{
@@ -1039,17 +1049,17 @@ import {commonService} from '../../service/commonService.js'
             .check{
                 float: left;
                 margin-top: 18px;
-                box-sizing: border-box;
-                border: 3px solid rgb(0, 185, 181);
-                width: @size14;
-                height: @size14;
-                position: relative;
+                // box-sizing: border-box;
+                border: 2px solid rgb(0, 185, 181);
+                width: @size10;
+                height: @size10;
+                // position: relative;
                 i{
                     font-size: @size10;
                     line-height: @size10;
-                    position: absolute;
-                    top: -1px;
-                    left: -11px;
+                    // position: absolute;
+                    // top: -1px;
+                    // left: -11px;
                     color: rgb(0, 185, 181);
                 }
 
@@ -1057,28 +1067,28 @@ import {commonService} from '../../service/commonService.js'
             .check1{
                 float: left;
                 margin-top: 18px;
-                box-sizing: border-box;
-                border: 3px solid rgb(168, 174, 180);
-                width: @size14;
-                height: @size14;
-                position: relative;
+                // box-sizing: border-box;
+                border: 2px solid rgb(168, 174, 180);
+                width: @size10;
+                height: @size10;
+                // position: relative;
                 i{
                     font-size: @size10;
                     line-height: @size10;
-                    position: absolute;
-                    top: -1px;
-                    left: -11px;
+                    // position: absolute;
+                    // top: -1px;
+                    // left: -11px;
                     display: none
                 }
             }
-            i{
-                font-size: 25px;
-                color: rgb(168, 174, 180);
-                float: left;
-                margin-left: @size10;
-                line-height:  @size50;
+            // i{
+            //     font-size: 25px;
+            //     color: rgb(168, 174, 180);
+            //     float: left;
+            //     margin-left: @size10;
+            //     line-height:  @size50;
                 
-            }
+            // }
             .v_img{
                 float: left;
                 width: @size25;
@@ -1216,14 +1226,14 @@ import {commonService} from '../../service/commonService.js'
             border-bottom: 1px solid rgb(129, 135, 140);
             height: @size50;
             div{
-                font-size: @size12;
+                font-size: 12px;
                 line-height: @size20;
             }
         }
         .orderinfo{
             padding: @size5 @size10;
             div{
-                font-size: @size12;
+                font-size: 12px;
                 line-height: @size20;
             }
         }
@@ -1237,7 +1247,7 @@ import {commonService} from '../../service/commonService.js'
         border-top:1px solid rgb(53, 60, 70); 
         text-align: center;
         line-height: 1.2rem;
-        font-size: 15px;
+        font-size: 12px;
         background: #fff;
     }
     .footer{
@@ -1257,6 +1267,7 @@ import {commonService} from '../../service/commonService.js'
             line-height: @size45;
             position: relative;
             text-align: center;
+            font-size: 12px;
         }
         .r-icon{
             float: right;
@@ -1336,22 +1347,22 @@ import {commonService} from '../../service/commonService.js'
     .titleEn{
         padding-top: @size50;
         letter-spacing: 2px;
-        font-size: 16px;
+        font-size: 14px;
         font-weight: bold;
     }
     .titleCh{
-        font-size: @size11;
+        font-size: 12px;
         padding-bottom: @size25;
     }
     .num{
         width: 7.6rem;
         height: @size40;
         border-top: 1px solid gray;
-        font-size: @size14;
+        font-size: 12px;
         line-height: @size40;
         text-align: left;
         .fr{
-            font-size: @size14;
+            font-size: 12px;
             color: gray;
         }
     }
@@ -1386,7 +1397,7 @@ import {commonService} from '../../service/commonService.js'
             box-sizing: border-box;
             padding-bottom: @size13;
             p{
-                font-size: @size10;
+                font-size: 12px;
                 color:#ccc;
             }
         }

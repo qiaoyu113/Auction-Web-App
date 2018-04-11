@@ -337,7 +337,7 @@ import {commonService} from '../../service/commonService.js'
                 }
                 .label {
                     margin-left: -1.5rem;
-                    margin-right: -1.5rem; 
+                    margin-right: -1.1rem; 
                     text-align: center;  
                     font-size: 10px; 
                     
@@ -370,13 +370,15 @@ import {commonService} from '../../service/commonService.js'
             .witpay{
                 padding-left: @size10;
                 line-height: @size40;
-                font-size: @size14;
+                font-size: 12px;
+                font-weight: 700;
                 float: left;
             }
             .money{
                 margin-top: @size6;
                 line-height: @size30;
-                font-size: @size15;
+                font-size: 13px;
+                font-weight: 700;
                 color: rgb(21, 179, 187);
                 float: right;
                 padding: 0 @size10;
@@ -404,13 +406,14 @@ import {commonService} from '../../service/commonService.js'
                 .icon{
                     width: @size12;
                     height: @size12;
-                    border: 1px solid rgb(130, 135, 140);
+                    border: 1px solid rgb(175, 178, 182);
                     border-radius:50%; 
                     display: inline-block;
-                    font-size: @size1;
+                    font-size: @size10;
                     line-height: @size12;
-                    margin-top: @size14;
+                    margin-top: @size13;
                     margin-right: @size10;
+                    color:rgb(175, 178, 182);
                 }
         }
         .itemInfo{
@@ -436,11 +439,11 @@ import {commonService} from '../../service/commonService.js'
                 margin-left: @size15;
                 padding-top: @size10;
                 .money {
-                    font-size: 15px;
+                    font-size: 13px;
                     font-weight: bold;
                 }
                 .title {
-                    font-size: 14px;
+                    font-size: 12px;
                     color: rgb(133, 133, 133);
                     padding-top: @size1;
                      height: 20px;
@@ -451,7 +454,7 @@ import {commonService} from '../../service/commonService.js'
                     white-space: nowrap; 
                 }
                 .number {
-                    font-size: 12px;
+                    font-size: 9px;
                     color: rgb(133, 133, 133);
                     padding: 0 0 @size25 0;
                     line-height: @size10;
@@ -480,7 +483,7 @@ import {commonService} from '../../service/commonService.js'
             border-bottom: 1px solid rgb(129, 135, 140);
             
             div{
-                font-size: @size12;
+                font-size: 12px;
                 line-height: @size20;
             }
             .price{
@@ -500,7 +503,7 @@ import {commonService} from '../../service/commonService.js'
         .orderinfo{
             padding: @size5 @size10;
             div{
-                font-size: @size12;
+                font-size: 12px;
                 line-height: @size20;
             }
         }

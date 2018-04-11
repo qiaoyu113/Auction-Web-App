@@ -736,7 +736,7 @@ import {commonService} from '../../service/commonService.js'
         border-top:1px solid rgb(53, 60, 70); 
         text-align: center;
         line-height: 1.2rem;
-        font-size: 15px;
+        font-size: 12px;
     }
         .select-city.el-select {
             height: 38px;

@@ -466,15 +466,15 @@
                     text-align: center;
                     .sum{
                         padding-top: @size15;
-                        font-size:@size14;
+                        font-size:14px;
                         font-weight: bold;
                         color: gray;
                     }
                     .exp{
-                        font-size: @size10;
+                        font-size: 10px;
                     }
                     .warn{
-                        font-size: @size10;
+                        font-size: 10px;
                         color: rgb(153, 153, 153);
                     }
                     .bgcol{
@@ -499,7 +499,7 @@
                     // border-bottom: 1px solid rgb(202, 209, 217);
                     margin-left: @size10;
                     .fl{
-                        font-size: @size12;
+                        font-size: 12px;
                         line-height: @size35;
                     }
                     .fr{
@@ -521,7 +521,7 @@
                 height: @size35;
                 margin-left: @size10;
                 .fl{
-                    font-size: @size12;
+                    font-size: 12px;
                     line-height: @size35;
                 }
             }
@@ -531,29 +531,29 @@
                 .fl{
                     width: 20%;
                     text-align: center;
-                    font-size: @size10;
+                    font-size: 10px;
                     line-height: @size30;
                 }
                 .f2{
                     float: left;
                     width: 20%;
-                    font-size: @size10;
+                    font-size: 10px;
                     line-height: @size30;
 
                 }
                 .f3{
                     float: left;
                     width: 35%;
-                    font-size: @size10;
+                    font-size: 10px;
                     line-height: @size30;
                 }
                 .f4{
                     float: left;
                     width: 25%;
-                    font-size: @size10;
+                    font-size: 10px;
                     line-height: @size30;
                     i{
-                        font-size: @size10;
+                        font-size: 10px;
                     }
                 }
                 .line{

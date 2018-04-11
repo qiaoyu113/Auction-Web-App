@@ -263,13 +263,8 @@ import {commonService} from '../../service/commonService.js'
                              },2000) 
                         return false
                     }
-                    if(that.userBankDetail==''){
-                        this.htmlx="请输入开户银行"
-                        setTimeout(() => {  
-                                 this.htmlx=''
-                             },2000) 
-                        return false
-                    }
+               
+
                     if(that.userBankCardNo==''){
                         this.htmlx="请输入银行卡号"
                         setTimeout(() => {  
@@ -277,7 +272,22 @@ import {commonService} from '../../service/commonService.js'
                              },2000) 
                         return false
                     }
-                   
+                    let pattern = /^([1-9]{1})(\d{14}|\d{18})$/,  
+                       str = that.userBankCardNo.replace(/\s+/g, "");  
+                       if (!pattern.test(str)) {  
+                           that.htmlx='银行卡号不正确'
+                           setTimeout(() => {  
+                                 that.htmlx=''
+                             },2000) 
+                           return false;  
+                       }   
+                          if(that.userBankDetail==''){
+                        this.htmlx="请输入开户银行"
+                        setTimeout(() => {  
+                                 this.htmlx=''
+                             },2000) 
+                        return false
+                    }
                     if(that.phone==''){
                         this.htmlx="请输入手机号码"
                         setTimeout(() => {  
@@ -437,7 +447,7 @@ import {commonService} from '../../service/commonService.js'
                 
             .v_rows_l{
               float: left;
-              font-size: 10px;
+              font-size: 12px;
               height: 0.9rem;
               line-height: 0.9rem;
               i{
@@ -446,7 +456,7 @@ import {commonService} from '../../service/commonService.js'
 
               }
               span{
-                font-size: 14px;
+                font-size: 12px;
                 line-height: 0.9rem;
                 margin-left: @size10;
               }
@@ -455,7 +465,7 @@ import {commonService} from '../../service/commonService.js'
               float: left;
               width: @size30;
               height: @size15;
-              background: #15b3b3;
+              background: #409fff;
               margin-top: @size10;
               line-height: @size15;
               text-align: center;
@@ -465,7 +475,7 @@ import {commonService} from '../../service/commonService.js'
             }
             .v_rows_r{
               float: right;
-              font-size: 10px;
+              font-size: 12px;
                      color:#5b5b5b;
             }
             .v_Hook{
@@ -544,7 +554,7 @@ import {commonService} from '../../service/commonService.js'
             padding: 0 @size45;
             .redline{
                 box-sizing: border-box;
-                border-top: 0.08rem solid #fc5a06;
+                border-top: 0.08rem solid #eb6000;
                 padding: @size30;
                 padding-top: @size15;
                 position: relative;
@@ -553,7 +563,7 @@ import {commonService} from '../../service/commonService.js'
                     width: @size6;
                     height: @size6;
                     border-radius: 50%;
-                    border: 3px solid #fc5a06;
+                    border: 3px solid #eb6000;
                     display: inline-block;
                     position: absolute;
                     
@@ -562,7 +572,7 @@ import {commonService} from '../../service/commonService.js'
                 .pos1{
                     top: -@size8;
                     left: -1px;
-                    background: #fc5a06;
+                    background: #eb6000;
                 }
                 .pos2{
                     top: -@size8;
@@ -573,16 +583,16 @@ import {commonService} from '../../service/commonService.js'
                     right: -1px;
                 }
                 .v_red{
-                    background: #fc5a06;
+                    background: #eb6000;
                 }
                 .label {
-                    margin-left: -1.8rem;
+                    margin-left: -2rem;
                     margin-right: -1.3rem; 
                     text-align: center;  
                     font-size: 10px;
                     .label1{
                         float: left;
-                        color: #fc5a06;
+                        color: #eb6000;
                         font-size: @size13;
                     }
                     .label2{
@@ -596,7 +606,7 @@ import {commonService} from '../../service/commonService.js'
                         color: gray;
                     }
                     .label4{
-                        color: #fc5a06;
+                        color: #eb6000;
                     }
                 }
             }
@@ -619,7 +629,7 @@ import {commonService} from '../../service/commonService.js'
                     width: @size9;
                     height: @size9;
                     border-radius: 50%;
-                    border: 3px solid red;
+                    border: 3px solid #eb6000;
                     display: inline-block;
                     position: absolute;
                     
@@ -628,31 +638,31 @@ import {commonService} from '../../service/commonService.js'
                 .pos1{
                     top: -@size8;
                     left: -1px;
-                    background: red;
+                    background: #eb6000;
                 }
                 .pos2{
                     top: -@size8;
                     left: 3.3rem;
-                    background: red;
+                    background: #eb6000;
                 }
                 .pos3{
                     top: -@size8;
                     right: -1px;
                 }
                 .label {
-                    margin-left: -1.5rem;
+                    margin-left: -2rem;
                     margin-right: -1.5rem; 
                     text-align: center;   
                     
                     .label1{
                         float: left;
-                        color: red;
+                        color: #eb6000;
                         font-size: @size14;
                     }
                     .label2{
                         text-align: center;
                         font-size: @size14;
-                        color: red;
+                        color: #eb6000;
                     }
                     .label3{
                         float: right;
@@ -671,7 +681,7 @@ import {commonService} from '../../service/commonService.js'
             padding: 0 @size45;
             .redline{
                 box-sizing: border-box;
-                border-top: 0.08rem solid red;
+                border-top: 0.08rem solid #eb6000;
                 padding: @size30;
                 padding-top: @size15;
                 position: relative;
@@ -680,7 +690,7 @@ import {commonService} from '../../service/commonService.js'
                     width: @size9;
                     height: @size9;
                     border-radius: 50%;
-                    border: 3px solid red;
+                    border: 3px solid #eb6000;
                     display: inline-block;
                     position: absolute;
                     
@@ -689,37 +699,37 @@ import {commonService} from '../../service/commonService.js'
                 .pos1{
                     top: -@size8;
                     left: -1px;
-                    background: red;
+                    background: #eb6000;
                 }
                 .pos2{
                     top: -@size8;
                     left: 3.3rem;
-                    background: red;
+                    background: #eb6000;
                 }
                 .pos3{
                     top: -@size8;
                     right: -1px;
-                    background: red;
+                    background: #eb6000;
                 }
                 .label {
-                    margin-left: -1.5rem;
+                    margin-left: -2rem;
                     margin-right: -1.5rem; 
                     text-align: center;   
                     
                     .label1{
                         float: left;
-                        color: red;
+                        color: #eb6000;
                         font-size: @size14;
                     }
                     .label2{
                         text-align: center;
                         font-size: @size14;
-                        color: red;
+                        color: #eb6000;
                     }
                     .label3{
                         float: right;
                         font-size: @size14;
-                        color: red;
+                        color: #eb6000;
                     }
                 }
             }

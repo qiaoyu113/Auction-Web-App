@@ -99,7 +99,11 @@
             }else if(that.$route.name == 'personalCenter'){
                 that.index = 3
             }else if(that.$route.name == 'gologin'){
-                that.index = 3
+                if(that.$route.query.index==2){
+                   that.index = 2
+                }else if(that.$route.query.index==3){
+                   that.index = 3
+                }
             }
             that.onload()
             if(that.isIphoneX()){
@@ -120,32 +124,35 @@
                 let tokenYes = window.localStorage.getItem('token')
                 if(index === 0){
                     that.$router.replace({name:'home'})
-                    that.index = 0;
+                    
                 }else if(index === 1){
                     that.$router.replace({name:'special'})
-                    that.index = 1;
+                  
                 }else if(index === 2){
                     if(tokenYes == null || tokenYes == ''){
-                        that.$router.replace({name:'gologin'})
-                        that.index = 3;
+                        that.$router.push({path:'/gologin', query:{index:2}})
+                        
                     }else{
-                        if(that.goMyNum == 0){
-                            that.$router.replace({name:'my'})
-                        }else if(that.goMyNum == 1){
-                            that.$router.replace({name:'lot'})
-                        }else if(that.goMyNum == 2){
-                            that.$router.replace({name:'already'})
-                        }else if(that.goMyNum == 3){
-                            that.$router.replace({name:'not'})
-                        }
-                        that.index = 2;
+                        // if(that.goMyNum == 0){
+                        //     that.$router.replace({name:'my'})
+                        // }else if(that.goMyNum == 1){
+                        //     that.$router.replace({name:'lot'})
+                        // }else if(that.goMyNum == 2){
+                        //     that.$router.replace({name:'already'})
+                        // }else if(that.goMyNum == 3){
+                        //     that.$router.replace({name:'not'})
+                        // }
+                         that.$router.replace({name: 'my'})
                     }
                 }else if(index === 3){
                     if(tokenYes == null || tokenYes == ''){
-                        that.$router.replace({name:'gologin'})
+                        // that.$router.replace({name:'gologin'})
+                        that.$router.push({path:'/gologin', query:{index:3}})
+
+
                     }else {
                         that.$router.replace({name: 'personalCenter'})
-                        that.index = 3;
+                      
                     }
                 }
             },

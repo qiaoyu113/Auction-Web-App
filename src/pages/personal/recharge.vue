@@ -501,10 +501,10 @@
             .loginEn{
                 height:24px;
                 font-weight: bold;
-                font-size:16px;
+                font-size:14px;
             }
             .loginCn{
-                font-size: 14px;
+                font-size: 12px;
             }
             
         }
@@ -513,8 +513,8 @@
             letter-spacing: @size3;
             font-size: @size20;
             img{
-                width: 1rem;
-                margin-top: 1rem;
+                width: 0.8rem;
+                margin-top: 0.6rem;
             }
         }
     }
@@ -533,8 +533,8 @@
                 width: 2rem;
                 line-height: 1rem;
                 float: left;
-                font-size: @size12;
-                padding-top: @size1;
+                font-size: 13px;
+                // padding-top: @size1;
                 padding-left: @size10;
             }
             input{
@@ -543,8 +543,9 @@
                 float: right;
                 border: none;
                 outline: none;
-                font-size: @size12;
-                color: red;
+                font-size: 13px;
+                color: #eb6200;
+                line-height: 1rem;
                 // font-weight: bold;
                 text-align: right;
                 // padding-right: @size3;
@@ -563,7 +564,7 @@
             .span{
                 width: auto;
                float: right;
-               color: red;
+               color: #eb6200;
                font-size: @size12;
                padding-right: @size3;
                padding-left:0;
@@ -578,8 +579,10 @@
             }
         }
         .v_info{
+
              height: 1.3rem;
              margin-top: -1px;
+             padding-top: 1px;
              border-bottom: 1px solid #c7cacb;
              border-top: 1px solid #c7cacb;
 
@@ -594,14 +597,14 @@
         .canshoot{
                 font-size: @size12;
               p{
-            	font-size: @size12;
+            	font-size: 10px;
             	text-align: right;
             	margin-bottom: @size10;
                 color: #c4c4c4;
             	span{
             		font-weight: 700;
             		float: none;
-            		font-size: @size12;
+            		font-size: 10px;
 
             	}
             }
@@ -640,52 +643,53 @@
             margin-left: @size10;
             .check{
                 float: left;
-                margin-top: 18px;
-                box-sizing: border-box;
-                border: 3px solid rgb(0, 185, 181);
-                width: @size14;
-                height: @size14;
-                position: relative;
+                margin-top: @size20;
+                // box-sizing: border-box;
+                border: 2px solid rgb(0, 185, 181);
+                width: @size10;
+                height: @size10;
+
+                // position: relative;
                 i{
                     font-size: @size10;
                     line-height: @size10;
-                    position: absolute;
-                    top: -1px;
-                    left: -11px;
+                    // position: absolute;
+                    // top: -1px;
+                    // left: -11px;
                     color: rgb(0, 185, 181);
                 }
             }
             .check1{
                 float: left;
-                margin-top: 18px;
-                box-sizing: border-box;
-                border: 3px solid rgb(168, 174, 180);
-                width: @size14;
-                height: @size14;
-                position: relative;
+                margin-top: @size20;
+                // box-sizing: border-box;
+                border: 2px solid rgb(168, 174, 180);
+                width: @size10;
+                height: @size10;
+                // position: relative;
                 i{
                     font-size: @size10;
                     line-height: @size10;
-                    position: absolute;
-                    top: -1px;
-                    left: -11px;
-                    display: none
+                    // position: absolute;
+                    // top: -1px;
+                    // left: -11px;
+                    display: none;
                 }
             }
-            i{
-                font-size: 25px;
-                color: rgb(168, 174, 180);
-                float: left;
-                margin-left: @size10;
-                line-height:  @size50;
+            // i{
+            //     font-size: 25px;
+            //     color: rgb(168, 174, 180);
+            //     float: left;
+            //     margin-left: @size10;
+            //     line-height:  @size50;
                 
-            }
+            // }
             .v_img{
                 float: left;
                 width: @size25;
                 height: @size25;
                 margin-left: @size10;
-                margin-top: @size12;
+                margin-top: @size14;
             }
             .background1{
                 color: rgb(107, 184, 105);
@@ -719,14 +723,16 @@
                 float: left;
                 margin-left: @size10;
                 // margin-top: 17px;
-                line-height: 1.3rem;
+                line-height: @size50;
                 color: rgb(129, 135, 140);
                 font-size: 12px;
                 .span1{
                     font-size: 12px;
+                    line-height: @size50;
                     a{
                         color: #ee7d3b;
                         font-size: 12px;
+                        border-bottom: 1px solid #ee7d3b;
                         
                     }
                 }
