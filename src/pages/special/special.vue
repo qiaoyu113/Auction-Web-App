@@ -183,25 +183,27 @@
             //切换状态栏
             getMenu:function(index){
                 let that = this;
-                that.specialRun = [];
                 if(index === 1){
                     that.checked = 2;
                     that.page.num = 1;
                     that.$router.replace({name:'special',query:{type:'1'}})
-                    that.specialRun = [];
-                    that.downCallback()
+                    that.$router.go(0)
+//                    that.specialRun = [];
+//                    that.downCallback()
                 }else if(index===2){
                     that.checked = 1;
                     that.page.num = 1;
                     that.$router.replace({name:'special',query:{type:'2'}})
-                    that.specialRun = [];
-                    that.downCallback()
+                    that.$router.go(0)
+//                    that.specialRun = [];
+//                    that.downCallback()
                 }else{
                     that.checked = 3;
                     that.page.num = 1;
                     that.$router.replace({name:'special',query:{type:'3'}})
-                    that.specialRun = [];
-                    that.downCallback()
+                    that.$router.go(0)
+//                    that.specialRun = [];
+//                    that.downCallback()
                 }
             },
             //获取数据
