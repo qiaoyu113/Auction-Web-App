@@ -183,6 +183,7 @@
             //切换状态栏
             getMenu:function(index){
                 let that = this;
+                that.specialRun = [];
                 if(index === 1){
                     that.checked = 2;
                     that.page.num = 1;
