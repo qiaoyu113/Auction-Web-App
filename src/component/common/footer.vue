@@ -31,7 +31,7 @@
             <li class="fl" @click="checked(1)">
                 <img v-if="index == 1" src="../../assets/image/mycenter/c2.png"/>
                 <img v-if="index != 1" src="../../assets/image/mycenter/i2.png"/>
-                <p :class="index == 1 ? '':'pc'">专场</p>
+                <p :class="index == 1 ? '':'pc'">拍卖</p>
             </li>
             <li class="fl" @click="checked(2)">
                 <img v-if="index == 2 && !hintShow" src="../../assets/image/mycenter/c3.png"/>
