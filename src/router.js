@@ -29,7 +29,7 @@ Vue.component('z-icon',iconstate)
 
 // 定义组件
 const short = (resolve) => {require(['./pages/short.vue'],resolve)}
-const home = (resolve) => {require(['./pages/home/homarketsme.vue'],resolve)}
+const home = (resolve) => {require(['./pages/home/home.vue'],resolve)}
 const registerweixin = (resolve) => {require(['./component/login/registerweixin.vue'],resolve)}
 const service = (resolve) => {require(['./pages/service/service.vue'],resolve)}
 const special = (resolve) => {require(['./pages/special/special.vue'],resolve)}

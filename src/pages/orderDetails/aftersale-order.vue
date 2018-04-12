@@ -469,10 +469,10 @@ import {commonService} from '../../service/commonService.js'
             margin-left: @size10;
             line-height: @size40;
             .fl{
-                font-size: @size14;
+                font-size: 12px;
             }
             .fr{
-                font-size: @size14;
+                font-size: 12px;
                 font-weight: bold;
                 color: #fc5500;
             }

@@ -498,7 +498,6 @@
                     // left: -11px;
                     color: rgb(0, 185, 181);
                 }
-
             }
             .check1{
                 float: left;

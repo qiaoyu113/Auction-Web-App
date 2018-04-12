@@ -669,17 +669,17 @@ import {commonService} from '../../service/commonService.js'
                     .label1{
                         float: left;
                         color: #eb6000;
-                        font-size: @size13;
+                        font-size: 12px;
                     }
                     .label2{
                         text-align: center;
-                        font-size: @size13;
+                        font-size: 12px;
                         color: gray;
                         margin-left: -@size20;
                     }
                     .label3{
                         float: right;
-                        font-size: @size13;
+                        font-size: 12px;
                         color: gray;
                     }
                 }
@@ -731,17 +731,17 @@ import {commonService} from '../../service/commonService.js'
                     .label1{
                         float: left;
                         color: #eb6000;
-                        font-size: @size14;
+                        font-size: 12px;
                     }
                     .label2{
                         text-align: center;
-                        font-size: @size14;
+                        font-size: 12px;
                         color: #eb6000;
                         margin-left: -@size20;
                     }
                     .label3{
                         float: right;
-                        font-size: @size14;
+                        font-size: 12px;
                         color: gray;
                     }
                 }
@@ -794,16 +794,16 @@ import {commonService} from '../../service/commonService.js'
                     .label1{
                         float: left;
                         color: #fc5a06;
-                        font-size: @size14;
+                        font-size: 12px;
                     }
                     .label2{
                         text-align: center;
-                        font-size: @size14;
+                        font-size: 12px;
                         color: #fc5a06;
                     }
                     .label3{
                         float: right;
-                        font-size: @size14;
+                        font-size: 12px;
                         color: #fc5a06;
                     }
                 }
@@ -867,7 +867,7 @@ import {commonService} from '../../service/commonService.js'
                 float: right;
                 color:#87828c;
                 line-height: 1.02rem;
-                font-size: @size12;
+                font-size: 12px;
                 padding-top: @size1;
                 box-sizing: border-box;
                 margin-right: 0.1rem;
@@ -901,7 +901,7 @@ import {commonService} from '../../service/commonService.js'
         border-top:1px solid rgb(53, 60, 70); 
         text-align: center;
         line-height: 1.2rem;
-        font-size: 15px;
+        font-size: 12px;
         background: #fff;
     }
     .select-city.el-select {

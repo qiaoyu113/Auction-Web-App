@@ -419,13 +419,13 @@
         
     }
     .content{
-            width:100%;
+            width:9.6rem;
             max-width:10rem;
             position: fixed;
             top: @size36;
             bottom:0;
-            left:0;
-            right:0;
+            left:0.2rem;
+            right:0.2rem;
             overflow-y: scroll;
             -webkit-overflow-scrolling:touch;
         .account{

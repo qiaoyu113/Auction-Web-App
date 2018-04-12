@@ -619,10 +619,10 @@
                     padding-left: @size10;
                     padding-top: @size10;
                     span{
-                        font-size: @size10;
+                        font-size: 10px;
                     }
                     .span1{
-                        font-size: @size14;
+                        font-size: 12px;
                         font-weight: bold;
                     }
                 }
@@ -634,7 +634,7 @@
                     outline: none;
                     height: @size25;
                     width: 1.8rem;
-                    font-size: @size10;
+                    font-size: 10px;
                 }
             }
         }
@@ -647,7 +647,7 @@
                 border-bottom: 1px solid rgb(202, 209, 217);
                 margin-left: @size10;
                 .fl{
-                    font-size: @size12;
+                    font-size: 12px;
                     line-height: @size35;
                 }
                 .fr{
@@ -682,7 +682,7 @@
                 padding-top: @size20;
             }
             .log{
-                font-size:@size12;
+                font-size:12px;
             }
             .link{
                 font-size: 10px;
@@ -690,7 +690,7 @@
                 text-decoration: underline;
                 color: rgb(237, 121, 60);
                 a{
-                    font-size: @size10;
+                    font-size: 10px;
                     color: rgb(237, 121, 60);
                 }
             }
@@ -756,7 +756,7 @@
         position: fixed;
         left: 0;
         bottom: @size45;
-        font-size: @size10;
+        font-size: 10px;
         line-height: @size35;
         padding-left: @size20;
         p{
@@ -780,7 +780,7 @@
         position: fixed;
         left: 0;
         bottom: 1.6rem;
-        font-size: @size10;
+        font-size: 10px;
         line-height: @size35;
         padding-left: @size20;
         p{

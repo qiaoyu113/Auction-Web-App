@@ -994,6 +994,7 @@ import {commonService} from '../../service/commonService.js'
                 line-height: @size30;
                 font-weight: bold;
                 font-size: 12px;
+                color:rgb(129, 135, 140);
             }
         }
         .logdetail{
@@ -1211,11 +1212,11 @@ import {commonService} from '../../service/commonService.js'
             margin-left: @size10;
             line-height: @size40;
             .fl{
-                font-size: @size14;
+                font-size: 12px;
 
             }
             .fr{
-                font-size: @size14;
+                font-size: 12px;
                 font-weight: bold;
                 color: rgb(252, 90, 6);
             }
@@ -1339,6 +1340,7 @@ import {commonService} from '../../service/commonService.js'
             width: @size30;
             height: @size30;
             background: #eb6100;
+            z-index: 1001;
             i{
                 font-size: @size30;
                 color: white;

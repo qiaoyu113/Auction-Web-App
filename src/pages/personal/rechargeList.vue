@@ -485,7 +485,7 @@ import {commonService} from '../../service/commonService.js'
               margin-top: @size10;
               i{
                         display: none;
-                         font-size: @size10;
+                         font-size: 10px;
                          line-height: @size10;
                         // line-height: @size16;
                         color: #15b3b3;
@@ -514,7 +514,7 @@ import {commonService} from '../../service/commonService.js'
                     width: 2rem;
                     line-height: 1.02rem;
                     float: left;
-                    font-size: @size12;
+                    font-size: 12px;
                     padding-top: @size1;
                     padding-left: @size10;
                 }
@@ -530,7 +530,7 @@ import {commonService} from '../../service/commonService.js'
                     float: right;
                     border: none;
                     outline: none;
-                    font-size: @size12;
+                    font-size: 12px;
                     // color: red;
                     // font-weight: bold;
                     text-align: right;
@@ -542,7 +542,7 @@ import {commonService} from '../../service/commonService.js'
                     color:#87828c;
                     line-height: 1.02rem;
                     margin-right: 0.2rem;
-                    font-size: @size12;
+                    font-size: 12px;
                     padding-top: @size1;
                 }
         }
@@ -593,16 +593,16 @@ import {commonService} from '../../service/commonService.js'
                     .label1{
                         float: left;
                         color: #eb6000;
-                        font-size: @size13;
+                        font-size: 12px;
                     }
                     .label2{
                         text-align: center;
-                        font-size: @size13;
+                        font-size: 12px;
                         color: gray;
                     }
                     .label3{
                         float: right;
-                        font-size: @size13;
+                        font-size: 12px;
                         color: gray;
                     }
                     .label4{
@@ -657,16 +657,16 @@ import {commonService} from '../../service/commonService.js'
                     .label1{
                         float: left;
                         color: #eb6000;
-                        font-size: @size14;
+                        font-size: 12px;
                     }
                     .label2{
                         text-align: center;
-                        font-size: @size14;
+                        font-size: 12px;
                         color: #eb6000;
                     }
                     .label3{
                         float: right;
-                        font-size: @size14;
+                        font-size: 12px;
                         color: gray;
                     }
                 }
@@ -719,16 +719,16 @@ import {commonService} from '../../service/commonService.js'
                     .label1{
                         float: left;
                         color: #eb6000;
-                        font-size: @size14;
+                        font-size: 12px;
                     }
                     .label2{
                         text-align: center;
-                        font-size: @size14;
+                        font-size: 12px;
                         color: #eb6000;
                     }
                     .label3{
                         float: right;
-                        font-size: @size14;
+                        font-size: 12px;
                         color: #eb6000;
                     }
                 }
@@ -744,7 +744,7 @@ import {commonService} from '../../service/commonService.js'
                 width: 2rem;
                 line-height: 1.02rem;
                 float: left;
-                font-size: @size12;
+                font-size: 12px;
                 padding-left: @size10;
                 padding-top: @size1;
             }
@@ -755,7 +755,7 @@ import {commonService} from '../../service/commonService.js'
                 float: left;
                 border: none;
                 outline: none;
-                font-size: @size12;
+                font-size: 12px;
                 background: #fff;
             }
             .infoClose{
@@ -763,22 +763,26 @@ import {commonService} from '../../service/commonService.js'
                 color:#87828c;
                 line-height: 1.02rem;
                 margin-right: 0.2rem;
-                font-size: @size12;
+                font-size: 12px;
                 padding-top: @size1;
                 // box-sizing: border-box;
                 .span1{
-                    font-size: @size12;
+                    font-size: 12px;
                     font-weight: bold;
                     color: black;
                     width: auto;
                 }
+             
                 .span2{
-                     width: 3rem;
+                    width: 3rem;
                     display: inline-block;
                     line-height: @size14;
-                    font-size:@size10;
+                    font-size:12px;
                     text-align: right;
                     padding-top: @size6;
+                    i{
+                      font-size: 10px;
+                    }
     
                 }
                 
@@ -786,9 +790,9 @@ import {commonService} from '../../service/commonService.js'
             .infomore{
                 float: right;
                 color:#87828c;
-                line-height: 1.02rem;
-                font-size: @size12;
-                padding-top: @size1;
+                line-height: 1rem;
+                font-size: 12px;
+                // padding-top: @size1;
                 // box-sizing: border-box;
                 margin-right: 0.2rem;
                 .more{
@@ -825,7 +829,7 @@ import {commonService} from '../../service/commonService.js'
         border-top:1px solid rgb(53, 60, 70); 
         text-align: center;
         line-height: 1.2rem;
-        font-size: 15px;
+        font-size: 12px;
         background: #fff;
 
     }
