@@ -6,7 +6,7 @@
             <p class="top_p2 clearfix"><span>提交订单</span><span class="span" @click="Return()"><img src="../../../src/assets/image/mycenter/right.png"/></span></p>
         </div>
         <div class="time clearfix">
-            <p class="time_l">请在规定时间内支付，超时则扣除保证金</p>
+            <p class="time_l">请在规定时间内支付，超时保证金将被扣除</p>
             <div class="time_r clearfix ">
                 <div>{{countdown.dd}}</div>
                 <p>:</p>
@@ -112,7 +112,7 @@
         </div>
          <div class="saves" v-if="htmlx!=''">{{htmlx}}</div>
         <div class="botton" @click="postOrders()">
-            提交订单
+            确认支付
         </div>
         <div class="payOK"></div>
      <!--联系客服-->
@@ -358,8 +358,10 @@
                           if(res.data.datas.channelId=='ALIPAY_WAP'){
                                let orderNo = res.data.datas.orderNo;
                        window.localStorage.setItem('orderNo',orderNo);
+
                      commonService.putOrders({orderNo:orderNo,channelId:'ALIPAY_WAP'}).then(function(res){
                         if(res.data.success){
+                              window.localStorage.setItem('route','order');
                             let payOK = document.getElementsByClassName("payOK");
                                payOK[0].innerHTML = res.data.datas.payUrl;
                                document.punchout_form.submit()
@@ -701,7 +703,7 @@
                     float: right;
                     // margin-right: @size10;
                     p{
-                      font-size: 11px;
+                      font-size: 12px;
                       line-height: 15px;
                       color: rgb(51,51,51); 
                       text-align: right; 

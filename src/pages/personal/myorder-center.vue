@@ -9,7 +9,7 @@
                 <i class="iconfont icon-fanhui"></i>
             </span>
             <span class="font fl" :class="index==0 ? 'check' : ''" @click='getIndex(0)'>全部</span>
-            <span class="font fl" :class="index==1 ? 'check' : ''" @click='getIndex(1)'>待付款</span>
+            <span class="font fl" :class="index==1 ? 'check' : ''" @click='getIndex(1)'>待支付</span>
             <span class="font fl" :class="index==2 ? 'check' : ''" @click='getIndex(2)'>待收货</span>
             <span class="font fl" :class="index==3 ? 'check' : ''" @click='getIndex(3)'>售后</span>
             <span class="span1" @click="rto()"><img src="../../assets/image/mycenter/icon1.png" /></span>
@@ -27,8 +27,8 @@
             <div class="account" v-for="(list,index) in myList">
                 <div class="item">
                     <span>订单号:{{list.orderNo}}</span>
-                    <span class="fr bgcolor" v-if="list.status==1">待付款</span>
-                    <span class="fr bgcolor" v-if="list.status==2">处理中</span>
+                    <span class="fr bgcolor" v-if="list.status==1">待支付</span>
+                    <span class="fr bgcolor" v-if="list.status==2">待处理</span>
                     <span class="fr" v-if="list.status==3">待发货</span>
                     <span class="fr" v-if="list.status==4">已发货</span> 
                     <div class="v_rosr" v-if="list.status==6 || list.status==5"><img src="../../assets/image/mycenter/sc.png"  @click="deleteorder(list.orderNo)"/></div>
@@ -62,8 +62,8 @@
                         <button class="fr" @click="details(list.status,list.orderNo,list.csStatus)">查看订单</button>
                      <!--    <button class="fr"  v-if="list.csStatus!=0" @click="shouhou(list.status,list.id)">查看订单</button> -->
 
-                        <button class="fr" v-if="list.status==1" @click="details(list.status,list.orderNo)">立即付款</button>
-                        <button class="fr" v-if="list.status==2 || list.status==5">分享</button>
+                        <button class="fr" v-if="list.status==1" @click="details(list.status,list.orderNo)">立即支付</button>
+                        <!-- <button class="fr" v-if="list.status==2 || list.status==5">分享</button> -->
                     </div>
                 </div>
             </div>

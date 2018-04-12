@@ -8,17 +8,17 @@
                             <div class="ros clearfix" v-for="(list,index) in myList">
                                 <div class="line clearfix" v-if="list.auction._id == lineId">
                                     <div class="line_l"></div>
-                                    <div class="line_con">一周以前</div>
+                                    <div class="line_con">七天以前</div>
                                     <div class="line_r"></div>
                                 </div>
                                 <div class="line clearfix" v-if="list.auction._id == lineId2">
                                     <div class="line_l"></div>
-                                    <div class="line_con">1个月以前</div>
+                                    <div class="line_con">一个月以前</div>
                                     <div class="line_r"></div>
                                 </div>
                                 <div class="line clearfix" v-if="list.auction._id == lineId3">
                                     <div class="line_l"></div>
-                                    <div class="line_con">6个月以前</div>
+                                    <div class="line_con">六个月以前</div>
                                     <div class="line_r"></div>
                                 </div>
                                 <div class="line clearfix" v-if="list.auction._id == lineId4">
@@ -28,18 +28,18 @@
                                 </div>
                                 <div class="ros_l">
                                     <div class="ros_l_top clearfix" v-if="list.auction.doneBuy==1">
-                                        <div class="ros_prompt">拍卖成功</div>
+                                        <div class="ros_prompt">竞拍成功</div>
                                         <div class="ros_label" v-if="list.auctionCollect.show">NEW</div>
                                     </div>
                                     <div class="ros_l_top clearfix" v-if="list.auction.doneBuy==3">
-                                        <div class="ros_prompt">违约，保证金被扣除</div>
+                                        <div class="ros_prompt">已违约，保证金将被扣除</div>
                                         <div class="ros_label" v-if="list.auctionCollect.show">NEW</div>
                                     </div>
                                     <div class="ros_l2">{{list.auction.currentPrice | money}} CNY</div>
                                     <div class="ros_l3">{{list.auction.title}}</div>
                                     <div class="ros_l4">LOT-{{list.auction.completeNo}}</div>
                                     <div class="ros_con"  v-if="list.auction.doneBuy==1" @click="jump(list.auction._id)">
-                                        去支付
+                                        立即支付
                                     </div>
                                     <div class="ros_con"  v-if="list.auction.doneBuy!=1 && list.auction.doneBuy!=3" @click="jump(list.auction._id)">
                                         查看订单
@@ -68,7 +68,7 @@
                                 </div>
                                 <div class="ros_date" v-if="list.auction.doneBuy==1">
                                     <p>{{list.EndTimes}}</p>
-                                    <p><span>支付拍品</span></p>
+                                    <p><span>支付期限</span></p>
                                 </div>
                             </div>
                         </div>

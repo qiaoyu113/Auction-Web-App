@@ -13,7 +13,7 @@
         <div class="box2">
             <!--修改昵称-->
             <div class="info">
-                <div class="infoList">请输入昵称<input type="text" placeholder="请输入" v-model="inputName"/><div class="del" @click="deleteName" v-if="inputName!=''"><i class="iconfont icon-closeicon"></i></div></div>
+                <div class="infoList">昵称<input type="text" placeholder="请输入昵称" v-model="inputName"/><div class="del" @click="deleteName" v-if="inputName!=''"><i class="iconfont icon-closeicon"></i></div></div>
             </div>
             <!--保存-->
             <div class="saves" v-if="htmlx!=''">{{htmlx}}</div>
@@ -224,12 +224,12 @@
                 height:1rem;
                 line-height:1rem;
                 border-bottom:1px solid #C9D0D8;
-                font-size:13px;
+                font-size:12px;
                 color:#333;
                 overflow: hidden;
                 span{
                     color:#B1B1B1;
-                    font-size:13px;
+                    font-size:12px;
                     margin-left:0.8rem;
                 }
                 .more{

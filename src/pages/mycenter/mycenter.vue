@@ -63,9 +63,9 @@
             </div>
             <!--修改密码-->
             <div class="info">
-                <div class="infoList">修改密码<div class="more" @click="changePass"><img src="../../../src/assets/image/mycenter/more.png"/></div></div>
+                <div class="infoList">密码重置<div class="more" @click="changePass"><img src="../../../src/assets/image/mycenter/more.png"/></div></div>
                 <div class="infoList"><i class="iconfont icon-weixin1"></i>微信绑定号
-                <div class="goBind" @click="deleteorderwx()" v-if="user.wxBind==true">已绑定</div>
+                <div class="goBind" @click="deleteorderwx()" v-if="user.wxBind==true">去解绑</div>
                 <div class="goBind" v-if="user.wxBind==null || user.wxBind==false" @click='wxlogins'>去绑定</div>
                 </div>
             </div>
@@ -82,7 +82,7 @@
       
 
             <!--退出-->
-            <div class="back" @click="deleteorder()">退出登陆</div>
+            <div class="back" @click="deleteorder()">退出登录</div>
         </div>
        <!-- 性别 -->
         <div class="v_modal" ref="modal">
@@ -871,6 +871,7 @@
                font-size: 14px;
              }
           }
+
     }
 
  #demo #button { 
@@ -1266,6 +1267,7 @@
  cursor: not-allowed; 
 } 
   
+
    
 }
 </style>

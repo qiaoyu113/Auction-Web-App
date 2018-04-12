@@ -8,17 +8,17 @@
                             <div class="ros clearfix" v-for="(list,index) in myList"  @click="Router(list.auction._id)">
                                 <div class="line clearfix" v-if="list.auction._id == lineId">
                                     <div class="line_l"></div>
-                                    <div class="line_con">一周以前</div>
+                                    <div class="line_con">七天以前</div>
                                     <div class="line_r"></div>
                                 </div>
                                 <div class="line clearfix" v-if="list.auction._id == lineId2">
                                     <div class="line_l"></div>
-                                    <div class="line_con">1个月以前</div>
+                                    <div class="line_con">一个月以前</div>
                                     <div class="line_r"></div>
                                 </div>
                                 <div class="line clearfix" v-if="list.auction._id == lineId3">
                                     <div class="line_l"></div>
-                                    <div class="line_con">6个月以前</div>
+                                    <div class="line_con">六个月以前</div>
                                     <div class="line_r"></div>
                                 </div>
                                 <div class="line clearfix" v-if="list.auction._id == lineId4">
@@ -29,11 +29,11 @@
                                 <div class="ros_l">
                                     <div class="ros_l_top clearfix" v-if="list.auctionCollect.newPrice<list.auction.finalPrice">
                                         <div class="ros_offer">{{reversedNum(list.auctionCollect.newPrice/100)}} CNY</div>
-                                        <div class="ros_prompt">未竞价成功</div>
+                                        <div class="ros_prompt">竞价未成功</div>
                                         <div class="ros_label" v-if="list.auctionCollect.show==true">NEW</div>
                                     </div>
                                     <div class="ros_l_top clearfix" v-if="list.auction.auctionStatus == 4 && list.auction.marketStatus == 1">
-                                        <div class="ros_prompt">流拍</div>
+                                        <div class="ros_prompt">拍品流拍</div>
                                         <div class="ros_label" v-if="list.auctionCollect.show">NEW</div>
                                     </div>
                                     <div class="ros_l_top clearfix" v-if="list.auction.marketStatus == 0">

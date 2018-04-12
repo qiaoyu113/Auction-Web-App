@@ -17,10 +17,10 @@
         </div>
         <div class="content">
             <div class="warnTime" v-if="datas.status==2">
-                <span>打款<i>3日</i>会处理反馈，财务审核中，请耐心等待</span>
+                <span>将在打款后<i>3个工作日</i>内反馈，请耐心等待</span>
             </div>
             <div class="warnTime" v-if='index==1'>
-                <span>请在规定时间内支付</span>
+                <span>您的订单尚未支付</span>
                 <div class="time fr">
                     <div class="fr num">{{countdown.ss}}</div>
                     <div class="fr colon">:</div>
@@ -66,7 +66,7 @@
             </div>
 
             <div class="payment clearfix" v-if='index==0'>
-                <div class="witpay">代发货</div>
+                <div class="witpay">待发货</div>
                 <div class="btn"><a href="tel:15801619600">联系客服</a></div>
             </div>
             <div class="payment clearfix" v-if='index==1'>
@@ -117,7 +117,7 @@
                     <div>{{orderDetail.nu}}</div>
                 </div> 
                  <div class="logdetail" v-if="orderDetail.com=='tealab_ziti'">
-                    <div>自提</div>
+                    <div>线下自提</div>
                     <div>{{orderDetail.nu}}</div>
                 </div> 
             </div>
@@ -143,18 +143,18 @@
                 <div class="price clearfix"><div class="fl">保险+运费:</div><div class="fr">{{freight / 100 | money}} CNY</div></div>
             </div>
             <div class="orderinfo">
-                <div class="price clearfix"><div class="fl">订单编号:</div><div class="fr">{{datas.orderNo}}</div></div>
+                <div class="price clearfix"><div class="fl">订单号:</div><div class="fr">{{datas.orderNo}}</div></div>
                  <div class="price clearfix" v-if="createTime!=''"><div class="fl">支付时间:</div><div class="fr">{{createTime | stampFormate2}}</div></div>
                 <div class="price clearfix"><div class="fl">支付方式:</div>
                       <div class="fr"  v-if="method=='ALIPAY_WAP'">支付宝</div>
                       <div class="fr"  v-if="method=='WX_JSAPI'">微信</div>
-                      <div class="fr"  v-if="method=='OFFLINE_BANK'">线下转账</div>
+                      <div class="fr"  v-if="method=='OFFLINE_BANK'">转账汇款</div>
                       <!-- <div class="fr"  v-if='index==0'>线下转账</div> -->
                </div>
 
             </div>
         </div>
-        <div class="footer1" v-if='index==1' @click="rechargeList">支&nbsp;&nbsp;&nbsp;付</div>
+        <div class="footer1" v-if='index==1' @click="rechargeList">立即支付</div>
         <div class="footer" v-if='index==3'>
             <div class="value" @click="share()">
                 分&nbsp;&nbsp;&nbsp;享
@@ -413,7 +413,7 @@ import {commonService} from '../../service/commonService.js'
                     window.localStorage.setItem('orderNo',orderNo);
                     commonService.putOrders({orderNo:orderNo,channelId:'ALIPAY_WAP'}).then(function(res){
                         if(res.data.success){
- 
+                              window.localStorage.setItem('route','order');
                             let payOK = document.getElementsByClassName("payOK");
                                payOK[0].innerHTML = res.data.datas.payUrl;
                                document.punchout_form.submit()

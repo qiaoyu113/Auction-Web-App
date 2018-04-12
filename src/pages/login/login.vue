@@ -23,11 +23,11 @@
             </div>
             <!--登录账号-->
             <div class="info">
-                <input type="number" placeholder="输入手机号" v-model="phoneUser"/>
+                <input type="number" placeholder="请输入手机号码" v-model="phoneUser"/>
                 <div class="infoRight" @click="remphoneUser()" v-if="phoneUser!=''"><i class="iconfont icon-closeicon"></i></div>
             </div>
             <div class="info">
-                <input type="password" placeholder="输入密码" v-model="passwordUser"/>
+                <input type="password" placeholder="请输入密码" v-model="passwordUser"/>
                 <div class="infoRight" @click="rempasswordUser()" v-if="passwordUser!=''"><i class="iconfont icon-closeicon"></i></div>
             </div>
               <!--微信登录-->
@@ -63,7 +63,7 @@
                 <div class="infoRight" @click="rempassword()" v-if='password!=""'><i class="iconfont icon-closeicon"></i></div>
             </div>
             <div class="info">
-                <input type="password" placeholder="确认密码" v-model="password2"/>
+                <input type="password" placeholder="请确认密码" v-model="password2"/>
                 <div class="infoRight" @click="rempassword2()" v-if="password2!=''"><i class="iconfont icon-closeicon"></i></div>
             </div>
             <!--微信登陆-->

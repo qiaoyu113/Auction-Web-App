@@ -10,17 +10,17 @@
             <div class="loginBox">
                 <div class='loginEn'>PAYMENT</div>
                 <!-- <div class="loginCn" v-if="money==''">充值</div> -->
-                <div class="loginCn">充值</div>
+                <div class="loginCn">保证金充值</div>
             </div>
             <div class="fr" @click='Return()'>
             <img src="../../../src/assets/image/mycenter/right.png"/>
             </div>
         </div>
         <div class="box">
-            <div class="info clearfix"><span v-if="money==''">金额</span>
-               <span v-if="money!=''">金额</span>
+            <div class="info clearfix"><span v-if="money==''">充值金额</span>
+               <span v-if="money!=''">充值金额</span>
                <span class="span" v-if="money!=''">&nbsp;CNY</span>
-               <input type="number" placeholder="请输入金额" v-model="money" @input="moneyreplor()"/>
+               <input type="number" placeholder="请输入充值金额" v-model="money" @input="moneyreplor()"/>
                
             </div>
             <div class="canshoot">
@@ -47,17 +47,16 @@
             <!-- <div class="bor"></div> -->
             <div class="pay" @click="getIndex(1)" v-if="wxLogin==true">
                 <div :class="index==1 ? 'check' : 'check1'"><i class="iconfont icon-duihao"></i></div>
-                    <!-- <i :class="index==1 ? 'background1' : ''" class="iconfont icon-icon_weixinzhifu"></i> -->
                     <img class="v_img" v-if="index==1" src="../../assets/image/mycenter/wxzf.png" />
                 <img class="v_img" v-if="index!=1" src="../../assets/image/mycenter/wxzf2.png" />
-                    <div class="infoAlipay">微信支付</div>
+                    <div class="infoAlipay">微信充值</div>
             </div>
             <div class="pay" @click="getIndex(2)" v-if="wxLogin==false">
                 <div :class="index==2 ? 'check' : 'check1'"><i class="iconfont icon-duihao"></i></div>
                 <!-- <i :class="index==2 ? 'background2' : ''" class="iconfont icon-icon_zhifubao"></i> -->
                  <img class="v_img" v-if="index==2" src="../../assets/image/mycenter/zfb.png" />
                 <img class="v_img" v-if="index!=2" src="../../assets/image/mycenter/zfb2.png" />
-                <div class="infoAlipay">支付宝支付</div>
+                <div class="infoAlipay">支付宝充值</div>
             </div>
             <div class="pay" @click="getIndex(3)">
                 <div :class="index==3 ? 'check' : 'check1'"><i class="iconfont icon-duihao"></i></div>
@@ -253,6 +252,7 @@
                                       },2000) 
                     return false
                 }
+
                 let money=that.money * 100
                commonService.postBails({amount:money}).then(function(res){
                     // that.wallet=res.data.datas.user.wallet
@@ -284,7 +284,7 @@
                             window.localStorage.setItem('orderNo',orderNo);
                             commonService.putOrders({orderNo:orderNo,channelId:channelIds}).then(function(res){
                                 if(res.data.success){
-                       
+                                     window.localStorage.setItem('route','recharge');
                                     let payOK = document.getElementsByClassName("payOK");
                                     payOK[0].innerHTML = res.data.datas.payUrl;
                                     document.punchout_form.submit()
@@ -538,7 +538,7 @@
                 padding-left: @size10;
             }
             input{
-                width: 2rem;
+                // width: 2rem;
                 height: 1rem;
                 float: right;
                 border: none;
@@ -549,6 +549,9 @@
                 // font-weight: bold;
                 text-align: right;
                 // padding-right: @size3;
+            }
+            .number{
+                
             }
             p{
             	font-size: @size12;

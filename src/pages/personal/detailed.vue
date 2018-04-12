@@ -27,7 +27,7 @@
                     <div class="infoClose">{{list.formNo}}</div>
                 </div>
                 <div class="info"><span>交易金额</span>
-                    <div class="infoClose">{{list.flowAmount | money}}CNY
+                    <div class="infoClose">{{list.flowAmount | money}} CNY
                        </div>
                 </div>
                 <div class="info"><span>交易时间</span>
@@ -41,7 +41,7 @@
                     <div class="infoClose">
                     <span class="span2" v-if="list.channelId=='WX_JSAPI'">微信</span>
                     <span class="span2" v-if="list.channelId=='ALIPAY_WAP'">支付宝</span>
-                    <span class="span2" v-if="list.channelId=='OFFLINE_BANK'">银行卡</span>
+                    <span class="span2" v-if="list.channelId=='OFFLINE_BANK'">转账汇款</span>
 
                     </div>
                 </div>
@@ -141,10 +141,10 @@ import {commonService} from '../../service/commonService.js'
             .loginEn{
                 height:0.75rem;
                 font-weight: bold;
-                font-size:20px;
+                font-size:14px;
             }
             .loginCn{
-                font-size: 15px;
+                font-size: 12px;
             }
             
         }
@@ -171,7 +171,7 @@ import {commonService} from '../../service/commonService.js'
                 width: 2rem;
                 line-height: 1.02rem;
                 float: left;
-                font-size: @size12;
+                font-size: 12px;
                 padding-left: @size10;
                 padding-top: @size1;
             }
@@ -182,7 +182,7 @@ import {commonService} from '../../service/commonService.js'
                 float: left;
                 border: none;
                 outline: none;
-                font-size: @size12;
+                font-size: 12px;
                 background: #fff;
             }
             .infoClose{
@@ -190,14 +190,15 @@ import {commonService} from '../../service/commonService.js'
                 color:#87828c;
                 line-height: 1.02rem;
                 margin-right: 0.2rem;
-                font-size: @size12;
+                font-size: 12px;
                 padding-top: @size1;
                 box-sizing: border-box;
+              
                 img{
                     height: 1rem;
                 }
                 .span1{
-                    font-size: @size12;
+                    font-size: 12px;
                     font-weight: bold;
                     color: black;
                 }
@@ -205,7 +206,7 @@ import {commonService} from '../../service/commonService.js'
                     width: 3rem;
                     display: inline-block;
                     line-height: @size14;
-                    font-size:@size10;
+                    font-size:12px;
                     text-align: right;
                     line-height: 1.02rem;
                     // padding-top: @size6;

@@ -19,11 +19,11 @@
         </div>
         <div class="box2">
             <div class="info"><span>联系人</span>
-                <input type="" placeholder="请输入" v-model="name"/>
+                <input type="" placeholder="请输入联系人姓名" v-model="name"/>
                 <div class="infoClose" @click="remname()" v-if="name!=''"><i class="iconfont icon-closeicon"></i></div>
             </div>
-            <div class="info"><span>手机号</span>
-                <input type="number" placeholder="请输入" v-model="phone"/>
+            <div class="info"><span>联系方式</span>
+                <input type="number" placeholder="请输入联系人的手机号码" v-model="phone"/>
                 <div class="infoClose" @click="remphone()" v-if="phone!=''"><i class="iconfont icon-closeicon"></i></div>
             </div>
             <div class="info"><span>所在地区</span>
@@ -70,7 +70,7 @@
                 <div class="infoClose"><i>. . .</i></div>
             </div>
             <div class="detail">
-                <textarea placeholder="请输入详细地址" v-model="detailAdress"></textarea>
+                <textarea placeholder="请输入详细地址，小区、门牌等信息，5-60个字" v-model="detailAdress"></textarea>
             </div>
             <!-- <div class="resize">
                 <div class="check"><i class="iconfont icon-duihao"></i></div>
@@ -370,8 +370,24 @@ import {commonService} from '../../service/commonService.js'
                  let flag = reg.test(that.phone)
                  if(!flag){
                   that.prompt='手机格式不正确'
+                   setTimeout(() => { 
+                                 
+                          that.prompt= ''
+                        },2000) 
+
                    return false
                  }
+              
+                   if(that.detailAdress.length < 5||that.detailAdress.length>60){
+                  that.prompt='详细地址5-60个字'
+                   setTimeout(() => { 
+                                 
+                                   that.prompt= ''
+                                      },2000) 
+                   return false
+                 }
+                    
+                    return false
                  if(that.name=='' || that.phone=='' || that.provinceName=='' || that.cityName=='' || that.detailAdress=='' || that.districtName==''){
                   that.prompt='请填写完整'
                   return false

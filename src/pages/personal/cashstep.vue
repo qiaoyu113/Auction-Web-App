@@ -21,8 +21,8 @@
                     <div class="circle pos2"></div>
                     <div class="circle pos3"></div>
                     <div class="label">
-                        <span class="label1" v-if='flag==1'>填写支付宝帐号</span>
-                        <span class="label1" v-if='flag==2'>填写银行卡信息</span>
+                        <span class="label1" v-if='flag==1'>支付宝信息</span>
+                        <span class="label1" v-if='flag==2'>银行卡信息</span>
                         <span class="label2">身份验证</span>
                         <span class="label3">提现完成</span>
                     </div>
@@ -34,8 +34,8 @@
                     <div class="circle pos2"></div>
                     <div class="circle pos3"></div>
                     <div class="label">
-                        <span class="label1" v-if='flag==1'>填写支付宝帐号</span>
-                        <span class="label1" v-if='flag==2'>填写银行卡信息</span>
+                        <span class="label1" v-if='flag==1'>支付宝信息</span>
+                        <span class="label1" v-if='flag==2'>银行卡信息</span>
                         <span class="label2">身份验证</span>
                         <span class="label3">提现完成</span>
                     </div>
@@ -47,8 +47,8 @@
                     <div class="circle pos2"></div>
                     <div class="circle pos3"></div>
                     <div class="label">
-                        <span class="label1" v-if='flag==1'>填写支付宝帐号</span>
-                        <span class="label1" v-if='flag==2'>填写银行卡信息</span>
+                        <span class="label1" v-if='flag==1'>支付宝信息</span>
+                        <span class="label1" v-if='flag==2'>银行卡信息</span>
                         <span class="label2">身份验证</span>
                         <span class="label3">提现完成</span>
                     </div>
@@ -61,11 +61,11 @@
                     <input type="number" placeholder="请输入金额" disabled="disabled" v-model="money"/>
                 </div>
                 <div class="info"><span>支付宝帐号</span>
-                    <input type="text" placeholder="请输入支付宝帐号" v-model="account"/>
+                    <input type="text" class="v_zfbzh" placeholder="请输入支付宝帐号(手机号/邮箱)" v-model="account"/>
                     <div class="infoClose" @click='remaccount()' v-if="account!=''"><i class="iconfont icon-closeicon"></i></div>
                 </div>
                 <div class="info"><span>姓名</span>
-                    <input type="text" placeholder="请输入姓名" v-model="userName"/>
+                    <input type="text" placeholder="请输入支付宝认证姓名" v-model="userName"/>
                     <div class="infoClose" @click='remuserName()' v-if="userName!=''"><i class="iconfont icon-closeicon"></i></div>
                 </div>
             </div>
@@ -75,8 +75,8 @@
                      <span class="span"> &nbsp;CNY</span>
                     <input type="number" placeholder="请输入金额" disabled="disabled" v-model="money"/>
                 </div>
-                <div class="info"><span>姓名</span>
-                    <input type="text" placeholder="请输入收款方姓名" v-model="userBankName"/>
+                <div class="info"><span>收款人</span>
+                    <input type="text" placeholder="请输入收款人姓名" v-model="userBankName"/>
                     <div class="infoClose" @click='remuserBankName()' v-if="userBankName!=''"><i class="iconfont icon-closeicon"></i></div>
                 </div>
                  <div class="info"><span>银行卡号</span>
@@ -84,7 +84,7 @@
                     <div class="infoClose" @click='remuserBankCardNo()' v-if="userBankCardNo!=''"><i class="iconfont icon-closeicon"></i></div>
                 </div>
                 <div class="info"><span>银行</span>
-                    <input type="text" placeholder="请选择银行" disabled="disabled" value="userBank" v-model="userBank"/>
+                    <input type="text" placeholder="自动识别银行" disabled="disabled" value="userBank" v-model="userBank"/>
                     <!-- <div class="infomore" @click='removeAccount'><i class="more">...</i></div> -->
                 </div>
                
@@ -108,19 +108,19 @@
             </el-select>
                     <div class="infomore" ><i class="more">...</i></div>
                 </div>
-                <div class="info"><span>开户支行</span>
-                    <input type="text" placeholder="请输入开户支行" v-model="userBankDetail"/>
+                <div class="info"><span>开户行</span>
+                    <input type="text" placeholder="请输入开户行名称" v-model="userBankDetail"/>
                     <div class="infoClose" @click='remuserBankDetail' v-if="userBankDetail!=''"><i class="iconfont icon-closeicon"></i></div>
                 </div>
             </div>
             <!-- 身份验证 -->
             <div  v-if='index==2'>
-                <div class="info"><span>姓名</span>
-                    <input type="text" placeholder="请输入姓名" v-model="name"/>
+                <div class="info"><span>收款人</span>
+                    <input type="text" placeholder="请输入收款人姓名" v-model="name"/>
                     <div class="infoClose" @click='remname()' v-if="name!=''"><i class="iconfont icon-closeicon"></i></div>
                 </div>
-                <div class="info"><span>身份证号码</span>
-                    <input type="number" placeholder="请输入身份证号码" v-model="namecard"/>
+                <div class="info"><span>身份证号</span>
+                    <input type="number" placeholder="请输入18位身份证号码" v-model="namecard"/>
                     <div class="infoClose" @click='remnamecard()' v-if="namecard!=''"><i class="iconfont icon-closeicon"></i></div>
                 </div>
                 <div class="info"><span>手机号码</span>
@@ -131,9 +131,9 @@
                     <input type="text" placeholder="请输入验证码" v-model='kaptchaValue'/>
                     <div class="infoClose" @click="getKaptchas()"><img :src="img.imageString"/></div>
                 </div> -->
-                <div class="info"><span>验证码</span>
-                    <input type="number" placeholder="请输入验证码" v-model='verification'/>
-                    <div class="infoClose" @click="getFormssms">获取验证码<i v-if="count!=0">({{count}}s)</i></div>
+                <div class="info"><span>短信验证码</span>
+                    <input type="number" placeholder="请输入短信验证码" v-model='verification'/>
+                    <div class="infoClose" @click="getFormssms">获取验证码<i v-if="count!=0" class="v_tou">({{count}}s)</i></div>
                 </div>
             </div>
             <!-- 已完成 -->
@@ -152,7 +152,7 @@
                     <div class="infoClose">提现</div>
                      <!-- <div class="infoClose" v-if="list.channelId=='OFFLINE_BANK'">提现</div> -->
                 </div>
-                <div class="info"><span>提现方式</span>
+                <div class="info"><span>交易种类</span>
                     <div class="infoClose">
                     <span class="span2" v-if="list.channelId=='ALIPAY_WAP'">支付宝<br><i>{{list.channelUser}}</i></span>
                     <span class="span2" v-if="list.channelId=='OFFLINE_BANK'">{{list.userBank}}<br>
@@ -162,7 +162,7 @@
                 <div class="info"><span>提现金额</span>
                     <div class="infoClose" v-if="list.status==1" style="color:#eb6200;">处理中</div>
                     <div class="infoClose" v-if="list.status==2">已完成</div>
-                    <div class="infoClose" v-if="list.status==3">失败</div>
+                    <div class="infoClose" v-if="list.status==3">交易失败</div>
                 </div>
             </div>
         </div>
@@ -681,7 +681,7 @@ import {commonService} from '../../service/commonService.js'
                     right: -1px;
                 }
                 .label {
-                    margin-left: -2rem;
+                    margin-left: -1.5rem;
                     margin-right: -1.4rem; 
                     text-align: center; 
                     font-size: 10px; 
@@ -743,7 +743,7 @@ import {commonService} from '../../service/commonService.js'
                     right: -1px;
                 }
                 .label {
-                    margin-left: -2rem;
+                    margin-left: -1.5rem;
                     margin-right: -1.4rem; 
                     text-align: center;   
                     
@@ -806,7 +806,7 @@ import {commonService} from '../../service/commonService.js'
                     background: #eb6000;
                 }
                 .label {
-                    margin-left: -2rem;
+                    margin-left: -1.5rem;
                     margin-right: -1.4rem;  
                     text-align: center;   
                     
@@ -852,6 +852,9 @@ import {commonService} from '../../service/commonService.js'
                 font-size: 12px;
                 background: #fff;
             }
+            .v_zfbzh{
+               width: 5rem;
+            }
             .infoClose{
                 float: right;
                 color:#87828c;
@@ -860,6 +863,9 @@ import {commonService} from '../../service/commonService.js'
                 font-size: 10px;
                 // padding-top: @size1;
                 box-sizing: border-box;
+                .v_tou{
+                   font-size: 10px;
+                }
                 img{
                     height: 1rem;
                 }

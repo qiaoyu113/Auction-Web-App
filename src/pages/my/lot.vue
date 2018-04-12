@@ -8,7 +8,7 @@
                             <div class="ros_l">
                                 <div class="ros_l_top clearfix" v-if="list.auctionCollect.newPrice<list.auction.finalPrice">
                                     <div class="ros_offer">{{reversedNum(list.auctionCollect.newPrice/100)}} CNY</div>
-                                    <div class="ros_prompt">出价被超出</div>
+                                    <div class="ros_prompt">出价被超越</div>
                                     <div class="ros_label" v-if="list.auctionCollect.show==true">NEW</div>
                                 </div>
                                 <div class="ros_l_top clearfix" v-if="list.auctionCollect.newPrice==list.auction.finalPrice">

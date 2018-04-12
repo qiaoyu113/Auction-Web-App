@@ -4,14 +4,18 @@
     -->
     <!-- 个人中心-我的订单 -->
     <div class="v_myaccount" v-set-title="title">
-        
+       
         <!-- <div class="header">传家</div> -->
         <div class="nav">
             <span class="return fl" @click="Return()">
                 <i class="iconfont icon-fanhui"></i>
             </span>
         </div>
+        <div id="myorder-center">
+          <div id="mescroll" class="mescroll alreadys">
+        <div class="mescroll-bounce">
         <div class="content">
+       
             <div class="account">
                 <div class="item">
                     <div class="boxx">
@@ -22,14 +26,14 @@
                 <div class="box clearfix ">
                     <div class="fl">
                         <div class="sum bgcol">{{wallet!=null?wallet.availableMoney:0 | money}} CNY</div>
-                        <div class="exp">可用金额</div>
-                        <div class="warn">可用金额才可体现和出价</div>
+                        <div class="exp">保证金可用金额</div>
+                        <div class="warn">可用于提现和出价</div>
                     </div>
                     <div class="bor fl"></div>
                     <div class="fl">
                         <div class="sum">{{wallet!=null?wallet.frozenMoney:0 | money}} CNY</div>
-                        <div class="exp">冻结金额</div>
-                        <div class="warn">保证金体现未至账户时即被冻结</div>
+                        <div class="exp">保证金冻结金额</div>
+                        <div class="warn">冻结保证金不可用于提现和出价</div>
                     </div>
                 </div>
             </div>
@@ -58,9 +62,9 @@
                     <div class="f2">原因</div>
                     <div class="f3">时间</div>
                     <div class="f4">状态</div>
-                    <div class="bor"></div>
+                    <!-- <div class="bor"></div> -->
                 </div>
-                <div class="listcontent clearfix"  v-for="arr1 in arr"  :key="arr1.url" @click="detailed(arr1.formId)">
+                <div class="listcontent clearfix"  v-for="arr1 in myList"  :key="arr1.url" @click="detailed(arr1.formId)">
                     <div class="fl">{{arr1.flowAmount | money}}</div>
                    <!--  <div class="f2 line" v-if="arr1.flowStatus==10">充值</div>
                     <div class="f2 line" v-if="arr1.flowStatus==11">参拍冻结</div>
@@ -136,15 +140,20 @@
             </div>
         </div>
         <div class="serviceBk" v-if="ServiceBox"></div>
+        </div>
+        </div>
+        </div>
     </div>
 </template>
 
 <script >
+     import MeScroll from 'mescroll'
     import {appService} from '../../service/appService'
     import itemc from "../../component/home/item.vue"
 
     import {common} from '../../assets/js/common/common'
     import {commonService} from '../../service/commonService.js'
+
     export default {
         data () {
             return {
@@ -165,6 +174,12 @@
                     // state:'充值成功>'},
                 ],
                 ServiceBox:false,
+                totalPage:'',
+                myList:[
+
+                ],
+                 page:{num:1,size:30},
+                isShowNoMore:false,
             }
         },
         components:{'home-item':itemc},
@@ -195,10 +210,11 @@
             * 这里的数据可以放在data中
             * */ 
             
-            common.onMove('.content')
+            // common.onMove('#mescroll')
             this.onMove()
-            this.getBails()
+            // this.getBails()
             this.getUsers()
+            this.meScroll()
 
         },
         methods: {
@@ -240,11 +256,78 @@
             getBails:function(){
                 let that = this;
                commonService.getBails({pageNo:1,pageSize:30}).then(function(res){
-                
+
                     that.arr=res.data.datas.datas
                     
               })
             },
+                     //下拉刷新、加载
+            meScroll: function (){
+                let that = this;
+                let scrollUp = document.getElementsByClassName('mescroll-upwarp');
+                let scrollDown = document.getElementsByClassName('mescroll-downwarp-reset');
+                for(let i = 0;i<scrollUp.length;i++){
+                    scrollUp[i].parentNode.removeChild(scrollUp[i]);
+                }
+                for(let i = 0;i<scrollDown.length;i++){
+                    scrollDown[i].parentNode.removeChild(scrollDown[i]);
+                }
+                let scrollWarp = document.getElementsByClassName('mescroll-downwarp');
+                for(let i = 0;i<scrollWarp.length;i++){
+                    scrollWarp[i].parentNode.removeChild(scrollWarp[i]);
+                }
+                that.mescroll = new MeScroll("mescroll", {
+                    up: {
+                        callback: that.upCallback,
+                        page:{size:that.page.size},
+                        isBounce: false, //此处禁止ios回弹,解析(务必认真阅读,特别是最后一点): http://www.mescroll.com/qa.html#q10
+                    },
+                    down: {
+                        callback: that.downCallback //下拉刷新的回调,别写成downCallback(),多了括号就自动执行方法了
+                    }
+                });
+            },
+            downCallback(){
+                let that = this;
+                that.page.num = 1;
+                that.myList = [];
+                that.upCallback()
+            },
+            upCallback: function () {
+                const that = this;
+                that.getListData(that.page.num, that.page.size,function(curPageData) {
+                    if(that.page.num === 1)  that.myList = [];//如果是第一页需手动制空列表
+                    that.myList = that.myList.concat(curPageData); //更新列表数据
+                    // 加载完成后busy为false，如果最后一页则lastpage为true
+                    //          加载完成后给页数+1
+                    if(that.page.num >= that.totalPage) {
+                        that.isShowNoMore = true;
+                    }else{
+                        that.isShowNoMore = false;
+                    }
+                    that.page.num = that.page.num + 1;
+                    that.mescroll.endSuccess(curPageData.length,that.totalPage);
+                    that.mescroll.endUpScroll(that.isShowNoMore)
+                }, function() {
+                    that.mescroll.endErr(); //联网失败的回调,隐藏下拉刷新和上拉加载的状态;
+                });
+            },
+            getListData:function(pageNum,pageSize,successCallback,errorCallback) {
+                //延时一秒,模拟联网
+                const that = this;
+               commonService.getBails({pageNo:pageNum,pageSize:pageSize}).then(function(res){
+                    if(res.data.code === 200){
+                        let boxlist = res.data.datas.datas;
+                        that.totalPage = res.data.datas.totalPage;
+                        console.log(res)
+                        successCallback&&successCallback(boxlist);//成功回调
+                    }else{
+                        let boxlist = [];
+                        successCallback&&successCallback(boxlist);//成功回调
+                    }
+                })
+            },
+
              getUsers:function(){
                 let that = this;
                commonService.getUsers().then(function(res){
@@ -270,7 +353,7 @@
                     })
 
                 };
-                overscroll(document.querySelector('.content'));
+                overscroll(document.querySelector('#mescroll'));
                 document.body.addEventListener('touchmove', function(evt) {
                     if(!evt._isScroller) {
                         evt.preventDefault()
@@ -287,6 +370,7 @@
     /*rem等基本设置都放在base中，不写多个*/
     @import url('../../assets/css/base.less');
     @import url('../../assets/css/icon/iconfont.css');
+     @import url("../../assets/css/common/mescroll.min.css");
     .v_myaccount{
         .talk{
             width: 1rem;
@@ -418,16 +502,31 @@
         }
         
     }
-    .content{
+      #mescroll{
             width:9.6rem;
             max-width:10rem;
             position: fixed;
-            top: @size36;
-            bottom:0;
-            left:0.2rem;
-            right:0.2rem;
+            top:  @size36;
+            bottom:0rem;
+            left:0rem;
+            right:0rem;
+            margin:auto;
+            height:inherit;
+            overflow: hidden;
             overflow-y: scroll;
             -webkit-overflow-scrolling:touch;
+        }
+    .content{
+            // width:9.6rem;
+            // max-width:10rem;
+            // position: fixed;
+            // top: @size36;
+            // bottom:0;
+            // left:0.2rem;
+            // right:0.2rem;
+            // overflow-y: scroll;
+            // -webkit-overflow-scrolling:touch;
+            // padding: 0 0.2rem;
         .account{
             box-sizing: border-box;
 
@@ -437,7 +536,7 @@
                 text-align: center;
                 .boxx{
                     height: @size98;
-                    width: 100%;
+                    // width: 100%;
                     background-image:url('../../assets/image/mycenter/suiyuan.png');
                     background-size: 100% 100%;
                     margin-top: @size10;
@@ -457,7 +556,7 @@
             }
             .box{
                 height:@size98;
-                width: 100%;
+                width: 9.6rem;
                 border-bottom: 1px solid rgb(51, 51, 51);
                 box-sizing: border-box;
                 position: relative;
@@ -519,7 +618,8 @@
             .address{
                 // box-sizing: border-box;
                 height: @size35;
-                margin-left: @size10;
+                padding-left: @size10;
+                border-bottom: 1px solid #ccc;
                 .fl{
                     font-size: 12px;
                     line-height: @size35;
@@ -528,6 +628,7 @@
             .listcontent{
                 height: @size30;
                 text-align: center;
+                border-bottom: 1px solid #ccc;
                 .fl{
                     width: 20%;
                     text-align: center;

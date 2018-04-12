@@ -41,7 +41,7 @@
                     <!-- <i class="iconfont icon-tupian"></i> -->
                     <img src="../../assets/image/mycenter/usre2.png" />
                     <div class="number" v-if="numItem.noPayNum!=0&&numItem.noPayNum!=null">{{numItem.noPayNum}}</div></div>
-                    <div class="font">待付款</div>
+                    <div class="font">待支付</div>
                 </div>
                 <div class="litbox fl" @click="order(2)">
                     <div class="pic">
@@ -551,7 +551,7 @@
                     width: @size22;
                     height: @size18;
                     display: inline-block;
-                    margin-top: @size24;
+                    margin-top: 0.54rem;
                     margin-left: @size30;
                     position: relative;
                     i{

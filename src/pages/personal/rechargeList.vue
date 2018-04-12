@@ -45,7 +45,7 @@
                     <p class="v_rows_r">{{list.cardNo}}</p>
                    </div>
                    <div class="v_rows clearfix">
-                    <p class="v_rows_l">开户银行</p>
+                    <p class="v_rows_l">开户行</p>
                     <p class="v_rows_r">{{list.bank}} {{list.subBank}}</p>
                    </div>
                  </div>
@@ -61,8 +61,8 @@
                     <input type="number" placeholder="请输入银行卡号" value="userBankCardNo" v-model="userBankCardNo" @blur="cardObtain()"/>
                     <div class="infoClose" @click='remuserBankCardNo()' v-if="userBankCardNo!=''"><i class="iconfont icon-closeicon"></i></div>
                 </div>
-                 <div class="info clearfix"><span>开户银行</span>
-                    <input type="text" placeholder="自动输入开户银行" value="userBankDetail" v-model="userBankDetail" disabled="disabled" />
+                 <div class="info clearfix"><span>开户行</span>
+                    <input type="text" placeholder="自动识别开户行" value="userBankDetail" v-model="userBankDetail" disabled="disabled" />
                     <!-- <div class="infomore" @click='removeAccount'><i class="iconfont icon-closeicon"></i></div> -->
                 </div>
                <div class="info1 clearfix"><span>汇款金额</span>
@@ -101,7 +101,7 @@
                 <div class="info"><span>状态</span>
                     <div class="infoClose" v-if="list.status==1" style="color:#eb6200;">处理中</div>
                     <div class="infoClose" v-if="list.status==2">已完成</div>
-                    <div class="infoClose" v-if="list.status==3">失败</div>
+                    <div class="infoClose" v-if="list.status==3">交易失败</div>
                 </div>
             </div>
         </div>

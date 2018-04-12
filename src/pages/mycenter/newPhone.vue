@@ -21,7 +21,7 @@
             </div> -->
             <!--短信验证码-->
             <div class="info">
-                <div class="infoList">短信验证码<input class="codeInp" type="number" placeholder="请输入" v-model="inputNum"/><div class="code" @click="getcode">获取验证码<span v-if="codeShow" style="margin:0;">({{timeOver}})</span></div></div>
+                <div class="infoList">短信验证码<input class="codeInp" type="number" placeholder="请输入短信验证码" v-model="inputNum"/><div class="code" @click="getcode">获取验证码<span v-if="codeShow" style="margin:0;">({{timeOver}})</span></div></div>
             </div>
             <div id="captcha-box"></div>
             <!--保存-->
@@ -41,7 +41,7 @@
                 title: '个人中心',
                 header:{
                     name:'CELL PHONE NUMBER',
-                    name2:'新手机号'
+                    name2:'手机号码修改'
                 },
                 timeOver:60,//短信验证码倒计时
                 inputPhone:'',//手机号
