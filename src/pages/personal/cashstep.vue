@@ -57,7 +57,7 @@
             <!-- 填写支付宝信息 -->
             <div  v-if='index==1&&flag==1'>
                 <div class="info1"><span>提现金额</span>
-                     <span class="span">CNY</span>
+                     <span class="span">&nbsp;CNY</span>
                     <input type="number" placeholder="请输入金额" disabled="disabled" v-model="money"/>
                 </div>
                 <div class="info"><span>支付宝帐号</span>
@@ -72,7 +72,7 @@
             <!-- 填写银行卡信息 -->
             <div  v-if='index==1&&flag==2'>
                 <div class="info1"><span>提现金额</span>
-                     <span class="span">CNY</span>
+                     <span class="span"> &nbsp;CNY</span>
                     <input type="number" placeholder="请输入金额" disabled="disabled" v-model="money"/>
                 </div>
                 <div class="info"><span>姓名</span>
@@ -142,7 +142,7 @@
                     <div class="infoClose">{{list.no}}</div>
                 </div>
                 <div class="info"><span>提现金额</span>
-                    <div class="infoClose">{{list.amount | money}}CNY
+                    <div class="infoClose">{{list.amount | money}} &nbsp;CNY
                        </div>
                 </div>
                 <div class="info"><span>交易时间</span>
@@ -160,7 +160,7 @@
                     </div>
                 </div>
                 <div class="info"><span>提现金额</span>
-                    <div class="infoClose" v-if="list.status==1">处理中</div>
+                    <div class="infoClose" v-if="list.status==1" style="color:#eb6200;">处理中</div>
                     <div class="infoClose" v-if="list.status==2">已完成</div>
                     <div class="infoClose" v-if="list.status==3">失败</div>
                 </div>
@@ -397,13 +397,29 @@ import {commonService} from '../../service/commonService.js'
                            return false;  
                        } 
                        
-                         if(that.cityName ==''&&that.provinceName){
-                            that.htmlx='开户省市不能为空'
+                         // if(that.cityName ==''&&that.provinceName){
+                         //    that.htmlx='开户省市不能为空'
+                         //    setTimeout(() => {  
+                         //         that.htmlx=''
+                         //     },2000) 
+                         //    return false
+                         // }
+                          if(that.provinceIndex ==''){
+                            that.htmlx='开户省不能为空'
                             setTimeout(() => {  
                                  that.htmlx=''
                              },2000) 
                             return false
                          }
+
+                          if(that.cityIndex ==''){
+                            that.htmlx='开户市不能为空'
+                            setTimeout(() => {  
+                                 that.htmlx=''
+                             },2000) 
+                            return false
+                         }
+
                          if(that.userBankDetail ==''){
                             that.htmlx='开户支行不能为空'
                             setTimeout(() => {  
@@ -514,7 +530,7 @@ import {commonService} from '../../service/commonService.js'
                
                 let money=that.money * 100
               
-                 commonService.postForms({channelId:channelId,channelUser:that.account,phone:that.phone,type:type,idCard:that.namecard,userName:that.userName,smsCode:that.verification,smsType:7,amount:money,realName:that.name,userBankName:that.userBankName,userBank:that.userBank,userBankCardNo:that.userBankCardNo,userBankProvince:that.provinceName,userBankCity:that.cityName,userBankDetail:that.userBankDetail}).then(function(res){                    //市
+                 commonService.postForms({channelId:channelId,channelUser:that.account,phone:that.phone,type:type,idCard:that.namecard,userName:that.userName,smsCode:that.verification,smsType:7,amount:money,realName:that.name,userBankName:that.userBankName,userBank:that.userBank,userBankCardNo:that.userBankCardNo,userBankProvince:that.provinceIndex,userBankCity:that.cityIndex,userBankDetail:that.userBankDetail}).then(function(res){                    //市
                   
                     if(res.data.message=='success'){
                        that.oddNumbers=res.data.datas 
@@ -600,6 +616,8 @@ import {commonService} from '../../service/commonService.js'
                     float: right;
                     width: auto;
                     padding-left:0;
+                    margin-right: @size8;
+                    font-weight: 700;
                 }
                 input{
                     width: 2rem;
@@ -610,6 +628,7 @@ import {commonService} from '../../service/commonService.js'
                     font-size: 12px;
                     // color: red;
                     // font-weight: bold;
+                    font-weight: 700;
                     text-align: right;
                     background: #fff;
                     line-height: 1rem;
@@ -700,8 +719,8 @@ import {commonService} from '../../service/commonService.js'
                 position: relative;
                 top: @size25;
                 .circle{
-                    width: @size9;
-                    height: @size9;
+                    width: @size6;
+                    height: @size6;
                     border-radius: 50%;
                     border: 3px solid #eb6000;
                     display: inline-block;
@@ -838,7 +857,7 @@ import {commonService} from '../../service/commonService.js'
                 color:#87828c;
                 line-height: 1.02rem;
                 margin-right: 0.2rem;
-                font-size: 12px;
+                font-size: 10px;
                 // padding-top: @size1;
                 box-sizing: border-box;
                 img{
@@ -858,6 +877,7 @@ import {commonService} from '../../service/commonService.js'
                     padding-top: @size6;
                     i{
                       font-size: 10px;
+                      color:#ccc;
                     }
     
                 }

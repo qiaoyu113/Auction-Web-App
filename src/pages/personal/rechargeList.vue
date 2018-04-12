@@ -66,7 +66,7 @@
                     <!-- <div class="infomore" @click='removeAccount'><i class="iconfont icon-closeicon"></i></div> -->
                 </div>
                <div class="info1 clearfix"><span>汇款金额</span>
-                     <span class="span">CNY</span>
+                     <span class="span">&nbsp;CNY</span>
                     <input type="number" placeholder="请输入金额" disabled="disabled" v-model="money"/>
                 </div>
                 <div class="info clearfix"><span>手机号码</span>
@@ -82,7 +82,7 @@
                 </div>
                 <div class="info"><span>交易金额</span>
                     <div class="infoClose">
-                         <span class="span1">{{list.amount | money}}CNY</span>
+                         <span class="span1">{{list.amount | money}}&nbsp;CNY</span>
                        </div>
                 </div>
                 <div class="info"><span>交易时间</span>
@@ -95,11 +95,11 @@
                 <div class="info"><span>支付方式</span>
                     <div class="infoClose">
                     <span class="span2" v-if="list.userBankCardNo!=null">{{list.userBankDetail}}<br>
-                    尾号{{list.userBankCardNo.substr(list.userBankCardNo.length-4)}}{{card.cardTypeName}}</span>
+                    <i>尾号{{list.userBankCardNo.substr(list.userBankCardNo.length-4)}}{{card.cardTypeName}}</i></span>
                     </div>
                 </div>
                 <div class="info"><span>状态</span>
-                    <div class="infoClose" v-if="list.status==1">处理中</div>
+                    <div class="infoClose" v-if="list.status==1" style="color:#eb6200;">处理中</div>
                     <div class="infoClose" v-if="list.status==2">已完成</div>
                     <div class="infoClose" v-if="list.status==3">失败</div>
                 </div>
@@ -465,7 +465,7 @@ import {commonService} from '../../service/commonService.js'
               float: left;
               width: @size30;
               height: @size15;
-              background: #409fff;
+              background: #15b3b2;
               margin-top: @size10;
               line-height: @size15;
               text-align: center;
@@ -515,7 +515,7 @@ import {commonService} from '../../service/commonService.js'
                     line-height: 1.02rem;
                     float: left;
                     font-size: 12px;
-                    padding-top: @size1;
+                    // padding-top: @size1;
                     padding-left: @size10;
                 }
                 .span{
@@ -523,6 +523,8 @@ import {commonService} from '../../service/commonService.js'
                     width: auto;
                     padding-left:0;
                     margin-right: 0.2rem;
+
+                    font-weight: 700;
                 }
                 input{
                     width: 2rem;
@@ -530,9 +532,10 @@ import {commonService} from '../../service/commonService.js'
                     float: right;
                     border: none;
                     outline: none;
+                    line-height: 1.02rem;
                     font-size: 12px;
                     // color: red;
-                    // font-weight: bold;
+                    font-weight: 700;
                     text-align: right;
                     background: #fff;
                     // padding-right: @size3;
@@ -782,6 +785,7 @@ import {commonService} from '../../service/commonService.js'
                     padding-top: @size6;
                     i{
                       font-size: 10px;
+                      color:#ccc;
                     }
     
                 }

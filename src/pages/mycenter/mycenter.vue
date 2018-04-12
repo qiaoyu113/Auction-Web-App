@@ -663,12 +663,12 @@
                 height:1rem;
                 line-height:1rem;
                 border-bottom:1px solid #C9D0D8;
-                font-size:13px;
+                font-size:12px;
                 color:#333;
                 position: relative;
                 span{
                     color:#B1B1B1;
-                    font-size:13px;
+                    font-size:12px;
                     margin-left:0.8rem;
                 }
                 .more{
@@ -686,7 +686,7 @@
                 .goBind{
                     float:right;
                     color:#6F6F6F;
-                    font-size:13px;
+                    font-size:12px;
                     padding-right:0.2rem;
                 }
                 #start_date{
@@ -697,7 +697,7 @@
                     height: 1rem;
                    background:transparent;
                    border: none;
-                   font-size: 13px;
+                   font-size: 12px;
                   color: #B1B1B1;
                   //  text-align: center;
                 }
@@ -731,12 +731,12 @@
                 height:1rem;
                 line-height:1rem;
                 border-bottom:1px solid #C9D0D8;
-                font-size:13px;
+                font-size:12px;
                 color:#333;
                 overflow: hidden;
                 span{
                     color:#B1B1B1;
-                    font-size:13px;
+                    font-size:12px;
                     margin-left:0.8rem;
                 }
                 .more{
@@ -750,7 +750,7 @@
                 .goBind{
                     float:right;
                     color:#6F6F6F;
-                    font-size:13px;
+                    font-size:12px;
                     padding-right:0.2rem;
                 }
                 .del{
@@ -762,7 +762,7 @@
                     margin-left:0.2rem;
                     border:none;
                     outline: none;
-                    font-size:13px;
+                    font-size:12px;
                 }
             }
             .infoList:last-child{

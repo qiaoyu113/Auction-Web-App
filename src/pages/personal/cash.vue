@@ -17,13 +17,13 @@
         </div>
         <div class="box">
             <div class="info clearfix"><span>金额</span>
-               <span class="span" v-if="money!=''">CNY</span><input type="number" placeholder="请输入金额" v-model="money" @input="cny()" @keyup="moneyreplor()" />
+               <span class="span" v-if="money!=''">&nbsp;CNY</span><input type="number" placeholder="请输入金额" v-model="money" @input="cny()" @keyup="moneyreplor()" />
             </div>
             <div class="bor"></div>
             <div class="money clearfix">
                 <div class="fl">
                     <p>保证金提现余额<span>{{wallet!=null?wallet.availableMoney:0 | money}}CNY</span></p>
-                    <p>保证金总额{{wallet!=null?wallet.totalMoney:0 | money}}CNY</p>
+                    <p>保证金金额总额{{wallet!=null?wallet.totalMoney:0 | money}}CNY</p>
                 </div>
                 <div class="fr" @click="full()">全部提现</div>
             </div>
@@ -385,10 +385,10 @@
             .loginEn{
                 height:24px;
                 font-weight: bold;
-                font-size:16px;
+                font-size:14px;
             }
             .loginCn{
-                font-size: 14px;
+                font-size: 12px;
             }
             
         }
@@ -417,7 +417,7 @@
                 width: 2rem;
                 line-height: 1rem;
                 float: left;
-                font-size: 13px;
+                font-size: 12px;
 
                 // padding-top: @size1;
                 padding-left: @size10;
@@ -591,7 +591,7 @@
         border-top:1px solid rgb(53, 60, 70); 
         text-align: center;
         line-height: 1.2rem;
-        font-size: 15px;
+        font-size: 12px;
         background: #fff;
     }
    }

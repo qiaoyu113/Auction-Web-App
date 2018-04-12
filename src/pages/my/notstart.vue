@@ -265,7 +265,7 @@
 
                     }
                     .ros_l2{
-                        font-size: 15px;
+                        font-size: 13px;
                         font-weight: bold;
                         color: rgb(53,60,70);
                     }
@@ -416,7 +416,7 @@
                     margin-right: @size10;
                     p{
                         text-align: right;
-                        font-size: 15px;
+                        font-size: 13px;
                         line-height: @size16;
                         color: rgb(51,51,51);
                         font-weight:700;

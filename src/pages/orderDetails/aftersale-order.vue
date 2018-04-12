@@ -47,7 +47,7 @@
             <div class="orderinfo">
                 <div class="price clearfix" v-if='index>0'><div class="fl">退回路径</div><div class="fr">银行卡</div></div>
                 <div class="price clearfix" v-if='index>0'><div class="fl">差额原因</div><div class="fr">{{datas.amountReason}}</div></div>
-                <div class="price clearfix" v-if='index==0'>货品属性特殊，无法进行退货。审核失败，客服驳回售后申请。如有问题，请联系售后</div>
+                <div class="price clearfix" v-if='index==0'>{{datas.problem}}</div>
             </div>
             <div class="v_helpCenter">
                 <span class="fl">到账周期说明</span>
@@ -168,7 +168,7 @@ import {commonService} from '../../service/commonService.js'
                
                     if(res.data.code==200){
                      that.datas=res.data.datas
-                    
+                     console.log(that.datas)
                      that.orderNo=that.datas.orderNo
                      that.getOrderid()
                      if(that.datas.status==2){
@@ -336,8 +336,8 @@ import {commonService} from '../../service/commonService.js'
                     background: rgb(21, 179, 187);
                 }
                 .label {
-                    margin-left: -1.5rem;
-                    margin-right: -1.1rem; 
+                    margin-left: -1.54rem;
+                    margin-right: -1.3rem; 
                     text-align: center;  
                     font-size: 10px; 
                     

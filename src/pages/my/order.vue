@@ -22,7 +22,7 @@
             <div class="address_l">
                 <p>{{address.name}}</p>
             </div>
-            <div class="address_r" @click="jump()">
+            <div class="address_r" @click="jump(address.id)">
                 <i class="iconfont icon-shezhi"></i>
             </div>
             <div class="address_con">
@@ -260,8 +260,8 @@
                     this.getAddressid()
                 }
             },
-            jump:function(){
-               this.$router.push({path:"/my/selection",query:{auctionId:this.auctionId}})
+            jump:function(id){
+               this.$router.push({path:"/my/selection",query:{auctionId:this.auctionId,addressId:id}})
             },
             //获取默认地址 
             getDefault:function(){
@@ -269,6 +269,7 @@
                  commonService.getDefault().then(function(res){
                     if(res.data.datas!=null){
                         that.address=res.data.datas
+                        console.log(that.address)
                     }
                 })
             },
@@ -328,7 +329,11 @@
                 }
                 if(that.address.id==undefined || that.address.id==''){
                     that.htmlx='请选择地址'
+                    setTimeout(() => { 
+                                    that.htmlx = ''
+                                      },2000) 
                        return false
+                        
 
                 }
 
@@ -367,6 +372,9 @@
                         // that.$router.push({path:"/normalorder",query:{id:res.data.datas.orderNo}})
                     }else{
                         that.htmlx=res.data.message
+                         setTimeout(() => { 
+                                    that.htmlx = ''
+                                      },2000) 
                     }
                 })
             }
@@ -507,7 +515,7 @@
             // margin-top: @size10;
             span{
                 float: left;
-                font-size: 14px;
+                font-size: 12px;
                 line-height: 20px;
             }
             .span{
@@ -563,7 +571,7 @@
           .address_l{
             float: left;
             p{
-                font-size: 10px;
+                font-size: 12px;
                 color: rgb(51,51,51);
             }
           }
@@ -599,7 +607,7 @@
                 div{
                     margin-top: 0.1rem;
                     p{
-                        font-size: 10px;
+                        font-size: 12px;
                         color: rgb(204,204,204);
                     }
                 }
@@ -709,7 +717,7 @@
                     height: @size40;
                     margin: 0 @size10;
                     line-height: @size40;
-                    font-size: 11px;
+                    font-size: 12px;
                     color: rgb(51,51,51);
                     border-bottom: 1px solid rgb(224,224,224);
                 }
@@ -749,7 +757,7 @@
                     .ros_r{
                         float: left;
                         p{
-                            font-size: 10px;
+                            font-size: 12px;
                             line-height: @size13;
                         }
                         .linh{

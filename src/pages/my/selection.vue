@@ -24,8 +24,8 @@
             </div>
             <div class="v_moren" v-if="list.defaultAdress==true">默认地址</div>
             </div>
-            <div class="address_r" :class="{'address_rcolor':list.defaultAdress==true}" @click="addressIds(list._id)">
-                <div><i class="iconfont icon-duihao" v-if="list.defaultAdress==true"></i></div>
+            <div class="address_r" :class="{'address_rcolor':list._id==addressId}" @click="addressIds(list._id)">
+                <div><i class="iconfont icon-duihao" v-if="list._id==addressId"></i></div>
             </div>
             
         </div>
@@ -45,7 +45,7 @@
                 title: '传家',
                 address:'',
                 auctionId:this.$route.query.auctionId,
-                addressId:'',
+                addressId:this.$route.query.addressId,
             }
         },
         syncData({store}) {
@@ -72,23 +72,26 @@
         mounted: function() {
           common.onMove('.selection')
         	this.getAddress()
+
         },
         methods: {
           addressIds:function(id){
                  this.addressId=id
-                 this.$router.push({path:"/my/order",query:{addressId:this.addressId,auctionId:this.auctionId}})
+                 // this.$router.push({path:"/my/order",query:{addressId:this.addressId,auctionId:this.auctionId}})
           },
           xing:function(){
             this.$router.push({path:"/address",query:{id:''}})
           },
         	obtain:function(){
-            this.$router.push({path:"/my/order",query:{addressId:this.addressId,auctionId:this.auctionId}})    
+            this.$router.push({path:"/my/order",query:{addressId:this.addressId,auctionId:this.auctionId}})  
+
         	},
         	// 获取地址
         	getAddress:function(){
                 let that=this;
                  commonService.getAddress({pageNo:1,pageSize:30}).then(function(res){
                    that.address=res.data.datas.datas
+
                 })
             },
 
@@ -104,7 +107,7 @@
           left: 0;
           right: 0;
           top: 0;
-          overflow-x: scroll;
+          overflow-y: scroll;
           bottom: 0;
        .top{
           padding: @size50 @size20;
@@ -149,7 +152,7 @@
             width: 7.4rem;
             position: relative;
             p{
-                font-size: 10px;
+                font-size: 12px;
                 color: rgb(51,51,51);
             }
             .v_moren{
@@ -157,7 +160,7 @@
                bottom: 0;
                left: 0;
                color: #ee8640;
-               font-size: 10px;
+               font-size: 12px;
             }
             .address_l_l{
               float: left;
@@ -169,14 +172,14 @@
              .address_con{
                 float: right;
                 p{
-                    font-size: 10px;
+                    font-size: 12px;
                     color: rgb(51,51,51);
                     text-align: right;
                 }
                 div{
                     margin-top: 0.1rem;
                     p{
-                        font-size: 10px;
+                        font-size: 12px;
                         color: rgb(102,102,102);
                     }
                 }

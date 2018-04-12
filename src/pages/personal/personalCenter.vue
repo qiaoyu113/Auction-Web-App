@@ -513,9 +513,10 @@
                 .hel{
                     font-weight: bold;
                     letter-spacing: 1px;
+                    font-size: 14px;
                 }
                 .name{
-                    font-size: @size14;
+                    font-size: 12px;
                     line-height: @size14;
                 }
                 .prove{
@@ -550,7 +551,7 @@
                     width: @size22;
                     height: @size18;
                     display: inline-block;
-                    margin-top: @size30;
+                    margin-top: @size24;
                     margin-left: @size30;
                     position: relative;
                     i{
@@ -619,10 +620,10 @@
                     padding-left: @size10;
                     padding-top: @size10;
                     span{
-                        font-size: 10px;
+                        font-size: 12px;
                     }
                     .span1{
-                        font-size: 12px;
+                        font-size: 10px;
                         font-weight: bold;
                     }
                 }
@@ -634,7 +635,7 @@
                     outline: none;
                     height: @size25;
                     width: 1.8rem;
-                    font-size: 10px;
+                    font-size: 12px;
                 }
             }
         }

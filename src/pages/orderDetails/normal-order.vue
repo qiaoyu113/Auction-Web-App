@@ -66,7 +66,7 @@
             </div>
 
             <div class="payment clearfix" v-if='index==0'>
-                <div class="witpay">处理中</div>
+                <div class="witpay">代发货</div>
                 <div class="btn"><a href="tel:15801619600">联系客服</a></div>
             </div>
             <div class="payment clearfix" v-if='index==1'>
@@ -1023,7 +1023,7 @@ import {commonService} from '../../service/commonService.js'
             .witpay{
                 padding-left: @size10;
                 line-height: @size40;
-                font-size: 14px;
+                font-size: 12px;
                 float: left;
             }
             .btn{
@@ -1036,7 +1036,7 @@ import {commonService} from '../../service/commonService.js'
                 float: right;
                 padding: 0 @size10;
                 a{
-                  font-size: 14px;
+                  font-size: 12px;
                 }
                 
             }
@@ -1130,7 +1130,7 @@ import {commonService} from '../../service/commonService.js'
                 margin-left: @size10;
                 line-height: 1.3333rem;
                 color: rgb(129, 135, 140);
-                font-size: 15px;
+                font-size: 12px;
             }
         }
         }
@@ -1145,7 +1145,7 @@ import {commonService} from '../../service/commonService.js'
                 // margin-top: 1rem;
                 span{
                     float: left;
-                    font-size: 14px;
+                    font-size: 12px;
                 }
             }
             div{
@@ -1181,13 +1181,13 @@ import {commonService} from '../../service/commonService.js'
                 margin-left: @size15;
                 padding-top: @size10;
                 .money {
-                    font-size: 15px;
+                    font-size: 13px;
                     font-weight: bold;
                 }
                 .title {
                     font-size: 12px;
                     color: rgb(133, 133, 133);
-                    padding-top: @size1;
+                    // padding-top: @size1;
                     line-height: @size20;
                     max-height: @size40;
                     height: @size20;
@@ -1216,7 +1216,7 @@ import {commonService} from '../../service/commonService.js'
 
             }
             .fr{
-                font-size: 12px;
+                font-size: 13px;
                 font-weight: bold;
                 color: rgb(252, 90, 6);
             }

@@ -218,12 +218,12 @@
                 height:1rem;
                 line-height:1rem;
                 border-bottom:1px solid #C9D0D8;
-                font-size:13px;
+                font-size:12px;
                 color:#333;
 
                 span{
                     color:#B1B1B1;
-                    font-size:13px;
+                    font-size:12px;
                     margin-left:0.8rem;
                 }
                 .more{
@@ -237,7 +237,7 @@
                 .goBind{
                     float:right;
                     color:#6F6F6F;
-                    font-size:13px;
+                    font-size:12px;
                     padding-right:0.2rem;
                 }
             }
@@ -270,7 +270,7 @@
                 height:1rem;
                 line-height:1rem;
                 border-bottom:1px solid #C9D0D8;
-                font-size:13px;
+                font-size:12px;
                 color:#333;
                 overflow: hidden;
                 img{
@@ -278,7 +278,7 @@
                 }
                 span{
                     color:#B1B1B1;
-                    font-size:13px;
+                    font-size:12px;
                     margin-left:0.8rem;
                 }
                 .more{
@@ -292,14 +292,14 @@
                 .goBind{
                     float:right;
                     color:#6F6F6F;
-                    font-size:13px;
+                    font-size:12px;
                     padding-right:0.2rem;
                 }
                 .phone{
                     float:right;
                     margin-right:0.1rem;
                     color:#333;
-                    font-size:13px;
+                    font-size:12px;
                 }
                 .code{
                     float:right;
@@ -311,24 +311,24 @@
                     margin-left:0.2rem;
                     border:none;
                     outline: none;
-                    font-size:13px;
+                    font-size:12px;
                     color:#333;
                 }
                 input::-webkit-input-placeholder {
                     color:#C1C1C1;
-                    font-size:13px;
+                    font-size:12px;
                 }
                 input:-moz-placeholder {
                     color:#C1C1C1;
-                    font-size:13px;
+                    font-size:12px;
                 }
                 input::-moz-placeholder {
                     color:#C1C1C1;
-                    font-size:13px;
+                    font-size:12px;
                 }
                 input:-ms-input-placeholder {
                     color:#C1C1C1;
-                    font-size:13px;
+                    font-size:12px;
                 }
                 .codeInp{
                     width:3rem;

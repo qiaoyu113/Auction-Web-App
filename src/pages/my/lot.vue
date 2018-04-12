@@ -253,7 +253,7 @@
                         .ros_offer{
                             color: rgb(153,153,153);
                             font-weight: bold;
-                            font-size: 13px;
+                            font-size: 12px;
                             text-decoration:line-through;
                         }
                         .ros_prompt{
@@ -270,7 +270,7 @@
 
                     }
                     .ros_l2{
-                        font-size: 15px;
+                        font-size: 13px;
                         font-weight: bold;
                         color: rgb(53,60,70);
                     }
@@ -426,7 +426,7 @@
 
                     p{
                         text-align: right;
-                        font-size: 15px;
+                        font-size: 13px;
                         line-height: @size16;
                         color: rgb(51,51,51);
                         font-weight:700;

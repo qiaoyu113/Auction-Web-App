@@ -19,7 +19,7 @@
         <div class="box">
             <div class="info clearfix"><span v-if="money==''">金额</span>
                <span v-if="money!=''">金额</span>
-               <span class="span" v-if="money!=''">CNY</span>
+               <span class="span" v-if="money!=''">&nbsp;CNY</span>
                <input type="number" placeholder="请输入金额" v-model="money" @input="moneyreplor()"/>
                
             </div>
@@ -533,7 +533,7 @@
                 width: 2rem;
                 line-height: 1rem;
                 float: left;
-                font-size: 13px;
+                font-size: 12px;
                 // padding-top: @size1;
                 padding-left: @size10;
             }
@@ -587,7 +587,7 @@
              border-top: 1px solid #c7cacb;
 
              p{
-                font-size: 14px;
+                font-size: 12px;
                 margin-left: @size20;
                 line-height: 1.3rem;
                 color: #707070;
@@ -725,13 +725,13 @@
                 // margin-top: 17px;
                 line-height: @size50;
                 color: rgb(129, 135, 140);
-                font-size: 12px;
+                font-size: 10px;
                 .span1{
-                    font-size: 12px;
+                    font-size: 10px;
                     line-height: @size50;
                     a{
                         color: #ee7d3b;
-                        font-size: 12px;
+                        font-size: 10px;
                         border-bottom: 1px solid #ee7d3b;
                         
                     }
@@ -763,7 +763,7 @@
         border-top:1px solid rgb(53, 60, 70); 
         text-align: center;
         line-height: 1.2rem;
-        font-size: 14px;
+        font-size: 12px;
         color:#777;
         background: #fff;
     }

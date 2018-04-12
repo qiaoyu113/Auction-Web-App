@@ -641,7 +641,7 @@
                     font-size:28px;
                     margin-left: 0.3rem;
                     color:#A9AEB6;
-                    line-height: @size35;
+                    // line-height: @size35;
                 }
         }
         .font{
@@ -680,7 +680,7 @@
             width:100%;
             max-width:10rem;
             position: fixed;
-            top: 1.2rem;
+            top:  @size36;
             bottom:0rem;
             left:0;
             right:0;
