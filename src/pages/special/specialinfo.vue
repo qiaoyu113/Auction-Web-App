@@ -339,7 +339,9 @@
                             that.meScroll();
                         }else{
                             that.recoCh = false;
-                            that.wxShare()
+                            setTimeout(function(){
+                                that.wxShare()
+                            },500)
                         }
                     }
                 })
