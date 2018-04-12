@@ -264,7 +264,7 @@ export const commonService = {
     },
     /* 图片  */
     postBase: function (params) {
-        return axios.post('/files/base64' + this.getParam(params))
+        return axios.post('/files/base64',qs.stringify(params))
     },
     /* 获取实名认证信息  */
     getAuths: function () {
