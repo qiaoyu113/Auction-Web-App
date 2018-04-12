@@ -147,7 +147,7 @@
             let that = this;
             that.onMove()
             that.id = that.$route.params.id;
-            that.meScroll();
+            that.onload();
         },
         methods: {
             //微信分享
@@ -375,7 +375,7 @@
             //返回上一层
             back:function(){
                 let that = this;
-                that.$router.back({name:'/'})
+                that.$router.replace({name:'home'})
             },
             //前往拍品详情
             sellListGo(id){

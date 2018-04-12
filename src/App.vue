@@ -56,6 +56,10 @@
     body {
         font-family: PingFang SC,Hiragino Sans GB,Microsoft YaHei,WenQuanYi Micro Hei,Helvetica Neue,Arial,sans-serif;
     }
+    body iframe{
+        opacity:0;
+        display:none;
+    }
     p{margin: 0;}
     #home {
         padding-bottom: 65px;
