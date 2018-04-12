@@ -339,6 +339,7 @@
                             that.meScroll();
                         }else{
                             that.recoCh = false;
+                            that.wxShare()
                         }
                     }
                 })
