@@ -1291,7 +1291,7 @@
             //跳查看规则
             goRule(){
                 let that = this;
-                that.$router.push({name:'helpcenter'})
+                that.$router.push({name:'helpcenter',query:{index:'3'}})
             },
             //分享
             share(){
