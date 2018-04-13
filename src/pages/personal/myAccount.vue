@@ -319,7 +319,7 @@
                     if(res.data.code === 200){
                         let boxlist = res.data.datas.datas;
                         that.totalPage = res.data.datas.totalPage;
-                        console.log(res)
+                      
                         successCallback&&successCallback(boxlist);//成功回调
                     }else{
                         let boxlist = [];
