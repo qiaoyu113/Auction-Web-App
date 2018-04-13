@@ -381,7 +381,7 @@
             top: 5.5rem;
             bottom: 0;
             margin: auto;
-            border: 2px solid #000;
+            border: 2px solid #343c47;
             border-right: none;
             border-bottom-left-radius: 6px;
             border-top-left-radius:6px;
