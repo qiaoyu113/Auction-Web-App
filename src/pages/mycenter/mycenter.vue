@@ -64,7 +64,7 @@
             <!--修改密码-->
             <div class="info">
                 <div class="infoList">密码重置<div class="more" @click="changePass"><img src="../../../src/assets/image/mycenter/more.png"/></div></div>
-                <div class="infoList"><i class="iconfont icon-weixin1"></i>微信绑定号
+                <div class="infoList"><i class="iconfont icon-weixin1"></i>绑定微信号
                 <div class="goBind" @click="deleteorderwx()" v-if="user.wxBind==true">去解绑</div>
                 <div class="goBind" v-if="user.wxBind==null || user.wxBind==false" @click='wxlogins'>去绑定</div>
                 </div>

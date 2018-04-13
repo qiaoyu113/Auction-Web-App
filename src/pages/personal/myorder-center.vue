@@ -651,7 +651,7 @@
             
             padding-top: @size3; 
             margin-left: @size25;
-            color: rgb(157, 169, 177);
+            color: rgb(153, 153, 153);
         }
         .span1{
             float: right;

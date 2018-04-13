@@ -387,7 +387,7 @@ import {commonService} from '../../service/commonService.js'
                    return false
                  }
                     
-                    return false
+                  
                  if(that.name=='' || that.phone=='' || that.provinceName=='' || that.cityName=='' || that.detailAdress=='' || that.districtName==''){
                   that.prompt='请填写完整'
                   return false
@@ -631,7 +631,7 @@ import {commonService} from '../../service/commonService.js'
                 width: 2rem;
                 line-height: 1.02rem;
                 float: left;
-                font-size: 14px;
+                font-size: 12px;
             }
             input{
                 // padding-left:2rem; 
@@ -640,7 +640,7 @@ import {commonService} from '../../service/commonService.js'
                 float: left;
                 border: none;
                 outline: none;
-                font-size: 14px;
+                font-size: 12px;
             }
             .diqu{
             	width: 6rem;
@@ -683,7 +683,7 @@ import {commonService} from '../../service/commonService.js'
                 outline: none;
                 box-sizing: border-box;
                 padding: @size10;
-                font-size: 13px;
+                font-size: 12px;
                 letter-spacing: @size1;
             }
         }
@@ -724,7 +724,7 @@ import {commonService} from '../../service/commonService.js'
                 height: @size14;
             }
             span{
-                font-size: 14px;
+                font-size: 12px;
                 padding-left: @size8;
                 color: red;
             }

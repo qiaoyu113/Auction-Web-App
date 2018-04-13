@@ -3,7 +3,8 @@
         <div class="header">
             <div class="headerLeft">
                 <div class="headerEn">{{header.name}}</div>
-                <div class="headerCh">{{header.name2}}</div>
+                <div class="headerCh" v-if="login">{{header.name2}}</div>
+                 <div class="headerCh" v-if="!login">{{header.name3}}</div>
             </div>
             <div class="headerRight" @click="Returns()">
                 <img src="../../assets/image/mycenter/right.png"/>
@@ -47,7 +48,7 @@
         <div class="box sign" v-if="!login && !wxShow">
             <!--注册账号-->
             <div class="info">
-                <input type="number" placeholder="输入手机号" v-model="phone"/>
+                <input type="number" placeholder="请输入手机号" v-model="phone"/>
                  <div class="infoRight" @click="remphone()" v-if="phone!=''"><i class="iconfont icon-closeicon"></i></div>
             </div>
             <!-- <div class="info">
@@ -55,11 +56,11 @@
                 <div class="code" @click="getKaptchas()"><img :src="img.imageString"/></div>
             </div> -->
            <div class="info">
-                <input style="width:6rem;" type="number" placeholder="输入验证码" v-model="code"/>
+                <input style="width:6rem;" type="number" placeholder="请输入验证码" v-model="code"/>
                 <div class="code" @click="getcode">获取验证码<span v-if="codeShow" style="margin:0;">({{timeOver}})</span></div>
             </div>
             <div class="info">
-                <input type="password" placeholder="输入密码" v-model="password"/>
+                <input type="password" placeholder="请输入密码" v-model="password"/>
                 <div class="infoRight" @click="rempassword()" v-if='password!=""'><i class="iconfont icon-closeicon"></i></div>
             </div>
             <div class="info">
@@ -84,7 +85,7 @@
                 </div>
             </div>
            <div class="info">
-                <input type="number" placeholder="输入手机号" v-model="phone"/>
+                <input type="number" placeholder="请输入手机号" v-model="phone"/>
                  <div class="infoRight" @click="remphone()" v-if="phone!=''"><i class="iconfont icon-closeicon"></i></div>
             </div>
             <!-- <div class="info">
@@ -92,15 +93,15 @@
                 <div class="code" @click="getKaptchas()"><img :src="img.imageString"/></div>
             </div> -->
            <div class="info">
-                <input style="width:6rem;" type="number" placeholder="输入验证码" v-model="code"/>
+                <input style="width:6rem;" type="number" placeholder="请输入验证码" v-model="code"/>
                 <div class="code" @click="getcode">获取验证码<span v-if="codeShow" style="margin:0;">({{timeOver}})</span></div>
             </div>
             <div class="info">
-                <input type="password" placeholder="输入密码" v-model="password"/>
+                <input type="password" placeholder="请输入密码" v-model="password"/>
                 <div class="infoRight" @click="rempassword()" v-if='password!=""'><i class="iconfont icon-closeicon"></i></div>
             </div>
             <div class="info">
-                <input type="password" placeholder="确认密码" v-model="password2"/>
+                <input type="password" placeholder="请确认密码" v-model="password2"/>
                 <div class="infoRight" @click="rempassword2()" v-if="password2!=''"><i class="iconfont icon-closeicon"></i></div>
             </div>
             <!--登陆和提示-->
@@ -156,7 +157,8 @@
                 title: '传家',
                 header:{
                     name:'LOG IN',
-                    name2:'用户登录'
+                    name2:'用户登录',
+                    name3:'用户注册',
                 },
                 wxShow:false,
                 checked:true,
@@ -776,6 +778,7 @@
                     color:#A8A8A8;
                     margin-left:0.2rem;
                     padding:0 0.14rem;
+                    font-size: 12px;
                 }
                 .check2{
                     float:left;
@@ -789,6 +792,7 @@
                     color:#353535;
                     float:left;
                     padding:0 0.14rem;
+                    font-size: 12px;
                     box-sizing: border-box;
                     border-bottom:1px solid #353535;
                 }
@@ -837,7 +841,7 @@
                     float:left;
                     border:none;
                     outline: none;
-                    font-size:14px;
+                    font-size:12px;
                 }
                 input::-webkit-input-placeholder {
                     color:#C1C1C1;
@@ -922,7 +926,7 @@
                 line-height:1.2rem;
                 border-top:1px solid #333;
                 text-align: center;
-                font-size:14px;
+                font-size:12px;
                 background: #fff;
             }
         }
