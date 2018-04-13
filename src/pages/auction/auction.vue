@@ -513,7 +513,7 @@
             let overTime = window.localStorage.getItem('overTime');
             let now = new Date().getTime();
             let timePass = now - overTime
-            if(timePass <= 20000){
+            if(timePass <= 30000){
                 if(payOk != null){
                     if(payOk == '1'){
                         that.dis2Show = false;
