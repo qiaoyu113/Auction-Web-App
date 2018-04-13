@@ -27,7 +27,7 @@
                     <div class="infoClose">{{list.formNo}}</div>
                 </div>
                 <div class="info"><span>交易金额</span>
-                    <div class="infoClose">{{list.flowAmount | money}} CNY
+                    <div class="infoClose v_chu">{{list.flowAmount | money}} CNY
                        </div>
                 </div>
                 <div class="info"><span>交易时间</span>
@@ -48,19 +48,19 @@
                 <div class="info"><span>状态</span>
                     <div class="infoClose" v-if="list.flowStatus==10">已完成</div>
                     <div class="infoClose" v-if="list.flowStatus==11">已完成</div>
-                    <div class="infoClose" v-if="list.flowStatus==20">处理中</div>
+                    <div class="infoClose v_colorj" v-if="list.flowStatus==20">处理中</div>
                     <div class="infoClose" v-if="list.flowStatus==21">已完成</div>
-                    <div class="infoClose" v-if="list.flowStatus==22">处理中</div>
+                    <div class="infoClose v_colorj" v-if="list.flowStatus==22">处理中</div>
                     <div class="infoClose" v-if="list.flowStatus==23">交易关闭</div>
                     <div class="infoClose" v-if="list.flowStatus==30">交易关闭</div>
                     <div class="infoClose" v-if="list.flowStatus==31">交易关闭</div>
                     <div class="infoClose" v-if="list.flowStatus==32">交易关闭</div>
-                    <div class="infoClose" v-if="list.flowStatus==40">处理中</div>
+                    <div class="infoClose v_colorj" v-if="list.flowStatus==40">处理中</div>
                     <div class="infoClose" v-if="list.flowStatus==41">已完成</div>
                     <div class="infoClose" v-if="list.flowStatus==42">交易关闭</div>
-                    <div class="infoClose" v-if="list.flowStatus==50">处理中</div>
+                    <div class="infoClose v_colorj" v-if="list.flowStatus==50">处理中</div>
                     <div class="infoClose" v-if="list.flowStatus==51">已完成</div>
-                    <div class="infoClose" v-if="list.flowStatus==52">处理中</div>
+                    <div class="infoClose v_colorj" v-if="list.flowStatus==52">处理中</div>
                     <div class="infoClose" v-if="list.flowStatus==53">交易关闭</div>
 
                 </div>
@@ -185,6 +185,9 @@ import {commonService} from '../../service/commonService.js'
                 font-size: 12px;
                 background: #fff;
             }
+            .v_chu{
+                font-weight: 700;
+            }
             .infoClose{
                 float: right;
                 color:#87828c;
@@ -213,6 +216,9 @@ import {commonService} from '../../service/commonService.js'
     
                 }
                 
+            }
+            .v_colorj{
+                color:#eb6200;
             }
             .infomore{
                 float: right;

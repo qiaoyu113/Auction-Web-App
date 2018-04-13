@@ -104,6 +104,19 @@
                 </div>
             </div>
         </div>
+           <div class="v_modaltou" ref="v_modaltou" v-if="v_modal">
+           <div class="v_box">
+                  <div class="v_box_top" @click="remrealname()"><i class="iconfont icon-closeicon"></i></div>
+                 <p class="v_box_p">PROMPT</p>
+
+                 <p>提示</p>
+                 <p  class="v_box_img">请先实名认证</p>
+                 <!-- <div><img src="../../assets/image/mycenter/scy.png" /></div> -->
+                 <div class="v_button" @click='realname()'> 
+                     去认证
+                 </div>
+           </div>
+        </div>
         <!--联系客服-->
         <div class="talk" @click="openService()">
             <img src="../../assets/image/mycenter/icon5.png"/>
@@ -180,6 +193,8 @@
                 ],
                  page:{num:1,size:30},
                 isShowNoMore:false,
+                list:'',
+                v_modal:false,
             }
         },
         components:{'home-item':itemc},
@@ -215,6 +230,7 @@
             // this.getBails()
             this.getUsers()
             this.meScroll()
+            this.getUsersss()
 
         },
         methods: {
@@ -230,6 +246,13 @@
             },
             Return:function(){
               this.$router.push({path:"/personalCenter"})  
+            },
+            remrealname:function(){
+             this.v_modal=false
+            },
+            //去认证 
+             realname:function(){
+                this.$router.push({name:'realname'})
             },
             detailed:function(id){
            
@@ -248,11 +271,27 @@
                 this.$router.push({path:"/recharge"})
             },
              cash:function(){
-                this.$router.push({path:"/cash"})
+                 console.log(this.list)
+                 if(this.list.realNameStatus==2){
+                    this.$router.push({path:"/cash"})
+                }else{
+                    this.v_modal=true
+                }
             },
             helpcenter:function(){ 
                 this.$router.push({path:"/helpcenter",query:{index:4}})
             },
+               // 获取个人信息
+            getUsersss:function(){
+                let that = this;
+                  commonService.getUsers().then(function(res){
+                    if(res.data.code==200){
+                      that.list=res.data.datas.user
+                    }
+
+                 }) 
+            },
+            //获取保证金明细
             getBails:function(){
                 let that = this;
                commonService.getBails({pageNo:1,pageSize:30}).then(function(res){
@@ -666,6 +705,71 @@
                 }
             }
         }
+    }
+     .v_modaltou{
+          position: fixed;
+          left: 0;
+          top: 0;
+          right: 0;
+          bottom: 0;
+          width: 100%;
+          height: 100%;
+          z-index: 9999;
+          background: rgba(0,0,0,0.5);
+         
+          
+          .v_box{
+            width: 6.5rem;
+            height: 6.6rem;
+            background: #fff;
+            margin: 4rem auto 0; 
+            position: relative;
+            .v_box_top{
+                 position: absolute;
+                 right: 0;
+                 top: 0;
+                 width: @size30;
+                 height: @size30;
+                 background: #eb6100;
+                 i{
+                    font-size: @size30;
+                    color:#fff;
+                 }
+            }
+            .v_box_p{
+                 padding-top: @size50;
+                 font-size: 14px;
+                 color: rgb(57, 57, 57);
+                 font-weight: 700;
+            }
+            .v_box_img{
+                 margin:@size24 0 @size14; 
+                 width: 100%;
+                 img{
+                    width: @size40;
+                    height: @size40;
+                    margin-left: 2.72rem;
+                 }
+            }
+            p{
+                font-size: 14px;
+                text-align: center;
+                color: rgb(98, 98, 98);
+                // padding:1rem 0.5rem;
+                
+            }
+            .v_button{
+               position: absolute;
+               bottom: 0;
+               left: 0;
+               height: @size44;
+               width: 100%;
+               border-top:1px solid #353c47;
+               text-align: center;
+               line-height: @size44;
+               font-size: 14px;
+             }
+          }
     }
 
     }

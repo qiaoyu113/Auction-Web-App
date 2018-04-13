@@ -13,7 +13,7 @@
         <div class="box2" v-if="index==1">
             <!--新手机号码-->
             <div class="info">
-                <div class="infoList">注册手机号<input class="codeInp" type="number" placeholder="请输入" v-model="phone"/>
+                <div class="infoList">注册手机号<input class="codeInp" type="number" placeholder="请输入注册手机号" v-model="phone"/>
                <div class="goBind" @click="remphone()" v-if="phone!=''"> <i class="iconfont icon-closeicon"></i></div>
                 </div>
             </div>
@@ -27,7 +27,7 @@
             <!--</div>-->
             <!--短信验证码-->
             <div class="info">
-                <div class="infoList">短信验证码<input class="codeInp" type="number" placeholder="请输入" v-model="inputNum"/><div class="code" @click="getcode">获取验证码<span v-if="codeShow" style="margin:0;">({{timeOver}})</span></div></div>
+                <div class="infoList">短信验证码<input class="codeInp" type="number" placeholder="请输入短信验证码" v-model="inputNum"/><div class="code" @click="getcode">获取验证码<span v-if="codeShow" style="margin:0;">({{timeOver}})</span></div></div>
             </div>
             <div id="captcha-box"></div>
             <!--保存-->
@@ -39,12 +39,12 @@
         <div class="box2" v-if="index==2">
             <!--新手机号码-->
             <div class="info">
-                <div class="infoList">新密码<input class="codeInp" type="password" placeholder="请输入" v-model="newPassword"/>
+                <div class="infoList">新密码<input class="codeInp" type="password" placeholder="请输入新密码" v-model="newPassword"/>
                <div class="goBind" @click="remnewPassword()" v-if="newPassword!=''"> <i class="iconfont icon-closeicon"></i></div>
                 </div>
             </div>
             <div class="info">
-                <div class="infoList">确认新密码<input class="codeInp" type="password" placeholder="请输入" v-model="newPassword2"/>
+                <div class="infoList">确认新密码<input class="codeInp" type="password" placeholder="请确认新密码" v-model="newPassword2"/>
                <div class="goBind" @click="remnewPassword2()" v-if="newPassword2!=''"> <i class="iconfont icon-closeicon"></i></div>
                 </div>
             </div>
@@ -524,7 +524,7 @@
                 height:1rem;
                 line-height:1rem;
                 border-bottom:1px solid #C9D0D8;
-                font-size:13px;
+                font-size:12px;
                 color:#333;
                 overflow: hidden;
                 img{
@@ -532,7 +532,7 @@
                 }
                 span{
                     color:#B1B1B1;
-                    font-size:13px;
+                    font-size:12px;
                     margin-left:0.8rem;
                 }
                 .more{
@@ -546,14 +546,14 @@
                 .goBind{
                     float:right;
                     color:#6F6F6F;
-                    font-size:13px;
+                    font-size:12px;
                     padding-right:0.2rem;
                 }
                 .phone{
                     float:right;
                     margin-right:0.1rem;
                     color:#333;
-                    font-size:13px;
+                    font-size:12px;
                 }
                 .code{
                     float:right;
@@ -565,24 +565,24 @@
                     margin-left:0.2rem;
                     border:none;
                     outline: none;
-                    font-size:13px;
+                    font-size:12px;
                     color:#333;
                 }
                 input::-webkit-input-placeholder {
                     color:#C1C1C1;
-                    font-size:13px;
+                    font-size:12px;
                 }
                 input:-moz-placeholder {
                     color:#C1C1C1;
-                    font-size:13px;
+                    font-size:12px;
                 }
                 input::-moz-placeholder {
                     color:#C1C1C1;
-                    font-size:13px;
+                    font-size:12px;
                 }
                 input:-ms-input-placeholder {
                     color:#C1C1C1;
-                    font-size:13px;
+                    font-size:12px;
                 }
                 .codeInp{
                     width:3rem;

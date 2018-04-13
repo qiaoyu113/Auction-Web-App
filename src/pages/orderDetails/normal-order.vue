@@ -66,13 +66,15 @@
             </div>
 
             <div class="payment clearfix" v-if='index==0'>
-                <div class="witpay">待发货</div>
+                <div class="witpay" v-if="datas.status==2">处理中</div>
+                <div class="witpay" v-if="datas.status==3">待发货</div>
                 <div class="btn"><a href="tel:15801619600">联系客服</a></div>
             </div>
             <div class="payment clearfix" v-if='index==1'>
                 <div class="witpay">待支付</div>
                 <!-- <div class="btn" @click="kshow()">更改支付方式</div> -->
             </div>
+          
             <div class="payment clearfix" v-if='index==1 && wxLogin==true'>
              <div class="pay" @click="methodlist('WX_JSAPI')">
                 <div :class="method=='WX_JSAPI' ? 'check' : 'check1'"><i class="iconfont icon-duihao"></i></div>
@@ -384,6 +386,12 @@ import {commonService} from '../../service/commonService.js'
         rechargeList:function(){      
               let that=this;
               let index=''
+              // if(that.wxLogin==true){
+              //    if(){
+
+              //    }
+              // }
+
               if(that.method=='OFFLINE_BANK'){
                      index=3
             that.$router.push({path:"/rechargeList",query:{money:that.datas.amount,index:index,orderNo:that.orderNo,type:4}})
@@ -445,6 +453,15 @@ import {commonService} from '../../service/commonService.js'
                 }
                 if(that.datas.channelId!=''){
                   that.method=that.datas.channelId
+                  if(that.wxLogin==true){
+                        if(that.method=="ALIPAY_WAP"){
+                             that.method="WX_JSAPI"
+                        }
+                  }else if(that.wxLogin==false){
+                        if(that.method=="WX_JSAPI"){
+                             that.method="ALIPAY_WAP"
+                        }
+                  }
                 }else{
                   that.method='OFFLINE_BANK'
                 }
@@ -744,7 +761,7 @@ import {commonService} from '../../service/commonService.js'
             display: none;
             img{
                 margin-top: @size6;
-                width: 0.5rem;
+                width: 0.4rem;
             }
         }
         .display{
@@ -766,7 +783,7 @@ import {commonService} from '../../service/commonService.js'
                 padding-left: @size10;
                 i{
                     font-size: 10px;
-                    color: red;
+                    color: #eb6200;
                 }
             }
             .time{
@@ -1207,7 +1224,7 @@ import {commonService} from '../../service/commonService.js'
         }
         .totalMoney{
             height: @size40;
-            width: 8.933rem;
+            // width: 8.933rem;
             border-bottom: 1px solid rgb(129, 135, 140);
             margin-left: @size10;
             line-height: @size40;

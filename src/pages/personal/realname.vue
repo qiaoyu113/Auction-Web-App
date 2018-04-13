@@ -4,7 +4,7 @@
     -->
     <!-- 实名认证 -->
     <div :class="shadow" class="realname" id="" v-set-title="title">
-        
+         <div class="v_realname">
         <!-- <div class="header">传家</div> -->
         <div class="content">
             <div class="loginBox">
@@ -71,13 +71,15 @@
                 <p>6.您提供的信息我们将会严格为您保密。</p>
             </div>
             <!--登陆和提示-->
-            <div class="bottom">
+         
+        </div>  
+        </div> 
+        <div class="bottom">
                 <div class="wrong" v-if="prompt!=''">{{prompt}}</div>
                 <div class="log" @click="submit" v-if="rz.authStatus!=1 && rz.authStatus!=3">确认认证</div>
                 <div class="log log2" v-if="rz.authStatus==1">审核中</div>
                 <div class="log" @click="submit" v-if="rz.authStatus==3">去认证</div>
             </div>
-        </div>
         <!-- 弹窗 -->
         <div class="shadow" :class="dis">
         <div class="popWin">
@@ -161,7 +163,7 @@
         mounted: function() {
             // this.shuchu()
             
-            common.onMove('.realname')
+            common.onMove('.v_realname')
             this.getAuths()
         },
         methods: {
@@ -360,6 +362,7 @@
     @import url('../../assets/css/base.less');
     @import url('../../assets/css/icon/iconfont.css');
     .realname{
+        .v_realname{
         position: fixed;
           left: 0;
           right: 0;
@@ -422,7 +425,7 @@
                 width: 2rem;
                 line-height: 1.02rem;
                 float: left;
-                font-size: @size12;
+                font-size: 12px;
                 padding-left: @size10;
                 padding-top: @size1;
             }
@@ -435,14 +438,14 @@
                 border: none;
                 outline: none;
                 background: #fff;
-                font-size: @size12;
+                font-size: 12px;
             }
             .infoClose{
                 float: right;
                 color:#87828c;
                 line-height: 1.02rem;
                 margin-right: 0.2rem;
-                font-size: @size12;
+                font-size: 12px;
                 padding-top: @size1;
             }
         }
@@ -450,7 +453,7 @@
             width: 100%;
             text-align: center;
             span{
-                font-size: 0.24rem;
+                font-size: 10px;
                 border-bottom: 1px solid #87828c;
                 color: #87828c
             }
@@ -546,15 +549,15 @@
         .hit{
             margin:2.05rem 0; 
             p{
-                font-size: @size10;
+                font-size: 10px;
                 padding-left: @size10;
                 color: rgb(153, 153, 153);
                 span{
-                    font-size: @size10;
-                    color: red;
+                    font-size: 10px;
+                    color: #eb6200;
                 }
                 a{
-                    font-size: @size10;
+                    font-size: 10px;
                     color:#ec6c1a;
                     text-decoration: underline;
                 }
@@ -570,6 +573,7 @@
         text-decoration: underline;
 
     }
+}
     .bottom{
         width: 100%;
         position: fixed;
@@ -641,11 +645,11 @@
             }
             .removeCn{
                 color: #333333;
-                font-size: @size12;
+                font-size: 12px;
             }
             .removeCon{
                 color: #333333;
-                font-size:@size12;
+                font-size:12px;
                 padding: @size15;
             }
         }
@@ -675,7 +679,7 @@
             span{
                 float: left;
                 width: 50%;
-                font-size:@size11;
+                font-size:12px;
             }
         }
     }

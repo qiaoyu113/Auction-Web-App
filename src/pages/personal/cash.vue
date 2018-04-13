@@ -22,8 +22,8 @@
             <div class="bor"></div>
             <div class="money clearfix">
                 <div class="fl">
-                    <p>保证金提现余额<span>{{wallet!=null?wallet.availableMoney:0 | money}}CNY</span></p>
-                    <p>保证金金额总额{{wallet!=null?wallet.totalMoney:0 | money}}CNY</p>
+                    <p>保证金提现余额&nbsp;<span>{{wallet!=null?wallet.availableMoney:0 | money}}CNY</span></p>
+                    <p>保证金金额总额&nbsp;{{wallet!=null?wallet.totalMoney:0 | money}}CNY</p>
                 </div>
                 <div class="fr" @click="full()">全部提现</div>
             </div>
@@ -170,7 +170,7 @@
             } else {
 //                    这里不是微信浏览器
                 this.wxLogin = false;
-                 this.index=2
+                 this.index=3
             }
              },
              getIndex: function(index) {
@@ -417,19 +417,18 @@
                 line-height: 1rem;
                 float: left;
                 font-size: 12px;
-
                 // padding-top: @size1;
                 padding-left: @size10;
             }
             input{
-                width: 2rem;
+                // width: 3rem;
                 height: 100%;
                 float: right;
                 border: none;
                 outline: none;
                 font-size: 13px;
                 color: #eb6200;
-                font-weight: bold;
+                // font-weight: bold;
                 line-height: 1rem;
                 text-align: right;
                 // padding-right: @size3;
@@ -438,7 +437,7 @@
                 width: auto;
                float: right;
                color: #eb6200;
-               font-size: @size12;
+               font-size: 13px;
                padding-right: @size3;
                padding-left:0;
             }

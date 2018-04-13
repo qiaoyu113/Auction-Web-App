@@ -28,18 +28,7 @@
             </div>
         </div>
      
-         <div class="v_modal" ref="v_modal" v-if="v_modal">
-           <div class="v_box">
-                  <div class="v_box_top" @click="heig()"><i class="iconfont icon-closeicon"></i></div>
-                 <p class="v_box_p">REMOVE ITEM</p>
-                 <p>删除</p>
-                 <div class="v_box_img"><img src="../../assets/image/mycenter/scy.png" /></div>
-                 <p>是否删除地址?</p>
-                 <div class="v_button" @click='deleteAddress()'> 
-                     确定
-                 </div>
-           </div>
-        </div>
+        
         <!--联系客服-->
         <div class="talk" @click="openService()">
             <img src="../../assets/image/mycenter/icon5.png"/>
@@ -78,6 +67,19 @@
         <div class="serviceBk" v-if="ServiceBox"></div>
     </div>
      <div class="footer" @click="jump()">添加新地址&nbsp;&nbsp;<span>+</span></div>
+
+      <div class="v_modal" ref="v_modal" v-if="v_modal">
+           <div class="v_box">
+                  <div class="v_box_top" @click="heig()"><i class="iconfont icon-closeicon"></i></div>
+                 <p class="v_box_p">REMOVE ITEM</p>
+                 <p>删除</p>
+                 <div class="v_box_img"><img src="../../assets/image/mycenter/scy.png" /></div>
+                 <p>是否删除地址?</p>
+                 <div class="v_button" @click='deleteAddress()'> 
+                     确定
+                 </div>
+           </div>
+        </div>
     </div>
 </template>
 
@@ -323,19 +325,21 @@ import {commonService} from '../../service/commonService.js'
    
     .content{
         padding: 0 @size10;
-        margin-top:@size35;
+        
         padding-bottom: 1.2rem;
 
         .peo{
             padding:@size15 @size10;
             height: @size20;
-            .fl{font-size:@size12;} 
-            .fr{font-size:@size12;} 
+            .fl{font-size:12px;} 
+            .fr{font-size:12px;} 
         }
         .addr{
             color: gray;
-            font-size: @size12;
+            font-size: 12px;
             width: 100%;
+            // max-width: 6.3rem;
+
             text-align: right;
             box-sizing: border-box;
             padding-right:@size10;
@@ -355,17 +359,17 @@ import {commonService} from '../../service/commonService.js'
             
             .checked{
                 float: left;
-                box-sizing: border-box;
-                border: 3px solid rgb(0, 185, 181);
-                width: @size14;
-                height: @size14;
-                position: relative;
+                // box-sizing: border-box;
+                border: 2px solid rgb(0, 185, 181);
+                width:  @size10;
+                height:  @size10;
+                // position: relative;
                 i{
                     font-size: @size10;
                     line-height: @size10;
-                    position: absolute;
-                    top: -@size1;
-                    left: -@size1;
+                    // position: absolute;
+                    // top: -@size1;
+                    // left: -@size1;
                     color: rgb(0, 185, 181);
                 }
                 .v_span{
@@ -374,17 +378,17 @@ import {commonService} from '../../service/commonService.js'
             }
             .check{
                 float: left;
-                box-sizing: border-box;
-                border: 3px solid rgb(153, 153, 153);
-                width: @size14;
-                height: @size14;
+                // box-sizing: border-box;
+                border: 2px solid rgb(153, 153, 153);
+                width: @size10;
+                height: @size10;
                 position: relative;
                 i{
                     display: none;
                 }
             }
             span{
-                font-size: @size14;
+                font-size: 12px;
                 padding-left: @size10;
                 line-height: @size15;
                
@@ -395,7 +399,7 @@ import {commonService} from '../../service/commonService.js'
             button{
                 margin:0 @size10;
                 outline: none;
-                font-size: @size14;
+                font-size: 12px;
                 line-height: @size11;
             }
             .v_fr{
@@ -404,7 +408,9 @@ import {commonService} from '../../service/commonService.js'
         }
     }
   
-    .v_modal{
+
+ }
+     .v_modal{
           position: fixed;
           left: 0;
           top: 0;
@@ -467,7 +473,6 @@ import {commonService} from '../../service/commonService.js'
              }
           }
     }
- }
    .footer{
         background: #fff;
         position:fixed;

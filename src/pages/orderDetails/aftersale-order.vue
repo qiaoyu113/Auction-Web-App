@@ -168,7 +168,7 @@ import {commonService} from '../../service/commonService.js'
                
                     if(res.data.code==200){
                      that.datas=res.data.datas
-                     console.log(that.datas)
+                    
                      that.orderNo=that.datas.orderNo
                      that.getOrderid()
                      if(that.datas.status==2){

@@ -781,8 +781,8 @@ import {commonService} from '../../service/commonService.js'
                 position: relative;
                 top: @size25;
                 .circle{
-                    width: @size9;
-                    height: @size9;
+                    width: @size6;
+                    height: @size6;
                     border-radius: 50%;
                     border: 3px solid #eb6000;
                     display: inline-block;
@@ -860,7 +860,7 @@ import {commonService} from '../../service/commonService.js'
                 color:#87828c;
                 line-height: 1.02rem;
                 margin-right: 0.2rem;
-                font-size: 10px;
+                font-size: 12px;
                 // padding-top: @size1;
                 box-sizing: border-box;
                 .v_tou{

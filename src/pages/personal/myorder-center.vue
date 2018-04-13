@@ -503,7 +503,7 @@
         top: 5.5rem;
         bottom: 0;
         margin: auto;
-        border: 2px solid #343c47;
+        border: 2px solid #000;
         border-right: none;
         border-bottom-left-radius: 6px;
         border-top-left-radius:6px;
@@ -646,7 +646,7 @@
         }
         .font{
             display: inline-block;
-            font-size: @size14;
+            font-size: 13px;
             line-height: @size30;
             
             padding-top: @size3; 
@@ -669,7 +669,7 @@
         }
         .check{
             border-bottom:2px solid black;
-            color: black;
+            color: rgb(51, 51, 51);
         }
     }
 

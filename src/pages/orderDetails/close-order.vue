@@ -213,7 +213,7 @@ import {commonService} from '../../service/commonService.js'
             padding-right: 20px;
             display: none;
             img{
-                width: @size20;
+                width: 0.4rem;
                 margin-top: @size5;
             }
         }
@@ -358,7 +358,7 @@ import {commonService} from '../../service/commonService.js'
         }
         .totalMoney{
             height: @size40;
-            width: 8.933rem;
+            // width: 8.933rem;
             border-bottom: 1px solid rgb(129, 135, 140);
             margin-left: @size10;
             line-height: @size40;
@@ -366,7 +366,7 @@ import {commonService} from '../../service/commonService.js'
                 font-size: 12px;
             }
             .fr{
-                font-size: 12px;
+                font-size: 13px;
                 font-weight: bold;
                 color: #fc5500;
             }

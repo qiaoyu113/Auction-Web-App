@@ -8,7 +8,7 @@
         <div class="content">
             <div class="loginBox">
                 <div class='loginEn'>SHIPPING ADDRESS</div>
-                <div class="loginCn">地址选择</div>
+                <div class="loginCn">地址管理</div>
             </div>
             <div>
             	<!-- <v-distpicker></v-distpicker> -->
@@ -365,7 +365,20 @@ import {commonService} from '../../service/commonService.js'
             // 新增地址
              postAddress:function(){
                let that = this
-               
+                  if(that.name==''){
+                   that.prompt='请填写联系人'
+                   setTimeout(() => { 
+                        that.prompt= ''
+                           },2000) 
+                   return false
+                 }
+                if(that.phone==''){
+                   that.prompt='请填写联系方式'
+                   setTimeout(() => { 
+                        that.prompt= ''
+                           },2000) 
+                   return false
+                 }
                  let reg = /^1[3|4|5|7|8][0-9]{9}$/;
                  let flag = reg.test(that.phone)
                  if(!flag){
@@ -377,21 +390,53 @@ import {commonService} from '../../service/commonService.js'
 
                    return false
                  }
-              
-                   if(that.detailAdress.length < 5||that.detailAdress.length>60){
-                  that.prompt='详细地址5-60个字'
-                   setTimeout(() => { 
-                                 
-                                   that.prompt= ''
-                                      },2000) 
-                   return false
-                 }
-                    
-                  
-                 if(that.name=='' || that.phone=='' || that.provinceName=='' || that.cityName=='' || that.detailAdress=='' || that.districtName==''){
-                  that.prompt='请填写完整'
+                 //   if(that.provinceName==''){
+                 //   that.prompt='请选择省'
+                 //   setTimeout(() => { 
+                 //        that.prompt= ''
+                 //           },2000) 
+                 //   return false
+                 // }
+                 //   if(that.cityName==''){
+                 //   that.prompt='请填写联系方式'
+                 //   setTimeout(() => { 
+                 //        that.prompt= ''
+                 //           },2000) 
+                 //   return false
+                 // }
+                 //   if(that.detailAdress==''){
+                 //   that.prompt='请填写联系方式'
+                 //   setTimeout(() => { 
+                 //        that.prompt= ''
+                 //           },2000) 
+                 //   return false
+                 // }
+                    if(that.provinceIndex=='' || that.cityIndex=='' || that.countyIndex==''){
+                  that.prompt='请选择地区'
+                  setTimeout(() => {              
+                    that.prompt= ''
+                     },2000) 
                   return false
                  }
+                   if(that.detailAdress==''){
+                  that.prompt='请填写详细地址'
+                  setTimeout(() => {              
+                    that.prompt= ''
+                     },2000) 
+                  return false
+                 }
+                  
+                 if(that.detailAdress.length < 5 || that.detailAdress.length > 60){
+                  that.prompt='详细地址5-60个字'
+                   setTimeout(() => {           
+                    that.prompt= ''
+                 },2000) 
+                   return false
+                 }
+              return false
+                    
+                  
+              
                commonService.postAddress({name:that.name,phone:that.phone,provinceName:that.provinceName,provinceId:that.provinceid,cityName:that.cityName,cityId:that.cityid,districtName:that.countyName,districtId:that.countyid,detailAdress:that.detailAdress}).then(function(res){
                 // that.bankCard=res.data.datas
                    if(res.data.code==200){
@@ -582,7 +627,7 @@ import {commonService} from '../../service/commonService.js'
     //     line-height: @size45;
     // }
     .content{
-        margin-top: @size45;
+        // margin-top: @size45;
         width:100%;
         height:3.7rem;
         border-bottom:2px solid rgb(51, 51, 51);
@@ -596,11 +641,11 @@ import {commonService} from '../../service/commonService.js'
             .loginEn{
                 height:0.75rem;
                 font-weight: 600;
-                font-size:16px;
-                letter-spacing: @size3;
+                font-size:14px;
+                // letter-spacing: @size3;
             }
             .loginCn{
-                font-size: 15px;
+                font-size: 12px;
             }
         }
         .icon{
@@ -674,7 +719,7 @@ import {commonService} from '../../service/commonService.js'
             margin-top: @size15;
             box-sizing: border-box;
             overflow: hidden;
-            border-radius: 6px;
+            // border-radius: 6px;
             textarea{
                 width: 100%;
                 height: 100%;

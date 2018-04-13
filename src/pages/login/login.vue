@@ -753,6 +753,9 @@
                     font-weight: bold;
                     font-size:20px;
                 }
+                .headerCh{
+                    font-size: 12px;
+                }
             }
             .headerRight{
                 float: right;
@@ -806,6 +809,7 @@
                 width: 2rem;
                 text-align: center;
                 margin:0.5rem auto;
+                font-size: 14px;
                 i{
                     font-size:28px;
                     float:left;
@@ -862,6 +866,7 @@
                     color:#C1C1C1;
                 }
                 .code{
+                     font-size: 10px;
                     img{
                         height: 1rem;
                     }

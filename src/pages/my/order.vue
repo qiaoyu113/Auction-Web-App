@@ -527,7 +527,7 @@
                 margin-top: -0.2rem;
             }
             img{
-                width: 0.8rem;
+                width: 1rem;
                 margin-top: 0.4rem;
             }
           }
@@ -605,6 +605,7 @@
                     font-size: 12px;
                     color: rgb(51,51,51);
                     text-align: right;
+                    max-width: 6rem;
                 }
                 div{
                     margin-top: 0.1rem;

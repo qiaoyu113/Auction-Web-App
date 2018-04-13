@@ -252,12 +252,15 @@
                                       },2000) 
                     return false
                 }
-
+            
                 let money=that.money * 100
                commonService.postBails({amount:money}).then(function(res){
                     // that.wallet=res.data.datas.user.wallet
                     if(res.data.code!=200){
                         that.prompt=res.data.message
+                         setTimeout(() => { 
+                                   that.prompt=""
+                                      },2000) 
                         return false
                     }
                     if(that.index==3){
@@ -568,7 +571,8 @@
                 width: auto;
                float: right;
                color: #eb6200;
-               font-size: @size12;
+               font-size: 13px;
+                line-height: 1rem;
                padding-right: @size3;
                padding-left:0;
             }
