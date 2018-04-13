@@ -510,16 +510,21 @@
             window.localStorage.setItem('back','no')
             //是否支付成功
             let payOk = window.localStorage.getItem('payOk');
-//            if(payOk != null){
-//                if(payOk == '1'){
-//                    that.dis2Show = false;
-//                    that.dis3Show = true;
-//                    that.hintText = '保证金支付成功';
-//                }else{
-//                    that.dis4Show = true;
-//                    that.hintText = '保证金支付失败';
-//                }
-//            }
+            let overTime = window.localStorage.getItem('overTime');
+            let now = new Date().getTime();
+            let timePass = now - overTime
+            if(timePass <= 20000){
+                if(payOk != null){
+                    if(payOk == '1'){
+                        that.dis2Show = false;
+                        that.dis3Show = true;
+                        that.hintText = '保证金支付成功';
+                    }else{
+                        that.dis4Show = true;
+                        that.hintText = '保证金支付失败';
+                    }
+                }
+            }
             window.localStorage.removeItem('payOk');
             let token = window.localStorage.getItem('token');
             if(token != null){

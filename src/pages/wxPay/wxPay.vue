@@ -76,6 +76,8 @@
                                     //1.知识。2.活动。3.会员。4.商品。5.直播
                                     window.localStorage.removeItem('checked')
                                     window.localStorage.setItem('payOk','1')
+                                    let time = new Date().getTime()
+                                    window.localStorage.setItem('overTime',time)
                                     let route = window.localStorage.getItem('route')
                                     if(route == 'auction'){
                                         let id = window.localStorage.getItem('id');
