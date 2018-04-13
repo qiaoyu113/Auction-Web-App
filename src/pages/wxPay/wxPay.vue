@@ -98,6 +98,8 @@
                                 cancel:function(){
                                     window.localStorage.removeItem('checked');
                                     window.localStorage.setItem('payOk','2')
+                                    let time = new Date().getTime()
+                                    window.localStorage.setItem('overTime',time)
                                     let route = window.localStorage.getItem('route')
                                     if(route == 'auction'){
                                         let id = window.localStorage.getItem('id');

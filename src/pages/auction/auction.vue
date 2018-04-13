@@ -513,7 +513,7 @@
             let overTime = window.localStorage.getItem('overTime');
             let now = new Date().getTime();
             let timePass = now - overTime
-            if(timePass <= 30000){
+            if(timePass <= 10000){
                 if(payOk != null){
                     if(payOk == '1'){
                         that.dis2Show = false;
@@ -525,7 +525,6 @@
                     }
                 }
             }
-            window.localStorage.removeItem('payOk');
             let token = window.localStorage.getItem('token');
             if(token != null){
                 that.isCollect();
@@ -771,11 +770,11 @@
                                     that.h = '00'
                                     that.m = '00'
                                     that.s = '00'
-                                    if(that.details.auctionStatus == '2'){
+//                                    if(that.details.auctionStatus == '2'){
                                         that.page.num = 1;
                                         that.specialist = [];
                                         that.upCallback()
-                                    }
+//                                    }
                                 }
                             },1000);
                         }else if(that.details.auctionStatus == '3'){
@@ -793,11 +792,11 @@
                                     that.h = '00'
                                     that.m = '00'
                                     that.s = '00'
-                                    if(that.details.auctionStatus == '2'){
+//                                    if(that.details.auctionStatus == '2'){
                                         that.page.num = 1;
                                         that.specialist = [];
                                         that.upCallback()
-                                    }
+//                                    }
                                 }
                             },1000);
                         }else{
@@ -815,11 +814,11 @@
                                     that.h = '00'
                                     that.m = '00'
                                     that.s = '00'
-                                    if(that.details.auctionStatus == '2'){
+//                                    if(that.details.auctionStatus == '2'){
                                         that.page.num = 1;
                                         that.specialist = [];
                                         that.upCallback()
-                                    }
+//                                    }
                                 }
                             },1000);
                         }
@@ -1151,6 +1150,7 @@
             //关闭提示窗
             closePay:function() {
                 let that = this;
+                window.localStorage.removeItem('payOk');
                 that.dis2Show = false;
                 that.dis3Show = false;
                 that.dis4Show = false;
