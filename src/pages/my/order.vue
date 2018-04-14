@@ -503,7 +503,8 @@
             overflow-y: scroll;
             -webkit-overflow-scrolling:touch;
        .top{
-          padding: @size50 @size20;
+          padding: 1.07rem 0.53rem;
+          height: 3.7rem;
           border-bottom: 2px solid rgb(53,60,70);
           .top_p1{
             font-size: 14px;
@@ -527,7 +528,7 @@
                 margin-top: -0.2rem;
             }
             img{
-                width: 1rem;
+                width: 0.8rem;
                 margin-top: 0.4rem;
             }
           }

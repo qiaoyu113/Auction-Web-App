@@ -262,19 +262,27 @@ import {commonService} from '../../service/commonService.js'
            },
            cardObtain:function(){
                 let that=this
-                 let pattern = /^([1-9]{1})(\d{14}|\d{18})$/,  
-                       str = that.userBankCardNo.replace(/\s+/g, "");  
-                       if (!pattern.test(str)) {  
-                           that.htmlx='银行卡号不正确'
-                            setTimeout(() => {  
-                           that.htmlx=''
-                         },2000) 
-                           return false;  
-                       } 
+                 // let pattern = /^([1-9]{1})(\d{14}|\d{18})$/,  
+                 //       str = that.userBankCardNo.replace(/\s+/g, "");  
+                 //       if (!pattern.test(str)) {  
+                 //           that.htmlx='银行卡号不正确'
+                 //            setTimeout(() => {  
+                 //           that.htmlx=''
+                 //         },2000) 
+                 //           return false;  
+                 //       } 
 
                 let cards=''
                cards=card.bankCardAttribution(that.userBankCardNo)
                that.userBank=cards.bankName
+                if (that.userBank==undefined) {  
+                           that.htmlx='银行卡号不正确'
+                           setTimeout(() => {  
+                                 that.htmlx=''
+                             },2000) 
+                           return false;  
+                       } 
+
             },
             Return:function(){
                 window.history.go(-1)
