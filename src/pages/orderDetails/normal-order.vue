@@ -157,11 +157,12 @@
             </div>
         </div>
         <div class="footer1" v-if='index==1' @click="rechargeList">立即支付</div>
+        <div class="footer1" v-if='index==2' @click="goodsreceipt(datas.orderNo)">确认收货</div>
         <div class="footer" v-if='index==3'>
             <div class="value" @click="share()">
                 分&nbsp;&nbsp;&nbsp;享
             </div>
-            <div class="r-icon" ><a href="tel:15801619600"><img src="../../assets/image/mycenter/usre4.png" /></a></div>
+            <div class="r-icon"><a href="tel:15801619600"><img src="../../assets/image/mycenter/usre4.png" /></a></div>
         </div>
      <div class="logistics">
         <!-- <div class="header">传家</div> -->
@@ -208,7 +209,19 @@
                      确定
                  </div>
            </div>
-        </div>
+     </div>
+       <div class="v_modal" ref="v_modal" v-if="v_goodsreceipt">
+           <div class="v_box">
+                  <div class="v_box_top" @click="remgoodsreceipt()"><i class="iconfont icon-closeicon"></i></div>
+                 <p class="v_box_p">REMOVE ITEM</p>
+                 <p>确认</p>
+                 <div class="v_box_img"><img src="../../assets/image/mycenter/scy.png" /></div>
+                 <p>是否确认收货?</p>
+                 <div class="v_button" @click='putUsersorder()'> 
+                     确定
+                 </div>
+           </div>
+     </div>
      <!--分享提示-->
         <div class="shareBox" v-if="shareHint">可以使用浏览器分享按钮分享给好友哦</div>
 
@@ -280,6 +293,8 @@ import {commonService} from '../../service/commonService.js'
           wxLogin:true,
           shareHint:false,
           v_modal:false,
+          v_goodsreceipt:false,
+          goodsreceiptid:'',
           deleteorderid:'',//删除订单ID
           ServiceBox:false,
           
@@ -382,6 +397,28 @@ import {commonService} from '../../service/commonService.js'
         
             this.dis=''
          
+        },
+        //取消收货
+        remgoodsreceipt:function(){
+           this.v_goodsreceipt=false
+        },
+        //确认收货按钮
+        goodsreceipt:function(id){
+           this.v_goodsreceipt=true
+           this.goodsreceiptid=id
+
+        },
+
+        //确认收货
+        putUsersorder:function(){
+          let that=this
+          commonService.putUsersorder({orderNo:that.goodsreceiptid}).then(function(res){ 
+           
+                 if(res.data.message=="success"){
+                that.remgoodsreceipt()
+                   that.getOrderid()
+                 }
+          }) 
         },
         rechargeList:function(){      
               let that=this;
@@ -753,6 +790,7 @@ import {commonService} from '../../service/commonService.js'
               font-size: 28px;
               margin-left: 0.3rem;
               color: #a9aeb6;
+              line-height: @size35;
             }
         }
         .span1{
@@ -1225,7 +1263,7 @@ import {commonService} from '../../service/commonService.js'
         .totalMoney{
             height: @size40;
             // width: 8.933rem;
-            border-bottom: 1px solid rgb(129, 135, 140);
+            border-bottom: 1px solid #e7ecef;
             margin-left: @size10;
             line-height: @size40;
             .fl{
@@ -1236,6 +1274,7 @@ import {commonService} from '../../service/commonService.js'
                 font-size: 13px;
                 font-weight: bold;
                 color: rgb(252, 90, 6);
+                margin-right: @size10;
             }
         }
         .moneys{

@@ -641,6 +641,7 @@
                     font-size:28px;
                     margin-left: 0.3rem;
                     color:#A9AEB6;
+                    line-height: @size35;
                     // line-height: @size35;
                 }
         }

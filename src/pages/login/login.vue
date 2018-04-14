@@ -48,7 +48,7 @@
         <div class="box sign" v-if="!login && !wxShow">
             <!--注册账号-->
             <div class="info">
-                <input type="number" placeholder="请输入手机号" v-model="phone"/>
+                <input type="number" placeholder="请输入手机号码" v-model="phone"/>
                  <div class="infoRight" @click="remphone()" v-if="phone!=''"><i class="iconfont icon-closeicon"></i></div>
             </div>
             <!-- <div class="info">
@@ -749,9 +749,9 @@
                 width:80%;
                 float:left;
                 .headerEn{
-                    height:0.75rem;
+                    // height:0.75rem;
                     font-weight: bold;
-                    font-size:20px;
+                    font-size:14px;
                 }
                 .headerCh{
                     font-size: 12px;
@@ -762,7 +762,7 @@
                 margin-top:0.3rem;
                 img{
                     width: 1rem;
-                    margin-top: 0.4rem;
+                    margin-top: 0.3rem;
                 }
             }
             .menu{
@@ -775,6 +775,7 @@
                     float:left;
                     color:#A8A8A8;
                     padding:0 0.14rem;
+                    font-size: 12px;
                 }
                 .register{
                     float:left;
@@ -789,6 +790,7 @@
                     margin-left:0.2rem;
                     padding:0 0.14rem;
                     box-sizing: border-box;
+                    font-size: 12px;
                     border-bottom:1px solid #353535;
                 }
                 .check{

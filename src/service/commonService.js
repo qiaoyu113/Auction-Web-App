@@ -289,6 +289,11 @@ export const commonService = {
      deleteOrderid: function (id) {
         return axios.delete('/orders/'+ id)
     },
+    /* 确认收货  */
+    putUsersorder: function (params) {
+        return axios.put('/users/order' + this.getParam(params))
+    },
+
       /* 获取售后列表单  */
     getOrdercs: function (params) {
         return axios.get('/ordercs' + this.getParam(params))

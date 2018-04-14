@@ -165,12 +165,12 @@
             if(ua.match(/MicroMessenger/i)=="micromessenger") {
 //                    这里是微信浏览器
                 this.wxLogin = true;
-                this.index=1
+                this.index=3
 
             } else {
 //                    这里不是微信浏览器
                 this.wxLogin = false;
-                 this.index=3
+                 this.index=2
             }
              },
              getIndex: function(index) {
@@ -440,6 +440,7 @@
                font-size: 13px;
                padding-right: @size3;
                padding-left:0;
+               // margin-top: 1px;
             }
             .infoClose{
                 float: right;

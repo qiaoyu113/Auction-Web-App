@@ -307,7 +307,7 @@
             letter-spacing: @size3;
             font-size: @size20;
             img{
-                width: 1rem;
+                width: 0.8rem;
                 margin-top: 1rem;
             }
         }    
@@ -359,10 +359,11 @@
                 box-sizing: border-box;
                 font-size: @size10;
                 margin-right: @size10;
+                line-height: 0.6rem;
             }
             .checked{
                 color:#353535;
-                border-bottom:2px solid #353535;
+                border-bottom:4px solid #353535;
             }
         }
     .text{
