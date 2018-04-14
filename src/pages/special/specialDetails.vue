@@ -871,11 +871,12 @@
         .sell-list{
             .sell-pic{
                 width:100%;
-                height: 4rem;
+                height: 5.57rem;
                 overflow: hidden;
                 img{
-                    width: 100%;
+                    width: 14rem;
                     height: 100%;
+                    margin-left:-2rem;
                 }
             }
             .sell-information {
