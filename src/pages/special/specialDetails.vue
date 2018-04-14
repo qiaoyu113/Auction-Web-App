@@ -871,7 +871,7 @@
         .sell-list{
             .sell-pic{
                 width:100%;
-                height: @size162;
+                height: 4rem;
                 overflow: hidden;
                 img{
                     width: 100%;
