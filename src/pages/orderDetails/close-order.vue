@@ -205,6 +205,7 @@ import {commonService} from '../../service/commonService.js'
                 font-size: 28px;
                 color:#a9aeb6;
                 margin-left: 0.3rem;
+                line-height: @size35;
                 
             }
         }
@@ -213,8 +214,8 @@ import {commonService} from '../../service/commonService.js'
             padding-right: 20px;
             display: none;
             img{
-                width: 0.4rem;
-                margin-top: @size5;
+                 width: 0.4rem;
+                margin-top: @size8;
             }
         }
         .display{
@@ -294,16 +295,16 @@ import {commonService} from '../../service/commonService.js'
             border-bottom: 1px solid rgb(129, 135, 140);
             .peo{
                 padding: @size13 @size10;
-                font-size: @size14;
+                font-size: 12px;
                 color: black;
                 span{
                     float: left;
-                    font-size: @size14;
+                    font-size: 12px;
                 }
             }
             div{
                 padding-right: @size10;
-                font-size: @size12;
+                font-size: 12px;
                 text-align: right;
                 line-height: @size18;
                 color: rgb(129, 135, 140);
@@ -333,11 +334,11 @@ import {commonService} from '../../service/commonService.js'
                 margin-left: @size15;
                 padding-top: @size10;
                 .money {
-                    font-size: 15px;
+                    font-size: 13px;
                     font-weight: bold;
                 }
                 .title {
-                    font-size: 14px;
+                    font-size: 12px;
                     color: rgb(133, 133, 133);
                     padding-top: @size1;
                     height: 20px;
@@ -348,7 +349,7 @@ import {commonService} from '../../service/commonService.js'
                     white-space: nowrap; 
                 }
                 .number {
-                    font-size: 12px;
+                    font-size: 10px;
                     color: rgb(133, 133, 133);
                     padding: 0 0 @size25 0;
                     line-height: @size10;
@@ -377,14 +378,14 @@ import {commonService} from '../../service/commonService.js'
             border-bottom: 1px solid rgb(129, 135, 140);
             height: @size50;
             div{
-                font-size: @size12;
+                font-size: 12px;
                 line-height: @size20;
             }
         }
         .orderinfo{
             padding: @size5 @size10;
             div{
-                font-size: @size12;
+                font-size: 12px;
                 line-height: @size20;
             }
         }

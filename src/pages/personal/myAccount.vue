@@ -104,7 +104,12 @@
                 </div>
             </div>
         </div>
-           <div class="v_modaltou" ref="v_modaltou" v-if="v_modal">
+
+       
+        </div>
+        </div>
+        </div>
+                   <div class="v_modaltou" ref="v_modaltou" v-if="v_modal">
            <div class="v_box">
                   <div class="v_box_top" @click="remrealname()"><i class="iconfont icon-closeicon"></i></div>
                  <p class="v_box_p">PROMPT</p>
@@ -152,10 +157,7 @@
                 <p class="p">长按识别二维码</p>
             </div>
         </div>
-        <div class="serviceBk" v-if="ServiceBox"></div>
-        </div>
-        </div>
-        </div>
+         <div class="serviceBk" v-if="ServiceBox"></div>
     </div>
 </template>
 

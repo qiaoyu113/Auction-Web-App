@@ -47,7 +47,7 @@
             <div class="orderinfo">
                 <div class="price clearfix" v-if='index>0'><div class="fl">退回路径</div><div class="fr">银行卡</div></div>
                 <div class="price clearfix" v-if='index>0'><div class="fl">差额原因</div><div class="fr">{{datas.amountReason}}</div></div>
-                <div class="price clearfix" v-if='index==0'>{{datas.problem}}</div>
+                <div class="price clearfix" v-if='index==0'>{{datas.refuseReason}}</div>
             </div>
             <div class="v_helpCenter">
                 <span class="fl">到账周期说明</span>
@@ -168,7 +168,7 @@ import {commonService} from '../../service/commonService.js'
                
                     if(res.data.code==200){
                      that.datas=res.data.datas
-                    
+                     
                      that.orderNo=that.datas.orderNo
                      that.getOrderid()
                      if(that.datas.status==2){
@@ -269,6 +269,7 @@ import {commonService} from '../../service/commonService.js'
                 font-size: 28px;
                 color: #a9aeb6;
                 margin-left: 0.3rem;
+                line-height: @size35;
             }
         }
         .span1{
@@ -276,7 +277,7 @@ import {commonService} from '../../service/commonService.js'
             padding-right: 20px;
             display: none;
              img{
-                width: @size16;
+                width: 0.4rem;
                 margin-top: @size8;
             }
         }

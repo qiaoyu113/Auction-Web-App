@@ -433,10 +433,8 @@ import {commonService} from '../../service/commonService.js'
                  },2000) 
                    return false
                  }
-              return false
-                    
-                  
-              
+
+                                  
                commonService.postAddress({name:that.name,phone:that.phone,provinceName:that.provinceName,provinceId:that.provinceid,cityName:that.cityName,cityId:that.cityid,districtName:that.countyName,districtId:that.countyid,detailAdress:that.detailAdress}).then(function(res){
                 // that.bankCard=res.data.datas
                    if(res.data.code==200){

@@ -620,10 +620,10 @@
                     padding-left: @size10;
                     padding-top: @size10;
                     span{
-                        font-size: 12px;
+                        font-size: 10px;
                     }
                     .span1{
-                        font-size: 10px;
+                        font-size: 12px;
                         font-weight: bold;
                     }
                 }

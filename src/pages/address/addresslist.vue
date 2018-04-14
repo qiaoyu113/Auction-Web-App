@@ -325,7 +325,7 @@ import {commonService} from '../../service/commonService.js'
    
     .content{
         padding: 0 @size10;
-        
+        margin-top: @size45;
         padding-bottom: 1.2rem;
 
         .peo{

@@ -57,8 +57,8 @@
             <!-- 填写支付宝信息 -->
             <div  v-if='index==1&&flag==1'>
                 <div class="info1"><span>提现金额</span>
-                     <span class="span">&nbsp;CNY</span>
-                    <input type="number" placeholder="请输入金额" disabled="disabled" v-model="money"/>
+                     <span class="span">{{money}}&nbsp;CNY</span>
+                    <!-- <input type="number" placeholder="请输入金额" disabled="disabled" v-model="money"/> -->
                 </div>
                 <div class="info"><span>支付宝帐号</span>
                     <input type="text" class="v_zfbzh" placeholder="请输入支付宝帐号(手机号/邮箱)" v-model="account"/>
@@ -72,8 +72,8 @@
             <!-- 填写银行卡信息 -->
             <div  v-if='index==1&&flag==2'>
                 <div class="info1"><span>提现金额</span>
-                     <span class="span"> &nbsp;CNY</span>
-                    <input type="number" placeholder="请输入金额" disabled="disabled" v-model="money"/>
+                     <span class="span"> {{money}}&nbsp;CNY</span>
+                    <!-- <input type="number" placeholder="请输入金额" disabled="disabled" v-model="money"/> -->
                 </div>
                 <div class="info"><span>收款人</span>
                     <input type="text" placeholder="请输入收款人姓名" v-model="userBankName"/>

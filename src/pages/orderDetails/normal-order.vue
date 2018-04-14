@@ -161,7 +161,7 @@
             <div class="value" @click="share()">
                 分&nbsp;&nbsp;&nbsp;享
             </div>
-            <div class="r-icon" ><a href="tel:15801619600"><img src="../../assets/image/mycenter/usre4.png" /></a></div>
+            <div class="r-icon"><a href="tel:15801619600"><img src="../../assets/image/mycenter/usre4.png" /></a></div>
         </div>
      <div class="logistics">
         <!-- <div class="header">传家</div> -->
@@ -446,7 +446,7 @@ import {commonService} from '../../service/commonService.js'
             commonService.getOrderid(that.orderNo).then(function(res){
                
                 that.datas=res.data.datas
-              
+               // console.log(that.datas)
                 if(that.datas.status==1){
                   let data =Number(that.datas.expireTime)
                  that.countdown=common.getTimer(data)
@@ -753,6 +753,7 @@ import {commonService} from '../../service/commonService.js'
               font-size: 28px;
               margin-left: 0.3rem;
               color: #a9aeb6;
+              line-height: @size35;
             }
         }
         .span1{
@@ -1225,7 +1226,7 @@ import {commonService} from '../../service/commonService.js'
         .totalMoney{
             height: @size40;
             // width: 8.933rem;
-            border-bottom: 1px solid rgb(129, 135, 140);
+            border-bottom: 1px solid #e7ecef;
             margin-left: @size10;
             line-height: @size40;
             .fl{
@@ -1236,6 +1237,7 @@ import {commonService} from '../../service/commonService.js'
                 font-size: 13px;
                 font-weight: bold;
                 color: rgb(252, 90, 6);
+                margin-right: @size10;
             }
         }
         .moneys{

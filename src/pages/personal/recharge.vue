@@ -49,21 +49,21 @@
                 <div :class="index==1 ? 'check' : 'check1'"><i class="iconfont icon-duihao"></i></div>
                     <img class="v_img" v-if="index==1" src="../../assets/image/mycenter/wxzf.png" />
                 <img class="v_img" v-if="index!=1" src="../../assets/image/mycenter/wxzf2.png" />
-                    <div class="infoAlipay">微信充值</div>
+                    <div class="infoAlipay v_infoAlipay">微信充值</div>
             </div>
             <div class="pay" @click="getIndex(2)" v-if="wxLogin==false">
                 <div :class="index==2 ? 'check' : 'check1'"><i class="iconfont icon-duihao"></i></div>
                 <!-- <i :class="index==2 ? 'background2' : ''" class="iconfont icon-icon_zhifubao"></i> -->
                  <img class="v_img" v-if="index==2" src="../../assets/image/mycenter/zfb.png" />
                 <img class="v_img" v-if="index!=2" src="../../assets/image/mycenter/zfb2.png" />
-                <div class="infoAlipay">支付宝充值</div>
+                <div class="infoAlipay v_infoAlipay">支付宝充值</div>
             </div>
             <div class="pay" @click="getIndex(3)">
                 <div :class="index==3 ? 'check' : 'check1'"><i class="iconfont icon-duihao"></i></div>
                 <!-- <i :class="index==3 ? 'background3' : ''" class="iconfont icon-icon_zhifubao"></i> -->
                  <img class="v_img" v-if="index==3" src="../../assets/image/mycenter/xxzf.png" />
                 <img class="v_img" v-if="index!=3" src="../../assets/image/mycenter/xxzf2.png" />
-                <div class="infoAlipay">转账汇款</div>
+                <div class="infoAlipay v_infoAlipay">转账汇款</div>
             </div>
         </div>
         <div class="prompt" v-if="prompt!=''">{{prompt}}</div>
@@ -744,6 +744,9 @@
                     }
                 }
                  
+            }
+            .v_infoAlipay{
+                font-size: 12px;
             }
         }
     }
