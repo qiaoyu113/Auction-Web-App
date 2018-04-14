@@ -517,7 +517,7 @@
             font-size: @size20;
             img{
                 width: 0.8rem;
-                margin-top: 0.6rem;
+                margin-top: 0.9rem;
             }
         }
     }
@@ -595,9 +595,10 @@
 
              p{
                 font-size: 12px;
-                margin-left: @size20;
+                margin-left: 0.2667rem;
                 line-height: 1.3rem;
-                color: #707070;
+                // color: ;
+
              }
 
         }

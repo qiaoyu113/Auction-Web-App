@@ -153,8 +153,8 @@ import {commonService} from '../../service/commonService.js'
             letter-spacing: @size3;
             font-size: @size20;
             img{
-                width: 1rem;
-                margin-top: 1rem;
+                width: 0.8rem;
+                margin-top: 0.9rem;
             }
         }
     }
@@ -190,7 +190,7 @@ import {commonService} from '../../service/commonService.js'
             }
             .infoClose{
                 float: right;
-                color:#87828c;
+                color:rgb(51, 51, 51);
                 line-height: 1.02rem;
                 margin-right: 0.2rem;
                 font-size: 12px;

@@ -728,6 +728,8 @@ import {commonService} from '../../service/commonService.js'
                 padding: @size10;
                 font-size: 12px;
                 letter-spacing: @size1;
+                resize: none;
+                -webkit-appearance: none;
             }
         }
         .resize{

@@ -173,7 +173,7 @@
             margin-top:0.3rem;
             img{
                 width: 0.8rem;
-                margin-top: 0.4rem;
+                margin-top: 0.6rem;
             }
         }
     }

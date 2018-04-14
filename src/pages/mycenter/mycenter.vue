@@ -226,6 +226,11 @@
         },
         mounted: function() {
             // common.onMove('.mycenter')
+             document.body.addEventListener('touchmove', function (event) {
+            // if (!evt._isScroller) {
+                event.returnValue = true;
+            // }
+        },false)
             this.getUsers()
             this.timeSelect();
 

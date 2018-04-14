@@ -10,7 +10,7 @@
         <div class="content">
             <div class="loginBox">
                 <div class='loginEn'>HELP</div>
-                <div class="loginCn">帮助中心</div>
+                <div class="loginCn v_loginCn">帮助中心</div>
             </div>
             <div class="fr" @click="Return()">
             <img src="../../../src/assets/image/mycenter/right.png"/>
@@ -293,12 +293,12 @@
             width:80%;
             float:left;
             .loginEn{
-                height:24px;
+                line-height:24px;
                 font-weight: bold;
-                font-size:16px;
+                font-size:14px;
             }
             .loginCn{
-                font-size: 14px;
+                font-size: 12px;
             }
             
         }
@@ -308,7 +308,7 @@
             font-size: @size20;
             img{
                 width: 0.8rem;
-                margin-top: 1rem;
+                margin-top: 0.8rem;
             }
         }    
     }   
