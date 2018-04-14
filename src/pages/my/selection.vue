@@ -123,6 +123,7 @@
           .top_p2{
           	float: left;
             font-size: 12px;
+            line-height: 20px;
             color: rgb(51,51,51);
             // margin-top: @size10;
           }

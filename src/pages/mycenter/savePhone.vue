@@ -13,7 +13,7 @@
         <div class="box2">
             <!--新手机号码-->
             <div class="info">
-                <div class="infoList">新手机号码<input type="number" placeholder="请输入新手机号码" v-model="inputPhone"/><div class="del" @click="deleteName"><i class="iconfont icon-closeicon"></i></div></div>
+                <div class="infoList">新手机号码<input type="number" placeholder="请输入新手机号码" v-model="inputPhone"/><div class="del" @click="deleteName" v-if="inputPhone!=''"><i class="iconfont icon-closeicon"></i></div></div>
             </div>
             <!--图片-->
           <!--   <div class="info">
@@ -79,7 +79,23 @@
             //换手机号
             save:function(){
                 let that = this;
-                
+                if(that.inputPhone==''){
+                    that.htmlx='新手机号码不能为空'
+
+                        setTimeout(() => {  
+                                 that.htmlx=''
+                             },2000) 
+                return false
+                }
+                 let reg = /^1[3|4|5|7|8][0-9]{9}$/;
+                    let flag = reg.test(that.inputPhone)
+                    if(!flag){
+                        this.htmlx="手机号码不正确"
+                        setTimeout(() => {  
+                                 that.htmlx=''
+                             },2000) 
+                        return false
+                    }
              commonService.putPhoneset({phone:that.inputPhone,smsCode:this.inputNum,type:6}).then(function(res){
         
                     if(res.data.code==200){
@@ -103,8 +119,27 @@
             //获取验证码
           getcode:function(){
                 let that = this;
-                if(that.codeShow){
+             if(that.inputPhone==''){
+                    that.htmlx='新手机号码不能为空'
 
+                        setTimeout(() => {  
+                                 that.htmlx=''
+                             },2000) 
+                return false
+                }
+                 let reg = /^1[3|4|5|7|8][0-9]{9}$/;
+                    let flag = reg.test(that.inputPhone)
+                    if(!flag){
+                        this.htmlx="手机号码不正确"
+                        setTimeout(() => {  
+                                 that.htmlx=''
+                             },2000) 
+                        return false
+                    }
+
+
+                if(that.codeShow){
+                     return false
                 }else{
                     that.codeShow = true;
                     let time = setInterval(function(){
@@ -205,11 +240,11 @@
                 height:1rem;
                 line-height:1rem;
                 border-bottom:1px solid #C9D0D8;
-                font-size:13px;
+                font-size:12px;
                 color:#333;
                 span{
                     color:#B1B1B1;
-                    font-size:13px;
+                    font-size:12px;
                     margin-left:0.8rem;
                 }
                 .more{
@@ -223,7 +258,7 @@
                 .goBind{
                     float:right;
                     color:#6F6F6F;
-                    font-size:13px;
+                    font-size:12px;
                     padding-right:0.2rem;
                 }
             }
@@ -256,12 +291,12 @@
                 height:1rem;
                 line-height:1rem;
                 border-bottom:1px solid #C9D0D8;
-                font-size:13px;
+                font-size:12px;
                 color:#333;
                 overflow: hidden;
                 span{
                     color:#B1B1B1;
-                    font-size:13px;
+                    font-size:12px;
                     margin-left:0.8rem;
                 }
                 .more{
@@ -275,7 +310,7 @@
                 .goBind{
                     float:right;
                     color:#6F6F6F;
-                    font-size:13px;
+                    font-size:12px;
                     padding-right:0.2rem;
                 }
                 .del{
@@ -287,7 +322,7 @@
                     float:right;
                     margin-right:0.1rem;
                     color:#B1B1B1;
-                    font-size:12px;
+                    font-size:10px;
                     img{
                         height: 1rem;
                     }
@@ -296,7 +331,7 @@
                     margin-left:0.2rem;
                     border:none;
                     outline: none;
-                    font-size:13px;
+                    font-size:12px;
                     color:#333;
                 }
                 input::-webkit-input-placeholder {

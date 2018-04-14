@@ -529,7 +529,7 @@
             }
             img{
                 width: 0.8rem;
-                margin-top: 0.4rem;
+                margin-top: 0.47rem;
             }
           }
 
@@ -671,14 +671,14 @@
             border-bottom: 1px solid rgb(53, 60, 70);
             .total{
                 height: @size40;
-                margin: 0 @size10;
+                margin-left:@size10;
                 border-bottom: 1px solid rgb(224,224,224);
                 .total_l{
                     float: left;
                     // margin-left: @size10;
                     line-height: @size40;
                     color: rgb(53,60,70);
-                    font-size: 13px;
+                    font-size: 12px;
                 }
                 .total_r{
                     float: right;
@@ -687,6 +687,7 @@
                     line-height: @size40;
                     color: rgb(235,97,0);
                     font-size: 13px;
+                    margin-right: @size10;
                 }
             }
             .scattered{
@@ -719,7 +720,7 @@
 
                 .payment_top{
                     height: @size40;
-                    margin: 0 @size10;
+                    margin-left:@size10;
                     line-height: @size40;
                     font-size: 12px;
                     color: rgb(51,51,51);
@@ -728,7 +729,7 @@
                 .ros{
                     border-bottom: 1px solid rgb(224,224,224);
                     padding: @size13 0;
-                    margin: 0 @size10;
+                    margin-left: @size10;
                     .ros_l{
                         float: left;
                         width: @size10;

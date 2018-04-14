@@ -107,7 +107,7 @@
             </div>
             <div v-if="datas.status==4 || datas.status==5 || datas.status==6">
                <div class="logistic">
-                    物流信息<span class="fr" @click="show" v-if="logistics!=''">...</span>
+                    物流信息<span class="fr" @click="show" v-if="logistics!=''"><img src="../../../src/assets/image/mycenter/more.png"/></span>
                 </div>
                 <div class="logdetail" v-if="logistics!=''">
                     <div>顺丰速运</div>
@@ -124,7 +124,7 @@
                 </div> 
             </div>
             <div class="address">
-                <div class="peo"><span>{{adress.name}}</span>  {{adress.phone}}</div>
+                <div class="peo"><p><span>{{adress.name}}</span>  {{adress.phone}}</p></div>
                 <div>{{adress.provinceName}} {{adress.cityName}} {{adress.districtName}}</div>
                 <div>{{adress.detailAdress}}</div>
             </div>
@@ -159,10 +159,11 @@
         <div class="footer1" v-if='index==1' @click="rechargeList">立即支付</div>
         <div class="footer1" v-if='index==2' @click="goodsreceipt(datas.orderNo)">确认收货</div>
         <div class="footer" v-if='index==3'>
-            <div class="value" @click="share()">
-                分&nbsp;&nbsp;&nbsp;享
+        <a href="tel:15801619600">
+            <div class="value">
+                客&nbsp;&nbsp;&nbsp;服
             </div>
-            <div class="r-icon"><a href="tel:15801619600"><img src="../../assets/image/mycenter/usre4.png" /></a></div>
+            <div class="r-icon"><img src="../../assets/image/mycenter/usre4.png" /></div></a>
         </div>
      <div class="logistics">
         <!-- <div class="header">传家</div> -->
@@ -213,9 +214,9 @@
        <div class="v_modal" ref="v_modal" v-if="v_goodsreceipt">
            <div class="v_box">
                   <div class="v_box_top" @click="remgoodsreceipt()"><i class="iconfont icon-closeicon"></i></div>
-                 <p class="v_box_p">REMOVE ITEM</p>
+                 <p class="v_box_p">CONFIRM</p>
                  <p>确认</p>
-                 <div class="v_box_img"><img src="../../assets/image/mycenter/scy.png" /></div>
+                 <!-- <div class="v_box_img"><img src="../../assets/image/mycenter/scy.png" /></div> -->
                  <p>是否确认收货?</p>
                  <div class="v_button" @click='putUsersorder()'> 
                      确定
@@ -798,7 +799,7 @@ import {commonService} from '../../service/commonService.js'
             padding-right: 20px;
             display: none;
             img{
-                margin-top: @size6;
+                margin-top: @size10;
                 width: 0.4rem;
             }
         }
@@ -1039,8 +1040,8 @@ import {commonService} from '../../service/commonService.js'
         .logistic{
             height: @size40;
             box-sizing: border-box;
-            width: 8.933rem;
-            border-bottom: 1px solid rgb(129, 135, 140);
+            // width: 8.933rem;
+            border-bottom: 1px solid #e7ecef;
             margin-left: @size10;
             line-height: @size40;
             font-size: 12px;
@@ -1050,6 +1051,11 @@ import {commonService} from '../../service/commonService.js'
                 font-weight: bold;
                 font-size: 12px;
                 color:rgb(129, 135, 140);
+                img{
+                      width: 0.5rem;
+                      margin-top: 0.5rem;
+                      margin-right: @size10;
+                }
             }
         }
         .logdetail{
@@ -1060,7 +1066,7 @@ import {commonService} from '../../service/commonService.js'
             padding-top: @size10;
             div{
                 font-size: 12px;
-                color: rgb(129, 135, 140);
+                color: rgb(51, 51, 51);
                 line-height: @size18;
                 max-height: @size18;
                 overflow: hidden;
@@ -1195,17 +1201,23 @@ import {commonService} from '../../service/commonService.js'
             border-bottom: 1px solid rgb(129, 135, 140);
             .peo{
                 padding: @size13 @size10;
-                font-size: @size14;
-                color: black;
+                font-size: 12px;
+                color: rgb(51, 51, 51);
                 // margin-top: 1rem;
-                span{
+                p{
+                  color: rgb(51, 51, 51);
+                  font-size: 12px;
+                   span{
                     float: left;
                     font-size: 12px;
+                    color: rgb(51, 51, 51);
                 }
+                }
+               
             }
             div{
                 padding-right: @size10;
-                font-size: @size12;
+                font-size: 12px;
                 text-align: right;
                 line-height: @size18;
                 color: rgb(129, 135, 140);

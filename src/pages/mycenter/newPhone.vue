@@ -21,7 +21,7 @@
             </div> -->
             <!--短信验证码-->
             <div class="info">
-                <div class="infoList">短信验证码<input class="codeInp" type="number" placeholder="请输入短信验证码" v-model="inputNum"/><div class="code" @click="getcode">获取验证码<span v-if="codeShow" style="margin:0;">({{timeOver}})</span></div></div>
+                <div class="infoList">短信验证码<input class="codeInp" type="number" placeholder="请输入短信验证码" v-model="inputNum"/><div class="code" @click="getcode">获取验证码<span v-if="codeShow" style="margin:0;">({{timeOver}}s)</span></div></div>
             </div>
             <div id="captcha-box"></div>
             <!--保存-->
@@ -43,7 +43,7 @@
                     name:'CELL PHONE NUMBER',
                     name2:'手机号码修改'
                 },
-                timeOver:60,//短信验证码倒计时
+                timeOver:0,//短信验证码倒计时
                 inputPhone:'',//手机号
                 inputNum:'',//验证码
                 codeShow:false,
@@ -108,26 +108,30 @@
             //获取验证码
           getcode:function(){
                 let that = this;
-                if(that.codeShow){
-
-                }else{
+              if(that.timeOver==0){
                     that.codeShow = true;
+                    that.timeOver = 90;
                     let time = setInterval(function(){
                    
-                        if(that.timeOver === 0){
+                        if(that.timeOver == 0){
                             // clearInterval(time)
-                            that.codeShow = false;
-                            that.timeOver = 90;
-                        }else{
+                           that.codeShow = false;
+                        }else{ 
+                          
                             that.timeOver = that.timeOver -= 1
                         }
                     },1000)
-                }
+               }else{
+                  return false
+               }
+        
                 // 获取短信验码
                  commonService.getSendMessage({phone:that.phone,type:5}).then(function(res){
                     
                     if(res.data.code == 200){
-                      // that.$router.go(-1);
+                       
+ 
+
                     }else{
                         that.htmlx=res.data.message
                         setTimeout(() => {  
@@ -305,7 +309,7 @@
                     float:right;
                     margin-right:0.1rem;
                     color:#B1B1B1;
-                    font-size:12px;
+                    font-size:10px;
                 }
                 input{
                     margin-left:0.2rem;

@@ -38,12 +38,12 @@
                 <img v-if="index == 2 && hintShow" src="../../assets/image/mycenter/c31.png"/>
                 <img v-if="index != 2 && !hintShow" src="../../assets/image/mycenter/i3.png"/>
                 <img v-if="index != 2 && hintShow" src="../../assets/image/mycenter/i31.png"/>
-                <p :class="index == 2 ? '':'pc'">我的</p>
+                <p :class="index == 2 ? '':'pc'">收藏</p>
             </li>
             <li class="fl" @click="checked(3)">
                 <img v-if="index == 3" src="../../assets/image/mycenter/c4.png"/>
                 <img v-if="index != 3" src="../../assets/image/mycenter/i4.png"/>
-                <p :class="index == 3 ? '':'pc'">个人</p>
+                <p :class="index == 3 ? '':'pc'">我的</p>
             </li>
         </ul>
     </div>
