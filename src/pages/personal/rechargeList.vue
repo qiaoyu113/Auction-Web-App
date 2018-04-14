@@ -171,20 +171,21 @@ import {commonService} from '../../service/commonService.js'
             },
             cardObtain:function(){
                 let that=this
-                 let pattern = /^([1-9]{1})(\d{14}|\d{18})$/,  
-                       str = that.userBankCardNo.replace(/\s+/g, "");  
-                       if (!pattern.test(str)) {  
+                 // let pattern = /^([1-9]{1})(\d{15}|\d{16}|\d{17}|\d{18})$/,  
+                 //       str = that.userBankCardNo.replace(/\s+/g, "");  
+                     
+
+                let cards=''
+               cards=card.bankCardAttribution(that.userBankCardNo)
+               that.userBankDetail=cards.bankName
+               
+                   if (that.userBankDetail==undefined) {  
                            that.htmlx='银行卡号不正确'
                            setTimeout(() => {  
                                  that.htmlx=''
                              },2000) 
                            return false;  
                        } 
-
-                let cards=''
-               cards=card.bankCardAttribution(that.userBankCardNo)
-               that.userBankDetail=cards.bankName
-
             },
             moneys:function(){
                 if(this.type==1){

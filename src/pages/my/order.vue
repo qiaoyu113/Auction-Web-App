@@ -18,7 +18,7 @@
             </div>
         </div>
         <!-- 地址 -->
-        <div class="address clearfix" v-if="address!=null">
+        <div class="address clearfix" v-if="address!=''">
             <div class="address_l">
                 <p>{{address.name}}</p>
             </div>
@@ -33,7 +33,7 @@
                 </div>
             </div>
         </div>
-        <div class="address clearfix" v-if="address==null">
+        <div class="address clearfix" v-if="address==''">
             <div class="address_l">
                 <p>地址</p>
             </div>
@@ -267,9 +267,9 @@
             getDefault:function(){
                  let that=this;
                  commonService.getDefault().then(function(res){
+                
                     if(res.data.datas!=null){
                         that.address=res.data.datas
-                        console.log(that.address)
                     }
                 })
             },
