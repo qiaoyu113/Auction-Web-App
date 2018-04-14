@@ -136,7 +136,7 @@
           	}
           }
           .v_dian{
-             margin-right: 0.2667rem;
+             // margin-right: 0.2667rem;
               img{
                 width: 0.8rem;
                 margin-top: 0rem;

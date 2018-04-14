@@ -80,7 +80,7 @@
             <div class="center">
                 <div class="address  clearfix">
                     <div class="fl">帮助中心</div>
-                    <div class="fr" @click="help()">...</div>
+                    <div class="fr" @click="help()"><img src="../../../src/assets/image/mycenter/more.png"/></div>
                 </div>
             </div>
         </div>
@@ -588,6 +588,10 @@
                     font-weight: bold;  
                     padding-right: @size10;
                     margin-top: 0.06rem;
+                      img{
+                        width: 0.5rem;
+                        margin-top: @size16;
+                    }
                 }
             }
         }

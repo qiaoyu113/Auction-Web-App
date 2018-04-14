@@ -217,7 +217,7 @@
                  <p class="v_box_p">CONFIRM</p>
                  <p>确认</p>
                  <!-- <div class="v_box_img"><img src="../../assets/image/mycenter/scy.png" /></div> -->
-                 <p>是否确认收货?</p>
+                 <p class="v_box_img">是否确认收货?</p>
                  <div class="v_button" @click='putUsersorder()'> 
                      确定
                  </div>

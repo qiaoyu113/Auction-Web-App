@@ -204,7 +204,7 @@
             // },
         },
         mounted: function() {
-            this.onMove()
+            // this.onMove()
             // this.getKaptchas()
             this.vwx()
             this.vwximg()
@@ -631,7 +631,7 @@
         left:0;
         top:0;
         right:0;
-        bottom:1.87rem;
+        bottom:2rem;
         margin:auto;
         .q_talk{
             width: 1rem;
@@ -905,6 +905,7 @@
                 text-align: center;
                 font-size: 10px;
                 margin-top: 2.3rem;
+                padding-bottom: 1.3rem;
 
                 a{
                   font-size: 10px;  

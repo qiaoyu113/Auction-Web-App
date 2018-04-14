@@ -133,7 +133,7 @@
                 </div> -->
                 <div class="info"><span>短信验证码</span>
                     <input type="number" placeholder="请输入短信验证码" v-model='verification'/>
-                    <div class="infoClose" @click="getFormssms">获取验证码<i v-if="count!=0" class="v_tou">({{count}}s)</i></div>
+                    <div class="infoClose v_tou" @click="getFormssms">获取验证码<i v-if="count!=0" class="v_tou">({{count}}s)</i></div>
                 </div>
             </div>
             <!-- 已完成 -->
@@ -142,7 +142,7 @@
                     <div class="infoClose">{{list.no}}</div>
                 </div>
                 <div class="info"><span>提现金额</span>
-                    <div class="infoClose">{{list.amount | money}} &nbsp;CNY
+                    <div class="infoClose v_infoClose">{{list.amount | money}} &nbsp;CNY
                        </div>
                 </div>
                 <div class="info"><span>交易时间</span>
@@ -894,6 +894,9 @@ import {commonService} from '../../service/commonService.js'
     
                 }
                 
+            }
+            .v_infoClose{
+               font-weight: 700;
             }
             .infomore{
                 float: right;

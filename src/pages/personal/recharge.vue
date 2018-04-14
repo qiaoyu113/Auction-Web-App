@@ -775,7 +775,7 @@
         text-align: center;
         line-height: 1.2rem;
         font-size: 12px;
-        color:#777;
+        color:rgb(51, 51, 51);
         background: #fff;
     }
    }

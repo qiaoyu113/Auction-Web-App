@@ -523,7 +523,7 @@
             }
             .span{
                 float: right;
-                margin-right: @size10;
+                // margin-right: @size10;
                 font-size: 16px;
                 margin-top: -0.2rem;
             }
