@@ -395,13 +395,11 @@ import {commonService} from '../../service/commonService.js'
                              },2000) 
                             return false
                          }
-                      let pattern = /^([1-9]{1})(\d{14}|\d{18})$/,  
-                       str = that.userBankCardNo.replace(/\s+/g, "");  
-                       if (!pattern.test(str)) {  
+                     if (that.userBank==undefined) {  
                            that.htmlx='银行卡号不正确'
-                            setTimeout(() => {  
-                           that.htmlx=''
-                         },2000) 
+                           setTimeout(() => {  
+                                 that.htmlx=''
+                             },2000) 
                            return false;  
                        } 
                        

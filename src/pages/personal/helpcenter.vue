@@ -284,7 +284,7 @@
         }
     .content{
         width:100%;
-        height:3.7rem;
+        height:3.1rem;
         // border-bottom:2px solid #353535;
         padding:1.07rem 0.53rem;
         box-sizing: border-box;

@@ -422,7 +422,7 @@
             }
             input{
                 // width: 3rem;
-                height: 100%;
+                height: 1rem;
                 float: right;
                 border: none;
                 outline: none;
@@ -438,9 +438,10 @@
                float: right;
                color: #eb6200;
                font-size: 13px;
+               line-height: 1rem;
                padding-right: @size3;
                padding-left:0;
-               // margin-top: 1px;
+               
             }
             .infoClose{
                 float: right;

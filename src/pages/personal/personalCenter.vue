@@ -251,7 +251,7 @@
                 this.$router.push({path:"/login"})
             },
             getPos:function(index) {
-                var str = 90*(index)+'px';
+                var str = 2.43*(index)+'rem';
                 str='left:'+str;
                 return str;
             },
@@ -713,7 +713,8 @@
                     position: absolute;
                     width: @size80;
                     height: @size80;
-                    margin-left: @size5;
+                    // margin-left: @size5;
+                    // margin-right: 10px;
                     background: gray;
                     overflow: hidden;
                     

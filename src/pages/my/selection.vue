@@ -115,6 +115,7 @@
           .top_p1{
             font-weight: bold;
             font-size: 14px;
+            line-height: 24px;
             color: rgb(51,51,51);
           }
           .top_div{
@@ -123,7 +124,7 @@
           	float: left;
             font-size: 12px;
             color: rgb(51,51,51);
-            margin-top: @size10;
+            // margin-top: @size10;
           }
           div{
           	float: right;
@@ -136,8 +137,8 @@
           .v_dian{
              margin-right: 0.2667rem;
               img{
-                width: 1rem;
-                margin-top: 0.2rem;
+                width: 0.8rem;
+                margin-top: 0rem;
               }
            }
           }

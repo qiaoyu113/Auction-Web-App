@@ -398,7 +398,7 @@
                  commonService.getUsers().then(function(res){
                     that.user=res.data.datas.user
                     that.headerImage=that.picHead + that.user.headImg
-                    console.log(that.headerImage)
+                    // console.log(that.headerImage)
                     let sex=that.user.sex
                     that.radio=sex + ''
                     that.startTime=that.user.birthday
@@ -430,7 +430,7 @@
                  commonService.deleteTokens().then(function(res){
                     if(res.data.code==200){
                         that.v_modal=false
-                        that.$router.push({name:'personalCenter'})
+                        that.$router.push({name:'home'})
 
                     }
               })

@@ -66,8 +66,8 @@
                     <!-- <div class="infomore" @click='removeAccount'><i class="iconfont icon-closeicon"></i></div> -->
                 </div>
                <div class="info1 clearfix"><span>汇款金额</span>
-                     <span class="span">&nbsp;CNY</span>
-                    <input type="number" placeholder="请输入金额" disabled="disabled" v-model="money"/>
+                     <span class="span">{{money}}&nbsp;CNY</span>
+                    <!-- <input type="number" placeholder="请输入金额" disabled="disabled" v-model="money"/> -->
                 </div>
                 <div class="info clearfix"><span>手机号码</span>
                     <input type="number" placeholder="请输入手机号码" value="phone" v-model="phone"/>
@@ -273,15 +273,13 @@ import {commonService} from '../../service/commonService.js'
                              },2000) 
                         return false
                     }
-                    let pattern = /^([1-9]{1})(\d{14}|\d{18})$/,  
-                       str = that.userBankCardNo.replace(/\s+/g, "");  
-                       if (!pattern.test(str)) {  
+                    if (that.userBankDetail==undefined) {  
                            that.htmlx='银行卡号不正确'
                            setTimeout(() => {  
                                  that.htmlx=''
                              },2000) 
                            return false;  
-                       }   
+                       }  
                           if(that.userBankDetail==''){
                         this.htmlx="请输入开户银行"
                         setTimeout(() => {  
