@@ -765,7 +765,6 @@
                                 that.m = parseInt(time / 1000 / 60 % 60, 10) < 10 ? '0' +  parseInt(time / 1000 / 60 % 60 , 10) :  parseInt(time / 1000 / 60 % 60 , 10);
                                 that.s = parseInt(time / 1000 % 60, 10) < 10 ? '0' + parseInt(time / 1000 % 60, 10) : parseInt(time / 1000 % 60, 10);
                                 if(time < 0){
-                                    debugger
                                     clearInterval(timeRun);
                                     that.day = '00'
                                     that.h = '00'
@@ -1026,7 +1025,7 @@
                 if(that.bidPrice <= 10000){
                     if(that.bidPrice <= Number(that.details.basePrice) + 200){
                         if(that.offerNumDate){
-                            that.bidPrice = Number(that.details.basePrice) + 100;
+                            that.bidPrice = Number(that.details.basePrice);
                         }else{
                             that.bidPrice = Number(that.details.currentPrice) + 100;
                         }

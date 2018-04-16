@@ -171,7 +171,7 @@
                                     that.h = '00'
                                     that.m = '00'
                                     that.s = '00'
-                                    that.meScroll()
+//                                    that.meScroll()
                                 }
                             },1000)
                         }
