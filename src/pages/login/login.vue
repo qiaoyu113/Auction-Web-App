@@ -24,7 +24,7 @@
             </div>
             <!--登录账号-->
             <div class="info">
-                <input type="number" placeholder="请输入手机号码" v-model="phoneUser"/>
+                <input type="text" pattern="[0-9]*" placeholder="请输入手机号码" v-model="phoneUser"/>
                 <div class="infoRight" @click="remphoneUser()" v-if="phoneUser!=''"><i class="iconfont icon-closeicon"></i></div>
             </div>
             <div class="info">

@@ -19,11 +19,11 @@
                                 <div class="ros_l4">LOT-{{list.auction.completeNo}}</div>
                             </div>
                               <div class="ros_l" v-if="list.auction.offerNum==0">
-                                <div class="ros_l_top clearfix">
+                           <!--      <div class="ros_l_top clearfix">
                                     <div class="ros_offer">0 CNY</div>
                                     <div class="ros_prompt">出价被超越</div>
                                     <div class="ros_label" v-if="list.auctionCollect.show==true">NEW</div>
-                                </div>
+                                </div> -->
                             
                                 <div class="ros_l2">{{reversedNum(list.auction.basePrice/100)}} CNY</div>
                                 <div class="ros_l3">{{list.auction.title}}</div>
@@ -185,6 +185,7 @@
 //                                    that.meScroll()
                                 }
                             },1000)
+                            console.log(boxlist)
                         }
                         successCallback&&successCallback(boxlist);//成功回调
                     }else{
