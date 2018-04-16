@@ -765,16 +765,17 @@
                                 that.m = parseInt(time / 1000 / 60 % 60, 10) < 10 ? '0' +  parseInt(time / 1000 / 60 % 60 , 10) :  parseInt(time / 1000 / 60 % 60 , 10);
                                 that.s = parseInt(time / 1000 % 60, 10) < 10 ? '0' + parseInt(time / 1000 % 60, 10) : parseInt(time / 1000 % 60, 10);
                                 if(time < 0){
+                                    debugger
                                     clearInterval(timeRun);
                                     that.day = '00'
                                     that.h = '00'
                                     that.m = '00'
                                     that.s = '00'
-//                                    if(that.details.auctionStatus == '2'){
+                                    if(that.details.auctionStatus == '2'){
                                         that.page.num = 1;
                                         that.specialist = [];
                                         that.upCallback()
-//                                    }
+                                    }
                                 }
                             },1000);
                         }else if(that.details.auctionStatus == '3'){
@@ -792,11 +793,11 @@
                                     that.h = '00'
                                     that.m = '00'
                                     that.s = '00'
-//                                    if(that.details.auctionStatus == '2'){
+                                    if(that.details.auctionStatus == '2'){
                                         that.page.num = 1;
                                         that.specialist = [];
                                         that.upCallback()
-//                                    }
+                                    }
                                 }
                             },1000);
                         }else{
@@ -814,11 +815,11 @@
                                     that.h = '00'
                                     that.m = '00'
                                     that.s = '00'
-//                                    if(that.details.auctionStatus == '2'){
+                                    if(that.details.auctionStatus == '2'){
                                         that.page.num = 1;
                                         that.specialist = [];
                                         that.upCallback()
-//                                    }
+                                    }
                                 }
                             },1000);
                         }
