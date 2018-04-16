@@ -306,7 +306,7 @@
                     }else{
                         that.isShowNoMore = false;
                     }
-                    that.page.num = that.page.num+1;
+                    that.page.num = that.page.num + 1;
                     that.mescroll.endSuccess(curPageData.length,that.totalPage);
                     that.mescroll.endUpScroll(that.isShowNoMore)
                     that.wxShare()

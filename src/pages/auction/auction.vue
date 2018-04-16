@@ -834,6 +834,7 @@
                             if(res.data.code === 200){
                                 if(res.data.datas.pager.datas != null){
                                     let auctionList = res.data.datas.pager.datas;
+                                    that.totalPage = Number(res.data.datas.pager.totalCount);
                                     let ids = [];
                                     for(let i = 0;i<auctionList.length;i++){
                                         if(auctionList[i].id === that.id){
@@ -847,7 +848,6 @@
                                                 let specialist = res.data.datas.pager.datas;
                                                 let collects = res.data.datas.collects;
                                                 let dataArr = '';
-                                                that.totalPage = res.data.datas.pager.totalPage;
                                                 for (let i = 0;i<specialist.length;i++){
                                                     if(specialist[i].currentPrice === 0){
                                                         specialist[i].currentPrice = specialist[i].basePrice
@@ -870,7 +870,7 @@
                                                 successCallback&&successCallback(dataArr);//成功回调
                                             }else{
                                                 let specialist = [];
-                                                that.totalPage = '1';
+//                                                that.totalPage = '1';
                                                 successCallback&&successCallback(specialist);//成功回调
                                             }
                                         }
