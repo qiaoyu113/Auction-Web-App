@@ -302,6 +302,8 @@
                                         window.localStorage.setItem('phone',that.phone)
                                         that.login = true;
                                         that.wxShow = false;
+                                         window.localStorage.setItem('token',res.data.datas)
+                                         that.$router.replace({name:'personalCenter'})
                                     }else if(res.data.code === 512104){
                                         // that.getKaptchas()
                                         that.hint2 = true;

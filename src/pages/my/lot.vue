@@ -185,7 +185,7 @@
 //                                    that.meScroll()
                                 }
                             },1000)
-                            console.log(boxlist)
+                         
                         }
                         successCallback&&successCallback(boxlist);//成功回调
                     }else{

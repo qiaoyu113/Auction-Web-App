@@ -273,7 +273,7 @@
            beforeAvatarUpload2(file) {
             const isJPG = file.type === 'image/jpeg';
             const isLt2M = file.size / 1024 / 1024 < 2;
-         
+          console.log(file.size)
             // var reader = new FileReader();
             // var that = this;
             //  reader.readAsDataURL(file);
