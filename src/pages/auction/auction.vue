@@ -827,26 +827,28 @@
                             that.onswiper();
                         });
                         that.marketNo = res.data.datas.marketNo;
-                        commonService.getAuctionList({
-                            pageNo:that.page.num,
-                            pageSize:that.page.size,
-                            marketNo:that.marketNo}).then(function(res){
-                            if(res.data.code === 200){
-                                if(res.data.datas.pager.datas != null){
-                                    let auctionList = res.data.datas.pager.datas;
-                                    that.totalPage = Number(res.data.datas.pager.totalCount);
-                                    let ids = [];
-                                    for(let i = 0;i<auctionList.length;i++){
-                                        if(auctionList[i].id === that.id){
-                                        }else{
-                                            ids.push(auctionList[i].id);
-                                        }
-                                    }
-                                    commonService.getAuctionList({pageNo:1,pageSize:10,auctionIds:ids}).then(function(res) {
+//                        commonService.getAuctionList({
+//                            pageNo:that.page.num,
+//                            pageSize:that.page.size,
+//                            marketNo:that.marketNo}).then(function(res){
+//                            if(res.data.code === 200){
+//                                if(res.data.datas.pager.datas != null){
+//                                    let auctionList = res.data.datas.pager.datas;
+//                                    that.totalPage = Number(res.data.datas.pager.totalCount);
+//                                    let ids = [];
+//                                    for(let i = 0;i<auctionList.length;i++){
+//                                        if(auctionList[i].id === that.id){
+//                                            ids.push(auctionList[i].id);
+//                                        }else{
+//
+//                                        }
+//                                    }
+                                    commonService.getAuctionList({pageNo:that.page.num,pageSize:that.page.size,auctionIds:that.id}).then(function(res) {
                                         if(res.data.code === 200){
                                             if(res.data.datas.pager != null){
                                                 let specialist = res.data.datas.pager.datas;
                                                 let collects = res.data.datas.collects;
+                                                that.totalPage = Number(res.data.datas.pager.totalCount);
                                                 let dataArr = '';
                                                 for (let i = 0;i<specialist.length;i++){
                                                     if(specialist[i].currentPrice === 0){
@@ -875,11 +877,11 @@
                                             }
                                         }
                                     })
-                                }else{
-
-                                }
-                            }
-                        })
+//                                }else{
+//
+//                                }
+//                            }
+//                        })
                     }else{
                         that.$router.replace({name:'none'})
                     }
@@ -2221,6 +2223,7 @@
                             font-size: 10px;
                             line-height: @size10;
                             color: rgb(129, 135, 140);
+                            margin-top: 0.06rem;
                         }
                         .span3{
                             font-size: 13px;
