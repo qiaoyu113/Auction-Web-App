@@ -24,7 +24,7 @@
             </div>
             <!--登录账号-->
             <div class="info">
-                <input type="text" pattern="[0-9]*" placeholder="请输入手机号码" v-model="phoneUser"/>
+                <input type="text" @input="keyupphone" placeholder="请输入手机号码" v-model="phoneUser"/>
                 <div class="infoRight" @click="remphoneUser()" v-if="phoneUser!=''"><i class="iconfont icon-closeicon"></i></div>
             </div>
             <div class="info">
@@ -244,6 +244,9 @@
             remphoneUser:function(){
                 this.phoneUser=''
             },
+            keyupphone:function(){
+                this.phoneUser=this.phoneUser.replace(/[^\d$]/ig,'')
+            },
             rempasswordUser:function(){
                 this.passwordUser=''
             },
@@ -359,6 +362,7 @@
             //点击登陆
             loginBtn:function(){
                 let that = this;
+               
                 commonService.goLogin({phone:that.phoneUser,password:that.passwordUser,platform:that.platform}).then(function(res){
                     if(res.data.code === 200){
                         let token = res.data.datas;
@@ -772,7 +776,8 @@
                 line-height:0.8rem;
                 position: absolute;
                 bottom:1px;
-                box-sizing: border-box;
+                // box-sizing: border-box;
+                // overflow: hidden;
                 .login{
                     float:left;
                     color:#A8A8A8;
@@ -791,17 +796,18 @@
                     color:#353535;
                     margin-left:0.2rem;
                     padding:0 0.14rem;
-                    box-sizing: border-box;
+                    // box-sizing: border-box;
                     font-size: 12px;
-                    border-bottom:1px solid #353535;
+                    border-bottom:2px solid #353535;
                 }
                 .check{
                     color:#353535;
                     float:left;
                     padding:0 0.14rem;
                     font-size: 12px;
-                    box-sizing: border-box;
-                    border-bottom:1px solid #353535;
+                    // box-sizing: border-box;
+                    border-bottom:2px solid #353535;
+
                 }
             }
         }
@@ -893,8 +899,8 @@
             padding-top:2.94rem;
         }
         .code{
-            height: 1.06rem;
-            line-height: 1.06rem;
+            // height: 1.06rem;
+            // line-height: 1.06rem;
             float:right;
             margin-right:0.1rem;
             color:#B1B1B1;
@@ -905,6 +911,8 @@
         }  
         .v_code{
             font-size: 10px;
+            margin-top: 0.28rem;
+            border-bottom: 1px solid #b1b1b1;
             span{
                 font-size: 10px;
             }
