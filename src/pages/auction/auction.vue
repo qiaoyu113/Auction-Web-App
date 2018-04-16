@@ -770,11 +770,11 @@
                                     that.h = '00'
                                     that.m = '00'
                                     that.s = '00'
-//                                    if(that.details.auctionStatus == '2'){
+                                    if(that.details.auctionStatus == '2'){
                                         that.page.num = 1;
                                         that.specialist = [];
                                         that.upCallback()
-//                                    }
+                                    }
                                 }
                             },1000);
                         }else if(that.details.auctionStatus == '3'){
@@ -792,11 +792,11 @@
                                     that.h = '00'
                                     that.m = '00'
                                     that.s = '00'
-//                                    if(that.details.auctionStatus == '2'){
+                                    if(that.details.auctionStatus == '2'){
                                         that.page.num = 1;
                                         that.specialist = [];
                                         that.upCallback()
-//                                    }
+                                    }
                                 }
                             },1000);
                         }else{
@@ -814,11 +814,11 @@
                                     that.h = '00'
                                     that.m = '00'
                                     that.s = '00'
-//                                    if(that.details.auctionStatus == '2'){
+                                    if(that.details.auctionStatus == '2'){
                                         that.page.num = 1;
                                         that.specialist = [];
                                         that.upCallback()
-//                                    }
+                                    }
                                 }
                             },1000);
                         }
@@ -1025,7 +1025,7 @@
                 if(that.bidPrice <= 10000){
                     if(that.bidPrice <= Number(that.details.basePrice) + 200){
                         if(that.offerNumDate){
-                            that.bidPrice = Number(that.details.basePrice) + 100;
+                            that.bidPrice = Number(that.details.basePrice);
                         }else{
                             that.bidPrice = Number(that.details.currentPrice) + 100;
                         }
