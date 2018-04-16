@@ -406,7 +406,7 @@
             float: right;
             margin-top: 0.3rem;
             img{
-                width: 1rem;
+                width: 0.8rem;
                 margin-top: 0.4rem;
             }
         }

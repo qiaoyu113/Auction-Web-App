@@ -891,16 +891,17 @@
 }
 #demo .show { 
   float: left;
- width: 2.2rem; 
- height: 2.2rem; 
+  margin-top: 0.2rem;
+ width: 1.76rem; 
+ height: 1.76rem; 
  overflow: hidden; 
  position: relative; 
  border-radius: 50%; 
  border: 1px solid #d5d5d5; 
 }
 #demo .picture { 
- width: 2.2rem; 
- height: 2.2rem; 
+ width: 1.76rem; 
+ height: 1.76rem; 
  overflow: hidden; 
  background-position: center center; 
  background-repeat: no-repeat; 

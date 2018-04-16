@@ -57,7 +57,7 @@
             </div> -->
            <div class="info">
                 <input style="width:6rem;" type="number" placeholder="请输入验证码" v-model="code"/>
-                <div class="code" @click="getcode">获取验证码<span v-if="codeShow" style="margin:0;">({{timeOver}})</span></div>
+                <div class="code v_code" @click="getcode">获取验证码<span v-if="codeShow" style="margin:0;">({{timeOver}}s)</span></div>
             </div>
             <div class="info">
                 <input type="password" placeholder="请输入密码" v-model="password"/>
@@ -94,7 +94,7 @@
             </div> -->
            <div class="info">
                 <input style="width:6rem;" type="number" placeholder="请输入验证码" v-model="code"/>
-                <div class="code" @click="getcode">获取验证码<span v-if="codeShow" style="margin:0;">({{timeOver}})</span></div>
+                <div class="code v_code" @click="getcode">获取验证码<span v-if="codeShow" style="margin:0;">({{timeOver}}s)</span></div>
             </div>
             <div class="info">
                 <input type="password" placeholder="请输入密码" v-model="password"/>
@@ -260,7 +260,7 @@
                 this.$router.push({path:"/resetpassword"}) 
             },
             Returns:function(){
-                this.$router.push({path:"/personalCenter"}) 
+                this.$router.push({path:"/gologin",query:{index:3}}) 
             },
             vwximg:function(){
 
@@ -888,7 +888,7 @@
             }
         }
         .sign{
-            padding-top:2.4rem;
+            padding-top:2.94rem;
         }
         .code{
             height: 1.06rem;
@@ -901,6 +901,12 @@
                 font-size: 12px;
             }
         }  
+        .v_code{
+            font-size: 10px;
+            span{
+                font-size: 10px;
+            }
+        }
         .v_kefu{
                 text-align: center;
                 font-size: 10px;
