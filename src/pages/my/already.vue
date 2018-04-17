@@ -290,8 +290,12 @@
                     if(res.data.datas==null){
                          that.$router.push({path:"/my/order",query:{auctionId:id}}) 
                     }else{
+                     
                         let status=res.data.datas.status
-                        if(status!=6){//订单详情页
+                        let csStatus=res.data.datas.csStatus
+                         if(status==5 && csStatus!=0 && csStatus!=1 ){
+                              that.$router.push({path:"/afterorder",query:{id:res.data.datas.orderNo,type:'whole'}}) 
+                           }else if(status!=6){//订单详情页
                          that.$router.push({path:"/normalorder",query:{id:res.data.datas.orderNo}}) 
                         }else if(status==6){//关闭
                          // that.$router.push({path:"/closeorder",query:{id:res.data.datas.orderNo}}) 

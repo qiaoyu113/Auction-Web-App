@@ -139,7 +139,7 @@
                     that.myList = that.myList.concat(curPageData); //更新列表数据
                     // 加载完成后busy为false，如果最后一页则lastpage为true
                     //          加载完成后给页数+1
-                    console.log(that.myList)
+               
                     if(that.page.num >= that.totalPage) {
                         that.isShowNoMore = true;
                     }else{

@@ -198,7 +198,12 @@ import {commonService} from '../../service/commonService.js'
                 
             },
             Return:function(){
+               if(this.type==4){
+                  this.$router.push({path:"/normalorder",query:{id:this.orderNo}}) 
+               }else{
                 window.history.go(-1)
+               }
+                
             },
             remname:function(){
               this.name=''
