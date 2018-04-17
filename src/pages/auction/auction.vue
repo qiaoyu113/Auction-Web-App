@@ -2217,7 +2217,7 @@
                         margin-top: @size16;
                         color: rgb(129, 135, 140);
                         .span1{
-                            font-size: 13px;
+                            font-size: 12px;
                             line-height: @size13;
                             color: rgb(129, 135, 140);
                         }
@@ -2228,7 +2228,7 @@
                             margin-top: 0.06rem;
                         }
                         .span3{
-                            font-size: 13px;
+                            font-size: 12px;
                             line-height: @size13;
                             color: #000;
                         }
@@ -2239,7 +2239,7 @@
                         margin-left: @size10;
                         margin-top: 0.39rem;
                         color: rgb(129, 135, 140);
-                        font-size: 13px;
+                        font-size: 12px;
                     }
                     .infoAlipay2{
                         text-align: left;
@@ -2247,7 +2247,7 @@
                         margin-left: @size10;
                         margin-top: 0.39rem;
                         color: #000000;
-                        font-size: 13px;
+                        font-size: 12px;
                     }
                 }
 
