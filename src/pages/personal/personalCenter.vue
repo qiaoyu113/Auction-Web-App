@@ -482,7 +482,9 @@
                     border-radius: 50%;
                     overflow: hidden;
                 img{
-                    width: 100%;
+                    width: 1.93rem;
+                    height: 1.93rem;
+                    margin: -0.1rem -0.1rem;
                     // height: 100%;
                      
                 }

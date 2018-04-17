@@ -267,9 +267,11 @@
                 this.$router.push({path:"/resetpassword"}) 
             },
             Returns:function(){
-               that.login = false;
-                that.wxShow = true;
-                this.wximg=null
+
+               window.localStorage.removeItem('headImg')
+               // this.login = false;
+               //  this.wxShow = true;
+               //  this.wximg=null
                 this.$router.push({path:"/gologin",query:{index:3}}) 
             },
             vwximg:function(){
