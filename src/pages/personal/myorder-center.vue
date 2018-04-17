@@ -31,7 +31,8 @@
                     <span class="fr bgcolor" v-if="list.status==2">待处理</span>
                     <span class="fr" v-if="list.status==3">待发货</span>
                     <span class="fr" v-if="list.status==4">已发货</span> 
-                    <div class="v_rosr" v-if="list.status==6 || list.status==5"><img src="../../assets/image/mycenter/sc.png"  @click="deleteorder(list.orderNo)"/></div>
+                    <div class="v_rosr" v-if="list.status==6"><img src="../../assets/image/mycenter/sc.png"  @click="deleteorder(list.orderNo)"/></div>
+                    <div class="v_rosr" v-if="list.status==5 && list.csStatus!=2 && list.csStatus!=3"><img src="../../assets/image/mycenter/sc.png"  @click="deleteorder(list.orderNo)"/></div>
                     <span class="fr" v-if="list.status==6">已关闭</span>
                     <span class="fr" v-if="list.status==5&&list.csStatus==0">已完成</span>
                     <span class="fr" v-if="list.status==5&&list.csStatus==1">已完成</span>
@@ -74,7 +75,9 @@
                 <div class="item">
                     <span>订单号:{{list.orderNo}}</span>
                     <span class="fr" v-if="list.status!=6 && list.status!=8">售后中</span>
+                    <div class="v_rosr" v-if="list.status==6 || list.status==8"><img src="../../assets/image/mycenter/sc.png"  @click="deleteorder(list.orderNo)"/></div>
                     <span class="fr" v-if="list.status==6 || list.status==8">已完成</span>
+                     
                 </div>
                 <div class="box clearfix ">
                     <div class="boxImg fl">
@@ -304,9 +307,6 @@
                 }
                commonService.getOrder({pageNo:1,pageSize:10,status:status}).then(function(res){
                       that.datalist=res.data.datas.datas
-                     
-                  
-                
                       
                     })
             },
@@ -330,8 +330,9 @@
              // 获取售后列表
             getOrdercs:function(){
                 let that=this;
-               commonService.getOrdercs({pageNo:1,pageSize:30}).then(function(res){
+               commonService.getOrdercs({pageNo:1,pageSize:50}).then(function(res){
                       that.ordercs=res.data.datas.datas
+                      
                     })
             },
             //下拉刷新、加载

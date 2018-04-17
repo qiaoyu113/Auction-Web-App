@@ -28,7 +28,7 @@
                 <div class="infoRight" @click="remphoneUser()" v-if="phoneUser!=''"><i class="iconfont icon-closeicon"></i></div>
             </div>
             <div class="info">
-                <input type="password" placeholder="请输入密码" v-model="passwordUser"/>
+                <input type="password" placeholder="请输入密码" v-model="passwordUser" @keydown="keydenglu"/>
                 <div class="infoRight" @click="rempasswordUser()" v-if="passwordUser!=''"><i class="iconfont icon-closeicon"></i></div>
             </div>
               <!--微信登录-->
@@ -64,7 +64,7 @@
                 <div class="infoRight" @click="rempassword()" v-if='password!=""'><i class="iconfont icon-closeicon"></i></div>
             </div>
             <div class="info">
-                <input type="password" placeholder="请确认密码" v-model="password2"/>
+                <input type="password" placeholder="请确认密码" v-model="password2" @keydown="keyzc"/>
                 <div class="infoRight" @click="rempassword2()" v-if="password2!=''"><i class="iconfont icon-closeicon"></i></div>
             </div>
             <!--微信登陆-->
@@ -101,7 +101,7 @@
                 <div class="infoRight" @click="rempassword()" v-if='password!=""'><i class="iconfont icon-closeicon"></i></div>
             </div>
             <div class="info">
-                <input type="password" placeholder="请确认密码" v-model="password2"/>
+                <input type="password" placeholder="请确认密码" v-model="password2" @keydown="keywxzc"/>
                 <div class="infoRight" @click="rempassword2()" v-if="password2!=''"><i class="iconfont icon-closeicon"></i></div>
             </div>
             <!--登陆和提示-->
@@ -284,6 +284,23 @@
                 this.login = false;
             }
             },
+            keydenglu:function(event){
+                if(event.keyCode == 13){
+                    this.loginBtn()
+                }
+
+            },
+            keyzc:function(event){
+                 if(event.keyCode == 13){
+                    this.sign()
+                }
+            },
+            keywxzc:function(event){
+                 if(event.keyCode == 13){
+                    this.putUsers()
+                }
+            },
+
             // // 获取图片验证码
             // getKaptchas:function(){
             //     let that=this

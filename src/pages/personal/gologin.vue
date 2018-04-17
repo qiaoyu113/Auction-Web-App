@@ -4,73 +4,9 @@
     -->
     <!-- 个人中心 -->
     <div class="gologin"  v-set-title="title">
-        
-        <!-- <div class="header">传家</div> -->
-        <div class="content" v-if="logined">
-            <div class="box clearfix ">
-                <div class="boxImg fl" @click="mycenter()">
-                    <img src="../../assets/image/mycenter/ph.png"/>
-                    <div class="member">v{{list.vipLevel}}</div>
-                </div>
-                <div class="info fl">
-                    <div class="hel">HELLO!</div>
-                    <div class="name">{{list.name}}</div>
-                    <div class="prove" v-if="list.realNameStatus==2">
-                        <i class="iconfont icon-duigoudunpai"></i>&nbsp;实名认证
-                    </div>
-                </div>
-                <div class="fr" @click="mycenter()">...</div>
-            </div>
-            <div class="option clearfix">
-                <div class="litbox fl" @click="order(0)">
-                    <div class="pic"><i class="iconfont icon-tupian"></i></div>
-                    <div class="font">全部订单</div>
-                </div>
-                <div class="litbox fl" @click="order(1)">
-                    <div class="pic"><i class="iconfont icon-tupian"></i><div class="number" v-if="numItem.noPayNum!=0&&numItem.noPayNum!=null">{{numItem.noPayNum}}</div></div>
-                    <div class="font">待付款</div>
-                </div>
-                <div class="litbox fl" @click="order(2)">
-                    <div class="pic"><i class="iconfont icon-tupian"></i><div class="number" v-if="numItem.noGetNum!=0&&numItem.noPayNum!=null">{{numItem.noGetNum}}</div></div>
-                    <div class="font">待收货</div>
-                </div>
-                <div class="litbox fl">
-                    <div class="pic"><i class="iconfont icon-tupian"></i><div class="number" v-if="numItem.saleNum!=0&&numItem.noPayNum!=null">{{numItem.saleNum}}</div></div>
-                    <div class="font">退款/售后</div>
-                </div>
-            </div>
-            <div class="account">
-                <div class="acc  clearfix">
-                    <div class="fl">保证金管理</div>
-                    <div class="fr" @click="bond">...</div>
-                </div>
-                <div class="remain clearfix">
-                    <div class="mon fl">
-                        <span >保证金总额</span><br> 
-                        <!-- <span class="span1">{{list.wallet.totalMoney}}CNY</span>  -->
-                        <span class="span1">{{totalMoney | money}}CNY</span>
-                    </div>
-                    <button class="fr" @click="cash">提现</button>
-                    <button class="fr" @click="recharge">充值</button>
-                </div>
-            </div>
-            <div class="center">
-                <div class="address  clearfix">
-                    <div class="fl">地址管理</div>
-                    <div class="fr" @click="address()">...</div>
-                </div>
-                <div class="address  clearfix">
-                    <div class="fl">会员中心</div>
-                    <div class="fr" @click="member">...</div>
-                </div>
-                <div class="address  clearfix">
-                    <div class="fl">帮助中心</div>
-                    <div class="fr" @click="help">...</div>
-                </div>
-            </div>
-            
-        </div>
-        <div class="content" v-if='!logined'>
+      
+    
+        <div class="content">
             <div class="unlogin">
                 <div class="pic"><img src="../../assets/image/mycenter/ph.png"/></div>
                 <div class="hel">HELLO!</div>
@@ -604,6 +540,9 @@
                 padding-top: 3rem;
                 span{
                     font-size: @size80;
+                }
+                img{
+                    width: @size80;
                 }
             }
             .hel{
