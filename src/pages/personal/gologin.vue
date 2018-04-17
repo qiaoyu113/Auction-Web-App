@@ -248,7 +248,6 @@
                 }
                 commonService.getFootPrint({pageNo:1,pageSize:30,cookiesId:cookiesId }).then(function(res){
                     if(res.data.code === 200){
-                        console.log(res)
                         that.footPrint=res.data.datas.datas
                     }
                 })

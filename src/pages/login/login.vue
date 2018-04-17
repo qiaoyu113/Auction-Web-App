@@ -36,7 +36,7 @@
                 <i class="iconfont icon-icon_weixin"></i>微信
             </div>
             <!--联系客服-->
-            <div class="talk" v-if="wximg!=null"><a href="tel:15801619600" @click="resetpassword()"><span>登录遇到问题，联系客服</span></a></div>
+            <div class="talk" v-if="wximg!=null"><a href="tel:15801619600"><span>登录遇到问题，联系客服</span></a></div>
             <!--登录和提示-->
             <div class="v_kefu" v-if="wximg==null"><a href="javaScript:;" @click="resetpassword()">忘记密码</a> | <a href="tel:15801619600">联系客服</a></div>
             <div :class="isX ? 'bottoms':'bottom'">
@@ -59,7 +59,7 @@
                 <input style="width:6rem;" type="number" placeholder="请输入验证码" v-model="code"/>
                 <div class="code v_code" @click="getcode">获取验证码<span v-if="codeShow" style="margin:0;">({{timeOver}}s)</span></div>
             </div>
-            <div class="info">
+            <div class="info v_border">
                 <input type="password" placeholder="请输入密码" v-model="password"/>
                 <div class="infoRight" @click="rempassword()" v-if='password!=""'><i class="iconfont icon-closeicon"></i></div>
             </div>
@@ -96,7 +96,7 @@
                 <input style="width:6rem;" type="number" placeholder="请输入验证码" v-model="code"/>
                 <div class="code v_code" @click="getcode">获取验证码<span v-if="codeShow" style="margin:0;">({{timeOver}}s)</span></div>
             </div>
-            <div class="info">
+            <div class="info v_border">
                 <input type="password" placeholder="请输入密码" v-model="password"/>
                 <div class="infoRight" @click="rempassword()" v-if='password!=""'><i class="iconfont icon-closeicon"></i></div>
             </div>
@@ -111,11 +111,11 @@
             </div>
         </div>
         <!--联系客服-->
-        <div class="q_talk" @click="openService()">
+    <!--     <div class="q_talk" @click="openService()">
             <img src="../../assets/image/mycenter/icon5.png"/>
-        </div>
+        </div> -->
         <!--客户服务-->
-        <div class="serviceBox" v-if="ServiceBox">
+    <!--     <div class="serviceBox" v-if="ServiceBox">
             <div class="serviceClose" @click="closeService()">×</div>
             <div class="serviceTop">
                 <h2>ASSISTANCE</h2>
@@ -144,7 +144,7 @@
                 <p>联系微信客服</p>
                 <p class="p">长按识别二维码</p>
             </div>
-        </div>
+        </div> -->
         <div class="serviceBk" v-if="ServiceBox"></div>
     </div>
 </template>
@@ -850,7 +850,7 @@
                 }
             }
             .info{
-                width:100%;
+                // width:100%;
                 height:1.06rem;
                 padding-left:0.2rem;
                 box-sizing: border-box;
@@ -888,6 +888,12 @@
                         height: 1rem;
                     }
                 }
+            }
+            .v_border{
+                border-bottom:1px solid #d1d7de;
+                 padding-left:0rem;
+                 margin-left: 0.2rem;
+
             }
             .talk{
                 width:100%;

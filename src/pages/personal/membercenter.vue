@@ -237,7 +237,7 @@
     @import url('../../assets/css/icon/iconfont.css');
   .v_membercenter{
     .membercenter{
-             width:100%;
+            width:100%;
             max-width:10rem;
             position: fixed;
             top: 0;
@@ -532,7 +532,7 @@
         }
         .pointDetail{
             padding-left: @size10;
-            min-height: 1000px;
+            // min-height: 1000px;
             .tit{
                 height: @size40;
                 text-align: left;

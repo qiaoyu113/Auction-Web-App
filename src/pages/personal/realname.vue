@@ -259,7 +259,7 @@
     //            }
     //         }
             if (!isJPG) {
-                 this.$message.error('上传头图片只能是jpg、jpeg、png、bmp格式!');
+                 this.$message.error('上传图片只能是jpg、jpeg、png、bmp格式!');
             }
             if (!isLt2M) {
               this.$message.error('上传图片大小不能超过 2MB!');
@@ -302,10 +302,10 @@
     //            }
     //         }
             if (!isJPG) {
-                 this.$message.error('上传头图片只能是jpg、jpeg、png、bmp格式!');
+                 this.$message.error('上传图片只能是jpg、jpeg、png、bmp格式!');
             }
             if (!isLt2M) {
-              this.$message.error('上传头像图片大小不能超过 2MB!');
+              this.$message.error('上传图片大小不能超过 2MB!');
             }
             return  isJPG && isLt2M;
           },

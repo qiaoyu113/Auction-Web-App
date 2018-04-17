@@ -283,8 +283,19 @@
          change (e) { 
                        let files = e.target.files || e.dataTransfer.files; 
                        if (!files.length) return; 
-                       this.panel = true; 
+                      
+                      
                        this.picValue = files[0]; 
+                       // console.log(this.picValue.size)
+                        if(this.picValue.type!="image/image" && this.picValue.type!="image/jpeg" && this.picValue.type!="image/bmp" && this.picValue.type!="image/png" && this.picValue.type!="image/jpg"){
+                             this.$message.error('上传头像只能是jpg、jpeg、png、bmp格式!');
+                             return false
+                       } 
+                        if(this.picValue.size / 1024 / 1024 > 2){
+                             this.$message.error('上传头像大小不能超过 2MB!');
+                             return false
+                       }
+                       this.panel = true; 
                        this.url = this.getObjectURL(this.picValue); 
                          //每次替换图片要重新得到新的url 
                        if(this.cropper){ 
@@ -488,12 +499,12 @@
     @import url('../../assets/css/base.less');
 
     .mycenter{
-        position: fixed;
-          left: 0;
-          right: 0;
-          top: 0;
-          overflow-y: scroll;
-          bottom: 0;
+        // position: fixed;
+        //   left: 0;
+        //   right: 0;
+        //   top: 0;
+        //   overflow-y: scroll;
+        //   bottom: 0;
 
          #demo #button2{
               position: absolute;
@@ -915,8 +926,9 @@
  border: 1px solid #d5d5d5; 
 }
 #demo .picture { 
- width: 1.76rem; 
- height: 1.76rem; 
+ width: 1.96rem; 
+ height: 1.96rem; 
+ margin: -0.1rem -0.1rem;
  overflow: hidden; 
  background-position: center center; 
  background-repeat: no-repeat; 
