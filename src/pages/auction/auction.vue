@@ -849,24 +849,26 @@
                                                 let specialist = res.data.datas.pager.datas;
                                                 let collects = res.data.datas.collects;
                                                 that.totalPage = Number(res.data.datas.pager.totalCount);
-                                                let dataArr = '';
-                                                for (let i = 0;i<specialist.length;i++){
-                                                    if(specialist[i].currentPrice === 0){
-                                                        specialist[i].currentPrice = specialist[i].basePrice
-                                                    }
-                                                    let price = specialist[i].currentPrice/100;
-                                                    if(price%1 === 0){
-                                                        specialist[i].currentPrice = price.toString() + '.00'
-                                                    }else{
-                                                        specialist[i].currentPrice = price.toFixed(2);
-                                                    }
-                                                    let collect = collects.indexOf(specialist[i].id)
-                                                    if(collect === -1){
-                                                        specialist[i]['collect'] = false;
-                                                        dataArr = specialist;
-                                                    }else{
-                                                        specialist[i]['collect'] = true;
-                                                        dataArr = specialist;
+                                                let dataArr = [];
+                                                if(specialist.length != 0){
+                                                    for (let i = 0;i<specialist.length;i++){
+                                                        if(specialist[i].currentPrice === 0){
+                                                            specialist[i].currentPrice = specialist[i].basePrice
+                                                        }
+                                                        let price = specialist[i].currentPrice/100;
+                                                        if(price%1 === 0){
+                                                            specialist[i].currentPrice = price.toString() + '.00'
+                                                        }else{
+                                                            specialist[i].currentPrice = price.toFixed(2);
+                                                        }
+                                                        let collect = collects.indexOf(specialist[i].id)
+                                                        if(collect === -1){
+                                                            specialist[i]['collect'] = false;
+                                                            dataArr = specialist;
+                                                        }else{
+                                                            specialist[i]['collect'] = true;
+                                                            dataArr = specialist;
+                                                        }
                                                     }
                                                 }
                                                 successCallback&&successCallback(dataArr);//成功回调
@@ -2612,16 +2614,15 @@
                 margin-right: @size15;
                 box-sizing: border-box;
                 .num{
-                    // box-sizing: border-box;
-                    border: 0.5px solid rgb(129, 135, 140);
-                    height: @size20;
+                    border: 0.6px solid #81878c;
+                    height: .6rem;
                     background: white;
-                    border-radius:3px;
-                    padding: 2px;
-                    margin-top:@size6;
-                    line-height: @size21;
-                    font-size: @size12;
-                    font-weight: bold;
+                    border-radius: 3px;
+                    margin-top: .16rem;
+                    line-height: .6rem;
+                    font-size: .32rem;
+                    font-weight: 700;
+                    width: .55rem;
                 }
                 .colon{
                     font-weight: bold;

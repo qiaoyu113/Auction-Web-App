@@ -15,7 +15,7 @@
             <div class="mescroll-bounce">
                 <div class="titleEn">{{details.title}}</div>
                 <div class="titleCh">{{details.subTitle}}</div>
-                <div class="speTime">{{details.createTime}}</div>
+                <div class="speTime">{{details.smTitle}}</div>
                 <div class="speCont" id="html" v-html="details.content"></div>
                 <div class="recommend" v-if="recoCh">RECOMMEND</div>
                 <!--<div class="recoCh" v-if="recoCh">拍品推荐</div>-->
