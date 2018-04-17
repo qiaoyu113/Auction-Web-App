@@ -843,7 +843,7 @@
 //
 //                                        }
 //                                    }
-                                    commonService.getAuctionList({pageNo:that.page.num,pageSize:that.page.size,auctionIds:that.id}).then(function(res) {
+                                    commonService.getAuctionList({pageNo:that.page.num,pageSize:that.page.size,auctionIds:that.id,type:1}).then(function(res) {
                                         if(res.data.code === 200){
                                             if(res.data.datas.pager != null){
                                                 let specialist = res.data.datas.pager.datas;

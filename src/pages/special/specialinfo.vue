@@ -289,7 +289,8 @@
                             commonService.getAuctionList({
                                 pageNo:pageNum,
                                 pageSize:pageSize,
-                                auctionIds:that.details.auctionIds.toString()
+                                auctionIds:that.details.auctionIds.toString(),
+                                type:2
                             }).then(function(res){
                                 if(res.data.code === 200){
                                     let act = res.data.datas.pager.datas;
