@@ -1,5 +1,6 @@
 <template>
     <div id="home" class="newPhone" v-set-title="title">
+    <v-service></v-service>
         <div class="headertt">
             <div class="headerLeft">
                 <div class="headerEn">{{header.name}}</div>
@@ -108,6 +109,14 @@
             //获取验证码
           getcode:function(){
                 let that = this;
+
+                if(that.phone==''){
+                      that.htmlx="请输入手机号"
+                        setTimeout(() => {  
+                                 that.htmlx=''
+                             },2000) 
+                        return false
+                }
               if(that.timeOver==0){
                     that.codeShow = true;
                     that.timeOver = 90;

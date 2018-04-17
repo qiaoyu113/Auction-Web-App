@@ -1,5 +1,6 @@
 <template>
     <div class="resetpassword" v-set-title="title">
+    
         <div class="headertts">
             <div class="headerLeft">
                 <div class="headerEn">{{header.name}}</div>

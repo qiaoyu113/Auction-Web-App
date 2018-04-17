@@ -39,7 +39,8 @@
 
                      <div class="clearfix"> 
                        <div class="show"> 
-                        <div class="picture" :style="'backgroundImage:url('+headerImage+')'"> 
+                        <div class="picture" > 
+                        <img :src="headerImage" :onerror="errorImg01"/>
                         </div> 
                        </div>
                        <div class="v_show"> 
@@ -180,6 +181,7 @@
                     name:'PERSONAL SETTING',
                     name2:'个人设置'
                 },
+
                 inputName:'',//修改的名字
                 hasPhone:true,//是否有手机号绑定
                 radio:'1',
@@ -418,7 +420,7 @@
                  commonService.getUsers().then(function(res){
                     that.user=res.data.datas.user
                     that.headerImage=that.picHead + that.user.headImg
-                    // console.log(that.headerImage)
+                
                     let sex=that.user.sex
                     that.radio=sex + ''
                     that.startTime=that.user.birthday
@@ -650,7 +652,7 @@
     }
     .box{
         width:100%;
-        padding:0.27rem;
+        padding:0.2667rem;
         box-sizing: border-box;
         .boxHeader{
             width:100%;
@@ -933,6 +935,10 @@
  background-position: center center; 
  background-repeat: no-repeat; 
  background-size: cover; 
+  img{
+    width: 100%;
+    height: 100%;
+  }
 }
 #demo .v_show{
     float: right;

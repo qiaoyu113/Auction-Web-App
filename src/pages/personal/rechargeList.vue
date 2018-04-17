@@ -10,6 +10,7 @@
     index三种状1.填写信息 2.审核中 3.已完成
     -->
     <div class="rechargeList">
+     <v-service></v-service>
         <!-- <div class="header">传家</div> -->
         <div class="nav">
             <span class="" @click="Return()"><i class="iconfont icon-fanhui"></i></span> 

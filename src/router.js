@@ -17,6 +17,7 @@ import zhistory from './component/common/goback.vue'
 import backhome from './component/common/back-home.vue'
 import nav from './component/common/nav.vue'
 import iconstate from './component/common/iconState.vue'
+import vservice from './component/common/service.vue'
 
 Vue.component('z-modal', zmodal)
 Vue.component('z-banner', zbanner)
@@ -25,6 +26,7 @@ Vue.component('z-history', zhistory)
 Vue.component('z-home', backhome)
 Vue.component('z-nav',nav)
 Vue.component('z-icon',iconstate)
+Vue.component('v-service',vservice)
 
 
 // 定义组件

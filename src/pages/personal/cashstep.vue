@@ -11,6 +11,7 @@
     -->
     <div class="cashstep" v-set-title="title">
         <!-- <div class="header">传家</div> -->
+        <v-service></v-service>
         <div class="nav">
             <span class="" @click="Return()"><i class="iconfont icon-fanhui"></i></span> 
         </div>

@@ -63,7 +63,7 @@
             </div>
             <div class="sample" @click="show">照片样例</div>
             <div class="hit">
-                <p>1.每日可实名认证<span>三次</span>，如有问题 <a href="tel:15801619600">联系客服</a>。 </p>
+                <p>1.每日可实名认证<span>五次</span>，如有问题 <a href="tel:15801619600">联系客服</a>。 </p>
                 <p>2.请手持相关证件，要求手持证件正面及背面的照片。</p>
                 <p>3.手持证件照必须是正面头部照。</p>
                 <p>4.必须看清证件号且证件号不被遮挡。</p>
@@ -99,6 +99,42 @@
                 </div>
         </div>
         </div>
+                <!--联系客服-->
+        <div class="talk" @click="openService()">
+            <img src="../../assets/image/mycenter/icon5.png"/>
+        </div>
+        <!--客户服务-->
+        <div class="serviceBox" v-if="ServiceBox">
+            <div class="serviceClose" @click="closeService()">×</div>
+            <div class="serviceTop">
+                <h2>ASSISTANCE</h2>
+                <p>客户服务</p>
+            </div>
+            <a href="tel:15801619600">
+                <div class="serviceList">
+                    <img src="../../assets/image/mycenter/t1.png"/>
+                    <p>电话委托</p>
+                </div>
+            </a>
+            <a href="tel:15801619600">
+                <div class="serviceList">
+                    <img src="../../assets/image/mycenter/t2.png"/>
+                    <p>客服服务</p>
+                </div>
+            </a>
+            <a href="tel:15801619600">
+                <div class="serviceList">
+                    <img src="../../assets/image/mycenter/t3.png"/>
+                    <p>私恰</p>
+                </div>
+            </a>
+            <div class="serviceWX">
+                <img src="../../assets/image/mycenter/wx.png"/>
+                <p>联系微信客服</p>
+                <p class="p">长按识别二维码</p>
+            </div>
+        </div>
+        <div class="serviceBk" v-if="ServiceBox"></div>
     </div>
 </template>
 
@@ -127,6 +163,7 @@
                 img2:'',
                 rz:'',
                 imgurl:'http://api.sundayauction.cn/files',
+                ServiceBox:false,
             }
         },
         components:{
@@ -165,8 +202,20 @@
             
             common.onMove('.v_realname')
             this.getAuths()
+         
         },
         methods: {
+          
+             //打开客服
+            openService(){
+                let that = this;
+                that.ServiceBox = true;
+            },
+            //关闭客服
+            closeService(){
+                let that = this;
+                that.ServiceBox = false;
+            },
             close:function() {
                 this.dis='dis';
             },
@@ -218,8 +267,12 @@
                 this.imageUrl = URL.createObjectURL(file.raw);
              },
            beforeAvatarUpload(file) {
-            const isJPG = file.type === 'image/jpeg/bmp/png/jpg';
+            const isJPG = file.type === 'image/jpg';
+            const isJPG2 = file.type === 'image/jpeg';
+            const isJPG3 = file.type === 'image/png';
+            const isJPG4 = file.type === 'image/bmp';
             const isLt2M = file.size / 1024 / 1024 < 2;
+       
          
             // var reader = new FileReader();
             // var that = this;
@@ -258,20 +311,23 @@
     //        })
     //            }
     //         }
-            if (!isJPG) {
+            if (!isJPG && !isJPG2 && !isJPG3 && !isJPG4) {
                  this.$message.error('上传图片只能是jpg、jpeg、png、bmp格式!');
             }
             if (!isLt2M) {
               this.$message.error('上传图片大小不能超过 2MB!');
             }
-            return  isJPG && isLt2M;
+            return  (isJPG || isJPG2 || isJPG3 || isJPG4) && isLt2M;
           },
           handleAvatarSuccess2(res, file) {
                 this.authBackPic=res.datas.file
                 this.imageUrl2 = URL.createObjectURL(file.raw);
              },
            beforeAvatarUpload2(file) {
-            const isJPG = file.type === 'image/jpeg/bmp/png/jpg';
+            const isJPG = file.type === 'image/jpg';
+            const isJPG2 = file.type === 'image/jpeg';
+            const isJPG3 = file.type === 'image/png';
+            const isJPG4 = file.type === 'image/bmp';
             const isLt2M = file.size / 1024 / 1024 < 2;
             // var reader = new FileReader();
             // var that = this;
@@ -301,13 +357,13 @@
     //        })
     //            }
     //         }
-            if (!isJPG) {
+            if (!isJPG && !isJPG2 && !isJPG3 && !isJPG4) {
                  this.$message.error('上传图片只能是jpg、jpeg、png、bmp格式!');
             }
             if (!isLt2M) {
               this.$message.error('上传图片大小不能超过 2MB!');
             }
-            return  isJPG && isLt2M;
+            return  (isJPG || isJPG2 || isJPG3 || isJPG4) && isLt2M;
           },
           shuchu:function(){
 
@@ -363,6 +419,111 @@
     @import url('../../assets/css/base.less');
     @import url('../../assets/css/icon/iconfont.css');
     .realname{
+         .talk{
+            width: 1rem;
+            height: 0.9rem;
+            background: #fff;
+            position: fixed;
+            right: 0;
+            top: 5.5rem;
+            bottom: 0;
+            margin: auto;
+            border: 2px solid #000;
+            border-right: none;
+            border-bottom-left-radius: 6px;
+            border-top-left-radius:6px;
+            padding:0.2rem;
+            box-sizing:border-box;
+            img{
+                width:0.56rem;
+                height:0.5rem;
+            }
+        }
+        .serviceBk{
+            width:100%;
+            height:100%;
+            position: fixed;
+            top:0;
+            bottom:0;
+            left:0;
+            right:0;
+            margin:auto;
+            background:#000000;
+            opacity: 0.65;
+            z-index:200;
+
+        }
+        .serviceBox{
+            width:7rem;
+            height:9.2rem;
+            position: absolute;
+            left:0;
+            right:0;
+            top:0;
+            bottom:0;
+            margin:auto;
+            background:#fff;
+            padding:0.5rem;
+            z-index:201;
+            .serviceClose{
+                position: absolute;
+                right:0;
+                top:0;
+                width:0.8rem;
+                height:0.8rem;
+                background:#EB6100;
+                color:#fff;
+                text-align: center;
+                line-height:0.7rem;
+                font-size: 0.9rem;
+            }
+            .serviceTop{
+                text-align: center;
+                margin-top:0.5rem;
+                margin-bottom:0.4rem;
+                h2{
+                    font-size:18px;
+                }
+                p{
+                    font-size:12px;
+                    margin-top:0.2rem;
+                }
+            }
+            .serviceList{
+                overflow: hidden;
+                font-size: 12px;
+                padding:0.3rem 0 0.3rem 2.3rem;
+                border-top:1px solid #B5B8BA;
+                img{
+                    float:left;
+                    width:0.5rem;
+                }
+                p{
+                    width:2rem;
+                    text-align: center;
+                    float:left;
+                    font-size:12px;
+                }
+            }
+            .serviceWX{
+                overflow: hidden;
+                font-size: 12px;
+                border-top:1px solid #B5B8BA;
+                text-align: center;
+                img{
+                    width:2rem;
+                    height:2rem;
+                    margin: 0.4rem auto;
+                }
+                p{
+                    font-size:12px;
+                }
+                .p{
+                    font-size:9px;
+                    color:#C3C3C3;
+                }
+            }
+        }
         .v_realname{
         position: fixed;
           left: 0;

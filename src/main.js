@@ -42,6 +42,7 @@ import zbanner from './component/common/banner.vue'
 import zfooter from './component/common/footer.vue'
 import zhistory from './component/common/goback.vue'
 import backhome from './component/common/back-home.vue'
+import vservice from './component/common/service.vue'
 
 
 
@@ -52,6 +53,7 @@ Vue.component('z-history', zhistory)
 Vue.component('pheader', pheader)
 Vue.component('z-home', backhome)
 Vue.component('poption', poption)
+Vue.component('v-service', vservice)
 
 
 

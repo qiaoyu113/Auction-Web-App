@@ -1,5 +1,6 @@
 <template>
     <div id="home" class="savePhone" v-set-title="title">
+    <v-service></v-service>
         <div class="v_header">
             <div class="headerLeft">
                 <div class="headerEn">{{header.name}}</div>
