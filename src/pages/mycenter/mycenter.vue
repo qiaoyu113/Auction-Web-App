@@ -705,9 +705,10 @@
                     margin-left:0.8rem;
                 }
                 .more{
-                    width: 1rem;
+                    // width: 1rem;
                     float:right;
                     margin-top:0.24rem;
+                    margin-right: 0.2667rem;
                     img{
                         width: 0.5rem;
                         margin-top: 0.2rem;
@@ -943,7 +944,8 @@
 #demo .v_show{
     float: right;
     margin-top: 0.6rem;
-    width: 1rem;
+    // width: 1rem;
+    margin-right: 0.2667rem;
      height: 1rem;
     overflow: hidden;
     position: relative;

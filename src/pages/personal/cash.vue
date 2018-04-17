@@ -158,6 +158,10 @@
                 }else{
                     this.money=this.money.replace(/\D/g,'')
                 }
+                if(this.money>this.wallet.availableMoney / 100){
+                     this.money=(this.wallet.availableMoney / 100).toFixed(0)
+                 }
+
             },
             // 首次加载判断在什么浏览器下打开
              wxshow:function(){

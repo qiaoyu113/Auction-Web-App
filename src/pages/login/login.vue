@@ -459,7 +459,7 @@
                                     if(that.timeOver === 0){
                                         clearInterval(time)
                                         that.codeShow = false;
-                                        that.timeOver = 60;
+                                        that.timeOver = 90;
                                     }else{
                                         that.timeOver = that.timeOver -= 1
                                     }

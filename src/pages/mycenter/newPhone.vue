@@ -125,6 +125,8 @@
                         if(that.timeOver == 0){
                             // clearInterval(time)
                            that.codeShow = false;
+                            clearInterval(time)
+                         
                         }else{ 
                           
                             that.timeOver = that.timeOver -= 1
@@ -319,6 +321,9 @@
                     margin-right:0.1rem;
                     color:#B1B1B1;
                     font-size:10px;
+                    span{
+                        font-size: 10px;
+                    }
                 }
                 input{
                     margin-left:0.2rem;

@@ -370,6 +370,7 @@ import {commonService} from '../../service/commonService.js'
                 font-size: 13px;
                 font-weight: bold;
                 color: #fc5500;
+                margin-right: 0.2667rem;
             }
         }
         .moneys{
