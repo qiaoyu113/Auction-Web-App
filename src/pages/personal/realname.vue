@@ -218,7 +218,7 @@
                 this.imageUrl = URL.createObjectURL(file.raw);
              },
            beforeAvatarUpload(file) {
-            const isJPG = file.type === 'image/jpeg';
+            const isJPG = file.type === 'image/jpeg/bmp/png/jpg';
             const isLt2M = file.size / 1024 / 1024 < 2;
          
             // var reader = new FileReader();
@@ -258,22 +258,21 @@
     //        })
     //            }
     //         }
-            // if (!isJPG) {
-            //      this.$message.error('上传头像图片只能是 JPG 格式!');
-            // }
-            if (!isLt2M) {
-              this.$message.error('上传头像图片大小不能超过 2MB!');
+            if (!isJPG) {
+                 this.$message.error('上传头图片只能是jpg、jpeg、png、bmp格式!');
             }
-            return isLt2M;
+            if (!isLt2M) {
+              this.$message.error('上传图片大小不能超过 2MB!');
+            }
+            return  isJPG && isLt2M;
           },
           handleAvatarSuccess2(res, file) {
                 this.authBackPic=res.datas.file
                 this.imageUrl2 = URL.createObjectURL(file.raw);
              },
            beforeAvatarUpload2(file) {
-            const isJPG = file.type === 'image/jpeg';
+            const isJPG = file.type === 'image/jpeg/bmp/png/jpg';
             const isLt2M = file.size / 1024 / 1024 < 2;
-          console.log(file.size)
             // var reader = new FileReader();
             // var that = this;
             //  reader.readAsDataURL(file);
@@ -302,13 +301,13 @@
     //        })
     //            }
     //         }
-            // if (!isJPG) {
-            //      this.$message.error('上传头像图片只能是 JPG 格式!');
-            // }
+            if (!isJPG) {
+                 this.$message.error('上传头图片只能是jpg、jpeg、png、bmp格式!');
+            }
             if (!isLt2M) {
               this.$message.error('上传头像图片大小不能超过 2MB!');
             }
-            return isLt2M;
+            return  isJPG && isLt2M;
           },
           shuchu:function(){
 
@@ -326,6 +325,7 @@
 
             if(that.name==''){
                  that.prompt="真实姓名不能为空"
+                 
                  return false
             }
             if(that.namecard==''){
@@ -346,6 +346,7 @@
                            that.getAuths()
                        }else{
                         that.prompt=res.data.message;
+
                        }
                     // that.url='http://test.resource.vjuzhen.com/'+ res.data.datas
             })

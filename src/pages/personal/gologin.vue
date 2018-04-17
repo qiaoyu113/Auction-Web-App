@@ -208,7 +208,7 @@
                 this.$router.push({path:"/helpcenter"})
             },
             getPos:function(index) {
-                var str = 95*(index)+'px';
+                var str = 2.40*(index)+'rem';
                 str='left:'+str;
                 return str;
             },
@@ -248,6 +248,7 @@
                 }
                 commonService.getFootPrint({pageNo:1,pageSize:30,cookiesId:cookiesId }).then(function(res){
                     if(res.data.code === 200){
+                        console.log(res)
                         that.footPrint=res.data.datas.datas
                     }
                 })
@@ -626,7 +627,7 @@
             }
         }
     }
-    .sell-spic {
+     .sell-spic {
             width: 9.4666rem; 
             height: @size80;
             overflow: hidden;
@@ -642,10 +643,14 @@
                     position: absolute;
                     width: @size80;
                     height: @size80;
-                    margin-left: @size5;
+                    // margin-left: @size5;
+                    // margin-right: 10px;
                     background: gray;
+                    overflow: hidden;
+                    
                     img {
-                      width: 2.75rem;
+                        // width: @size80;
+                       width: 2.75rem;
                       height: 2.1333rem;
                       margin-left: -0.35rem;
                       vertical-align: top;

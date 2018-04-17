@@ -48,7 +48,7 @@
         <div class="box sign" v-if="!login && !wxShow">
             <!--注册账号-->
             <div class="info">
-                <input type="number" placeholder="请输入手机号码" v-model="phone"/>
+                <input type="text"  @input="keyupphone2" placeholder="请输入手机号码" v-model="phone"/>
                  <div class="infoRight" @click="remphone()" v-if="phone!=''"><i class="iconfont icon-closeicon"></i></div>
             </div>
             <!-- <div class="info">
@@ -85,7 +85,7 @@
                 </div>
             </div>
            <div class="info">
-                <input type="number" placeholder="请输入手机号" v-model="phone"/>
+                <input type="text" @input="keyupphone2" placeholder="请输入手机号" v-model="phone"/>
                  <div class="infoRight" @click="remphone()" v-if="phone!=''"><i class="iconfont icon-closeicon"></i></div>
             </div>
             <!-- <div class="info">
@@ -247,6 +247,10 @@
             keyupphone:function(){
                 this.phoneUser=this.phoneUser.replace(/[^\d$]/ig,'')
             },
+            
+            keyupphone2:function(){
+                this.phone=this.phone.replace(/[^\d$]/ig,'')
+            },
             rempasswordUser:function(){
                 this.passwordUser=''
             },
@@ -263,10 +267,13 @@
                 this.$router.push({path:"/resetpassword"}) 
             },
             Returns:function(){
+               that.login = false;
+                that.wxShow = true;
+                this.wximg=null
                 this.$router.push({path:"/gologin",query:{index:3}}) 
             },
             vwximg:function(){
-
+                
               this.wximg=window.localStorage.getItem('headImg')
               
             },
@@ -367,7 +374,7 @@
                     if(res.data.code === 200){
                         let token = res.data.datas;
                         window.localStorage.setItem('token',token)
-                        that.$router.replace({name:'personalCenter'})
+                        that.$router.replace({name:'home'})
                     }else if(res.data.code === 513110){
                         that.hint = true;
                         that.hintText = '用户不存在,请注册';
@@ -920,7 +927,7 @@
         .v_kefu{
                 text-align: center;
                 font-size: 10px;
-                margin-top: 2.3rem;
+                margin-top: 2rem;
                 padding-bottom: 1.3rem;
 
                 a{

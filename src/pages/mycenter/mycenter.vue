@@ -32,7 +32,9 @@
                       <div> 
                       <img id="image" :src="url" alt="Picture"> 
                       </div>
+                      <button type="button" id="button2" @click="crop2">取消</button>
                       <button type="button" id="button" @click="crop">确定</button>
+
                      </div> 
 
                      <div class="clearfix"> 
@@ -307,8 +309,6 @@
               
             commonService.postBase({base64Img:that.headerImage,width:that.width,height:that.height}).then(function(res){
                     let img = res.data.datas;
-               
-
                           commonService.postUsersinfo({sex:that.radio,birthday:that.startTime,headImg:img}).then(function(res){
                                     
                                         that.getUsers()
@@ -337,6 +337,10 @@
                       context.fill(); 
                       return canvas; 
                      },
+                 crop2:function(){
+                   this.panel=false
+                 },   
+                
 
             //打开客服
             openService(){
@@ -490,6 +494,17 @@
           top: 0;
           overflow-y: scroll;
           bottom: 0;
+
+         #demo #button2{
+              position: absolute;
+              left: 10px;
+              top: 10px;
+              width: 80px;
+              height: 40px;
+              border: none;
+              border-radius: 5px;
+              background: white;
+         }
         .talk{
             width: 1rem;
             height: 0.9rem;

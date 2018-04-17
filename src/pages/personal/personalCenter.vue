@@ -251,7 +251,7 @@
                 this.$router.push({path:"/login"})
             },
             getPos:function(index) {
-                var str = 2.43*(index)+'rem';
+                var str = 2.40*(index)+'rem';
                 str='left:'+str;
                 return str;
             },
