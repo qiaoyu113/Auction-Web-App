@@ -1226,6 +1226,10 @@
                                 }
                             })
                         }
+                    }else{
+                        that.dis2Show = false;
+                        that.dis4Show = true;
+                        that.hintText = res.data.datas;
                     }
                 })
             },
@@ -2223,13 +2227,13 @@
                         }
                         .span2{
                             font-size: 10px;
-                            line-height: @size10;
-                            color: rgb(129, 135, 140);
-                            margin-top: 0.06rem;
+                            line-height: 0.2667rem;
+                            color: #81878c;
+                            margin-top: 0.2rem;
                         }
                         .span3{
                             font-size: 12px;
-                            line-height: @size13;
+                            line-height: 0.1rem;
                             color: #000;
                         }
                     }

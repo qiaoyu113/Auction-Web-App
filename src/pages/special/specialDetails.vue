@@ -336,12 +336,12 @@
                         setTimeout(function(){
                             let now = new Date().getTime()
                             let time = '';
-//                            if(that.details.auctionStatus == '1'){
-//                                time = that.details.auctionStartTime - now;
-//                            }else{
-//                                time = that.details.auctionEndTime - now;
-//                            }
-                            time = that.details.mqEndTime - now;
+                            if(that.details.auctionStatus == '1'){
+                                time = that.details.auctionStartTime - now;
+                            }else{
+                                time = that.details.mqEndTime - now;
+                            }
+//                            time = that.details.mqEndTime - now;
                             let day = '';
                             let h =  '';
                             let m =  '';
@@ -363,12 +363,12 @@
                         let timeRun = setInterval(function(){
                             let now = new Date().getTime()
                             let time = '';
-//                            if(that.details.auctionStatus == '1'){
-//                                time = that.details.auctionStartTime - now;
-//                            }else{
-//                                time = that.details.auctionEndTime - now;
-//                            }
-                            time = that.details.mqEndTime - now;
+                            if(that.details.auctionStatus == '1'){
+                                time = that.details.auctionStartTime - now;
+                            }else{
+                                time = that.details.mqEndTime - now;
+                            }
+//                            time = that.details.mqEndTime - now;
                             let day = '';
                             let h =  '';
                             let m =  '';
