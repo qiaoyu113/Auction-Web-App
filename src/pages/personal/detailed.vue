@@ -284,7 +284,7 @@ import {commonService} from '../../service/commonService.js'
         width:100%;
         height:3.7rem;
         border-bottom:2px solid #353535;
-        padding:1.07rem 0.53rem;
+        padding:1.07rem 0.2667rem;
         box-sizing: border-box;
         position: relative;
         .loginBox{

@@ -154,18 +154,17 @@
             // 不可开头输入0
              moneyreplor:function(){
 
-                 if(this.wallet==null){
-                   this.wallet.availableMoney=0
-                }
-                if(this.money>this.wallet.availableMoney / 100){
-                     this.money=(this.wallet.availableMoney / 100).toFixed(0)
-                 }
                 if(this.money.length==1){
                     this.money=this.money.replace(/[^1-9]/g,'')
                 }else{
                     this.money=this.money.replace(/\D/g,'')
                 }
-               
+                if(this.wallet==null){
+                   this.money=''
+                }
+                if(this.money>this.wallet.availableMoney / 100){
+                     this.money=(this.wallet.availableMoney / 100).toFixed(0)
+                 }
 
             },
             // 首次加载判断在什么浏览器下打开

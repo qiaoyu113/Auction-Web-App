@@ -139,25 +139,31 @@
                     }
 
 
-                if(that.codeShow){
+                if(that.timeOver != 0){
                      return false
-                }else{
-                    that.codeShow = true;
-                    let time = setInterval(function(){
-                        // console.log(that.timeOver);
-                        if(that.timeOver === 0){
-                            // clearInterval(time)
-                            that.codeShow = false;
-                            that.timeOver = 90;
-                        }else{
-                            that.timeOver = that.timeOver -= 1
-                        }
-                    },1000)
                 }
                 // 获取短信验码
                  commonService.getNewPhone({phone:that.inputPhone,type:6}).then(function(res){
                     if(res.data.code == 200){
-                     // that.$router.go(-1);
+                if(that.timeOver==0){
+                    that.codeShow = true;
+                    that.timeOver = 90;
+                    let time = setInterval(function(){
+                   
+                        if(that.timeOver == 0){
+                            // clearInterval(time)
+                           that.codeShow = false;
+                            clearInterval(time)
+                         
+                        }else{ 
+                          
+                            that.timeOver = that.timeOver -= 1
+                        }
+                    },1000)
+               }else{
+                  return false
+               }
+
                     }else{
                       that.htmlx=res.data.message
                       setTimeout(() => {  

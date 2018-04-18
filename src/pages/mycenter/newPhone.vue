@@ -126,7 +126,16 @@
                              },2000) 
                         return false
                     }
-              if(that.timeOver==0){
+
+               if(that.timeOver != 0){
+                     return false
+                }
+        
+                // 获取短信验码
+                 commonService.getSendMessage({phone:that.phone,type:5}).then(function(res){
+                    
+                    if(res.data.code == 200){
+                 if(that.timeOver==0){
                     that.codeShow = true;
                     that.timeOver = 90;
                     let time = setInterval(function(){
@@ -144,13 +153,6 @@
                }else{
                   return false
                }
-        
-                // 获取短信验码
-                 commonService.getSendMessage({phone:that.phone,type:5}).then(function(res){
-                    
-                    if(res.data.code == 200){
-                       
- 
 
                     }else{
                         that.htmlx=res.data.message
