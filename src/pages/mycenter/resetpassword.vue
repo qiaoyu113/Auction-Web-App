@@ -28,7 +28,7 @@
             <!--</div>-->
             <!--短信验证码-->
             <div class="info">
-                <div class="infoList">短信验证码<input class="codeInp" type="number" placeholder="请输入短信验证码" v-model="inputNum"/><div class="code" @click="getcode">获取验证码<span v-if="codeShow" style="margin:0;">({{timeOver}})</span></div></div>
+                <div class="infoList">短信验证码<input class="codeInp" type="number" placeholder="请输入短信验证码" v-model="inputNum"/><div class="code" @click="getcode">获取验证码<span v-if="codeShow" style="margin:0;">({{timeOver}}s)</span></div></div>
             </div>
             <div id="captcha-box"></div>
             <!--保存-->
@@ -254,21 +254,40 @@
             //获取验证码
           getcode:function(){
                 let that = this;
-                if(that.codeShow){
-
-                }else{
+           if(that.phone==''){
+                      that.htmlx="请输入手机号"
+                        setTimeout(() => {  
+                                 that.htmlx=''
+                             },2000) 
+                        return false
+                }
+                 let reg = /^1[3|4|5|7|8][0-9]{9}$/;
+                    let flag = reg.test(that.phone)
+                    if(!flag){
+                        this.htmlx="手机号码不正确"
+                        setTimeout(() => {  
+                                 this.htmlx=''
+                             },2000) 
+                        return false
+                    }
+              if(that.timeOver==0){
                     that.codeShow = true;
+                    that.timeOver = 90;
                     let time = setInterval(function(){
-                        // console.log(that.timeOver);
-                        if(that.timeOver === 0){
+                   
+                        if(that.timeOver == 0){
                             // clearInterval(time)
-                            that.codeShow = false;
-                            that.timeOver = 90;
-                        }else{
+                           that.codeShow = false;
+                            clearInterval(time)
+                         
+                        }else{ 
+                          
                             that.timeOver = that.timeOver -= 1
                         }
                     },1000)
-                }
+               }else{
+                  return false
+               }
                 // 获取短信验码
                  commonService.getSms({phone:that.phone,type:3,kaptchaKey:that.img.kaptchaKey,kaptchaValue:that.kaptchaValue}).then(function(res){
                     
@@ -560,7 +579,10 @@
                     float:right;
                     margin-right:0.1rem;
                     color:#B1B1B1;
-                    font-size:12px;
+                    font-size:10px;
+                    span{
+                      font-size: 10px;
+                    }
                 }
                 input{
                     margin-left:0.2rem;

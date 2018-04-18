@@ -117,6 +117,15 @@
                              },2000) 
                         return false
                 }
+                 let reg = /^1[3|4|5|7|8][0-9]{9}$/;
+                    let flag = reg.test(that.phone)
+                    if(!flag){
+                        this.htmlx="手机号码不正确"
+                        setTimeout(() => {  
+                                 this.htmlx=''
+                             },2000) 
+                        return false
+                    }
               if(that.timeOver==0){
                     that.codeShow = true;
                     that.timeOver = 90;
