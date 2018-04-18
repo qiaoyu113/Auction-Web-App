@@ -921,6 +921,7 @@
 #demo .show { 
   float: left;
   margin-top: 0.2rem;
+  margin-left: 0.2rem;
  width: 1.76rem; 
  height: 1.76rem; 
  overflow: hidden; 

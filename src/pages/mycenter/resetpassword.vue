@@ -110,7 +110,7 @@
                     name:'PASSWORD',
                     name2:'密码重置'
                 },
-                timeOver:60,//短信验证码倒计时
+                timeOver:0,//短信验证码倒计时
                 inputPhone:'',//手机号
                 inputNum:'',//验证码
                 codeShow:false,
@@ -201,13 +201,15 @@
                              },2000) 
                         return false
                     }
+
+
+
                commonService.postResetpassword({phone:that.phone,smsCode:that.inputNum,type:3}).then(function(res){
                    
                     if(res.data.code == 200){
                       // that.$router.go(-1);
                       that.key=res.data.datas
                       that.index=2
-
                     }else{
                         that.htmlx=res.data.message
                         setTimeout(() => {  

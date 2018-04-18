@@ -22,7 +22,7 @@
             </div> -->
             <!-- 短信验证 -->
             <div class="info">
-                <div class="infoList">短信验证码<input class="codeInp" type="number" placeholder="请输入短信验证码" v-model="inputNum"/><div class="code" @click="getcode">获取验证码<span v-if="codeShow" style="margin:0;">({{timeOver}})</span></div></div>
+                <div class="infoList">短信验证码<input class="codeInp" type="number" placeholder="请输入短信验证码" v-model="inputNum"/><div class="code" @click="getcode">获取验证码<span v-if="codeShow" style="margin:0;">({{timeOver}}s)</span></div></div>
             </div>
             <!--保存-->
              <div class="saves" v-if="htmlx">{{htmlx}}</div>
@@ -326,6 +326,9 @@
                     font-size:10px;
                     img{
                         height: 1rem;
+                    }
+                    span{
+                        font-size: 10px;
                     }
                 }
                 input{
