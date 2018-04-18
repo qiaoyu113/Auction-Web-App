@@ -862,9 +862,7 @@ import {commonService} from '../../service/commonService.js'
             .v_zfbzh{
                width: 5rem;
             }
-             .v_tou{
-                   font-size: 10px;
-                }
+          
             .infoClose{
                 float: right;
                 color:#87828c;
@@ -897,6 +895,9 @@ import {commonService} from '../../service/commonService.js'
                 }
                 
             }
+            .v_tou{
+                   font-size: 10px;
+                }
             .v_infoClose{
                font-weight: 700;
             }
