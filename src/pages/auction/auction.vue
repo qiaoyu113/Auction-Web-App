@@ -1158,7 +1158,8 @@
                 that.dis2Show = false;
                 that.dis3Show = false;
                 that.dis4Show = false;
-                that.$router.replace({name:'auctionMore',params:{id:that.id}})
+//                that.$router.replace({name:'auctionMore',params:{id:that.id}})
+                that.$router.go(0)
             },
             //判断浏览器
             monitor(){
@@ -2145,24 +2146,27 @@
                         float: left;
                         margin-top: 18px;
                         box-sizing: border-box;
-                        border: 3px solid rgb(0, 185, 181);
-                        width: @size14;
-                        height: @size14;
+                        border: 2px solid #00b9b5;
+                        width: 0.3733rem;
+                        height: 0.3733rem;
                         position: relative;
                         i{
-                            font-size: @size10;
-                            line-height: @size10;
+                            font-size: 0.2667rem;
                             position: absolute;
-                            top: -1px;
-                            left: -11px;
-                            color: rgb(0, 185, 181);
+                            top: 0;
+                            left: 0;
+                            bottom:0;
+                            right:0;
+                            margin:auto;
+                            line-height: 0.2667rem;
+                            color: #00b9b5;
                         }
                     }
                     .check1{
                         float: left;
                         margin-top: 18px;
                         box-sizing: border-box;
-                        border: 3px solid rgb(168, 174, 180);
+                        border: 2px solid rgb(168, 174, 180);
                         width: @size14;
                         height: @size14;
                         position: relative;
@@ -2222,19 +2226,21 @@
                         color: rgb(129, 135, 140);
                         .span1{
                             font-size: 12px;
-                            line-height: @size13;
+                            line-height: 0.2rem;
                             color: rgb(129, 135, 140);
+                            margin-top: 0.05rem;
                         }
                         .span2{
                             font-size: 10px;
                             line-height: 0.2667rem;
                             color: #81878c;
-                            margin-top: 0.2rem;
+                            margin-top: 0.14rem;
                         }
                         .span3{
                             font-size: 12px;
-                            line-height: 0.1rem;
+                            line-height: 0.2rem;
                             color: #000;
+                            margin-top: 0.05rem;
                         }
                     }
                     .infoAlipay{
