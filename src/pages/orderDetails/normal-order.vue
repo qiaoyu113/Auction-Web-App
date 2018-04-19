@@ -364,7 +364,11 @@ import {commonService} from '../../service/commonService.js'
             }
              },
         Return:function(){
-           this.$router.push({path:"/myorder",query:{index:0}})
+          if(this.$route.query.go==2){
+            this.$router.push({path:"/my/already"})
+          }else{
+            this.$router.push({path:"/myorder",query:{index:0}})
+          }
         },
         Routerid:function(id){
             this.$router.push({name:'auctionMore',params:{id:id}})

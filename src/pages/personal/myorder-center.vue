@@ -36,7 +36,7 @@
                     <span class="fr" v-if="list.status==6">已关闭</span>
                     <span class="fr" v-if="list.status==5&&list.csStatus==0">已完成</span>
                     <span class="fr" v-if="list.status==5&&list.csStatus==1">已完成</span>
-                    <span class="fr" v-if="list.status==5&&list.csStatus==2">售后中</span>
+                    <span class="fr" v-if="list.status==5&&list.csStatus==2">已完成</span>
                     <span class="fr" v-if="list.status==5&&list.csStatus==3">售后中</span>
                     <span class="fr" v-if="list.status==5&&list.csStatus==4">已完成</span>
                     <span class="fr" v-if="list.status==5&&list.csStatus==5">已完成</span>
@@ -285,7 +285,7 @@
         
                 if(type==6){
                     this.$router.push({path:"/closeorder",query:{id:id}})  
-                }else if(type==5 && csStatus!=0 && csStatus!=1 ){
+                }else if(type==5 && csStatus!=0 && csStatus!=1 && csStatus!=2 ){
                      this.$router.push({path:"/afterorder",query:{id:id,type:'whole'}}) 
                 }else{
                     this.$router.push({path:"/normalorder",query:{id:id}}) 

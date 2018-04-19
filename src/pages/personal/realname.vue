@@ -75,7 +75,8 @@
         </div>  
         </div> 
         <div class="bottom">
-                <div class="wrong" v-if="prompt!=''">{{prompt}}</div>
+                <div class="wrong" v-if="v_html!=''">{{v_html}}</div>
+                <div class="wrong" v-if="prompt!=''&&v_html==''">{{prompt}}</div>
                 <div class="log" @click="submit" v-if="rz.authStatus!=1 && rz.authStatus!=3">确认认证</div>
                 <div class="log log2" v-if="rz.authStatus==1">审核中</div>
                 <div class="log" @click="submit" v-if="rz.authStatus==3">去认证</div>
@@ -164,6 +165,7 @@
                 rz:'',
                 imgurl:'http://api.sundayauction.cn/files',
                 ServiceBox:false,
+                v_html:'',
             }
         },
         components:{
@@ -312,10 +314,16 @@
     //            }
     //         }
             if (!isJPG && !isJPG2 && !isJPG3 && !isJPG4) {
-                 this.$message.error('上传图片只能是jpg、jpeg、png、bmp格式!');
+                 this.v_html='上传图片只能是jpg、jpeg、png、bmp格式!';
+                    setTimeout(() => { 
+                                    this.v_html = ''
+                                      },2000) 
             }
             if (!isLt2M) {
-              this.$message.error('上传图片大小不能超过 2MB!');
+              this.v_html='上传图片大小不能超过 2MB!';
+              setTimeout(() => { 
+                                    this.v_html = ''
+                                      },2000) 
             }
             return  (isJPG || isJPG2 || isJPG3 || isJPG4) && isLt2M;
           },
@@ -358,10 +366,16 @@
     //            }
     //         }
             if (!isJPG && !isJPG2 && !isJPG3 && !isJPG4) {
-                 this.$message.error('上传图片只能是jpg、jpeg、png、bmp格式!');
+                 this.v_html='上传图片只能是jpg、jpeg、png、bmp格式!';
+                    setTimeout(() => { 
+                                    this.v_html = ''
+                                      },2000) 
             }
             if (!isLt2M) {
-              this.$message.error('上传图片大小不能超过 2MB!');
+              this.v_html='上传图片大小不能超过 2MB!';
+              setTimeout(() => { 
+                                    this.v_html = ''
+                                      },2000) 
             }
             return  (isJPG || isJPG2 || isJPG3 || isJPG4) && isLt2M;
           },

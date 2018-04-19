@@ -30,11 +30,11 @@
            <p><a href="tel:15801619600">我要送拍</a></p>
         </div>
         <!--联系客服-->
-        <div class="talk" @click="openService()">
+      <!--   <div class="talk" @click="openService()">
             <img src="../../assets/image/mycenter/icon5.png"/>
-        </div>
+        </div> -->
         <!--客户服务-->
-        <div class="serviceBox" v-if="ServiceBox">
+     <!--    <div class="serviceBox" v-if="ServiceBox">
             <div class="serviceClose" @click="closeService()">×</div>
             <div class="serviceTop">
                 <h2>ASSISTANCE</h2>
@@ -63,8 +63,8 @@
                 <p>联系微信客服</p>
                 <p class="p">长按识别二维码</p>
             </div>
-        </div>
-        <div class="serviceBk" v-if="ServiceBox"></div>
+        </div> -->
+        <!-- <div class="serviceBk" v-if="ServiceBox"></div> -->
         <z-footer ></z-footer>
     </div>
 </template>
@@ -175,14 +175,16 @@
             //浏览记录
                 getFootPrint(){
                 let that = this;
+
                 let cookiesId  = window.localStorage.getItem('cookiesId');
-             
+                 console.log(cookiesId + "我")
                 if(cookiesId  == undefined || cookiesId  == '' || cookiesId  == null){
-                    cookiesId  = Date.parse(new Date());
-                    cookiesId  = "zstat" + "-" + cookiesId  + "-" + Math.round(Math.random() * 3000000000);
-                    window.localStorage.setItem('cookiesId',cookiesId );
+                    // cookiesId  = Date.parse(new Date());
+                    // cookiesId  = "zstat" + "-" + cookiesId  + "-" + Math.round(Math.random() * 3000000000);
+                    // window.localStorage.setItem('cookiesId',cookiesId );
+                    cookiesId=''
                 }
-                commonService.getFootPrint({pageNo:1,pageSize:30,cookiesId:cookiesId }).then(function(res){
+                commonService.getFootPrint({pageNo:1,pageSize:50,cookiesId:cookiesId }).then(function(res){
                     if(res.data.code === 200){
                         that.footPrint=res.data.datas.datas
                     }
@@ -190,15 +192,15 @@
             },
 
 //打开客服
-            openService(){
-                let that = this;
-                that.ServiceBox = true;
-            },
+            // openService(){
+            //     let that = this;
+            //     that.ServiceBox = true;
+            // },
             //关闭客服
-            closeService(){
-                let that = this;
-                that.ServiceBox = false;
-            },
+            // closeService(){
+            //     let that = this;
+            //     that.ServiceBox = false;
+            // },
             //页面滑动问题
             onMove:function(){
                 let overscroll = function(el) {

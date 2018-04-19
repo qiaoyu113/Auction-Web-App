@@ -85,6 +85,7 @@
       
 
             <!--退出-->
+            <div class="v_o">错误</div>
             <div class="back" @click="deleteorder()">退出登录</div>
         </div>
        <!-- 性别 -->

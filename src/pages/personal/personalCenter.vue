@@ -317,9 +317,10 @@
                 let cookiesId  = window.localStorage.getItem('cookiesId');
              
                 if(cookiesId  == undefined || cookiesId  == '' || cookiesId  == null){
-                    cookiesId  = Date.parse(new Date());
-                    cookiesId  = "zstat" + "-" + cookiesId  + "-" + Math.round(Math.random() * 3000000000);
-                    window.localStorage.setItem('cookiesId',cookiesId );
+                    // cookiesId  = Date.parse(new Date());
+                    // cookiesId  = "zstat" + "-" + cookiesId  + "-" + Math.round(Math.random() * 3000000000);
+                    // window.localStorage.setItem('cookiesId',cookiesId );
+                    cookiesId=''
                 }
                 commonService.getFootPrint({pageNo:1,pageSize:50,cookiesId:cookiesId }).then(function(res){
                     if(res.data.code === 200){
