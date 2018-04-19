@@ -353,7 +353,7 @@
         <div class="dis2" v-if="dis2Show">
             <div class="transparent"></div>
             <div class="popWin" >
-                <div class="close" @click="closePay()"><i class="iconfont icon-closeicon"></i></div>
+                <div class="close" @click="closePay2()"><i class="iconfont icon-closeicon"></i></div>
                 <div class="payEn">PAYMENT</div>
                 <div class="payCh">保证金缴纳</div>
                 <div class="remind">
@@ -399,14 +399,14 @@
         <div class="dis3" v-if="dis3Show">
             <div class="transparent"></div>
             <div class="popWin">
-                <div class="close" @click="closePay()"><i class="iconfont icon-closeicon"></i></div>
+                <div class="close" @click="closePay2()"><i class="iconfont icon-closeicon"></i></div>
                 <div class="payEn">SUCCESS</div>
                 <div class="payCh">成功</div>
                 <div class="remind">
                     <img src="../../assets/image/mycenter/yesHint.png"/>
                     <p class="p2">{{hintText}}</p>
                 </div>
-                <div class="footer" @click="closePay()">确定</div>
+                <div class="footer" @click="closePay2()">确定</div>
             </div>
         </div>
 
@@ -414,7 +414,7 @@
         <div class="dis3" v-if="dis4Show">
             <div class="transparent"></div>
             <div class="popWin">
-                <div class="close" @click="closePay()"><i class="iconfont icon-closeicon"></i></div>
+                <div class="close" @click="closePay2()"><i class="iconfont icon-closeicon"></i></div>
                 <div class="payEn">WARN</div>
                 <div class="payCh">警告</div>
                 <div class="remind">
@@ -1160,6 +1160,15 @@
                 that.dis4Show = false;
 //                that.$router.replace({name:'auctionMore',params:{id:that.id}})
                 that.$router.go(0)
+            },
+            closePay2:function() {
+                let that = this;
+                window.localStorage.removeItem('payOk');
+                that.dis2Show = false;
+                that.dis3Show = false;
+                that.dis4Show = false;
+                that.$router.replace({name:'auctionMore',params:{id:that.id}})
+//                that.$router.go(0)
             },
             //判断浏览器
             monitor(){
