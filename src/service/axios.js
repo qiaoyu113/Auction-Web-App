@@ -35,7 +35,7 @@ axios.interceptors.response.use(function (response) {
     // 对token过期的跳转登录页面
     if (response.data.code == 510100 && !(response.config.url.indexOf('cdks/login')>0)){
         if(isClient){
-            localStorage.clear();
+            localStorage.removeItem('token');
             localStorage.redirectUrl = location.href
             location.href = location.origin+'/gologin/'
         }
