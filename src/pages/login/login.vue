@@ -187,6 +187,7 @@
                 wximg:'',
                 ServiceBox:false,
                 isX:false,
+                lanjie:true,
             }
         },
      // asyncData({store,route}) {
@@ -325,18 +326,26 @@
                     if(that.checkPassword){
                         if(that.password == that.password2){
                             if(that.code != ''){
+                                if(that.lanjie==false){
+                                    return false
+                                }
+                                that.lanjie=false
+
                                 commonService.goSignup({phone:that.phone,password:that.password,smsCode:that.code,type:1,platform:that.platform}).then(function(res){
                                     if(res.data.code === 200){
                                         that.phoneUser = that.phone;
                                         window.localStorage.setItem('phone',that.phone)
                                         that.login = true;
                                         that.wxShow = false;
+
+                                        that.lanjie=true
                                          window.localStorage.setItem('token',res.data.datas)
                                          that.$router.replace({name:'home'})
                                     }else if(res.data.code === 512104){
                                         // that.getKaptchas()
                                         that.hint2 = true;
                                         that.hint2Text = '短信验证码已过期';
+                                        that.lanjie=true
                                         setTimeout(() => { 
                                     that.hint2 = false;
                                     that.hint2Text = ''
@@ -345,6 +354,7 @@
                                     }else{
                                         that.hint2 = true;
                                         that.hint2Text = res.data.message; 
+                                        that.lanjie=true
                                          setTimeout(() => {  
                       
                                           that.hint2 = false;
@@ -498,11 +508,15 @@
                     if(that.checkPassword){
                         if(that.password == that.password2){
                             if(that.code != ''){
+                                if(that.lanjie==false){
+                                    return false
+                                }
+                                that.lanjie=false   
                                 commonService.putUserss({infoKey:infoKey,type:1,smsCode:that.code,phone:that.phone,platfrom:'WXH5',password:that.password}).then(function(res){
-               
                                     if(res.data.code === 512104){
                                         that.hint2 = true;
                                         that.hint2Text = '短信验证码已过期';
+                                        that.lanjie=true
                                         setTimeout(() => { 
                                     that.hint2 = false;
                                     that.hint2Text = ''
@@ -513,6 +527,7 @@
                                         window.localStorage.setItem('phone',that.phone)
                                         that.login = true;
                                         that.wxShow = false;
+                                        that.lanjie=true
                                         window.localStorage.setItem('token',res.data.datas)
                                         that.$router.replace({name:'home'})
 
