@@ -5,7 +5,8 @@
     <!-- 帮助中心 -->
   <div class="v_membercenter">
     <div class="membercenter">
-        
+        <div id="mescroll" class="mescroll lots">
+            <div class="mescroll-bounce">
         <!-- <div class="header">传家</div> -->
         <div class="content">
             <div class="loginBox clearfix">
@@ -61,7 +62,7 @@
 
             <div class="pointDetail">
                 <div class="tit">积分明细</div>
-                <div class="record" v-for="list in records">
+                <div class="record" v-for="list in myList">
                   <div class="fl">{{list.name}}</div>{{list.num}}<div class="fr" v-if="list.getTime!=null">{{list.getTime | stampFormate2 }}</div>
                 </div>
                 <!-- <div class="record"><div class="fl">拍卖成交</div> +5 <div class="fr">2018.4.44 20:11:50</div></div> --> 
@@ -119,11 +120,13 @@
             </div>
         </div>
         <div class="serviceBk" v-if="ServiceBox"></div>
+        </div></div>
     </div>
   </div>
 </template>
 
 <script >
+    import MeScroll from 'mescroll'
     import {appService} from '../../service/appService'
     import {common} from '../../assets/js/common/common'
     import {commonService} from '../../service/commonService.js'
@@ -141,6 +144,10 @@
                 colorValue2:'',
                 rule:'',//规则
                 ServiceBox:false,
+                page:{num:1,size:6},
+                isShowNoMore:false,
+                totalPage:'',
+                myList:[],
             }
         },
         components:{},
@@ -148,8 +155,9 @@
             
             common.onMove('.membercenter')
             this.getUsers()
-            this.getPoint()
+            this.meScroll()
             this.getDoctype()
+
             
         },
         methods: {
@@ -209,12 +217,12 @@
               })
              },
              // 获取积分明细
-             getPoint:function(){
-                let that=this
-                 commonService.getPoint({pageNo:1,pageSize:30}).then(function(res){
-                   that.records=res.data.datas.datas
-              })
-             },
+             // getPoint:function(){
+             //    let that=this
+             //     commonService.getPoint({pageNo:1,pageSize:50}).then(function(res){
+             //       that.records=res.data.datas.datas
+             //  })
+             // },
              // 获取会员规则
               getDoctype:function(){
                 let that=this
@@ -224,6 +232,73 @@
 
               })
              },
+             //下拉刷新、加载
+            meScroll: function (){
+                let that = this;
+                let scrollUp = document.getElementsByClassName('mescroll-upwarp');
+                let scrollDown = document.getElementsByClassName('mescroll-downwarp-reset');
+                for(let i = 0;i<scrollUp.length;i++){
+                    scrollUp[i].parentNode.removeChild(scrollUp[i]);
+                }
+                for(let i = 0;i<scrollDown.length;i++){
+                    scrollDown[i].parentNode.removeChild(scrollDown[i]);
+                }
+                let scrollWarp = document.getElementsByClassName('mescroll-downwarp');
+                for(let i = 0;i<scrollWarp.length;i++){
+                    scrollWarp[i].parentNode.removeChild(scrollWarp[i]);
+                }
+                that.mescroll = new MeScroll("mescroll", {
+                    up: {
+                        callback: that.upCallback,
+                        page:{size:that.page.size},
+                        isBounce: false, //此处禁止ios回弹,解析(务必认真阅读,特别是最后一点): http://www.mescroll.com/qa.html#q10
+                    },
+                    down: {
+                        callback: that.downCallback //下拉刷新的回调,别写成downCallback(),多了括号就自动执行方法了
+                    }
+                });
+            },
+            downCallback(){
+                let that = this;
+                that.page.num = 1;
+                that.myList = [];
+                that.upCallback()
+            },
+            upCallback: function () {
+                const that = this;
+                that.getListData(that.page.num, that.page.size,function(curPageData) {
+                    if(that.page.num === 1)  that.myList = [];//如果是第一页需手动制空列表
+                    that.myList = that.myList.concat(curPageData); //更新列表数据
+                    // 加载完成后busy为false，如果最后一页则lastpage为true
+                    //          加载完成后给页数+1
+        
+                    if(that.page.num >= that.totalPage) {
+                        that.isShowNoMore = true;
+                    }else{
+                        that.isShowNoMore = false;
+                    }
+                    that.page.num = that.page.num + 1;
+                    that.mescroll.endSuccess(curPageData.length,that.totalPage);
+                    that.mescroll.endUpScroll(that.isShowNoMore)
+                }, function() {
+                    that.mescroll.endErr(); //联网失败的回调,隐藏下拉刷新和上拉加载的状态;
+                });
+            },
+            getListData:function(pageNum,pageSize,successCallback,errorCallback) {
+                //延时一秒,模拟联网
+                const that = this;
+                commonService.getPoint({pageNo:pageNum,pageSize:pageSize}).then(function(res){
+                    if(res.data.code === 200){
+                        let boxlist = res.data.datas.datas;
+                        that.totalPage = res.data.datas.totalPage;
+                       
+                        successCallback&&successCallback(boxlist);//成功回调
+                    }else{
+                        let boxlist = [];
+                        successCallback&&successCallback(boxlist);//成功回调
+                    }
+                })
+            },
           
 
         }
@@ -235,6 +310,7 @@
     /*rem等基本设置都放在base中，不写多个*/
     @import url('../../assets/css/base.less');
     @import url('../../assets/css/icon/iconfont.css');
+    @import url("../../assets/css/common/mescroll.min.css");
   .v_membercenter{
     .membercenter{
             width:100%;
@@ -420,7 +496,8 @@
         padding: 0 @size20;
         .time{
             text-align: right;
-            margin-top: @size40;
+            margin: @size40 0 @size20 0;
+
             font-size: @size10;
         }
         .box{

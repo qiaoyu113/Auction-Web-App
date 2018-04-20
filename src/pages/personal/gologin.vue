@@ -177,7 +177,6 @@
                 let that = this;
 
                 let cookiesId  = window.localStorage.getItem('cookiesId');
-                 console.log(cookiesId + "我")
                 if(cookiesId  == undefined || cookiesId  == '' || cookiesId  == null){
                     // cookiesId  = Date.parse(new Date());
                     // cookiesId  = "zstat" + "-" + cookiesId  + "-" + Math.round(Math.random() * 3000000000);
