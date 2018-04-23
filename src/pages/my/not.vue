@@ -236,7 +236,7 @@
     export default {
         data () {
             return {
-                title: '传家',
+                title: '茗探',
                 datas:'',
                 loading:'false',
                 lineId:'',

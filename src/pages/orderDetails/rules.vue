@@ -45,7 +45,7 @@ import {common} from '../../assets/js/common/common'
     props: ['str'],
     data () {
       return {
-          title:'传家',
+          title:'茗探',
           arrays: [],
           dis:'',
           

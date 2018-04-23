@@ -105,7 +105,7 @@
     export default {
         data () {
             return {
-                title: '个人中心',
+                title: '茗探',
                 header:{
                     name:'PASSWORD',
                     name2:'密码重置'

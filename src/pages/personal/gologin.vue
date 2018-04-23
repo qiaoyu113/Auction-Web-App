@@ -77,7 +77,7 @@
     export default {
         data () {
             return {
-                title: '传家',
+                title: '茗探',
                 logined:false,
                 img:[
                     'http://img0.imgtn.bdimg.com/it/u=3206453844,923580852&fm=27&gp=0.jpg',

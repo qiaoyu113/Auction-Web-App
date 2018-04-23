@@ -37,7 +37,7 @@
     export default {
         data () {
             return {
-                title: '个人中心',
+                title: '茗探',
                 header:{
                     name:'CELL PHONE NUMBER',
                     name2:'手机号码修改'

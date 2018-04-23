@@ -42,7 +42,7 @@
     export default {
         data () {
             return {
-                title: '传家',
+                title: '茗探',
                 address:'',
                 auctionId:this.$route.query.auctionId,
                 addressId:this.$route.query.addressId,

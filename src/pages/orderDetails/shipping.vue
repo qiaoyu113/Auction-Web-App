@@ -71,7 +71,7 @@ import {appService} from '../../service/appService'
     props: ['str'],
     data () {
       return {
-          title:'传家',
+          title:'茗探',
           arrays: [],
           dis:'',
           

@@ -183,7 +183,7 @@ import {commonService} from '../../service/commonService.js'
     props: ['str'],
     data () {
       return {
-          title:'传家',
+          title:'茗探',
           arrays: [],
           index:1,
           active:0,

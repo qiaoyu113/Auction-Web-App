@@ -147,7 +147,7 @@
         data () {
             return {
                 url:'',
-                title: '传家',
+                title: '茗探',
                 dis:'dis',
                 shadow:'shadow',
                 name:'',

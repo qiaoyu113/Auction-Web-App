@@ -29,7 +29,7 @@
     export default {
         data () {
             return {
-                title: '个人中心',
+                title: '茗探',
                 user:{
                     name:'吴彦祖',
                     sex:'男',
