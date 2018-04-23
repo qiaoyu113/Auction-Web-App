@@ -43,7 +43,7 @@
                     </div> -->
                 </div>
             </div>
-            <div class="bar" v-if="integral!=''">
+            <div class="bar" v-if="integral!=''" :class="integral==null?'v_bar':''">
                 <div class="clearfix" >
                     <div class="box fl">
                         <div class="progress" :style="'width:'+ width + ';' + 'background: linear-gradient(to right,'+colorValue1+','+ colorValue2 +');'"></div>
@@ -54,7 +54,7 @@
                 </div>            
                 <p class="warn">在累计{{integral}}分即可升级</p>
             </div>
-            <div class="bar" v-if="integral==''">
+            <div class="bar" v-if="integral==''" :class="integral==null?'v_bar':''">
                 <p class="warn">恭喜您！您已是顶级会员了哟～～～</p>      
                 <p class="warn">更多会员权益敬请期待！</p>
             </div>
@@ -137,7 +137,7 @@
                 user:'',
                 records:'',
                 pointNum:'',//会员积分
-                integral:'1',//再次升级所需的积分
+                integral:null,//再次升级所需的积分
                 width:'',
                 colorValue1:'',
                 colorValue2:'',
@@ -211,6 +211,7 @@
              getVip:function(level){
                 let that=this
                  commonService.getVip(level+1).then(function(res){
+
                     if(res.data.datas!=null){
                       that.integral=res.data.datas.pointNum - that.pointNum
                     that.width=that.pointNum / res.data.datas.pointNum * 100+ '%'
@@ -542,8 +543,21 @@
                 font-size: @size10;
                 text-align: left;
                 line-height: @size10;
-                padding-top: @size5
+                padding-top: @size5;
+            
             }
+        }
+        .v_bar{
+            .box{
+                display: none;
+            }
+            .fr{
+                 color: #fff;
+            }
+          .warn{
+            color:#fff;
+          }
+
         }
         .pointDetail{
             padding-left: @size10;

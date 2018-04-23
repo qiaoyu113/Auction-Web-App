@@ -341,7 +341,7 @@
                 that.getListData(that.page.num, that.page.size,function(curPageData) {
                     if(that.page.num === 1)  that.myList = [];//如果是第一页需手动制空列表
                     that.myList = that.myList.concat(curPageData); //更新列表数据
-
+                   
                     // 加载完成后busy为false，如果最后一页则lastpage为true
                     //          加载完成后给页数+1
                     if(that.page.num >= that.totalPage) {
@@ -363,6 +363,7 @@
                     if(res.data.code === 200){
                         let boxlist = res.data.datas.datas;
                         that.totalPage = res.data.datas.totalPage;
+                       
                         for(let i=0;i<boxlist.length;i++){
                             let date=new Date()
                             let now = new Date().getTime()
@@ -390,6 +391,7 @@
                                 that.lineId4 = boxlist[i].auction._id
                                 that.weekEndsOpen4 = false;
                             }
+
                             if(boxlist[i].auction.doneBuy == '1'){
                                 let now = new Date().getTime()
                                 let time = '';

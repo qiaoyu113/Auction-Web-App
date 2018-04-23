@@ -163,7 +163,7 @@
             <div class="value">
                 客&nbsp;&nbsp;&nbsp;服
             </div>
-            <div class="r-icon"><img src="../../assets/image/mycenter/usre4.png" /></div></a>
+            <div class="r-icon"><img src="../../assets/image/mycenter/usre4.png" /><p>售后</p></div></a>
         </div>
      <div class="logistics">
         <!-- <div class="header">传家</div> -->
@@ -1354,9 +1354,14 @@ import {commonService} from '../../service/commonService.js'
                 font-size: @size30;
             }
             img{
-                margin-top: @size10;
+                margin-top: @size2;
                 width: @size24;
                 height: @size24;
+            }
+            p{
+              text-align: center;
+              font-size: 10px;
+              color: rgb(51, 51, 51);
             }
         } 
     }

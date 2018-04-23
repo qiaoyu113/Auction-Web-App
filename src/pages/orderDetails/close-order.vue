@@ -272,16 +272,16 @@ import {commonService} from '../../service/commonService.js'
                     .label1{
                         float: left;
                         color: black;
-                        font-size: @size16;
+                        font-size: 12px;
                     }
                     .label2{
                         text-align: center;
-                        font-size: @size16;
+                        font-size: 12px;
                         color: gray;
                     }
                     .label3{
                         float: right;
-                        font-size: @size16;
+                        font-size: 12px;
                         color: gray;
                     }
                 }

@@ -62,6 +62,7 @@
                         
                         <button class="fr" @click="details(list.status,list.orderNo,list.csStatus)">查看订单</button>
                      <!--    <button class="fr"  v-if="list.csStatus!=0" @click="shouhou(list.status,list.id)">查看订单</button> -->
+                  <!--    <button class="fr" v-if="list.status==4" @click="details(list.status,list.orderNo)">确认收货</button> -->
 
                         <button class="fr" v-if="list.status==1" @click="details(list.status,list.orderNo)">立即支付</button>
                         <!-- <button class="fr" v-if="list.status==2 || list.status==5">分享</button> -->
@@ -324,7 +325,7 @@
                    let that=this;
                commonService.deleteOrderid(that.deleteorderid).then(function(res){
                           that.v_modal=false
-                          that.meScroll()
+                          location.reload();
                     })
             },
              // 获取售后列表

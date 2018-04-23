@@ -76,10 +76,10 @@
                 <div class="check"><i class="iconfont icon-duihao"></i></div>
                 <span class="">设置为默认地址</span>
             </div> -->
-           <!--  <div class="del">
-                <div class="delete"><i class="iconfont icon-tupian"></i></div>
+            <div class="del clearfix" v-if="addressid!=''" @click="">
+                <div class="delete"><i class="el-icon-delete"></i></div>
                 <span>删除地址</span>
-            </div> -->
+            </div>
         </div>
         <div class="prompt" v-if="prompt!=''">{{prompt}}</div>
         <div class="footer" @click="postAddress()" v-if="addressid==''">保&nbsp;&nbsp;存</div>
@@ -764,14 +764,18 @@ import {commonService} from '../../service/commonService.js'
             line-height: @size40;
             .delete{
                 float: left;
-                color: red;
+                i{
+                  margin-top: 12px;
+                  color: #eb6100;
                 width: @size14;
                 height: @size14;
+                }
             }
             span{
+              float: left;
                 font-size: 12px;
                 padding-left: @size8;
-                color: red;
+                color: #eb6100;
             }
         }
     }
