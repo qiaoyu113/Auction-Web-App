@@ -167,7 +167,7 @@
             return {
                 details:'',
                 img:'',
-                title: '传家',
+                title: '茗探',
                 index:2,
                 id:'',
                 page:{num:1,size:10},

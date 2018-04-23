@@ -1,6 +1,6 @@
 <template>
     <div id="auction" v-set-title="title">
-        <div class="header">传家</div>
+        <div class="header">茗探</div>
         <div class="nav">
             <span class="back"><i class="iconfont icon-fanhui"></i></span>
             <span class="span1">

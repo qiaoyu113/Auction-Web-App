@@ -59,7 +59,7 @@
     export default {
         data () {
             return {
-                title: '传家',
+                title: '茗探',
                 page:{num:1,size:4},
                 homelist:[],
                 totalPage:'1',
