@@ -76,7 +76,7 @@
                 <div class="check"><i class="iconfont icon-duihao"></i></div>
                 <span class="">设置为默认地址</span>
             </div> -->
-            <div class="del clearfix" v-if="addressid!=''" @click="">
+            <div class="del clearfix" v-if="addressid!=''" @click="vmodeal(addressid)">
                 <div class="delete"><i class="el-icon-delete"></i></div>
                 <span>删除地址</span>
             </div>
@@ -144,6 +144,18 @@
           <p>5</p>
           <p>6</p>
         </div> -->
+             <div class="v_modal" ref="v_modal" v-if="v_modal">
+           <div class="v_box">
+                  <div class="v_box_top" @click="heig()"><i class="iconfont icon-closeicon"></i></div>
+                 <p class="v_box_p">REMOVE ITEM</p>
+                 <p>删除</p>
+                 <div class="v_box_img"><img src="../../assets/image/mycenter/scy.png" /></div>
+                 <p>是否删除地址?</p>
+                 <div class="v_button" @click='deleteAddress()'> 
+                     确定
+                 </div>
+           </div>
+        </div>
     </div>
 </template>
 
@@ -178,6 +190,9 @@ import {commonService} from '../../service/commonService.js'
           cityIndex:'',
           countyIndex:'',
           ServiceBox:false,
+           v_modal:false,
+          id:'',
+    
       }
     },
 //      components:{'city-picker':city},
@@ -231,6 +246,24 @@ import {commonService} from '../../service/commonService.js'
         remphone:function(){
            this.phone=""
         },
+         heig:function(){
+            this.v_modal=false
+          },
+          vmodeal:function(id){
+            this.v_modal=true
+            this.id=id
+          },
+          deleteAddress:function(){
+               let that = this
+               commonService.deleteAddress(that.id).then(function(res){
+                // that.bankCard=res.data.datas
+                  if(res.data.code==200){
+                    that.$router.push({path:"/addresslist"})
+                     that.v_modal=false
+                  }
+  
+                })
+            },
     	getAddressid:function(){
             let that = this
             that.addressid=this.$route.query.id
@@ -814,7 +847,69 @@ import {commonService} from '../../service/commonService.js'
             }
         }
         
-
+ .v_modal{
+          position: fixed;
+          left: 0;
+          top: 0;
+          right: 0;
+          bottom: 0;
+          width: 100%;
+          height: 100%;
+          z-index: 9999;
+          background: rgba(0,0,0,0.5);
+          .v_box{
+            width: 6.5rem;
+            height: 6.6rem;
+            background: #fff;
+            margin: 4rem auto 0; 
+            position: relative;
+            .v_box_top{
+                 position: absolute;
+                 right: 0;
+                 top: 0;
+                 width: @size30;
+                 height: @size30;
+                 background: #eb6100;
+                 i{
+                    font-size: @size30;
+                    color:#fff;
+                 }
+            }
+            .v_box_p{
+                 padding-top: @size50;
+                 font-size: 14px;
+                 color: rgb(57, 57, 57);
+                 font-weight: 700;
+            }
+            .v_box_img{
+                 margin:@size24 0 @size14; 
+                 width: 100%;
+                 img{
+                    width: @size40;
+                    height: @size40;
+                    margin-left: 2.72rem;
+                 }
+            }
+            p{
+                font-size: 14px;
+                text-align: center;
+                color: rgb(98, 98, 98);
+                // padding:1rem 0.5rem;
+                
+            }
+            .v_button{
+               position: absolute;
+               bottom: 0;
+               left: 0;
+               height: @size44;
+               width: 100%;
+               border-top:1px solid #353c47;
+               text-align: center;
+               line-height: @size44;
+               font-size: 14px;
+             }
+          }
+    }
 
 }
     .el-select-dropdown {

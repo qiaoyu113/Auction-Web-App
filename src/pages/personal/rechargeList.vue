@@ -436,6 +436,7 @@ import {commonService} from '../../service/commonService.js'
               font-size: 28px;
               margin-left: 0.3rem;
               color: #a9aeb6;
+              line-height: 0.9333rem;
             }
         }
     }

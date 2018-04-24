@@ -42,7 +42,7 @@
                     name:'CELL PHONE NUMBER',
                     name2:'手机号码修改'
                 },
-                timeOver:90,//短信验证码倒计时
+                timeOver:0,//短信验证码倒计时
                 inputPhone:'',//手机号
                 inputNum:'',//验证码
                 codeShow:false,
