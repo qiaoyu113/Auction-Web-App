@@ -62,7 +62,7 @@
                         
                         <button class="fr" @click="details(list.status,list.orderNo,list.csStatus)">查看订单</button>
                      <!--    <button class="fr"  v-if="list.csStatus!=0" @click="shouhou(list.status,list.id)">查看订单</button> -->
-                  <!--    <button class="fr" v-if="list.status==4" @click="details(list.status,list.orderNo)">确认收货</button> -->
+                     <button class="fr" v-if="list.status==4" @click="goodsreceipt(list.orderNo)">确认收货</button>
 
                         <button class="fr" v-if="list.status==1" @click="details(list.status,list.orderNo)">立即支付</button>
                         <!-- <button class="fr" v-if="list.status==2 || list.status==5">分享</button> -->
@@ -112,6 +112,18 @@
                  </div>
            </div>
         </div>
+        <div class="v_modal" ref="v_modal" v-if="v_goodsreceipt">
+           <div class="v_box">
+                  <div class="v_box_top" @click="remgoodsreceipt()"><i class="iconfont icon-closeicon"></i></div>
+                 <p class="v_box_p">CONFIRM</p>
+                 <p>确认</p>
+                 <!-- <div class="v_box_img"><img src="../../assets/image/mycenter/scy.png" /></div> -->
+                 <p class="v_box_img">是否确认收货?</p>
+                 <div class="v_button" @click='putUsersorder()'> 
+                     确定
+                 </div>
+           </div>
+     </div>
         <!--分享提示-->
         <div class="shareBox" v-if="shareHint">可以使用浏览器分享按钮分享给好友哦</div>
         <!--联系客服-->
@@ -178,6 +190,8 @@
                 ServiceBox:false,
                 shareHint:false,
                 v_modal:false,
+                v_goodsreceipt:false,
+                goodsreceiptid:'',
                 deleteorderid:'',//删除订单ID
             }
         },
@@ -282,6 +296,28 @@
                 //     that.meScroll();
                 // }
             },
+            //取消收货
+        remgoodsreceipt:function(){
+           this.v_goodsreceipt=false
+        },
+        //确认收货按钮
+        goodsreceipt:function(id){
+           this.v_goodsreceipt=true
+           this.goodsreceiptid=id
+
+        },
+
+        //确认收货
+        putUsersorder:function(){
+          let that=this
+          commonService.putUsersorder({orderNo:that.goodsreceiptid}).then(function(res){ 
+           
+                 if(res.data.message=="success"){
+                that.remgoodsreceipt()
+                   location.reload();
+                 }
+          }) 
+        },
             details:function(type,id,csStatus,list){
         
                 if(type==6){

@@ -398,15 +398,20 @@
                                 let week = Number(boxlist[i].auction.mqEndTime) + 7 * 24 * 3600 * 1000;
                                 time = week - now;
                                 //初始化时间
+
                                 if(time < 0){
                                     boxlist[i].EndTimes = '00:00:00:00'
-                                    break;
-                                }
+                                    // break;
+                                }else{
+
+
+                              
                                 let day = parseInt(time / 1000 / 60 / 60 / 24, 10) < 10 ? '0' + parseInt(time / 1000 / 60 / 60 / 24, 10) : parseInt(time / 1000 / 60 / 60 / 24, 10);
                                 let h = parseInt(time / 1000 / 60 / 60 % 24, 10) < 10 ? '0' + parseInt(time / 1000 / 60 / 60 % 24, 10) : parseInt(time / 1000 / 60 / 60 % 24, 10);
                                 let m = parseInt(time / 1000 / 60 % 60, 10) < 10 ? '0' + parseInt(time / 1000 / 60 % 60, 10) : parseInt(time / 1000 / 60 % 60, 10);
                                 let s = parseInt(time / 1000 % 60, 10) < 10 ? '0' + parseInt(time / 1000 % 60, 10) : parseInt(time / 1000 % 60, 10);
                                 boxlist[i].EndTimes = day + ':' + h + ':' + m + ':' + s;
+                            }
                                 let timeRun = setInterval(function() {
 //                                  //初始化时间
                                     let now = new Date().getTime()

@@ -23,7 +23,7 @@
                     <div class="checked" :class="list.defaultAdress==false?'check':'checked'" @click="postAddressid(list._id)"><i class="iconfont icon-duihao"></i></div>
                      <span :class="list.defaultAdress==false?'':'color'">默认地址</span>
                     <span class="fr v_fr"  @click="edit(list._id)">编辑</span>
-                    <span class="fr v_fr"  @click="vmodeal(list._id)">删除 |</span>
+                    <span class="fr v_fr"  @click="vmodeal(list._id)">删除<i>|</i></span>
                 </div>
             </div>
         </div>
@@ -352,7 +352,7 @@ import {commonService} from '../../service/commonService.js'
         .resize{
             height: @size30;
             padding-top: @size15;
-            padding-left: @size10;
+            padding:@size15  @size10 0;
             border-bottom: 1px solid rgb(96, 99, 104);
          
               
@@ -404,6 +404,13 @@ import {commonService} from '../../service/commonService.js'
             }
             .v_fr{
                color: gray;
+               line-height: 14px;
+               i{
+                color: #ebebeb;
+                margin-left: @size10;
+                font-size: 12px;
+                line-height: 14px;
+               }
             }
         }
     }
