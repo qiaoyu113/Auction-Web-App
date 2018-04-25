@@ -36,9 +36,9 @@
                 <i class="iconfont icon-icon_weixin"></i>微信
             </div>
             <!--联系客服-->
-            <div class="talk" v-if="wximg!=null"><a href="tel:15801619600"><span>登录遇到问题，联系客服</span></a></div>
+            <div class="talk" v-if="wximg!=null"><a href="tel:4001887107"><span>登录遇到问题，联系客服</span></a></div>
             <!--登录和提示-->
-            <div class="v_kefu" v-if="wximg==null"><a href="javaScript:;" @click="resetpassword()">忘记密码</a> | <a href="tel:15801619600">联系客服</a></div>
+            <div class="v_kefu" v-if="wximg==null"><a href="javaScript:;" @click="resetpassword()">忘记密码</a> | <a href="tel:4001887107">联系客服</a></div>
             <div :class="isX ? 'bottoms':'bottom'">
                 <div class="hint" v-if="hint">{{hintText}}</div>
                 <div class="ok" @click="loginBtn">登 录</div>

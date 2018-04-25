@@ -63,7 +63,7 @@
             </div>
             <div class="sample" @click="show">照片样例</div>
             <div class="hit">
-                <p>1.每日可实名认证<span>五次</span>，如有问题 <a href="tel:15801619600">联系客服</a>。 </p>
+                <p>1.每日可实名认证<span>五次</span>，如有问题 <a href="tel:4001887107">联系客服</a>。 </p>
                 <p>2.请手持相关证件，要求手持证件正面及背面的照片。</p>
                 <p>3.手持证件照必须是正面头部照。</p>
                 <p>4.必须看清证件号且证件号不被遮挡。</p>
@@ -111,19 +111,19 @@
                 <h2>ASSISTANCE</h2>
                 <p>客户服务</p>
             </div>
-            <a href="tel:15801619600">
+            <a href="tel:4001887107">
                 <div class="serviceList">
                     <img src="../../assets/image/mycenter/t1.png"/>
                     <p>电话委托</p>
                 </div>
             </a>
-            <a href="tel:15801619600">
+            <a href="tel:4001887107">
                 <div class="serviceList">
                     <img src="../../assets/image/mycenter/t2.png"/>
                     <p>客服服务</p>
                 </div>
             </a>
-            <a href="tel:15801619600">
+            <a href="tel:4001887107">
                 <div class="serviceList">
                     <img src="../../assets/image/mycenter/t3.png"/>
                     <p>私恰</p>

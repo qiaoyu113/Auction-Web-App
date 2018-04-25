@@ -125,7 +125,7 @@
                  </div>
            </div>
         </div>
-        <div :class="isX ? 'gives':'give'"><p><a href="tel:15801619600">马上送拍</a></p></div>
+        <div :class="isX ? 'gives':'give'"><p><a href="tel:4001887107">马上送拍</a></p></div>
         </div>
         <!--联系客服-->
         <div class="talk" @click="openService()">
@@ -138,19 +138,19 @@
                 <h2>ASSISTANCE</h2>
                 <p>客户服务</p>
             </div>
-            <a href="tel:15801619600">
+            <a href="tel:4001887107">
                 <div class="serviceList">
                     <img src="../../assets/image/mycenter/t1.png"/>
                     <p>电话委托</p>
                 </div>
             </a>
-            <a href="tel:15801619600">
+            <a href="tel:4001887107">
                 <div class="serviceList">
                     <img src="../../assets/image/mycenter/t2.png"/>
                     <p>客服服务</p>
                 </div>
             </a>
-            <a href="tel:15801619600">
+            <a href="tel:4001887107">
                 <div class="serviceList">
                     <img src="../../assets/image/mycenter/t3.png"/>
                     <p>私恰</p>
@@ -251,7 +251,7 @@
                 this.$router.push({path:"/login"})
             },
             getPos:function(index) {
-                var str = 2.40*(index)+'rem';
+                var str = 2.3*(index)+'rem';
                 str='left:'+str;
                 return str;
             },
@@ -452,6 +452,7 @@
           top: 0;
           overflow-y: scroll;
           bottom: 1.2rem;
+
     .header{
         position: fixed;
         top: 0;
@@ -470,7 +471,7 @@
         .box{
             height: 3.4rem;
             width: 100%;
-            border-bottom: 1px solid rgb(51, 51, 51);
+            border-bottom: 1px solid rgb(130, 135, 140);
             .v_boxImg{
                 width: 1.73rem;
                 height: 1.73rem;
@@ -517,6 +518,7 @@
                     font-weight: bold;
                     letter-spacing: 1px;
                     font-size: 14px;
+                    color: rgb(51, 51, 51);
                 }
                 .name{
                     font-size: 12px;
@@ -546,7 +548,7 @@
         }
         .option{
             height: @size98;
-            border-bottom: 1px solid rgb(51, 51, 51);
+            border-bottom: 1px solid rgb(130, 135, 140);
             .litbox{
                 width: 25%;
                 height: 100%;
@@ -586,6 +588,7 @@
                     font-size: 12px;
                     text-align: center;
                     padding-top: @size20;
+                    color: rgb(51,51,51);
                 
                 }
             }
@@ -602,6 +605,7 @@
                 .fl{
                     font-size: 12px;
                     line-height: @size35;
+                    color: rgb(51, 51, 51);
                 }
                 .fr{
                     letter-spacing: @size3;
@@ -617,7 +621,7 @@
             }
             .remain{
                 height: @size55;
-                border-bottom: 1px solid rgb(51, 51, 51);
+                border-bottom: 1px solid rgb(130, 135, 140);
                 padding-right: @size10;
                 .mon{
                     padding-left: @size10;
@@ -637,13 +641,15 @@
                     background: white;
                     outline: none;
                     height: @size25;
+                    line-height: @size25;
                     width: 1.8rem;
                     font-size: 12px;
+                    color: rgb(51, 51, 51);
                 }
             }
         }
         .center{
-            border-bottom: 1px solid black;
+            border-bottom: 1px solid rgb(130,135,140);
             box-sizing: border-box;
             .address{
                 // box-sizing: border-box;
@@ -770,7 +776,7 @@
             text-align: right; 
             a{
                 color: #fff;
-                font-size: 12px;
+                font-size: 10px;
             }
         }
         

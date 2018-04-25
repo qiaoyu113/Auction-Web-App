@@ -68,7 +68,7 @@
             <div class="payment clearfix" v-if='index==0'>
                 <div class="witpay" v-if="datas.status==2">处理中</div>
                 <div class="witpay" v-if="datas.status==3">待发货</div>
-                <div class="btn"><a href="tel:15801619600">联系客服</a></div>
+                <div class="btn"><a href="tel:4001887107">联系客服</a></div>
             </div>
             <div class="payment clearfix" v-if='index==1'>
                 <div class="witpay">待支付</div>
@@ -159,7 +159,7 @@
         <div class="footer1" v-if='index==1' @click="rechargeList">立即支付</div>
         <div class="footer1" v-if='index==2' @click="goodsreceipt(datas.orderNo)">确认收货</div>
         <div class="footer" v-if='index==3'>
-        <a href="tel:15801619600">
+        <a href="tel:4001887107">
             <div class="value">
                 客&nbsp;&nbsp;&nbsp;服
             </div>
@@ -238,19 +238,19 @@
                 <h2>ASSISTANCE</h2>
                 <p>客户服务</p>
             </div>
-            <a href="tel:15801619600">
+            <a href="tel:4001887107">
                 <div class="serviceList">
                     <img src="../../assets/image/mycenter/t1.png"/>
                     <p>电话委托</p>
                 </div>
             </a>
-            <a href="tel:15801619600">
+            <a href="tel:4001887107">
                 <div class="serviceList">
                     <img src="../../assets/image/mycenter/t2.png"/>
                     <p>客服服务</p>
                 </div>
             </a>
-            <a href="tel:15801619600">
+            <a href="tel:4001887107">
                 <div class="serviceList">
                     <img src="../../assets/image/mycenter/t3.png"/>
                     <p>私恰</p>

@@ -27,7 +27,7 @@
                 <!-- available -->
         </div>
         <div :class="isX ? 'gives':'give'">
-           <p><a href="tel:15801619600">我要送拍</a></p>
+           <p><a href="tel:4001887107">我要送拍</a></p>
         </div>
         <!--联系客服-->
       <!--   <div class="talk" @click="openService()">
@@ -144,7 +144,7 @@
                 this.$router.push({path:"/helpcenter"})
             },
             getPos:function(index) {
-                var str = 2.40*(index)+'rem';
+                var str = 2.30*(index)+'rem';
                 str='left:'+str;
                 return str;
             },
@@ -510,7 +510,7 @@
             }
         }
         .center{
-            border-bottom: 1px solid black;
+            border-bottom: 1px solid rgb(130,135,140);
             box-sizing: border-box;
             .address{
                 // box-sizing: border-box;
@@ -534,7 +534,7 @@
         }
         .unlogin{
             height: 10.3333rem;
-            border-bottom: 1px solid black;
+            border-bottom: 1px solid rgb(130, 135, 140);
             box-sizing: border-box;
             text-align: center;
             .pic{
@@ -636,7 +636,7 @@
             text-align: right; 
             a{
                 color: #fff;
-                font-size: 12px;
+                font-size: 10px;
             }
         }
     }
