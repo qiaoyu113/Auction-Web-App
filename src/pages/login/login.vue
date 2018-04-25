@@ -41,7 +41,7 @@
             <div class="v_kefu" v-if="wximg==null"><a href="javaScript:;" @click="resetpassword()">忘记密码</a> | <a href="tel:4001887107">联系客服</a></div>
             <div :class="isX ? 'bottoms':'bottom'">
                 <div class="hint" v-if="hint">{{hintText}}</div>
-                <div class="ok" @click="loginBtn">登 录</div>
+                <div class="ok" @click="loginBtn">登 &nbsp;录</div>
             </div>
         </div>
         <!--注册中心-->
@@ -74,7 +74,7 @@
             <!--登陆和提示-->
             <div :class="isX ? 'bottoms':'bottom'">
                 <div class="hint" v-if="hint2">{{hint2Text}}</div>
-                <div class="ok" @click="sign">注 册</div>
+                <div class="ok" @click="sign">注&nbsp; 册</div>
             </div>
         </div>
         <!--微信登陆-->
@@ -791,7 +791,7 @@
         .header{
             width:100%;
             height:3.7rem;
-            border-bottom:1px solid #2B343D;
+            border-bottom:4px solid #2B343D;
             padding:1.07rem 0.53rem;
             box-sizing: border-box;
             position: relative;
@@ -819,7 +819,7 @@
                 height:0.8rem;
                 line-height:0.8rem;
                 position: absolute;
-                bottom:1px;
+                bottom:4px;
                 // box-sizing: border-box;
                 // overflow: hidden;
                 .login{
@@ -842,7 +842,7 @@
                     padding:0 0.14rem;
                     // box-sizing: border-box;
                     font-size: 12px;
-                    border-bottom:2px solid #353535;
+                    border-bottom:4px solid #353535;
                 }
                 .check{
                     color:#353535;
@@ -850,7 +850,7 @@
                     padding:0 0.14rem;
                     font-size: 12px;
                     // box-sizing: border-box;
-                    border-bottom:2px solid #353535;
+                    border-bottom:4px solid #353535;
 
                 }
             }
@@ -976,6 +976,7 @@
                 a{
                   font-size: 10px;  
                   text-decoration: underline; 
+                  color: rgb(51, 51, 51);
                 }
                
             }
@@ -992,13 +993,13 @@
                 color:#fff;
                 background:linear-gradient(70deg, #DC704A, #F44EA0);
                 text-align: center;
-                font-size:12px;
+                font-size:10px;
             }
             .ok{
                 width:100%;
                 height:1.2rem;
                 line-height:1.2rem;
-                border-top:1px solid #333;
+                border-top:2px solid #333;
                 text-align: center;
                 font-size:12px;
                 background: #fff;

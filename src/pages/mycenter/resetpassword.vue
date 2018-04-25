@@ -30,8 +30,10 @@
             <div class="info">
                 <div class="infoList">短信验证码<input class="codeInp" type="number" placeholder="请输入短信验证码" v-model="inputNum"/><div class="code" @click="getcode">获取验证码<span v-if="codeShow" style="margin:0;">({{timeOver}}s)</span></div></div>
             </div>
+            
             <div id="captcha-box"></div>
             <!--保存-->
+            <div class="v_tishi">如无法获取短信验证码，请<a href="tel:4001887107">联系客服</a></div>
             <div class="saves" v-if="htmlx!=''">{{htmlx}}</div>
 
             <div class="save" @click="postResetpassword">下一步</div>
@@ -40,15 +42,16 @@
         <div class="box2" v-if="index==2">
             <!--新手机号码-->
             <div class="info">
-                <div class="infoList">新密码<input class="codeInp" type="password" placeholder="请输入新密码" v-model="newPassword"/>
+                <div class="infoList"><span class="v_tt">新密码</span><input class="codeInp" type="password" placeholder="请输入新密码" v-model="newPassword"/>
                <div class="goBind" @click="remnewPassword()" v-if="newPassword!=''"> <i class="iconfont icon-closeicon"></i></div>
                 </div>
             </div>
             <div class="info">
-                <div class="infoList">确认新密码<input class="codeInp" type="password" placeholder="请确认新密码" v-model="newPassword2"/>
+                <div class="infoList"><span class="v_tt">确认新密码</span><input class="codeInp" type="password" placeholder="请确认新密码" v-model="newPassword2"/>
                <div class="goBind" @click="remnewPassword2()" v-if="newPassword2!=''"> <i class="iconfont icon-closeicon"></i></div>
                 </div>
             </div>
+            
            <!--  <div class="info">
                 <input type="password" placeholder="输入密码" v-model="password"/>
                 <div class="infoRight" @click="removePassword"><i class="iconfont icon-closeicon"></i></div>
@@ -500,6 +503,7 @@
                     font-size:13px;
                     margin-left:0.8rem;
                 }
+
                 .more{
                     width: 1rem;
                     float:right;
@@ -557,6 +561,11 @@
                     font-size:12px;
                     margin-left:0.8rem;
                 }
+                 .v_tt{
+                   color:#333;
+                   margin-left: 0;
+                   width: 2rem;
+                }
                 .more{
                     width: 1rem;
                     float:right;
@@ -587,7 +596,7 @@
                     }
                 }
                 input{
-                    margin-left:0.2rem;
+                    margin-left:1rem;
                     border:none;
                     outline: none;
                     font-size:12px;
@@ -650,6 +659,17 @@
         margin-bottom:30px;
         /*overflow: hidden;*/
     }
+    }
+    .v_tishi{
+      margin-top: @size300;
+      font-size: 10px;
+      color: rgb(51,51,51);
+      text-align: center;
+      a{
+        color: rgb(235, 97, 0);
+        font-size: 10px;
+        text-decoration: underline;
+      }
     }
 }
 </style>

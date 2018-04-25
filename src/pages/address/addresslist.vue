@@ -40,19 +40,19 @@
                 <h2>ASSISTANCE</h2>
                 <p>客户服务</p>
             </div>
-            <a href="tel:15801619600">
+            <a href="tel:4001887107">
                 <div class="serviceList">
                     <img src="../../assets/image/mycenter/t1.png"/>
                     <p>电话委托</p>
                 </div>
             </a>
-            <a href="tel:15801619600">
+            <a href="tel:4001887107">
                 <div class="serviceList">
                     <img src="../../assets/image/mycenter/t2.png"/>
                     <p>客服服务</p>
                 </div>
             </a>
-            <a href="tel:15801619600">
+            <a href="tel:4001887107">
                 <div class="serviceList">
                     <img src="../../assets/image/mycenter/t3.png"/>
                     <p>私恰</p>
@@ -329,7 +329,7 @@ import {commonService} from '../../service/commonService.js'
         padding-bottom: 1.2rem;
 
         .peo{
-            padding:@size15 @size10;
+            padding:0.06rem @size10;
             height: @size20;
             .fl{font-size:12px;} 
             .fr{font-size:12px;} 

@@ -317,7 +317,7 @@
      padding:0 @size10 2px @size10;
      // margin: 
      border-bottom:2px solid #353535;
-     width: 9.3333rem;
+     // width: 9.3333rem;
      overflow: hidden;
      background: rgba(255, 255, 255,0);
      // background: red;

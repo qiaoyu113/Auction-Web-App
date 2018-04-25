@@ -25,7 +25,7 @@
             </div>
             <div class="v_prompt" ref="v_prompt">{{prompt}}</div>
             <!--保存-->
-            <div class="save" @click="putPasswords()">保存</div>
+            <div class="save" @click="putPasswords()">保 &nbsp; &nbsp; 存</div>
         </div>
     </div>
 </template>

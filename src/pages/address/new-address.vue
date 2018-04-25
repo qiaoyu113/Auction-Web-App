@@ -82,8 +82,8 @@
             </div>
         </div>
         <div class="prompt" v-if="prompt!=''">{{prompt}}</div>
-        <div class="footer" @click="postAddress()" v-if="addressid==''">保&nbsp;&nbsp;存</div>
-        <div class="footer" @click="postAddressid()" v-if="addressid!=''">保&nbsp;&nbsp;存</div>
+        <div class="footer" @click="postAddress()" v-if="addressid==''">保 &nbsp; &nbsp; 存</div>
+        <div class="footer" @click="postAddressid()" v-if="addressid!=''">保 &nbsp; &nbsp; 存</div>
         <!--联系客服-->
         <div class="talk" @click="openService()">
             <img src="../../assets/image/mycenter/icon5.png"/>
@@ -694,7 +694,8 @@ import {commonService} from '../../service/commonService.js'
     }
     .box2{
         width:100%;
-        padding:@size20;
+        padding:0 @size20;
+        margin-top: @size8;
         box-sizing: border-box;
          padding-bottom: @size55;
         .info{

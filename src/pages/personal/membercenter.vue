@@ -570,7 +570,7 @@
                 
             }
             .record{
-                border-top: 1px solid rgb(153, 153, 153);
+                border-top: 1px solid rgb(202, 209, 217);
                 font-size: @size10;
                 height: @size30;
                 line-height: @size30;

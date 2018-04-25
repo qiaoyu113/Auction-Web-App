@@ -628,6 +628,8 @@
         .service{
             width: 100%;
             text-align: center;
+            height: 24px;
+            border-bottom: 1px solid #87828c;
             span{
                 font-size: 10px;
                 border-bottom: 1px solid #87828c;
@@ -723,7 +725,7 @@
             }
         }
         .hit{
-            margin:2.05rem 0; 
+            margin:1.45rem 0; 
             p{
                 font-size: 10px;
                 padding-left: @size10;

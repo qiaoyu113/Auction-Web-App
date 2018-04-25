@@ -18,7 +18,7 @@
             </div>
             <!--保存-->
             <div class="saves" v-if="htmlx!=''">{{htmlx}}</div>
-            <div class="save" @click="postUsersinfo()">保存</div>
+            <div class="save" @click="postUsersinfo()">保 &nbsp; &nbsp; 存</div>
         </div>
     </div>
 </template>

@@ -756,7 +756,7 @@
             box-sizing: border-box;
             .item{
                 height: @size40;
-                border-bottom: 1px solid rgb(129, 135, 140);
+                border-bottom: 1px solid rgb(202, 209, 217);
                 line-height: @size40;
                 margin-left: @size10;
                 span{
@@ -813,7 +813,7 @@
             .box{
                 height: 2.933rem;
                 width: 100%;
-                border-bottom: 1px solid rgb(51, 51, 51);
+                border-bottom: 1px solid rgb(130, 135, 140);
                 .boxImg{
                     width: @size80;
                     height: @size80;
@@ -853,14 +853,15 @@
                         line-height: 14px;
                     }
                     .fr{
-                        border: 1px solid rgb(51, 51, 51);
+                        border: 1px solid rgb(130, 135, 140);
                         margin-left: @size10;
                         background: white;
+                        color: rgb(51, 51, 51);
                         outline: none;
                         height: @size25;
                         line-height: @size25;
                         width: 1.8666rem;
-                        font-size: 10px;
+                        font-size: 12px;
                     }
                     button{
                         color:rgb(51, 51, 51);
