@@ -712,12 +712,12 @@
         .container{
             width:100%;
             .sell-more{
-                padding: 0.093rem;
+                padding: 0.166rem;
                 box-sizing: border-box;
                 .sellList{
                     width: 4.57rem;
                     float:left;
-                    margin:0.2rem 0.1rem;
+                    margin: 0.2rem 0.065rem;
                     position: relative;
                     .pic {
                         width:100%;

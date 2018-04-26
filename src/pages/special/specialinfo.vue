@@ -656,13 +656,14 @@
                 color:#212121;
             }
             .sell-more{
-                width:100%;
-                padding: 0.093rem;
+                /*width:100%;*/
+                padding: 0.16rem;
+                margin: 0.1333rem;
                 box-sizing: border-box;
                 .sellList{
                     width: 4.57rem;
                     float:left;
-                    margin:0.2rem 0.13rem;
+                    margin: 0.2rem 0.065rem;
                     position: relative;
                     .pic {
                         width:100%;
@@ -693,13 +694,13 @@
                         }
                     }
                     .date{
-                        width:0.7rem;
+                        width:0.8rem;
                         position: absolute;
                         right:0;
                         top:0;
                         .collect{
-                            width:0.35rem;
-                            height:0.35rem;
+                            width:0.4rem;
+                            height:0.4rem;
                             float:left;
                             background:#333333;
                             /*padding:0.08rem 0.1rem;*/
@@ -724,8 +725,8 @@
                             }
                         }
                         .collect2{
-                            width:0.35rem;
-                            height:0.35rem;
+                            width:0.4rem;
+                            height:0.4rem;
                             float:right;
                             background:#5EBAA9;
                             padding: 0.09rem 0.03rem;
@@ -739,8 +740,8 @@
                             }
                         }
                         .collect3{
-                            width:0.35rem;
-                            height:0.35rem;
+                            width:0.4rem;
+                            height:0.4rem;
                             float:right;
                             background:#F2CE76;
                             padding: 0.09rem 0.09rem;
@@ -753,8 +754,8 @@
                             }
                         }
                         .collect4{
-                            width:0.35rem;
-                            height:0.35rem;
+                            width:0.4rem;
+                            height:0.4rem;
                             float:right;
                             background:#EB6100;
                             padding: 0.09rem 0.09rem;
@@ -778,8 +779,8 @@
                             }
                         }
                         .collect5{
-                            width:0.35rem;
-                            height:0.35rem;
+                            width:0.4rem;
+                            height:0.4rem;
                             float:right;
                             background:#808080;
                             padding: 0.09rem 0.09rem;

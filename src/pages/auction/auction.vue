@@ -1665,11 +1665,12 @@
                         height: 3.47rem;
                     }
                     .money {
-                        font-size: 15px;
+                        font-size: 12px;
+                        font-weight:bold;
                         padding-top: @size15;
                     }
                     .title {
-                        font-size: 14px;
+                        font-size: 12px;
                         color: rgb(133, 133, 133);
                         padding-top: @size1;
                         overflow: hidden;
@@ -1677,7 +1678,7 @@
                         text-overflow: ellipsis;
                     }
                     .number {
-                        font-size: 12px;
+                        font-size: 10px;
                         color: rgb(133, 133, 133);
                         padding: 0 0 @size25 0;
                         overflow: hidden;
@@ -1691,8 +1692,8 @@
                     right:0;
                     top:0;
                     .collect{
-                        width:0.35rem;
-                        height:0.35rem;
+                        width:0.4rem;
+                        height:0.4rem;
                         float:left;
                         background:#333333;
                         /*padding:0.08rem 0.1rem;*/
@@ -1717,8 +1718,8 @@
                         }
                     }
                     .collect2{
-                        width:0.35rem;
-                        height:0.35rem;
+                        width:0.4rem;
+                        height:0.4rem;
                         float:right;
                         background:#5EBAA9;
                         /*padding: 0.09rem 0.03rem;*/
@@ -1735,8 +1736,8 @@
                         }
                     }
                     .collect3{
-                        width:0.35rem;
-                        height:0.35rem;
+                        width:0.4rem;
+                        height:0.4rem;
                         float:right;
                         background:#F2CE76;
                         padding: 0.09rem 0.09rem;
@@ -1749,8 +1750,8 @@
                         }
                     }
                     .collect4{
-                        width:0.35rem;
-                        height:0.35rem;
+                        width:0.4rem;
+                        height:0.4rem;
                         float:right;
                         background:#EB6100;
                         padding: 0.09rem 0.09rem;
@@ -1774,8 +1775,8 @@
                         }
                     }
                     .collect5{
-                        width:0.35rem;
-                        height:0.35rem;
+                        width:0.4rem;
+                        height:0.4rem;
                         float:right;
                         background:#808080;
                         padding: 0.09rem 0.09rem;
@@ -1868,13 +1869,14 @@
                         text-align: left;
                         line-height: @size15;
                         .tit{
-                            margin-top: @size40;
+                            margin-top: 0.8rem;
                             font-size: 10px;
                             color: rgb(122, 122, 122);
                         }
                         .price{
                             font-size: 12px;
                             font-weight: bold;
+                            margin-top: 0.04rem;
                         }
                         .title{
                             font-size: 10px;
@@ -1883,15 +1885,17 @@
                             overflow: hidden;
                             text-overflow:ellipsis;
                             white-space: nowrap;
+                            margin-top: 0.08rem;
                         }
                         .time{
                             font-size: 10px;
                             color: rgb(122, 122, 122);
+                            margin-top: 0.04rem;
                         }
                     }
                     .moneytime{
                         text-align: right;
-                        padding-top: @size13;
+                        padding-top: 0.4rem;
                         .nowTit{
                             font-size: 10px;
                             line-height: 15px;
@@ -1903,10 +1907,9 @@
                             font-weight: bold;
                         }
                         .over{
-                            padding-top: @size10;
-                            padding-bottom: 0.1rem;
+                            /*padding-top: 0.15rem;*/
+                            /*padding-bottom: 0.1rem;*/
                             font-size: 10px;
-                            line-height: 15px;
                             color:#7a7a7a;
                         }
                         .time{
@@ -1933,7 +1936,7 @@
                             }
                         }
                         .time1{
-                            color: #000;
+                            color:rgb(102,102,102);
                             font-size: 10px;
                             line-height: @size15;
                             font-weight: bold;
@@ -1942,7 +1945,7 @@
                 }
             }
             .bidRecord{
-                padding:  0.1rem 0;
+                padding:  0.2rem 0;
                 width: 100%;
                 max-height:  7.99rem;
                 overflow: scroll;
@@ -1953,7 +1956,7 @@
                     color:#ED6506 !important;
                     .price{
                         text-align: left;
-                        line-height: 0.8rem;
+                        line-height: 1.14rem;
                         font-size: @size14;
                         font-weight: bold;
                     }
@@ -2048,6 +2051,7 @@
                     padding-top: @size50;
                     font-size:@size14;
                     font-weight: bold;
+                    color:rgb(51,51,51);
                 }
                 .payCh{
                     font-size: 11px;
@@ -2150,7 +2154,7 @@
                 }
                 .pay{
                     height: @size50;
-                    border-top: 1px solid rgb(129, 135, 140);
+                    border-top: 1px solid rgb(202, 209, 217);
                     .check{
                         float: left;
                         margin-top: 18px;
@@ -2278,7 +2282,7 @@
                     bottom: 0;
                     left: 0;
                     line-height: @size45;
-                    font-size: 14px;
+                    font-size: 12px;
                 }
             }
         }
@@ -2569,7 +2573,6 @@
             bottom: @size45;
             width: 100%;
             height: @size35;
-
             text-align: center;
             font-size: 13px;
             line-height: @size25;
@@ -2578,14 +2581,14 @@
                 //height: @size15;
                 border: 1px solid white;
                 border-radius:3px;
-                font-size:  11px;
+                font-size:  10px;
                 color: white;
                 margin:0.22rem @size10 @size10 0.5rem;
                 padding:0.03rem 0.1rem;
                 line-height: 0.38rem;
             }
             .value{
-                font-size:  12px;
+                font-size:  10px;
                 color: white;
                 margin-top:@size6;
             }
@@ -2596,7 +2599,7 @@
                 margin-right: @size10;
             }
             .success{
-                font-size: 12px;
+                font-size: 10px;
                 color: white;
                 line-height: @size35;
                 padding-right: @size20;
@@ -2666,14 +2669,14 @@
                 //height: @size15;
                 border: 1px solid white;
                 border-radius:3px;
-                font-size:  11px;
+                font-size:  10px;
                 color: white;
                 margin:0.22rem @size10 @size10 0.5rem;
                 padding:0.03rem 0.1rem;
                 line-height: 0.38rem;
             }
             .value{
-                font-size:  12px;
+                font-size:  10px;
                 color: white;
                 margin-top:@size6;
             }
@@ -2684,7 +2687,7 @@
                 margin-right: @size10;
             }
             .success{
-                font-size: 12px;
+                font-size: 10px;
                 color: white;
                 line-height: @size35;
                 padding-right: @size20;
@@ -2783,7 +2786,7 @@
                 height: 100%;
                 line-height: 1.2rem;
                 text-align: center;
-                font-size: 14px;
+                font-size: 12px;
                 color:#333;
                 border-left: 1px solid #cdd4dc;
             }
@@ -2952,7 +2955,7 @@
                 height: 100%;
                 line-height: 1.2rem;
                 text-align: center;
-                font-size: 14px;
+                font-size: 12px;
                 color:#333;
                 border-left: 1px solid #cdd4dc;
             }
@@ -2987,7 +2990,7 @@
                     font-size: 12px;
                 }
                 .price{
-                    font-size: 15px;
+                    font-size: 12px;
                     width: 2.68rem;
                     font-weight: bold;
                 }
@@ -3029,7 +3032,7 @@
                     font-size: 12px;
                 }
                 .price{
-                    font-size: 15px;
+                    font-size: 12px;
                     width: 2.68rem;
                     font-weight: bold;
                     color:#E85800;
@@ -3054,10 +3057,10 @@
                 padding-left: 0.5rem;
                 box-sizing:border-box;
                 .label{
-                    font-size: 12px;
+                    font-size: 10px;
                 }
                 .price{
-                    font-size: 15px;
+                    font-size: 12px;
                     width: 2.68rem;
                     font-weight: bold;
                     color:#E85800;
@@ -3088,7 +3091,7 @@
                 border-left:1px solid rgb(205, 212, 220);
                 text-align: center;
                 line-height: @size45;
-                font-size: 14px;
+                font-size: 12px;
             }
             .offer2{
                 float: right;
@@ -3098,7 +3101,7 @@
                 border-left:1px solid rgb(205, 212, 220);
                 text-align: center;
                 line-height: @size45;
-                font-size: 14px;
+                font-size: 12px;
                 color:#E85800;
             }
         }

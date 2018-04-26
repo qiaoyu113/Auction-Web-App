@@ -43,7 +43,7 @@
 @import url('../../assets/css/base.less');
 #specials{
     width: 100%;
-    height: 4.5rem;
+    height: 5.6rem;
     background-repeat:no-repeat;
     background-size:100% 100%;
     margin-bottom: @size5;
@@ -88,7 +88,7 @@
             overflow: hidden;
             white-space: nowrap;
             text-overflow:ellipsis;
-            padding-top: 1.2rem;
+            padding-top: 1.8rem;
             font-size: 18px;
             font-weight: 500;
             color: rgb(255, 255, 255);
@@ -102,10 +102,10 @@
             color: rgb(255, 255, 255);
             font-size: 13px;
             font-weight: 400;
-            margin-top:@size2;
+            margin-top:0.2rem;
         }
         .time{
-            padding-top: @size14;
+            padding-top: 0.4rem;
             font-size: 12px;
             color: rgb(255, 255, 255);
         }

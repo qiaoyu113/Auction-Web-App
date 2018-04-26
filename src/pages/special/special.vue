@@ -622,7 +622,7 @@
                 span{
                     // display: inline-block;
                     text-align: center;
-                    font-size: @size14;
+                    font-size: 12px;
                     line-height: 1.07rem;
                     //margin-left: @size35;
                     // padding-left: @size55;
@@ -631,7 +631,7 @@
                     box-sizing: border-box;
                     padding-bottom: 0.2rem;
                     border-bottom: 2px solid black;
-                    color: rgb(51, 51, 51);
+                    color: rgb(53, 60, 70);
                     height: 1.07rem;
                     display: block;
                     width: 60%;
@@ -778,7 +778,7 @@
                 position: relative;
                 .sell-bpic {
                     width: 100%;
-                    margin-bottom: @size5;
+                    margin-bottom: 3px;
                     height: @size150;
                     overflow: hidden;
                     img {
@@ -812,7 +812,7 @@
                                 li {
                                     width: @size80;
                                     height: @size80;
-                                    margin-right: @size5;
+                                    margin-left: 3px;
                                     background: gray;
                                     float: left;
                                     overflow: hidden;
@@ -851,8 +851,8 @@
                     right:0;
                     top:0;
                     .collect{
-                        width:0.35rem;
-                        height:0.35rem;
+                        width:0.4rem;
+                        height:0.4rem;
                         float:left;
                         /*background:#333333;*/
                         box-sizing: border-box;
@@ -877,8 +877,8 @@
                         }
                     }
                     .collect2{
-                        width:0.35rem;
-                        height:0.35rem;
+                        width:0.4rem;
+                        height:0.4rem;
                         float:right;
                         background:#5EBAA9;
                         box-sizing: border-box;
@@ -895,8 +895,8 @@
                         }
                     }
                     .collect3{
-                        width:0.35rem;
-                        height:0.35rem;
+                        width:0.4rem;
+                        height:0.4rem;
                         float:right;
                         background:#F2CE76;
                         padding: 0.09rem 0.09rem;
@@ -909,8 +909,8 @@
                         }
                     }
                     .collect4{
-                        width:0.35rem;
-                        height:0.35rem;
+                        width:0.4rem;
+                        height:0.4rem;
                         float:right;
                         background:#EB6100;
                         /*padding: 0.09rem 0.09rem;*/
@@ -938,8 +938,8 @@
                         }
                     }
                     .collect5{
-                        width:0.35rem;
-                        height:0.35rem;
+                        width:0.4rem;
+                        height:0.4rem;
                         float:right;
                         background:#808080;
                         padding: 0.09rem 0.09rem;
