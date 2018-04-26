@@ -245,7 +245,7 @@
                 width: 25%;
                 text-align: center;
                 line-height: @size40;
-                font-size:0.3733rem;
+                font-size:12px;
                 p{
                     font-size:0.3733rem;
                     color: rgb(153,153,153);
@@ -256,11 +256,11 @@
                     height: 1.0667rem;
                     display: inline-block;
                     padding: 0 0.16rem;
-                    font-size:0.3733rem;
+                    font-size:12px;
                 }
                 span{
                     color: #999999;
-                    font-size:0.3733rem;
+                    font-size:12px;
                 }
             }
         }

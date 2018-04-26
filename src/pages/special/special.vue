@@ -846,7 +846,7 @@
                     }
                 }
                 .date{
-                    width:0.7rem;
+                    width:0.8rem;
                     position: absolute;
                     right:0;
                     top:0;

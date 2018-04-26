@@ -539,13 +539,13 @@
                         margin-left: -0.5rem;
                     }
                     .date{
-                        width:0.7rem;
+                        width:0.8rem;
                         position: absolute;
                         right:0;
                         top:0;
                         .collect{
-                            width:0.35rem;
-                            height:0.35rem;
+                            width:0.4rem;
+                            height:0.4rem;
                             float:left;
                             background:#333333;
                             /*padding:0.08rem 0.1rem;*/
@@ -576,8 +576,8 @@
                             }
                         }
                         .collect2{
-                            width:0.35rem;
-                            height:0.35rem;
+                            width:0.4rem;
+                            height:0.4rem;
                             float:right;
                             background:#5EBAA9;
                             padding: 0.09rem 0.03rem;
@@ -591,8 +591,8 @@
                             }
                         }
                         .collect3{
-                            width:0.35rem;
-                            height:0.35rem;
+                            width:0.4rem;
+                            height:0.4rem;
                             float:right;
                             background:#F2CE76;
                             padding: 0.09rem 0.09rem;
@@ -605,8 +605,8 @@
                             }
                         }
                         .collect4{
-                            width:0.35rem;
-                            height:0.35rem;
+                            width:0.4rem;
+                            height:0.4rem;
                             float:right;
                             background:#EB6100;
                             padding: 0.09rem 0.09rem;
@@ -630,8 +630,8 @@
                             }
                         }
                         .collect5{
-                            width:0.35rem;
-                            height:0.35rem;
+                            width:0.4rem;
+                            height:0.4rem;
                             float:right;
                             background:#808080;
                             padding: 0.09rem 0.09rem;
