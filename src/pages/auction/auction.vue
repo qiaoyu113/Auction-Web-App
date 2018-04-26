@@ -2762,7 +2762,7 @@
         }
         //流拍
         .bground4{
-            background:gray;
+            background:rgb(169,174,180);
             max-width: 10rem;
         }
         //底部
