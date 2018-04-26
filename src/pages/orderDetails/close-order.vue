@@ -214,7 +214,7 @@ import {commonService} from '../../service/commonService.js'
             padding-right: 20px;
             display: none;
             img{
-                 width: 0.4rem;
+                 width: 17px;
                 margin-top: @size8;
             }
         }
@@ -360,7 +360,7 @@ import {commonService} from '../../service/commonService.js'
         .totalMoney{
             height: @size40;
             // width: 8.933rem;
-            border-bottom: 1px solid rgb(129, 135, 140);
+            border-bottom: 1px solid rgb(202, 209, 217);
             margin-left: @size10;
             line-height: @size40;
             .fl{
@@ -369,7 +369,7 @@ import {commonService} from '../../service/commonService.js'
             .fr{
                 font-size: 13px;
                 font-weight: bold;
-                color: #fc5500;
+                color: rgb(102, 102, 102);
                 margin-right: 0.2667rem;
             }
         }

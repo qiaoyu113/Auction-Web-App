@@ -65,7 +65,7 @@
                     <!-- <div class="bor"></div> -->
                 </div>
                 <div class="listcontent clearfix"  v-for="arr1 in myList"  :key="arr1.url" @click="detailed(arr1.formId)">
-                    <div class="fl">{{arr1.flowAmount | money}}</div>
+                    <div class="fl">{{arr1.flowAmount | money}}CNY</div>
                    <!--  <div class="f2 line" v-if="arr1.flowStatus==10">充值</div>
                     <div class="f2 line" v-if="arr1.flowStatus==11">参拍冻结</div>
                     <div class="f2 line" v-if="arr1.flowStatus==20">充值</div>
@@ -573,7 +573,7 @@
 
             .item{
                 // border-bottom: 1px solid rgb(129, 135, 140);
-                padding-top: @size10;
+                // padding-top: @size10;
                 text-align: center;
                 .boxx{
                     height: @size98;
@@ -622,7 +622,7 @@
                     }
                 }
                 .bor{
-                    border-left: 1px solid rgb(153, 153, 153);
+                    border-left: 1px solid rgb(202, 209, 217);
                     height: 1.8666rem;
                     position: absolute;
                     right:0;
@@ -660,7 +660,9 @@
                 // box-sizing: border-box;
                 height: @size35;
                 padding-left: @size10;
-                border-bottom: 1px solid #ccc;
+                border-bottom: 1px solid rgb(202, 209, 217);
+                width: 9.4rem;
+                margin-left: 0.2rem;
                 .fl{
                     font-size: 12px;
                     line-height: @size35;
@@ -669,7 +671,9 @@
             .listcontent{
                 height: @size30;
                 text-align: center;
-                border-bottom: 1px solid #ccc;
+                border-bottom: 1px solid rgb(202, 209, 217);
+                width: 9.4rem;
+                margin-left: 0.2rem;
                 .fl{
                     width: 20%;
                     text-align: center;

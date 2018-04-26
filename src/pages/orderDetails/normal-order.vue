@@ -95,7 +95,7 @@
             </div>
 
             </div>
-            <div class="payment clearfix" v-if='index==1'>
+            <div class="payment vv_payment clearfix" v-if='index==1'>
              <div class="pay" @click="methodlist('OFFLINE_BANK')">
                 <div :class="method=='OFFLINE_BANK' ? 'check' : 'check1'"><i class="iconfont icon-duihao"></i></div>
                 <img class="v_img" v-if="method=='OFFLINE_BANK'" src="../../assets/image/mycenter/xxzf.png" />
@@ -173,7 +173,7 @@
                 <div class="close" @click="close()"><i class="iconfont icon-closeicon"></i></div>
                 <div class="titleEn">SHIPPING</div>
                 <div class="titleCh">物流信息</div>
-                <div class="num">运单号<span class="fr">{{logistic.nu}}</span></div>
+                <div class="num v_num">运单号<span class="fr">{{logistic.nu}}</span></div>
                 <div class="num num1">快递公司<span class="fr">顺丰速运</span></div>
                 <!-- <div class="num num1">预计送达<span class="fr">2018.05.11</span></div> -->
                 <div class="box">
@@ -847,8 +847,9 @@ import {commonService} from '../../service/commonService.js'
                     font-size: @size12;
                     font-weight: bold;
                     width: @size25;
-                    text-align: center;
+                    text-align: #a9aeb4;
                 }
+                
                 .colon{
                     text-align: center;
                     margin-top:@size6; 
@@ -902,16 +903,16 @@ import {commonService} from '../../service/commonService.js'
                     .label1{
                         float: left;
                         color: #fc5500;
-                        font-size: @size16;
+                        font-size: 12px;
                     }
                     .label2{
                         text-align: center;
-                        font-size: @size16;
+                        font-size: 12px;
                         color: gray;
                     }
                     .label3{
                         float: right;
-                        font-size: @size16;
+                        font-size: 12px;
                         color: gray;
                     }
                 }
@@ -963,16 +964,16 @@ import {commonService} from '../../service/commonService.js'
                     .label1{
                         float: left;
                         color:  #fc5500;
-                        font-size: @size16;
+                        font-size: 12px;
                     }
                     .label2{
                         text-align: center;
-                        font-size: @size16;
+                        font-size: 12px;
                         color:  #fc5500;
                     }
                     .label3{
                         float: right;
-                        font-size: @size16;
+                        font-size: 12px;
                         color: gray;
                     }
                 }
@@ -1025,16 +1026,16 @@ import {commonService} from '../../service/commonService.js'
                     .label1{
                         float: left;
                         color: #fc5a06;
-                        font-size: @size16;
+                        font-size: 12px;
                     }
                     .label2{
                         text-align: center;
-                        font-size: @size16;
+                        font-size: 12px;
                         color: #fc5a06;
                     }
                     .label3{
                         float: right;
-                        font-size: @size16;
+                        font-size: 12px;
                         color: #fc5a06;
                     }
                 }
@@ -1084,9 +1085,10 @@ import {commonService} from '../../service/commonService.js'
         .payment{
             // height: @size40;
             box-sizing: border-box;
-            border-bottom: 1px solid rgb(129, 135, 140);
+            border-bottom: 1px solid rgb(202, 209, 217);
+            margin-left: @size10;
             .witpay{
-                padding-left: @size10;
+                // padding-left: @size10;
                 line-height: @size40;
                 font-size: 12px;
                 float: left;
@@ -1111,7 +1113,7 @@ import {commonService} from '../../service/commonService.js'
             .pay{
             height: @size50;
             // border-bottom: 1px solid #87828c;
-            margin-left: @size10;
+            // margin-left: @size10;
             .check{
                 float: left;
                 margin-top: 18px;
@@ -1199,6 +1201,27 @@ import {commonService} from '../../service/commonService.js'
             }
         }
         }
+     .vv_payment{
+        border-bottom: 1px solid rgb(129, 135, 140);
+        margin-left: 0;
+        .witpay{
+                margin-left: @size10;
+              
+            }
+            .pay{
+               margin-left: @size10;
+            }
+
+     }
+        .v_payment{
+          border-top: 1px solid rgb(202, 209, 217);
+          border-bottom: 1px solid rgb(202, 209, 217);
+          margin-left: 0.2667rem;
+          .pay{
+             margin-left: 0;
+
+          }
+        }
         .address{
             height: 2.3333rem;
             box-sizing: border-box;
@@ -1224,7 +1247,7 @@ import {commonService} from '../../service/commonService.js'
                 font-size: 12px;
                 text-align: right;
                 line-height: @size18;
-                color: rgb(129, 135, 140);
+                color: rgb(153, 153, 153);
                 font-weight: 100;
             }
         }
@@ -1279,7 +1302,7 @@ import {commonService} from '../../service/commonService.js'
         .totalMoney{
             height: @size40;
             // width: 8.933rem;
-            border-bottom: 1px solid #e7ecef;
+            border-bottom: 1px solid rgb(202, 209, 217);
             margin-left: @size10;
             line-height: @size40;
             .fl{
@@ -1436,7 +1459,7 @@ import {commonService} from '../../service/commonService.js'
     .num{
         width: 7.6rem;
         height: @size40;
-        border-top: 1px solid gray;
+        border-top: 1px solid rgb(130, 135, 140);
         font-size: 12px;
         line-height: @size40;
         text-align: left;
@@ -1446,8 +1469,11 @@ import {commonService} from '../../service/commonService.js'
         }
     }
     .num1{
-        border-bottom: 1px solid gray;
+
+        border-top: 1px solid #a9aeb4;
+        border-bottom: 1px solid rgb(130, 135, 140);
     }
+   
     .box{
         // height: 8.4rem;
         // overflow:hidden;
@@ -1456,7 +1482,7 @@ import {commonService} from '../../service/commonService.js'
             padding: @size26 0 0 0.44rem;
             position: relative;
             // padding-left: 0.44rem;
-            border-left: 2px solid gray;
+            border-left: 2px solid #a9aeb4;
             .line{
                 position: absolute;
                 left: -@size5;
@@ -1464,11 +1490,11 @@ import {commonService} from '../../service/commonService.js'
                 width: @size10;
                 height: @size10;
                 border-radius: 50%;
-                background: gray;
+                background: #a9aeb4;
                 z-index: 3000;
                   }
         .contents_box{
-            border-bottom: 1px solid gray;
+            border-bottom: 1px solid #a9aeb4;
             text-align: left;
             // float: left;
             width:  7rem;

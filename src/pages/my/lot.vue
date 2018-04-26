@@ -263,7 +263,7 @@
                         div{
                             float: left;
                             margin-right: @size5;
-                            font-size: 11px;
+                            font-size: 10px;
                             line-height: 15px;
                         }
                         .ros_offer{
@@ -448,7 +448,7 @@
                         font-weight:700;
 
                         span{
-                            font-size: 11px;
+                            font-size: 10px;
                             line-height: @size16;
                             color: rgb(51,51,51);
                             font-weight:400;

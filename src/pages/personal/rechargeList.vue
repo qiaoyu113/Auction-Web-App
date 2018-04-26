@@ -70,7 +70,7 @@
                      <span class="span">{{money}}&nbsp;CNY</span>
                     <!-- <input type="number" placeholder="请输入金额" disabled="disabled" v-model="money"/> -->
                 </div>
-                <div class="info clearfix"><span>手机号码</span>
+                <div class="info v_info clearfix"><span>手机号码</span>
                     <input type="number" placeholder="请输入手机号码" value="phone" v-model="phone"/>
                     <div class="infoClose" @click='remphone()' v-if="phone!=''"><i class="iconfont icon-closeicon"></i></div>
                 </div>
@@ -99,7 +99,7 @@
                     <i>尾号{{list.userBankCardNo.substr(list.userBankCardNo.length-4)}}{{card.cardTypeName}}</i></span>
                     </div>
                 </div>
-                <div class="info"><span>状态</span>
+                <div class="info v_info"><span>状态</span>
                     <div class="infoClose" v-if="list.status==1" style="color:#eb6200;">处理中</div>
                     <div class="infoClose" v-if="list.status==2">已完成</div>
                     <div class="infoClose" v-if="list.status==3">交易失败</div>
@@ -108,7 +108,7 @@
         </div>
         <div class="footer1t" v-if="htmlx!=''">{{htmlx}}</div>
         <div class="footer1" v-if='index==1||index==2' @click="nextStep">下一步</div>
-        <div class="footer1" v-if='index==3' @click="Routes()">完成</div>
+        <div class="footer1" v-if='index==3' @click="Routes()">完 &nbsp; &nbsp; 成</div>
         
     </div>
 </template>
@@ -515,14 +515,15 @@ import {commonService} from '../../service/commonService.js'
                 width: 100%;
                 height: @size40;
                 text-align: left;
-                border-bottom: 1px solid #87828c;
+                border-bottom: 1px solid rgb(202, 209, 217);
+                margin-left: @size10;
                 span{
                     width: 2rem;
                     line-height: 1.02rem;
                     float: left;
                     font-size: 12px;
                     // padding-top: @size1;
-                    padding-left: @size10;
+                    // padding-left: @size10;
                 }
                 .span{
                     float: right;
@@ -747,14 +748,15 @@ import {commonService} from '../../service/commonService.js'
         .info{
             width: 100%;
             height: @size40;
-            border-bottom: 1px solid #87828c;
+            border-bottom: 1px solid rgb(202, 209, 217);
             text-align: left;
+            margin-left: @size10;
             span{
                 width: 2rem;
                 line-height: 1.02rem;
                 float: left;
                 font-size: 12px;
-                padding-left: @size10;
+                // padding-left: @size10;
                 padding-top: @size1;
             }
             input{
@@ -812,6 +814,13 @@ import {commonService} from '../../service/commonService.js'
                     line-height: @size35;
                 }
             }
+        }
+        .v_info{
+          margin-left: 0;
+          border-bottom: 1px solid #81878c;
+          span{
+            margin-left: @size10;
+          }
         }
     }
     .footer1t{

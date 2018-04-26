@@ -41,7 +41,7 @@
             <div class="v_kefu" v-if="wximg==null"><a href="javaScript:;" @click="resetpassword()">忘记密码</a> | <a href="tel:4001887107">联系客服</a></div>
             <div :class="isX ? 'bottoms':'bottom'">
                 <div class="hint" v-if="hint">{{hintText}}</div>
-                <div class="ok" @click="loginBtn">登 &nbsp;录</div>
+                <div class="ok" @click="loginBtn">登 &nbsp; &nbsp; 录</div>
             </div>
         </div>
         <!--注册中心-->
@@ -74,7 +74,7 @@
             <!--登陆和提示-->
             <div :class="isX ? 'bottoms':'bottom'">
                 <div class="hint" v-if="hint2">{{hint2Text}}</div>
-                <div class="ok" @click="sign">注&nbsp; 册</div>
+                <div class="ok" @click="sign">注 &nbsp; &nbsp; 册</div>
             </div>
         </div>
         <!--微信登陆-->
@@ -791,7 +791,7 @@
         .header{
             width:100%;
             height:3.7rem;
-            border-bottom:4px solid #2B343D;
+            border-bottom:2px solid rgb(53, 60,70);
             padding:1.07rem 0.53rem;
             box-sizing: border-box;
             position: relative;
@@ -819,7 +819,7 @@
                 height:0.8rem;
                 line-height:0.8rem;
                 position: absolute;
-                bottom:4px;
+                bottom:2px;
                 // box-sizing: border-box;
                 // overflow: hidden;
                 .login{
@@ -842,7 +842,7 @@
                     padding:0 0.14rem;
                     // box-sizing: border-box;
                     font-size: 12px;
-                    border-bottom:4px solid #353535;
+                    border-bottom:2px solid rgb(53, 60,70);
                 }
                 .check{
                     color:#353535;
@@ -850,7 +850,7 @@
                     padding:0 0.14rem;
                     font-size: 12px;
                     // box-sizing: border-box;
-                    border-bottom:4px solid #353535;
+                    border-bottom:2px solid rgb(53, 60,70);
 
                 }
             }
@@ -863,9 +863,10 @@
                 width: 2rem;
                 text-align: center;
                 margin:0.5rem auto;
-                font-size: 14px;
+                font-size: 12px;
+                line-height: 22px;
                 i{
-                    font-size:28px;
+                    font-size:26px;
                     float:left;
                     line-height: 0.6rem;
                 }
@@ -999,7 +1000,7 @@
                 width:100%;
                 height:1.2rem;
                 line-height:1.2rem;
-                border-top:2px solid #333;
+                border-top:2px solid rgb(53, 60, 70);
                 text-align: center;
                 font-size:12px;
                 background: #fff;
@@ -1024,7 +1025,7 @@
                 width:100%;
                 height:1.2rem;
                 line-height:1.2rem;
-                border-top:1px solid #333;
+                border-top:1px solid rgb(53, 60, 70);
                 text-align: center;
                 font-size:14px;
                 background: #fff;

@@ -583,9 +583,9 @@
             padding-left: @size20;
             border-left: 1px solid rgb(217,217,217);
             line-height: 1.3rem;
-            margin-left: @size10;
+            margin-left: @size20;
             i{
-                font-size: 16px;
+                font-size: 12px;
                 color: rgb(169,174,180);
             }
           }
@@ -602,6 +602,7 @@
           }
           .address_con{
                 float: right;
+
                 p{
                     font-size: 12px;
                     color: rgb(51,51,51);
@@ -630,7 +631,7 @@
           .goods{
             margin: @size15 @size10 0;
             padding-bottom: @size10;
-            border-bottom: 1px solid rgb(53,60,70);
+            border-bottom: 1px solid rgb(130,135,140);
             .goods_l{
                 float: left;
                 width: 2.1333rem;
@@ -668,7 +669,7 @@
           }
           .money{
             margin:0 @size10;
-            border-bottom: 1px solid rgb(53, 60, 70);
+            border-bottom: 1px solid rgb(130, 135, 140);
             .total{
                 height: @size40;
                 margin-left:@size10;

@@ -235,13 +235,15 @@
           height: @size45;
           div{
             position: fixed;
-            left: 0;
-            bottom: 0;
+            left: @size10;
+            right: @size10;
+            bottom: @size10;
             z-index: 999;
-            width: 100%;
+            // width: 100%;
+            
             height: @size45;
             background: #fff;
-            border-top: 1px solid rgb(53,60,70);
+            border: 2px solid rgb(53,60,70);
             text-align: center;
             line-height: @size45;
             font-size: 12px;

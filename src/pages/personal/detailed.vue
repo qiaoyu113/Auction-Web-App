@@ -10,9 +10,7 @@
     index三种状1.填写信息 2.审核中 3.已完成
     -->
     <div class="detailed" v-set-title="title">
-        
-        <div class="content">
-        <div class="contents">
+          <div class="contents">
             <div class="loginBox">
                 <div class='loginEn'>PAYMENT HISTORY</div>
                 <div class="loginCn">交易明细</div>
@@ -21,6 +19,8 @@
             <img src="../../../src/assets/image/mycenter/right.png"/>
             </div>
         </div>
+        <div class="content">
+      
             <!-- 已完成 -->
             <div>
                 <div class="info"><span>交易号</span>
@@ -277,14 +277,12 @@ import {commonService} from '../../service/commonService.js'
                 }
             }
         }
- 
-    .content{
-    	.contents{
+    .contents{
         // margin-top: @size45;
         width:100%;
         height:3.7rem;
         border-bottom:2px solid #353535;
-        padding:1.07rem 0.2667rem;
+        padding:1.07rem @size20;
         box-sizing: border-box;
         position: relative;
         .loginBox{
@@ -310,6 +308,8 @@ import {commonService} from '../../service/commonService.js'
             }
         }
     }
+    .content{
+    
     
         margin-bottom: 1.2rem;
         padding: 0 @size10;
@@ -317,14 +317,15 @@ import {commonService} from '../../service/commonService.js'
         .info{
             width: 100%;
             height: @size40;
-            border-bottom: 1px solid #87828c;
+            border-bottom: 1px solid rgb(202, 209, 217);
+            margin-left: @size10;
             text-align: left;
             span{
                 width: 2rem;
                 line-height: 1.02rem;
                 float: left;
                 font-size: 12px;
-                padding-left: @size10;
+                // padding-left: @size10;
                 padding-top: @size1;
             }
             input{

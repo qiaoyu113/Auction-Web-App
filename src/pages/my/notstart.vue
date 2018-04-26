@@ -244,7 +244,7 @@
                         div{
                             float: left;
                             margin-right: @size5;
-                            font-size: 11px;
+                            font-size: 10px;
                             line-height: 15px;
                         }
                         .ros_offer{

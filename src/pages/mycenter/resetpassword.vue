@@ -561,7 +561,7 @@
                     font-size:12px;
                     margin-left:0.8rem;
                 }
-                 .v_tt{
+                .v_tt{
                    color:#333;
                    margin-left: 0;
                    width: 2rem;

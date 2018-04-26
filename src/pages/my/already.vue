@@ -523,7 +523,7 @@
                         div{
                             float: left;
                             margin-right: @size5;
-                            font-size: 11px;
+                            font-size: 10px;
                             line-height: 15px;
                         }
                         .ros_offer{
@@ -698,9 +698,9 @@
                     font-size: 12px;
                     color: #4D4D4D;
                     width: 1.8666rem;
-                    height: 0.75rem;
+                    height: 0.64rem;
                     border: 1px solid #4D4D4D;
-                    line-height: 0.75rem;
+                    line-height: 0.64rem;
                     text-align: center;
                 }
                 .v_tros_con{
@@ -710,9 +710,9 @@
                     // font-size: 12px;
                     // color: #4D4D4D;
                     width: 1.8666rem;
-                    height: 0.75rem;
+                    height: 0.64rem;
                     // border: 1px solid #4D4D4D;
-                    line-height: 0.75rem;
+                    line-height: 0.64rem;
                     // text-align: center;
 
                 }

@@ -43,7 +43,7 @@
                 <!-- <i :class="index==2 ? 'background2' : ''" class="iconfont icon-icon_zhifubao"></i> -->
                 <div class="infoAlipay">提现至支付宝</div>
             </div>
-            <div class="pay" @click="getIndex(3)">
+            <div class="pay v_pay" @click="getIndex(3)">
                 <div :class="index==3 ? 'check' : 'check1'"><i class="iconfont icon-duihao"></i></div>
                 <!-- <i :class="index==3 ? 'background3' : ''" class="iconfont icon-icon_zhifubao"></i> -->
                 <img class="v_img" v-if="index==3" src="../../assets/image/mycenter/xxzf.png" />
@@ -413,7 +413,7 @@
         padding: 0 @size10;
         box-sizing: border-box;
         .bor{
-            border-bottom: 1px solid #87828c;
+            border-bottom: 1px solid rgb(202, 209, 217);
             margin-left: @size10;
         }
         .info{
@@ -462,7 +462,7 @@
         }
         .money{
             height: @size55;
-            border-bottom: 1px solid black;
+            border-bottom: 1px solid rgb(130, 135, 140);
             .fl{
                 margin-top: @size8;
                 padding-left: @size10;
@@ -488,7 +488,7 @@
         }
         .pay{
             height: @size50;
-            border-bottom: 1px solid #87828c;
+            border-bottom: 1px solid rgb(202, 209, 217);
             margin-left: @size10;
             .check{
                 float: left;
@@ -573,6 +573,16 @@
                 line-height: 1.3333rem;
                 color: rgb(129, 135, 140);
                 font-size: 12px;
+            }
+        }
+        .v_pay{
+            border-bottom: 1px solid rgb(130, 135, 140);
+            margin-left: 0;
+            .check1{
+                margin-left: @size10;
+            }
+            .check{
+                margin-left: @size10;
             }
         }
     }

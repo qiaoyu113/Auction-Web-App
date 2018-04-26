@@ -282,8 +282,8 @@ import {commonService} from '../../service/commonService.js'
             padding-right: 20px;
             display: none;
              img{
-                width: 0.4rem;
-                margin-top: @size8;
+                width: 17px;
+                margin-top: @size10;
             }
         }
         .display{
@@ -349,17 +349,17 @@ import {commonService} from '../../service/commonService.js'
                     
                     .label1{
                         float: left;
-                        font-size: @size16;
+                        font-size: 12px;
                         color: gray;
                     }
                     .label2{
                         text-align: center;
-                        font-size: @size16;
+                        font-size: 12px;
                         color: gray;
                     }
                     .label3{
                         float: right;
-                        font-size: @size16;
+                        font-size: 12px;
                         color: gray;
                     }
                     .fontcolor{
@@ -372,9 +372,10 @@ import {commonService} from '../../service/commonService.js'
         .payment{
             height: @size40;
             box-sizing: border-box;
-            border-bottom: 1px solid rgb(129, 135, 140);
+            margin-left: @size10;
+            border-bottom: 1px solid rgb(202, 209, 217);
             .witpay{
-                padding-left: @size10;
+                // padding-left: @size10;
                 line-height: @size40;
                 font-size: 12px;
                 font-weight: 700;
