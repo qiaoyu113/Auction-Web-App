@@ -630,7 +630,7 @@
                 .check{
                     box-sizing: border-box;
                     padding-bottom: 0.2rem;
-                    border-bottom: 2px solid black;
+                    border-bottom: 2px solid rbg(53,60,70);
                     color: rgb(53, 60, 70);
                     height: 1.05rem;
                     display: block;
