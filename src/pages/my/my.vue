@@ -253,7 +253,7 @@
                 .show{
                     color: #333333;
                     border-bottom: 2px solid rgb(53,60,70);
-                    height: 1.05rem;
+                    height: 1.06rem;
                     display: inline-block;
                     padding: 0 0.16rem;
                     font-size:12px;
