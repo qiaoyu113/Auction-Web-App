@@ -2109,7 +2109,7 @@
                         position: absolute;
                         right: 0;
                         top: -3px;
-                        font-size: 35px;
+                        font-size: 30px;
                         line-height: 40px;
                         color: #E85800;
                     }
@@ -2389,7 +2389,7 @@
                         position: absolute;
                         right: 0;
                         top: -3px;
-                        font-size: 35px;
+                        font-size: 30px;
                         line-height: 40px;
                         color: red;
                     }
@@ -2801,13 +2801,14 @@
                 text-align: center;
                 padding-left: 0.5rem;
                 box-sizing:border-box;
+                color:rgb(51,51,51);
                 .nobtn1{
                     color:#E6E6E6 !important;
                 }
                 .btn1{
                     width: 1.46rem;
                     line-height:@size40;
-                    font-size: 35px;
+                    font-size: 30px;
                     color: #3C434D;
                     float: left;
                     margin-left: -0.4rem;
@@ -2815,7 +2816,7 @@
                 .btn2{
                     width: 1.46rem;
                     line-height:@size40;
-                    font-size: 35px;
+                    font-size: 30px;
                     color: red;
                     float: right;
                 }
@@ -2848,7 +2849,7 @@
                 .btn1{
                     width: 1.46rem;
                     line-height:@size40;
-                    font-size: 35px;
+                    font-size: 30px;
                     color: #E3E3E3;
                     float: left;
                     margin-left: -0.4rem;
@@ -2856,7 +2857,7 @@
                 .btn2{
                     width: 1.46rem;
                     line-height:@size40;
-                    font-size: 35px;
+                    font-size: 30px;
                     color: #E3E3E3;
                     float: right;
                     /*margin-top: 0.04rem;*/
@@ -2976,7 +2977,7 @@
                 .btn1{
                     width: 1.46rem;
                     line-height:@size40;
-                    font-size: 35px;
+                    font-size: 30px;
                     color: #3C434D;
                     float: left;
                     margin-left: -0.4rem;
@@ -2984,7 +2985,7 @@
                 .btn2{
                     width: 1.46rem;
                     line-height:@size40;
-                    font-size: 35px;
+                    font-size: 30px;
                     color: rgb(236,105,65);
                     float: right;
                 }
@@ -3025,7 +3026,7 @@
                 .btn1{
                     width: 1.46rem;
                     line-height:@size40;
-                    font-size: 35px;
+                    font-size: 30px;
                     color: #E3E3E3;
                     float: left;
                     margin-left: -0.4rem;
@@ -3033,7 +3034,7 @@
                 .btn2{
                     width: 1.46rem;
                     line-height:@size40;
-                    font-size: 35px;
+                    font-size: 30px;
                     color: #E3E3E3;
                     float: right;
                     /*margin-top: 0.04rem;*/

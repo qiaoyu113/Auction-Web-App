@@ -676,6 +676,7 @@
                             font-size: 12px;
                             padding-top: @size15;
                             color:rgb(51,51,51);
+                            font-weight:bold;
                         }
                         .title {
                             font-size: 12px;

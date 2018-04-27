@@ -729,7 +729,7 @@
                         .money {
                             font-size: 12px;
                             padding-top: @size15;
-                            font-weight: 500;
+                            font-weight: bold;
                             color:rgb(51,51,51);
                         }
                         .title {
