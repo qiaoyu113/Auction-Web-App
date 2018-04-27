@@ -742,9 +742,9 @@
         }
         .back{
             width:100%;
-            height:1.2rem;
-            line-height:1.2rem;
-            border:1px solid #28313A;
+            height:40px;
+            line-height:40px;
+            border:2px solid rgb(53, 60, 70);
             text-align: center;
             box-sizing: border-box;
             margin-top:0.8rem;

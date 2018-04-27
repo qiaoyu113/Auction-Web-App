@@ -472,7 +472,7 @@ import {commonService} from '../../service/commonService.js'
         .totalMoney{
             height: @size40;
             // width: 8.933rem;
-            border-bottom: 1px solid rgb(231, 236, 239);
+            border-bottom: 1px solid rgb(202, 209, 217);
             margin-left: @size10;
             line-height: @size40;
             .fl{

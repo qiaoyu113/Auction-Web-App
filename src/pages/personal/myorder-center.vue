@@ -685,7 +685,7 @@
         }
         .font{
             display: inline-block;
-            font-size: 13px;
+            font-size: 12px;
             line-height: @size30;
             
             padding-top: @size3; 
@@ -761,7 +761,7 @@
                 margin-left: @size10;
                 span{
                     font-size: 10px;
-                    color: rgb(129, 135, 140);
+                    color: rgb(51, 51, 51);
                     padding-right: @size10;
                 }
                 .v_rosr{
@@ -837,6 +837,7 @@
                         font-size: 14px;
                         line-height: 18px;
                         letter-spacing: 1px;
+                        color: rgb(51, 51, 51);
                     }
                     .name{
                         font-size: 12px;
@@ -846,11 +847,13 @@
                         overflow: hidden;
                         text-overflow: ellipsis;
                         white-space: nowrap; 
+                        color: #333;
                     }
                     .prove{
                         font-size: 10px;
-                        color:rgb(133, 133, 133);
+                        color:rgb(51, 51, 51);
                         line-height: 14px;
+
                     }
                     .fr{
                         border: 1px solid rgb(130, 135, 140);

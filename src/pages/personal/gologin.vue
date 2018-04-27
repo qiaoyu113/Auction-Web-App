@@ -499,7 +499,7 @@
                 }
                 .fr{
                     margin-top: @size15;
-                    border: 1px solid rgb(202, 209, 217);
+                    border: 1px solid rgb(130, 135, 140);
                     margin-left: @size10;
                     background: white;
                     outline: none;
@@ -635,6 +635,9 @@
             font-size: 10px;
             text-align: right; 
             a{
+                padding: 4px 10px;
+                background: rgb(0, 27, 72);
+                border-radius: 3px;
                 color: #fff;
                 font-size: 10px;
             }
@@ -658,7 +661,7 @@
             text-align: right;
             a{
                 color: #fff;
-                font-size: 12px;
+                font-size: 10px;
             }
         }
     }

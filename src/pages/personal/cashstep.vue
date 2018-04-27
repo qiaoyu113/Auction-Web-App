@@ -65,7 +65,7 @@
                     <input type="text" class="v_zfbzh" placeholder="请输入支付宝帐号(手机号/邮箱)" v-model="account"/>
                     <div class="infoClose" @click='remaccount()' v-if="account!=''"><i class="iconfont icon-closeicon"></i></div>
                 </div>
-                <div class="info"><span>姓名</span>
+                <div class="info v_info"><span>姓名</span>
                     <input type="text" placeholder="请输入支付宝认证姓名" v-model="userName"/>
                     <div class="infoClose" @click='remuserName()' v-if="userName!=''"><i class="iconfont icon-closeicon"></i></div>
                 </div>

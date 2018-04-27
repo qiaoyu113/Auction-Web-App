@@ -488,7 +488,7 @@
                 .line{
                     width: 9rem;
                     position: relative;
-                    border-bottom: 1px solid rgb(228,228,288);
+                    border-bottom: 1px solid rgb(202,209,217);
                     height: @size15;
                     float:right;
                     margin-bottom: 0.3rem;
@@ -699,7 +699,7 @@
                     color: #4D4D4D;
                     width: 1.8666rem;
                     height: 0.64rem;
-                    border: 1px solid #4D4D4D;
+                    border: 1px solid rgb(130, 135, 140);
                     line-height: 0.64rem;
                     text-align: center;
                 }

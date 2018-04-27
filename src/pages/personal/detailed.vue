@@ -45,7 +45,7 @@
 
                     </div>
                 </div>
-                <div class="info"><span>状态</span>
+                <div class="info v_info"><span>状态</span>
                     <div class="infoClose" v-if="list.flowStatus==10">已完成</div>
                     <div class="infoClose" v-if="list.flowStatus==11">已完成</div>
                     <div class="infoClose v_colorj" v-if="list.flowStatus==20">处理中</div>
@@ -315,7 +315,7 @@ import {commonService} from '../../service/commonService.js'
         padding: 0 @size10;
       
         .info{
-            width: 100%;
+            // width: 100%;
             height: @size40;
             border-bottom: 1px solid rgb(202, 209, 217);
             margin-left: @size10;
@@ -388,6 +388,14 @@ import {commonService} from '../../service/commonService.js'
                     line-height: @size35;
                 }
             }
+        }
+        .v_info{
+            margin-left: 0;
+            border-bottom: 1px solid rgb(130, 135, 140);
+            span{
+                margin-left: @size10;
+            }
+
         }
     }
 

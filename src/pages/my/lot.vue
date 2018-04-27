@@ -283,6 +283,9 @@
                             line-height: @size15;
                             color: #fff;
                         }
+                        .ros_l2{
+                            font-size: 13px;
+                        }
 
                     }
                     .ros_l2{

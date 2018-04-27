@@ -512,7 +512,7 @@ import {commonService} from '../../service/commonService.js'
 
         }
         .info1{
-                width: 100%;
+                // width: 100%;
                 height: @size40;
                 text-align: left;
                 border-bottom: 1px solid rgb(202, 209, 217);
@@ -746,7 +746,7 @@ import {commonService} from '../../service/commonService.js'
             
         }
         .info{
-            width: 100%;
+            // width: 100%;
             height: @size40;
             border-bottom: 1px solid rgb(202, 209, 217);
             text-align: left;

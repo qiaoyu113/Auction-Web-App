@@ -774,7 +774,10 @@
             margin-right: 1.4rem;
             font-size: 10px;
             text-align: right; 
-            a{
+            a{  
+                padding: 4px 10px;
+                background: rgb(0, 27, 72);
+                border-radius: 3px;
                 color: #fff;
                 font-size: 10px;
             }

@@ -839,13 +839,14 @@ import {commonService} from '../../service/commonService.js'
                     box-sizing: border-box;
                     height: @size25;
                     background: white;
-                    border: 1px solid black;
+                    border: 1px solid rgb(130, 135, 140);
                     border-radius:3px;
                     padding: @size3 @size2; 
                     margin-top:@size5; 
                     line-height: 0.50rem;
                     font-size: @size12;
                     font-weight: bold;
+                    color:rgb(51, 51, 51);
                     width: @size25;
                     text-align: #a9aeb4;
                 }
@@ -1046,7 +1047,7 @@ import {commonService} from '../../service/commonService.js'
             height: @size40;
             box-sizing: border-box;
             // width: 8.933rem;
-            border-bottom: 1px solid #e7ecef;
+            border-bottom: 1px solid rgb(202,209,217);
             margin-left: @size10;
             line-height: @size40;
             font-size: 12px;
@@ -1384,7 +1385,7 @@ import {commonService} from '../../service/commonService.js'
             p{
               text-align: center;
               font-size: 10px;
-              color: rgb(51, 51, 51);
+              color: rgb(153, 153, 153);
             }
         } 
     }

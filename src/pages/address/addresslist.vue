@@ -325,12 +325,13 @@ import {commonService} from '../../service/commonService.js'
    
     .content{
         padding: 0 @size10;
-        margin-top: @size45;
+        margin-top: @size36;
         padding-bottom: 1.2rem;
 
         .peo{
             padding:0.06rem @size10;
-            height: @size20;
+            // height: @size20;
+            line-height: 34px;
             .fl{font-size:12px;} 
             .fr{font-size:12px;} 
         }
@@ -345,7 +346,7 @@ import {commonService} from '../../service/commonService.js'
             padding-right:@size10;
         }
         .bor{
-            border-bottom: 1px solid rgb(96, 99, 104);
+            border-bottom: 1px solid rgb(202, 209, 217);
             margin-left: @size10;
             margin-top: @size10;
         }
@@ -353,7 +354,7 @@ import {commonService} from '../../service/commonService.js'
             height: @size30;
             padding-top: @size15;
             padding:@size15  @size10 0;
-            border-bottom: 1px solid rgb(96, 99, 104);
+            border-bottom: 1px solid rgb(130, 135, 140);
          
               
             
@@ -488,7 +489,7 @@ import {commonService} from '../../service/commonService.js'
         height: 1.2rem;
         box-sizing: border-box;
         margin:@size5; 
-        border:1px solid rgb(53, 60, 70); 
+        border:2px solid rgb(53, 60, 70); 
         text-align: center;
         line-height: 1.2rem;
         font-size: 12px;

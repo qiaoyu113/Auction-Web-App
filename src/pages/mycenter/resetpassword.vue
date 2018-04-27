@@ -42,7 +42,7 @@
         <div class="box2" v-if="index==2">
             <!--新手机号码-->
             <div class="info">
-                <div class="infoList"><span class="v_tt">新密码</span><input class="codeInp" type="password" placeholder="请输入新密码" v-model="newPassword"/>
+                <div class="infoList"><span class="v_tt">新密码&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><input class="codeInp" type="password" placeholder="请输入新密码" v-model="newPassword"/>
                <div class="goBind" @click="remnewPassword()" v-if="newPassword!=''"> <i class="iconfont icon-closeicon"></i></div>
                 </div>
             </div>
@@ -596,7 +596,7 @@
                     }
                 }
                 input{
-                    margin-left:1rem;
+                    margin-left:0.666rem;
                     border:none;
                     outline: none;
                     font-size:12px;

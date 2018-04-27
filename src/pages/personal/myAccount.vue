@@ -598,7 +598,7 @@
             .box{
                 height:@size98;
                 width: 9.6rem;
-                border-bottom: 1px solid rgb(51, 51, 51);
+                border-bottom: 1px solid rgb(130, 135, 140);
                 box-sizing: border-box;
                 position: relative;
                 .fl{
@@ -631,7 +631,7 @@
             }
         }
         .center{
-                border-bottom: 1px solid black;
+                border-bottom: 1px solid rgb(130, 135, 140);
                 box-sizing: border-box;
                 .address{
                     // box-sizing: border-box;
@@ -659,10 +659,10 @@
             .address{
                 // box-sizing: border-box;
                 height: @size35;
-                padding-left: @size10;
+                margin-left: @size10;
                 border-bottom: 1px solid rgb(202, 209, 217);
                 width: 9.4rem;
-                margin-left: 0.2rem;
+                // margin-left: 0.2rem;
                 .fl{
                     font-size: 12px;
                     line-height: @size35;
