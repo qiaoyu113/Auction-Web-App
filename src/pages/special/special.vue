@@ -632,7 +632,7 @@
                     padding-bottom: 0.2rem;
                     border-bottom: 2px solid black;
                     color: rgb(53, 60, 70);
-                    height: 1.07rem;
+                    height: 1.05rem;
                     display: block;
                     width: 60%;
                     margin: auto;

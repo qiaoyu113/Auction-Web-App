@@ -1668,10 +1668,11 @@
                         font-size: 12px;
                         font-weight:bold;
                         padding-top: @size15;
+                        color:rgb(51,51,51);
                     }
                     .title {
                         font-size: 12px;
-                        color: rgb(133, 133, 133);
+                        color:rgb(51,51,51);
                         padding-top: @size1;
                         overflow: hidden;
                         white-space: nowrap;
@@ -1679,7 +1680,7 @@
                     }
                     .number {
                         font-size: 10px;
-                        color: rgb(133, 133, 133);
+                        color:rgb(51,51,51);
                         padding: 0 0 @size25 0;
                         overflow: hidden;
                         white-space: nowrap;
@@ -1687,7 +1688,7 @@
                     }
                 }
                 .date{
-                    width:0.7rem;
+                    width:0.8rem;
                     position: absolute;
                     right:0;
                     top:0;
@@ -1876,7 +1877,7 @@
                         .price{
                             font-size: 12px;
                             font-weight: bold;
-                            margin-top: 0.04rem;
+                            margin-top: 0.05rem;
                         }
                         .title{
                             font-size: 10px;
@@ -1890,7 +1891,7 @@
                         .time{
                             font-size: 10px;
                             color: rgb(122, 122, 122);
-                            margin-top: 0.04rem;
+                            margin-top: 0.05rem;
                         }
                     }
                     .moneytime{
@@ -1902,9 +1903,10 @@
                             color:#7a7a7a;
                         }
                         .nowPrice{
-                            font-size: 16px;
+                            font-size: 12px;
                             color: #ED6506;
                             font-weight: bold;
+                            margin-bottom: 0.2rem;
                         }
                         .over{
                             /*padding-top: 0.15rem;*/
@@ -1920,7 +1922,7 @@
                                 height: .6rem;
                                 background: #000;
                                 border-radius: 3px;
-                                margin-top: .16rem;
+                                margin-top: .06rem;
                                 line-height: .6rem;
                                 font-size: .32rem;
                                 font-weight: 700;
@@ -2594,7 +2596,7 @@
             }
             .value1{
                 color: black;
-                font-size:  12px;
+                font-size:  10px;
                 margin-top:@size6;
                 margin-right: @size10;
             }
@@ -2983,11 +2985,11 @@
                     width: 1.46rem;
                     line-height:@size40;
                     font-size: 35px;
-                    color: red;
+                    color: rgb(236,105,65);
                     float: right;
                 }
                 .label{
-                    font-size: 12px;
+                    font-size: 10px;
                 }
                 .price{
                     font-size: 12px;
@@ -3002,13 +3004,21 @@
                 }
             }
             .value2{
+                /*float: left;*/
+                /*width: 5.4rem;*/
+                /*height: 100%;*/
+                /*line-height: @size45;*/
+                /*position: relative;*/
+                /*text-align: center;*/
+                /*padding-left: 0.5rem;*/
                 float: left;
-                width: 5.4rem;
-                height: 100%;
-                line-height: @size45;
+                width: 5.8rem;
                 position: relative;
+                padding-left: .5rem;
+                box-sizing: border-box;
+                height: 100%;
+                line-height: 1.2rem;
                 text-align: center;
-                padding-left: 0.5rem;
                 .nobtn1{
                     color:#E6E6E6 !important;
                 }
@@ -3063,7 +3073,7 @@
                     font-size: 12px;
                     width: 2.68rem;
                     font-weight: bold;
-                    color:#E85800;
+                    color:rgb(51,51,51);
                 }
             }
             .r-icon{

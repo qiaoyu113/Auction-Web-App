@@ -673,20 +673,21 @@
                             height: 3.47rem;
                         }
                         .money {
-                            font-size: 15px;
+                            font-size: 12px;
                             padding-top: @size15;
+                            color:rgb(51,51,51);
                         }
                         .title {
-                            font-size: 14px;
-                            color: rgb(133, 133, 133);
+                            font-size: 12px;
+                            color:rgb(51,51,51);
                             padding-top: @size1;
                             overflow: hidden;
                             white-space: nowrap;
                             text-overflow:ellipsis;
                         }
                         .number {
-                            font-size: 12px;
-                            color: rgb(133, 133, 133);
+                            font-size: 10px;
+                            color:rgb(51,51,51);
                             padding: 0 0 @size25 0;
                             overflow: hidden;
                             white-space: nowrap;
