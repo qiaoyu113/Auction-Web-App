@@ -2991,11 +2991,13 @@
                 }
                 .label{
                     font-size: 10px;
+                    color:rgb(51,51,51)
                 }
                 .price{
                     font-size: 12px;
                     width: 2.68rem;
                     font-weight: bold;
+                    color:rgb(51,51,51)
                 }
                 .price2{
                     font-size: 14px;
