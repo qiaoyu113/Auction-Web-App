@@ -844,11 +844,11 @@ import {commonService} from '../../service/commonService.js'
                     padding: @size3 @size2; 
                     margin-top:@size5; 
                     line-height: 0.50rem;
-                    font-size: @size12;
+                    font-size: 12px;
                     font-weight: bold;
                     color:rgb(51, 51, 51);
                     width: @size25;
-                    text-align: #a9aeb4;
+                    text-align: center;
                 }
                 
                 .colon{
@@ -1469,9 +1469,12 @@ import {commonService} from '../../service/commonService.js'
             color: gray;
         }
     }
+    .v_num{
+      border-bottom: 1px solid rgb(202, 209, 217);
+    }
     .num1{
 
-        border-top: 1px solid #a9aeb4;
+        border-top: 0px solid #a9aeb4;
         border-bottom: 1px solid rgb(130, 135, 140);
     }
    
@@ -1486,7 +1489,7 @@ import {commonService} from '../../service/commonService.js'
             border-left: 2px solid #a9aeb4;
             .line{
                 position: absolute;
-                left: -@size5;
+                left: -@size6;
                 top: @size26;
                 width: @size10;
                 height: @size10;
@@ -1495,7 +1498,7 @@ import {commonService} from '../../service/commonService.js'
                 z-index: 3000;
                   }
         .contents_box{
-            border-bottom: 1px solid #a9aeb4;
+            border-bottom: 1px solid rgb(202, 209, 217);
             text-align: left;
             // float: left;
             width:  7rem;
@@ -1513,7 +1516,7 @@ import {commonService} from '../../service/commonService.js'
          margin-top: @size26;
          .line{
             position: absolute;
-            left: -@size5;
+            left: -@size6;
             top: 0;
             background: #eb6100;
 

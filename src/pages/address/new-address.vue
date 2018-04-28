@@ -661,7 +661,7 @@ import {commonService} from '../../service/commonService.js'
         // margin-top: @size45;
         width:100%;
         height:3.7rem;
-        border-bottom:2px solid rgb(51, 51, 51);
+        border-bottom:2px solid rgb(53, 60, 70);
         padding:1.07rem 0.53rem;
         box-sizing: border-box;
         position: relative;

@@ -58,11 +58,11 @@
                 <img class="v_img" v-if="index!=2" src="../../assets/image/mycenter/zfb2.png" />
                 <div class="infoAlipay v_infoAlipay">支付宝充值</div>
             </div>
-            <div class="pay" @click="getIndex(3)" style="border-bottom: 1px solid #c7cacb;">
+            <div class="pay v_tubox" @click="getIndex(3)" style="border-bottom: 1px solid #c7cacb;">
                 <div :class="index==3 ? 'check' : 'check1'"><i class="iconfont icon-duihao"></i></div>
                 <!-- <i :class="index==3 ? 'background3' : ''" class="iconfont icon-icon_zhifubao"></i> -->
-                 <img class="v_img " v-if="index==3" src="../../assets/image/mycenter/xxzf4.png" />
-                <img class="v_img " v-if="index!=3" src="../../assets/image/mycenter/xxzf5.png" />
+                 <img class="v_img " v-if="index==3" src="../../assets/image/mycenter/xxzf.png" />
+                <img class="v_img " v-if="index!=3" src="../../assets/image/mycenter/xxzf2.png" />
                 <div class="infoAlipay v_infoAlipay">转账汇款</div>
             </div>
         </div>
@@ -748,7 +748,12 @@
             }
             .v_infoAlipay{
                 font-size: 12px;
+
             }
+        }
+        .v_tubox{
+             margin-left: 0;
+             padding-left: @size10;
         }
     }
     .prompt{

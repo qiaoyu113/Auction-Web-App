@@ -46,8 +46,8 @@
             <div class="pay v_pay" @click="getIndex(3)">
                 <div :class="index==3 ? 'check' : 'check1'"><i class="iconfont icon-duihao"></i></div>
                 <!-- <i :class="index==3 ? 'background3' : ''" class="iconfont icon-icon_zhifubao"></i> -->
-                <img class="v_img" v-if="index==3" src="../../assets/image/mycenter/xxzf.png" />
-                <img class="v_img" v-if="index!=3" src="../../assets/image/mycenter/xxzf2.png" />
+                <img class="v_img" v-if="index==3" src="../../assets/image/mycenter/xxzf4.png" />
+                <img class="v_img" v-if="index!=3" src="../../assets/image/mycenter/xxzf5.png" />
                 <div class="infoAlipay">提现至银行卡</div>
             </div>
         </div>

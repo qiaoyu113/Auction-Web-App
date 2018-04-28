@@ -486,12 +486,12 @@ import {commonService} from '../../service/commonService.js'
         position:fixed;
         bottom:0;
         width: 9.73rem;
-        height: 1.2rem;
+        height: 40px;
         box-sizing: border-box;
         margin:@size5; 
         border:2px solid rgb(53, 60, 70); 
         text-align: center;
-        line-height: 1.2rem;
+        line-height: 40px;
         font-size: 12px;
         span{
             font-weight: bold;

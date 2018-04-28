@@ -125,7 +125,7 @@
                  </div>
            </div>
         </div>
-        <div :class="isX ? 'gives':'give'"><p><a href="tel:4001887107">马上送拍</a></p></div>
+        <div :class="isX ? 'gives':'give'"><p><a href="tel:4001887107">我要送拍</a></p></div>
         </div>
         <!--联系客服-->
         <div class="talk" @click="openService()">
@@ -636,7 +636,7 @@
                 }
                 .fr{
                     margin-top: @size15;
-                    border: 1px solid rgb(202, 209, 217);
+                    border: 1px solid rgb(130, 135, 140);
                     margin-left: @size10;
                     background: white;
                     outline: none;

@@ -842,7 +842,7 @@
                     padding:0 0.14rem;
                     // box-sizing: border-box;
                     font-size: 12px;
-                    border-bottom:2px solid rgb(53, 60,70);
+                    border-bottom:3px solid rgb(53, 60,70);
                 }
                 .check{
                     color:#353535;
@@ -850,7 +850,7 @@
                     padding:0 0.14rem;
                     font-size: 12px;
                     // box-sizing: border-box;
-                    border-bottom:2px solid rgb(53, 60,70);
+                    border-bottom:3px solid rgb(53, 60,70);
 
                 }
             }
@@ -972,7 +972,7 @@
                 text-align: center;
                 font-size: 10px;
                 margin-top: 2rem;
-                padding-bottom: 1.3rem;
+                padding-bottom: 1.6rem;
 
                 a{
                   font-size: 10px;  
@@ -1000,7 +1000,7 @@
                 width:100%;
                 height:1.2rem;
                 line-height:1.2rem;
-                border-top:2px solid rgb(53, 60, 70);
+                border-top:1px solid rgb(53, 60, 70);
                 text-align: center;
                 font-size:12px;
                 background: #fff;

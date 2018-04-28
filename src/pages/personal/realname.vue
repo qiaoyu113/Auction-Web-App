@@ -637,7 +637,7 @@
             }
         }
         .picbox{
-            margin-top: @size15;
+            margin-top: @size25;
             
             .z-pic{
                 position: relative;
@@ -725,7 +725,7 @@
             }
         }
         .hit{
-            margin:1.45rem 0; 
+            margin:0.988rem 0; 
             p{
                 font-size: 10px;
                 padding-left: @size10;

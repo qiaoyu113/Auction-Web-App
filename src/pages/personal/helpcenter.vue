@@ -316,7 +316,7 @@
      height: 0.6rem;  
      padding:0 @size10 2px @size10;
      // margin: 
-     border-bottom:2px solid #353535;
+     border-bottom:2px solid rgb(53, 60, 70);
      // width: 9.3333rem;
      overflow: hidden;
      background: rgba(255, 255, 255,0);
@@ -363,7 +363,7 @@
             }
             .checked{
                 color:#353535;
-                border-bottom:4px solid #353535;
+                border-bottom:3px solid rgb(53, 60, 70);
             }
         }
     .text{

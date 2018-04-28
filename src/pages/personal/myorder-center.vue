@@ -792,12 +792,13 @@
                         box-sizing: border-box;
                         height: @size25;
                         background: white;
-                        border: 1px solid black;
+                        border: 1px solid rgb(130, 135, 140);
                         border-radius:3px;
                         padding: @size3 @size2; 
                         margin-top:@size5; 
                         line-height: 0.50rem;
                         font-size: 12px;
+                        color: rgb(51, 51, 51);
                         width: 24px;
                         text-align: center;
                         font-weight: bold;

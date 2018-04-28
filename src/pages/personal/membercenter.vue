@@ -382,7 +382,7 @@
       
         width:100%;
         height:3.7rem;
-        border-bottom:2px solid #353535;
+        border-bottom:2px solid rgb(53, 60, 70);
         padding:1.07rem 0.53rem;
         box-sizing: border-box;
         position: relative;
@@ -413,7 +413,7 @@
             height:0.6rem;
             line-height:0.6rem;
             position: absolute;
-            bottom:1px;
+            bottom:2px;
             box-sizing: border-box;
             .font{
                 color:rgb(153, 153, 153);
@@ -426,7 +426,7 @@
             }
             .checked{
                 color:#353535;
-                border-bottom:2px solid #353535;
+                border-bottom:3px solid rgb(53, 60, 70);
             }
         }
         

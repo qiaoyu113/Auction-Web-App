@@ -232,7 +232,7 @@
        }
      
        .botton{
-          height: @size45;
+          height: 40px;
           div{
             position: fixed;
             left: @size10;
@@ -240,12 +240,12 @@
             bottom: @size10;
             z-index: 999;
             // width: 100%;
-            
-            height: @size45;
+            box-sizing: border-box;
+            height: 40px;
             background: #fff;
             border: 2px solid rgb(53,60,70);
             text-align: center;
-            line-height: @size45;
+            line-height: 40px;
             font-size: 12px;
           }
        }
