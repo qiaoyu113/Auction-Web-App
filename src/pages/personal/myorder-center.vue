@@ -662,7 +662,7 @@
         z-index: 999;
         width: @size375;
         height: @size35;
-        border-bottom: 0.5px solid rgb(53, 60, 70);
+        border-bottom: 1px solid rgb(53, 60, 70);
         background: rgb(255, 255, 255);
         // position: fixed;
         // top: @size45;
@@ -707,7 +707,7 @@
             }
         }
         .check{
-            border-bottom:2px solid black;
+            border-bottom:3px solid rgb(53, 60, 70);
             color: rgb(51, 51, 51);
         }
     }
