@@ -43,6 +43,9 @@
                                         <span class="list" v-if="list === 1"><img src="../../assets/image/mycenter/rzIcon.png">质量认证</span>
                                         <span class="list" v-if="list === 2"><img src="../../assets/image/mycenter/rzIcon.png">作者认证</span>
                                         <span class="list" v-if="list === 3"><img src="../../assets/image/mycenter/rzIcon.png">专家认证</span>
+                                        <span class="list" v-if="list === 4"><img src="../../assets/image/mycenter/rzIcon.png">无理由退换</span>
+                                        <span class="list" v-if="list === 5"><img src="../../assets/image/mycenter/rzIcon.png">送货上门</span>
+                                        <span class="list" v-if="list === 6"><img src="../../assets/image/mycenter/rzIcon.png">权威鉴定</span>
                                     </span>
                                 </div>
                                 <div class="info">
