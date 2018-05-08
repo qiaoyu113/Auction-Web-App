@@ -36,7 +36,7 @@
                 <i class="iconfont icon-icon_weixin"></i>微信
             </div>
             <!--联系客服-->
-            <div class="talk" v-if="wximg!=null"><a href="tel:4001887107"><span>登录遇到问题，联系客服</span></a></div>
+             <div class="v_kefu vv_kefu" v-if="wximg!=null"><a href="javaScript:;" @click="resetpassword()">忘记密码</a> | <a href="tel:4001887107">联系客服</a></div>
             <!--登录和提示-->
             <div class="v_kefu" v-if="wximg==null"><a href="javaScript:;" @click="resetpassword()">忘记密码</a> | <a href="tel:4001887107">联系客服</a></div>
             <div :class="isX ? 'bottoms':'bottom'">
@@ -981,6 +981,9 @@
                 }
                
             }
+        .vv_kefu{
+             margin-top: 2.58667rem;
+        }
         .bottom{
             position: fixed;
             left:0;

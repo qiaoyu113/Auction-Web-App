@@ -125,11 +125,11 @@
 <input type="text" name="start_date" id="start_date" v-model="startTime" placeholder="选择开始日期" readonly="readonly" /> -->
 <!--</div>-->
         <!--联系客服-->
-        <div class="talk" @click="openService()">
+      <!--   <div class="talk" @click="openService()">
             <img src="../../assets/image/mycenter/icon5.png"/>
-        </div>
+        </div> -->
         <!--客户服务-->
-        <div class="serviceBox" v-if="ServiceBox">
+      <!--   <div class="serviceBox" v-if="ServiceBox">
             <div class="serviceClose" @click="closeService()">×</div>
             <div class="serviceTop">
                 <h2>ASSISTANCE</h2>
@@ -159,7 +159,7 @@
                 <p class="p">长按识别二维码</p>
             </div>
         </div>
-        <div class="serviceBk" v-if="ServiceBox"></div>
+        <div class="serviceBk" v-if="ServiceBox"></div> -->
    </div>
 </template>
 
