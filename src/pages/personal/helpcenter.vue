@@ -5,7 +5,7 @@
     <!-- 测试~~~~~~~~~~ -->
     <!-- 帮助中心 -->
     <div class="helpcenter" id="" v-set-title="title">
-        
+        <div class="v_helpcenter">
         <!-- <div class="header">传家</div> -->
         <div class="content">
             <div class="loginBox">
@@ -39,6 +39,7 @@
                 </p> -->
             </div>
         </div>
+         </div>
         <!--联系客服-->
         <div class="talk" @click="openService()">
             <img src="../../assets/image/mycenter/icon5.png"/>
@@ -75,6 +76,7 @@
             </div>
         </div>
         <div class="serviceBk" v-if="ServiceBox"></div>
+       
     </div>
 </template>
 
@@ -116,10 +118,14 @@
             },
         },
         mounted: function() {
-            common.onMove('.helpcenter')
+
+            
             common.onMove2('.menu')
+
            this.getDoctype()
            this.orderroute()
+           common.onMove('.v_helpcenter')
+
         },
         methods: {
             //打开客服
@@ -155,6 +161,7 @@
                   commonService.getDoctype({type:1}).then(function(res){
                     if(res.data.code==200){
                       that.datas=res.data.datas
+                      
                     }
                   
                  }) 
@@ -171,12 +178,17 @@
     @import url('../../assets/css/base.less');
     @import url('../../assets/css/icon/iconfont.css');
     .helpcenter{
-           position: fixed;
+        .v_helpcenter{
+          position: fixed;
           left: 0;
           right: 0;
-          top: 0;
+          top: 0px;
+          bottom: 0px;
+          min-height: 110%;
           overflow-y: scroll;
-          bottom: 0;
+          
+        }
+          
         .talk{
             width: 1rem;
             height: 0.9rem;
@@ -385,6 +397,7 @@
 
         }
         .textbox{
+             min-height: 76%;
             img{
                 max-width: 100%;
                 height: auto!important;

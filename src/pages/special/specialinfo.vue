@@ -625,6 +625,7 @@
             .speCont{
                 padding: @size20 @size20 @size15 @size20;
                 text-align: left;
+                min-height: 80%;
                 img{
                     width:100% !important;
                     height: auto !important;
