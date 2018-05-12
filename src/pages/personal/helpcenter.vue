@@ -30,7 +30,7 @@
                 <div class="tit">保证金说明</div>
                 <p class="txt">为了维护拍卖交易秩序，保障平台用户的合法权益，以下规则请大家务必遵守</p>
             </div> -->
-            <div class="box" v-html="lists.content">
+            <div class="textbox" v-html="lists.content">
 
          <!--        <div class="tit">1.保证金金额</div>
                 <p class="txt">为了维护拍卖交易秩序，保障平台用户的合法权益，以下规则请大家务必遵守为了维护拍卖交易秩序，保障平台用户的合法权益，以下规则请大家务必遵守
@@ -381,6 +381,13 @@
             .txt{
                 font-size: @size11;
                 color: rgb(153, 153, 153);
+            }
+
+        }
+        .textbox{
+            img{
+                max-width: 100%;
+                height: auto!important;
             }
         }
     }
