@@ -33,7 +33,11 @@
             <div  v-if='index==1'>
                  <div class="v_block" v-for="list in bankCard" >
                    <div class="v_rows clearfix">
-                     <p class="v_rows_l"><i class="iconfont icon-duihao"></i><span>银行账户</span></p>
+                     <p class="v_rows_l"><i class="iconfont icon-duihao" v-if="list.bank=='农业银行'"></i>
+                      <img src="../../assets/image/mycenter/yhjs.png" v-if="list.bank=='建设银行'"/>
+                      <img src="../../assets/image/mycenter/yhzs.png" v-if="list.bank=='招商银行'"/>
+                      <img src="../../assets/image/mycenter/yhgs.png" v-if="list.bank=='工商银行'"/>
+                     <span>银行账户</span></p>
                      <div class="v_rows_con">官方</div>
                      <div class="v_rows_r v_Hook" :class="bankCardId==list.id?'v_id':''" @click="bankId(list.id,list.cardNo)"><i class="iconfont icon-duihao"></i></div>
                    </div>
@@ -257,7 +261,7 @@ import {commonService} from '../../service/commonService.js'
                let that = this
                commonService.getBankCards().then(function(res){
                 that.bankCard=res.data.datas
-                  // console.log(res)
+                  console.log(that.bankCard)
                  })
             },
             //提交申请表
@@ -459,6 +463,11 @@ import {commonService} from '../../service/commonService.js'
               i{
                 font-size: 14px;
                 line-height: 0.9rem;
+
+              }
+              img{
+                width: 0.6rem;
+                margin-top: 0.15rem;
 
               }
               span{
