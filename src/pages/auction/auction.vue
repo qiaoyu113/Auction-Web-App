@@ -610,7 +610,7 @@
                 let that = this;
                 let stompClient = null;
 //                let socket = new SockJS('http://shik.s1.natapp.cc/auction');
-                let socket = new SockJS('http://api.sundayauction.cn/auction');
+                let socket = new SockJS('http://api.dimanche.net.cn/auction');
                 stompClient = Stomp.over(socket);
                 stompClient.connect({}, function(frame) {
                     // 2.有人出价后后台会回调这里

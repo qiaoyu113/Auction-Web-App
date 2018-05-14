@@ -163,7 +163,7 @@
                 img1:'',
                 img2:'',
                 rz:'',
-                imgurl:'http://api.sundayauction.cn/files',
+                imgurl:'http://api.dimanche.net.cn/files',
                 ServiceBox:false,
                 v_html:'',
             }
@@ -192,7 +192,7 @@
                 return this.$store.state.homeStore.noticelist || []
             },
              pingjie(){
-              return "http://api.sundayauction.cn/files/base64?base64Img="+this.base+"&width="+this.width+"&height="+this.height
+              return "http://api.dimanche.net.cn/files/base64?base64Img="+this.base+"&width="+this.width+"&height="+this.height
             },
             picHead() {
                 return this.$store.state.picHead

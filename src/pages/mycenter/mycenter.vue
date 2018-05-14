@@ -187,7 +187,7 @@
                 radio:'1',
                 startTime:'',
                 // date: null,
-                imgurl:'http://api.sundayauction.cn/files',
+                imgurl:'http://api.dimanche.net.cn/files',
                 imageUrl:'',
                 imgler:'',
                 ServiceBox:false,

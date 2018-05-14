@@ -12,7 +12,7 @@ import homeStore from './modules/homeStore'
 const store = new Vuex.Store({
     // 定义状态
     state: {
-        picHead:'http://resource.sundayauction.cn/',
+        picHead:'http://resource.dimanche.net.cn/',
         indexLogo:'',
         indexName:'',
         fromPath:['home'],
