@@ -57,7 +57,7 @@
         width:100%;
         height:100%;
         background: #000;
-        opacity:0.18;
+        opacity:0;
         position: absolute;
         top: 0;
     }
