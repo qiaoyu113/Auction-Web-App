@@ -234,8 +234,9 @@
         .head{
             width:100%;
             height: @size40;
+            overflow: hidden;
             border-bottom: 1px solid rgb(53,60,70);
-            padding-bottom: 1px;
+            // padding-bottom: 1px;
             position: fixed;
             top:0;
             background:#fff;
@@ -253,7 +254,8 @@
                 .show{
                     color: #333333;
                     border-bottom: 2px solid rgb(53,60,70);
-                    height: 1.06rem;
+                    height: @size41;
+                    box-sizing: border-box;
                     display: inline-block;
                     padding: 0 0.16rem;
                     font-size:12px;

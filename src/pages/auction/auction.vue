@@ -1654,11 +1654,11 @@
         .sell-more{
             box-sizing: border-box;
             text-align: center;
-            margin: @size5;
+            margin: @size5 0.2993rem;
             .sellList {
-                width: 4.49rem;
+                width: 4.57rem;
                 float: left;
-                margin: 0.2rem 0.15rem;
+                margin: 0.2rem 0.065rem;
                 position: relative;
                 .pic {
                     width: 100%;

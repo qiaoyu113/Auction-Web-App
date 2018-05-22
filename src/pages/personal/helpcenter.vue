@@ -25,7 +25,7 @@
             </div>
             </div>
         <div class="text" v-for="lists in datas" v-if="lists.order==order">
-            <div class="time">更新时间：{{lists.createTime | stampFormate}}</div>
+            <!-- <div class="time">更新时间：{{lists.createTime | stampFormate}}</div> -->
          <!--    <div class="box">
                 <div class="tit">保证金说明</div>
                 <p class="txt">为了维护拍卖交易秩序，保障平台用户的合法权益，以下规则请大家务必遵守</p>
@@ -120,11 +120,19 @@
         mounted: function() {
 
             
-            common.onMove2('.menu')
-
+           
+           // common.onMove('.v_helpcenter')
            this.getDoctype()
            this.orderroute()
-           common.onMove('.v_helpcenter')
+           document.body.addEventListener('touchmove', function (event) {
+            // if (!evt._isScroller) {
+                event.returnValue = true;
+            // }
+        },false)
+          
+            // document.body.addEventListener('touchmove', function(e) {
+            //         e.preventDefault()
+            //     },false)
 
         },
         methods: {
@@ -161,7 +169,10 @@
                   commonService.getDoctype({type:1}).then(function(res){
                     if(res.data.code==200){
                       that.datas=res.data.datas
-                      
+                       setTimeout(function(){
+                            // common.onMove('.v_helpcenter')
+                            // common.onMove2('.menu')
+                       },0)
                     }
                   
                  }) 
@@ -179,13 +190,13 @@
     @import url('../../assets/css/icon/iconfont.css');
     .helpcenter{
         .v_helpcenter{
-          position: fixed;
-          left: 0;
-          right: 0;
-          top: 0px;
-          bottom: 0px;
-          min-height: 110%;
-          overflow-y: scroll;
+          // position: fixed;
+          // left: 0;
+          // right: 0;
+          // top: 0px;
+          // bottom: 0px;
+          // min-height: 110%;
+          // overflow-y: scroll;
           
         }
           
@@ -379,7 +390,7 @@
             }
         }
     .text{
-        padding: 0 @size20;
+        padding: 0 @size20 @size50;
         .time{
             text-align: right;
             margin-top: @size40;
@@ -394,10 +405,10 @@
                 font-size: @size11;
                 color: rgb(153, 153, 153);
             }
-
         }
         .textbox{
-             min-height: 76%;
+             // min-height: 1000px;
+             margin-top: 30px;
             img{
                 max-width: 100%;
                 height: auto!important;

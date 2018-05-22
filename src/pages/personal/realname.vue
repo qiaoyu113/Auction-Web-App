@@ -39,7 +39,8 @@
                       :on-success="handleAvatarSuccess"
                       :before-upload="beforeAvatarUpload">
                       <img v-if="imageUrl" :src="imageUrl" class="avatar">
-                      <i v-else class="el-icon-plus avatar-uploader-icon"></i>
+                      <img class="v_iimg" src="../../assets/image/mycenter/zm.png" />
+                      <!-- <i v-else class="el-icon-plus avatar-uploader-icon"></i> -->
                     </el-upload>
                 <div class="hig" v-if="authFrontPic!=''" @click="shuchu()"><i class="iconfont icon-closeicon"></i></div>
                   <p>身份证正面照</p>
@@ -54,7 +55,8 @@
                       :on-success="handleAvatarSuccess2"
                       :before-upload="beforeAvatarUpload2">
                       <img v-if="imageUrl2" :src="imageUrl2" class="avatar">
-                      <i v-else class="el-icon-plus avatar-uploader-icon"></i>
+                      <img class="v_iimg" src="../../assets/image/mycenter/bm.png" />
+                      <!-- <i v-else class="el-icon-plus avatar-uploader-icon"></i> -->
                     </el-upload>
                 <div class="hig" v-if="authBackPic!=''" @click="shuchu2()"><i class="iconfont icon-closeicon"></i></div>
                   <p>身份证背面照</p>
@@ -99,6 +101,19 @@
                     <span>2.证件背面照</span>
                 </div>
         </div>
+        </div>
+         <div class="v_modaltou" ref="v_modaltou" v-if="v_modal">
+           <div class="v_box">
+                  <div class="v_box_top" @click="heigorder()"><i class="iconfont icon-closeicon"></i></div>
+                 <p class="v_box_p">FAIL</p>
+
+                 <p>认证失败</p>
+                 <p  class="v_box_img">{{fail}}</p>
+                 <!-- <div><img src="../../assets/image/mycenter/scy.png" /></div> -->
+                 <div class="v_button" @click='heigorder()'> 
+                     确定
+                 </div>
+           </div>
         </div>
                 <!--联系客服-->
         <div class="talk" @click="openService()">
@@ -165,6 +180,8 @@
                 rz:'',
                 imgurl:'http://api.dimanche.net.cn/files',
                 ServiceBox:false,
+                v_modal:false,
+                fail:'',
                 v_html:'',
             }
         },
@@ -207,6 +224,16 @@
          
         },
         methods: {
+            // 取消删除
+            heigorder:function(){
+                   this.v_modal=false
+                   
+            },
+            // 删除订单
+            deleteorder:function(){
+                this.v_modal=true
+                
+            },
           
              //打开客服
             openService(){
@@ -242,7 +269,9 @@
                     if(res.data.datas!=null){
                         that.rz=res.data.datas
                         if(that.rz.authStatus==3){
-                             that.prompt="认证失败，" + that.rz.varifyContent
+                             // that.prompt="认证失败，" + that.rz.varifyContent
+                               that.fail=that.rz.varifyContent
+                               that.deleteorder()
                               that.name=''
                               that.namecard=''
                               that.authFrontPic=''
@@ -394,20 +423,32 @@
             let that=this;
 
             if(that.name==''){
-                 that.prompt="真实姓名不能为空"
+                 that.v_html="真实姓名不能为空"
+                  setTimeout(() => { 
+                                    this.v_html = ''
+                                      },2000) 
                  
                  return false
             }
             if(that.namecard==''){
-                 that.prompt="身份证号不能为空"
+                 that.v_html="身份证号不能为空"
+                 setTimeout(() => { 
+                                    this.v_html = ''
+                                      },2000) 
                  return false
             }
             if(that.authFrontPic==''){
-                that.prompt="身份证正面照不能为空"
+                that.v_html="身份证正面照不能为空"
+                setTimeout(() => { 
+                                    this.v_html = ''
+                                      },2000) 
                 return false
             }
             if(that.authBackPic==''){
-                that.prompt="身份证反面照不能为空"
+                that.v_html="身份证反面照不能为空"
+                setTimeout(() => { 
+                                    this.v_html = ''
+                                      },2000) 
                 return false
             }
 
@@ -415,8 +456,10 @@
                        if(res.data.code==200){
                            that.getAuths()
                        }else{
-                        that.prompt=res.data.message;
-
+                        that.v_html=res.data.message;
+                        setTimeout(() => { 
+                                    this.v_html = ''
+                                      },2000) 
                        }
                     // that.url='http://test.resource.vjuzhen.com/'+ res.data.datas
             })
@@ -696,6 +739,10 @@
                     
 
                 }
+                .avatar-uploader .v_iimg{
+                     width: 1.7066rem;
+                     margin-top:@size30;
+                }
                   .avatar-uploader .el-upload {
                     // border: 1px  #d9d9d9;
                     // border-radius: 6px;
@@ -780,6 +827,72 @@
         }
     }
     // 弹窗样式
+    .v_modaltou{
+          position: fixed;
+          left: 0;
+          top: 0;
+          right: 0;
+          bottom: 0;
+          width: 100%;
+          height: 100%;
+          z-index: 9999;
+          background: rgba(0,0,0,0.5);
+         
+          
+          .v_box{
+            width: 6.5rem;
+            height: 6.6rem;
+            background: #fff;
+            margin: 4rem auto 0; 
+            position: relative;
+            .v_box_top{
+                 position: absolute;
+                 right: 0;
+                 top: 0;
+                 width: @size30;
+                 height: @size30;
+                 background: #eb6100;
+                 i{
+                    font-size: @size30;
+                    color:#fff;
+                 }
+            }
+            .v_box_p{
+                 padding-top: @size50;
+                 font-size: 14px;
+                 color: rgb(57, 57, 57);
+                 font-weight: 700;
+            }
+            .v_box_img{
+                 margin:@size24 0 @size14; 
+                 width: 100%;
+                 img{
+                    width: @size40;
+                    height: @size40;
+                    margin-left: 2.72rem;
+                 }
+            }
+            p{
+                font-size: 14px;
+                text-align: center;
+                color: rgb(98, 98, 98);
+                // padding:1rem 0.5rem;
+                
+            }
+            .v_button{
+               position: absolute;
+               bottom: 0;
+               left: 0;
+               height: @size44;
+               width: 100%;
+               border-top:1px solid #353c47;
+               text-align: center;
+               line-height: @size44;
+               font-size: 14px;
+             }
+          }
+
+    }
     .shadow{
         width: 100%;
         height: 100%;

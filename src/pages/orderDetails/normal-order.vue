@@ -163,7 +163,7 @@
             <div class="value">
                 客&nbsp;&nbsp;&nbsp;服
             </div>
-            <div class="r-icon"><img src="../../assets/image/mycenter/usre4.png" /><p>售后</p></div></a>
+            <div class="r-icon"><img src="../../assets/image/mycenter/souhou.png" /><p>售后</p></div></a>
         </div>
      <div class="logistics">
         <!-- <div class="header">传家</div> -->
@@ -228,11 +228,11 @@
 
         <div class="payOK"></div>
         <!--联系客服-->
-        <div class="talk" @click="openService()">
+     <!--    <div class="talk" @click="openService()">
             <img src="../../assets/image/mycenter/icon5.png"/>
-        </div>
+        </div> -->
         <!--客户服务-->
-        <div class="serviceBox" v-if="ServiceBox">
+     <!--    <div class="serviceBox" v-if="ServiceBox">
             <div class="serviceClose" @click="closeService()">×</div>
             <div class="serviceTop">
                 <h2>ASSISTANCE</h2>
@@ -261,8 +261,8 @@
                 <p>联系微信客服</p>
                 <p class="p">长按识别二维码</p>
             </div>
-        </div>
-        <div class="serviceBk" v-if="ServiceBox"></div>
+        </div> -->
+        <!-- <div class="serviceBk" v-if="ServiceBox"></div> -->
     </div>
 </template>
 
