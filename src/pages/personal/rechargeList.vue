@@ -466,8 +466,8 @@ import {commonService} from '../../service/commonService.js'
 
               }
               img{
-                width: 0.6rem;
-                margin-top: 0.15rem;
+                width: 0.46rem;
+                margin-top: 0.2rem;
 
               }
               span{
