@@ -17,9 +17,9 @@
                     <div class="sell-list">
                         <div class="swiper-container sell-pic">
                             <div class="swiper-wrapper">
-                                <div class="swiper-slide" v-for="item in img">
+                                <div class="swiper-slide" v-for="(item,index) in img">
                                     <a href='javascript:void(0)'>
-                                        <img :src="$store.state.picHead + item" >
+                                        <img :src="$store.state.picHead + item"  @click="showImage(index)">
                                     </a>
                                 </div>
                             </div>
@@ -432,6 +432,23 @@
 
         <!--分享提示-->
         <div class="shareBox" v-if="shareHint">可以使用浏览器分享按钮分享给好友哦</div>
+
+        <!--图片展示-->
+        <div class="ImageShowBox" v-if="ImageShowData">
+            <div class="imageShowBoxClose" @click="imageClose">×</div>
+            <div class="swiper-container2 sell-pic">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide" v-for="item in img">
+                        <a href='javascript:void(0)'>
+                            <img class="imgShowAn" :src="$store.state.picHead + item">
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--<a href='javascript:void(0)' v-if="ImageShowData">-->
+            <!--<img class="imgShowAn"  :src="ImageShows"/>-->
+        <!--</a>-->
     </div>
 </template>
 
@@ -499,6 +516,8 @@
                 shareHint:false,
                 goMyNum:'0',
                 isX:false,
+                ImageShows:'',//展示图片样式
+                ImageShowData:false,//打开图片展示
             }
         },
         components:{'z-foot':item,'z-info':info,'z-record':record,'z-payment':payment},
@@ -549,6 +568,20 @@
             that.bugShow = false;
         },
         methods: {
+            //展示图片
+            showImage:function(index){
+                let that = this;
+                that.ImageShows = that.img;
+                that.ImageShowData = true;
+                console.log(index)
+                that.$nextTick(function () {
+                    that.onswiper2(index);
+                });
+            },
+            imageClose:function(){
+                let that = this;
+                that.ImageShowData = false;
+            },
             isIphoneX(){
                 return /iphone/gi.test(navigator.userAgent) && (screen.height == 812 && screen.width == 375)
             },
@@ -939,6 +972,16 @@
                             }
                         },
                     },
+                });
+            },
+            onswiper2(num){
+                let that = this;
+                console.log(num)
+                let swiper = new Swiper('.swiper-container2', {
+                    loop: true,
+                    speed: 400,
+                    autoplay: false,
+                    initialSlide :num,
                 });
             },
             //返回上一层
@@ -1357,6 +1400,48 @@
     @import url("../../assets/css/common/mescroll.min.css");
     @import '../../assets/css/common/swiper.min.css';
     #auction{
+        .ImageShowBox{
+            width:100%;
+            height:100%;
+            position: fixed;
+            background:#000;
+            top:0;
+            left:0;
+            bottom:0;
+            right:0;
+            margin:auto;
+            z-index:1000;
+            .imageShowBoxClose{
+                width:20px;
+                height:20px;
+                position: fixed;
+                right:0.3rem;
+                top:0.3rem;
+                font-size:28px;
+                color:#fff;
+                z-index:2000;
+            }
+            .imgShowAn{
+                width:100%;
+                position: absolute;
+                top:0;
+                left:0;
+                right:0;
+                bottom:0;
+                margin:auto;
+                z-index: 1100;
+                animation-fill-mode:forwards;
+                animation: shows2 0.3s linear 0s 1 forwards;
+            }
+        }
+        @keyframes shows2 {
+            0% {
+                top:-100%;
+            }
+            100% {
+                top:0%;
+            }
+        }
         .shareBox{
             width:6rem;
             height:2rem;
