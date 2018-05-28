@@ -976,7 +976,6 @@
             },
             onswiper2(num){
                 let that = this;
-                console.log(num)
                 let swiper = new Swiper('.swiper-container2', {
                     loop: true,
                     speed: 400,
