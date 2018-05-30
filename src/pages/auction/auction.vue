@@ -16,11 +16,11 @@
                 <div>
                     <div class="sell-list">
                         <div class="swiper-container sell-pic">
-                            <div class="swiper-wrapper">
-                                <div class="swiper-slide" v-for="(item,index) in img">
-                                    <a href='javascript:void(0)'>
-                                        <img :src="$store.state.picHead + item"  @click="showImage(index)">
-                                    </a>
+                            <div class="swiper-wrapper" @click="showImage(index)">
+                                <div class="swiper-slide" v-for="(item,index) in img" >
+                                    <!--<a href='javascript:void(0)'>-->
+                                        <img :src="$store.state.picHead + item">
+                                    <!--</a>-->
                                 </div>
                             </div>
                             <div class="dian">
@@ -434,8 +434,8 @@
         <div class="shareBox" v-if="shareHint">可以使用浏览器分享按钮分享给好友哦</div>
 
         <!--图片展示-->
-        <div class="ImageShowBox" v-if="ImageShowData">
-            <div class="imageShowBoxClose" @click="imageClose">×</div>
+        <div class="ImageShowBox" v-if="ImageShowData" @click="imageClose">
+            <!--<div class="imageShowBoxClose" @click="imageClose">×</div>-->
             <div class="swiper-container2 sell-pic">
                 <div class="swiper-wrapper">
                     <div class="swiper-slide" v-for="item in img">
@@ -518,6 +518,7 @@
                 isX:false,
                 ImageShows:'',//展示图片样式
                 ImageShowData:false,//打开图片展示
+                swiper:''//实例化
             }
         },
         components:{'z-foot':item,'z-info':info,'z-record':record,'z-payment':payment},
@@ -573,9 +574,9 @@
                 let that = this;
                 that.ImageShows = that.img;
                 that.ImageShowData = true;
-                console.log(index)
+                let indexs = that.swiper.activeIndex - 1
                 that.$nextTick(function () {
-                    that.onswiper2(index);
+                    that.onswiper2(indexs);
                 });
             },
             imageClose:function(){
@@ -951,7 +952,7 @@
             //swiper初始化
             onswiper(){
                 let that = this;
-                let swiper = new Swiper('.swiper-container', {
+                that.swiper = new Swiper('.swiper-container', {
                     loop: true,
                     speed: 400,
                     autoplay: true,
