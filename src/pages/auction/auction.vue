@@ -16,7 +16,7 @@
                 <div>
                     <div class="sell-list">
                         <div class="swiper-container sell-pic">
-                            <div class="swiper-wrapper" @click="showImage(index)">
+                            <div class="swiper-wrapper" @click="showImage()">
                                 <div class="swiper-slide" v-for="(item,index) in img" >
                                     <!--<a href='javascript:void(0)'>-->
                                         <img :src="$store.state.picHead + item">
@@ -440,7 +440,9 @@
                 <div class="swiper-wrapper">
                     <div class="swiper-slide" v-for="item in img">
                         <a href='javascript:void(0)'>
-                            <img class="imgShowAn" :src="$store.state.picHead + item">
+                            <div class="swiper-zoom-container">
+                                <img class="imgShowAn" :src="$store.state.picHead + item">
+                            </div>
                         </a>
                     </div>
                 </div>
@@ -570,11 +572,17 @@
         },
         methods: {
             //展示图片
-            showImage:function(index){
+            showImage:function(){
                 let that = this;
                 that.ImageShows = that.img;
                 that.ImageShowData = true;
-                let indexs = that.swiper.activeIndex - 1
+                let indexs = that.swiper.realIndex;
+//                console.log(indexs)
+//                if(indexs == -1) {
+//                    indexs = 0;
+//                }else if(indexs == 0){
+//                    indexs = 0;
+//                }
                 that.$nextTick(function () {
                     that.onswiper2(indexs);
                 });
@@ -978,10 +986,11 @@
             onswiper2(num){
                 let that = this;
                 let swiper = new Swiper('.swiper-container2', {
-                    loop: true,
+                    loop: false,
                     speed: 400,
                     autoplay: false,
                     initialSlide :num,
+                    zoom : true,
                 });
             },
             //返回上一层
@@ -1423,6 +1432,7 @@
             }
             .imgShowAn{
                 width:100%;
+                height:7.5rem;
                 position: absolute;
                 top:0;
                 left:0;
