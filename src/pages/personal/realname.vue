@@ -93,8 +93,8 @@
                     <p class="removeCon">请保持照片清晰，以便审核</p>
                 </div>
                 <div class="picbox clearfix">
-                    <div class="pic"><img src="../../assets/image/mycenter/authFrontPic.png"></div>
-                    <div class="pic"><img src="../../assets/image/mycenter/authBackPic.png"></div>
+                    <div class="pic"><img src="../../assets/image/mycenter/authFrontPic.jpg"></div>
+                    <div class="pic"><img src="../../assets/image/mycenter/authBackPic.jpg"></div>
                 </div>
                 <div class="font">
                     <span>1.证件正面照</span>
