@@ -990,7 +990,7 @@
                     speed: 400,
                     autoplay: false,
                     initialSlide :num,
-                    zoom : true,
+//                    zoom : true,
                 });
             },
             //返回上一层
