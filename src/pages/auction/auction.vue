@@ -990,7 +990,7 @@
                     speed: 400,
                     autoplay: false,
                     initialSlide :num,
-//                    zoom : true,
+                    zoom : true,
                 });
             },
             //返回上一层
@@ -1440,8 +1440,8 @@
                 bottom:0;
                 margin:auto;
                 z-index: 1100;
-                animation-fill-mode:forwards;
-                animation: shows2 0.3s linear 0s 1 forwards;
+                /*animation-fill-mode:forwards;*/
+                /*animation: shows2 0.3s linear 0s 1 forwards;*/
             }
         }
         @keyframes shows2 {

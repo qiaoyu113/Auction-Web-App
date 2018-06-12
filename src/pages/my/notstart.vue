@@ -163,6 +163,7 @@
                                     that.h = '00'
                                     that.m = '00'
                                     that.s = '00'
+//                                    boxlist[i].EndTimes = that.day + ':' + that.h + ':' + that.m + ':' + that.s;
                                     that.meScroll()
                                 }
                             },1000)
