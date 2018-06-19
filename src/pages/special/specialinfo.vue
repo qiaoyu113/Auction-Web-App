@@ -155,6 +155,7 @@
                 let that = this;
                 let url = window.location.href;
                 let html = document.getElementById("html").innerText;
+                commonService.putInsertion({businessType:3,dimensionType:1,businessTypeId:that.id,businessName:that.details.title}).then(function(res){})
                 commonService.getWxShare({url:url}).then(function(res){
                     if(res.data.code === 200){
                         let wxMore = res.data.datas;
@@ -335,7 +336,7 @@
                     if(res.data.code === 200){
                         that.details = res.data.datas;
                         that.details.createTime = common.getFormatOfDate(that.details.createTime,'yyyy.MM.dd h:m:s')
-                        if(that.details.auctionIds != null){
+                        if(that.details.auctionIds != null && that.details.auctionIds.length != 0){
                             that.recoCh = true;
                             that.meScroll();
                         }else{
