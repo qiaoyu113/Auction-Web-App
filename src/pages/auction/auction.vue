@@ -1172,8 +1172,8 @@
                                 that.userWallet = Math.round(res.data.datas.user.wallet.availableMoney/100)
                             }
                             that.dis2Show = true;
-
-                            if(that.deposit*1 < that.userWallet*1){
+ 
+                            if(that.deposit*1 <= that.userWallet*1){
                                 that.walletDate = true;
                                 that.getIndex(0)
                             }else{
