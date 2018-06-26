@@ -302,7 +302,7 @@
             const isJPG2 = file.type === 'image/jpeg';
             const isJPG3 = file.type === 'image/png';
             const isJPG4 = file.type === 'image/bmp';
-            const isLt2M = file.size / 1024 / 1024 < 2;
+            const isLt2M = file.size / 1024 / 1024 < 5;
        
          
             // var reader = new FileReader();
@@ -349,7 +349,7 @@
                                       },2000) 
             }
             if (!isLt2M) {
-              this.v_html='上传图片大小不能超过 2MB!';
+              this.v_html='上传图片大小不能超过 5MB!';
               setTimeout(() => { 
                                     this.v_html = ''
                                       },2000) 
@@ -365,7 +365,7 @@
             const isJPG2 = file.type === 'image/jpeg';
             const isJPG3 = file.type === 'image/png';
             const isJPG4 = file.type === 'image/bmp';
-            const isLt2M = file.size / 1024 / 1024 < 2;
+            const isLt2M = file.size / 1024 / 1024 < 5;
             // var reader = new FileReader();
             // var that = this;
             //  reader.readAsDataURL(file);
@@ -401,7 +401,7 @@
                                       },2000) 
             }
             if (!isLt2M) {
-              this.v_html='上传图片大小不能超过 2MB!';
+              this.v_html='上传图片大小不能超过 5MB!';
               setTimeout(() => { 
                                     this.v_html = ''
                                       },2000) 
