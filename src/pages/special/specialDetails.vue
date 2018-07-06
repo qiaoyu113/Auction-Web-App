@@ -76,7 +76,7 @@
                                 <a href='javascript:void(0)'>
                                     <img :src="$store.state.picHead + list.picItems[0]"/>
                                 </a>
-                                <div class="money">{{reversedNum(list.currentPrice)}} CYN</div>
+                                <div class="money">{{reversedNum(list.currentPrice)}} CNY</div>
                                 <div class="title">{{list.title}}</div>
                                 <div class="number">LOT-{{list.completeNo}}</div>
                             </div>

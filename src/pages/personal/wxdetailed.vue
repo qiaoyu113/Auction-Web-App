@@ -46,7 +46,7 @@
                     </div>
                 </div>
                 <div class="info"><span>状态</span>
-                    <div class="infoClose">交易关闭</div>
+                    <div class="infoClose">已完成</div>
                   <!--   <div class="infoClose" v-if="list.status==1">提现中</div>
                     <div class="infoClose" v-if="list.status==2">交易关闭</div>
                     <div class="infoClose" v-if="list.status==3">交易失败</div> -->

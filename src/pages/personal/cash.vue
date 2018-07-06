@@ -29,13 +29,13 @@
             </div>
             <div class="info"><span>提现方式</span></div>
             <div class="bor"></div>
-        <!--     <div class="pay" @click="getIndex(1)" v-if="wxLogin==true">
+            <div class="pay" @click="getIndex(1)" v-if="wxLogin==true">
                 <div :class="index==1 ? 'check' : 'check1'"><i class="iconfont icon-duihao"></i></div>
                      <img class="v_img" v-if="index==1" src="../../assets/image/mycenter/wxzf.png" />
                 <img class="v_img" v-if="index!=1" src="../../assets/image/mycenter/wxzf2.png" />
                  
                     <div class="infoAlipay">提现至微信</div>
-            </div> -->
+            </div>
             <div class="pay" @click="getIndex(2)" v-if="wxLogin==false">
                 <div :class="index==2 ? 'check' : 'check1'"><i class="iconfont icon-duihao"></i></div>
                 <img class="v_img" v-if="index==2" src="../../assets/image/mycenter/zfb.png" />
