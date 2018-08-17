@@ -25,9 +25,9 @@
                 <input type="text" v-if="rz.authStatus==1" placeholder="请输入真实姓名" disabled="disabled" v-model="name"/>
             </div>
             <div class="info"><span>身份证号</span>
-                <input type="number" v-if="rz.authStatus!=1" placeholder="请输入18位证件号码" v-model="namecard"/>
+                <input type="text" v-if="rz.authStatus!=1" placeholder="请输入18位证件号码" v-model="namecard"/>
                 <div class="infoClose" v-if="rz.authStatus!=1&&namecard!=''" @click='removeNamecard'><i class="iconfont icon-closeicon"></i></div>
-                 <input type="number" v-if="rz.authStatus==1" placeholder="请输入18位证件号码" disabled="disabled" v-model="namecard"/>
+                 <input type="text" v-if="rz.authStatus==1" placeholder="请输入18位证件号码" disabled="disabled" v-model="namecard"/>
             </div>
             <!--正反面照-->
             <div class="picbox clearfix">
