@@ -458,7 +458,7 @@
                        }else{
                         that.v_html=res.data.message;
                         setTimeout(() => { 
-                                    this.v_html = ''
+                                    that.v_html = ''
                                       },2000) 
                        }
                     // that.url='http://test.resource.vjuzhen.com/'+ res.data.datas
