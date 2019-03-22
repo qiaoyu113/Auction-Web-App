@@ -4,8 +4,8 @@ const express = require('express')
 const favicon = require('serve-favicon')
 const resolve = file => path.resolve(__dirname, file)
 
-const isProd = process.env.NODE_ENV === 'production'
-// const isProd = true;
+// const isProd = process.env.NODE_ENV === 'production'
+const isProd = true;
 
 const app = express()
 let renderer
@@ -77,7 +77,8 @@ app.get('*', (req, res) => {
     .pipe(res)
 })
 
-const port = process.env.PORT || 8009;
+// const port = process.env.PORT || 8009; //正式
+const port = process.env.PORT || 9016; //测试
 // const port = process.env.PORT || 8090;
 app.listen(port, () => {
   console.log(`server started at http://localhost:${port}`)
