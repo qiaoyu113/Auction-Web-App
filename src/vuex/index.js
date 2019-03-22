@@ -12,7 +12,8 @@ import homeStore from './modules/homeStore'
 const store = new Vuex.Store({
     // 定义状态
     state: {
-        picHead:'http://resource.dimanche.net.cn/',
+        // picHead:'http://resource.dimanche.net.cn/', //正式
+        picHead:'http://resource.qizhigo.com/', // ceshi
         indexLogo:'',
         indexName:'',
         fromPath:['home'],
